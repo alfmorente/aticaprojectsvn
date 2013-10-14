@@ -1,0 +1,15 @@
+<package>
+  <description brief="Modulo_Camaras">
+
+     Modulo_Camaras
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Camaras</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
