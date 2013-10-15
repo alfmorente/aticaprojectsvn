@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp
+../include/Atica_teleoperacion/teleoperacion.h
+/home/atica/catkin_ws/src/Modulo_Teleoperacion/src/../include/Atica_teleoperacion/teleoperacion.h
+
