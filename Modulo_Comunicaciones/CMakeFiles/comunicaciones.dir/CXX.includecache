@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_Comunicaciones/src/comunicaciones.cpp
+../include/Atica_Comunicaciones/comunicaciones.h
+/home/atica/catkin_ws/src/Modulo_Comunicaciones/src/../include/Atica_Comunicaciones/comunicaciones.h
+
