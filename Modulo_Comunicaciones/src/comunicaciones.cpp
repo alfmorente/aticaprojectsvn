@@ -1,7 +1,7 @@
 #include "../include/Modulo_Comunicaciones/comunicaciones.h"
 
 // Publicadores
-
+// comentario
 ros::Publisher pub_modo;
 ros::Publisher pub_comteleop;
 ros::Publisher pub_waypoint;
