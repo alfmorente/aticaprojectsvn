@@ -1,0 +1,15 @@
+<package>
+  <description brief="Modulo_GPS">
+
+     Modulo_GPS
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_GPS</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

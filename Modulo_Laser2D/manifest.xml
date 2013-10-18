@@ -1,0 +1,15 @@
+<package>
+  <description brief="Modulo_Laser2D">
+
+     Modulo_Laser2D
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Laser2D</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

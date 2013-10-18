@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_TeachMapping/src/teachMapping.cpp
+../include/Atica_TeachMapping/teachMapping.h
+/home/atica/catkin_ws/src/Modulo_TeachMapping/src/../include/Atica_TeachMapping/teachMapping.h
+

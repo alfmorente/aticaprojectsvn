@@ -1,0 +1,15 @@
+<package>
+  <description brief="Modulo_Navegacion">
+
+     Modulo_Navegacion
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Navegacion</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

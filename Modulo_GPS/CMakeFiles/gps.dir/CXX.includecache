@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_GPS/src/gps.cpp
+../include/Atica_GPS/gps.h
+/home/atica/catkin_ws/src/Modulo_GPS/src/../include/Atica_GPS/gps.h
+

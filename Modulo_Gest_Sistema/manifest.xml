@@ -1,0 +1,15 @@
+<package>
+  <description brief="Modulo_Gest_Sistema">
+
+     Modulo_Gest_Sistema
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Gest_Sistema</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
