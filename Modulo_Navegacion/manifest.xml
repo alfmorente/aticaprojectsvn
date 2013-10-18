@@ -9,6 +9,10 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Modulo_Navegacion</url>
   <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="nav_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
 
 </package>
 
