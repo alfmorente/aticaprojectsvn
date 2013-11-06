@@ -319,7 +319,7 @@ static int dataToBuffer(ReportPlatformOperationalDataMessage message, unsigned c
 		{
 			// pack
 			// Scaled Byte (0, 127)
-			tempByte = jausByteFromDouble(message->waterNivel, 0, 127);
+			tempByte = jausByteFromDouble(message->waterNivel, 0, 100);
 			
 			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
 			index += JAUS_BYTE_SIZE_BYTES;
