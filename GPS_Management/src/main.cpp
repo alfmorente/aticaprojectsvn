@@ -74,7 +74,7 @@ int main(int argc, char** argv)
         }
 
 
-        int flagInspvas = false, flagCorrimudatasa = false, flagBestGPSPosa = false;
+        int flagInspvas = false, flagCorrimudatasa = false, flagBestGPSPosa = false, flagHeadinga = false;
         int typeFrame;
         while (ros::ok()) {
             typeFrame = gps->rcvData();
@@ -84,13 +84,15 @@ int main(int argc, char** argv)
                 flagCorrimudatasa = true;
             else if (typeFrame == TT_BESTGPSPOSA)
                     flagBestGPSPosa = true;
+            else if (typeFrame == TT_HEADINGA)
+                    flagHeadinga = true;
             else if (typeFrame == TT_ERROR) {
                 cerr << "Tiempo expirado: No se reciben datos del GPS" << endl;
                 return 1;
             }
 
             int insStatus = 0, solStatus = 0;
-            if (flagInspvas && flagCorrimudatasa && flagBestGPSPosa) {
+            if (flagInspvas && flagCorrimudatasa && flagBestGPSPosa && flagHeadinga) {
                
                 // Volcado de datos
                 fprintf(fichero, "%.8f ", gps->getInspVas().seconds);
@@ -168,6 +170,7 @@ int main(int argc, char** argv)
 
 
                 fprintf(fichero, "%d ", insStatus);
+                fprintf(fichero, "%d ", gps->getHeading().num_satellites);
                 fprintf(fichero, "%d\n", solStatus);
 
                 //fprintf(fichero,"%s\n",gps->getInspVas().status.c_str());
@@ -177,6 +180,7 @@ int main(int argc, char** argv)
                 flagCorrimudatasa = false;
                 flagInspvas = false;
                 flagBestGPSPosa =false;
+                flagHeadinga = false;
             }
         }
       
