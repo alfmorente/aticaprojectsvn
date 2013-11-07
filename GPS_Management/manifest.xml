@@ -1,0 +1,15 @@
+<package>
+  <description brief="GPS_Management">
+
+     GPS_Management
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/GPS_Management</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
