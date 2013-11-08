@@ -102,6 +102,26 @@ struct Inspos{
     string status;
 };
 
+struct Heading{
+    string sol_stat;
+    string pos_type;
+    float length;
+    float heading;
+    float pitch;
+    float res;
+    float hdg_std_dev;
+    float ptch_std_dev;
+    string stn_id;
+    unsigned char observations;
+    unsigned char num_satellites;
+    unsigned char obs;
+    unsigned char multi;
+    unsigned char res2;
+    unsigned char ext_sol_stat;
+    unsigned char res3;
+    unsigned char sig_mask;
+};
+
 class GPS_Management
 {
 	private:
@@ -116,6 +136,7 @@ class GPS_Management
                 Bestleverarm bestleverarm;
                 Corrimudata corrimudata;
                 Inspos inspos;
+                Heading heading;
 	public:
                 // Constructor
 		GPS_Management();
@@ -126,6 +147,7 @@ class GPS_Management
                 Bestleverarm getLeverarm();
                 Corrimudata getCorrIMUData();
                 Inspos getInsPos();
+                Heading getHeading();
 
 
                 // Funciones de configuracion
@@ -165,6 +187,7 @@ class GPS_Management
                 bool gps_adq_bestleverarm(Response res);
                 bool gps_adq_corrimudata(Response res);
                 bool gps_adq_inspos(Response res);
+                bool gps_adq_heading(Response res);
 
                 bool isPortOpened();
 

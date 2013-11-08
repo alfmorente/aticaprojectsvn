@@ -123,5 +123,9 @@ extern "C" {
 #define TT_INSPVASA 0
 #define TT_CORRIMUDATASA 1
 #define TT_BESTGPSPOSA 2
+#define TT_INSPOSA 3
+#define TT_HEADINGA 4
+#define TT_GPSVELA 5
+#define TT_BESTLEVERARMA 6
 
 

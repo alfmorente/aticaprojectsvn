@@ -23,6 +23,7 @@ Inspvas GPS_Management::getInspVas(){return this->inspvas;}
 Bestleverarm GPS_Management::getLeverarm(){return this->bestleverarm;}
 Corrimudata GPS_Management::getCorrIMUData(){return this->corrimudata;}
 Inspos GPS_Management::getInsPos(){return this->inspos;}
+Heading GPS_Management::getHeading(){return this->heading;}
 
 /*gps_conf_alignmentmode:Configura la forma de alinearse de la IMU
  *
@@ -705,6 +706,7 @@ bool GPS_Management::gps_adq_corrimudata(Response res){
   return true;
 }
 
+
 bool GPS_Management::gps_adq_inspos(Response res){
   string *datos = getData(6,res.data);
   this->inspos.week=stringToLong(datos[0]);
@@ -714,6 +716,28 @@ bool GPS_Management::gps_adq_inspos(Response res){
   this->inspos.hgt=stringToDouble(datos[4]);
   this->inspos.status=datos[5];
   return true;
+}
+
+bool GPS_Management::gps_adq_heading(Response res) {
+    string *datos = getData(17, res.data);
+    this->heading.sol_stat=datos[0];
+    this->heading.pos_type=datos[1];
+    this->heading.length=stringToFloat(datos[2]);
+    this->heading.heading=stringToFloat(datos[3]);
+    this->heading.pitch=stringToFloat(datos[4]);
+    this->heading.res=stringToFloat(datos[5]);
+    this->heading.hdg_std_dev=stringToFloat(datos[6]);
+    this->heading.ptch_std_dev=stringToFloat(datos[7]);
+    this->heading.stn_id=datos[8];
+    this->heading.observations=datos[9][0];
+    this->heading.num_satellites=datos[10][0];
+    this->heading.obs=datos[11][0];
+    this->heading.multi=datos[12][0];
+    this->heading.res2=datos[13][0];
+    this->heading.ext_sol_stat=datos[14][0];
+    this->heading.res3=datos[15][0];
+    this->heading.sig_mask=datos[16][0];
+    return true;
 }
 
 string GPS_Management::create_message(string command, int num_param, string options[]){
@@ -872,20 +896,26 @@ int GPS_Management::rcvData(){
   if(res.ok){
     if(res.header=="BESTGPSVELA"){
       gps_adq_bestgpsvel(res);
+      tt=TT_GPSVELA;
     }else if(res.header=="BESTGPSPOSA"){
       gps_adq_bestgpspos(res);
       tt=TT_BESTGPSPOSA;
     }else if(res.header=="INSPVASA"){
-      cout << res.data << endl;
+      //cout << res.data << endl;
       gps_adq_inspvas(res);
       tt=TT_INSPVASA;
     }else if(res.header=="BESTLEVERARMA"){
       gps_adq_bestleverarm(res);
+      tt=TT_BESTLEVERARMA;
     }else if(res.header=="CORRIMUDATASA"){
       gps_adq_corrimudata(res);
       tt=TT_CORRIMUDATASA;
     }else if(res.header=="INSPOSA"){
       gps_adq_inspos(res);
+      tt=TT_INSPOSA;
+    }else if(res.header=="HEADINGA"){
+      gps_adq_heading(res);
+      tt=TT_HEADINGA;
     }
   }else{
     tt=TT_ERROR;

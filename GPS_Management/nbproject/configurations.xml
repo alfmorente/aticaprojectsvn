@@ -2,25 +2,6 @@
 <configurationDescriptor version="69">
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <df name="GPS_Management" root=".">
-      <df name=".svn">
-        <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-        </df>
-        <in>all-wcprops</in>
-        <in>dir-props</in>
-        <in>entries</in>
-      </df>
       <df name="bin">
       </df>
       <df name="catkin">
