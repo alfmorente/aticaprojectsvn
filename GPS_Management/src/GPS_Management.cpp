@@ -901,7 +901,6 @@ int GPS_Management::rcvData(){
       gps_adq_bestgpspos(res);
       tt=TT_BESTGPSPOSA;
     }else if(res.header=="INSPVASA"){
-      //cout << res.data << endl;
       gps_adq_inspvas(res);
       tt=TT_INSPVASA;
     }else if(res.header=="BESTLEVERARMA"){

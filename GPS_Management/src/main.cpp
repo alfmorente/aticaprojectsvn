@@ -33,7 +33,7 @@ int main(int argc, char** argv)
         cout << "Establecido modo de alineamiento - KINEMATIC" << endl;
 
         cout << "Configuracion (Azimuth inicial)..." << endl;
-        while (!gps->gps_conf_setinitazimuth(0.0, 1.0));
+        while (!gps->gps_conf_setinitazimuth(0.0, 5));
         cout << "Azimuth OK" << endl;
         /*
         cout << "Configurando offset de la antena..." << endl;
@@ -48,7 +48,7 @@ int main(int argc, char** argv)
         //gps->gps_log_general("bestgpsposa", "");
         //gps->rcvData();
         
-        cout << "Comenzar movimiento 4km/h para alinear IMU" << endl;
+        //cout << "Comenzar movimiento 4km/h para alinear IMU" << endl;
 
         gps->gps_log_general("inspvasa", "ontime 1");
         while (gps->getInspVas().status != "INS_SOLUTION_GOOD") {
@@ -103,8 +103,8 @@ int main(int argc, char** argv)
                 fprintf(fichero, "%.8f ", gps->getGPSPos().lat_dev);
                 fprintf(fichero, "%.8f ", gps->getGPSPos().lon_dev);
                 fprintf(fichero, "%.8f ", gps->getGPSPos().hgt_dev);
-                fprintf(fichero, "%.8f ", gps->getGPSPos().l1);
-                fprintf(fichero, "%.8f ", gps->getGPSPos().l2);
+                fprintf(fichero, "%c ", gps->getGPSPos().l1);
+                fprintf(fichero, "%c ", gps->getGPSPos().l2);
 
                 fprintf(fichero, "%.8f ", gps->getInspVas().roll);
                 fprintf(fichero, "%.8f ", gps->getInspVas().pitch);
@@ -170,7 +170,7 @@ int main(int argc, char** argv)
 
 
                 fprintf(fichero, "%d ", insStatus);
-                fprintf(fichero, "%d ", gps->getHeading().num_satellites);
+                fprintf(fichero, "%c ", gps->getHeading().num_satellites);
                 fprintf(fichero, "%d\n", solStatus);
 
                 //fprintf(fichero,"%s\n",gps->getInspVas().status.c_str());
@@ -181,6 +181,23 @@ int main(int argc, char** argv)
                 flagInspvas = false;
                 flagBestGPSPosa =false;
                 flagHeadinga = false;
+
+                // Muestreo por pantalla
+                cout << "==========================================================" << endl;
+                cout << "DATOS BESTGPSPOS - Estado: " << gps->getGPSPos().sol_status << endl;
+                cout << "Latitud: " << gps->getGPSPos().lat << "; Longitud: " << gps->getGPSPos().lon << "; Altitud: " << gps->getGPSPos().hgt << endl;
+                cout << "Desviacion latitud: " << gps->getGPSPos().lat_dev << "; Desviacion longitud: " << gps->getGPSPos().lon_dev << "; Desviacion altitud: " << gps->getGPSPos().hgt_dev << endl;
+                cout << "L1: " << gps->getGPSPos().l1 << "; L2: " << gps->getGPSPos().l2 << endl;
+                cout << "~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << "DATOS INSPVAS - Estado: " << gps->getInspVas().status << endl;
+                cout << "Roll: " << gps->getInspVas().roll << "; Pitch: " << gps->getInspVas().pitch << "; Azimuth: " << gps->getInspVas().azimuth << endl;
+                cout << "Velocidad: " << vel_mod << "; Vel. Norte: " << gps->getInspVas().north_velocity << "; Vel. Este: " << gps->getInspVas().east_velocity << endl;
+                cout << "~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << "DATOS CORRIMUDATA" << endl;
+                cout << "Roll rate: " << gps->getCorrIMUData().roll_rate << "; Pitch rate: " << gps->getCorrIMUData().pitch_rate << "; Yaw rate: " << gps->getCorrIMUData().yaw_rate << endl;
+                cout << "Lateral acc: " << gps->getCorrIMUData().lateral_acc << "; Longitudinal acc: " << gps->getCorrIMUData().longitudinal_acc << "; Vertical acc: " << gps->getCorrIMUData().vertical_acc << endl;
+                cout << "~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << "DATOS HEADING - Num Satelites: " << gps->getHeading().num_satellites << endl;
             }
         }
       
