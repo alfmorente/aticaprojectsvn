@@ -112,6 +112,187 @@ void fcn_sub_errores(const Modulo_Gest_Errores::msg_errores msg)
 // campo del mensaje. Luego lo envia relleno.
 short isWarningOrCritial(Modulo_Gest_Errores::msg_errores msg){
     // TODO !!!!!!!!!!!!!!!!!!!!!!
+    // Modificación de Alfonso
+    switch (modoActual){
+        case (MODE_TELEOP):           // Modo Remote
+            switch (msg.id_subsistema){
+                case (SUBS_COMUNICACIONES):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_COMM_CONNECTION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_COMM_CONFIGURATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case (SUBS_GEST_SISTEMA):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_MODE_GPS):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_MODE_LASER):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_MODE_DRIVING):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_MODE_NAVIGATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_TELEOP):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_TELEOP_NEAR_OBSTACLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_TELEOP_FAR_OBSTABLE):
+                            msg.tipo_error=TOE_WARNING;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_CONDUCCION):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_DRIVING_HANDBRAKE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_DRIVING_GEAR):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_DRIVING_ENGINE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_DRIVING_ROBOT):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_NAVEGACION):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_WARNING;
+                        break;
+                        case (ERROR_NAVIGATION_OBSTACLE_UNAVOIDABLE):
+                            msg.tipo_error=TOE_WARNING;
+                        break;
+                        case (ERROR_NAVIGATION_WAYPOINTS_GETTING_TIMEOUT):
+                            msg.tipo_error=TOE_WARNING;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_CAMARA):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_CAMERA_COMMUNICATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_CAMERA_CONFIGURATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_GPS):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_GPS_NOT_SATELLITE_SIGNAL):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_GPS_SOLUTION_NOT_GOOD):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_GPS_IMU_BAD_ALIGNMENT):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_GPS_MEMORY_OVERFLOW_TEACH):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_LASER_DELANTERO):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_COMMUNICATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_CONFIGURATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_LASER_TRAS_IZQ):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_COMMUNICATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_CONFIGURATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_LASER_TRAS_DER):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_COMMUNICATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_CONFIGURATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                case(SUBS_LASER_3D):
+                    switch (msg.id_error){
+                        case (ERROR_MODULE_UNAVAILABLE):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_COMMUNICATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        case (ERROR_LASER_CONFIGURATION):
+                            msg.tipo_error=TOE_CRITICAL;
+                        break;
+                        default: break;     // Ha llegado un id_error no contemplado
+                    }
+                break;
+                default: break;     // id_subsistema incorrecto
+            }
+            break;          // FIN MODO TELEOPERADO
+
+    }
     return msg.tipo_error;
 }
 // Cambia a modo neutro
