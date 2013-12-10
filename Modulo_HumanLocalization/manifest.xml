@@ -1,0 +1,15 @@
+<package>
+  <description brief="Modulo_HumanLocalization">
+
+     Modulo_HumanLocalization
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_HumanLocalization</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
