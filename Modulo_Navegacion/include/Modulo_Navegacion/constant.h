@@ -71,3 +71,24 @@ extern "C" {
 #define SUBMODE_NAV_COME_TO_ME 2
 #define SUBMODE_MAPPING_UNDFD 0
 #define SUBMODE_TEACH_UNDFD 0
+
+// Stado del Modo de operación
+#define MODULE_OFF 0
+#define MODULE_ON 1
+#define MODULE_PAUSE 2
+#define MODULE_RESUME 3
+
+
+// Stado del Modo de operación
+#define NAVIGATION_OFF 0
+#define NAVIGATION_ON 1
+#define NAVIGATION_PAUSE 2
+#define NAVIGATION_RESUME 3
+
+// Stado del Modo de operación
+#define MODE_START 0
+#define MODE_STOP 1
+#define MODE_RUN 2
+#define MODE_EXIT 3
+#define MODE_REQUEST 4
+#define MODE_FINISH 5

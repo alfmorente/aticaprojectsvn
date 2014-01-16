@@ -20,13 +20,13 @@ extern "C" {
 #endif	/* GEST_NAVEGACION_H */
 
 //Mensajes
-#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_errores.h"
-#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_gest_navegacion.h"
+#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_error.h"
+#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_module_enable.h"
 #include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_gps.h"
-#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_habilitacion_modulo.h"
+#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_gest_navegacion.h"
 #include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_laser.h"
-#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_modo.h"
-#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_waypoint.h"
+#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_mode.h"
+#include "../../msg_gen/cpp/include/Modulo_Navegacion/msg_waypoints.h"
 
 //ROS y demas librerias
 #include "ros/ros.h"
@@ -48,15 +48,28 @@ typedef struct{
     std::vector<float> distances;
 }Sensors;
 
+typedef struct{
+
+    short submodule;
+    short status;
+
+}mode_nav;
+
+
 //Funciones de suscripcion
 void fcn_sub_gps(const Modulo_Navegacion::msg_gps);
 void fcn_sub_laser(const Modulo_Navegacion::msg_laser);
-void fcn_sub_waypoint(const Modulo_Navegacion::msg_waypoint);
-void fcn_sub_hab_modulos(const Modulo_Navegacion::msg_habilitacion_modulo);
+void fcn_sub_waypoints(const Modulo_Navegacion::msg_waypoints);
+void fcn_sub_module_enable(const Modulo_Navegacion::msg_module_enable);
 
 // Funciones propias
 // Transforma a mensaje necesario para move_base el valor de los sensores
 Modulo_Navegacion::msg_gest_navegacion adaptSensorValues(Sensors);
 // Calcula la distancia minima para considerar si se ha llegado al WP actual
-bool hasReachedToWP(std::vector<float>, float, float );
+bool hasReachedToWP(float,float, float, float );
 bool checkEndListWaypoints();
+
+//Se encarga de la navegacion del vehiculo en los tres submodos posibles
+void fcn_mng_CTME();
+void fcn_mng_PLAN();
+void fcn_mng_FLME();
