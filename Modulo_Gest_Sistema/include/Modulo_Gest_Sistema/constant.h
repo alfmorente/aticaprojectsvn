@@ -43,21 +43,26 @@ extern "C" {
 #define MODE_TEACH 9
 
 // Subsistemas - id_subsistema de msg_errores
-#define SUBS_COMUNICACIONES 0
-#define SUBS_GEST_SUSTEMA 1
+#define SUBS_COMMUNICATION 0
+#define SUBS_MANAGE_SYSTEM 1
 #define SUBS_TELEOP 2
-#define SUBS_CONDUCCION 3
-#define SUBS_NAVEGACION 4
-#define SUBS_CAMARA 5
+#define SUBS_DRIVING 3
+#define SUBS_NAVIGATION 4
+#define SUBS_CAMERA 5
 #define SUBS_GPS 6
-#define SUBS_LASER_DELANTERO 7
-#define SUBS_LASER_TRAS_IZQ 8
-#define SUBS_LASER_TRAS_DER 9
+#define SUBS_LASER_FRONT 7
+#define SUBS_LASER_BACK_LEFT 8
+#define SUBS_LASER_BACK_RIGHT 9
 #define SUBS_LASER_3D 10
+#define SUBS_HUMAN_LOCALIZATION 11
+//#define SUBS_WAYPOINTS_MAP 12
+//#define SUBS_VEHICLE_LOCALIZATION 12 //(Mode convoy)
+#define SUBS_BEACON 12
+#define SUBS_RANGE_DATA_FUSION 13 //(Mode convoy)
 
 // ID Modulo - msg_hab_modulo
 #define ID_MOD_TELEOP 0
-#define ID_MOD_NAVEGACION 1
+#define ID_MOD_NAVIGATE 1
 #define ID_MOD_MAPPING 2
 #define ID_MOD_TEACH 3
 
@@ -65,12 +70,79 @@ extern "C" {
 #define SUBMODE_TELEOP_TELEOP 0
 #define SUBMODE_TELEOP_START_ENGINE 1
 #define SUBMODE_TELEOP_STOP_ENGINE 2
-#define SUBMODE_TELEOP_ENGAGE_BREAK 3
+#define SUBMODE_TELEOP_ENGAGE_BRAKE 3
 #define SUBMODE_NAV_PLAN 0
 #define SUBMODE_NAV_FOLLOW_ME 1
 #define SUBMODE_NAV_COME_TO_ME 2
+#define SUBMODE_NAV_CONVOY 3
 #define SUBMODE_MAPPING_UNDFD 0
 #define SUBMODE_TEACH_UNDFD 0
 
 // Timeout para activacion de modulos
 #define TIMEOUT_ACTIVATION_MODULE 10 //segundos
+
+/**************************************
+ ************** ERRORS **************
+ ************************************/
+// TYPE OF ERROR
+#define TOE_UNDEFINED 0
+#define TOE_WARNING 1
+#define TOE_CRITICAL 2
+
+// ID ERROR
+
+// General
+#define ERROR_MODULE_UNAVAILABLE 0
+
+// Subsystem = System Management
+#define ERROR_MODE_GPS  1
+#define ERROR_MODE_LASER 2
+#define ERROR_MODE_DRIVING 3
+#define ERROR_MODE_NAVIGATION 4
+
+// Subsystem = Driving
+#define ERROR_DRIVING_HANDBRAKE 1
+#define ERROR_DRIVING_GEAR 2
+#define ERROR_DRIVING_ENGINE 3
+#define ERROR_DRIVING_ROBOT 4
+
+// Subsystem = GPS
+#define ERROR_GPS_COMMUNICATION 1
+#define ERROR_GPS_NOT_SATELLITE_SIGNAL 2
+#define ERROR_GPS_SOLUTION_NOT_GOD 3
+#define ERROR_GPS_MEMORY_OVERFLOW_TEACH 4
+#define ERROR_GPS_IMU_BAD_ALIGNMENT 5
+
+// Subsystem = Laser 2D
+#define ERROR_LASER_CONFIGURATION 1
+#define ERROR_LASER_COMMUNICATION 2
+
+// Subsystem = Communications
+#define ERROR_COMM_CONNECTION 1
+#define ERROR_COMM_CONFIGURATION 2
+
+// Subsystem = Camera
+#define ERROR_CAMERA_CONFIGURATION 1
+#define ERROR_CAMERA_COMMUNICATION 2
+
+// Subsystem = Navigation
+#define ERROR_NAVIGATION_OBSTACLE_UNAVOIDABLE 1
+#define ERROR_NAVIGATION_WAYPOINTS_GETTING_TIMEOUT 2 //Dudoso
+
+// Subsystem = Teleoperate
+#define ERROR_TELEOP_NEAR_OBSTACLE 1
+#define ERROR_TELEOP_FAR_OBSTABLE 2
+
+// Stado del Modo de operación
+#define MODE_START 0
+#define MODE_STOP 1
+#define MODE_RUN 2
+#define MODE_EXIT 3
+#define MODE_REQUEST 4
+#define MODE_FINISH 5
+
+// Stado del Modo de operación
+#define MODULE_OFF 0
+#define MODULE_ON 1
+#define MODULE_PAUSE 2
+#define MODULE_RESUME 3
