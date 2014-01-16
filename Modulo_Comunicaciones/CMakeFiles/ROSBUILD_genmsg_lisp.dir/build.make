@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Comunicaciones
 
@@ -42,96 +45,75 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Comunicaciones
 # Include the progress variables for this target.
 include CMakeFiles/ROSBUILD_genmsg_lisp.dir/progress.make
 
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_modo.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_mode.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_modo.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_camaras.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_mode.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_error.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_camaras.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_waypoint.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_waypoint.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_error.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_gps.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_gps.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_com_teleoperado.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_com_teleoperate.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_com_teleoperado.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_errores.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_com_teleoperate.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_camera.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_errores.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_camera.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_backup.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_backup.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_waypoints.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_waypoints.lisp
 
-msg_gen/lisp/msg_modo.lisp: msg/msg_modo.msg
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/lisp/msg_modo.lisp: manifest.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/lisp/msg_modo.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_mode.lisp: msg/msg_mode.msg
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_mode.lisp: manifest.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_modo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_modo.lisp"
-	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_modo.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_mode.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_mode.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_mode.msg
 
-msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_modo.lisp
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_mode.lisp
 
-msg_gen/lisp/_package_msg_modo.lisp: msg_gen/lisp/msg_modo.lisp
+msg_gen/lisp/_package_msg_mode.lisp: msg_gen/lisp/msg_mode.lisp
 
-msg_gen/lisp/msg_camaras.lisp: msg/msg_camaras.msg
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/lisp/msg_camaras.lisp: manifest.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_error.lisp: msg/msg_error.msg
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_error.lisp: manifest.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_camaras.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_camaras.lisp"
-	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_camaras.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_error.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_error.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_error.msg
 
-msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_camaras.lisp
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_error.lisp
 
-msg_gen/lisp/_package_msg_camaras.lisp: msg_gen/lisp/msg_camaras.lisp
-
-msg_gen/lisp/msg_waypoint.lisp: msg/msg_waypoint.msg
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/lisp/msg_waypoint.lisp: manifest.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_waypoint.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_waypoint.lisp"
-	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_waypoint.msg
-
-msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_waypoint.lisp
-
-msg_gen/lisp/_package_msg_waypoint.lisp: msg_gen/lisp/msg_waypoint.lisp
+msg_gen/lisp/_package_msg_error.lisp: msg_gen/lisp/msg_error.lisp
 
 msg_gen/lisp/msg_gps.lisp: msg/msg_gps.msg
 msg_gen/lisp/msg_gps.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -149,7 +131,7 @@ msg_gen/lisp/msg_gps.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_gps.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_gps.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_gps.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_gps.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_gps.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_gps.msg
 
@@ -157,73 +139,124 @@ msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_gps.lisp
 
 msg_gen/lisp/_package_msg_gps.lisp: msg_gen/lisp/msg_gps.lisp
 
-msg_gen/lisp/msg_com_teleoperado.lisp: msg/msg_com_teleoperado.msg
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/lisp/msg_com_teleoperado.lisp: manifest.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/lisp/msg_com_teleoperado.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: msg/msg_com_teleoperate.msg
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_com_teleoperate.lisp: manifest.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_com_teleoperate.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_com_teleoperate.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_com_teleoperate.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_com_teleoperate.msg
+
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_com_teleoperate.lisp
+
+msg_gen/lisp/_package_msg_com_teleoperate.lisp: msg_gen/lisp/msg_com_teleoperate.lisp
+
+msg_gen/lisp/msg_camera.lisp: msg/msg_camera.msg
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_camera.lisp: manifest.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_camera.lisp: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_com_teleoperado.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_com_teleoperado.lisp"
-	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_com_teleoperado.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_camera.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_camera.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_camera.msg
 
-msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_com_teleoperado.lisp
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_camera.lisp
 
-msg_gen/lisp/_package_msg_com_teleoperado.lisp: msg_gen/lisp/msg_com_teleoperado.lisp
+msg_gen/lisp/_package_msg_camera.lisp: msg_gen/lisp/msg_camera.lisp
 
-msg_gen/lisp/msg_errores.lisp: msg/msg_errores.msg
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/lisp/msg_errores.lisp: manifest.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_backup.lisp: msg/msg_backup.msg
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_backup.lisp: manifest.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_backup.lisp: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_errores.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_errores.lisp"
-	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_errores.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_backup.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_backup.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_backup.msg
 
-msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_errores.lisp
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_backup.lisp
 
-msg_gen/lisp/_package_msg_errores.lisp: msg_gen/lisp/msg_errores.lisp
+msg_gen/lisp/_package_msg_backup.lisp: msg_gen/lisp/msg_backup.lisp
+
+msg_gen/lisp/msg_waypoints.lisp: msg/msg_waypoints.msg
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_waypoints.lisp: manifest.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_waypoints.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_waypoints.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_waypoints.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_waypoints.msg
+
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_waypoints.lisp
+
+msg_gen/lisp/_package_msg_waypoints.lisp: msg_gen/lisp/msg_waypoints.lisp
 
 ROSBUILD_genmsg_lisp: CMakeFiles/ROSBUILD_genmsg_lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_modo.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_mode.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_modo.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_camaras.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_mode.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_error.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_camaras.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_waypoint.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_waypoint.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_error.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_gps.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_gps.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_com_teleoperado.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_com_teleoperate.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_com_teleoperado.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_errores.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_com_teleoperate.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_camera.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
-ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_errores.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_camera.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_backup.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_backup.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_waypoints.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_waypoints.lisp
 ROSBUILD_genmsg_lisp: CMakeFiles/ROSBUILD_genmsg_lisp.dir/build.make
 .PHONY : ROSBUILD_genmsg_lisp
 

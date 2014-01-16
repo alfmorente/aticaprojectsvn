@@ -126,7 +126,7 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/inform/environment/reportCameraCountMessage.c \
 		./src/message/inform/environment/reportRelativeObjectPositionMessage.c \
 		./src/message/inform/environment/reportCameraPoseMessage.c \
-		./src/message/inform/alarmas/reportAlarmaMessage.c \
+		./src/message/inform/error/reportErrorMessage.c \
 		./src/message/jausMessage.c \
 		./src/message/command/communications/setDataLinkStatusMessage.c \
 		./src/message/command/communications/setSelectedDataLinkStateMessage.c \
@@ -320,7 +320,7 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportCameraCountMessage.o \
 		./Build/reportRelativeObjectPositionMessage.o \
 		./Build/reportCameraPoseMessage.o \
-		./Build/reportAlarmaMessage.o \
+		./Build/reportErrorMessage.o \
 		./Build/jausMessage.o \
 		./Build/setDataLinkStatusMessage.o \
 		./Build/setSelectedDataLinkStateMessage.o \
@@ -778,8 +778,8 @@ $(TARGET) : $(OBJECTS)
 ./Build/reportCameraPoseMessage.o : ./src/message/inform/environment/reportCameraPoseMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportCameraPoseMessage.o ./src/message/inform/environment/reportCameraPoseMessage.c
 
-./Build/reportAlarmaMessage.o : ./src/message/inform/alarmas/reportAlarmaMessage.c
-	gcc $(CCFLAGS) -o ./Build/reportAlarmaMessage.o ./src/message/inform/alarmas/reportAlarmaMessage.c
+./Build/reportErrorMessage.o : ./src/message/inform/error/reportErrorMessage.c
+	gcc $(CCFLAGS) -o ./Build/reportErrorMessage.o ./src/message/inform/error/reportErrorMessage.c
 
 ./Build/jausMessage.o : ./src/message/jausMessage.c
 	gcc $(CCFLAGS) -o ./Build/jausMessage.o ./src/message/jausMessage.c

@@ -19,49 +19,104 @@ extern "C" {
 #endif	/* COMUNICACIONES_H */
 
 // Mensajes
-#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_camaras.h"
-#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_com_teleoperado.h"
-#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_errores.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_camera.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_com_teleoperate.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_error.h"
 #include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_gps.h"
-#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_modo.h"
-#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_waypoint.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_mode.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_waypoints.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_backup.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
 #include "constant.h"
 #include "../../libjaus/include/jaus.h"
 #include "../../libopenJaus/include/openJaus.h"
+#include "../include/Modulo_Comunicaciones/handlerJAUS.h"
+
+
+// Publicadores
+// comentario
+ros::Publisher pub_mode;
+ros::Publisher pub_comteleop;
+ros::Publisher pub_waypoints;
+ros::Publisher pub_error;
+
+//Variables JAUS del subsystema
+OjCmpt compCamera;
+OjCmpt compGPS;
+OjCmpt compVehicle;
+OjCmpt compMission;
+
+MyHandler* handler;
+FileLoader *configData;
+NodeManager* nm;
+bool comActiva;
+
+// Otras Variables
+int numberWaypoints; //Numero de waypoints del camino
 
 // Estructura de datos que maneja los mensajes ROS
 typedef struct{
     short tipo_mensaje;
-    Modulo_Comunicaciones::msg_camaras mens_cam;
+    Modulo_Comunicaciones::msg_camera mens_cam;
     Modulo_Comunicaciones::msg_gps mens_gps;
-    Modulo_Comunicaciones::msg_errores mens_errores;
-    Modulo_Comunicaciones::msg_modo mens_modo;
-    Modulo_Comunicaciones::msg_waypoint mens_waypoint;
-    Modulo_Comunicaciones::msg_com_teleoperado mens_teleop;
-    //Modulo_Comunicaciones::msg_backup mens_backup;
+    Modulo_Comunicaciones::msg_error mens_error;
+    Modulo_Comunicaciones::msg_mode mens_mode;
+    Modulo_Comunicaciones::msg_waypoints mens_waypoints;
+    Modulo_Comunicaciones::msg_com_teleoperate mens_teleop;
+    Modulo_Comunicaciones::msg_backup mens_backup;
 }ROSmessage;
 
 // Estructura de datos que maneja los mensajes JAUS
 typedef struct{
-   // short tipo_mensaje;
-    ReportImageMessage imagen;
-    ReportGlobalPoseMessage gps;
-    ReportAlarmaMessage alarma;
+
+    ReportImageMessage image;
+    ReportGlobalPoseMessage posGPS;
+    ReportVelocityStateMessage velGPS;
+    ReportErrorMessage error;
+
+    SetWrenchEffortMessage   mainCommand;
+    SetDiscreteDevicesMessage auxCommand;
+
+
+    ReportGlobalWaypointMessage waypoint;
+    ReportWaypointCountMessage numberWaypoints;
+    RunMissionMessage startMode;
+    PauseMissionMessage pauseMode;
+    ResumeMissionMessage resumeMode;
+    AbortMissionMessage exitMode;
+    ReportMissionStatusMessage missionStatus;
+
 }mensajeJAUS;
+short JAUS_message_type;
+
+double* auxWaypointLat;
+double* auxWaypointLon;
+
+//Funcion para el spin de ROS
+void* spinThread(void* obj);
 
 // Funciones de suscripcion
 void fcn_sub_gps(const Modulo_Comunicaciones::msg_gps);
-void fcn_sub_errores(const Modulo_Comunicaciones::msg_errores);
-void fcn_sub_camaras(const Modulo_Comunicaciones::msg_camaras);
+void fcn_sub_error(const Modulo_Comunicaciones::msg_error);
+void fcn_sub_camera(const Modulo_Comunicaciones::msg_camera);
+void fcn_sub_mode(const Modulo_Comunicaciones::msg_mode);
+void fcn_sub_backup(const Modulo_Comunicaciones::msg_backup);
+
+//Funciones de Publicacion
+void fcn_pub_mode(Modulo_Comunicaciones::msg_mode);
+void fcn_pub_comteleop(Modulo_Comunicaciones::msg_com_teleoperate);
+void fcn_pub_waypoints(Modulo_Comunicaciones::msg_waypoints);
+void fcn_pub_error(Modulo_Comunicaciones::msg_error);
 
 // Funciones propias
-bool connect();
-bool disconnect();
+void connect();
+void disconnect();
 bool checkConnection();
+bool configureJAUS();
 JausMessage convertROStoJAUS(ROSmessage msg_ROS);
 ROSmessage convertJAUStoROS(mensajeJAUS msg_JAUS);
-bool sendJAUSMessage(JausMessage);
-bool rcvJAUSMessage();
+void sendJAUSMessage(JausMessage txMessage);
+void rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage);
+int redondea(float valor);

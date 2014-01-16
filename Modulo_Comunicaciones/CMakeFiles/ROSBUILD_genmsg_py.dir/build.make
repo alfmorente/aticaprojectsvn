@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Comunicaciones
 
@@ -44,75 +47,56 @@ include CMakeFiles/ROSBUILD_genmsg_py.dir/progress.make
 
 CMakeFiles/ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/__init__.py
 
-src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_modo.py
-src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_camaras.py
-src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_waypoint.py
+src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_mode.py
+src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_error.py
 src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_gps.py
-src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py
-src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_errores.py
+src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py
+src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_camera.py
+src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_backup.py
+src/Modulo_Comunicaciones/msg/__init__.py: src/Modulo_Comunicaciones/msg/_msg_waypoints.py
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/__init__.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_modo.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_camaras.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_waypoint.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_gps.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_com_teleoperado.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_errores.msg
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_mode.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_error.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_gps.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_com_teleoperate.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_camera.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_backup.msg /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_waypoints.msg
 
-src/Modulo_Comunicaciones/msg/_msg_modo.py: msg/msg_modo.msg
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Comunicaciones/msg/_msg_modo.py: manifest.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Comunicaciones/msg/_msg_modo.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: msg/msg_mode.msg
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Comunicaciones/msg/_msg_mode.py: manifest.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_mode.py: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_modo.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_modo.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_mode.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_mode.msg
 
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: msg/msg_camaras.msg
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: manifest.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Comunicaciones/msg/_msg_camaras.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: msg/msg_error.msg
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Comunicaciones/msg/_msg_error.py: manifest.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_error.py: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_camaras.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_camaras.msg
-
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: msg/msg_waypoint.msg
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: manifest.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Comunicaciones/msg/_msg_waypoint.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_waypoint.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_waypoint.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_error.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_error.msg
 
 src/Modulo_Comunicaciones/msg/_msg_gps.py: msg/msg_gps.msg
 src/Modulo_Comunicaciones/msg/_msg_gps.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -130,58 +114,99 @@ src/Modulo_Comunicaciones/msg/_msg_gps.py: /opt/ros/groovy/share/std_msgs/packag
 src/Modulo_Comunicaciones/msg/_msg_gps.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_Comunicaciones/msg/_msg_gps.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_Comunicaciones/msg/_msg_gps.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_gps.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_gps.msg
 
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: msg/msg_com_teleoperado.msg
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: manifest.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_com_teleoperado.msg
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: msg/msg_com_teleoperate.msg
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: manifest.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_com_teleoperate.msg
 
-src/Modulo_Comunicaciones/msg/_msg_errores.py: msg/msg_errores.msg
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Comunicaciones/msg/_msg_errores.py: manifest.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Comunicaciones/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: msg/msg_camera.msg
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Comunicaciones/msg/_msg_camera.py: manifest.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_camera.py: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_camera.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_camera.msg
+
+src/Modulo_Comunicaciones/msg/_msg_backup.py: msg/msg_backup.msg
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Comunicaciones/msg/_msg_backup.py: manifest.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_backup.py: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_7)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_errores.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_errores.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_backup.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_backup.msg
+
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: msg/msg_waypoints.msg
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: manifest.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Comunicaciones/msg/_msg_waypoints.py: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Comunicaciones/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Comunicaciones/msg/_msg_waypoints.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Comunicaciones/msg/msg_waypoints.msg
 
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py
 ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/__init__.py
-ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_modo.py
-ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_camaras.py
-ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_waypoint.py
+ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_mode.py
+ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_error.py
 ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_gps.py
-ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_com_teleoperado.py
-ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_errores.py
+ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_com_teleoperate.py
+ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_camera.py
+ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_backup.py
+ROSBUILD_genmsg_py: src/Modulo_Comunicaciones/msg/_msg_waypoints.py
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py.dir/build.make
 .PHONY : ROSBUILD_genmsg_py
 

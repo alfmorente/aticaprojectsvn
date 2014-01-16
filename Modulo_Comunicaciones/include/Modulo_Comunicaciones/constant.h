@@ -42,6 +42,13 @@ extern "C" {
 #define MODE_MAPPING 8
 #define MODE_TEACH 9
 
+// Stado del Modo de operación
+#define MODE_START 0
+#define MODE_STOP 1
+#define MODE_RUN 2
+#define MODE_EXIT 3
+#define MODE_REQUEST 4
+
 // Subsistemas - id_subsistema de msg_errores
 #define SUBS_COMUNICACIONES 0
 #define SUBS_GEST_SUSTEMA 1
@@ -72,14 +79,17 @@ extern "C" {
 #define SUBMODE_MAPPING_UNDFD 0
 #define SUBMODE_TEACH_UNDFD 0
 
-// Tipo de mensaje ROS (para traducir a CAN)
+// Tipo de mensaje ROS (para traducir a JAUS y viceversa)
 #define TOM_CAMERA 0
 #define TOM_GPS 1
 #define TOM_ERROR 2
-#define TOM_MODO 3
+#define TOM_MODE 3
 #define TOM_WAYPOINT 4
 #define TOM_TELEOP 5
 #define TOM_BACKUP 6
+#define TOM_UNKNOW -1
+
+
 
 // Elementos de los actuadores (msg_com_teleoperado)
 #define ID_TELEOP_STEER 0
@@ -99,9 +109,35 @@ extern "C" {
 #define MIN_BRAKE_VALUE 0 // Freno minimo
 #define MAX_HANDBRAKE_VALUE 1 // Freno de mano puesto
 #define MIN_HANDBRAKE_VALUE 0 // Freno de mano quitado
-#define MAX_GEAR_VALUE 6 // Marcha maxima
+#define MAX_GEAR_VALUE 2 // Marcha maxima
 #define MIN_GEAR_VALUE 0 // Marcha minima
 #define MAX_LIGHTS_VALUE 1 // Luces puestas
 #define MIN_LIGHTS_VALUE 0 // Luces quitadas
 #define MAX_ENGINE_VALUE 1 // Motor encendido
 #define MIN_ENGINE_VALUE 0 // Motor apagado
+
+//Valores para otros actuadores
+#define BACK  0
+#define NEUTRAL 1
+#define DRIVE 2
+#define ON 1
+#define OFF 0
+#define POSITION 1
+#define CROSSING 2
+#define BEAM 3
+
+//Valores JAUS
+#define JAUS_BACK 64
+#define JAUS_NEUTRAL 128
+#define JAUS_DRIVE 192
+#define JAUS_ON 1
+#define JAUS_OFF 0
+
+#define MISSION 0
+#define TASK 1
+#define SPOOLING 0
+#define PENDING 1
+#define PAUSED 2
+#define ABORTED 3
+#define FINISHED 4
+

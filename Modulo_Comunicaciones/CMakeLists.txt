@@ -28,7 +28,7 @@ rosbuild_genmsg()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 include_directories(libjaus/include libopenJaus/include)
 link_directories(libjaus/lib libopenJaus/lib)
-rosbuild_add_executable(comunicaciones src/comunicaciones.cpp)
+rosbuild_add_executable(comunicaciones src/comunicaciones.cpp src/handlerJAUS.cpp)
 target_link_libraries(comunicaciones libjaus.so libopenJaus.so)
 #target_link_libraries(example ${PROJECT_NAME})
 
