@@ -1,6 +1,7 @@
 #include "../include/Modulo_TeachMapping/teachMapping.h"
 
 using namespace std;
+
 // Publicadores
 ros::Publisher pub_errores;
 
