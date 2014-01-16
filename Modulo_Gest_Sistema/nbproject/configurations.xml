@@ -41,8 +41,6 @@
           <df name="src" kind="SOURCE_LOGICAL_FOLDER">
           </df>
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
@@ -111,18 +109,123 @@
       <df name="msg" kind="SOURCE_LOGICAL_FOLDER">
       </df>
       <df name="msg_gen">
+        <df name=".svn">
+          <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+          <in>entries</in>
+        </df>
         <df name="cpp" kind="SOURCE_LOGICAL_FOLDER">
+          <df name=".svn">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+            </df>
+            <in>entries</in>
+          </df>
           <df name="include" kind="SOURCE_LOGICAL_FOLDER">
+            <df name=".svn">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+              </df>
+              <in>entries</in>
+            </df>
             <df name="Modulo_Gest_Sistema" kind="SOURCE_LOGICAL_FOLDER">
+              <df name=".svn">
+                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+                  <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                  <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                  <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                </df>
+                <in>entries</in>
+              </df>
+              <in>msg_error.h</in>
+              <in>msg_mode.h</in>
+              <in>msg_module_enable.h</in>
             </df>
           </df>
         </df>
         <df name="lisp" kind="SOURCE_LOGICAL_FOLDER">
+          <df name=".svn">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+            </df>
+            <in>entries</in>
+          </df>
         </df>
       </df>
       <df name="src" kind="SOURCE_LOGICAL_FOLDER">
         <df name="Modulo_Gest_Sistema">
           <df name="msg">
+            <df name=".svn">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+              </df>
+              <in>entries</in>
+            </df>
           </df>
         </df>
         <in>gest_sistema.cpp</in>
