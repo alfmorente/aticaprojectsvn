@@ -269,28 +269,48 @@ void connect(){
     compVehicle=ojCmptCreate("VEHICLE_COMPONENT",JAUS_PRIMITIVE_DRIVER ,1);
     compMission=ojCmptCreate("MISSION_COMPONENT",JAUS_MISSION_SPOOLER,1);
     compGPS=ojCmptCreate("GPS_COMPONENT",JAUS_GLOBAL_POSE_SENSOR,1);
+    compNavigation=ojCmptCreate("NAVIGATION_COMPONENT",JAUS_GLOBAL_WAYPOINT_DRIVER,1);
+    compVelSensor=ojCmptCreate("VELOCITY_COMPONENT",JAUS_VELOCITY_STATE_SENSOR,1);
     
     //Configuro Componente
-/*    ojCmptAddService(compSubsystem, JAUS_SUBSYSTEM_COMMANDER);
-    ojCmptAddServiceOutputMessage(compSubsystem, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_PRIMITIVE_DRIVER, JAUS_SET_WRENCH_EFFORT, 0xFF);
-    ojCmptAddServiceOutputMessage(compSubsystem, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_PRIMITIVE_DRIVER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_WAYPOINT, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_WAYPOINT_COUNT, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_MISSION_SPOOLER , JAUS_RUN_MISSION, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_MISSION_SPOOLER , JAUS_PAUSE_MISSION, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_MISSION_SPOOLER , JAUS_RESUME_MISSION, 0xFF);
-    ojCmptAddServiceInputMessage(compSubsystem, JAUS_MISSION_SPOOLER , JAUS_ABORT_MISSION, 0xFF);
-    ojCmptAddServiceOutputMessage(compSubsystem, JAUS_GLOBAL_POSE_SENSOR , JAUS_REPORT_VELOCITY_STATE, 0xFF);
-    ojCmptAddServiceOutputMessage(compSubsystem, JAUS_VISUAL_SENSOR, JAUS_REPORT_IMAGE, 0xFF);
-    ojCmptAddServiceOutputMessage(compSubsystem, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
-    ojCmptAddServiceOutputMessage(compSubsystem, JAUS_GLOBAL_POSE_SENSOR , JAUS_REPORT_GLOBAL_POSE, 0xFF);
-    ojCmptSetMessageProcessorCallback(compSubsystem,rcvJAUSMessage);
+    ojCmptAddService(compCamera, JAUS_VISUAL_SENSOR);
+    ojCmptAddService(compVehicle, JAUS_PRIMITIVE_DRIVER);
+    ojCmptAddService(compMission, JAUS_MISSION_SPOOLER);
+    ojCmptAddService(compGPS, JAUS_GLOBAL_POSE_SENSOR);
+    ojCmptAddService(compNavigation, JAUS_GLOBAL_WAYPOINT_DRIVER);
+    ojCmptAddService(compVelSensor, JAUS_VELOCITY_STATE_SENSOR);
+
+
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_SET_WRENCH_EFFORT, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
+    ojCmptAddServiceInputMessage(compNavigation, JAUS_GLOBAL_WAYPOINT_DRIVER , JAUS_REPORT_GLOBAL_WAYPOINT, 0xFF);
+    ojCmptAddServiceInputMessage(compNavigation,JAUS_GLOBAL_WAYPOINT_DRIVER , JAUS_REPORT_WAYPOINT_COUNT, 0xFF);
+    ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_RUN_MISSION, 0xFF);
+    ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_PAUSE_MISSION, 0xFF);
+    ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_RESUME_MISSION, 0xFF);
+    ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_ABORT_MISSION, 0xFF);
+    ojCmptAddServiceOutputMessage(compVelSensor, JAUS_VELOCITY_STATE_SENSOR , JAUS_REPORT_VELOCITY_STATE, 0xFF);
+    ojCmptAddServiceOutputMessage(compCamera, JAUS_VISUAL_SENSOR, JAUS_REPORT_IMAGE, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
+    ojCmptAddServiceOutputMessage(compGPS, JAUS_GLOBAL_POSE_SENSOR , JAUS_REPORT_GLOBAL_POSE, 0xFF);
+
+    ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
+    ojCmptSetMessageProcessorCallback(compNavigation,rcvJAUSMessage);
+    ojCmptSetMessageProcessorCallback(compMission,rcvJAUSMessage);
+    ojCmptSetMessageProcessorCallback(compVelSensor,rcvJAUSMessage);
+    ojCmptSetMessageProcessorCallback(compCamera,rcvJAUSMessage);
+    ojCmptSetMessageProcessorCallback(compGPS,rcvJAUSMessage);
     //ojCmptSetStateCallback(compVeh, JAUS_READY_STATE,jausComunicator::process_data);
-*/
+
     //run
-//    ojCmptRun(compSubsystem);
+    ojCmptRun(compVehicle);
+    ojCmptRun(compNavigation);
+    ojCmptRun(compMission);
+    ojCmptRun(compVelSensor);
+    ojCmptRun(compCamera);
+    ojCmptRun(compGPS);
 }
 
 // Desconexion JAUS

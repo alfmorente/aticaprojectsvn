@@ -47,6 +47,9 @@ OjCmpt compCamera;
 OjCmpt compGPS;
 OjCmpt compVehicle;
 OjCmpt compMission;
+OjCmpt compNavigation;
+OjCmpt compVelSensor;
+
 
 MyHandler* handler;
 FileLoader *configData;
