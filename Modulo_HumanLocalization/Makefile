@@ -163,6 +163,19 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmsg_py
+
+# Build rule for target.
+ROSBUILD_genmsg_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_py
+.PHONY : ROSBUILD_genmsg_py
+
+# fast build rule for target.
+ROSBUILD_genmsg_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
+.PHONY : ROSBUILD_genmsg_py/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -228,6 +241,19 @@ doxygen/fast:
 .PHONY : doxygen/fast
 
 #=============================================================================
+# Target rules for targets named human_localization
+
+# Build rule for target.
+human_localization: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 human_localization
+.PHONY : human_localization
+
+# fast build rule for target.
+human_localization/fast:
+	$(MAKE) -f CMakeFiles/human_localization.dir/build.make CMakeFiles/human_localization.dir/build
+.PHONY : human_localization/fast
+
+#=============================================================================
 # Target rules for targets named rosbuild_clean-test-results
 
 # Build rule for target.
@@ -278,6 +304,19 @@ rospack_genmsg: cmake_check_build_system
 rospack_genmsg/fast:
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 .PHONY : rospack_genmsg/fast
+
+#=============================================================================
+# Target rules for targets named rospack_genmsg_all
+
+# Build rule for target.
+rospack_genmsg_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
+.PHONY : rospack_genmsg_all
+
+# fast build rule for target.
+rospack_genmsg_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
+.PHONY : rospack_genmsg_all/fast
 
 #=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
@@ -409,6 +448,30 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/human_localization.o: src/human_localization.cpp.o
+.PHONY : src/human_localization.o
+
+# target to build an object file
+src/human_localization.cpp.o:
+	$(MAKE) -f CMakeFiles/human_localization.dir/build.make CMakeFiles/human_localization.dir/src/human_localization.cpp.o
+.PHONY : src/human_localization.cpp.o
+
+src/human_localization.i: src/human_localization.cpp.i
+.PHONY : src/human_localization.i
+
+# target to preprocess a source file
+src/human_localization.cpp.i:
+	$(MAKE) -f CMakeFiles/human_localization.dir/build.make CMakeFiles/human_localization.dir/src/human_localization.cpp.i
+.PHONY : src/human_localization.cpp.i
+
+src/human_localization.s: src/human_localization.cpp.s
+.PHONY : src/human_localization.s
+
+# target to generate assembly for a file
+src/human_localization.cpp.s:
+	$(MAKE) -f CMakeFiles/human_localization.dir/build.make CMakeFiles/human_localization.dir/src/human_localization.cpp.s
+.PHONY : src/human_localization.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -417,12 +480,14 @@ help:
 	@echo "... depend"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
+	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... doxygen"
 	@echo "... edit_cache"
+	@echo "... human_localization"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
@@ -432,6 +497,7 @@ help:
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
+	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... run_tests"
@@ -442,6 +508,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/human_localization.o"
+	@echo "... src/human_localization.i"
+	@echo "... src/human_localization.s"
 .PHONY : help
 
 

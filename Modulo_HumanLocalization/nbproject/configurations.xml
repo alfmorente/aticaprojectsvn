@@ -2,62 +2,26 @@
 <configurationDescriptor version="69">
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <df name="Modulo_HumanLocalization" root=".">
-      <df name=".svn">
-        <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-        </df>
-        <in>all-wcprops</in>
-        <in>entries</in>
+      <df name="bin">
       </df>
       <df name="catkin">
         <df name="catkin_generated" kind="SOURCE_LOGICAL_FOLDER">
           <df name="version" kind="SOURCE_LOGICAL_FOLDER">
-            <in>package.cmake</in>
           </df>
         </df>
       </df>
       <df name="catkin_generated">
         <df name="installspace" kind="SOURCE_LOGICAL_FOLDER">
-          <in>_setup_util.py</in>
-          <in>env.sh</in>
-          <in>setup.bash</in>
-          <in>setup.sh</in>
-          <in>setup.zsh</in>
         </df>
         <df name="stamps" kind="SOURCE_LOGICAL_FOLDER">
           <df name="Modulo_HumanLocalization" kind="SOURCE_LOGICAL_FOLDER">
-            <in>interrogate_setup_dot_py.py.stamp</in>
-            <in>package.xml.stamp</in>
           </df>
         </df>
-        <in>env_cached.sh</in>
-        <in>generate_cached_setup.py</in>
-        <in>ordered_paths.cmake</in>
-        <in>setup_cached.sh</in>
       </df>
       <df name="CMakeFiles">
         <df name="_catkin_empty_exported_target.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="clean_test_results.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="CMakeTmp" kind="SOURCE_LOGICAL_FOLDER">
           <df name="CMakeFiles" kind="SOURCE_LOGICAL_FOLDER">
@@ -67,174 +31,72 @@
         </df>
         <df name="CompilerIdC" kind="SOURCE_LOGICAL_FOLDER">
           <in>CMakeCCompilerId.c</in>
-          <in>a.out</in>
         </df>
         <df name="CompilerIdCXX" kind="SOURCE_LOGICAL_FOLDER">
           <in>CMakeCXXCompilerId.cpp</in>
-          <in>a.out</in>
         </df>
         <df name="doxygen.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
+        </df>
+        <df name="human_localization.dir">
+          <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
         </df>
         <df name="rosbuild_clean-test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
+        </df>
+        <df name="ROSBUILD_genmsg_py.dir">
         </df>
         <df name="ROSBUILD_gensrv_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="rosbuild_precompile.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="rosbuild_premsgsrvgen.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="rospack_genmsg.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
+        </df>
+        <df name="rospack_genmsg_all.dir">
         </df>
         <df name="rospack_genmsg_libexe.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="rospack_gensrv.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="run_tests.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test-future.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test-results-run.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="tests.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
-        <in>CMakeCCompiler.cmake</in>
-        <in>CMakeCXXCompiler.cmake</in>
-        <in>CMakeDetermineCompilerABI_C.bin</in>
-        <in>CMakeDetermineCompilerABI_CXX.bin</in>
-        <in>CMakeDirectoryInformation.cmake</in>
-        <in>CMakeError.log</in>
-        <in>CMakeOutput.log</in>
-        <in>CMakeRuleHashes.txt</in>
-        <in>CMakeSystem.cmake</in>
-        <in>Makefile.cmake</in>
-        <in>Makefile2</in>
-        <in>TargetDirectories.txt</in>
-        <in>cmake.check_cache</in>
-        <in>progress.marks</in>
       </df>
       <df name="devel">
         <df name="etc" kind="SOURCE_LOGICAL_FOLDER">
           <df name="catkin" kind="SOURCE_LOGICAL_FOLDER">
             <df name="profile.d" kind="SOURCE_LOGICAL_FOLDER">
-              <in>05.catkin-test-results.sh</in>
-              <in>05.catkin_make.bash</in>
-              <in>05.catkin_make_isolated.bash</in>
             </df>
           </df>
         </df>
-        <in>_setup_util.py</in>
-        <in>env.sh</in>
-        <in>setup.bash</in>
-        <in>setup.sh</in>
-        <in>setup.zsh</in>
       </df>
       <df name="gtest">
         <df name="CMakeFiles" kind="SOURCE_LOGICAL_FOLDER">
           <df name="gtest.dir" kind="SOURCE_LOGICAL_FOLDER">
             <df name="src" kind="SOURCE_LOGICAL_FOLDER">
             </df>
-            <in>DependInfo.cmake</in>
-            <in>build.make</in>
-            <in>cmake_clean.cmake</in>
-            <in>depend.make</in>
-            <in>flags.make</in>
-            <in>link.txt</in>
-            <in>progress.make</in>
           </df>
           <df name="gtest_main.dir" kind="SOURCE_LOGICAL_FOLDER">
             <df name="src" kind="SOURCE_LOGICAL_FOLDER">
             </df>
-            <in>DependInfo.cmake</in>
-            <in>build.make</in>
-            <in>cmake_clean.cmake</in>
-            <in>depend.make</in>
-            <in>flags.make</in>
-            <in>link.txt</in>
-            <in>progress.make</in>
           </df>
-          <in>CMakeDirectoryInformation.cmake</in>
-          <in>progress.marks</in>
         </df>
-        <in>Makefile</in>
-        <in>cmake_install.cmake</in>
       </df>
       <df name="include" kind="SOURCE_LOGICAL_FOLDER">
         <df name="Modulo_HumanLocalization" kind="SOURCE_LOGICAL_FOLDER">
@@ -244,7 +106,21 @@
       </df>
       <df name="lib">
       </df>
+      <df name="msg">
+      </df>
+      <df name="msg_gen">
+        <df name="cpp" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="include" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="Modulo_HumanLocalization" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+        </df>
+        <df name="lisp" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+      </df>
       <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="Modulo_HumanLocalization">
+        </df>
         <in>human_localization.cpp</in>
       </df>
       <df name="test_results">
@@ -278,36 +154,6 @@
           <executablePath></executablePath>
         </makeTool>
       </makefileType>
-      <item path="catkin/catkin_generated/version/package.cmake" ex="true" tool="3">
-      </item>
-      <item path="devel/_setup_util.py" ex="true" tool="3">
-      </item>
-      <item path="devel/env.sh" ex="true" tool="3">
-      </item>
-      <item path="devel/etc/catkin/profile.d/05.catkin-test-results.sh"
-            ex="true"
-            tool="3">
-      </item>
-      <item path="devel/etc/catkin/profile.d/05.catkin_make.bash" ex="true" tool="3">
-      </item>
-      <item path="devel/etc/catkin/profile.d/05.catkin_make_isolated.bash"
-            ex="true"
-            tool="3">
-      </item>
-      <item path="devel/setup.bash" ex="true" tool="3">
-      </item>
-      <item path="devel/setup.sh" ex="true" tool="3">
-      </item>
-      <item path="devel/setup.zsh" ex="true" tool="3">
-      </item>
-      <item path="gtest/CMakeFiles/gtest.dir/build.make" ex="true" tool="3">
-      </item>
-      <item path="gtest/CMakeFiles/gtest.dir/flags.make" ex="true" tool="3">
-      </item>
-      <item path="gtest/CMakeFiles/gtest.dir/progress.make" ex="true" tool="3">
-      </item>
-      <item path="gtest/cmake_install.cmake" ex="true" tool="3">
-      </item>
     </conf>
   </confs>
 </configurationDescriptor>
