@@ -1,1 +1,2 @@
-uint8 modo
+uint8 mode
+uint8 status
