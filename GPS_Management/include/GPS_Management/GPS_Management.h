@@ -93,6 +93,21 @@ struct Inspvas{
     string status;
 };
 
+struct Inspva{
+    unsigned long week;
+    double seconds;
+    double lat;
+    double lon;
+    double hgt;
+    double north_velocity;
+    double east_velocity;
+    double up_velocity;
+    double roll;
+    double pitch;
+    double azimuth;
+    string status;
+};
+
 struct Inspos{
     unsigned long week;
     double seconds;
@@ -132,6 +147,7 @@ class GPS_Management
                 // Estructuras de los mensajes a recibir
                 Bestgpsvel bestgpsvel;
                 Bestgpspos bestgpspos;
+                Inspva inspva;
                 Inspvas inspvas;
                 Bestleverarm bestleverarm;
                 Corrimudata corrimudata;
@@ -144,6 +160,7 @@ class GPS_Management
                 Bestgpsvel getGPSVel();
                 Bestgpspos getGPSPos();
                 Inspvas getInspVas();
+                Inspva getInspVa();
                 Bestleverarm getLeverarm();
                 Corrimudata getCorrIMUData();
                 Inspos getInsPos();
@@ -183,6 +200,7 @@ class GPS_Management
                 //Funciones de adquisición de datos
                 bool gps_adq_bestgpsvel(Response res);
                 bool gps_adq_bestgpspos(Response res);
+                bool gps_adq_inspva(Response res);
                 bool gps_adq_inspvas(Response res);
                 bool gps_adq_bestleverarm(Response res);
                 bool gps_adq_corrimudata(Response res);

@@ -15,8 +15,6 @@
 #define SERIAL_TIMEOUT 2
 #define FRAME_FAILED 3
 
-
-
 class PortSerial
 {
 
