@@ -31,38 +31,40 @@ int main(int argc, char** argv)
         cout << "Configurando (Modo de alineamiento inicial)..." << endl;
         while (!gps->gps_conf_alignmentmode(ALIGNMENTMODE_UNAIDED));
         cout << "Establecido modo de alineamiento - KINEMATIC" << endl;
-
+        
         cout << "Configuracion (Azimuth inicial)..." << endl;
-        while (!gps->gps_conf_setinitazimuth(0.0, 5));
+        while (!gps->gps_conf_setinitazimuth(-90, 5));
         cout << "Azimuth OK" << endl;
         /*
         cout << "Configurando offset de la antena..." << endl;
         while (!gps->gps_conf_setimutoantoffset(-35,15,62,0,0,0));
         cout << "Offset antena OK" << endl;
         */
-        gps->gps_log_general("bestgpsposa", "ontime 1");
+        gps->gps_log_general("bestgpsposa", "ontime 0.1");
         while (gps->getGPSPos().sol_status != "SOL_COMPUTED") {
             gps->rcvData();
             cout << "Esperando Alineamiento de GPS: " << gps->getGPSPos().sol_status << endl;
         }
+        cout << "GPS Alineado" << endl;
         //gps->gps_log_general("bestgpsposa", "");
         //gps->rcvData();
         
         //cout << "Comenzar movimiento 4km/h para alinear IMU" << endl;
 
-        gps->gps_log_general("inspvasa", "ontime 1");
-        while (gps->getInspVas().status != "INS_SOLUTION_GOOD") {
+        gps->gps_log_general("inspvaa", "ontime 0.1");
+        while ((gps->getInspVa().status != "INS_SOLUTION_GOOD") && (gps->getInspVa().status!="INS_ALIGNMENT_COMPLETE")) {
             gps->rcvData();
-            cout << "Esperando Alineamiento de IMU: " << gps->getInspVas().status << endl;
+            cout << "Esperando Alineamiento de IMU: " << gps->getInspVa().status << endl;
         }
-        gps->gps_log_general("corrimudatasa", "ontime 1");
+        cout << "IMU Alineado" << endl;
+        gps->gps_log_general("corrimudatasa", "ontime 0.1");
 
-        int i = 0;
+        //int i = 0;
         double vel_mod = 0.0;
 
         // Fichero a guardar
         FILE *fichero;
-        char nombre[12] = "datos2.txt";
+        char nombre[12] = "datos.txt";
 
         fichero = fopen(nombre, "w");
         printf("Fichero: %s (para escritura) -> ", nombre);
@@ -73,7 +75,7 @@ int main(int argc, char** argv)
             return 1;
         }
 
-
+/*
         int flagInspvas = false, flagCorrimudatasa = false, flagBestGPSPosa = false, flagHeadinga = false;
         int typeFrame;
         while (ros::ok()) {
@@ -200,7 +202,71 @@ int main(int argc, char** argv)
                 cout << "DATOS HEADING - Num Satelites: " << gps->getHeading().num_satellites << endl;
             }
         }
-      
+      */
+        // PRUEBAS SEMANA DEL 15 de DICIEMBRE ---_>>>>> BORRAR!!!!
+        bool flagInspva = false, flagCorrimudatasa = false, flagBestGPSPosa = false;
+        int typeFrame, insStatus;
+        while(ros::ok()){
+            typeFrame = gps->rcvData();
+            switch (typeFrame){
+                    case TT_BESTGPSPOSA:
+                        flagBestGPSPosa = true;
+                        break;
+                    case TT_INSPVAA:
+                        flagInspva = true;
+                        break;
+                    case TT_CORRIMUDATASA:
+                        flagCorrimudatasa = true;
+                        break;
+                    default:
+                        break;
+            }
+
+            if(flagBestGPSPosa && flagCorrimudatasa && flagInspva){
+                // Volcado de datos
+                fprintf(fichero, "%.8f ", gps->getInspVas().seconds);
+
+                fprintf(fichero, "%.8f ", gps->getGPSPos().lat);
+                fprintf(fichero, "%.8f ", gps->getGPSPos().lon);
+                fprintf(fichero, "%.8f ", gps->getGPSPos().hgt);
+
+                fprintf(fichero, "%.8f ", gps->getInspVas().lat);
+                fprintf(fichero, "%.8f ", gps->getInspVas().lon);
+                fprintf(fichero, "%.8f ", gps->getInspVas().hgt);
+
+                if (gps->getInspVas().status == "INS_INACTIVE")
+                    insStatus = 0;
+                else if (gps->getInspVas().status == "INS_ALIGNING")
+                    insStatus = 1;
+                else if (gps->getInspVas().status == "INS_SOLUTION_NOT_GOOD")
+                    insStatus = 2;
+                else if (gps->getInspVas().status == "INS_SOLUTION_GOOD")
+                    insStatus = 3;
+                else if (gps->getInspVas().status == "INS_BAD_GPS_AGREEMENT")
+                    insStatus = 6;
+                else if (gps->getInspVas().status == "INS_ALIGNMENT_COMPLETE")
+                    insStatus = 7;
+
+                fprintf(fichero, "%d\n", insStatus);
+                fflush(fichero);
+                flagBestGPSPosa = false;
+                flagCorrimudatasa = false;
+                flagInspva = false;
+                // Muestreo por pantalla
+                cout << "=========================================" << endl;
+                cout << "I N S P V A    D A T A :" << endl;
+                cout << "Lat: " << gps->getInspVas().lat << endl;
+                cout << "Lon: " << gps->getInspVas().lon << endl;
+                cout << "Hgt: " << gps->getInspVas().hgt << endl;
+                cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << "G P S P O S A    D A T A :" << endl;
+                cout << "Lat: " << gps->getGPSPos().lat << endl;
+                cout << "Lon: " << gps->getGPSPos().lon << endl;
+                cout << "Hgt: " << gps->getGPSPos().hgt << endl;
+
+            }
+        }
+
     
   }
   else

@@ -20,6 +20,7 @@ GPS_Management::GPS_Management(){
 Bestgpsvel GPS_Management::getGPSVel(){return this->bestgpsvel;}
 Bestgpspos GPS_Management::getGPSPos(){return this->bestgpspos;}
 Inspvas GPS_Management::getInspVas(){return this->inspvas;}
+Inspva GPS_Management::getInspVa(){return this->inspva;}
 Bestleverarm GPS_Management::getLeverarm(){return this->bestleverarm;}
 Corrimudata GPS_Management::getCorrIMUData(){return this->corrimudata;}
 Inspos GPS_Management::getInsPos(){return this->inspos;}
@@ -681,6 +682,26 @@ bool GPS_Management::gps_adq_inspvas(Response res){
   return true;
 }
 
+bool GPS_Management::gps_adq_inspva(Response res){
+  // Rellenar atributo bestgpspos con los datos obtenidos de Response
+  string *datos = getData(12,res.data);
+
+  this->inspva.week=stringToLong(datos[0]);
+  this->inspva.seconds=stringToDouble(datos[1]);
+  this->inspva.lat=stringToDouble(datos[2]);
+  this->inspva.lon=stringToDouble(datos[3]);
+  this->inspva.hgt=stringToDouble(datos[4]);
+  this->inspva.north_velocity=stringToDouble(datos[5]);
+  this->inspva.east_velocity=stringToDouble(datos[6]);
+  this->inspva.up_velocity=stringToDouble(datos[7]);
+  this->inspva.roll=stringToDouble(datos[8]);
+  this->inspva.pitch=stringToDouble(datos[9]);
+  this->inspva.azimuth=stringToDouble(datos[10]);
+  this->inspva.status=datos[11];
+
+  return true;
+}
+
 bool GPS_Management::gps_adq_bestleverarm(Response res){
   string *datos = getData(7,res.data);
   this->bestleverarm.x_offset=stringToDouble(datos[0]);
@@ -913,8 +934,11 @@ int GPS_Management::rcvData(){
       gps_adq_inspos(res);
       tt=TT_INSPOSA;
     }else if(res.header=="HEADINGA"){
-      gps_adq_heading(res);
+      gps_adq_inspva(res);
       tt=TT_HEADINGA;
+    }else if(res.header=="INSPVAA"){
+      gps_adq_inspva(res);
+      tt=TT_INSPVAA;
     }
   }else{
     tt=TT_ERROR;
