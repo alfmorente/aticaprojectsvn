@@ -1,2 +1,2 @@
-float32[] angulos
-float32[] distancias
+float32[] angle
+float32[] distance
