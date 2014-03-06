@@ -1,3 +1,3 @@
 uint8 id_module
-uint8 submodule
+uint8 submode
 uint8 status
