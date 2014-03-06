@@ -22,6 +22,10 @@ extern "C" {
 #include "../../msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h"
 #include "../../msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h"
 #include "../../msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h"
+#include "../../msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h"
+#include "std_msgs/Bool.h"
+
+
 
 //ROS y demas librerias
 #include "ros/ros.h"
@@ -44,9 +48,24 @@ int state_rangeDataFusion;
 int state_errors;
 int actualMode;
 
+
+ros::Publisher pub_module_enable;
+ros::Publisher pub_error;
+ros::Publisher pub_mode_error;
+ros::Publisher pub_mode_communication;
+ros::Publisher pub_ack;
+
+
+bool modesAvailables[12];
+
 // Funciones de suscripcion
-void fcn_sub_modo(const Modulo_Gest_Sistema::msg_mode);
-void fcn_sub_errores(const Modulo_Gest_Sistema::msg_error);
+void fcn_sub_mode_error(const Modulo_Gest_Sistema::msg_mode);
+void fcn_sub_mode_remote(const Modulo_Gest_Sistema::msg_mode);
+void fcn_sub_mode_communication(const Modulo_Gest_Sistema::msg_mode);
+void fcn_sub_mode_convoy(const Modulo_Gest_Sistema::msg_mode);
+void fcn_sub_mode_nav(const Modulo_Gest_Sistema::msg_mode);
+void fcn_sub_mode_driving(const Modulo_Gest_Sistema::msg_mode);
+void fcn_sub_available_mode(const Modulo_Gest_Sistema::msg_available_mode);
 
 
 
@@ -61,3 +80,9 @@ bool waitForAllModulesReady(ros::NodeHandle);
 
 //Actualiza el estado de los modulos
 void updateStatusModules(ros::NodeHandle);
+
+//Metodos auxiliares
+bool modeRUN(int mode);
+void modeSTOP(int mode);
+void modeEXIT(int mode);
+void modeRESUME(int mode);
