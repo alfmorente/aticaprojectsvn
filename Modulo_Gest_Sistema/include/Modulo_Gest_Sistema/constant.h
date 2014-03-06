@@ -31,16 +31,20 @@ extern "C" {
 #define ALARM_EXIT 3
 
 // Modos de operacion - msg_modo
-#define MODE_NEUTRAL 0
-#define MODE_TELEOP 1
-#define MODE_START_ENGINE 2
-#define MODE_STOP_ENGINE 3
-#define MODE_ENGAGE_BRAKE 4
-#define MODE_PLAN 5
-#define MODE_COME_TO_ME 6
-#define MODE_FOLLOW_ME 7
-#define MODE_MAPPING 8
-#define MODE_TEACH 9
+#define MODE_NEUTRAL -1
+#define MODE_TELEOP 0
+#define MODE_START_ENGINE 1
+#define MODE_STOP_ENGINE 2
+#define MODE_ENGAGE_BRAKE 3
+#define MODE_PLAN 4
+#define MODE_COME_TO_ME 5
+#define MODE_FOLLOW_ME 6
+#define MODE_MAPPING 7
+#define MODE_TEACH 8
+#define MODE_CONVOY 9
+#define MODE_CONVOY_TELEOP 10
+#define MODE_CONVOY_AUTO 11
+#define MODE_MANUAL 12
 
 // Subsistemas - id_subsistema de msg_errores
 #define SUBS_COMMUNICATION 0
@@ -79,7 +83,7 @@ extern "C" {
 #define SUBMODE_TEACH_UNDFD 0
 
 // Timeout para activacion de modulos
-#define TIMEOUT_ACTIVATION_MODULE 10 //segundos
+#define TIMEOUT_ACTIVATION_MODULE 100 //segundos
 
 /**************************************
  ************** ERRORS **************
@@ -95,10 +99,11 @@ extern "C" {
 #define ERROR_MODULE_UNAVAILABLE 0
 
 // Subsystem = System Management
-#define ERROR_MODE_GPS  1
-#define ERROR_MODE_LASER 2
-#define ERROR_MODE_DRIVING 3
-#define ERROR_MODE_NAVIGATION 4
+#define ERROR_MODE_NOT_UNAVAILABLE  1
+#define ERROR_MODE_GPS  2
+#define ERROR_MODE_LASER 3
+#define ERROR_MODE_DRIVING 4
+#define ERROR_MODE_NAVIGATION 5
 
 // Subsystem = Driving
 #define ERROR_DRIVING_HANDBRAKE 1
@@ -138,8 +143,7 @@ extern "C" {
 #define MODE_STOP 1
 #define MODE_RUN 2
 #define MODE_EXIT 3
-#define MODE_REQUEST 4
-#define MODE_FINISH 5
+#define MODE_FINISH 4
 
 // Stado del Modo de operación
 #define MODULE_OFF 0
