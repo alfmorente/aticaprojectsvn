@@ -26,6 +26,7 @@ extern "C" {
 #include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_mode.h"
 #include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_waypoints.h"
 #include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_backup.h"
+#include "../../msg_gen/cpp/include/Modulo_Comunicaciones/msg_available_mode.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
@@ -69,6 +70,7 @@ typedef struct{
     Modulo_Comunicaciones::msg_waypoints mens_waypoints;
     Modulo_Comunicaciones::msg_com_teleoperate mens_teleop;
     Modulo_Comunicaciones::msg_backup mens_backup;
+    Modulo_Comunicaciones::msg_available_mode mens_available_mode;
 }ROSmessage;
 
 // Estructura de datos que maneja los mensajes JAUS
@@ -106,6 +108,7 @@ void fcn_sub_error(const Modulo_Comunicaciones::msg_error);
 void fcn_sub_camera(const Modulo_Comunicaciones::msg_camera);
 void fcn_sub_mode(const Modulo_Comunicaciones::msg_mode);
 void fcn_sub_backup(const Modulo_Comunicaciones::msg_backup);
+void fcn_sub_available_mode(const Modulo_Comunicaciones::msg_available_mode);
 
 //Funciones de Publicacion
 void fcn_pub_mode(Modulo_Comunicaciones::msg_mode);

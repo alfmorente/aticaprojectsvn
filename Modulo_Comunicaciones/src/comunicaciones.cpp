@@ -110,6 +110,18 @@ void* spinThread(void* obj)
  * *****************************************************************************
  * ****************************************************************************/
 
+//Subscriptor de modos disponibles
+void fcn_sub_available_mode(const Modulo_Comunicaciones::msg_available_mode msg)
+{
+    // Se genera el mensaje a enviar
+    ROSmessage msg_ROS;
+    msg_ROS.tipo_mensaje=TOM_AVAILABLE_MODE;
+    msg_ROS.mens_gps=msg;
+
+    // Espera que la comunicacion este activa
+    if(comActiva)
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+}
 // Suscriptor de gps
 void fcn_sub_gps(const Modulo_Comunicaciones::msg_gps msg)
 {
@@ -122,13 +134,13 @@ void fcn_sub_gps(const Modulo_Comunicaciones::msg_gps msg)
     // Espera que la comunicacion este activa
     if(comActiva)
     {
-	JAUS_message_type=JAUS_REPORT_GLOBAL_POSE;
+	//JAUS_message_type=JAUS_REPORT_GLOBAL_POSE;
 	// Se envia el mensaje por JAUS
     	sendJAUSMessage(convertROStoJAUS(msg_ROS));
 
-	JAUS_message_type=JAUS_REPORT_VELOCITY_STATE;
+	/**JAUS_message_type=JAUS_REPORT_VELOCITY_STATE;
 	// Se envia el mensaje por JAUS
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS));**/
     }
 }
 
@@ -265,22 +277,40 @@ void connect(){
     }
 
     //Creo componente
-    compCamera=ojCmptCreate("CAMERA_COMPONENT",JAUS_VISUAL_SENSOR ,1);
+    compVehicle=ojCmptCreate("VEHICLE",JAUS_SUBSYSTEM_COMMANDER ,1);
+    /**compCamera=ojCmptCreate("CAMERA_COMPONENT",JAUS_VISUAL_SENSOR ,1);
     compVehicle=ojCmptCreate("VEHICLE_COMPONENT",JAUS_PRIMITIVE_DRIVER ,1);
     compMission=ojCmptCreate("MISSION_COMPONENT",JAUS_MISSION_SPOOLER,1);
     compGPS=ojCmptCreate("GPS_COMPONENT",JAUS_GLOBAL_POSE_SENSOR,1);
     compNavigation=ojCmptCreate("NAVIGATION_COMPONENT",JAUS_GLOBAL_WAYPOINT_DRIVER,1);
-    compVelSensor=ojCmptCreate("VELOCITY_COMPONENT",JAUS_VELOCITY_STATE_SENSOR,1);
+    compVelSensor=ojCmptCreate("VELOCITY_COMPONENT",JAUS_VELOCITY_STATE_SENSOR,1);**/
     
     //Configuro Componente
-    ojCmptAddService(compCamera, JAUS_VISUAL_SENSOR);
+    ojCmptAddService(compVehicle, JAUS_SUBSYSTEM_COMMANDER);
+    /**ojCmptAddService(compCamera, JAUS_VISUAL_SENSOR);
     ojCmptAddService(compVehicle, JAUS_PRIMITIVE_DRIVER);
     ojCmptAddService(compMission, JAUS_MISSION_SPOOLER);
     ojCmptAddService(compGPS, JAUS_GLOBAL_POSE_SENSOR);
     ojCmptAddService(compNavigation, JAUS_GLOBAL_WAYPOINT_DRIVER);
     ojCmptAddService(compVelSensor, JAUS_VELOCITY_STATE_SENSOR);
+    **/
 
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_WRENCH_EFFORT, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_WAYPOINT, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle,JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_WAYPOINT_COUNT, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_RUN_MISSION, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_PAUSE_MISSION, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_RESUME_MISSION, 0xFF);
+    ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_ABORT_MISSION, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_VELOCITY_STATE, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_IMAGE, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
+    ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_POSE, 0xFF);
 
+    /**
     ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
     ojCmptAddServiceInputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_SET_WRENCH_EFFORT, 0xFF);
     ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
@@ -295,22 +325,28 @@ void connect(){
     ojCmptAddServiceOutputMessage(compCamera, JAUS_VISUAL_SENSOR, JAUS_REPORT_IMAGE, 0xFF);
     ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
     ojCmptAddServiceOutputMessage(compGPS, JAUS_GLOBAL_POSE_SENSOR , JAUS_REPORT_GLOBAL_POSE, 0xFF);
+    **/
 
     ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
+    /**ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
     ojCmptSetMessageProcessorCallback(compNavigation,rcvJAUSMessage);
     ojCmptSetMessageProcessorCallback(compMission,rcvJAUSMessage);
     ojCmptSetMessageProcessorCallback(compVelSensor,rcvJAUSMessage);
     ojCmptSetMessageProcessorCallback(compCamera,rcvJAUSMessage);
     ojCmptSetMessageProcessorCallback(compGPS,rcvJAUSMessage);
     //ojCmptSetStateCallback(compVeh, JAUS_READY_STATE,jausComunicator::process_data);
+    **/
+
+    ojCmptSetStateCallback(compVehicle,JAUS_READY_STATE,fcn_ready);
 
     //run
     ojCmptRun(compVehicle);
+    /**ojCmptRun(compVehicle);
     ojCmptRun(compNavigation);
     ojCmptRun(compMission);
     ojCmptRun(compVelSensor);
     ojCmptRun(compCamera);
-    ojCmptRun(compGPS);
+    ojCmptRun(compGPS);**/
 }
 
 // Desconexion JAUS
@@ -346,7 +382,10 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
     destino->component = JAUS_SUBSYSTEM_COMMANDER;
     
     switch (msg_ROS.tipo_mensaje){
-
+        case TOM_AVAILABLE_MODE:
+            break;
+        case TOM_CONFIGURATION:
+            break;
         case TOM_CAMERA:
             tipoMensajeJAUS.image = reportImageMessageCreate();
 	    jausAddressCopy(tipoMensajeJAUS.image->destination, destino);
@@ -397,33 +436,27 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break;
         case TOM_MODE:
 	    //Camino finalizado o modo terminado
-	    if(msg_ROS.mens_mode.status==MODE_EXIT)
+	    if(msg_ROS.mens_mode.mode==MODE_FINISH)
 	    {
             	tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
             	jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
            	tipoMensajeJAUS.missionStatus->type=MISSION;
+                tipoMensajeJAUS.missionStatus->missionId=msg_ROS.mens_mode.mode;
 		tipoMensajeJAUS.missionStatus->status=FINISHED;
             	msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);
             	reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus);
 	    }
+        case TOM_ACK:
 	    //ACK del modo
-	    else if(msg_ROS.mens_mode.status==MODE_START)
-	    {
-            	tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
-            	jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
-           	tipoMensajeJAUS.missionStatus->type=MISSION;
-		tipoMensajeJAUS.missionStatus->status=SPOOLING;
-            	msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);
-            	reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus);
-	    }
-            break;
-        case TOM_BACKUP:
             tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
-            tipoMensajeJAUS.missionStatus->type=TASK;
-	    tipoMensajeJAUS.missionStatus->status=FINISHED;
+            tipoMensajeJAUS.missionStatus->type=MISSION;
+            tipoMensajeJAUS.missionStatus->missionId=msg_ROS.mens_mode.mode;
+            tipoMensajeJAUS.missionStatus->status=SPOOLING;
             msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);
             reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus);
+            break;
+        case TOM_BACKUP:
             break;
 	
         default:
@@ -433,7 +466,6 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
 }
 
 // Conversion de mensaje JAUS a ROS
-
 ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
 
     // TODO Conversion JAUS a ROS
@@ -442,114 +474,6 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
     msg_ROS.tipo_mensaje=TOM_UNKNOW;
     switch(msg_JAUS->commandCode)
     {
-        //Comandos de tele-operacion
-        case JAUS_SET_WRENCH_EFFORT:
-            tipoMensajeJAUS.mainCommand=setWrenchEffortMessageFromJausMessage(msg_JAUS);
-            if(tipoMensajeJAUS.mainCommand)
-            {
-                msg_ROS.tipo_mensaje=TOM_TELEOP;
-                switch(tipoMensajeJAUS.mainCommand->presenceVector)
-                {
-                    case 0x0004:
-                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_THROTTLE;
-                        msg_ROS.mens_teleop.value=redondea(tipoMensajeJAUS.mainCommand->propulsiveLinearEffortZPercent);
-	   		//ROS_INFO("Acelerador Recibido %d",msg_ROS.mens_teleop.value);
-                        break;
-                    case 0x0008:
-                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_STEER;
-                        msg_ROS.mens_teleop.value=redondea(tipoMensajeJAUS.mainCommand->propulsiveRotationalEffortXPercent);
-	   		//ROS_INFO("Direccion recibida %d",msg_ROS.mens_teleop.value );
-                        break;
-                    case 0x0100:
-                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_BRAKE;
-                        msg_ROS.mens_teleop.value=redondea(tipoMensajeJAUS.mainCommand->resistiveLinearEffortZPercent);
-	   		//ROS_INFO("Freno recibido %d",msg_ROS.mens_teleop.value);
-                        break;
-                    default:
-                        break;
-                }
-                msg_ROS.mens_teleop.debug=false;
-                setWrenchEffortMessageDestroy(tipoMensajeJAUS.mainCommand);
-
-            }
-            break;
-
-        case JAUS_SET_DISCRETE_DEVICES:
-            //ROS_INFO("Mensaje de Teleoperacion recibido");
-            tipoMensajeJAUS.auxCommand=setDiscreteDevicesMessageFromJausMessage(msg_JAUS);
-            if(tipoMensajeJAUS.auxCommand)
-            {
-                msg_ROS.tipo_mensaje=TOM_TELEOP;
-                switch(tipoMensajeJAUS.auxCommand->presenceVector)
-                {
-                    case 0x0001:
-			//Start
-	   		//ROS_INFO("Start recibido");
-                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_ENGINE;
-                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->mainPropulsion;
-                        break;
-                    case 0x0002:
-			//Freno de mano
-                        if(tipoMensajeJAUS.auxCommand->auxiliarComandos==0)
-                        {
-	   		    //ROS_INFO("Freno de mano Recibida");
-                            msg_ROS.mens_teleop.ID_element=ID_TELEOP_HANDBRAKE;
-                            msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->parkingBrake;
-
-                        }
-			//Luces
-                        else if(tipoMensajeJAUS.auxCommand->auxiliarComandos==1)
-                        {
-			    if(tipoMensajeJAUS.auxCommand->beam)
-			    {
-	   		    	//ROS_INFO("Luz larga Recibida");
-                            	msg_ROS.mens_teleop.ID_element=ID_TELEOP_LIGHTS;
-                            	msg_ROS.mens_teleop.value=BEAM;
-			    }
-			    else if(tipoMensajeJAUS.auxCommand->crossing_light)
-			    {
-	   		    	//ROS_INFO("Luz corta Recibida");
-                            	msg_ROS.mens_teleop.ID_element=ID_TELEOP_LIGHTS;
-                            	msg_ROS.mens_teleop.value=CROSSING;
-			    }
-			    else if(tipoMensajeJAUS.auxCommand->position_light)
-			    {
-	   		    	//ROS_INFO("Luz de posicion Recibida");
-                            	msg_ROS.mens_teleop.ID_element=ID_TELEOP_LIGHTS;
-                            	msg_ROS.mens_teleop.value=POSITION;
-			    }
-			    else 
-			    {
-	   		    	//ROS_INFO("Luces apagadas");
-                            	msg_ROS.mens_teleop.ID_element=ID_TELEOP_LIGHTS;
-                            	msg_ROS.mens_teleop.value=OFF;
-			    }
-
-                        }
-
-                        break;
-                    case 0x0004:
-			//Marcha
-                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_GEAR;
-			if(tipoMensajeJAUS.auxCommand->gear<JAUS_NEUTRAL)
-                        	msg_ROS.mens_teleop.value=BACK;
-			else if(tipoMensajeJAUS.auxCommand->gear==JAUS_NEUTRAL)
-                        	msg_ROS.mens_teleop.value=NEUTRAL;
-			else if(tipoMensajeJAUS.auxCommand->gear>JAUS_NEUTRAL)
-                        	msg_ROS.mens_teleop.value=DRIVE;
-	   		ROS_INFO("Marcha Recibida %d",msg_ROS.mens_teleop.value);
-
-			
-                        break;
-                    default:
-                        break;
-                }
-                msg_ROS.mens_teleop.debug=false;
-                setDiscreteDevicesMessageDestroy(tipoMensajeJAUS.auxCommand);
-
-            }
-            break;
-
         //Comandos de misión (modos de la plataforma)
         //RUN: Comenzar el Modo x
         //PAUSE: STOP de la navegación
@@ -563,7 +487,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
             {
                 msg_ROS.tipo_mensaje=TOM_MODE;
                 msg_ROS.mens_mode.mode=tipoMensajeJAUS.startMode->missionId;
-                msg_ROS.mens_mode.status=MODE_REQUEST;
+                msg_ROS.mens_mode.status=MODE_START;
                 runMissionMessageDestroy(tipoMensajeJAUS.startMode);
 
             }
@@ -605,40 +529,121 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
             }
             break;
 
-        //Waypoints en modo de navegación
-        case JAUS_REPORT_GLOBAL_WAYPOINT:
-            //ROS_INFO("Mensaje de Waypoints recibido");
-            tipoMensajeJAUS.waypoint=reportGlobalWaypointMessageFromJausMessage(msg_JAUS);
-            if(tipoMensajeJAUS.waypoint)
+
+
+        //Conducción
+        case JAUS_SET_WRENCH_EFFORT:
+            tipoMensajeJAUS.mainCommand=setWrenchEffortMessageFromJausMessage(msg_JAUS);
+            if(tipoMensajeJAUS.mainCommand)
             {
-                int indexWaypoint=tipoMensajeJAUS.waypoint->waypointNumber-1;
-		auxWaypointLat[indexWaypoint]=tipoMensajeJAUS.waypoint->latitudeDegrees;
-		auxWaypointLon[indexWaypoint]=tipoMensajeJAUS.waypoint->longitudeDegrees;
-                if(tipoMensajeJAUS.waypoint->waypointNumber==numberWaypoints)
+                msg_ROS.tipo_mensaje=TOM_TELEOP;
+                switch(tipoMensajeJAUS.mainCommand->presenceVector)
                 {
-                    msg_ROS.tipo_mensaje=TOM_WAYPOINT;
-                    for(int i=0;i<numberWaypoints-1;i++)
-                    {
-                        msg_ROS.mens_waypoints.waypoint_lat.push_back(auxWaypointLat[i]);
-                        msg_ROS.mens_waypoints.waypoint_lon.push_back(auxWaypointLon[i]);
-                    }
-                    msg_ROS.mens_waypoints.num_waypoints=numberWaypoints;
+                    case 0x0004:
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_THROTTLE;
+                        msg_ROS.mens_teleop.value=redondea(tipoMensajeJAUS.mainCommand->propulsiveLinearEffortZPercent);
+	   		ROS_INFO("Acelerador Recibido %d",msg_ROS.mens_teleop.value);
+                        break;
+                    case 0x0008:
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_STEER;
+                        msg_ROS.mens_teleop.value=redondea(tipoMensajeJAUS.mainCommand->propulsiveRotationalEffortXPercent);
+	   		ROS_INFO("Direccion recibida %d",msg_ROS.mens_teleop.value );
+                        break;
+                    case 0x0100:
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_BRAKE;
+                        msg_ROS.mens_teleop.value=redondea(tipoMensajeJAUS.mainCommand->resistiveLinearEffortZPercent);
+	   		ROS_INFO("Freno recibido %d",msg_ROS.mens_teleop.value);
+                        break;
+                    default:
+                        break;
                 }
-                reportGlobalWaypointMessageDestroy(tipoMensajeJAUS.waypoint);
+                setWrenchEffortMessageDestroy(tipoMensajeJAUS.mainCommand);
 
             }
             break;
-        case JAUS_REPORT_WAYPOINT_COUNT:
-           // ROS_INFO("Mensaje de Numero de Waypoints recibido");
-            tipoMensajeJAUS.numberWaypoints=reportWaypointCountMessageFromJausMessage(msg_JAUS);
-            if(tipoMensajeJAUS.numberWaypoints)
+
+        case JAUS_SET_DISCRETE_DEVICES:
+            //ROS_INFO("Mensaje de Teleoperacion recibido");
+            tipoMensajeJAUS.auxCommand=setDiscreteDevicesMessageFromJausMessage(msg_JAUS);
+            if(tipoMensajeJAUS.auxCommand)
             {
-                    tipoMensajeJAUS.numberWaypoints=reportWaypointCountMessageFromJausMessage(msg_JAUS);
-                    numberWaypoints=tipoMensajeJAUS.numberWaypoints->waypointCount;
-                    auxWaypointLat=new double[numberWaypoints];
-                    auxWaypointLon=new double[numberWaypoints];
+                msg_ROS.tipo_mensaje=TOM_TELEOP;
+                switch(tipoMensajeJAUS.auxCommand->presenceVector)
+                {
+                    case 0x0001:
+			//Start
+	   		//ROS_INFO("Power recibido");
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_ENGINE;
+                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->mainPropulsion;
+                        break;
+                    case 0x0002:
+			//Freno de mano
+	   		//ROS_INFO("Freno de mano Recibida");
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_HANDBRAKE;
+                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->parkingBrake;
+
+                        //Luz IR
+                        //ROS_INFO("Luz IR");
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_LIGHT_IR;
+                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->beam;
+
+                        //Luz convencional
+	   		//ROS_INFO("Luz Convencional");
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_LIGHT_STANDAR;
+                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->position_light;
+
+                        //Diferencial
+	   		//ROS_INFO("Diferencial");
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_DIFF;
+                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->cruise;
+
+                        //activacion laser 2D
+	   		//ROS_INFO("Activacion laser 2D");
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_ACT_LASER2D;
+                        msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->crossing_light;
+
+
+                        break;
+                    case 0x0004:
+			//Marcha
+                        msg_ROS.mens_teleop.ID_element=ID_TELEOP_GEAR;
+			if(tipoMensajeJAUS.auxCommand->gear<JAUS_NEUTRAL_HIGH)
+                        	msg_ROS.mens_teleop.value=HIGH;
+			else if(tipoMensajeJAUS.auxCommand->gear<JAUS_REVERSE)
+                        	msg_ROS.mens_teleop.value=NEUTRAL_HIGH;
+			else if(tipoMensajeJAUS.auxCommand->gear<JAUS_NEUTRAL_LOW)
+                        	msg_ROS.mens_teleop.value=REVERSE;
+                	else if(tipoMensajeJAUS.auxCommand->gear<JAUS_LOW)
+                        	msg_ROS.mens_teleop.value=NEUTRAL_LOW;
+                	else
+                        	msg_ROS.mens_teleop.value=LOW;
+	   		ROS_INFO("Marcha Recibida %d",msg_ROS.mens_teleop.value);
+
+			
+                        break;
+                    default:
+                        break;
+                }
+                msg_ROS.mens_teleop.debug=false;
+                setDiscreteDevicesMessageDestroy(tipoMensajeJAUS.auxCommand);
+
             }
-	    reportWaypointCountMessageDestroy(tipoMensajeJAUS.numberWaypoints);
+            break;
+        //Comandos de cámaras
+        case JAUS_SET_CAMERA_POSE:
+            break;
+
+        //Navegacion
+        //Waypoints en modo de navegación
+        case JAUS_REPORT_GLOBAL_WAYPOINT:
+            ROS_INFO("Nuevo Waypoint Follow ME");
+            tipoMensajeJAUS.waypoint=reportGlobalWaypointMessageFromJausMessage(msg_JAUS);
+            if(tipoMensajeJAUS.waypoint)
+            {
+                msg_ROS.mens_waypoints.waypoint_lat=tipoMensajeJAUS.waypoint.latitudeDegrees;
+                msg_ROS.mens_waypoints.waypoint_lon=tipoMensajeJAUS.waypoint.longitudeDegrees;
+                reportGlobalWaypointMessageDestroy(tipoMensajeJAUS.waypoint);
+            }
             break;
         default:
             break;

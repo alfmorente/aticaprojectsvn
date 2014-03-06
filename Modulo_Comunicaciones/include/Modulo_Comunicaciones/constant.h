@@ -47,7 +47,7 @@ extern "C" {
 #define MODE_STOP 1
 #define MODE_RUN 2
 #define MODE_EXIT 3
-#define MODE_REQUEST 4
+#define MODE_FINISH 4
 
 // Subsistemas - id_subsistema de msg_errores
 #define SUBS_COMUNICACIONES 0
@@ -85,20 +85,29 @@ extern "C" {
 #define TOM_ERROR 2
 #define TOM_MODE 3
 #define TOM_WAYPOINT 4
-#define TOM_TELEOP 5
-#define TOM_BACKUP 6
+#define TOM_PLAN 5
+#define TOM_TELEOP 6
+#define TOM_BACKUP 7
+#define TOM_ACK 8
+#define TOM_PET_CONFIGURATION 9
+#define TOM_CONFIGURATION 10
+#define TOM_AVAILABLE_MODE 11
 #define TOM_UNKNOW -1
 
 
 
 // Elementos de los actuadores (msg_com_teleoperado)
-#define ID_TELEOP_STEER 0
-#define ID_TELEOP_THROTTLE 1
-#define ID_TELEOP_BRAKE 2
-#define ID_TELEOP_HANDBRAKE 3
-#define ID_TELEOP_GEAR 4
-#define ID_TELEOP_LIGHTS 5
-#define ID_TELEOP_ENGINE 6
+#define ID_TELEOP_THROTTLE 0
+#define ID_TELEOP_BRAKE 1
+#define ID_TELEOP_STEER 2
+#define ID_TELEOP_GEAR 3
+#define ID_TELEOP_HANDBRAKE 4
+#define ID_TELEOP_ENGINE 5
+#define ID_TELEOP_LIGHT_IR 6
+#define ID_TELEOP_LIGHT_STANDAR 7
+#define ID_TELEOP_DIFF 8
+#define ID_TELEOP_ACT_LASER2D 9
+
 
 // Cotas Maximas y minimas para actuadores (depuracion msg_com_teleoperado)
 #define MAX_STEER_VALUE 100 // Giro maximo
@@ -117,9 +126,12 @@ extern "C" {
 #define MIN_ENGINE_VALUE 0 // Motor apagado
 
 //Valores para otros actuadores
-#define BACK  0
-#define NEUTRAL 1
-#define DRIVE 2
+#define HIGH  0
+#define NEUTRAL_HIGH 1
+#define REVERSE 2
+#define NEUTRAL_LOW 3
+#define LOW 4
+
 #define ON 1
 #define OFF 0
 #define POSITION 1
@@ -127,11 +139,11 @@ extern "C" {
 #define BEAM 3
 
 //Valores JAUS
-#define JAUS_BACK 64
-#define JAUS_NEUTRAL 128
-#define JAUS_DRIVE 192
-#define JAUS_ON 1
-#define JAUS_OFF 0
+#define JAUS_HIGH 25
+#define JAUS_NEUTRAL_HIGH 76
+#define JAUS_REVERSE 127
+#define JAUS_NEUTRAL_LOW 178
+#define JAUS_LOW 229
 
 #define MISSION 0
 #define TASK 1
