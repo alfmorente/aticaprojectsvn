@@ -76,7 +76,6 @@ void fcn_sub_enable_module(const Modulo_Teleoperacion::msg_module_enable msg)
                     // Publicacion de com_teleoperado
                     msg_tlp.id_element=ID_TELEOP_ENGINE;
                     msg_tlp.value= START_ENGINE;
-                    msg_tlp.debug=false;
                     pub_teleop.publish(msg_tlp);
                     // Publicacion del modo
                     msg_md.mode=MODE_START_ENGINE;
@@ -87,7 +86,6 @@ void fcn_sub_enable_module(const Modulo_Teleoperacion::msg_module_enable msg)
                     // Publicacion de com_teleoperado
                     msg_tlp.id_element=ID_TELEOP_ENGINE;
                     msg_tlp.value= STOP_ENGINE;
-                    msg_tlp.debug=false;
                     pub_teleop.publish(msg_tlp);
                     // Publicacion del modo
                     msg_md.mode=MODE_STOP_ENGINE;
@@ -98,7 +96,6 @@ void fcn_sub_enable_module(const Modulo_Teleoperacion::msg_module_enable msg)
                     // Publicacion de com_teleoperado
                     msg_tlp.id_element=ID_TELEOP_BRAKE;
                     msg_tlp.value= HANDBRAKE_ON;
-                    msg_tlp.debug=false;
                     pub_teleop.publish(msg_tlp);
                     // Publicacion del modo
                     msg_md.mode=MODE_ENGAGE_BRAKE;
@@ -124,20 +121,23 @@ void fcn_sub_laser(const Modulo_Teleoperacion::msg_laser msg)
         Modulo_Teleoperacion::msg_error msg_err;
         switch (processDataLaser(msg)){
             case NEAR_OBSTACLE:
-                msg_err.id_subsistema=ID_MOD_TELEOP;
+                msg_err.id_subsystem=ID_MOD_TELEOP;
                 msg_err.id_error=NEAR_OBSTACLE_DETECTION;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
                 pub_error.publish(msg_err);
                 break;
             case FAR_OBSTACLE:
-                msg_err.id_subsistema=ID_MOD_TELEOP;
+                msg_err.id_subsystem=ID_MOD_TELEOP;
                 msg_err.id_error=FAR_OBSTACLE_DETECTION;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
                 pub_error.publish(msg_err);
                 break;
             case NO_OBSTACLE:
+                //msg_err.id_subsystem=ID_MOD_TELEOP;
+                //msg_err.id_error=
                 break;
             default:
+                cout << "Error lectura datos láser" << endl;
                 break;
         }
     }
@@ -169,6 +169,7 @@ void fcn_sub_com_teleop(const Modulo_Teleoperacion::msg_com_teleop msg)
 
 // Acota los valores para que no se salgan de rango
 int convertToCorrectValues(int id_elem, int value){
+    Modulo_Teleoperacion::msg_error msg_err;
     switch (id_elem){
         case ID_TELEOP_STEER:
             if(value<MIN_STEER_VALUE){
@@ -184,10 +185,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_THROTTLE:
@@ -204,10 +205,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_BRAKE:
@@ -224,10 +225,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_HANDBRAKE:
@@ -244,10 +245,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_GEAR:
@@ -264,10 +265,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_LIGHTS:
@@ -284,10 +285,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_IR_LIGHTS:
@@ -304,10 +305,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_ENGINE:
@@ -324,10 +325,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_DIFF:
@@ -344,10 +345,10 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         case ID_TELEOP_LASER:
@@ -364,22 +365,23 @@ int convertToCorrectValues(int id_elem, int value){
                 error_count=0;
             }
             if (error_count>=MAX_OUTRANGE_ERROR){
-                Modulo_Teleoperacion::msg_error msg_err;
-                msg_err.id_subsistema=SUBS_TELEOP;
+                msg_err.id_subsystem=SUBS_TELEOP;
                 msg_err.id_error=REMOTE_PARAMATER_OUTRANGE;
-                msg_err.tipo_error=TOE_UNDEFINED;
+                msg_err.type_error=TOE_UNDEFINED;
+                error_count=0;
             }
             break;
         default:
             return -1;
             break;
     }
+    pub_error.publish(msg_err);
 }
 
 short processDataLaser(Modulo_Teleoperacion::msg_laser msg){
     short obstacle;
     int i;
-    for (i=0;i=(int)msg.distance.size();i++){
+    for (i=0;(i=msg.distance.size());i++){
         if ((msg.distance[i]>0) && (msg.distance[i]<=LasFront_alarm)){
             obstacle=NEAR_OBSTACLE;
             return obstacle;
@@ -393,4 +395,5 @@ short processDataLaser(Modulo_Teleoperacion::msg_laser msg){
             return obstacle;
         }
     }
+    return -1;
 }
