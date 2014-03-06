@@ -3,12 +3,12 @@ FILE(REMOVE_RECURSE
   "msg_gen"
   "src/Modulo_GPS/msg"
   "CMakeFiles/ROSBUILD_genmsg_lisp"
-  "msg_gen/lisp/msg_gps.lisp"
-  "msg_gen/lisp/_package.lisp"
-  "msg_gen/lisp/_package_msg_gps.lisp"
   "msg_gen/lisp/msg_errores.lisp"
   "msg_gen/lisp/_package.lisp"
   "msg_gen/lisp/_package_msg_errores.lisp"
+  "msg_gen/lisp/msg_gps.lisp"
+  "msg_gen/lisp/_package.lisp"
+  "msg_gen/lisp/_package_msg_gps.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

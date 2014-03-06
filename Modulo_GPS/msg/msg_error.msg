@@ -1,0 +1,3 @@
+uint8 id_subsystem
+uint16 id_error
+uint16 type_error

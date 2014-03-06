@@ -4,8 +4,8 @@ FILE(REMOVE_RECURSE
   "src/Modulo_GPS/msg"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/Modulo_GPS/msg/__init__.py"
-  "src/Modulo_GPS/msg/_msg_gps.py"
   "src/Modulo_GPS/msg/_msg_errores.py"
+  "src/Modulo_GPS/msg/_msg_gps.py"
 )
 
 # Per-language clean rules from dependency scanning.
