@@ -1,0 +1,2 @@
+float64 wp_latitude
+float64 wp_longitude
