@@ -1,6 +1,6 @@
 /* 
  * File:   gps.h
- * Author: carlosamores
+ * Author: atica
  *
  * Created on 16 de septiembre de 2013, 11:51
  */
@@ -18,16 +18,22 @@ extern "C" {
 
 #endif	/* GPS_H */
 
+// Variable de continuacion de modulo
+bool exitModule;
+
 // Mensajes
 #include "../../msg_gen/cpp/include/Modulo_GPS/msg_gps.h"
 #include "../../msg_gen/cpp/include/Modulo_GPS/msg_errores.h"
+#include "../../msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h"
 
 // ROS
 #include "ros/ros.h"
 #include "constant.h"
+#include <signal.h>
 
 
-// NO hay suscriptores
+// Suscriptores
+void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable);
 
 // Funciones propias
 

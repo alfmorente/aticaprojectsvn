@@ -3,18 +3,39 @@
 ros::Publisher pub_gps;
 ros::Publisher pub_errores;
 
-// Variable de continuacion de modulo
- bool exitModule;
-
 using namespace std;
+
+// what has to be done at program exit
+void do_exit(int error)
+{
+  printf("finished GPS (%d).\n\n", error);
+  exit(error);
+}
+
+// the signal handler for manual break Ctrl-C
+void signal_handler(int signal)
+{
+  do_exit(0);
+}
+
+// what has to be done at program start
+void init()
+{
+  /* install signal handlers */
+  signal(SIGTERM, signal_handler);
+  signal(SIGINT, signal_handler);
+
+}
 
 int main(int argc, char **argv)
 {
+  // Orden para la parada manual con CTtrl+C
+  init();
 
   // Inicio de ROS
   ros::init(argc, argv, "GPS");
 
-    // Manejador ROS
+  // Manejador ROS
   ros::NodeHandle n;
 
   // Espera activa de inicio de modulo
@@ -27,6 +48,9 @@ int main(int argc, char **argv)
   // Generación de publicadores
   pub_gps = n.advertise<Modulo_GPS::msg_gps>("gps", 1000);
   pub_errores = n.advertise<Modulo_GPS::msg_errores>("error", 1000);
+
+  // Inicialización de suscriptores
+  ros::Subscriber sub_moduleEnable = n.subscribe("moduleEnable", 1000, fcn_sub_enableModule);
 
   // Inicializacion de variable global de fin de modulo
   exitModule=false;
@@ -78,8 +102,16 @@ int main(int argc, char **argv)
  * *****************************************************************************
  * ****************************************************************************/
 
-// No hay
-
+void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable msg){
+    if (msg.id_module == ID_MOD_TEACH){
+        if (msg.status == STATUS_ON){
+            // Guarda los datos del GPS en archivo TEMP
+        }
+        else if (msg.status == STATUS_OFF){
+            // Cierra archivo temporal. Filtra y lo envía
+        }
+    }
+}
 /*******************************************************************************
  *******************************************************************************
  *                              FUNCIONES PROPIAS

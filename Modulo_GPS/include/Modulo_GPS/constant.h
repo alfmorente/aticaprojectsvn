@@ -55,13 +55,14 @@ extern "C" {
 #define SUBS_LASER_TRAS_DER 9
 #define SUBS_LASER_3D 10
 
-// ID Modulo - msg_hab_modulo
+// ID Modulo - msg_enable_module
 #define ID_MOD_TELEOP 0
 #define ID_MOD_NAVEGACION 1
-#define ID_MOD_MAPPING 2
-#define ID_MOD_TEACH 3
+#define ID_MOD_CONVOY 2
+#define ID_MOD_MAPPING 3
+#define ID_MOD_TEACH 4
 
-// Submodos - msg_hab_modulo
+// Submodos - msg_enable_module
 #define SUBMODE_TELEOP_TELEOP 0
 #define SUBMODE_TELEOP_START_ENGINE 1
 #define SUBMODE_TELEOP_STOP_ENGINE 2
@@ -71,3 +72,7 @@ extern "C" {
 #define SUBMODE_NAV_COME_TO_ME 2
 #define SUBMODE_MAPPING_UNDFD 0
 #define SUBMODE_TEACH_UNDFD 0
+
+// Status - msg_enable_module
+#define STATUS_OFF 0
+#define STATUS_ON 1
