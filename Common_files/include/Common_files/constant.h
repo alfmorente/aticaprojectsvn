@@ -24,7 +24,6 @@ extern "C" {
 #define STATE_CONF 1
 #define STATE_OK 2
 #define STATE_ERROR 3
-#define PRUEBA_PRIVACIDAD 4
 
 // Constante para gestión de interruptores/banderas
 #define OFF 0
