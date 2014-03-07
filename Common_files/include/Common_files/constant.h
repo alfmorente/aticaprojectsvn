@@ -5,7 +5,7 @@
  * Created on 19 de septiembre de 2013, 12:00
  */
 
-// olakase
+// OLAKASE
 
 #ifndef CONSTANT_H
 #define	CONSTANT_H
