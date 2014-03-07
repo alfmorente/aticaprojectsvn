@@ -5,7 +5,6 @@
  * Created on 19 de septiembre de 2013, 12:00
  */
 
-// OLAKASE
 
 #ifndef CONSTANT_H
 #define	CONSTANT_H
@@ -25,6 +24,7 @@ extern "C" {
 #define STATE_CONF 1
 #define STATE_OK 2
 #define STATE_ERROR 3
+#define PRUEBA_PRIVACIDAD 4
 
 // Constante para gestión de interruptores/banderas
 #define OFF 0
