@@ -36,7 +36,7 @@ extern "C" {
 
 //Constantes para definir tipo de mensajes (Mensajes que requieran ACK)
 #define SET 0
-#define INFORM 1
+#define INFO 1
 
 // Constantes de tipos de parada de emergencia
 #define TOS_OBSTACLE 0
