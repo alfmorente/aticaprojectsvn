@@ -1,4 +1,0 @@
-tf/tfMessage mensajeTF
-nav_msgs/Odometry odometria
-sensor_msgs/LaserScan laserInfo
-geometry_msgs/PoseStamped posicion
