@@ -50,6 +50,12 @@ ros::Publisher pub_error, pub_switch, pub_backup, pub_info_stop;
 // ----- Subscriptores
 ros::Subscriber sub_navigation, sub_com_teleop, sub_engine_brake, sub_emergency_stop;  
 
+// ----- Mensajes
+Modulo_Conduccion::msg_error msg_err;
+Modulo_Conduccion::msg_switch msg_switch;
+Modulo_Conduccion::msg_backup msg_backup;
+Modulo_Conduccion::msg_info_stop msg_info_stop;
+
 ConduccionThread * conduccion;
 CANCommunication * can;
 

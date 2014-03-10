@@ -28,7 +28,7 @@ struct msg_backup_ {
   , handbrake(false)
   , gear(0)
   , engine(false)
-  , speed(0.0)
+  , speed(0)
   {
   }
 
@@ -39,7 +39,7 @@ struct msg_backup_ {
   , handbrake(false)
   , gear(0)
   , engine(false)
-  , speed(0.0)
+  , speed(0)
   {
   }
 
@@ -61,8 +61,8 @@ struct msg_backup_ {
   typedef uint8_t _engine_type;
   uint8_t engine;
 
-  typedef float _speed_type;
-  float speed;
+  typedef uint8_t _speed_type;
+  uint8_t speed;
 
 
   typedef boost::shared_ptr< ::Modulo_Conduccion::msg_backup_<ContainerAllocator> > Ptr;
@@ -93,12 +93,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::Modulo_Conduccion::msg_backup_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "df2017219d28cc65f22715b1e9daac82";
+    return "ff8688787aa97766b5311a5e39e25a80";
   }
 
   static const char* value(const  ::Modulo_Conduccion::msg_backup_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xdf2017219d28cc65ULL;
-  static const uint64_t static_value2 = 0xf22715b1e9daac82ULL;
+  static const uint64_t static_value1 = 0xff8688787aa97766ULL;
+  static const uint64_t static_value2 = 0xb5311a5e39e25a80ULL;
 };
 
 template<class ContainerAllocator>
@@ -121,7 +121,7 @@ int8 steer\n\
 bool handbrake\n\
 uint8 gear\n\
 bool engine\n\
-float32 speed\n\
+uint8 speed\n\
 ";
   }
 
@@ -178,7 +178,7 @@ struct Printer< ::Modulo_Conduccion::msg_backup_<ContainerAllocator> >
     s << indent << "engine: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.engine);
     s << indent << "speed: ";
-    Printer<float>::stream(s, indent + "  ", v.speed);
+    Printer<uint8_t>::stream(s, indent + "  ", v.speed);
   }
 };
 

@@ -34,6 +34,8 @@ int main(int argc, char **argv)
   sub_com_teleop = n.subscribe("clean",1000,fcn_sub_com_teleop);
   sub_engine_brake = n.subscribe("engBrakeSD",1000,fcn_sub_engine_brake);
   sub_emergency_stop = n.subscribe("emergency",1000,fcn_sub_emergency_stop);
+  
+  // Generacion 
 
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("estado_modulo_conduccion",STATE_OK);
@@ -43,8 +45,7 @@ int main(int argc, char **argv)
   finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos.
   
   // Envío de erorr si no hay comunicacion CAN 
-  if (!finDePrograma) {
-        Modulo_Conduccion::msg_error msg_err;
+  if (!finDePrograma) {       
         msg_err.id_subsystem = SUBS_DRIVING;
         msg_err.id_error = CONNECTION_CAN_FAIL; // Error en conduccion (0: comunicacion)
         pub_error.publish(msg_err);
@@ -56,9 +57,25 @@ int main(int argc, char **argv)
       if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF)             
          finDePrograma=disconnectCommunication();   // Fin de programa = false (se cierra el CAN)
       else {
-          
+                   
           // Publicaciones....
           
+          // Publicacion del mensaje de Backup
+          msg_backup.throttle = conduccion->acelerador; // acelerador
+          msg_backup.brake = conduccion->freno_servicio; // freno de servicio
+          msg_backup.steer = (conduccion->sentido_marcha) * (conduccion->direccion) ; // direccion
+          msg_backup.handbrake = conduccion->freno_estacionamiento; // freno de mano
+          msg_backup.gear = conduccion->marcha_actual; // marcha
+          msg_backup.engine = conduccion->arranque_parada; // arranque/parada
+          msg_backup.speed = conduccion->velocidad; // velocidad
+          pub_error.publish(msg_backup);
+          
+          // Publicacion del mensaje switch
+          if (conduccion->conmutador_m_a == 0)
+                msg_switch.value = false;   // Manual
+          else if (conduccion->conmutador_m_a == 1)
+                msg_switch.value = true;    // Teleoperado
+          pub_error.publish(msg_switch);
           
       }
 
@@ -66,7 +83,6 @@ int main(int argc, char **argv)
   
   // Envío de erorr si no hay envio/recepcion de tramas CAN 
   if (!conduccion->CONDUCCION_ACTIVE){
-        Modulo_Conduccion::msg_error msg_err;
         msg_err.id_subsystem = SUBS_DRIVING;
         msg_err.id_error = CONNECTION_CAN_FAIL; // Error en conduccion (1: envio/recepcion tramas CAN)
         pub_error.publish(msg_err);                
@@ -129,16 +145,40 @@ void fcn_sub_com_teleop(const Modulo_Conduccion::msg_com_teleop msg)
         default:          
             break;          
     }
+        
+  conduccion->valor_parada_emergencia = 0;
 
 }
 
 // Suscriptor al Módulo de System Management
 void fcn_sub_engine_brake(const Modulo_Conduccion::msg_engine_brake msg)  {
     
+    ROS_INFO("I heard a ENGINE BRAKE message from SYSTEM MANAGEMENT");
+    
+    if (msg.command) {          // brake
+        if (msg.value)
+            conduccion->valor_freno_estacionamiento = 1;  // 1 --> ON   
+        else
+            conduccion->valor_freno_estacionamiento = 0;  // 0 --> OFF    
+    }
+    else {                      // engine
+        if (msg.value)
+            conduccion->valor_arranque_parada = 1;      // 1 --> ON   
+        else
+            conduccion->valor_arranque_parada = 0;  // 0 --> OFF
+    }       
+    
 }
 
 // Suscriptor al Módulo de System Management
 void fcn_sub_emergency_stop(const Modulo_Conduccion::msg_emergency_stop msg) {
+    
+    ROS_INFO("I heard a EMERGENCY STOP message from SYSTEM MANAGEMENT");
+    
+    if (msg.value)
+        conduccion->valor_parada_emergencia = 1;
+    else
+        conduccion->valor_parada_emergencia = 1;
     
 }
 

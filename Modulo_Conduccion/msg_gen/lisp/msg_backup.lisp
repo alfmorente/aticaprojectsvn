@@ -40,8 +40,8 @@
    (speed
     :reader speed
     :initarg :speed
-    :type cl:float
-    :initform 0.0))
+    :type cl:fixnum
+    :initform 0))
 )
 
 (cl:defclass msg_backup (<msg_backup>)
@@ -96,11 +96,7 @@
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'handbrake) 1 0)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'gear)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'engine) 1 0)) ostream)
-  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'speed))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'speed)) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <msg_backup>) istream)
   "Deserializes a message object of type '<msg_backup>"
@@ -112,12 +108,7 @@
     (cl:setf (cl:slot-value msg 'handbrake) (cl:not (cl:zerop (cl:read-byte istream))))
     (cl:setf (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'gear)) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'engine) (cl:not (cl:zerop (cl:read-byte istream))))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'speed) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:setf (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'speed)) (cl:read-byte istream))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<msg_backup>)))
@@ -128,16 +119,16 @@
   "Modulo_Conduccion/msg_backup")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<msg_backup>)))
   "Returns md5sum for a message object of type '<msg_backup>"
-  "df2017219d28cc65f22715b1e9daac82")
+  "ff8688787aa97766b5311a5e39e25a80")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'msg_backup)))
   "Returns md5sum for a message object of type 'msg_backup"
-  "df2017219d28cc65f22715b1e9daac82")
+  "ff8688787aa97766b5311a5e39e25a80")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<msg_backup>)))
   "Returns full string definition for message of type '<msg_backup>"
-  (cl:format cl:nil "uint8 throttle~%uint8 brake~%int8 steer~%bool handbrake~%uint8 gear~%bool engine~%float32 speed~%~%"))
+  (cl:format cl:nil "uint8 throttle~%uint8 brake~%int8 steer~%bool handbrake~%uint8 gear~%bool engine~%uint8 speed~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'msg_backup)))
   "Returns full string definition for message of type 'msg_backup"
-  (cl:format cl:nil "uint8 throttle~%uint8 brake~%int8 steer~%bool handbrake~%uint8 gear~%bool engine~%float32 speed~%~%"))
+  (cl:format cl:nil "uint8 throttle~%uint8 brake~%int8 steer~%bool handbrake~%uint8 gear~%bool engine~%uint8 speed~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <msg_backup>))
   (cl:+ 0
      1
@@ -146,7 +137,7 @@
      1
      1
      1
-     4
+     1
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <msg_backup>))
   "Converts a ROS message object to a list"

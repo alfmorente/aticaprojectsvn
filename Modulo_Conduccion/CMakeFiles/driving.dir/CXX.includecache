@@ -72,7 +72,7 @@ ros/macros.h
 ros/assert.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/ros/assert.h
 
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_break.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
 string
 -
 vector
@@ -249,8 +249,8 @@ string
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_navigation.h
 ../../msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h
-../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_break.h
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_break.h
+../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
 ../../msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h
 ros/ros.h
