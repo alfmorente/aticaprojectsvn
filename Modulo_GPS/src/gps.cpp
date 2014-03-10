@@ -5,95 +5,95 @@ ros::Publisher pub_errores;
 
 using namespace std;
 
-// what has to be done at program exit
-void do_exit(int error)
-{
-  printf("finished GPS (%d).\n\n", error);
-  exit(error);
-}
+int main(int argc, char **argv) {
 
-// the signal handler for manual break Ctrl-C
-void signal_handler(int signal)
-{
-  do_exit(0);
-}
+    // Obtencion del modo de operacion y comprobacion de que es correcto
+    int operationMode;
+    if ((operationMode = getOperationMode(argc, argv)) == 0) {
+        return 1;
+    }
 
-// what has to be done at program start
-void init()
-{
-  /* install signal handlers */
-  signal(SIGTERM, signal_handler);
-  signal(SIGINT, signal_handler);
+    // Orden para la parada manual con CTtrl+C
+    init_signals();
 
-}
+    // Inicio de ROS
+    ros::init(argc, argv, "GPS");
 
-int main(int argc, char **argv)
-{
-  // Orden para la parada manual con CTtrl+C
-  init();
+    // Manejador ROS
+    ros::NodeHandle n;
 
-  // Inicio de ROS
-  ros::init(argc, argv, "GPS");
+    // Espera activa de inicio de modulo
+    int estado_actual = STATE_OFF;
+    while (estado_actual != STATE_CONF) {
+        n.getParam("estado_modulo_GPS", estado_actual);
+    }
+    cout << "ATICA GPS :: Iniciando configuración..." << endl;
 
-  // Manejador ROS
-  ros::NodeHandle n;
+    // Generación de publicadores
+    pub_gps = n.advertise<Modulo_GPS::msg_gps>("gps", 1000);
+    pub_errores = n.advertise<Modulo_GPS::msg_error>("error", 1000);
+    // Inicialización de suscriptores
+    ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
+    ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);
 
-  // Espera activa de inicio de modulo
-  int estado_actual=STATE_OFF;
-  while(estado_actual!=STATE_CONF){
-          n.getParam("estado_modulo_GPS",estado_actual);
-  }
-  cout << "Atica GPS :: Iniciando configuración..." << endl;
+    switch (operationMode) {
+        case OPERATION_MODE_DEBUG:
+            // Funcionamiento del modo debug
+            break;
+        case OPERATION_MODE_RELEASE:
+            // Funcionamiento del modo release
+            break;
+        case OPERATION_MODE_SIMULATION:
+            // Funcionamiento del modo simulacion
+            
+            break;
+        default:
+            break;
+    }
 
-  // Generación de publicadores
-  pub_gps = n.advertise<Modulo_GPS::msg_gps>("gps", 1000);
-  pub_errores = n.advertise<Modulo_GPS::msg_errores>("error", 1000);
+    /*
+    // Inicializacion de variable global de fin de modulo
+    exitModule=false;
 
-  // Inicialización de suscriptores
-  ros::Subscriber sub_moduleEnable = n.subscribe("moduleEnable", 1000, fcn_sub_enableModule);
+    // Conexion y configuracion del dispositivo
+    connect();
+    configure();
 
-  // Inicializacion de variable global de fin de modulo
-  exitModule=false;
+    // Todo esta correcto, lo especificamos con el correspondiente parametro
+    n.setParam("estado_modulo_GPS",STATE_OK);
+    cout << "Atica GPS :: Configurado y funcionando" << endl;
 
-  // Conexion y configuracion del dispositivo
-  connect();
-  configure();
+    while (ros::ok() && !exitModule)
+    {
+        if(isAlive()){
+            if(checkStateGPS()){
+                // Genera la informacion en msg_gps y se publica
 
-  // Todo esta correcto, lo especificamos con el correspondiente parametro
-  n.setParam("estado_modulo_GPS",STATE_OK);
-  cout << "Atica GPS :: Configurado y funcionando" << endl;
+                n.getParam("estado_modulo_GPS",estado_actual);
+                if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
+                    exitModule=true;
+                }
+            }else{
+                Modulo_GPS::msg_error msg_err;
+                msg_err.id_subsistema = SUBS_GPS;
+                msg_err.id_error=0; // TODO por definir
+                pub_errores.publish(msg_err);
 
-  while (ros::ok() && !exitModule)
-  {
-      if(isAlive()){
-          if(checkStateGPS()){
-              // Genera la informacion en msg_gps y se publica
-
-              n.getParam("estado_modulo_GPS",estado_actual);
-              if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
-                  exitModule=true;
-              }
-          }else{
-              Modulo_GPS::msg_errores msg_err;
-              msg_err.id_subsistema = SUBS_GPS;
-              msg_err.id_error=0; // TODO por definir
-              pub_errores.publish(msg_err);
-
-              n.getParam("estado_modulo_GPS",estado_actual);
-              if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
-                  exitModule=true;
-              }
-          }
-      }else{
-          Modulo_GPS::msg_errores msg_err;
-          msg_err.id_subsistema = SUBS_GPS;
-          msg_err.id_error=0; // TODO por definir
-          pub_errores.publish(msg_err);
-          exitModule=true;
-      }
-  }
-
-  return 0;
+                n.getParam("estado_modulo_GPS",estado_actual);
+                if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
+                    exitModule=true;
+                }
+            }
+        }else{
+            Modulo_GPS::msg_error msg_err;
+            msg_err.id_subsistema = SUBS_GPS;
+            msg_err.id_error=0; // TODO por definir
+            pub_errores.publish(msg_err);
+            exitModule=true;
+        }
+    }
+     */
+    return 0;
 }
 
 /*******************************************************************************
@@ -102,15 +102,12 @@ int main(int argc, char **argv)
  * *****************************************************************************
  * ****************************************************************************/
 
-void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable msg){
-    if (msg.id_module == ID_MOD_TEACH){
-        if (msg.status == STATUS_ON){
-            // Guarda los datos del GPS en archivo TEMP
-        }
-        else if (msg.status == STATUS_OFF){
-            // Cierra archivo temporal. Filtra y lo envía
-        }
-    }
+void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable msg) {
+    // TODO
+}
+
+void fcn_sub_backup(const Modulo_GPS::msg_backup msg) {
+    // TODO
 }
 /*******************************************************************************
  *******************************************************************************
@@ -120,16 +117,31 @@ void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable msg){
 
 //Funciones propias
 
-bool connect(){return true;}
+bool connect() {
+    return true;
+}
 
-bool disconnect(){return true;}
+bool disconnect() {
+    return true;
+}
 
-bool configure(){return true;}
+bool configure() {
+    return true;
+}
 
-bool sendData(){return true;}
+bool sendData() {
+    return true;
+}
 
-bool recvData(){return true;}
+bool recvData() {
+    return true;
+}
 
-bool isAlive(){return true;}
+bool isAlive() {
+    return true;
+}
 
-bool checkStateGPS(){return true;}
+bool checkStateGPS() {
+    return true;
+}
+

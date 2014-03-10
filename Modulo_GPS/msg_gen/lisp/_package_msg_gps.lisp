@@ -1,14 +1,14 @@
 (cl:in-package Modulo_GPS-msg)
-(cl:export '(LATITUD-VAL
-          LATITUD
-          LONGITUD-VAL
-          LONGITUD
-          ALTITUD-VAL
-          ALTITUD
+(cl:export '(LATITUDE-VAL
+          LATITUDE
+          LONGITUDE-VAL
+          LONGITUDE
+          ALTITUDE-VAL
+          ALTITUDE
+          ROLL-VAL
+          ROLL
           PITCH-VAL
           PITCH
           YAW-VAL
           YAW
-          ROLL-VAL
-          ROLL
 ))

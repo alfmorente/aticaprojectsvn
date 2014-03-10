@@ -3,8 +3,10 @@ FILE(REMOVE_RECURSE
   "msg_gen"
   "src/Modulo_GPS/msg"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
-  "msg_gen/cpp/include/Modulo_GPS/msg_errores.h"
+  "msg_gen/cpp/include/Modulo_GPS/msg_backup.h"
+  "msg_gen/cpp/include/Modulo_GPS/msg_error.h"
   "msg_gen/cpp/include/Modulo_GPS/msg_gps.h"
+  "msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h"
 )
 
 # Per-language clean rules from dependency scanning.

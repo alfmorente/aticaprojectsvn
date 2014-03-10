@@ -3,6 +3,8 @@ FILE(REMOVE_RECURSE
   "msg_gen"
   "src/Modulo_GPS/msg"
   "CMakeFiles/gps.dir/src/gps.cpp.o"
+  "CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o"
+  "CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o"
   "bin/gps.pdb"
   "bin/gps"
 )

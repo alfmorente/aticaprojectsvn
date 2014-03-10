@@ -448,6 +448,54 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/Modulo_GPS/external_signals.o: src/Modulo_GPS/external_signals.cpp.o
+.PHONY : src/Modulo_GPS/external_signals.o
+
+# target to build an object file
+src/Modulo_GPS/external_signals.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o
+.PHONY : src/Modulo_GPS/external_signals.cpp.o
+
+src/Modulo_GPS/external_signals.i: src/Modulo_GPS/external_signals.cpp.i
+.PHONY : src/Modulo_GPS/external_signals.i
+
+# target to preprocess a source file
+src/Modulo_GPS/external_signals.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.i
+.PHONY : src/Modulo_GPS/external_signals.cpp.i
+
+src/Modulo_GPS/external_signals.s: src/Modulo_GPS/external_signals.cpp.s
+.PHONY : src/Modulo_GPS/external_signals.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/external_signals.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.s
+.PHONY : src/Modulo_GPS/external_signals.cpp.s
+
+src/Modulo_GPS/interaction.o: src/Modulo_GPS/interaction.cpp.o
+.PHONY : src/Modulo_GPS/interaction.o
+
+# target to build an object file
+src/Modulo_GPS/interaction.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o
+.PHONY : src/Modulo_GPS/interaction.cpp.o
+
+src/Modulo_GPS/interaction.i: src/Modulo_GPS/interaction.cpp.i
+.PHONY : src/Modulo_GPS/interaction.i
+
+# target to preprocess a source file
+src/Modulo_GPS/interaction.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.i
+.PHONY : src/Modulo_GPS/interaction.cpp.i
+
+src/Modulo_GPS/interaction.s: src/Modulo_GPS/interaction.cpp.s
+.PHONY : src/Modulo_GPS/interaction.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/interaction.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.s
+.PHONY : src/Modulo_GPS/interaction.cpp.s
+
 src/gps.o: src/gps.cpp.o
 .PHONY : src/gps.o
 
@@ -508,6 +556,12 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/Modulo_GPS/external_signals.o"
+	@echo "... src/Modulo_GPS/external_signals.i"
+	@echo "... src/Modulo_GPS/external_signals.s"
+	@echo "... src/Modulo_GPS/interaction.o"
+	@echo "... src/Modulo_GPS/interaction.i"
+	@echo "... src/Modulo_GPS/interaction.s"
 	@echo "... src/gps.o"
 	@echo "... src/gps.i"
 	@echo "... src/gps.s"

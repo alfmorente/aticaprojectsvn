@@ -22,42 +22,42 @@ struct msg_gps_ {
   typedef msg_gps_<ContainerAllocator> Type;
 
   msg_gps_()
-  : latitud(0.0)
-  , longitud(0.0)
-  , altitud(0.0)
+  : latitude(0.0)
+  , longitude(0.0)
+  , altitude(0.0)
+  , roll(0.0)
   , pitch(0.0)
   , yaw(0.0)
-  , roll(0.0)
   {
   }
 
   msg_gps_(const ContainerAllocator& _alloc)
-  : latitud(0.0)
-  , longitud(0.0)
-  , altitud(0.0)
+  : latitude(0.0)
+  , longitude(0.0)
+  , altitude(0.0)
+  , roll(0.0)
   , pitch(0.0)
   , yaw(0.0)
-  , roll(0.0)
   {
   }
 
-  typedef float _latitud_type;
-  float latitud;
+  typedef double _latitude_type;
+  double latitude;
 
-  typedef float _longitud_type;
-  float longitud;
+  typedef double _longitude_type;
+  double longitude;
 
-  typedef float _altitud_type;
-  float altitud;
+  typedef float _altitude_type;
+  float altitude;
+
+  typedef float _roll_type;
+  float roll;
 
   typedef float _pitch_type;
   float pitch;
 
   typedef float _yaw_type;
   float yaw;
-
-  typedef float _roll_type;
-  float roll;
 
 
   typedef boost::shared_ptr< ::Modulo_GPS::msg_gps_<ContainerAllocator> > Ptr;
@@ -88,12 +88,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::Modulo_GPS::msg_gps_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "d580e52d6a982a2a25a6c4682d734553";
+    return "f422e236d81ace5ed6f4a67c456a5ca3";
   }
 
   static const char* value(const  ::Modulo_GPS::msg_gps_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xd580e52d6a982a2aULL;
-  static const uint64_t static_value2 = 0x25a6c4682d734553ULL;
+  static const uint64_t static_value1 = 0xf422e236d81ace5eULL;
+  static const uint64_t static_value2 = 0xd6f4a67c456a5ca3ULL;
 };
 
 template<class ContainerAllocator>
@@ -110,13 +110,12 @@ template<class ContainerAllocator>
 struct Definition< ::Modulo_GPS::msg_gps_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "float32 latitud\n\
-float32 longitud\n\
-float32 altitud\n\
+    return "float64 latitude\n\
+float64 longitude\n\
+float32 altitude\n\
+float32 roll \n\
 float32 pitch\n\
 float32 yaw\n\
-float32 roll\n\
-\n\
 ";
   }
 
@@ -136,12 +135,12 @@ template<class ContainerAllocator> struct Serializer< ::Modulo_GPS::msg_gps_<Con
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
-    stream.next(m.latitud);
-    stream.next(m.longitud);
-    stream.next(m.altitud);
+    stream.next(m.latitude);
+    stream.next(m.longitude);
+    stream.next(m.altitude);
+    stream.next(m.roll);
     stream.next(m.pitch);
     stream.next(m.yaw);
-    stream.next(m.roll);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -159,18 +158,18 @@ struct Printer< ::Modulo_GPS::msg_gps_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::Modulo_GPS::msg_gps_<ContainerAllocator> & v) 
   {
-    s << indent << "latitud: ";
-    Printer<float>::stream(s, indent + "  ", v.latitud);
-    s << indent << "longitud: ";
-    Printer<float>::stream(s, indent + "  ", v.longitud);
-    s << indent << "altitud: ";
-    Printer<float>::stream(s, indent + "  ", v.altitud);
+    s << indent << "latitude: ";
+    Printer<double>::stream(s, indent + "  ", v.latitude);
+    s << indent << "longitude: ";
+    Printer<double>::stream(s, indent + "  ", v.longitude);
+    s << indent << "altitude: ";
+    Printer<float>::stream(s, indent + "  ", v.altitude);
+    s << indent << "roll: ";
+    Printer<float>::stream(s, indent + "  ", v.roll);
     s << indent << "pitch: ";
     Printer<float>::stream(s, indent + "  ", v.pitch);
     s << indent << "yaw: ";
     Printer<float>::stream(s, indent + "  ", v.yaw);
-    s << indent << "roll: ";
-    Printer<float>::stream(s, indent + "  ", v.roll);
   }
 };
 

@@ -5,6 +5,7 @@
  * Created on 19 de septiembre de 2013, 12:00
  */
 
+
 #ifndef CONSTANT_H
 #define	CONSTANT_H
 
@@ -17,6 +18,11 @@ extern "C" {
 #endif
 
 #endif	/* CONSTANT_H */
+
+// Constantes de modo de operacion del software
+#define OPERATION_MODE_DEBUG 1
+#define OPERATION_MODE_RELEASE 2
+#define OPERATION_MODE_SIMULATION 3
 
 // Constantes de gestion de cada modulo
 #define STATE_OFF 0
@@ -219,6 +225,10 @@ extern "C" {
 #define SUBMODE_TEACH 0
 #define SUBMODE_CONVOY 0
 
+// Estados - msg_module_enable
+#define MOD_OFF 0
+#define MOD_ON 1
+#define MOD_PAUSE 2
 
 // Elementos de los actuadores (msg_com_teleop)
 #define ID_REMOTE_THROTTLE 0
@@ -231,7 +241,6 @@ extern "C" {
 #define ID_REMOTE_LIGHT_STANDARD 7
 #define ID_REMOTE_DIFF 8
 #define ID_REMOTE_ACT_LASER2D 9
-#define ID_REMOTE_EMERGENCY_STOP 100
 
 //Valores para marcha (msg_com_teleop)
 #define GEAR_HIGH  0

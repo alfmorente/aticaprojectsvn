@@ -23,17 +23,23 @@ bool exitModule;
 
 // Mensajes
 #include "../../msg_gen/cpp/include/Modulo_GPS/msg_gps.h"
-#include "../../msg_gen/cpp/include/Modulo_GPS/msg_errores.h"
+#include "../../msg_gen/cpp/include/Modulo_GPS/msg_error.h"
 #include "../../msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h"
-
+#include "../../msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h"
+#include "../../msg_gen/cpp/include/Modulo_GPS/msg_backup.h"
 // ROS
 #include "ros/ros.h"
 #include "constant.h"
-#include <signal.h>
 
+// Señales externas
+#include "external_signals.h"
+
+// Interaccion con usuario
+#include "interaction.h"
 
 // Suscriptores
 void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable);
+void fcn_sub_backup(const Modulo_GPS::msg_backup);
 
 // Funciones propias
 
@@ -44,4 +50,6 @@ bool sendData();
 bool recvData();
 bool isAlive();
 bool checkStateGPS();
+
+
 

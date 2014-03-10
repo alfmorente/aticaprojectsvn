@@ -42,28 +42,50 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_GPS
 # Include the progress variables for this target.
 include CMakeFiles/ROSBUILD_genmsg_cpp.dir/progress.make
 
-CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_errores.h
+CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_backup.h
+CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_error.h
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_gps.h
+CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h
 
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: msg/msg_errores.msg
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: manifest.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/cpp/include/Modulo_GPS/msg_errores.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: msg/msg_backup.msg
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: manifest.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_backup.h: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_GPS/msg_errores.h"
-	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_errores.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_GPS/msg_backup.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_backup.msg
+
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: msg/msg_error.msg
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: manifest.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_error.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_GPS/msg_error.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_error.msg
 
 msg_gen/cpp/include/Modulo_GPS/msg_gps.h: msg/msg_gps.msg
 msg_gen/cpp/include/Modulo_GPS/msg_gps.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -81,13 +103,35 @@ msg_gen/cpp/include/Modulo_GPS/msg_gps.h: /opt/ros/groovy/share/std_msgs/package
 msg_gen/cpp/include/Modulo_GPS/msg_gps.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_GPS/msg_gps.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_GPS/msg_gps.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_GPS/msg_gps.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_gps.msg
 
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: msg/msg_module_enable.msg
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: manifest.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_module_enable.msg
+
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp
-ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_errores.h
+ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_backup.h
+ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_error.h
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_gps.h
+ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make
 .PHONY : ROSBUILD_genmsg_cpp
 
