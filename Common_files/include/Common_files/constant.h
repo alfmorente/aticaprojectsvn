@@ -222,7 +222,7 @@ extern "C" {
 
 // Estados - msg_module_enable
 #define MOD_OFF 0
-#define MON_ON 1
+#define MOD_ON 1
 #define MOD_PAUSE 2
 
 // Elementos de los actuadores (msg_com_teleop)
