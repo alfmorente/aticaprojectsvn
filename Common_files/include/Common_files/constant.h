@@ -19,6 +19,11 @@ extern "C" {
 
 #endif	/* CONSTANT_H */
 
+// Constantes de modo de operacion del software
+#define OPERATION_MODE_DEBUG 1
+#define OPERATION_MODE_RELEASE 2
+#define OPERATION_MODE_SIMULATION 3
+
 // Constantes de gestion de cada modulo
 #define STATE_OFF 0
 #define STATE_CONF 1
@@ -236,7 +241,6 @@ extern "C" {
 #define ID_REMOTE_LIGHT_STANDARD 7
 #define ID_REMOTE_DIFF 8
 #define ID_REMOTE_ACT_LASER2D 9
-#define ID_REMOTE_EMERGENCY_STOP 100
 
 //Valores para marcha (msg_com_teleop)
 #define GEAR_HIGH  0
