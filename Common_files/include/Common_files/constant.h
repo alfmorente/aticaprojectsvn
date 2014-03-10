@@ -34,6 +34,10 @@ extern "C" {
 #define OFF 0
 #define ON 1
 
+//Constantes para definir tipo de mensajes (Mensajes que requieran ACK)
+#define SET 0
+#define INFORM 1
+
 // Constantes de tipos de parada de emergencia
 #define TOS_OBSTACLE 0
 #define TOS_REMOTE 1
