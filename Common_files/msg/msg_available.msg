@@ -1,0 +1,1 @@
+bool[12] available
