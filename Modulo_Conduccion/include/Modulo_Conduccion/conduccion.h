@@ -42,7 +42,6 @@ extern "C" {
 
 
 //Atributos 
-ros::NodeHandle n;        // Manejador ROS
 
 // ----- Publicadores
 ros::Publisher pub_error, pub_switch, pub_backup, pub_info_stop; 

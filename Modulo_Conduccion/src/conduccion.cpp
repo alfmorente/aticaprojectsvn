@@ -14,6 +14,8 @@ int main(int argc, char **argv)
   // Inicio de ROS
   ros::init(argc, argv, "conduccion");
 
+  ros::NodeHandle n;        // Manejador ROS
+  
   int estado_actual =  STATE_OK;    // Para hacer pruebas locales
   
   // Espera activa de inicio de modulo
@@ -44,9 +46,10 @@ int main(int argc, char **argv)
   // Inicializacion de la comunicacion CAN
   finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos.
   
+  msg_err.id_subsystem = SUBS_DRIVING;
+  
   // Envío de erorr si no hay comunicacion CAN 
   if (!finDePrograma) {       
-        msg_err.id_subsystem = SUBS_DRIVING;
         msg_err.id_error = CONNECTION_CAN_FAIL; // Error en conduccion (0: comunicacion)
         pub_error.publish(msg_err);
   }
@@ -68,22 +71,83 @@ int main(int argc, char **argv)
           msg_backup.gear = conduccion->marcha_actual; // marcha
           msg_backup.engine = conduccion->arranque_parada; // arranque/parada
           msg_backup.speed = conduccion->velocidad; // velocidad
-          pub_error.publish(msg_backup);
+          pub_backup.publish(msg_backup);
+          
           
           // Publicacion del mensaje switch
           if (conduccion->conmutador_m_a == 0)
                 msg_switch.value = false;   // Manual
           else if (conduccion->conmutador_m_a == 1)
                 msg_switch.value = true;    // Teleoperado
-          pub_error.publish(msg_switch);
+          pub_switch.publish(msg_switch);
           
+          
+          // Publicacion del mensaje info_stop
+          if (conduccion->parada_emergencia_obstaculo == 1) {
+              msg_info_stop.id_event = 0;
+              msg_info_stop.value = true;
+          }
+          else if (conduccion->parada_emergencia_obstaculo == 0) {
+              msg_info_stop.id_event = 0;
+              msg_info_stop.value = false;
+          }
+          pub_info_stop.publish(msg_info_stop);
+                    
+          if (conduccion->parada_emergencia_remota == 1) {
+              msg_info_stop.id_event = 1;
+              msg_info_stop.value = true;
+          }
+          else if (conduccion->parada_emergencia_remota == 0) {
+              msg_info_stop.id_event = 1;
+              msg_info_stop.value = false;
+          }
+          pub_info_stop.publish(msg_info_stop);
+          
+          if (conduccion->parada_emergencia_local == 1) {
+              msg_info_stop.id_event = 2;
+              msg_info_stop.value = true;
+          }
+          else if (conduccion->parada_emergencia_local== 0) {
+              msg_info_stop.id_event = 2;
+              msg_info_stop.value = false;
+          }
+          pub_info_stop.publish(msg_info_stop);
+          
+          // Publicacion del mensaje error
+          switch (conduccion->id_error_Conduccion){
+              case 2:           // Fallo arranque/Parada
+                  msg_err.id_error = START_STOP_FAILURE;
+                  break;
+              case 3:           // Fallo acelerador
+                  msg_err.id_error = THROTTLE_FAILURE;
+                  break;
+              case 4:           // Fallo freno de estacionamiento
+                  msg_err.id_error = HANDBRAKE_FAILURE;
+                  break;
+              case 5:           // Fallo freno de servicio
+                  msg_err.id_error = BRAKE_FAILURE;
+                  break;
+              case 6:           // Fallo cambio de marcha
+                  msg_err.id_error = GEAR_SHIFT_FAILURE;
+                  break;
+              case 7:           // Fallo de direccion
+                  msg_err.id_error = STEER_FAILURE;
+                  break;
+              case 8:           // Fallo bloqueo de diferenciales
+                  msg_err.id_error = DIFFERENTIAL_LOCK_FAILURE;
+                  break;
+              case -1:
+                  break;
+              default:
+                  break;
+          }
+          pub_error.publish(msg_err);
       }
 
   }
   
   // Envío de erorr si no hay envio/recepcion de tramas CAN 
   if (!conduccion->CONDUCCION_ACTIVE){
-        msg_err.id_subsystem = SUBS_DRIVING;
         msg_err.id_error = CONNECTION_CAN_FAIL; // Error en conduccion (1: envio/recepcion tramas CAN)
         pub_error.publish(msg_err);                
   }
