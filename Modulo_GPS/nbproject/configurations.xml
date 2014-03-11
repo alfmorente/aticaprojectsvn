@@ -16,7 +16,6 @@
           <in>interaction.cpp</in>
         </df>
         <in>gps.cpp</in>
-        <in>signal_management.cpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -63,6 +62,14 @@
         <ccTool>
         </ccTool>
       </item>
+      <folder path="0/CMakeFiles">
+        <ccTool>
+          <incDir>
+            <pElem>msg_gen/cpp/include/Modulo_GPS</pElem>
+            <pElem>/usr/include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
       <folder path="0/src">
         <ccTool>
           <incDir>
@@ -84,10 +91,6 @@
       <item path="src/Modulo_GPS/interaction.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/gps.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/signal_management.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
     </conf>
   </confs>

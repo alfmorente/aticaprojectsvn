@@ -43,8 +43,6 @@
             </df>
           </df>
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
@@ -122,6 +120,7 @@
               <in>msg_error.h</in>
               <in>msg_gps.h</in>
               <in>msg_module_enable.h</in>
+              <in>msg_stream.h</in>
             </df>
           </df>
         </df>
@@ -136,7 +135,6 @@
           <in>interaction.cpp</in>
         </df>
         <in>gps.cpp</in>
-        <in>signal_management.cpp</in>
       </df>
       <df name="test_results">
       </df>

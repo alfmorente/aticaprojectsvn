@@ -6,21 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/../../include/Modulo_GPS/external_signals.h
-signal.h
--
-stdlib.h
--
-stdio.h
--
-
-/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/../../include/Modulo_GPS/interaction.h
-
-/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/external_signals.cpp
-../../include/Modulo_GPS/external_signals.h
-/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/../../include/Modulo_GPS/external_signals.h
-
-/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/interaction.cpp
-../../include/Modulo_GPS/interaction.h
-/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/../../include/Modulo_GPS/interaction.h
-
