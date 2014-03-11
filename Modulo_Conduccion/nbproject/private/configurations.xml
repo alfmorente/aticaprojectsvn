@@ -108,6 +108,7 @@
           <in>Timer.hpp</in>
           <in>conduccion.h</in>
           <in>constant.h</in>
+          <in>interaction.h</in>
         </df>
       </df>
       <df name="lib">
@@ -121,8 +122,8 @@
               <in>msg_backup.h</in>
               <in>msg_com_teleop.h</in>
               <in>msg_emergency_stop.h</in>
-              <in>msg_engine_brake.h</in>
               <in>msg_error.h</in>
+              <in>msg_fcn_aux.h</in>
               <in>msg_info_stop.h</in>
               <in>msg_navigation.h</in>
               <in>msg_switch.h</in>
@@ -142,6 +143,7 @@
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>
+        <in>interaction.cpp</in>
       </df>
       <df name="test_results">
       </df>

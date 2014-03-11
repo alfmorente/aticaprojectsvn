@@ -4,7 +4,7 @@ FILE(REMOVE_RECURSE
   "src/Modulo_Conduccion/msg"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
   "msg_gen/cpp/include/Modulo_Conduccion/msg_switch.h"
-  "msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h"
+  "msg_gen/cpp/include/Modulo_Conduccion/msg_fcn_aux.h"
   "msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h"
   "msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h"
   "msg_gen/cpp/include/Modulo_Conduccion/msg_backup.h"

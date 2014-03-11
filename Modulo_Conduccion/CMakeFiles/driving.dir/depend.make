@@ -21,8 +21,8 @@ CMakeFiles/driving.dir/src/Timer.cpp.o: src/Timer.cpp
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_backup.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h
-CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_error.h
+CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_fcn_aux.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_info_stop.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_navigation.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_switch.h
@@ -32,6 +32,7 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/Th
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/Timer.hpp
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/conduccion.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/constant.h
+CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/interaction.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/conduccion.cpp
 CMakeFiles/driving.dir/src/conduccion.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: /opt/ros/groovy/include/XmlRpcValue.h
@@ -87,4 +88,8 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o: /opt/ros/groovy/include/ros/types.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: /opt/ros/groovy/include/ros/wall_timer.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
+
+CMakeFiles/driving.dir/src/interaction.cpp.o: src/../include/Modulo_Conduccion/interaction.h
+CMakeFiles/driving.dir/src/interaction.cpp.o: src/interaction.cpp
+CMakeFiles/driving.dir/src/interaction.cpp.o: include/Modulo_Conduccion/constant.h
 

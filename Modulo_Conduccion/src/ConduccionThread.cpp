@@ -86,7 +86,7 @@ void ConduccionThread::DoWork(){
 void ConduccionThread::CheckConnection(){
     if (CANCONDUCCION->cont == 1500) {
         cout << "\n Comunicacion con Conduccion perdida - Error al enviar/recibir tramas CAN \n";          
-        CONDUCCION_ACTIVE = false;
+        CONDUCCION_ACTIVE = false;        
     }
 }
 
@@ -236,7 +236,7 @@ void ConduccionThread::m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
 
 void ConduccionThread::m_Change_Command_CAN_AUTOMATA(){
   
-TPCANMsg msgEx;
+    TPCANMsg msgEx;
     msgEx.ID = 0x00A;
     msgEx.LEN = 8;
     msgEx.MSGTYPE = 0;

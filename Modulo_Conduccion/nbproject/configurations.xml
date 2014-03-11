@@ -25,6 +25,7 @@
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>
+        <in>interaction.cpp</in>
       </df>
     </df>
     <logicalFolder name="src"
@@ -216,6 +217,8 @@
       <item path="src/conduccion.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="src/interaction.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

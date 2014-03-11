@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/driving.dir/src/ConduccionThread.cpp.o"
   "CMakeFiles/driving.dir/src/Thread.cpp.o"
   "CMakeFiles/driving.dir/src/Timer.cpp.o"
+  "CMakeFiles/driving.dir/src/interaction.cpp.o"
   "bin/driving.pdb"
   "bin/driving"
 )

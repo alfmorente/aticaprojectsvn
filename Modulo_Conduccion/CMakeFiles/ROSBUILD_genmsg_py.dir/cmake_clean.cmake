@@ -5,7 +5,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/Modulo_Conduccion/msg/__init__.py"
   "src/Modulo_Conduccion/msg/_msg_switch.py"
-  "src/Modulo_Conduccion/msg/_msg_engine_brake.py"
+  "src/Modulo_Conduccion/msg/_msg_fcn_aux.py"
   "src/Modulo_Conduccion/msg/_msg_com_teleop.py"
   "src/Modulo_Conduccion/msg/_msg_emergency_stop.py"
   "src/Modulo_Conduccion/msg/_msg_backup.py"

@@ -72,7 +72,7 @@ ros/macros.h
 ros/assert.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/ros/assert.h
 
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_error.h
 string
 -
 vector
@@ -94,7 +94,7 @@ ros/macros.h
 ros/assert.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/ros/assert.h
 
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_error.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_fcn_aux.h
 string
 -
 vector
@@ -249,8 +249,8 @@ string
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_navigation.h
 ../../msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h
-../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
+../../msg_gen/cpp/include/Modulo_Conduccion/msg_fcn_aux.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_fcn_aux.h
 ../../msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h
 ros/ros.h
@@ -265,8 +265,16 @@ Thread.hpp
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/Thread.hpp
 ConduccionThread.hpp
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/ConduccionThread.hpp
+interaction.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/interaction.h
 
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/constant.h
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/interaction.h
+stdlib.h
+-
+iostream
+-
 
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/CANCommunication.cpp
 ../include/Modulo_Conduccion/CANCommunication.hpp
@@ -297,6 +305,12 @@ sys/time.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp
 ../include/Modulo_Conduccion/conduccion.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/conduccion.h
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/interaction.cpp
+../include/Modulo_Conduccion/interaction.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/interaction.h
+Modulo_Conduccion/constant.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/Modulo_Conduccion/constant.h
 
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
@@ -911,4 +925,6 @@ ros/forwards.h
 /opt/ros/groovy/include/ros/ros/forwards.h
 
 /opt/ros/groovy/include/rosconsole/macros_generated.h
+
+include/Modulo_Conduccion/constant.h
 

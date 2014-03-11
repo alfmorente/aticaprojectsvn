@@ -3,8 +3,8 @@
   (:export
    "<MSG_SWITCH>"
    "MSG_SWITCH"
-   "<MSG_ENGINE_BRAKE>"
-   "MSG_ENGINE_BRAKE"
+   "<MSG_FCN_AUX>"
+   "MSG_FCN_AUX"
    "<MSG_COM_TELEOP>"
    "MSG_COM_TELEOP"
    "<MSG_EMERGENCY_STOP>"

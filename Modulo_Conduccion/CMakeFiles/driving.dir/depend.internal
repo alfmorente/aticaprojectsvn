@@ -22,8 +22,8 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_backup.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_com_teleop.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_emergency_stop.h
- /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_engine_brake.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_error.h
+ /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_fcn_aux.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_info_stop.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_navigation.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../msg_gen/cpp/include/Modulo_Conduccion/msg_switch.h
@@ -33,6 +33,7 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/Timer.hpp
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/conduccion.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/constant.h
+ /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/interaction.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
  /opt/ros/groovy/include/XmlRpcValue.h
@@ -88,3 +89,7 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o
  /opt/ros/groovy/include/ros/wall_timer.h
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
+CMakeFiles/driving.dir/src/interaction.cpp.o
+ /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/interaction.h
+ /home/atica/catkin_ws/src/Modulo_Conduccion/src/interaction.cpp
+ include/Modulo_Conduccion/constant.h
