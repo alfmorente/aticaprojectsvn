@@ -289,3 +289,9 @@ extern "C" {
 #define AVAILABLE_POS_CONVOY 9
 #define AVAILABLE_POS_CONVOY_REMOTE 10
 #define AVAILABLE_POS_CONVOY_AUTO 11
+
+//Define las funciones especiales
+#define ENGINE 0
+#define BRAKE  1
+#define TEACH  2
+#define MAPPING 3
