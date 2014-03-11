@@ -90,19 +90,20 @@ extern "C" {
 // ID ERROR
 // Subsystem = System Management
 #define MODE_NOT_AVAILABLE 0
-#define COMM_MODULE_NA 1
-#define REMOTE_MODULE_NA 2
-#define DRIVING_MODULE_NA 3
-#define NAVIGATION_MODULE_NA 4
-#define CAMERA_MODULE_NA 5
-#define GPS_MODULE_NA 6
-#define FRONT_LASER_MODULE_NA 7
-#define REAR_LASER_MODULE_NA 8
-#define LASER3D_MODULE_NA 9
-#define BEACON_MODULE_NA 10
-#define RDF_MODULE_NA 11
-#define HL_MODULE_NA 12
-#define CONVOY_MODULE_NA 13
+#define FUNCTION_NOT_AVAILABLE 1
+#define COMM_MODULE_NA 2
+#define REMOTE_MODULE_NA 3
+#define DRIVING_MODULE_NA 4
+#define NAVIGATION_MODULE_NA 5
+#define CAMERA_MODULE_NA 6
+#define GPS_MODULE_NA 7
+#define FRONT_LASER_MODULE_NA 8
+#define REAR_LASER_MODULE_NA 9
+#define LASER3D_MODULE_NA 10
+#define BEACON_MODULE_NA 11
+#define RDF_MODULE_NA 12
+#define HL_MODULE_NA 13
+#define CONVOY_MODULE_NA 14
 
 // Subsystem = Driving
 #define CONNECTION_CAN_FAIL 0
@@ -287,7 +288,7 @@ extern "C" {
 #define AVAILABLE_POS_MAPPING 7
 #define AVAILABLE_POS_TEACH 8
 #define AVAILABLE_POS_CONVOY 9
-#define AVAILABLE_POS_CONVOY_REMOTE 10
+#define AVAILABLE_POS_CONVOY_TELEOP 10
 #define AVAILABLE_POS_CONVOY_AUTO 11
 
 //Define las funciones especiales
@@ -295,3 +296,7 @@ extern "C" {
 #define BRAKE  1
 #define TEACH  2
 #define MAPPING 3
+
+//Define la posición del conmutador
+#define MANUAL 0
+#define TELEOP 1
