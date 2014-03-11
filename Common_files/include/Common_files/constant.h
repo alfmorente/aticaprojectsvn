@@ -46,18 +46,13 @@ extern "C" {
 // Modos de operacion - msg_modo
 #define MODE_NEUTRAL -1
 #define MODE_REMOTE 0
-#define MODE_START_ENGINE 1
-#define MODE_STOP_ENGINE 2
-#define MODE_ENGAGE_BRAKE 3
-#define MODE_PLAN 4
-#define MODE_COME_TO_ME 5
-#define MODE_FOLLOW_ME 6
-#define MODE_MAPPING 7
-#define MODE_TEACH 8
-#define MODE_CONVOY 9
-#define MODE_CONVOY_TELEOP 10
-#define MODE_CONVOY_AUTO 11
-#define MODE_MANUAL 12
+#define MODE_PLAN 1
+#define MODE_COME_TO_ME 2
+#define MODE_FOLLOW_ME 3
+#define MODE_CONVOY 4
+#define MODE_CONVOY_TELEOP 5
+#define MODE_CONVOY_AUTO 6
+#define MODE_MANUAL 7
 
 // Estado del Modo de operación
 #define MODE_START 0
@@ -219,9 +214,6 @@ extern "C" {
 
 // Submodos - msg_module_enable
 #define SUBMODE_REMOTE 0
-#define SUBMODE_REMOTE_START_ENGINE 1
-#define SUBMODE_REMOTE_STOP_ENGINE 2
-#define SUBMODE_REMOTE_ENGAGE_BRAKE 3
 #define SUBMODE_NAV_PLAN 0
 #define SUBMODE_NAV_FOLLOW_ME 1
 #define SUBMODE_NAV_COME_TO_ME 2
@@ -284,7 +276,16 @@ extern "C" {
 #define TOF_TEACH 1
 #define TOF_CONFIGURATION 2
 
-
-
-
-
+// Posiciones de modos y funciones dentro del vector de msg_available
+#define AVAILABLE_POS_REMOTE 0
+#define AVAILABLE_POS_START_ENGINE 1
+#define AVAILABLE_POS_STOP_ENGINE 2
+#define AVAILABLE_POS_ENGAGE_BRAKE 3
+#define AVAILABLE_POS_PLAN 4
+#define AVAILABLE_POS_COME_TO_ME 5
+#define AVAILABLE_POS_FOLLOW_ME 6
+#define AVAILABLE_POS_MAPPING 7
+#define AVAILABLE_POS_TEACH 8
+#define AVAILABLE_POS_CONVOY 9
+#define AVAILABLE_POS_CONVOY_REMOTE 10
+#define AVAILABLE_POS_CONVOY_AUTO 11
