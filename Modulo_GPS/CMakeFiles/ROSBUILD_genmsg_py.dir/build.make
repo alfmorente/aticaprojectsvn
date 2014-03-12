@@ -69,6 +69,7 @@ src/Modulo_GPS/msg/_msg_stream.py: /opt/ros/groovy/share/std_msgs/package.xml
 src/Modulo_GPS/msg/_msg_stream.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_GPS/msg/_msg_stream.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_GPS/msg/_msg_stream.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_GPS/msg/_msg_stream.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_GPS/msg/_msg_stream.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_stream.msg
@@ -89,6 +90,7 @@ src/Modulo_GPS/msg/_msg_module_enable.py: /opt/ros/groovy/share/std_msgs/package
 src/Modulo_GPS/msg/_msg_module_enable.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_GPS/msg/_msg_module_enable.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_GPS/msg/_msg_module_enable.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_GPS/msg/_msg_module_enable.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_GPS/msg/_msg_module_enable.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_module_enable.msg
@@ -109,6 +111,7 @@ src/Modulo_GPS/msg/_msg_backup.py: /opt/ros/groovy/share/std_msgs/package.xml
 src/Modulo_GPS/msg/_msg_backup.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_GPS/msg/_msg_backup.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_GPS/msg/_msg_backup.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_GPS/msg/_msg_backup.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_GPS/msg/_msg_backup.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_backup.msg
@@ -129,6 +132,7 @@ src/Modulo_GPS/msg/_msg_gps.py: /opt/ros/groovy/share/std_msgs/package.xml
 src/Modulo_GPS/msg/_msg_gps.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_GPS/msg/_msg_gps.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_GPS/msg/_msg_gps.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_GPS/msg/_msg_gps.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_GPS/msg/_msg_gps.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_gps.msg
@@ -149,6 +153,7 @@ src/Modulo_GPS/msg/_msg_error.py: /opt/ros/groovy/share/std_msgs/package.xml
 src/Modulo_GPS/msg/_msg_error.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_GPS/msg/_msg_error.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_GPS/msg/_msg_error.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_GPS/msg/_msg_error.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_GPS/msg/_msg_error.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_GPS/msg/msg_error.msg

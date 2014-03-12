@@ -29,6 +29,8 @@
             </df>
           </df>
         </df>
+        <df name="Common_files.dir">
+        </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
         </df>
@@ -42,6 +44,8 @@
             <df name="Modulo_GPS">
             </df>
           </df>
+        </df>
+        <df name="Progress">
         </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
@@ -110,27 +114,8 @@
       </df>
       <df name="lib">
       </df>
-      <df name="msg">
-      </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="Modulo_GPS">
-              <in>msg_backup.h</in>
-              <in>msg_error.h</in>
-              <in>msg_gps.h</in>
-              <in>msg_module_enable.h</in>
-              <in>msg_stream.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
-      </df>
       <df name="src">
         <df name="Modulo_GPS">
-          <df name="msg">
-          </df>
           <in>external_signals.cpp</in>
           <in>interaction.cpp</in>
         </df>

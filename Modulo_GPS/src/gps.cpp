@@ -39,14 +39,14 @@ int main(int argc, char **argv) {
     // Inicialización de la estructura que contiene los datos del GPS y variables globales
     //initInsValue(insdata);
     // Generación de publicadores
-    pub_gps = n.advertise<Modulo_GPS::msg_gps>("gps", 1000);
-    pub_errores = n.advertise<Modulo_GPS::msg_error>("error", 1000);
-    pub_errores = n.advertise<Modulo_GPS::msg_stream>("teachfile",1000);
+    pub_gps = n.advertise<Common_files::msg_gps>("gps", 1000);
+    pub_errores = n.advertise<Common_files::msg_error>("error", 1000);
+    pub_errores = n.advertise<Common_files::msg_stream>("teachfile",1000);
     // Inicialización de suscriptores
     ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
     ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);    
     // Creación de mensaje de publicacion de datos
-    Modulo_GPS::msg_gps insMessage;
+    Common_files::msg_gps insMessage;
     
     // Todo esta correcto, lo especificamos con el correspondiente parametro
     n.setParam("estado_modulo_GPS",STATE_OK);
@@ -98,11 +98,11 @@ int main(int argc, char **argv) {
  * *****************************************************************************
  * ****************************************************************************/
 
-void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable msg) {
+void fcn_sub_enableModule(const Common_files::msg_module_enable msg) {
     // TODO
 }
 
-void fcn_sub_backup(const Modulo_GPS::msg_backup msg) {
+void fcn_sub_backup(const Common_files::msg_backup msg) {
     // TODO
     // Actualizar insdata con lo de backup
     readyToPublish=true;

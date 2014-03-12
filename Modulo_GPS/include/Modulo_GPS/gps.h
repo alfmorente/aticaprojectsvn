@@ -18,21 +18,19 @@ extern "C" {
 
 #endif	/* GPS_H */
 
-
-
 // Mensajes
-#include "../../msg_gen/cpp/include/Modulo_GPS/msg_gps.h"
-#include "../../msg_gen/cpp/include/Modulo_GPS/msg_error.h"
-#include "../../msg_gen/cpp/include/Modulo_GPS/msg_module_enable.h"
-#include "../../msg_gen/cpp/include/Modulo_GPS/msg_stream.h"
-#include "../../msg_gen/cpp/include/Modulo_GPS/msg_backup.h"
+#include "Common_files/msg_gps.h"
+#include "Common_files/msg_error.h"
+#include "Common_files/msg_module_enable.h"
+#include "Common_files/msg_stream.h"
+#include "Common_files/msg_backup.h"
 
 // Librerias basicas
 #include <iostream>
 
 // ROS
 #include "ros/ros.h"
-#include "constant.h"
+#include "Common_files/constant.h"
 
 // Señales externas
 #include "external_signals.h"
@@ -56,8 +54,8 @@ bool exitModule, readyToPublish;
 insData insdata;
 
 // Suscriptores
-void fcn_sub_enableModule(const Modulo_GPS::msg_module_enable);
-void fcn_sub_backup(const Modulo_GPS::msg_backup);
+void fcn_sub_enableModule(const Common_files::msg_module_enable);
+void fcn_sub_backup(const Common_files::msg_backup);
 
 // Funciones propias
 
