@@ -41,6 +41,8 @@
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir">
         </df>
+        <df name="ROSBUILD_genmsg_py.dir">
+        </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
@@ -50,6 +52,8 @@
         <df name="rosbuild_premsgsrvgen.dir">
         </df>
         <df name="rospack_genmsg.dir">
+        </df>
+        <df name="rospack_genmsg_all.dir">
         </df>
         <df name="rospack_genmsg_libexe.dir">
         </df>
@@ -112,7 +116,39 @@
         <in>msg_stream.msg</in>
         <in>msg_waypoint.msg</in>
       </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="Common_files">
+              <in>msg_available.h</in>
+              <in>msg_backup.h</in>
+              <in>msg_camera.h</in>
+              <in>msg_com_teleop.h</in>
+              <in>msg_ctrl_camera.h</in>
+              <in>msg_emergency_stop.h</in>
+              <in>msg_error.h</in>
+              <in>msg_fcn_aux.h</in>
+              <in>msg_gps.h</in>
+              <in>msg_info_stop.h</in>
+              <in>msg_laser.h</in>
+              <in>msg_mode.h</in>
+              <in>msg_module_enable.h</in>
+              <in>msg_navigation.h</in>
+              <in>msg_rangedatafusion.h</in>
+              <in>msg_stream.h</in>
+              <in>msg_switch.h</in>
+              <in>msg_waypoint.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
       <df name="src">
+        <df name="Common_files">
+          <df name="msg">
+          </df>
+        </df>
       </df>
       <df name="test_results">
       </df>
