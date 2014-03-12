@@ -20,6 +20,8 @@ int main(int argc, char **argv)
 
   // Inicio de ROS
   ros::init(argc, argv, "teachMapping");
+  
+  cout << "hola mundooooooooooooooooooooooooooo" << endl;
 
     // Manejador ROS
   ros::NodeHandle n;
