@@ -1,7 +1,7 @@
 /* 
  * File:   teleoperacion.h
  * Author: atica
- *
+ * 
  * Created on 13 de septiembre de 2013, 11:27
  */
 
@@ -20,35 +20,43 @@ extern "C" {
 #endif	/* TELEOPERACION_H */
 
 //Mensajes
-#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_com_teleop.h"
-#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_error.h"
-#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_module_enable.h"
-#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_laser.h"
-#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_mode.h"
+//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_com_teleop.h"
+//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_error.h"
+//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_module_enable.h"
+//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_mode.h"
+#include "Common_files/msg_com_teleop.h"
+#include "Common_files/msg_error.h"
+#include "Common_files/msg_module_enable.h"
+#include "Common_files/msg_mode.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
 #include <iostream>
 #include <fstream>
-#include "constant.h"
+#include "../../../src/Common_files/include/Common_files/constant.h"
+#include <stdlib.h>
+#include <signal.h>
 
 //Variables globales
-// Manejador ROS
-ros::NodeHandle n;
 bool enableModule;
 int error_count;
+bool end_error;
+//Variable de activacion de modulo
+bool exitModule;
 
+// Obtener el modo de operacion
+int getOperationMode(int,char **);
+// Sintaxis correcta ante fallo
+void printCorrectSyntax();
 
 //Funciones de suscripcion
-void fcn_sub_com_teleop(const Modulo_Teleoperacion::msg_com_teleop);
-void fcn_sub_enable_module(const Modulo_Teleoperacion::msg_module_enable);
+void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
+void fcn_sub_enable_module(const Common_files::msg_module_enable);
 
 //Funciones propias
 int convertToCorrectValues(int,int);
-// Devuelve true si el proccesado de datos dictamina peligro y false en caso contrario
-short processDataLaser(Modulo_Teleoperacion::msg_laser);
 
-#define MAX_OUTRANGE_ERROR 10
+#define MAX_OUTRANGE_ERROR 3
 // Valores máximos y mínimos de los comandos de teleoperación
 #define MIN_STEER_VALUE -100
 #define MAX_STEER_VALUE 100
@@ -62,5 +70,11 @@ short processDataLaser(Modulo_Teleoperacion::msg_laser);
 #define MAX_GEAR_VALUE 4
 #define MIN_LIGHT_VALUE 0
 #define MAX_LIGHT_VALUE 1
-#define MIN_LIGHTS_IR_VALUE 0
-#define MAX_LIGHTS_IR_VALUE 1
+#define MIN_LIGHT_IR_VALUE 0
+#define MAX_LIGHT_IR_VALUE 1
+#define MIN_ENGINE_VALUE 0
+#define MAX_ENGINE_VALUE 1
+#define MIN_DIFF_VALUE 0
+#define MAX_DIFF_VALUE 1
+#define MIN_LASER_VALUE 0
+#define MAX_LASER_VALUE 1
