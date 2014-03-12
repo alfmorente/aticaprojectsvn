@@ -1,0 +1,14 @@
+(cl:in-package Common_files-msg)
+(cl:export '(LINEAL_VELOCITY_X-VAL
+          LINEAL_VELOCITY_X
+          LINEAL_VELOCITY_Y-VAL
+          LINEAL_VELOCITY_Y
+          LINEAL_VELOCITY_Z-VAL
+          LINEAL_VELOCITY_Z
+          ANGULAR_VELOCITY_X-VAL
+          ANGULAR_VELOCITY_X
+          ANGULAR_VELOCITY_Y-VAL
+          ANGULAR_VELOCITY_Y
+          ANGULAR_VELOCITY_Z-VAL
+          ANGULAR_VELOCITY_Z
+))

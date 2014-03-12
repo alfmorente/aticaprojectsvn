@@ -96,7 +96,7 @@
       <df name="lib">
       </df>
       <df name="msg">
-        <in>msg_available_mode.msg</in>
+        <in>msg_available.msg</in>
         <in>msg_backup.msg</in>
         <in>msg_camera.msg</in>
         <in>msg_com_teleop.msg</in>
