@@ -25,12 +25,13 @@ extern "C" {
 #include "Common_files/msg_stream.h"
 #include "Common_files/msg_backup.h"
 
-// Librerias basicas
+// Librerias 
 #include <iostream>
+#include "TeachThread.hpp"
 
 // ROS
 #include "ros/ros.h"
-#include "Common_files/constant.h"
+#include "../../Common_files/include/Common_files/constant.h"
 
 // Señales externas
 #include "external_signals.h"
@@ -49,9 +50,13 @@ typedef struct{
 }insData;
 
 // Variable de continuacion de modulo
-bool exitModule, readyToPublish;
+bool exitModule, readyToPublish, teachActive, launchTeach;
 // Variable donde guardar datos de INS
 insData insdata;
+// Hilo que controla el teach
+TeachThread teachThread;
+// Estructura para cola de datos en el hilo de teach
+TeachData teachData;
 
 // Suscriptores
 void fcn_sub_enableModule(const Common_files::msg_module_enable);

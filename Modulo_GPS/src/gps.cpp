@@ -1,4 +1,4 @@
-#include "../include/Modulo_GPS/gps.h"
+#include "Modulo_GPS/gps.h"
 
 ros::Publisher pub_gps;
 ros::Publisher pub_errores;
@@ -33,11 +33,7 @@ int main(int argc, char **argv) {
         n.getParam("estado_modulo_GPS", estado_actual);
     }
     cout << "ATICA GPS :: Iniciando configuración..." << endl;
-    
-    // Variable donde guardar datos de INS
-    //insData insdata;
-    // Inicialización de la estructura que contiene los datos del GPS y variables globales
-    //initInsValue(insdata);
+
     // Generación de publicadores
     pub_gps = n.advertise<Common_files::msg_gps>("gps", 1000);
     pub_errores = n.advertise<Common_files::msg_error>("error", 1000);
@@ -67,8 +63,15 @@ int main(int argc, char **argv) {
                 n.getParam("estado_modulo_GPS",estado_actual);
                 if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
                     exitModule=true;
-                }else{
+                }else {
+                    if (launchTeach) { // LANZAR TEACH
+                        // Lanzar el hilo
+                        teachThread.Run();
+                        launchTeach = false;
+                    }
+
                     if(readyToPublish){
+                        readyToPublish=false;
                         // Obtiene posicion y genera el mensaje
                         insMessage.latitude=insdata.latitude;
                         insMessage.longitude=insdata.longitude;
@@ -78,7 +81,14 @@ int main(int argc, char **argv) {
                         insMessage.yaw=insdata.yaw;
                         // Publica posicion
                         pub_gps.publish(insMessage);
-                        readyToPublish=false;
+                        if(teachActive){
+                            teachThread.setMode(true);
+                            teachData.latitude=insdata.latitude;
+                            teachData.longitude=insdata.longitude;
+                            teachThread.queueGPSdata.push(teachData);
+                        }else{
+                            teachThread.setMode(false);
+                        }
                     }
                     // Prepara la recepcion de mensajes
                     ros::spinOnce();
@@ -88,7 +98,6 @@ int main(int argc, char **argv) {
         default:
                 break;
     }
-
     return 0;
 }
 
@@ -100,6 +109,18 @@ int main(int argc, char **argv) {
 
 void fcn_sub_enableModule(const Common_files::msg_module_enable msg) {
     // TODO
+    if(msg.id_module==ID_MOD_TEACH){
+        if(msg.status==ON){
+            if(!teachActive){
+                teachActive=true;
+                launchTeach=true;
+            }
+        }else if(msg.status==OFF){
+            if(teachActive){
+                teachActive=false;
+            }
+        }
+    }
 }
 
 void fcn_sub_backup(const Common_files::msg_backup msg) {
@@ -152,4 +173,6 @@ void initModuleVariables(){
     insdata.yaw=0;
     exitModule=false;
     readyToPublish=false;
+    teachActive=false;
+    launchTeach=false;
 }

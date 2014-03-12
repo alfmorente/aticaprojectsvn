@@ -45,8 +45,6 @@
             </df>
           </df>
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
@@ -106,6 +104,8 @@
       </df>
       <df name="include">
         <df name="Modulo_GPS">
+          <in>TeachThread.hpp</in>
+          <in>Thread.hpp</in>
           <in>constant.h</in>
           <in>external_signals.h</in>
           <in>gps.h</in>
@@ -116,6 +116,8 @@
       </df>
       <df name="src">
         <df name="Modulo_GPS">
+          <in>TeachThread.cpp</in>
+          <in>Thread.cpp</in>
           <in>external_signals.cpp</in>
           <in>interaction.cpp</in>
         </df>

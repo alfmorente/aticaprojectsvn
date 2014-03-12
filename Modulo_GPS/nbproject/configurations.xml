@@ -21,6 +21,8 @@
       </df>
       <df name="src">
         <df name="Modulo_GPS">
+          <in>TeachThread.cpp</in>
+          <in>Thread.cpp</in>
           <in>external_signals.cpp</in>
           <in>interaction.cpp</in>
         </df>
@@ -56,6 +58,18 @@
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
         </makeTool>
+        <requiredProjects>
+          <makeArtifact PL="../Common_files"
+                        CT="0"
+                        CN="Default"
+                        AC="true"
+                        BL="false"
+                        WD="../Common_files"
+                        BC="${MAKE} -f Makefile"
+                        CC="${MAKE} -f Makefile clean"
+                        OP="">
+          </makeArtifact>
+        </requiredProjects>
       </makefileType>
       <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
             ex="false"
@@ -107,19 +121,13 @@
         <ccTool>
           <incDir>
             <pElem>include</pElem>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
           </incDir>
           <preprocessorList>
             <Elem>ROS_PACKAGE_NAME="Modulo_GPS"</Elem>
           </preprocessorList>
-        </ccTool>
-      </folder>
-      <folder path="0/src/Modulo_GPS">
-        <ccTool>
-          <incDir>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </folder>
       <folder path="Modules">
@@ -134,6 +142,10 @@
           </incDir>
         </ccTool>
       </folder>
+      <item path="src/Modulo_GPS/TeachThread.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/Thread.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/Modulo_GPS/external_signals.cpp"
             ex="false"
             tool="1"
@@ -147,11 +159,6 @@
       </item>
       <item path="src/gps.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
-          <incDir>
-            <pElem>../Common_files/msg_gen/cpp/include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
     </conf>

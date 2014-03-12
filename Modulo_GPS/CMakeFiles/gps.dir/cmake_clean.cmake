@@ -2,6 +2,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/gps.dir/src/gps.cpp.o"
   "CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o"
   "CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o"
+  "CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o"
+  "CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o"
   "bin/gps.pdb"
   "bin/gps"
 )

@@ -422,6 +422,54 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/Modulo_GPS/TeachThread.o: src/Modulo_GPS/TeachThread.cpp.o
+.PHONY : src/Modulo_GPS/TeachThread.o
+
+# target to build an object file
+src/Modulo_GPS/TeachThread.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o
+.PHONY : src/Modulo_GPS/TeachThread.cpp.o
+
+src/Modulo_GPS/TeachThread.i: src/Modulo_GPS/TeachThread.cpp.i
+.PHONY : src/Modulo_GPS/TeachThread.i
+
+# target to preprocess a source file
+src/Modulo_GPS/TeachThread.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.i
+.PHONY : src/Modulo_GPS/TeachThread.cpp.i
+
+src/Modulo_GPS/TeachThread.s: src/Modulo_GPS/TeachThread.cpp.s
+.PHONY : src/Modulo_GPS/TeachThread.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/TeachThread.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.s
+.PHONY : src/Modulo_GPS/TeachThread.cpp.s
+
+src/Modulo_GPS/Thread.o: src/Modulo_GPS/Thread.cpp.o
+.PHONY : src/Modulo_GPS/Thread.o
+
+# target to build an object file
+src/Modulo_GPS/Thread.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o
+.PHONY : src/Modulo_GPS/Thread.cpp.o
+
+src/Modulo_GPS/Thread.i: src/Modulo_GPS/Thread.cpp.i
+.PHONY : src/Modulo_GPS/Thread.i
+
+# target to preprocess a source file
+src/Modulo_GPS/Thread.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.i
+.PHONY : src/Modulo_GPS/Thread.cpp.i
+
+src/Modulo_GPS/Thread.s: src/Modulo_GPS/Thread.cpp.s
+.PHONY : src/Modulo_GPS/Thread.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/Thread.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.s
+.PHONY : src/Modulo_GPS/Thread.cpp.s
+
 src/Modulo_GPS/external_signals.o: src/Modulo_GPS/external_signals.cpp.o
 .PHONY : src/Modulo_GPS/external_signals.o
 
@@ -528,6 +576,12 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/Modulo_GPS/TeachThread.o"
+	@echo "... src/Modulo_GPS/TeachThread.i"
+	@echo "... src/Modulo_GPS/TeachThread.s"
+	@echo "... src/Modulo_GPS/Thread.o"
+	@echo "... src/Modulo_GPS/Thread.i"
+	@echo "... src/Modulo_GPS/Thread.s"
 	@echo "... src/Modulo_GPS/external_signals.o"
 	@echo "... src/Modulo_GPS/external_signals.i"
 	@echo "... src/Modulo_GPS/external_signals.s"
