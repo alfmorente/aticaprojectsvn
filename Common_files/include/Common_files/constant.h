@@ -236,7 +236,7 @@ extern "C" {
 // Output Errors
 #define CONVOY_CONNECTION_ERROR 100
 #define CONVOY_SOCKET_RECEIVE_ERROR 101
-#define LEADER_CRITICAL_ERROR 102
+#define LEADER_CRITICAL_ERROR_OUTPUT 102
 #define FOLLOWER_ERROR 103
 
 /**************************************
