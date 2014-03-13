@@ -23,6 +23,7 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_backup.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_com_teleop.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_emergency_stop.h
+ /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_fcn_aux.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_info_stop.h
  /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_navigation.h

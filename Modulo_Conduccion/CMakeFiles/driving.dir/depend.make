@@ -22,6 +22,7 @@ CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/..
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_backup.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_com_teleop.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_emergency_stop.h
+CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_fcn_aux.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_info_stop.h
 CMakeFiles/driving.dir/src/conduccion.cpp.o: src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_navigation.h

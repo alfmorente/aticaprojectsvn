@@ -2,7 +2,7 @@
  * File:   conduccion.h
  * Author: Sergio Doctor López
  *
- * Created on 5 de marzo de 2014, 10:50
+ * Created on 10 de marzo de 2014, 10:50
  */
 
 #ifndef CONDUCCION_H

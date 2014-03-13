@@ -76,6 +76,28 @@ ros/macros.h
 ros/assert.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/assert.h
 
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/serialization.h
+ros/builtin_message_traits.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/builtin_message_traits.h
+ros/message_operations.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/message_operations.h
+ros/time.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/time.h
+ros/macros.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/macros.h
+ros/assert.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/ros/assert.h
+
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_fcn_aux.h
 string
 -
@@ -219,8 +241,8 @@ string
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/Timer.hpp
 
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/conduccion.h
-Common_files/msg_error.h
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/Common_files/msg_error.h
+../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
 ../../../Common_files/msg_gen/cpp/include/Common_files/msg_switch.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_switch.h
 ../../../Common_files/msg_gen/cpp/include/Common_files/msg_backup.h

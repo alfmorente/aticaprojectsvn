@@ -190,8 +190,6 @@
         </cTool>
         <ccTool>
           <incDir>
-            <pElem>.</pElem>
-            <pElem>../Common_files</pElem>
             <pElem>CMakeFiles/CMakeTmp</pElem>
           </incDir>
         </ccTool>
