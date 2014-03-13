@@ -1,5 +1,5 @@
 #include "../include/Modulo_Conduccion/interaction.h"
-#include "Modulo_Conduccion/constant.h"
+#include "../../Common_files/include/Common_files/constant.h"
 
 using namespace std;
 

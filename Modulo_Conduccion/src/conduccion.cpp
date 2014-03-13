@@ -34,11 +34,11 @@ int main(int argc, char **argv)
   cout << "Atica CONDUCCION :: Iniciando configuración..." << endl;
 
   // Generación de publicadores
-  pub_error = n.advertise<Modulo_Conduccion::msg_error>("error",1000);
-  pub_switch = n.advertise<Modulo_Conduccion::msg_switch>("switch",1000);
-  pub_backup = n.advertise<Modulo_Conduccion::msg_backup>("backup",1000);
-  pub_info_stop = n.advertise<Modulo_Conduccion::msg_info_stop>("infoStop",1000);
-  pub_emergency_stop = n.advertise<Modulo_Conduccion::msg_emergency_stop>("emergInfo",1000);
+  pub_error = n.advertise<Common_files::msg_error>("error",1000);
+  pub_switch = n.advertise<Common_files::msg_switch>("switch",1000);
+  pub_backup = n.advertise<Common_files::msg_backup>("backup",1000);
+  pub_info_stop = n.advertise<Common_files::msg_info_stop>("infoStop",1000);
+  pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop>("emergInfo",1000);
 
   // Generación de subscriptores  
   sub_navigation = n.subscribe("pre_navigation", 1000, fcn_sub_navigation);
@@ -105,9 +105,9 @@ int main(int argc, char **argv)
 
 
                     // Publicacion del mensaje switch
-                    if (conduccion->conmutador_m_a == 0)
+                    if (conduccion->conmutador_m_a == OFF)
                           msg_switch.value = false;   // Manual
-                    else if (conduccion->conmutador_m_a == 1)
+                    else if (conduccion->conmutador_m_a == ON)
                           msg_switch.value = true;    // Teleoperado
                     pub_switch.publish(msg_switch);
 
@@ -120,11 +120,11 @@ int main(int argc, char **argv)
 
 
                     // Publicacion del mensaje info_stop
-                    if (conduccion->parada_emergencia_obstaculo == 1) {
+                    if (conduccion->parada_emergencia_obstaculo == ON) {
                         msg_info_stop.id_event = 0;
                         msg_info_stop.value = true;
                     }
-                    else if (conduccion->parada_emergencia_obstaculo == 0) {
+                    else if (conduccion->parada_emergencia_obstaculo == OFF) {
                         msg_info_stop.id_event = 0;
                         msg_info_stop.value = false;
                     }
@@ -137,7 +137,7 @@ int main(int argc, char **argv)
                     cout << "Parada de emergencia obstaculo: " << (int) msg_info_stop.value << "\n";
                     cout << "********************************************************** \n\n\n";
 
-                    if (conduccion->parada_emergencia_remota == 1) {
+                    if (conduccion->parada_emergencia_remota == ON) {
                         msg_info_stop.id_event = 1;
                         msg_info_stop.value = true;
 
@@ -152,7 +152,7 @@ int main(int argc, char **argv)
                         cout << "************************************************************* \n\n\n";
 
                     }
-                    else if (conduccion->parada_emergencia_remota == 0) {
+                    else if (conduccion->parada_emergencia_remota == OFF) {
                         msg_info_stop.id_event = 1;
                         msg_info_stop.value = false;
                     }
@@ -165,11 +165,11 @@ int main(int argc, char **argv)
                     cout << "Parada de emergencia remota: " << (int) msg_info_stop.value << "\n";
                     cout << "********************************************************** \n\n\n";
 
-                    if (conduccion->parada_emergencia_local == 1) {
+                    if (conduccion->parada_emergencia_local == ON) {
                         msg_info_stop.id_event = 2;
                         msg_info_stop.value = true;
                     }
-                    else if (conduccion->parada_emergencia_local== 0) {
+                    else if (conduccion->parada_emergencia_local== OFF) {
                         msg_info_stop.id_event = 2;
                         msg_info_stop.value = false;
                     }               
@@ -263,57 +263,58 @@ int main(int argc, char **argv)
  * ****************************************************************************/
 
 // Suscriptor al Módulo de Navegacion
-void fcn_sub_navigation(const Modulo_Conduccion::msg_navigation msg)
+void fcn_sub_navigation(const Common_files::msg_navigation msg)
 {
   ROS_INFO("I heard a NAVIGATION message \n");
 }
 
 // Suscriptor al Módulo de Remote
-void fcn_sub_com_teleop(const Modulo_Conduccion::msg_com_teleop msg)
+void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 {
-  ROS_INFO("I heard a TELEOP DEPURADO. message \n");
+    if (!msg.value) {
+        ROS_INFO("I heard a TELEOP DEPURADO. message \n");
 
-  switch (msg.id_element) {
-        case 0:   // Acelerador
-            conduccion->acelerador_tx = (short) msg.value;
-            break;
-        case 1:   // Freno de servicio
-            conduccion->freno_servicio_tx = (short) msg.value;
-            break;
-        case 2:   // Direccion
-            conduccion->valor_direccion = (short) msg.value;
-            break;
-        case 3:   // Marcha
-            conduccion->valor_marcha = (short) msg.value;
-            break;
-        case 4:   // Freno de mano
-            conduccion->valor_freno_estacionamiento = (short) msg.value;
-            break;
-        case 5:   // Encendido del motor
-            conduccion->valor_arranque_parada = (short) msg.value;
-            break;
-        case 6:   // Luces IR
-            conduccion->valor_luces_IR = (short) msg.value;
-            break;
-        case 7:   // Luces 
-            conduccion->valor_luces = (short) msg.value;
-            break;
-        case 8:   // Diferenciales
-            conduccion->valor_diferencial = (short) msg.value;
-            break;
-        case 9:   // Activacion Laser
-            conduccion->valor_laser = (short) msg.value;
-            break;
-        default:          
-            break;          
+        switch (msg.id_element) {
+              case 0:   // Acelerador
+                  conduccion->acelerador_tx = (short) msg.value;
+                  break;
+              case 1:   // Freno de servicio
+                  conduccion->freno_servicio_tx = (short) msg.value;
+                  break;
+              case 2:   // Direccion
+                  conduccion->valor_direccion = (short) msg.value;
+                  break;
+              case 3:   // Marcha
+                  conduccion->valor_marcha = (short) msg.value;
+                  break;
+              case 4:   // Freno de mano
+                  conduccion->valor_freno_estacionamiento = (short) msg.value;
+                  break;
+              case 5:   // Encendido del motor
+                  conduccion->valor_arranque_parada = (short) msg.value;
+                  break;
+              case 6:   // Luces IR
+                  conduccion->valor_luces_IR = (short) msg.value;
+                  break;
+              case 7:   // Luces 
+                  conduccion->valor_luces = (short) msg.value;
+                  break;
+              case 8:   // Diferenciales
+                  conduccion->valor_diferencial = (short) msg.value;
+                  break;
+              case 9:   // Activacion Laser
+                  conduccion->valor_laser = (short) msg.value;
+                  break;
+              default:          
+                  break;          
+          }
+
+        conduccion->valor_parada_emergencia = OFF;
     }
-        
-  conduccion->valor_parada_emergencia = OFF;
-
 }
 
 // Suscriptor al Módulo de System Management
-void fcn_sub_engine_brake(const Modulo_Conduccion::msg_fcn_aux msg)  {
+void fcn_sub_engine_brake(const Common_files::msg_fcn_aux msg)  {
     
     ROS_INFO("I heard a FUNCTION AUX message from SYSTEM MANAGEMENT \n");
     
@@ -333,14 +334,12 @@ void fcn_sub_engine_brake(const Modulo_Conduccion::msg_fcn_aux msg)  {
 }
 
 // Suscriptor al Módulo de System Management
-void fcn_sub_emergency_stop(const Modulo_Conduccion::msg_emergency_stop msg) {
+void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg) {
     
     ROS_INFO("I heard a EMERGENCY STOP message from SYSTEM MANAGEMENT \n");
     
     if (msg.value)
         conduccion->valor_parada_emergencia = SET;
-    else
-        conduccion->valor_parada_emergencia = INFO;
     
 }
 
