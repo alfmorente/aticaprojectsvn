@@ -45,14 +45,14 @@ extern "C" {
 
 // Modos de operacion - msg_modo
 #define MODE_NEUTRAL -1
-#define MODE_REMOTE 0
-#define MODE_PLAN 1
-#define MODE_COME_TO_ME 2
-#define MODE_FOLLOW_ME 3
-#define MODE_CONVOY 4
-#define MODE_CONVOY_TELEOP 5
-#define MODE_CONVOY_AUTO 6
-#define MODE_MANUAL 7
+#define MODE_MANUAL 0
+#define MODE_REMOTE 1
+#define MODE_PLAN 2
+#define MODE_COME_TO_ME 3
+#define MODE_FOLLOW_ME 4
+#define MODE_CONVOY 5
+#define MODE_CONVOY_TELEOP 6
+#define MODE_CONVOY_AUTO 7
 
 // Estado del Modo de operación
 #define MODE_START 0
@@ -104,6 +104,9 @@ extern "C" {
 #define RDF_MODULE_NA 12
 #define HL_MODULE_NA 13
 #define CONVOY_MODULE_NA 14
+// Output Errors
+#define MODE_OR_FUNCTION_NA 100
+#define MODULE_NOT_AVAILABLE 101
 
 // Subsystem = Driving
 #define CONNECTION_CAN_FAIL 0
@@ -115,6 +118,9 @@ extern "C" {
 #define GEAR_SHIFT_FAILURE 6
 #define STEER_FAILURE 7
 #define DIFFERENTIAL_LOCK_FAILURE 8
+// Output Errors
+#define CAN_FAILURE 100
+#define MECHANICAL_FAILURE 101
 
 // Subsystem = GPS
 #define GPS_GLOBAL_ERROR 0
@@ -145,6 +151,12 @@ extern "C" {
 #define PENDING 25
 #define INVALID_FIX 26
 #define UNAUTHORIZED_STATE 27
+// Output Errors
+#define DATA_RCV_FAILED_OUT 100
+#define SERIALPORT_ERROR 101
+#define GPS_CONFIG_ERROR 102
+#define IMU_ERROR 103
+#define GPS_RECEIVER_ERROR 104
 
 // Subsystem = LASER 2D
 #define LASER_SOCKET_FAIL 0
@@ -166,35 +178,51 @@ extern "C" {
 #define LASER_LOG_FILE_ERROR 16
 #define LASER_CONFIG_FILE_ERROR 17
 #define LASER_CONFIG_FILE_STRUCTURE_ERROR 18
+// Output Errors
+#define LASER_CONNECTION_ERROR 100
+#define LASER_COMMUNICATION_ERROR 101
+#define LASER_CONFIGURATION_ERROR 102
+#define LASER_COMMAND_ERROR 103
+#define LASER_FRAME_ERROR 104
+#define LASER_FILE_ERROR 105
 
 // Subsystem = Communications
-#define LINK_ERROR_900 0
-#define LINK_ERROR_2400 1
-#define JAUS_CONFIG_ERROR 2
-#define CREATE_COMPONENT_ERROR 3
-#define RUN_COMPONENT_ERROR 4
-#define COMM_LOG_FILE_ERROR 5
-#define COMM_CONFIG_FILE_ERROR 6
-#define COMM_CONFIG_FILE_STRUCTURE_ERROR 7
+#define JAUS_CONFIG_ERROR 0
+#define CREATE_COMPONENT_ERROR 1
+#define RUN_COMPONENT_ERROR 2
+#define COMM_LOG_FILE_ERROR 3
+#define COMM_CONFIG_FILE_ERROR 4
+#define COMM_CONFIG_FILE_STRUCTURE_ERROR 5
+// Output Errors
+#define JAUS_ERROR 100
+#define COMM_FILE_ERROR 101
 
 // Subsystem = Camera
 #define ERROR_CAMERA_CONFIGURATION 1
 #define ERROR_CAMERA_COMMUNICATION 2
+// Output Errors
+#define CAMERA_ERROR 100
 
 // Subsystem = Navigation
 #define ERROR_NAVIGATION_OBSTACLE_UNAVOIDABLE 1
 #define ERROR_NAVIGATION_WAYPOINTS_GETTING_TIMEOUT 2
+// Output Errors
+#define NAV_ERROR 100
 
 // Subsystem = Remote
 #define REMOTE_PARAMETER_OUTRANGE 0
-#define NEAR_OBSTACLE_DETECTION 1
-#define FAR_OBSTABLE_DETECTION 2
+// Output
+#define REMOTE_PARAMETER_ERROR 100
 
 // Subsystem = RangeDataFusion
 #define RDF_INSUFFICIENT_DATA 0
+// Output
+#define RDF_INSUFFICIENT_DATA_OUT 100
 
 // Subsystem = HumanLocalization
 #define HL_INSUFFICIENT_DATA 0
+// Output
+#define HL_INSUFFICIENT_DATA_OUT 100
 
 // Subsystem = Convoy
 #define UDP_SOCKET_FAIL 0
@@ -205,6 +233,16 @@ extern "C" {
 #define FOLLOWER_LASER_ERROR 5
 #define FOLLOWER_NAVIGATION_ERROR 6
 #define FOLLOWER_CAMERA_ERROR 7
+// Output Errors
+#define CONVOY_CONNECTION_ERROR 100
+#define CONVOY_SOCKET_RECEIVE_ERROR 101
+#define LEADER_CRITICAL_ERROR 102
+#define FOLLOWER_ERROR 103
+
+/**************************************
+ ************** END ERRORS ************
+ *************************************/
+
 
 // ID Modulo - msg_module_enable
 #define ID_MOD_REMOTE 0
@@ -279,18 +317,18 @@ extern "C" {
 #define TOF_CONFIGURATION 2
 
 // Posiciones de modos y funciones dentro del vector de msg_available
-#define AVAILABLE_POS_REMOTE 0
-#define AVAILABLE_POS_START_ENGINE 1
-#define AVAILABLE_POS_STOP_ENGINE 2
-#define AVAILABLE_POS_ENGAGE_BRAKE 3
-#define AVAILABLE_POS_PLAN 4
-#define AVAILABLE_POS_COME_TO_ME 5
-#define AVAILABLE_POS_FOLLOW_ME 6
-#define AVAILABLE_POS_MAPPING 7
-#define AVAILABLE_POS_TEACH 8
-#define AVAILABLE_POS_CONVOY 9
-#define AVAILABLE_POS_CONVOY_TELEOP 10
-#define AVAILABLE_POS_CONVOY_AUTO 11
+#define AVAILABLE_POS_REMOTE 1
+#define AVAILABLE_POS_PLAN 2
+#define AVAILABLE_POS_COME_TO_ME 3
+#define AVAILABLE_POS_FOLLOW_ME 4
+#define AVAILABLE_POS_CONVOY 5
+#define AVAILABLE_POS_CONVOY_TELEOP 6
+#define AVAILABLE_POS_CONVOY_AUTO 7
+#define AVAILABLE_POS_START_ENGINE 8
+#define AVAILABLE_POS_STOP_ENGINE 9
+#define AVAILABLE_POS_ENGAGE_BRAKE 10
+#define AVAILABLE_POS_TEACH 12
+#define AVAILABLE_POS_MAPPING 11
 
 //Define las funciones especiales
 #define ENGINE 0
