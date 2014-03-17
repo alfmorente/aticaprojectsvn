@@ -1,0 +1,16 @@
+<package>
+  <description brief="sim_driving">
+
+     sim_driving
+
+  </description>
+  <author>Atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/sim_driving</url>
+  <depend package="roscpp"/>
+  <depend package="Common_files"/>
+
+</package>
+
+
