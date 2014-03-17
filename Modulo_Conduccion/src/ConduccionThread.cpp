@@ -70,7 +70,7 @@ void ConduccionThread::DoWork(){
         }
 
         // TX de mensajes
-        m_Change_Command_CAN_AUTOMATA();
+        //m_Change_Command_CAN_AUTOMATA();
         //cout << "Tiempo de envio: " << time1.GetTime() << "\n";
         
     }
@@ -234,12 +234,13 @@ void ConduccionThread::m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
 
 // Envío del mensaje 00A (CAN --> autómata --> vehículo)
 
-void ConduccionThread::m_Change_Command_CAN_AUTOMATA(){
+void ConduccionThread::m_teleop_CAN_AUTOMATA(){
   
     TPCANMsg msgEx;
     msgEx.ID = 0x00A;
     msgEx.LEN = 8;
     msgEx.MSGTYPE = 0;
+
     
     uint8_t byte_1, byte_7;
 
@@ -417,6 +418,68 @@ void ConduccionThread::m_Change_Command_CAN_AUTOMATA(){
     msgEx.DATA[5] = (uint8_t) sentido_direccion_tx;
     msgEx.DATA[6] = (uint8_t) direccion_tx;
     msgEx.DATA[7] = byte_7;
+    
+        
+    CANCONDUCCION->SendMessage(&msgEx);
+    
+}
+
+
+void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
+  
+    TPCANMsg msgEx;
+    msgEx.ID = 0x00A;
+    msgEx.LEN = 8;
+    msgEx.MSGTYPE = 0;
+    
+    uint8_t byte_1;
+
+    if ((valor_arranque_parada == 1) && (valor_freno_estacionamiento == 1))
+        byte_1 = 17;          
+    else {
+        byte_1 = 0;
+    }
+    if (valor_arranque_parada == 1)
+        byte_1 = 1;
+    if (valor_freno_estacionamiento == 1)
+        byte_1 = 16;
+     
+    msgEx.DATA[0] = byte_1;
+    msgEx.DATA[1] = 0;
+    msgEx.DATA[2] = 0;
+    msgEx.DATA[3] = 0;
+    msgEx.DATA[4] = 0;
+    msgEx.DATA[5] = 0;
+    msgEx.DATA[6] = 0;
+    msgEx.DATA[7] = 0;
+    
+        
+    CANCONDUCCION->SendMessage(&msgEx);
+    
+}
+
+
+
+void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
+  
+    TPCANMsg msgEx;
+    msgEx.ID = 0x00A;
+    msgEx.LEN = 8;
+    msgEx.MSGTYPE = 0;
+
+    uint8_t byte_7;
+
+    if (valor_parada_emergencia == 1)
+        byte_7 = 16;
+  
+    msgEx.DATA[0] = 16;         // Freno de estacionamiento ON
+    msgEx.DATA[1] = 0;
+    msgEx.DATA[2] = 0;
+    msgEx.DATA[3] = 0;
+    msgEx.DATA[4] = 0;
+    msgEx.DATA[5] = 0;
+    msgEx.DATA[6] = 0;
+    msgEx.DATA[7] = byte_7;         // Parada de emergencia ON
     
         
     CANCONDUCCION->SendMessage(&msgEx);

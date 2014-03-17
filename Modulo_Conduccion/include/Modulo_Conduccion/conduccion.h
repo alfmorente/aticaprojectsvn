@@ -66,9 +66,16 @@ Common_files::msg_emergency_stop msg_emergency_stop;
 ConduccionThread * conduccion;
 CANCommunication * can;
 
-bool finDePrograma;   // Flag que comprueba si se crea bien la comunicacion con CAN
-int CANflag;          // Flag contador de reintentos de establecimiento de comunicaciones CAN
-             
+bool finDePrograma;     // Flag que comprueba si se crea bien la comunicacion con CAN
+int CANflag;            // Flag contador de reintentos de establecimiento de comunicaciones CAN
+bool parada_emergencia; // Flag que controla que cuando la parada de emergencia esta ON no pueda recibir mensajes de com_teleop
+
+//Funciones de publicacion
+void publishBackup();
+void publishSwitch();
+void publishInfoStop();
+void publishError();
+
 //Funciones de suscripcion
 void fcn_sub_navigation(const Common_files::msg_navigation);
 void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
@@ -83,6 +90,8 @@ bool disconnectCommunication();
 void do_exit(int);              // what has to be done at program exit
 void signal_handler(int);       // the signal handler for manual break Ctrl-C
 void init_signals();            // what has to be done at program start
+
+
 
 
 bool sendData();

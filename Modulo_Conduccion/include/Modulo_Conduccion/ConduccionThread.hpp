@@ -42,7 +42,9 @@ public:
     virtual ~ConduccionThread();
     virtual void DoWork();
     
-    void m_Change_Command_CAN_AUTOMATA();
+    void m_teleop_CAN_AUTOMATA();               // Escritura en el CAN cuando le llega un mensaje msg_com_teleop
+    void m_engine_brake_CAN_AUTOMATA();         // Escritura en el CAN cuando le llega un mensaje msg_fcn_aux
+    void m_emergency_stop_CAN_AUTOMATA();       // Escritura en el CAN cuando le llega un mensaje msg_emergency_stop
     
     void m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg);
     void m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg);
