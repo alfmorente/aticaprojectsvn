@@ -9,7 +9,9 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Modulo_Gest_Errores</url>
   <depend package="roscpp"/>
-
+  <depend package="Common_files"/>
+  
+  
 </package>
 
 
