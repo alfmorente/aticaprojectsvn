@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_RangeDataFusion/src/../../../src/Common_files/include/Common_files/constant.h
+
+/home/atica/catkin_ws/src/Modulo_RangeDataFusion/src/interaction.cpp
+../include/Modulo_Gest_Errores/interaction.h
+/home/atica/catkin_ws/src/Modulo_RangeDataFusion/src/../include/Modulo_Gest_Errores/interaction.h
+../../../src/Common_files/include/Common_files/constant.h
+/home/atica/catkin_ws/src/Modulo_RangeDataFusion/src/../../../src/Common_files/include/Common_files/constant.h
+
+/home/atica/catkin_ws/src/Modulo_RangeDataFusion/src/rangedata.cpp
+cstdlib
+-
+
