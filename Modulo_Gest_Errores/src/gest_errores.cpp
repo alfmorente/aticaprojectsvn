@@ -34,13 +34,13 @@ int main(int argc, char **argv)
   cout << "Atica GEST. ERRORES :: Iniciando configuración..." << endl;
 */
   // Inicializacion de publicadores
-  pub_modo = n.advertise<Common_files::msg_mode>("mode", 1000);
+  pub_modo = n.advertise<Common_files::msg_mode>("modeES", 1000);
   pub_errores = n.advertise<Common_files::msg_error>("error", 1000);
-  pub_avail_mode = n.advertise<Common_files::msg_available>("avail_mode", 1000);
+  pub_avail_mode = n.advertise<Common_files::msg_available>("avail", 1000);
 
   // Creacion de suscriptores
   ros::Subscriber sub_errores = n.subscribe("error", 1000, fcn_sub_errores);
-  ros::Subscriber sub_modo = n.subscribe("mode", 1000, fcn_sub_modo);
+  ros::Subscriber sub_modo = n.subscribe("modeSE", 1000, fcn_sub_modo);
 
   // Inicialización de variables globales
   modoActual=MODE_NEUTRAL;
@@ -111,6 +111,7 @@ void fcn_sub_modo(const Common_files::msg_mode msg)
 // Suscriptor de errores
 void fcn_sub_errores(const Common_files::msg_error msg)
 {
+    cout << "Me ha llegado el mensaje de error: " << msg << endl;
     int i=0,j=0;        // Variables para bucles for
     short end_error;    // Variable auxiliar usada para generar el msg
     short type_error = 0;
