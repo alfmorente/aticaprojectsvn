@@ -68,6 +68,8 @@ msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_module_enable.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_module_enable.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_HumanLocalization/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_module_enable.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_module_enable.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_HumanLocalization/msg/msg_module_enable.msg
@@ -92,6 +94,8 @@ msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_waypoint.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_waypoint.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_waypoint.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_HumanLocalization/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_waypoint.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_waypoint.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_HumanLocalization/msg/msg_waypoint.msg
@@ -116,6 +120,8 @@ msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_errores.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_errores.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_HumanLocalization/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_errores.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_errores.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_HumanLocalization/msg/msg_errores.msg

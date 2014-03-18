@@ -62,6 +62,8 @@ msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h: /opt/ros/groov
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_HumanLocalization/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_HumanLocalization/msg/msg_module_enable.msg
@@ -82,6 +84,8 @@ msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h: /opt/ros/groovy/sha
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_HumanLocalization/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_HumanLocalization/msg/msg_waypoint.msg
@@ -102,6 +106,8 @@ msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h: /opt/ros/groovy/shar
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_HumanLocalization/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_HumanLocalization/msg/msg_errores.msg

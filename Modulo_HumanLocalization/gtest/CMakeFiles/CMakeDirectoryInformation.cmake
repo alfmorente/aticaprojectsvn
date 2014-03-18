@@ -11,6 +11,7 @@ SET(CMAKE_FORCE_UNIX_PATHS 1)
 # The C and CXX include file search paths:
 SET(CMAKE_C_INCLUDE_PATH
   "include"
+  "/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include"
   "/opt/ros/groovy/include"
   "/usr/src/gtest/include"
   "/usr/src/gtest"

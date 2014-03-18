@@ -10,7 +10,7 @@
  // Publicadores
 
  ros::Publisher pub_waypoints;
- ros::Publisher pub_errores;
+ ros::Publisher pub_error;
 
 using namespace std;
 
@@ -24,6 +24,12 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+  // Obtencion del modo de operacion y comprobacion de que es correcto
+  int operationMode;
+  if ((operationMode = getOperationMode(argc, argv)) == 0) {
+      return 1;
+  }
+    
   // Inicio de ROS
   ros::init(argc, argv, "human_localization");
 
@@ -38,12 +44,12 @@ int main(int argc, char** argv) {
   cout << "Atica HUMAN LOCALIZATION :: Iniciando configuración..." << endl;
 
   // Inicializacion de publicadores
-  pub_errores = n.advertise<Modulo_HumanLocalization::msg_errores>("error", 1000);
-  pub_waypoints = n.advertise<Modulo_HumanLocalization::msg_waypoint>("waypoints_outcome", 1000);
+  pub_error = n.advertise<Common_files::msg_error>("error", 1000);
+  pub_waypoints = n.advertise<Common_files::msg_waypoint>("wpHN", 1000);
 
   // Creacion de suscriptores
-  ros::Subscriber sub_waypoints = n.subscribe("waypoints_income", 1000, fcn_sub_waypoint);
-  ros::Subscriber sub_moduleEnable = n.subscribe("moduleEnable", 1000, fcn_sub_enableModule);
+  ros::Subscriber sub_waypoints = n.subscribe("wpCH", 1000, fcn_sub_waypoint);
+  ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
 
   // Variable de continuacion de modulo
   exitModule=false;
@@ -54,11 +60,34 @@ int main(int argc, char** argv) {
 
   while (ros::ok() && !exitModule)
   {
-      n.getParam("estado_modulo_humanLocaliz",estado_actual);
-      if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-          exitModule=true;
-      }
-      ros::spinOnce();
+      switch (operationMode) {
+        case OPERATION_MODE_DEBUG:
+            // Funcionamiento del modo debug
+            n.getParam("estado_modulo_humanLocalization",estado_actual);
+            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
+                exitModule=true;
+            } 
+            ros::spinOnce();
+            break;
+        case OPERATION_MODE_RELEASE:
+            // Funcionamiento del modo release
+            n.getParam("estado_modulo_humanLocalization",estado_actual);
+            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
+                exitModule=true;
+            } 
+            ros::spinOnce();
+            break;
+        case OPERATION_MODE_SIMULATION:
+            // Funcionamiento del modo simulacion
+            n.getParam("estado_modulo_humanLocalization",estado_actual);
+            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
+                exitModule=true;
+            } 
+            ros::spinOnce();
+            break;
+        default:
+            break;
+    }
   }
   cout << "Atica HUMAN LOCALIZATION :: Módulo finalizado" << endl;
 
@@ -72,7 +101,7 @@ int main(int argc, char** argv) {
  * ****************************************************************************/
 
 // Suscriptor de waypoints
-void fcn_sub_waypoint(const Modulo_HumanLocalization::msg_waypoint waypoints_income)
+void fcn_sub_waypoint(const Common_files::msg_waypoint waypoints_income)
 {
     if (enableModule == true){
         pub_waypoints.publish (waypoints_income);
@@ -80,11 +109,17 @@ void fcn_sub_waypoint(const Modulo_HumanLocalization::msg_waypoint waypoints_inc
 }
 
 // Suscriptor habilitación módulos
-void fcn_sub_enableModule(const Modulo_HumanLocalization::msg_module_enable module)
+void fcn_sub_enableModule(const Common_files::msg_module_enable module)
 {
-    if ((module.id_module == ID_MOD_NAVEGACION) && (module.submodule == SUBMODE_NAV_FOLLOW_ME) && (module.status == MODULE_ON)){
+    if ((module.id_module == ID_MOD_NAVIGATION) && (module.submode == SUBMODE_NAV_FOLLOW_ME) && (module.status == MOD_ON)){
         enableModule = true;
     }
     else
         enableModule = false;
+}
+
+// Suscriptor de RangeDataFusion
+void fcn_sub_rangedatafusion(const Common_files::msg_rangedatafusion msg)
+{
+    
 }

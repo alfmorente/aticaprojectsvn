@@ -18,13 +18,15 @@ extern "C" {
 #endif	/* HUMAN_LOCALIZATION_H */
 
 // Mensajes
-#include "../../msg_gen/cpp/include/Modulo_HumanLocalization/msg_errores.h"
-#include "../../msg_gen/cpp/include/Modulo_HumanLocalization/msg_waypoint.h"
-#include "../../msg_gen/cpp/include/Modulo_HumanLocalization/msg_module_enable.h"
+#include "Common_files/msg_error.h"
+#include "Common_files/msg_waypoint.h"
+#include "Common_files/msg_module_enable.h"
+#include "Common_files/msg_rangedatafusion.h"
 
 // Funciones de suscripcion
-void fcn_sub_waypoint(const Modulo_HumanLocalization::msg_waypoint);
-void fcn_sub_enableModule(const Modulo_HumanLocalization::msg_module_enable);
+void fcn_sub_waypoint(const Common_files::msg_waypoint);
+void fcn_sub_enableModule(const Common_files::msg_module_enable);
+void fcn_sub_rangedatafusion(const Common_files::msg_rangedatafusion);
 
 //ROS y demás librerias
 #include "ros/ros.h"
@@ -34,4 +36,5 @@ void fcn_sub_enableModule(const Modulo_HumanLocalization::msg_module_enable);
 #include <stdio.h>
 #include <sys/types.h>
 #include <pwd.h>
-#include "constant.h"
+#include "../../../Common_files/include/Common_files/constant.h"
+#include "interaction.h"
