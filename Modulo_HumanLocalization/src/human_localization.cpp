@@ -50,6 +50,7 @@ int main(int argc, char** argv) {
   // Creacion de suscriptores
   ros::Subscriber sub_waypoints = n.subscribe("wpCH", 1000, fcn_sub_waypoint);
   ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
+  ros::Subscriber sub_rangedatafusion = n.subscribe("rangedata", 1000, fcn_sub_rangedatafusion);
 
   // Variable de continuacion de modulo
   exitModule=false;
