@@ -1,6 +1,5 @@
 #include "../include/Modulo_Teleoperacion/teleoperacion.h"
 
-  ros::Publisher pub_modo;
   ros::Publisher pub_error;
   ros::Publisher pub_teleop;
 
@@ -32,14 +31,13 @@ int main(int argc, char **argv)
   cout << "Atica TELEOPERACION :: Iniciando configuración..." << endl;
   
   // Generación de publicadores
-  pub_modo = n.advertise<Common_files::msg_mode>("mode", 1000);
-  pub_teleop = n.advertise<Common_files::msg_com_teleop>("clean",1000);
+  pub_teleop = n.advertise<Common_files::msg_com_teleop>("commands_clean",1000);
   pub_error = n.advertise<Common_files::msg_error>("error",1000);
 
 
   // Creacion de suscriptores
-  ros::Subscriber sub_hab_modulo = n.subscribe("moduleEnable", 1000, fcn_sub_enable_module);
-  ros::Subscriber sub_com_teleop = n.subscribe("unclean",1000,fcn_sub_com_teleop);
+  ros::Subscriber sub_hab_modulo = n.subscribe("modEnable", 1000, fcn_sub_enable_module);
+  ros::Subscriber sub_com_teleop = n.subscribe("commands_unclean",1000,fcn_sub_com_teleop);
 
   sleep(1);
   // Inicializacion de variable de habilitacion de modulo
