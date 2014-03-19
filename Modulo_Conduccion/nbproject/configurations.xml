@@ -222,8 +222,6 @@
         </ccTool>
       </item>
       <item path="src/ConduccionThread.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="src/Thread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>

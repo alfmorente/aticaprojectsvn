@@ -72,6 +72,7 @@ public:
     short valor_diferencial;
     short valor_laser;
     short valor_parada_emergencia;
+    uint8_t byte_7;
     
     // Atributos para el mensaje INFO (005)
     short arranque_parada;
@@ -99,6 +100,11 @@ public:
     
     //atributo de error
     int id_error_Conduccion; 
+    
+    bool paradaEmergencia;      // Flag para la parada de emergencia
+    
+    //Timer para esperar X segundos a que haga la parada de emergencia y volver a tener posibiildad de control del vehiculo
+    Timer t;
     
 private:
     

@@ -7,6 +7,8 @@
 
 #include "../include/Modulo_Conduccion/conduccion.h"
 
+#define temporizador 10.0
+
 using namespace std;
 
 int main(int argc, char **argv)
@@ -42,7 +44,7 @@ int main(int argc, char **argv)
 
   // Generación de subscriptores  
   sub_navigation = n.subscribe("pre_navigation", 1000, fcn_sub_navigation);
-  sub_com_teleop = n.subscribe("clean",1000,fcn_sub_com_teleop);
+  sub_com_teleop = n.subscribe("commands_clean",1000,fcn_sub_com_teleop);
   sub_fcn_aux = n.subscribe("engBrake",1000,fcn_sub_engine_brake);
   sub_emergency_stop = n.subscribe("emergSet",1000,fcn_sub_emergency_stop);
   
@@ -63,6 +65,9 @@ int main(int argc, char **argv)
         cout << "CONNECTION_CAN_FAIL \n";
   }
   
+  parada_emergencia = false;    // Al principio siempre es falsa la parada de emergencia. Solo se pondra a true cuando verdaderamente haya una parada.
+  valor_conmutador = 9;         // Al principio se le asigna un valor cualquiera para que en la primera itereacion cambio de valor y lo publique
+  
   switch (operationMode) {
         case OPERATION_MODE_DEBUG:
             
@@ -78,12 +83,32 @@ int main(int argc, char **argv)
                 }
                 
                 else {
+                        
+                    if ((conduccion->conf_parada_emergencia == 1) && (conduccion->paradaEmergencia)) {
+                        publishEmergencyStop();
+                        conduccion->paradaEmergencia = false;
+                    }
                     
-                    publishBackup();
-                    publishSwitch();
-                    publishInfoStop();
+                    if (parada_emergencia) {
+                        //cout << "inicio del timer a 10 segundos" << endl;
+                        if (conduccion->t.GetTimed() > temporizador){
+                                parada_emergencia = false;
+                                conduccion->t.Disable();                                
+                                //cout << "Fin del timer a 10 segundos" << endl;
+                                
+                        }                            
+                    }
+                    
+                    if (valor_conmutador != conduccion->conmutador_m_a){
+                        valor_conmutador = conduccion->conmutador_m_a;
+                        publishSwitch();
+                    }
+                        
+                    //publishBackup();
+                    
+                    //publishInfoStop();
                     //publishError();
-      
+                        
                 }
                 
                 ros::spinOnce();
@@ -132,6 +157,15 @@ int main(int argc, char **argv)
  * *****************************************************************************
  * ****************************************************************************/
 
+void publishEmergencyStop(){
+    
+        cout << "Publicacion de la parada de emergencia = INFORM \n";
+        msg_emergency_stop.value = true;
+        pub_emergency_stop.publish(msg_emergency_stop);
+        
+}
+
+
 void publishBackup(){
    /*
                     cout << "********** Publicacion del mensaje BACKUP *********** \n";
@@ -176,6 +210,7 @@ void publishSwitch(){
                           msg_switch.value = false;   // Manual
                     else if (conduccion->conmutador_m_a == ON)
                           msg_switch.value = true;    // Teleoperado
+                    
                     pub_switch.publish(msg_switch);
 
                     // Impresion del mensaje switch
@@ -318,55 +353,56 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 
         switch (msg.id_element) {
               case 0:   // Acelerador
-                  cout << "acelerador = " << msg.value << "\n";
+                  //cout << "acelerador = " << msg.value << "\n";
                   conduccion->acelerador_tx = (short) msg.value;
                   break;
               case 1:   // Velocidad
-                  cout << "Velocidad = " << msg.value << "\n";
+                  //cout << "Velocidad = " << msg.value << "\n";
                   conduccion->velocidad_tx = (short) msg.value;
                   break;
               case 2:   // Freno de servicio
-                  cout << "Freno de servicio = " << msg.value << "\n";
+                  //cout << "Freno de servicio = " << msg.value << "\n";
                   conduccion->freno_servicio_tx = (short) msg.value;
                   break;
               case 3:   // Direccion
-                  cout << "Direccion = " << msg.value << "\n";
+                  //cout << "Direccion = " << msg.value << "\n";
                   conduccion->valor_direccion = (short) msg.value;
                   break;
               case 4:   // Marcha
-                  cout << "Marcha = " << msg.value << "\n";
+                  //cout << "Marcha = " << msg.value << "\n";
                   conduccion->valor_marcha = (short) msg.value;
                   break;
               case 5:   // Freno de mano
-                  cout << "Freno de mano = " << msg.value << "\n";
+                  //cout << "Freno de mano = " << msg.value << "\n";
                   conduccion->valor_freno_estacionamiento = (short) msg.value;
                   break;
               case 6:   // Encendido del motor
-                  cout << "Encendido del motor = " << msg.value << "\n";
+                  //cout << "Encendido del motor = " << msg.value << "\n";
                   conduccion->valor_arranque_parada = (short) msg.value;
                   break;
               case 7:   // Luces IR
-                  cout << "Luces IR = " << msg.value << "\n";
+                  //cout << "Luces IR = " << msg.value << "\n";
                   conduccion->valor_luces_IR = (short) msg.value;
                   break;
               case 8:   // Luces 
-                  cout << "Luces = " << msg.value << "\n";
+                  //cout << "Luces = " << msg.value << "\n";
                   conduccion->valor_luces = (short) msg.value;
                   break;
               case 9:   // Diferenciales
-                  cout << "Diferenciales = " << msg.value << "\n";
+                  //cout << "Diferenciales = " << msg.value << "\n";
                   conduccion->valor_diferencial = (short) msg.value;
                   break;
               case 10:   // Activacion Laser
-                  cout << "Activacion del laser = " << msg.value << "\n";
+                  //cout << "Activacion del laser = " << msg.value << "\n";
                   conduccion->valor_laser = (short) msg.value;
                   break;
               default:          
                   break;          
-          }         
-        conduccion->valor_parada_emergencia = OFF;
-        conduccion->m_teleop_CAN_AUTOMATA();
+          }                 
+        conduccion->m_teleop_CAN_AUTOMATA(); 
+        ROS_INFO("He enviado un dato a la plaza chamartin---MADAFAKA CARLY & ALFONSO --- FUCK YOUR MADRES");
     }
+        
 }
 
 // Suscriptor al Módulo de System Management
@@ -400,15 +436,13 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg) {
     
     ROS_INFO("I heard a EMERGENCY STOP message from SYSTEM MANAGEMENT \n");
     
-    if (!msg.value){
         parada_emergencia = true;
         cout << "Parada de emergencia = SET \n";
         conduccion->valor_parada_emergencia = ON;
         conduccion->m_emergency_stop_CAN_AUTOMATA();
-    }
-    else {
-        parada_emergencia = false;
-    }
+        conduccion->t.Enable();
+
+    
 }
 
 

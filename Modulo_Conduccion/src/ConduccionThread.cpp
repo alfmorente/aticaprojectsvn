@@ -111,7 +111,7 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
     
     // BYTE 1 - Posicion conmutador M/A
     conmutador_m_a = StatusMsg.Msg.DATA[1];
-    
+        
     // BYTE 2 - Velocidad
     velocidad = StatusMsg.Msg.DATA[2];
     
@@ -151,7 +151,7 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
         
     // BYTE 7 - Confirmacion parada de emergencia - parada de emergencia por obstaculo 
     //        - Parada de emergencia remota - parada de emergencia local
-    if ((StatusMsg.Msg.DATA[7] & CONF_PARADA_EMERGENCIA) == CONF_PARADA_EMERGENCIA) 
+    if ((StatusMsg.Msg.DATA[7] & CONF_PARADA_EMERGENCIA) == CONF_PARADA_EMERGENCIA)
         conf_parada_emergencia = 1;
     else
         conf_parada_emergencia = 0;
@@ -240,9 +240,8 @@ void ConduccionThread::m_teleop_CAN_AUTOMATA(){
     msgEx.ID = 0x00A;
     msgEx.LEN = 8;
     msgEx.MSGTYPE = 0;
-
     
-    uint8_t byte_1, byte_7;
+    uint8_t byte_1;
 
     if ((valor_arranque_parada == 1) && (valor_freno_estacionamiento == 1))
         byte_1 = 17;          
@@ -445,13 +444,13 @@ void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
         byte_1 = 16;
      
     msgEx.DATA[0] = byte_1;
-    msgEx.DATA[1] = 0;
-    msgEx.DATA[2] = 0;
-    msgEx.DATA[3] = 0;
-    msgEx.DATA[4] = 0;
-    msgEx.DATA[5] = 0;
-    msgEx.DATA[6] = 0;
-    msgEx.DATA[7] = 0;
+    msgEx.DATA[1] = (uint8_t) acelerador_tx;
+    msgEx.DATA[2] = (uint8_t) velocidad_tx;
+    msgEx.DATA[3] = (uint8_t) freno_servicio_tx;
+    msgEx.DATA[4] = (uint8_t) cambio_marcha_tx;
+    msgEx.DATA[5] = (uint8_t) sentido_direccion_tx;
+    msgEx.DATA[6] = (uint8_t) direccion_tx;
+    msgEx.DATA[7] = byte_7;
     
         
     CANCONDUCCION->SendMessage(&msgEx);
@@ -461,7 +460,9 @@ void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
 
 
 void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
-  
+    
+    paradaEmergencia = true;
+    
     TPCANMsg msgEx;
     msgEx.ID = 0x00A;
     msgEx.LEN = 8;
@@ -472,7 +473,7 @@ void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
     if (valor_parada_emergencia == 1)
         byte_7 = 16;
   
-    msgEx.DATA[0] = 16;         // Freno de estacionamiento ON
+    msgEx.DATA[0] = 0;         
     msgEx.DATA[1] = 0;
     msgEx.DATA[2] = 0;
     msgEx.DATA[3] = 0;
@@ -483,5 +484,9 @@ void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
     
         
     CANCONDUCCION->SendMessage(&msgEx);
+    
+}
+
+void temporizador() {
     
 }

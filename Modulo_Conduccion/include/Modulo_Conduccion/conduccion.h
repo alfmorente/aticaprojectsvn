@@ -69,8 +69,10 @@ CANCommunication * can;
 bool finDePrograma;     // Flag que comprueba si se crea bien la comunicacion con CAN
 int CANflag;            // Flag contador de reintentos de establecimiento de comunicaciones CAN
 bool parada_emergencia; // Flag que controla que cuando la parada de emergencia esta ON no pueda recibir mensajes de com_teleop
+int valor_conmutador;   // Flag que contrala el cambio del conmutador de manual a remote
 
 //Funciones de publicacion
+void publishEmergencyStop();
 void publishBackup();
 void publishSwitch();
 void publishInfoStop();
