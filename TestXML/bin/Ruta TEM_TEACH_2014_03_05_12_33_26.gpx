@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx version="1.1" creator="Carlos Amores">
+    <metadata>
+        <name>Carlos Amores</name>
+        <desc>Fichero generado con TinyXML</desc>
+        <author>
+            <name>Carlos Amores</name>
+            <email>caramoalv@gmail.com</email>
+        </author>
+        <copyright></copyright>
+        <link>href=&quot;http://grvc.us.es&quot;</link>
+    </metadata>
+    <trk>
+        <name>Ruta TEM_TEACH_2014_03_05_12_33_26</name>
+        <trkseg>
+            <trkpt lat="24" lon="158">
+                <ele>1</ele>
+                <time>2014-03-05T12:33:26</time>
+            </trkpt>
+            <trkpt lat="-33" lon="89">
+                <ele>2</ele>
+                <time>2014-03-05T12:33:27</time>
+            </trkpt>
+            <trkpt lat="-63" lon="-20">
+                <ele>3</ele>
+                <time>2014-03-05T12:33:28</time>
+            </trkpt>
+            <trkpt lat="-31" lon="59">
+                <ele>4</ele>
+                <time>2014-03-05T12:33:29</time>
+            </trkpt>
+            <trkpt lat="-73" lon="36">
+                <ele>5</ele>
+                <time>2014-03-05T12:33:30</time>
+            </trkpt>
+            <trkpt lat="-9" lon="38">
+                <ele>6</ele>
+                <time>2014-03-05T12:33:31</time>
+            </trkpt>
+            <trkpt lat="57" lon="-113">
+                <ele>7</ele>
+                <time>2014-03-05T12:33:32</time>
+            </trkpt>
+            <trkpt lat="36" lon="-151">
+                <ele>8</ele>
+                <time>2014-03-05T12:33:33</time>
+            </trkpt>
+            <trkpt lat="77" lon="-144">
+                <ele>9</ele>
+                <time>2014-03-05T12:33:34</time>
+            </trkpt>
+            <trkpt lat="32" lon="76">
+                <ele>10</ele>
+                <time>2014-03-05T12:33:35</time>
+            </trkpt>
+        </trkseg>
+    </trk>
+</gpx>

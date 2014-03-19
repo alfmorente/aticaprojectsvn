@@ -1,0 +1,14 @@
+<package>
+  <description brief="TestXML">
+
+     TestXML
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/TestXML</url>
+  <depend package="roscpp"/>
+</package>
+
+

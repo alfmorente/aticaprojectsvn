@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/atica/catkin_ws/src/TestXML",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/TestXML/include -I/opt/ros/groovy/include    -DROS_PACKAGE_NAME='\"TestXML\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/GPS.dir/src/mainTest.cpp.o -c /home/atica/catkin_ws/src/TestXML/src/mainTest.cpp",
+  "file": "/home/atica/catkin_ws/src/TestXML/src/mainTest.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/TestXML/gtest",
+  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/TestXML/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TestXML\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
+  "file": "/usr/src/gtest/src/gtest-all.cc"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/TestXML/gtest",
+  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/TestXML/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TestXML\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
+  "file": "/usr/src/gtest/src/gtest_main.cc"
+}
+]
