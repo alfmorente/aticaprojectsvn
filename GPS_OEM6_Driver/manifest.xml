@@ -1,0 +1,15 @@
+<package>
+  <description brief="GPS_OEM6_Driver">
+
+     GPS_OEM6_Driver
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/GPS_OEM6_Driver</url>
+  <depend package="roscpp"/>
+  <depend package="Common_files" />
+</package>
+
+
