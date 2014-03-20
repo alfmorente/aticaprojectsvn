@@ -55,7 +55,7 @@ int main(int argc, char **argv)
   // Inicializacion de la comunicacion CAN
   finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos.
   
-  msg_err.id_subsystem = SUBS_DRIVING;
+  inicializa_variables(); 
   
   // Envío de erorr si no hay comunicacion CAN 
   if (!finDePrograma) {       
@@ -64,10 +64,7 @@ int main(int argc, char **argv)
         
         cout << "CONNECTION_CAN_FAIL \n";
   }
-  
-  parada_emergencia = false;    // Al principio siempre es falsa la parada de emergencia. Solo se pondra a true cuando verdaderamente haya una parada.
-  valor_conmutador = 9;         // Al principio se le asigna un valor cualquiera para que en la primera itereacion cambio de valor y lo publique
-  
+   
   switch (operationMode) {
         case OPERATION_MODE_DEBUG:
             
@@ -103,10 +100,24 @@ int main(int argc, char **argv)
                         valor_conmutador = conduccion->conmutador_m_a;
                         publishSwitch();
                     }
-                        
-                    //publishBackup();
                     
-                    //publishInfoStop();
+                    if (valor_parada_obstaculo != conduccion->parada_emergencia_obstaculo){
+                        valor_parada_obstaculo = conduccion->parada_emergencia_obstaculo;
+                        publishInfoStopOsbtacule(conduccion->parada_emergencia_obstaculo);
+                    }
+                    
+                    if (valor_parada_local != conduccion->parada_emergencia_local){
+                        valor_parada_local = conduccion->parada_emergencia_local;
+                        publishInfoStopLocal(conduccion->parada_emergencia_local);
+                    }
+                        
+                    if (valor_parada_remote != conduccion->parada_emergencia_remota){
+                        valor_parada_remote = conduccion->parada_emergencia_remota;
+                        publishInfoStopRemote(conduccion->parada_emergencia_remota);
+                    }
+                    
+                    //publishBackup();
+                                        
                     //publishError();
                         
                 }
@@ -145,9 +156,6 @@ int main(int argc, char **argv)
   return 0;
 
 }
-
-
-
 
 
 
@@ -205,15 +213,12 @@ void publishBackup(){
 
 void publishSwitch(){
     
-// Publicacion del mensaje switch
                     if (conduccion->conmutador_m_a == OFF)
                           msg_switch.value = false;   // Manual
                     else if (conduccion->conmutador_m_a == ON)
                           msg_switch.value = true;    // Teleoperado
                     
-                    pub_switch.publish(msg_switch);
-
-                    // Impresion del mensaje switch
+                    pub_switch.publish(msg_switch);                  
 
                     cout << "********** Publicacion del mensaje SWITCH *********** \n";
                     cout << "Si es 0 = Manual; Si es 1 = Teleoperado \n";
@@ -222,26 +227,48 @@ void publishSwitch(){
     
 }
  
-void publishInfoStop() {
-// Publicacion del mensaje info_stop
-                    if (conduccion->parada_emergencia_obstaculo == ON) {
+void publishInfoStopOsbtacule(short valor) {
+
+                    if (valor == ON) {
                         msg_info_stop.id_event = 0;
                         msg_info_stop.value = true;
                     }
-                    else if (conduccion->parada_emergencia_obstaculo == OFF) {
+                    else if (valor == OFF) {
                         msg_info_stop.id_event = 0;
                         msg_info_stop.value = false;
                     }
                     pub_info_stop.publish(msg_info_stop);
 
-                    // Impresion del mensaje info_stop
-
-                    cout << "********** Publicacion del mensaje INFO_STOP 1 *********** \n";
+                    cout << "****** Publicacion del mensaje INFO_STOP OBSTACULE  ****** \n";
                     cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia obstaculo;  \n";
                     cout << "Parada de emergencia obstaculo: " << (int) msg_info_stop.value << "\n";
                     cout << "********************************************************** \n\n\n";
+}
 
-                    if (conduccion->parada_emergencia_remota == ON) {
+
+void publishInfoStopLocal (short valor) {
+    
+                    if (valor == ON) {
+                        msg_info_stop.id_event = 2;
+                        msg_info_stop.value = true;
+                    }
+                    else if (valor == OFF) {
+                        msg_info_stop.id_event = 2;
+                        msg_info_stop.value = false;
+                    }               
+
+                    pub_info_stop.publish(msg_info_stop);
+
+                    cout << "******* Publicacion del mensaje INFO_STOP LOCAL ********* \n";
+                    cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia local;  \n";
+                    cout << "Parada de emergencia local: " << (int) msg_info_stop.value << "\n";
+                    cout << "********************************************************** \n\n\n";
+}
+
+
+void publishInfoStopRemote (short valor) {
+    
+                    if (valor == ON) {
                         msg_info_stop.id_event = 1;
                         msg_info_stop.value = true;
 
@@ -250,41 +277,21 @@ void publishInfoStop() {
                         msg_emergency_stop.value = INFO;
                         pub_emergency_stop.publish(msg_emergency_stop);
 
-                        cout << "******** Publicacion del mensaje EMERGENCY STOP 2 *********** \n";
+                        cout << "******** Publicacion del mensaje EMERGENCY STOP  ************ \n";
                         cout << "Si es 1 = INFO;  \n";
                         cout << "Emergency Stop: " << msg_emergency_stop.value << "\n";
                         cout << "************************************************************* \n\n\n";
 
                     }
-                    else if (conduccion->parada_emergencia_remota == OFF) {
+                    else if (valor == OFF) {
                         msg_info_stop.id_event = 1;
                         msg_info_stop.value = false;
                     }
                     pub_info_stop.publish(msg_info_stop);
 
-                    // Impresion del mensaje info_stop
-
-                    cout << "********** Publicacion del mensaje INFO_STOP 3 *********** \n";
+                    cout << "******* Publicacion del mensaje INFO_STOP REMOTE ********* \n";
                     cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia remota;  \n";
                     cout << "Parada de emergencia remota: " << (int) msg_info_stop.value << "\n";
-                    cout << "********************************************************** \n\n\n";
-
-                    if (conduccion->parada_emergencia_local == ON) {
-                        msg_info_stop.id_event = 2;
-                        msg_info_stop.value = true;
-                    }
-                    else if (conduccion->parada_emergencia_local== OFF) {
-                        msg_info_stop.id_event = 2;
-                        msg_info_stop.value = false;
-                    }               
-
-                    pub_info_stop.publish(msg_info_stop);
-
-                    // Impresion del mensaje info_stop
-
-                    cout << "************ Publicacion del mensaje INFO_STOP *********** \n";
-                    cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia local;  \n";
-                    cout << "Parada de emergencia local: " << (int) msg_info_stop.value << "\n";
                     cout << "********************************************************** \n\n\n";
 }
 
@@ -493,6 +500,15 @@ bool disconnectCommunication(){
 }
 
 
+void inicializa_variables() {
+  msg_err.id_subsystem = SUBS_DRIVING;    // Flag que indica a errores que estamos en el subsistema Driving
+  parada_emergencia = false;    // Al principio siempre es falsa la parada de emergencia. Solo se pondra a true cuando verdaderamente haya una parada.
+  valor_conmutador = 9;         // Al principio se le asigna un valor cualquiera para que en la primera itereacion cambio de valor y lo publique
+  valor_parada_obstaculo = 0;   // Al principio se le asigna el valor 0 que indica que no hay ninguna parada de emergencia. 
+  valor_parada_local = 0;       // Al principio se le asigna el valor 0 que indica que no hay ninguna parada de emergencia. 
+  valor_parada_remote = 0;      // Al principio se le asigna el valor 0 que indica que no hay ninguna parada de emergencia. 
+}
+
 /*******************************************************************************
  *******************************************************************************
  *                     FUNCIONES TRATAMIENTO DE SEÑALES
@@ -519,15 +535,4 @@ void init_signals()
   signal(SIGTERM, signal_handler);
   signal(SIGINT, signal_handler);
 }
-
-
-bool sendData(){return true;}
-
-bool recvData(){return true;}
-
-bool checkConnection(){return true;}
-
-bool convertROStoCAN(){return true;}
-
-bool convertCANtoROS(){return true;}
 

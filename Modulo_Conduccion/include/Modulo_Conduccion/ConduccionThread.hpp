@@ -102,7 +102,8 @@ public:
     int id_error_Conduccion; 
     
     bool paradaEmergencia;      // Flag para la parada de emergencia
-    
+    int tipo_parada;            // Flag que indica el tipo de parada producida dentro de 
+    int tipo_parada_emergencia;     // Flag que indica el tipo de parada producida
     //Timer para esperar X segundos a que haga la parada de emergencia y volver a tener posibiildad de control del vehiculo
     Timer t;
     

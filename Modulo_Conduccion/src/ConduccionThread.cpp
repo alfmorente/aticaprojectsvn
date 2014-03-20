@@ -156,21 +156,19 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
     else
         conf_parada_emergencia = 0;
     
-    if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_OBSTACULO) == PARADA_EMERGENCIA_OBSTACULO) 
+    if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_OBSTACULO) == PARADA_EMERGENCIA_OBSTACULO)
         parada_emergencia_obstaculo = 1;
-    else
+    else        
         parada_emergencia_obstaculo = 0;
-    
-    if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_REMOTA) == PARADA_EMERGENCIA_REMOTA) 
-        parada_emergencia_remota = 1;
-    else
+    if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_REMOTA) == PARADA_EMERGENCIA_REMOTA)
+        parada_emergencia_remota = 1;    
+    else         
         parada_emergencia_remota = 0;
-    
-    if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_LOCAL) == PARADA_EMERGENCIA_LOCAL) 
+    if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_LOCAL) == PARADA_EMERGENCIA_LOCAL)
         parada_emergencia_local = 1;
-    else
+    else        
         parada_emergencia_local = 0;
-           
+      
 }
 
 // Tratamiento del mensaje 00E (vehículo --> autómata --> CAN

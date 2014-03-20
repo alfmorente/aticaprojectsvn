@@ -66,16 +66,23 @@ Common_files::msg_emergency_stop msg_emergency_stop;
 ConduccionThread * conduccion;
 CANCommunication * can;
 
-bool finDePrograma;     // Flag que comprueba si se crea bien la comunicacion con CAN
-int CANflag;            // Flag contador de reintentos de establecimiento de comunicaciones CAN
-bool parada_emergencia; // Flag que controla que cuando la parada de emergencia esta ON no pueda recibir mensajes de com_teleop
-int valor_conmutador;   // Flag que contrala el cambio del conmutador de manual a remote
+bool finDePrograma;                     // Flag que comprueba si se crea bien la comunicacion con CAN
+int CANflag;                            // Flag contador de reintentos de establecimiento de comunicaciones CAN
+bool parada_emergencia;                 // Flag que controla que cuando la parada de emergencia esta ON no pueda recibir mensajes de com_teleop
+int valor_conmutador;                   // Flag que contrala el cambio del conmutador de manual a remote
+int valor_parada_obstaculo;             // Flag que contrala el cambio de la parada de emergencia por obstaculo
+int valor_parada_local;                 // Flag que contrala el cambio de la parada de emergencia local
+int valor_parada_remote;                // Flag que contrala el cambio de la parada de emergencia remota
+
 
 //Funciones de publicacion
 void publishEmergencyStop();
 void publishBackup();
 void publishSwitch();
-void publishInfoStop();
+void publishInfoStopOsbtacule (short valor);
+void publishInfoStopLocal (short valor);
+void publishInfoStopRemote (short valor);
+
 void publishError();
 
 //Funciones de suscripcion
@@ -87,17 +94,9 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
 //Funciones propias
 bool createCommunication();
 bool disconnectCommunication();
+void inicializa_variables();
 
 // Funciones tratamiento de señales
 void do_exit(int);              // what has to be done at program exit
 void signal_handler(int);       // the signal handler for manual break Ctrl-C
 void init_signals();            // what has to be done at program start
-
-
-
-
-bool sendData();
-bool recvData();
-bool checkConnection();
-bool convertROStoCAN();
-bool convertCANtoROS();
