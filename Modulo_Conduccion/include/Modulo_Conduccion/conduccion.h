@@ -30,14 +30,12 @@ extern "C" {
 #include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_fcn_aux.h"
 #include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_emergency_stop.h"
 
-
 //ROS
 #include "ros/ros.h"
-//#include "constant.h"
-#include "../../../Common_files/include/Common_files/constant.h"
-#include <stdlib.h>
 
 //OTROS
+#include "../../../Common_files/include/Common_files/constant.h"
+#include <stdlib.h>
 #include "CANCommunication.hpp"
 #include "Thread.hpp"
 #include "ConduccionThread.hpp"
@@ -45,7 +43,13 @@ extern "C" {
 // Interaccion con usuario
 #include "interaction.h"
 
-//Atributos 
+
+
+/*******************************************************************************
+ *******************************************************************************
+ *                              ATRIBUTOS
+ * *****************************************************************************
+ * ****************************************************************************/
 
 // Para interraccionar con los usuarios
 int operationMode;
@@ -83,6 +87,11 @@ short error_diferenciales;              // Flag que controla el error de los dif
 
 
 
+/*******************************************************************************
+ *******************************************************************************
+ *                          MÉTODOS Y FUNCIONES
+ * *****************************************************************************
+ * ****************************************************************************/
 
 //Funciones de publicacion
 void publishEmergencyStop();
