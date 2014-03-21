@@ -97,10 +97,7 @@ public:
     short error_cambio_marcha;
     short error_direccion;
     short error_bloqueo_diferenciales;
-    
-    //atributo de error
-    int id_error_Conduccion; 
-    
+           
     bool paradaEmergencia;      // Flag para la parada de emergencia
     int tipo_parada;            // Flag que indica el tipo de parada producida dentro de 
     int tipo_parada_emergencia;     // Flag que indica el tipo de parada producida

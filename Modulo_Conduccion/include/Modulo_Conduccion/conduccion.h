@@ -69,21 +69,30 @@ CANCommunication * can;
 bool finDePrograma;                     // Flag que comprueba si se crea bien la comunicacion con CAN
 int CANflag;                            // Flag contador de reintentos de establecimiento de comunicaciones CAN
 bool parada_emergencia;                 // Flag que controla que cuando la parada de emergencia esta ON no pueda recibir mensajes de com_teleop
-int valor_conmutador;                   // Flag que contrala el cambio del conmutador de manual a remote
-int valor_parada_obstaculo;             // Flag que contrala el cambio de la parada de emergencia por obstaculo
-int valor_parada_local;                 // Flag que contrala el cambio de la parada de emergencia local
-int valor_parada_remote;                // Flag que contrala el cambio de la parada de emergencia remota
+short valor_conmutador;                 // Flag que contrala el cambio del conmutador de manual a remote
+short valor_parada_obstaculo;           // Flag que contrala el cambio de la parada de emergencia por obstaculo
+short valor_parada_local;               // Flag que contrala el cambio de la parada de emergencia local
+short valor_parada_remote;              // Flag que contrala el cambio de la parada de emergencia remota
+short error_a_p;                        // Flag que controla el error del arranque y la parada
+short error_acelerador;                  // Flag que controla el error del acelerador
+short error_freno_estacionamiento;      // Flag que controla el error del freno de estacionamiento
+short error_freno_servicio;             // Flag que controla el error del freno de servicio
+short error_cambio_marcha;              // Flag que controla el error del cambio de amrcha
+short error_direccion;                  // Flag que controla el error de la direccion
+short error_diferenciales;              // Flag que controla el error de los diferenciales
+
+
 
 
 //Funciones de publicacion
 void publishEmergencyStop();
 void publishBackup();
 void publishSwitch();
-void publishInfoStopOsbtacule (short valor);
-void publishInfoStopLocal (short valor);
-void publishInfoStopRemote (short valor);
-
-void publishError();
+//void publishInfoStopOsbtacule (short valor);
+//void publishInfoStopLocal (short valor);
+//void publishInfoStopRemote (short valor);
+void publishInfoStop (short valor, int i);
+void publishError (short valor, int i);
 
 //Funciones de suscripcion
 void fcn_sub_navigation(const Common_files::msg_navigation);
@@ -95,6 +104,10 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
 bool createCommunication();
 bool disconnectCommunication();
 void inicializa_variables();
+void checkEmergencyStop();
+void checkSwitch();
+void checkInfoStop();
+void checkError();
 
 // Funciones tratamiento de señales
 void do_exit(int);              // what has to be done at program exit

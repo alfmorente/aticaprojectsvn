@@ -177,53 +177,25 @@ void ConduccionThread::m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
          
     // BYTE 0 - Fallo Arranque/Parada
     error_arranque_parada = StatusMsg.Msg.DATA[0];
-    if (error_arranque_parada != 0) 
-        id_error_Conduccion = 2;
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-    
+        
     // BYTE 1 - Fallo acelerador 
     error_acelerador = StatusMsg.Msg.DATA[1];
-    if (error_acelerador != 0)
-        id_error_Conduccion = 3;
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-    
+        
     // BYTE 2 - Fallo Freno de estacionamiento
     error_freno_estacionamiento = StatusMsg.Msg.DATA[2];
-    if (error_freno_estacionamiento != 0)
-        id_error_Conduccion = 4;
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-    
+        
     // BYTE 3 - Fallo Freno de servicio
     error_freno_servicio = StatusMsg.Msg.DATA[3];
-    if (error_freno_servicio != 0)
-        id_error_Conduccion = 5;
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-        
+            
     // BYTE 4 - Fallo Cambio de marchas
     error_cambio_marcha = StatusMsg.Msg.DATA[4];
-    if (error_cambio_marcha != 0)
-        id_error_Conduccion = 6;
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-            
+                
     // BYTE 5 - Fallo Direccion
     error_direccion = StatusMsg.Msg.DATA[5];
-    if (error_direccion != 0)
-        id_error_Conduccion = 7;
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-           
+               
     // BYTE 6 - Fallo Bloqueo de diferenciales
     error_bloqueo_diferenciales = StatusMsg.Msg.DATA[6];
-    if (error_bloqueo_diferenciales != 0)
-        id_error_Conduccion = 8;    
-    else
-        id_error_Conduccion = -1; // NO HAY ERROR
-       
+           
     // BYTE 7 - SIN USO
 
 }
