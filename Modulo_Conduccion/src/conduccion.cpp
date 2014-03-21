@@ -456,7 +456,7 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
                   break;          
           }                 
         conduccion->m_teleop_CAN_AUTOMATA(); 
-        ROS_INFO("He enviado un dato a la plaza chamartin---MADAFAKA CARLY & ALFONSO --- FUCK YOUR MADRES");
+        
     }
         
 }
