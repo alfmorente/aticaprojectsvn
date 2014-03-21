@@ -36,6 +36,7 @@ extern "C" {
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/time.h>
 #include <pwd.h>
 #include "../../../Common_files/include/Common_files/constant.h"
 #include <signal.h>
@@ -74,6 +75,7 @@ short mode_conv_auto_error(Common_files::msg_error);
 short mode_startengine_error(Common_files::msg_error);
 short mode_stopengine_error(Common_files::msg_error);
 short mode_engagebrake_error(Common_files::msg_error);
+void writeToLog(Common_files::msg_error);
 
 // Definicion constantes propias del modulo
 #define MODE_START_ENGINE 8

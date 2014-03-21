@@ -1,12 +1,13 @@
 #include "../include/Modulo_Gest_Errores/gest_errores.h"
 
-  // Publicadores
-  ros::Publisher pub_modo;
-  ros::Publisher pub_errores;
-  ros::Publisher pub_com_teleop;
-  ros::Publisher pub_avail_mode;
+// Publicadores
+ros::Publisher pub_modo;
+ros::Publisher pub_errores;
+ros::Publisher pub_com_teleop;
+ros::Publisher pub_avail_mode;
 
-  using namespace std;
+using namespace std;
+ofstream flog;
 
 int main(int argc, char **argv)
 {
@@ -45,6 +46,7 @@ int main(int argc, char **argv)
   // Inicialización de variables globales
   modoActual=MODE_NEUTRAL;
   exitModule=false;
+  flog.open("ficheroLog.txt");
 
   // Inicialización de mensaje available_mode todo a true
   int i = 0;
@@ -111,7 +113,7 @@ void fcn_sub_modo(const Common_files::msg_mode msg)
 // Suscriptor de errores
 void fcn_sub_errores(const Common_files::msg_error msg)
 {
-    cout << "Me ha llegado el mensaje de error: " << msg << endl;
+    //cout << "Me ha llegado el mensaje de error: " << msg << endl;
     int i=0,j=0;        // Variables para bucles for
     short end_error;    // Variable auxiliar usada para generar el msg
     short type_error = 0;
@@ -126,6 +128,7 @@ void fcn_sub_errores(const Common_files::msg_error msg)
                     msg_err.id_error=convertOutputError(msg);
                     msg_err.type_error=TOE_CRITICAL;
                     pub_errores.publish(msg_err);
+                    writeToLog(msg_err);
                     // Al ser un error critico se pasa a modo neutro
                     switchNeutral();
                     // Actualizo las tablas de gestion de modos disponibles
@@ -139,6 +142,7 @@ void fcn_sub_errores(const Common_files::msg_error msg)
                     msg_err.id_error=convertOutputError(msg);
                     msg_err.type_error=TOE_WARNING;
                     pub_errores.publish(msg_err);
+                    writeToLog(msg_err);
                     break;
             default:
                     cout << "Atica Gest. Errores :: Se ha recibido un error no clasificado" << endl;
@@ -6661,4 +6665,13 @@ int convertOutputError(Common_files::msg_error msg){
             break;            
     }
     return out_error;
+}
+
+// Funcion para escribir en el fichero log
+
+void writeToLog(Common_files::msg_error msg) {
+    struct timeval timeLog;
+    gettimeofday(&timeLog, NULL);
+    flog << timeLog.tv_sec % 18000 << "." << timeLog.tv_usec << "\n";
+    flog << msg << endl;
 }
