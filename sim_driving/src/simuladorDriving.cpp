@@ -12,7 +12,7 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
 
     // Generación de publicadores
-  pub_com_teleop = n.advertise<Common_files::msg_com_teleop>("clean", 1000);
+  pub_com_teleop = n.advertise<Common_files::msg_com_teleop>("commands_clean", 1000);
   pub_fcn_aux = n.advertise<Common_files::msg_fcn_aux>("engBrake", 1000);
   pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop>("emergSet", 1000);
   
@@ -31,7 +31,16 @@ int main(int argc, char **argv)
   while (ros::ok()) {
       
       publicaComTeleop();
-      publicaEmergencyStop();
+      //sleep(1);
+      if (cont_emergency == 1000){
+          sleep (10);
+              publicaEmergencyStop();
+              cout << "\n\n\n\n\n\n\n";
+              cout << "Publicado\n\n\n\n";
+              cout << "\n\n\n\n\n\n\n";
+      }
+      cont_emergency++;
+      cout << "Cuenta: " << cont_emergency << endl;
       
       /*
       if (cont <= 1000) {
@@ -164,25 +173,26 @@ void publicaComTeleop() {
           }
           
        pub_com_teleop.publish(msg_com_teleop);   
-     
+      
       }
     cout << "\n";
 }
 
 void publicaEmergencyStop(){
     //ROS_INFO("PUBLICA EMERGENCY STOP");
-       cont_emergency++;
-       if (cont_emergency == 500){
-           ROS_INFO("PUBLICA EMERGENCY STOP ----------------- ON");
+       //cont_emergency++;
+       //if (cont_emergency == 500){
+           ROS_INFO("PUBLICA EMERGENCY STOP ------------------------------------------------------------------------------------- ON");
            msg_emergency_stop.value = ON;
            pub_emergency_stop.publish(msg_emergency_stop);   
-       }
+       //} 
+           /*
        else if(cont_emergency == 1000){
            ROS_INFO("PUBLICA EMERGENCY STOP ----------------- OFF");
            msg_emergency_stop.value = OFF;
            cont_emergency = OFF;
            pub_emergency_stop.publish(msg_emergency_stop);   
-       }    
+       }   */ 
     
 }
 
