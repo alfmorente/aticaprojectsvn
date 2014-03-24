@@ -113,12 +113,12 @@ void fcn_sub_modo(const Common_files::msg_mode msg)
 // Suscriptor de errores
 void fcn_sub_errores(const Common_files::msg_error msg)
 {
-    //cout << "Me ha llegado el mensaje de error: " << msg << endl;
     int i=0,j=0;        // Variables para bucles for
     short end_error;    // Variable auxiliar usada para generar el msg
     short type_error = 0;
 
     if(msg.type_error==TOE_UNDEFINED){                              // Evita leer mensajes que el mismo haya enviado
+        cout << "Me ha llegado el mensaje de error: " << msg;
         type_error = isWarningOrCritical(msg,modoActual);           // Comprueba gravedad del error (CRIT o WARN)
         Common_files::msg_error msg_err;
         switch(type_error){
@@ -6427,7 +6427,9 @@ int convertOutputError(Common_files::msg_error msg){
                     break;
                 default:
                     cout << "Error indefinido" << endl;
+                    break;
             }
+            break;
         case SUBS_NAVIGATION:
             switch (msg.id_error){
                 case ERROR_NAVIGATION_WAYPOINTS_GETTING_TIMEOUT:
@@ -6658,6 +6660,7 @@ int convertOutputError(Common_files::msg_error msg){
                     break;
                 default:
                     cout << "Error indefinido" << endl;
+                    break;
             }
             break;
         default:
