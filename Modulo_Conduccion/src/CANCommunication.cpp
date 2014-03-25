@@ -171,9 +171,10 @@ void CANCommunication::DoWork() {
                     
                     
                     switch (msgRx.Msg.ID) {
-                        case 0x5:
-                        case 0xE:
-                        case 0x80:
+                        case 0x005:
+                        case 0x00E:
+                        case 0x080:
+                                //cout << "Cancomunitacion ID = " << hex << msgRx.Msg.ID << "\n";
                                 pthread_mutex_lock (&ConduccionQueue_mutex);                  
                                 ConduccionQueue.push (msgRx);
                                 pthread_mutex_unlock (&ConduccionQueue_mutex);
@@ -185,7 +186,7 @@ void CANCommunication::DoWork() {
                                 break;
                             
                         default:
-                            cout << "\n Error en lectura ALT \n";
+                            cout << "\n Error en lectura EN CAN COMUNICATION.cpp \n";
                 
                     }
                 }

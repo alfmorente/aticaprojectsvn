@@ -81,11 +81,11 @@ int main(int argc, char **argv)
                 
                 else {
                     
-                    checkEmergencyStop();
+                    //checkEmergencyStop();
                     
-                    checkSwitch();
+                    //checkSwitch();
                         
-                    checkInfoStop();
+                    //checkInfoStop();
                     
                     checkError();
                     
@@ -346,25 +346,25 @@ void publishError (short valor, int i) {
         msg_err.type_error = TOE_END_ERROR;
                 
     switch (i) {
-        case 2: // Fallo arranque/Parada
+        case START_STOP_FAILURE: // Fallo arranque/Parada
             msg_err.id_error = START_STOP_FAILURE;            
            break;
-        case 3: // Fallo acelerador
+        case THROTTLE_FAILURE: // Fallo acelerador
             msg_err.id_error = THROTTLE_FAILURE;
             break;
-        case 4: // Fallo freno de estacionamiento
+        case HANDBRAKE_FAILURE: // Fallo freno de estacionamiento
             msg_err.id_error = HANDBRAKE_FAILURE;
             break;
-        case 5: // Fallo freno de servicio
+        case BRAKE_FAILURE: // Fallo freno de servicio
             msg_err.id_error = BRAKE_FAILURE;
             break;
-        case 6: // Fallo cambio de marcha
+        case GEAR_SHIFT_FAILURE: // Fallo cambio de marcha
             msg_err.id_error = GEAR_SHIFT_FAILURE;
             break;
-        case 7: // Fallo de direccion
+        case STEER_FAILURE: // Fallo de direccion
             msg_err.id_error = STEER_FAILURE;
             break;
-        case 8: // Fallo bloqueo de diferenciales
+        case DIFFERENTIAL_LOCK_FAILURE: // Fallo bloqueo de diferenciales
             msg_err.id_error = DIFFERENTIAL_LOCK_FAILURE;
             break;
         default:
@@ -377,10 +377,10 @@ void publishError (short valor, int i) {
     cout << "5 = FALLO FRENO SERVICIO; 6 = FALLO CAMBIO MARCHA; 7 = FALLO DIRECCION \n";
     cout << "8 = FALLO DIFERENCIALES\n";
     cout << "---------------------------------------------------------------------- \n";
-    cout << "TIPO DE ERROR => 0 = TOE_END_ERRROR; 1 = TOE_UNDEFINED \n";
+    cout << "TIPO DE ERROR => 0 = TOE_UNDEFINED; 3 = TOE_END_ERROR \n";
     cout << "---------------------------------------------------------------------- \n";
-    cout << "ERROR: " << msg_err.id_error << "\n";
-    cout << "TIPO ERROR: " << msg_err.type_error << "\n";
+    cout << "ERROR: " << (int) msg_err.id_error << "\n";
+    cout << "TIPO ERROR: " << (int) msg_err.type_error << "\n";
     cout << "********************************************************************** \n\n\n";
     
 }
@@ -403,52 +403,48 @@ void fcn_sub_navigation(const Common_files::msg_navigation msg)
 // Suscriptor al Módulo de Remote
 void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 {
-        ROS_INFO("I heard a TELEOP DEPURADO. message \n");
+       // ROS_INFO("I heard a TELEOP DEPURADO. message \n");
         
     if (!parada_emergencia) {
 
         switch (msg.id_element) {
-              case 0:   // Acelerador
+              case ID_REMOTE_THROTTLE:   // Acelerador
                   //cout << "acelerador = " << msg.value << "\n";
                   conduccion->acelerador_tx = (short) msg.value;
-                  break;
-              case 1:   // Velocidad
-                  //cout << "Velocidad = " << msg.value << "\n";
-                  conduccion->velocidad_tx = (short) msg.value;
-                  break;
-              case 2:   // Freno de servicio
+                  break;              
+              case ID_REMOTE_BRAKE:   // Freno de servicio
                   //cout << "Freno de servicio = " << msg.value << "\n";
                   conduccion->freno_servicio_tx = (short) msg.value;
                   break;
-              case 3:   // Direccion
+              case ID_REMOTE_STEER:   // Direccion                  
                   //cout << "Direccion = " << msg.value << "\n";
                   conduccion->valor_direccion = (short) msg.value;
                   break;
-              case 4:   // Marcha
+              case ID_REMOTE_GEAR:   // Marcha
                   //cout << "Marcha = " << msg.value << "\n";
                   conduccion->valor_marcha = (short) msg.value;
                   break;
-              case 5:   // Freno de mano
+              case ID_REMOTE_HANDBRAKE:   // Freno de mano
                   //cout << "Freno de mano = " << msg.value << "\n";
                   conduccion->valor_freno_estacionamiento = (short) msg.value;
                   break;
-              case 6:   // Encendido del motor
+              case ID_REMOTE_ENGINE:   // Encendido del motor
                   //cout << "Encendido del motor = " << msg.value << "\n";
                   conduccion->valor_arranque_parada = (short) msg.value;
                   break;
-              case 7:   // Luces IR
+              case ID_REMOTE_LIGHT_IR:   // Luces IR
                   //cout << "Luces IR = " << msg.value << "\n";
                   conduccion->valor_luces_IR = (short) msg.value;
                   break;
-              case 8:   // Luces 
+              case ID_REMOTE_LIGHT_STANDARD:   // Luces 
                   //cout << "Luces = " << msg.value << "\n";
                   conduccion->valor_luces = (short) msg.value;
                   break;
-              case 9:   // Diferenciales
+              case ID_REMOTE_DIFF:   // Diferenciales
                   //cout << "Diferenciales = " << msg.value << "\n";
                   conduccion->valor_diferencial = (short) msg.value;
                   break;
-              case 10:   // Activacion Laser
+              case ID_REMOTE_ACT_LASER2D:   // Activacion Laser
                   //cout << "Activacion del laser = " << msg.value << "\n";
                   conduccion->valor_laser = (short) msg.value;
                   break;
@@ -620,39 +616,46 @@ void checkInfoStop() {
 
 void checkError() {
     
-    if (error_a_p != conduccion->error_arranque_parada) {
+    if ((error_a_p != conduccion->error_arranque_parada) && (conduccion->error_arranque_parada >= 0) && (conduccion->error_arranque_parada <= 1))  {
+        cout << "Valor 1: " << conduccion->error_arranque_parada << endl; 
         error_a_p = conduccion->error_arranque_parada;
-        publishError(conduccion->error_arranque_parada, 2);
+        publishError(conduccion->error_arranque_parada, START_STOP_FAILURE);
     }
     
-    if (error_acelerador != conduccion->error_acelerador) {
+    if ((error_acelerador != conduccion->error_acelerador) && (conduccion->error_acelerador >= 0) && (conduccion->error_acelerador <= 1))  {
+        cout << "Valor 2: " << conduccion->error_acelerador << endl;
         error_acelerador = conduccion->error_acelerador;
-        publishError(conduccion->error_acelerador, 3);
+        publishError(conduccion->error_acelerador, THROTTLE_FAILURE);
     }
     
-    if (error_freno_estacionamiento != conduccion->error_freno_estacionamiento) {
+    if ((error_freno_estacionamiento != conduccion->error_freno_estacionamiento) && (conduccion->error_freno_estacionamiento >= 0) && (conduccion->error_freno_estacionamiento <= 1)) {
+        cout << "Valor 3: " << conduccion->error_freno_estacionamiento << endl;
         error_freno_estacionamiento = conduccion->error_freno_estacionamiento;
-        publishError(conduccion->error_freno_estacionamiento, 4);
+        publishError(conduccion->error_freno_estacionamiento, HANDBRAKE_FAILURE);
     }
             
-    if (error_freno_servicio != conduccion->error_freno_servicio) {
+    if ((error_freno_servicio != conduccion->error_freno_servicio) && (conduccion->error_freno_servicio >= 0) && (conduccion->error_freno_servicio <= 1)) {
+        cout << "Valor 4: " << conduccion->error_freno_servicio << endl;
         error_freno_servicio = conduccion->error_freno_servicio;
-        publishError(conduccion->error_freno_servicio, 5);
+        publishError(conduccion->error_freno_servicio, BRAKE_FAILURE);
     }
     
-    if (error_cambio_marcha != conduccion->error_cambio_marcha) {
+    if ((error_cambio_marcha != conduccion->error_cambio_marcha) && (conduccion->error_cambio_marcha >= 0) && (conduccion->error_cambio_marcha <= 1)) {
+        cout << "Valor 5: " << conduccion->error_cambio_marcha << endl;
         error_cambio_marcha = conduccion->error_cambio_marcha;
-        publishError(conduccion->error_freno_servicio, 6);
+        publishError(conduccion->error_cambio_marcha, GEAR_SHIFT_FAILURE);
     }
 
-    if (error_direccion != conduccion->error_direccion) {
+    if ((error_direccion != conduccion->error_direccion) && (conduccion->error_direccion >= 0) && (conduccion->error_direccion <= 1)) {
+        cout << "Valor 6: " << conduccion->error_direccion << endl;
         error_direccion = conduccion->error_direccion;
-        publishError(conduccion->error_direccion, 7);
+        publishError(conduccion->error_direccion, STEER_FAILURE);
     }
 
-    if (error_diferenciales != conduccion->error_bloqueo_diferenciales) {
+    if ((error_diferenciales != conduccion->error_bloqueo_diferenciales) && (conduccion->error_bloqueo_diferenciales >= 0) && (conduccion->error_bloqueo_diferenciales <= 1)) {
+        cout << "Valor 7: " << conduccion->error_bloqueo_diferenciales << endl;
         error_diferenciales = conduccion->error_bloqueo_diferenciales;
-        publishError(conduccion->error_bloqueo_diferenciales, 8);
+        publishError(conduccion->error_bloqueo_diferenciales, DIFFERENTIAL_LOCK_FAILURE);
     }
     
 }

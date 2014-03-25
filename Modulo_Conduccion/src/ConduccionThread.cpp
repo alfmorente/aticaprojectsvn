@@ -38,7 +38,7 @@ void ConduccionThread::DoWork(){
             pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
             MsgAux=CANCONDUCCION->ConduccionQueue.front();
             pthread_mutex_unlock (&CANCONDUCCION->ConduccionQueue_mutex);
-            
+            //cout << "Desencolado mensaje con ID = " << hex << MsgAux.Msg.ID << "\n";
             switch (MsgAux.Msg.ID){
                     
                 case 0x5:
@@ -48,7 +48,7 @@ void ConduccionThread::DoWork(){
                     //cout << "\n Desencolado mensaje con ID = " << hex << MsgAux.Msg.ID << "\n";
                     break;
              
-                case 0xE:
+                case 0x00E:
                     //cout << "\n MENSAJE DE ERROR DEL VEHÍCULO \n";
                     m_Error_Message_AUTOMATA_CAN(MsgAux);
                     CANCONDUCCION->ConduccionQueue.pop();
@@ -63,7 +63,7 @@ void ConduccionThread::DoWork(){
                     break;
                 
                 default:                    
-                    cout << "\n Error en lectura \n";
+                    //cout << "\n Error en lectura \n";
                     break;
              }
                         
@@ -177,24 +177,31 @@ void ConduccionThread::m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
          
     // BYTE 0 - Fallo Arranque/Parada
     error_arranque_parada = StatusMsg.Msg.DATA[0];
+    //cout << "ERROR A/P: " << error_arranque_parada << endl;
         
     // BYTE 1 - Fallo acelerador 
     error_acelerador = StatusMsg.Msg.DATA[1];
+    //cout << "ERROR Acelerador: " << error_acelerador << endl;
         
     // BYTE 2 - Fallo Freno de estacionamiento
     error_freno_estacionamiento = StatusMsg.Msg.DATA[2];
+    //cout << "ERROR Freno Estacionamiento: " << error_freno_estacionamiento << endl;
         
     // BYTE 3 - Fallo Freno de servicio
     error_freno_servicio = StatusMsg.Msg.DATA[3];
+    //cout << "ERROR Freno Servicio: " << error_freno_servicio << endl;
             
     // BYTE 4 - Fallo Cambio de marchas
     error_cambio_marcha = StatusMsg.Msg.DATA[4];
+    //cout << "ERROR Cambio Marcha: " << error_cambio_marcha << endl;
                 
     // BYTE 5 - Fallo Direccion
     error_direccion = StatusMsg.Msg.DATA[5];
+    //cout << "ERROR Direccion: " << error_direccion << endl;
                
     // BYTE 6 - Fallo Bloqueo de diferenciales
     error_bloqueo_diferenciales = StatusMsg.Msg.DATA[6];
+    //cout << "ERROR Diferenciales: " << error_bloqueo_diferenciales << endl;
            
     // BYTE 7 - SIN USO
 
