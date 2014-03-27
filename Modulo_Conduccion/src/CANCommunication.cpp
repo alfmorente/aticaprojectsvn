@@ -23,6 +23,10 @@ CANCommunication::CANCommunication(bool bDevNodeGiven, bool bTypeGiven, int nTyp
     this->bitrate = bitrate;
     this->frame_extended = frame_extended;
     this->id = id;
+    contWrite = 0;
+    contRead = 0;
+    errorWrite = false;
+    errorRead = false;
     
 }
 
@@ -123,15 +127,17 @@ bool CANCommunication::SendMessage(TPCANMsg* msgTx) {
 
     bool res = false;
     
-    errno_can = CAN_Write(h, msgTx);
+    errno_can = CAN_Write (h, msgTx);
     if (errno_can != CAN_ERR_OK){
         cout << "canWrite() failed() with error " << errno_can << "!\n";
-        cont++;  // Contador de tramas fail. Se usa en ConduccionThread para comprobar que la comunicacion no se ha caido
+        checkErrorWrite (contWrite);
+        contWrite++;  // Contador de tramas fail. 
     }        
     else {
         //cout << "function canWrite() returned OK !\n";
         res = true;
-        cont = 0;  // Se resetea el contador de tramas. Se usa en ConduccionThread para comprobar que la comunicacion no se ha caido
+        contWrite = 0;  // Se resetea el contador de tramas.
+        errorWrite = false;
     }
 
     return res;
@@ -142,14 +148,27 @@ int32_t CANCommunication::ReceiveMessage(TPCANRdMsg* msgRx) {
     errno_can = LINUX_CAN_Read(h, msgRx);
     if (errno_can != CAN_ERR_OK) {
          cout << "canRead() failed with error " << errno_can << "!\n";
-         cont++;
+         checkErrorRead (contWrite);
+         contRead++;                    // Contador de tramas fail.      
     } else {
         //cout << "function canRead() returned OK !\n";
-        cont = 0;
+        contRead = 0;  // Se resetea el contador de tramas.
+        errorRead = false;
     }
     
     return errno_can;
 
+}
+
+void CANCommunication::checkErrorWrite (int contWrite) {
+    if (contWrite >= ERROR_WRITE_FRAME)
+        errorWrite = true;       
+    
+}
+ 
+void CANCommunication::checkErrorRead (int contRead) {
+    if (contRead >= ERROR_READ_FRAME)
+        errorRead = true;
 }
 
 
@@ -196,3 +215,5 @@ void CANCommunication::DoWork() {
         }
     }
 }
+
+

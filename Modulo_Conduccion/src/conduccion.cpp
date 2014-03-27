@@ -70,7 +70,7 @@ int main(int argc, char **argv)
             
             cout << "FUNCIONAMIENTO EN MODO DEBUG \n\n";
             
-            while (ros::ok() && finDePrograma && conduccion->CONDUCCION_ACTIVE) {     
+            while (ros::ok() && finDePrograma && !can->errorWrite) { // && ((can->errorRead) || (can->errorWrite))) {     
                 
                 n.getParam("estado_modulo_conduccion",estado_actual);
                 if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF) {             
@@ -116,9 +116,10 @@ int main(int argc, char **argv)
             
             
   // Envío de erorr si no hay envio/recepcion de tramas CAN 
-  if (!conduccion->CONDUCCION_ACTIVE){
+  if ((can->errorWrite) || (can->errorRead)){
         msg_err.id_error = COMMUNICATION_CAN_FAIL; // Error en conduccion (1: envio/recepcion tramas CAN)
         pub_error.publish(msg_err); 
+        conduccion->CONDUCCION_ACTIVE= false;
         
         cout << "COMMUNICATION_CAN_FAIL \n";
   }

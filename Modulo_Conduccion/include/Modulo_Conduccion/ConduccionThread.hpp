@@ -107,8 +107,8 @@ public:
 private:
     
     CANCommunication * CANCONDUCCION;
-    
-    void CheckConnection();
+   
+
     
 };
 

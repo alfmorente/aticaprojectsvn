@@ -31,6 +31,9 @@ using namespace std;
 // DEFINES
 
 #define DEFAULT_NODE "/dev/pcan0"
+#define ERROR_WRITE_FRAME 2000
+#define ERROR_READ_FRAME 2000
+
 
 #ifndef bool
   #define bool  int
@@ -63,6 +66,9 @@ public:
     virtual int32_t ReceiveMessage(TPCANRdMsg* msgRx);  
      
     virtual void DoWork();
+    
+    void checkErrorWrite (int contWrite);
+    void checkErrorRead (int contRead);
 
     
     // Creación de colas de mensakes
@@ -81,8 +87,12 @@ public:
     Timer CommunicationTimer2;
     
     //Comprueba el número de veces que se deja de escribir/leer
-    int cont;
-
+    int contWrite;
+    int contRead;
+    
+    bool errorWrite; // flag que controla si se ha producido error de escritura
+    bool errorRead;  // flag que contrala si se ha producido error de lectura
+    
 private:
     int idBus;
         

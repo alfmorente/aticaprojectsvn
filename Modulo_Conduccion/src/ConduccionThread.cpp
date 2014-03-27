@@ -26,8 +26,6 @@ void ConduccionThread::DoWork(){
 
     while (CONDUCCION_ACTIVE) {
 
-        CheckConnection();  // Comprobar que la comunicacion no se ha caido
-        
         // RX de mensajes
         pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
         QueueSize = CANCONDUCCION->ConduccionQueue.size();
@@ -81,16 +79,7 @@ void ConduccionThread::DoWork(){
     
 
 }
-       
-
-void ConduccionThread::CheckConnection(){
-    if (CANCONDUCCION->cont == 1500) {
-        cout << "\n Comunicacion con Conduccion perdida - Error al enviar/recibir tramas CAN \n";          
-        CONDUCCION_ACTIVE = false;        
-    }
-}
-
-
+      
 
 // Tratamiento del mensaje 005 (vehículo --> autómata --> CAN)
 
