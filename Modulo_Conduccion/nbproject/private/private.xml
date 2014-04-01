@@ -10,6 +10,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/include/Modulo_Conduccion/ConduccionThread.hpp</file>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/ConduccionThread.cpp</file>
             <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeLists.txt</file>
             <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/CANCommunication.cpp</file>
             <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp</file>

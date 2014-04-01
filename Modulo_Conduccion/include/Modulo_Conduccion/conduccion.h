@@ -43,6 +43,8 @@ extern "C" {
 // Interaccion con usuario
 #include "interaction.h"
 
+#define TIMER 10.0
+
 
 
 /*******************************************************************************

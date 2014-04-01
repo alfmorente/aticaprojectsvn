@@ -7,7 +7,7 @@
 
 #include "../include/Modulo_Conduccion/conduccion.h"
 
-#define temporizador 10.0
+
 
 using namespace std;
 
@@ -437,7 +437,7 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
                   //cout << "Luces IR = " << msg.value << "\n";
                   conduccion->valor_luces_IR = (short) msg.value;
                   break;
-              case ID_REMOTE_LIGHT_STANDARD:   // Luces 
+              case ID_REMOTE_LIGHT_CONVENTIONAL:   // Luces 
                   //cout << "Luces = " << msg.value << "\n";
                   conduccion->valor_luces = (short) msg.value;
                   break;
@@ -571,7 +571,7 @@ void checkEmergencyStop () {
 
     if (parada_emergencia) {
         //cout << "inicio del timer a 10 segundos" << endl;
-        if (conduccion->t.GetTimed() > temporizador) {
+        if (conduccion->t.GetTimed() > TIMER) {
             parada_emergencia = false;
             conduccion->t.Disable();
             //cout << "Fin del timer a 10 segundos" << endl;
