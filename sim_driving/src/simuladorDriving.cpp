@@ -32,15 +32,15 @@ int main(int argc, char **argv)
       
       publicaComTeleop();
       //sleep(1);
-      if (cont_emergency == 1000){
-          sleep (10);
-              publicaEmergencyStop();
-              cout << "\n\n\n\n\n\n\n";
-              cout << "Publicado\n\n\n\n";
-              cout << "\n\n\n\n\n\n\n";
-      }
-      cont_emergency++;
-      cout << "Cuenta: " << cont_emergency << endl;
+      //if (cont_emergency == 1000){
+         // sleep (10);
+           //   publicaEmergencyStop();
+             // cout << "\n\n\n\n\n\n\n";
+             // cout << "Publicado\n\n\n\n";
+             // cout << "\n\n\n\n\n\n\n";
+      //}
+      //cont_emergency++;
+      //cout << "Cuenta: " << cont_emergency << endl;
       
       /*
       if (cont <= 1000) {
@@ -83,23 +83,15 @@ void publicaComTeleop() {
     for (int i=0; i <= 10; i++) {
           msg_com_teleop.id_element = i;
           switch (i) {
-              case 0:  // Acelerador;
+              case ID_REMOTE_THROTTLE:  // Acelerador;
                 if (acelerador < OFF)
                   acelerador = 100;            
                 msg_com_teleop.value = acelerador;
                 acelerador = acelerador - 10;
                 cout << "acelerador = " << msg_com_teleop.value << "\n";
                 break;
-              
-              case 1:
-                if (velocidad > 100)
-                   velocidad = 0;            
-                msg_com_teleop.value = velocidad;
-                velocidad = velocidad + 10;
-                cout << "velocidad = " << msg_com_teleop.value << "\n";
-                break;
-                
-              case 2:  // Freno de servicio;
+                           
+              case ID_REMOTE_BRAKE:  // Freno de servicio;
                 if (freno > 100)
                     freno = OFF;            
                 msg_com_teleop.value = freno;
@@ -107,7 +99,7 @@ void publicaComTeleop() {
                 cout << "Freno = " << msg_com_teleop.value << "\n";
                 break;
               
-              case 3:   // Direccion
+              case ID_REMOTE_STEER:   // Direccion
                 if (direccion > 100)
                     direccion = -100;            
                 msg_com_teleop.value = direccion;
@@ -115,7 +107,7 @@ void publicaComTeleop() {
                 cout << "Direccion = " << msg_com_teleop.value << "\n";
                 break;
           
-              case 4:   //Marcha
+              case ID_REMOTE_GEAR:   //Marcha
                 if (marcha > 4) 
                     marcha = 0;
                 msg_com_teleop.value = marcha;
@@ -123,7 +115,7 @@ void publicaComTeleop() {
                 cout << "Marcha = " << msg_com_teleop.value << "\n";
                 break;
               
-              case 5:   //freno de mano
+              case ID_REMOTE_HANDBRAKE:   //freno de mano
                 if (freno_mano > ON)
                     freno_mano = OFF;
                 msg_com_teleop.value = freno_mano;
@@ -131,7 +123,7 @@ void publicaComTeleop() {
                 cout << "Freno mano = " << msg_com_teleop.value << "\n";
                 break;
               
-              case 6:   //arrancar motor
+              case ID_REMOTE_ENGINE:   //arrancar motor
                 if (motor > ON)
                     motor = OFF;
                 msg_com_teleop.value = motor;
@@ -139,7 +131,7 @@ void publicaComTeleop() {
                 cout << "Arrancar motor = " << msg_com_teleop.value << "\n";
                 break;  
                 
-              case 7:   //Luces IR
+              case ID_REMOTE_LIGHT_IR:   //Luces IR
                 if (lucesIR > ON)
                     lucesIR = OFF;
                 msg_com_teleop.value = lucesIR;
@@ -147,7 +139,7 @@ void publicaComTeleop() {
                 cout << "Luces IR = " << msg_com_teleop.value << "\n";
                 break;  
                 
-             case 8:   //Luces 
+             case ID_REMOTE_LIGHT_STANDARD:   //Luces 
                 if (luces > ON)
                     luces = OFF;
                 msg_com_teleop.value = luces;
@@ -155,7 +147,7 @@ void publicaComTeleop() {
                 cout << "Luces = " << msg_com_teleop.value << "\n";
                 break; 
 
-             case 9:   //Diferenciales 
+             case ID_REMOTE_DIFF:   //Diferenciales 
                 if (diferenciales > ON)
                     diferenciales = OFF;
                 msg_com_teleop.value = diferenciales;
@@ -163,7 +155,7 @@ void publicaComTeleop() {
                 cout << "Diferenciales = " << msg_com_teleop.value << "\n";
                 break; 
 
-             case 10:   //Activacion Laser 
+             case ID_REMOTE_ACT_LASER2D:   //Activacion Laser 
                 if (activacionLaser > ON)
                     activacionLaser = OFF;
                 msg_com_teleop.value = activacionLaser;
