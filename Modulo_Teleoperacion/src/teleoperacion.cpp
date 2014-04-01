@@ -223,7 +223,7 @@ int convertToCorrectValues(int id_elem, int value){
                 return value;
             }
             break;
-        case ID_REMOTE_LIGHT_STANDARD:
+        case ID_REMOTE_LIGHT_CONVENTIONAL:
             if(value<MIN_LIGHT_VALUE){
                 error_count++;
                 return MIN_LIGHT_VALUE;
