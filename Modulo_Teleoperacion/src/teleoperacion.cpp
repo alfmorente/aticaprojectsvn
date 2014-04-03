@@ -22,12 +22,12 @@ int main(int argc, char **argv)
   // Manejador ROS
   ros::NodeHandle n;
   
-  int estado_actual=STATE_OK;
+  //int estado_actual=STATE_OK;
   // Espera activa de inicio de modulo
-  //int estado_actual=STATE_OFF;
-  //while(estado_actual!=STATE_CONF){
-  //        n.getParam("estado_modulo_teleoperado",estado_actual);
-  //}
+  int estado_actual=STATE_OFF;
+  while(estado_actual!=STATE_CONF){
+          n.getParam("state_module_remote",estado_actual);
+  }
   cout << "Atica TELEOPERACION :: Iniciando configuración..." << endl;
   
   // Generación de publicadores
@@ -47,27 +47,27 @@ int main(int argc, char **argv)
   end_error=false;
 
   // Todo esta correcto, lo especificamos con el correspondiente parametro
-  n.setParam("estado_modulo_teleoperado",STATE_OK);
+  n.setParam("state_module_remote",STATE_OK);
   cout << "Atica TELEOPERACION :: Configurado y funcionando" << endl;
   
   while (ros::ok() && !exitModule){
     switch (operationMode) {
           case OPERATION_MODE_DEBUG:
-                n.getParam("estado_modulo_teleoperado", estado_actual);
+                n.getParam("state_module_remote", estado_actual);
                 if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
                     exitModule = true;
                 }
                 ros::spinOnce();
                 break;
           case OPERATION_MODE_RELEASE:
-                n.getParam("estado_modulo_teleoperado", estado_actual);
+                n.getParam("state_module_remote", estado_actual);
                 if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
                     exitModule = true;
                 }
                 ros::spinOnce();
                 break;
           case OPERATION_MODE_SIMULATION:
-                n.getParam("estado_modulo_teleoperado", estado_actual);
+                n.getParam("state_module_remote", estado_actual);
                 if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
                     exitModule = true;
                 }
@@ -96,6 +96,7 @@ void fcn_sub_enable_module(const Common_files::msg_module_enable msg)
     }
     else if ((msg.id_module==ID_MOD_REMOTE) && (msg.status==0)){
         enableModule=false;
+        cout << "Modulo desactivado\n";
     }
 }
 
