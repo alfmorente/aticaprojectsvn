@@ -20,11 +20,6 @@ extern "C" {
 #endif	/* GEST_ERRORES_H */
 
 // Mensajes
-//#include "../../msg_gen/cpp/include/Modulo_Gest_Errores/msg_modo.h"
-//#include "../../msg_gen/cpp/include/Modulo_Gest_Errores/msg_com_teleoperado.h"
-//#include "../../msg_gen/cpp/include/Modulo_Gest_Errores/msg_errores.h"
-//#include "../../msg_gen/cpp/include/Modulo_Gest_Errores/msg_available_mode.h"
-//#include "../../msg_gen/cpp/include/Modulo_Gest_Errores/msg_confirm.h"
 #include "Common_files/msg_mode.h"
 #include "Common_files/msg_available.h"
 #include "Common_files/msg_error.h"
@@ -44,19 +39,20 @@ extern "C" {
 
 // Definición de variables globales
 // Variable de control de modo
-short modoActual;
+short currentMode;
 // Variable de continuacion de modulo
 bool exitModule;
 // Variable control modos disponibles
 Common_files::msg_available avail_mode;
 // Variable con el número de errores por modo
-int num_err_mode[12];
+int numErrorMode[13][15][28];
 
 // Funciones de suscripcion
 void fcn_sub_modo(const Common_files::msg_mode);
 void fcn_sub_errores(const Common_files::msg_error);
 
 // Funciones propias
+void initialize(ros::NodeHandle n);
 short isWarningOrCritical(Common_files::msg_error, short modo);
 void switchNeutral();
 int convertOutputError(Common_files::msg_error);
@@ -72,16 +68,15 @@ short mode_mapping_error(Common_files::msg_error);
 short mode_convoy_error(Common_files::msg_error);
 short mode_conv_teleop_error(Common_files::msg_error);
 short mode_conv_auto_error(Common_files::msg_error);
-short mode_startengine_error(Common_files::msg_error);
-short mode_stopengine_error(Common_files::msg_error);
-short mode_engagebrake_error(Common_files::msg_error);
 void writeToLog(Common_files::msg_error);
+void updateModeAvailable (Common_files::msg_error);
+void updateEndError(Common_files::msg_error);
 
 // Definicion constantes propias del modulo
 #define MODE_START_ENGINE 8
 #define MODE_STOP_ENGINE 9
 #define MODE_ENGAGE_BRAKE 10
-#define MODE_TEACH 11
-#define MODE_MAPPING 12
+#define MODE_MAPPING 11
+#define MODE_TEACH 12
 
 #define TOE_UNAVAILABLE 99
