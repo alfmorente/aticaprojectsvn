@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportPlatformOperationalDataMessage.c
+// File Name: queryFileDataMessage.c
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo (galluzzo AT gmail DOT com)
 //
@@ -39,102 +39,48 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the functionality of a ReportPlatformOperationalDataMessage
-
+// Description: This file defines the functionality of a QueryFileDataMessage
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "jaus.h"
 
-static const int commandCode = JAUS_REPORT_PLATFORM_OPERATIONAL_DATA;
-static const int maxDataSizeBytes = 10;
+static const int commandCode = JAUS_QUERY_FILE_DATA;
+static const int maxDataSizeBytes = 0;
 
-static JausBoolean headerFromBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static JausBoolean headerToBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int headerToString(ReportPlatformOperationalDataMessage message, char **buf);
+static JausBoolean headerFromBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static JausBoolean headerToBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int headerToString(QueryFileDataMessage message, char **buf);
 
-static JausBoolean dataFromBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int dataToBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static void dataInitialize(ReportPlatformOperationalDataMessage message);
-static unsigned int dataSize(ReportPlatformOperationalDataMessage message);
+static JausBoolean dataFromBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int dataToBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static void dataInitialize(QueryFileDataMessage message);
+static void dataDestroy(QueryFileDataMessage message);
+static unsigned int dataSize(QueryFileDataMessage message);
 
 // ************************************************************************************************************** //
 //                                    USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
 // Initializes the message-specific fields
-static void dataInitialize(ReportPlatformOperationalDataMessage message)
+static void dataInitialize(QueryFileDataMessage message)
 {
 	// Set initial values of message fields
-	message->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
-	message->engineTemperatureCelsius = newJausDouble(0);	// Scaled Short (-75, 180)
-	message->odometerMeters  = newJausUnsignedInteger(0);
-	message->batteryVoltagePercent = newJausDouble(0);		// Scaled Byte (0, 127)
-	message->fuelLevelPercent = newJausDouble(0);			// Scaled Byte (0, 100)
-	message->oilPressurePercent = newJausDouble(0);			// Scaled Byte (0, 127)
+
+}
+
+// Destructs the message-specific fields
+static void dataDestroy(QueryFileDataMessage message)
+{
+	// Free message fields
 }
 
 // Return boolean of success
-static JausBoolean dataFromBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static JausBoolean dataFromBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
-	int index = 0;
-	JausShort tempShort;
-	JausByte tempByte;
-	
 	if(bufferSizeBytes == message->dataSize)
 	{
-		// Unpack Message Fields from Buffer
-		// Use Presence Vector
-		if(!jausByteFromBuffer(&message->presenceVector, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-		index += JAUS_BYTE_SIZE_BYTES;
-		
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ENGINE_BIT))
-		{
-			// unpack
-			if(!jausShortFromBuffer(&tempShort, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_SHORT_SIZE_BYTES;
-			
-			// Scaled Short (-75, 180)
-			message->engineTemperatureCelsius = jausShortToDouble(tempShort, -75, 180);
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ODOMETER_BIT))
-		{
-			// unpack
-			if(!jausUnsignedIntegerFromBuffer(&message->odometerMeters, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_UNSIGNED_INTEGER_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_BATTERY_BIT))
-		{
-			// unpack
-			if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-			
-			// Scaled Byte (0, 127)
-			message->batteryVoltagePercent = jausByteToDouble(tempByte, 0, 127);
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_FUEL_BIT))
-		{
-			// unpack
-			if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-			
-			// Scaled Byte (0, 100)
-			message->fuelLevelPercent = jausByteToDouble(tempByte, 0, 100);
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_OIL_BIT))
-		{
-			// unpack
-			if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-			
-			// Scaled Byte (0, 127)
-			message->oilPressurePercent = jausByteToDouble(tempByte, 0, 127);
-		}
 		return JAUS_TRUE;
 	}
 	else
@@ -144,159 +90,40 @@ static JausBoolean dataFromBuffer(ReportPlatformOperationalDataMessage message, 
 }
 
 // Returns number of bytes put into the buffer
-static int dataToBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static int dataToBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	int index = 0;
-	JausShort tempShort;
-	JausByte tempByte;
-
-	if(bufferSizeBytes >= dataSize(message))
-	{
-		// Pack Message Fields to Buffer
-		// Use Presence Vector
-		if(!jausByteToBuffer(message->presenceVector, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-		index += JAUS_BYTE_SIZE_BYTES;
-		
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ENGINE_BIT))
-		{
-			// pack
-			// Scaled Short (-75, 180)
-			tempShort = jausShortFromDouble(message->engineTemperatureCelsius, -75, 180);
-			
-			if(!jausShortToBuffer(tempShort, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_SHORT_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ODOMETER_BIT))
-		{
-			if(!jausUnsignedIntegerToBuffer(message->odometerMeters, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_UNSIGNED_INTEGER_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_BATTERY_BIT))
-		{
-			// pack
-			// Scaled Byte (0, 127)
-			tempByte = jausByteFromDouble(message->batteryVoltagePercent, 0, 127);
-			
-			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-		
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_FUEL_BIT))
-		{
-			// pack
-			// Scaled Byte (0, 100)
-			tempByte = jausByteFromDouble(message->fuelLevelPercent, 0, 100);
-			
-			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-		
-		if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_OIL_BIT))
-		{
-			// pack
-			// Scaled Byte (0, 127)
-			tempByte = jausByteFromDouble(message->oilPressurePercent, 0, 127);
-			
-			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-	}
 
 	return index;
 }
 
-static int dataToString(ReportPlatformOperationalDataMessage message, char **buf)
+static int dataToString(QueryFileDataMessage message, char **buf)
 {
   //message already verified 
-
   //Setup temporary string buffer
   
-  unsigned int bufSize = 300;
+  unsigned int bufSize = 100;
   (*buf) = (char*)malloc(sizeof(char)*bufSize);
-  
-  strcpy((*buf), "\nPresence Vector: " );
-  jausByteToHexString(message->presenceVector, (*buf)+strlen(*buf));
-  
-  if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ENGINE_BIT))
-  {
-    strcat((*buf), "\nEngine Temperature(celsius): ");
-    jausDoubleToString(message->engineTemperatureCelsius, (*buf)+strlen(*buf));
-  }
 
-  if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ODOMETER_BIT))
-  {
-    strcat((*buf), "\nOdometer(meters): ");
-    jausDoubleToString(message->odometerMeters, (*buf)+strlen(*buf));
-  }
-
-  if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_BATTERY_BIT))
-  {
-    strcat((*buf), "\nBattery Voltage(%): ");
-    jausDoubleToString(message->batteryVoltagePercent, (*buf)+strlen(*buf));
-  }
-  
-  if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_FUEL_BIT))
-  {
-    strcat((*buf), "\nFuel Level(%): ");
-    jausDoubleToString(message->fuelLevelPercent, (*buf)+strlen(*buf));
-  }
-  
-  if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_OIL_BIT))
-  {
-    strcat((*buf), "\nOil Pressure(%): ");
-    jausDoubleToString(message->engineTemperatureCelsius, (*buf)+strlen(*buf));
-  }
-
-  
   return (int)strlen(*buf);
 }
 
 // Returns number of bytes put into the buffer
-static unsigned int dataSize(ReportPlatformOperationalDataMessage message)
+static unsigned int dataSize(QueryFileDataMessage message)
 {
-	int index = 0;
-
-	index += JAUS_BYTE_SIZE_BYTES;
-	
-	if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ENGINE_BIT))
-	{
-		index += JAUS_SHORT_SIZE_BYTES;
-	}
-
-	if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_ODOMETER_BIT))
-	{
-		index += JAUS_UNSIGNED_INTEGER_SIZE_BYTES;
-	}
-
-	if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_BATTERY_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-	
-	if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_FUEL_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-	
-	if(jausByteIsBitSet(message->presenceVector, JAUS_OPERATIONAL_PV_OIL_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-
-	return index;
+	// Constant Size
+	return maxDataSizeBytes;
 }
 
 // ************************************************************************************************************** //
 //                                    NON-USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
-ReportPlatformOperationalDataMessage reportPlatformOperationalDataMessageCreate(void)
+QueryFileDataMessage queryFileDataMessageCreate(void)
 {
-	ReportPlatformOperationalDataMessage message;
+	QueryFileDataMessage message;
 
-	message = (ReportPlatformOperationalDataMessage)malloc( sizeof(ReportPlatformOperationalDataMessageStruct) );
+	message = (QueryFileDataMessage)malloc( sizeof(QueryFileDataMessageStruct) );
 	if(message == NULL)
 	{
 		return NULL;
@@ -318,17 +145,19 @@ ReportPlatformOperationalDataMessage reportPlatformOperationalDataMessageCreate(
 	
 	dataInitialize(message);
 	message->dataSize = dataSize(message);
+	
 	return message;	
 }
 
-void reportPlatformOperationalDataMessageDestroy(ReportPlatformOperationalDataMessage message)
+void queryFileDataMessageDestroy(QueryFileDataMessage message)
 {
+	dataDestroy(message);
 	jausAddressDestroy(message->source);
 	jausAddressDestroy(message->destination);
 	free(message);
 }
 
-JausBoolean reportPlatformOperationalDataMessageFromBuffer(ReportPlatformOperationalDataMessage message, unsigned char* buffer, unsigned int bufferSizeBytes)
+JausBoolean queryFileDataMessageFromBuffer(QueryFileDataMessage message, unsigned char* buffer, unsigned int bufferSizeBytes)
 {
 	int index = 0;
 	
@@ -350,9 +179,9 @@ JausBoolean reportPlatformOperationalDataMessageFromBuffer(ReportPlatformOperati
 	}
 }
 
-JausBoolean reportPlatformOperationalDataMessageToBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+JausBoolean queryFileDataMessageToBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
-	if(bufferSizeBytes < reportPlatformOperationalDataMessageSize(message))
+	if(bufferSizeBytes < queryFileDataMessageSize(message))
 	{
 		return JAUS_FALSE; //improper size	
 	}
@@ -365,14 +194,14 @@ JausBoolean reportPlatformOperationalDataMessageToBuffer(ReportPlatformOperation
 		}
 		else
 		{
-			return JAUS_FALSE; // headerToReportPlatformOperationalDataBuffer failed
+			return JAUS_FALSE; // headerToQueryFileDataBuffer failed
 		}
 	}
 }
 
-ReportPlatformOperationalDataMessage reportPlatformOperationalDataMessageFromJausMessage(JausMessage jausMessage)
+QueryFileDataMessage queryFileDataMessageFromJausMessage(JausMessage jausMessage)
 {
-	ReportPlatformOperationalDataMessage message;
+	QueryFileDataMessage message;
 	
 	if(jausMessage->commandCode != commandCode)
 	{
@@ -380,7 +209,7 @@ ReportPlatformOperationalDataMessage reportPlatformOperationalDataMessageFromJau
 	}
 	else
 	{
-		message = (ReportPlatformOperationalDataMessage)malloc( sizeof(ReportPlatformOperationalDataMessageStruct) );
+		message = (QueryFileDataMessage)malloc( sizeof(QueryFileDataMessageStruct) );
 		if(message == NULL)
 		{
 			return NULL;
@@ -413,9 +242,10 @@ ReportPlatformOperationalDataMessage reportPlatformOperationalDataMessageFromJau
 	}
 }
 
-JausMessage reportPlatformOperationalDataMessageToJausMessage(ReportPlatformOperationalDataMessage message)
+JausMessage queryFileDataMessageToJausMessage(QueryFileDataMessage message)
 {
 	JausMessage jausMessage;
+	int size;
 	
 	jausMessage = (JausMessage)malloc( sizeof(struct JausMessageStruct) );
 	if(jausMessage == NULL)
@@ -440,23 +270,21 @@ JausMessage reportPlatformOperationalDataMessageToJausMessage(ReportPlatformOper
 	
 	jausMessage->data = (unsigned char *)malloc(jausMessage->dataSize);
 	jausMessage->dataSize = dataToBuffer(message, jausMessage->data, jausMessage->dataSize);
-	
+		
 	return jausMessage;
 }
 
-
-unsigned int reportPlatformOperationalDataMessageSize(ReportPlatformOperationalDataMessage message)
+unsigned int queryFileDataMessageSize(QueryFileDataMessage message)
 {
 	return (unsigned int)(dataSize(message) + JAUS_HEADER_SIZE_BYTES);
 }
 
-char* reportPlatformOperationalDataMessageToString(ReportPlatformOperationalDataMessage message)
+char* queryFileDataMessageToString(QueryFileDataMessage message)
 {
   if(message)
   {
     char* buf1 = NULL;
     char* buf2 = NULL;
-    char* buf = NULL;
     
     int returnVal;
     
@@ -466,10 +294,11 @@ char* reportPlatformOperationalDataMessageToString(ReportPlatformOperationalData
     //Print the message data fields to the string buffer
     returnVal += dataToString(message, &buf2);
     
-buf = (char*)malloc(strlen(buf1)+strlen(buf2)+1);
+    char* buf;
+    buf = (char*)malloc(strlen(buf1)+strlen(buf2));
     strcpy(buf, buf1);
     strcat(buf, buf2);
-
+    
     free(buf1);
     free(buf2);
     
@@ -477,7 +306,7 @@ buf = (char*)malloc(strlen(buf1)+strlen(buf2)+1);
   }
   else
   {
-    char* buf = "Invalid ReportPlatformOperationalData Message";
+    char* buf = "Invalid QueryFileData Message";
     char* msg = (char*)malloc(strlen(buf)+1);
     strcpy(msg, buf);
     return msg;
@@ -485,7 +314,7 @@ buf = (char*)malloc(strlen(buf1)+strlen(buf2)+1);
 }
 //********************* PRIVATE HEADER FUNCTIONS **********************//
 
-static JausBoolean headerFromBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static JausBoolean headerFromBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	if(bufferSizeBytes < JAUS_HEADER_SIZE_BYTES)
 	{
@@ -523,7 +352,7 @@ static JausBoolean headerFromBuffer(ReportPlatformOperationalDataMessage message
 	}
 }
 
-static JausBoolean headerToBuffer(ReportPlatformOperationalDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static JausBoolean headerToBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	JausUnsignedShort *propertiesPtr = (JausUnsignedShort*)&message->properties;
 	
@@ -559,7 +388,7 @@ static JausBoolean headerToBuffer(ReportPlatformOperationalDataMessage message, 
 	}
 }
 
-static int headerToString(ReportPlatformOperationalDataMessage message, char **buf)
+static int headerToString(QueryFileDataMessage message, char **buf)
 {
   //message existance already verified 
 
@@ -672,6 +501,7 @@ static int headerToString(ReportPlatformOperationalDataMessage message, char **b
   strcat((*buf), "\nSequence Number: ");
   jausUnsignedShortToString(message->sequenceNumber, (*buf)+strlen(*buf));
   
-  return (int)strlen(*buf);
+  return strlen((*buf));
   
+
 }

@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportDiscreteDevicesMessage.h
+// File Name: reportErrorMessage.h
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo 
 //
@@ -39,44 +39,19 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the attributes of a ReportDiscreteDevicesMessage
+// Description: This file defines the attributes of a ReportErrorMessage
 
-#ifndef REPORT_DISCRETE_DEVICES_MESSAGE_H
-#define REPORT_DISCRETE_DEVICES_MESSAGE_H
+#ifndef REPORT_ALARMA_MESSAGE_H
+#define REPORT_ALARMA_MESSAGE_H
 
 #include "jaus.h"
 
-#ifndef JAUS_DEVICES_PV
-#define JAUS_DEVICES_PV
-#define JAUS_DEVICES_PV_PROPULSION_BIT	0
-#define JAUS_DEVICES_PV_PARKING_BIT		1
-#define JAUS_DEVICES_PV_GEAR_BIT		2
-#define JAUS_DEVICES_PV_TRANSFER_BIT	3
-#endif
-
-#ifndef JAUS_DEVICES_PROPULSION_BF
-#define JAUS_DEVICES_PROPULSION_BF
-#define JAUS_DEVICES_PROPULSION_BF_MAIN_POWER_BIT		0
-#define JAUS_DEVICES_PROPULSION_BF_MAIN_FUEL_BIT		1
-#define JAUS_DEVICES_PROPULSION_BF_AUXILARY_FUEL_BIT	2
-#define JAUS_DEVICES_PROPULSION_BF_AUXILARY_POWER_BIT	3
-#define JAUS_DEVICES_PROPULSION_BF_STARTING_DEVICE_BIT	4
-#define JAUS_DEVICES_PROPULSION_BF_COLD_START_BIT		5
-#define JAUS_DEVICES_PROPULSION_BF_AUTO_START_BIT		6
-#define JAUS_DEVICES_PROPULSION_BF_AUTO_SHUTDOWN_BIT	7
-#endif
-
-#ifndef JAUS_DEVICES_OTHER_BF
-#define JAUS_DEVICES_OTHER_BF
-#define JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT	0
-#define JAUS_DEVICES_OTHER_BF_HORN_BIT			1
-#endif
 
 
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
-	// Header Properties
+	// Header Properties#define JAUS_WRENCH_PV_PROPULSIVE_LINEAR_Z_BIT		2
 	struct
 	{
 		// Properties by bit fields
@@ -111,38 +86,27 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	JausByte presenceVector;
-	JausByte gear;
-	JausByte transferCase;
-
-	// Main Propulsion
-	JausBoolean mainPropulsion;
-	JausBoolean mainFuelSupply;
-	JausBoolean auxFuelSupply;
-	JausBoolean powerAuxDevices;
-	JausBoolean startingDevice;
-	JausBoolean coldStart;
-	JausBoolean automaticStart;
-	JausBoolean automaticStop;
-
-	// Parking, Brake and Horn
-	JausBoolean parkingBrake;
-	JausBoolean horn;
+	JausUnsignedShort subsystem;
+	JausUnsignedShort idError;
+	JausByte typeError;
 	
-}ReportDiscreteDevicesMessageStruct;
 
-typedef ReportDiscreteDevicesMessageStruct* ReportDiscreteDevicesMessage;
 
-JAUS_EXPORT ReportDiscreteDevicesMessage reportDiscreteDevicesMessageCreate(void);
-JAUS_EXPORT void reportDiscreteDevicesMessageDestroy(ReportDiscreteDevicesMessage);
+	
+}ReportErrorMessageStruct;
 
-JAUS_EXPORT JausBoolean reportDiscreteDevicesMessageFromBuffer(ReportDiscreteDevicesMessage message, unsigned char* buffer, unsigned int bufferSizeBytes);
-JAUS_EXPORT JausBoolean reportDiscreteDevicesMessageToBuffer(ReportDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+typedef ReportErrorMessageStruct* ReportErrorMessage;
 
-JAUS_EXPORT ReportDiscreteDevicesMessage reportDiscreteDevicesMessageFromJausMessage(JausMessage jausMessage);
-JAUS_EXPORT JausMessage reportDiscreteDevicesMessageToJausMessage(ReportDiscreteDevicesMessage message);
+JAUS_EXPORT ReportErrorMessage reportErrorMessageCreate(void);
+JAUS_EXPORT void reportErrorMessageDestroy(ReportErrorMessage);
 
-JAUS_EXPORT unsigned int reportDiscreteDevicesMessageSize(ReportDiscreteDevicesMessage message);
+JAUS_EXPORT JausBoolean reportErrorMessageFromBuffer(ReportErrorMessage message, unsigned char* buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean reportErrorMessageToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
 
-JAUS_EXPORT char* reportDiscreteDevicesMessageToString(ReportDiscreteDevicesMessage message);
-#endif // REPORT_DISCRETE_DEVICES_MESSAGE_H
+JAUS_EXPORT ReportErrorMessage reportErrorMessageFromJausMessage(JausMessage jausMessage);
+JAUS_EXPORT JausMessage reportErrorMessageToJausMessage(ReportErrorMessage message);
+
+JAUS_EXPORT unsigned int reportErrorMessageSize(ReportErrorMessage message);
+
+JAUS_EXPORT char* reportErrorMessageToString(ReportErrorMessage message);
+#endif // REPORT_ALARMA_MESSAGE_H

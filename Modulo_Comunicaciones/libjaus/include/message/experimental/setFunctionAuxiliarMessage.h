@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportDiscreteDevicesMessage.h
+// File Name: setFunctionAuxiliarMessage.h
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo 
 //
@@ -39,39 +39,17 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the attributes of a ReportDiscreteDevicesMessage
+// Description: This file defines the attributes of a SetFunctionAuxiliarMessage
 
-#ifndef REPORT_DISCRETE_DEVICES_MESSAGE_H
-#define REPORT_DISCRETE_DEVICES_MESSAGE_H
+#ifndef SET_FUNCTION_AUXILIAR_MESSAGE_H
+#define SET_FUNCTION_AUXILIAR_MESSAGE_H
+#ifndef JAUS_FUNCTION_OPERATION_BF
+#define JAUS_FUNCTION_OPERATION_BF
+#define JAUS_FUNCTION_OPERATION_BF_ACTIVATED_BIT	0
+#endif
+
 
 #include "jaus.h"
-
-#ifndef JAUS_DEVICES_PV
-#define JAUS_DEVICES_PV
-#define JAUS_DEVICES_PV_PROPULSION_BIT	0
-#define JAUS_DEVICES_PV_PARKING_BIT		1
-#define JAUS_DEVICES_PV_GEAR_BIT		2
-#define JAUS_DEVICES_PV_TRANSFER_BIT	3
-#endif
-
-#ifndef JAUS_DEVICES_PROPULSION_BF
-#define JAUS_DEVICES_PROPULSION_BF
-#define JAUS_DEVICES_PROPULSION_BF_MAIN_POWER_BIT		0
-#define JAUS_DEVICES_PROPULSION_BF_MAIN_FUEL_BIT		1
-#define JAUS_DEVICES_PROPULSION_BF_AUXILARY_FUEL_BIT	2
-#define JAUS_DEVICES_PROPULSION_BF_AUXILARY_POWER_BIT	3
-#define JAUS_DEVICES_PROPULSION_BF_STARTING_DEVICE_BIT	4
-#define JAUS_DEVICES_PROPULSION_BF_COLD_START_BIT		5
-#define JAUS_DEVICES_PROPULSION_BF_AUTO_START_BIT		6
-#define JAUS_DEVICES_PROPULSION_BF_AUTO_SHUTDOWN_BIT	7
-#endif
-
-#ifndef JAUS_DEVICES_OTHER_BF
-#define JAUS_DEVICES_OTHER_BF
-#define JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT	0
-#define JAUS_DEVICES_OTHER_BF_HORN_BIT			1
-#endif
-
 
 typedef struct
 {
@@ -111,38 +89,28 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	JausByte presenceVector;
-	JausByte gear;
-	JausByte transferCase;
-
-	// Main Propulsion
-	JausBoolean mainPropulsion;
-	JausBoolean mainFuelSupply;
-	JausBoolean auxFuelSupply;
-	JausBoolean powerAuxDevices;
-	JausBoolean startingDevice;
-	JausBoolean coldStart;
-	JausBoolean automaticStart;
-	JausBoolean automaticStop;
-
-	// Parking, Brake and Horn
-	JausBoolean parkingBrake;
-	JausBoolean horn;
+	// MESSAGE DATA MEMBERS GO HERE
 	
-}ReportDiscreteDevicesMessageStruct;
+	JausByte function;
 
-typedef ReportDiscreteDevicesMessageStruct* ReportDiscreteDevicesMessage;
+	//Operations
+	JausBoolean activated;
+		
+	
+}SetFunctionAuxiliarMessageStruct;
 
-JAUS_EXPORT ReportDiscreteDevicesMessage reportDiscreteDevicesMessageCreate(void);
-JAUS_EXPORT void reportDiscreteDevicesMessageDestroy(ReportDiscreteDevicesMessage);
+typedef SetFunctionAuxiliarMessageStruct* SetFunctionAuxiliarMessage;
 
-JAUS_EXPORT JausBoolean reportDiscreteDevicesMessageFromBuffer(ReportDiscreteDevicesMessage message, unsigned char* buffer, unsigned int bufferSizeBytes);
-JAUS_EXPORT JausBoolean reportDiscreteDevicesMessageToBuffer(ReportDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT SetFunctionAuxiliarMessage setFunctionAuxiliarMessageCreate(void);
+JAUS_EXPORT void setFunctionAuxiliarMessageDestroy(SetFunctionAuxiliarMessage);
 
-JAUS_EXPORT ReportDiscreteDevicesMessage reportDiscreteDevicesMessageFromJausMessage(JausMessage jausMessage);
-JAUS_EXPORT JausMessage reportDiscreteDevicesMessageToJausMessage(ReportDiscreteDevicesMessage message);
+JAUS_EXPORT JausBoolean setFunctionAuxiliarMessageFromBuffer(SetFunctionAuxiliarMessage message, unsigned char* buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean setFunctionAuxiliarMessageToBuffer(SetFunctionAuxiliarMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
 
-JAUS_EXPORT unsigned int reportDiscreteDevicesMessageSize(ReportDiscreteDevicesMessage message);
+JAUS_EXPORT SetFunctionAuxiliarMessage setFunctionAuxiliarMessageFromJausMessage(JausMessage jausMessage);
+JAUS_EXPORT JausMessage setFunctionAuxiliarMessageToJausMessage(SetFunctionAuxiliarMessage message);
 
-JAUS_EXPORT char* reportDiscreteDevicesMessageToString(ReportDiscreteDevicesMessage message);
-#endif // REPORT_DISCRETE_DEVICES_MESSAGE_H
+JAUS_EXPORT unsigned int setFunctionAuxiliarMessageSize(SetFunctionAuxiliarMessage message);
+
+JAUS_EXPORT char* setFunctionAuxiliarMessageToString(SetFunctionAuxiliarMessage message);
+#endif // SET_FUNCTION_AUXILIAR_MESSAGE_H

@@ -53,21 +53,6 @@
 #define JAUS_OPERATIONAL_PV_BATTERY_BIT 	2
 #define JAUS_OPERATIONAL_PV_FUEL_BIT 		3
 #define JAUS_OPERATIONAL_PV_OIL_BIT 		4
-#define JAUS_OPERATIONAL_PV_OIL_TEMP_BIT 	5
-#define JAUS_OPERATIONAL_PV_PRESS_NEUMATICA_BIT 	6
-#define JAUS_OPERATIONAL_PV_RPM_BIT 	7
-#define JAUS_OPERATIONAL_PV_WATER_NIVEL_BIT 	8
-#define JAUS_OPERATIONAL_PV_CONSUMPTION_ORBITROL_BIT 	9
-#define JAUS_OPERATIONAL_PV_CONSUMPTION_BRAKE_BIT 	10
-#define JAUS_OPERATIONAL_PV_OTHER_BIT 	11
-#endif
-
-#ifndef JAUS_OPERATIONAL_PV_OTHER_BF
-#define JAUS_OPERATIONAL_PV_OTHER_BF
-#define JAUS_OPERATIONAL_PV_OTHER_BF_PRESS_HYDRAULIC		0
-#define JAUS_OPERATIONAL_PV_OTHER_BF_OIL_ALARM		1
-#define JAUS_OPERATIONAL_PV_OTHER_BF_ENGINETEMP_ALARM		2
-#define JAUS_OPERATIONAL_PV_OTHER_BF_BOMBA_CONNECTED		3
 #endif
 
 typedef struct
@@ -108,25 +93,12 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	JausUnsignedShort presenceVector;
-	JausDouble engineTemperatureCelsius;	// Scaled Short (-35, 210)
+	JausByte presenceVector;
+	JausDouble engineTemperatureCelsius;	// Scaled Short (-75, 180)
 	JausUnsignedInteger odometerMeters;
-	JausDouble batteryVoltagePercent;		// Scaled Byte (0, 100)
+	JausDouble batteryVoltagePercent;		// Scaled Byte (0, 127)
 	JausDouble fuelLevelPercent;			// Scaled Byte (0, 100)
 	JausDouble oilPressurePercent;			// Scaled Byte (0, 127)
-	JausDouble oilTemp;				// Scaled Short (-35, 210)
-	JausDouble pressNeumatica;			// Scaled Short (0, 100)
-	JausDouble rpm;					// Scaled Short (0, 4000)
-	JausDouble waterNivel;				// Scaled Short (0, 100)
-	JausUnsignedInteger consumptionOrbitrol;
-	JausUnsignedInteger consumptionBrake;
-	
-	JausBoolean pressHydraulicaAlarm;
-	JausBoolean oilAlarm;
-	JausBoolean engineTempAlarm;
-	JausBoolean bombaConnected;
-	
-	
 	
 }ReportPlatformOperationalDataMessageStruct;
 

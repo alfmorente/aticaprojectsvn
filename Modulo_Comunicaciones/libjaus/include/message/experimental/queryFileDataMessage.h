@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportDiscreteDevicesMessage.h
+// File Name: queryFileDataMessage.h
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo 
 //
@@ -39,39 +39,12 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the attributes of a ReportDiscreteDevicesMessage
+// Description: This file defines the attributes of a QueryFileDataMessage
 
-#ifndef REPORT_DISCRETE_DEVICES_MESSAGE_H
-#define REPORT_DISCRETE_DEVICES_MESSAGE_H
+#ifndef QUERY_FILE_DATA_MESSAGE_H
+#define QUERY_FILE_DATA_MESSAGE_H
 
 #include "jaus.h"
-
-#ifndef JAUS_DEVICES_PV
-#define JAUS_DEVICES_PV
-#define JAUS_DEVICES_PV_PROPULSION_BIT	0
-#define JAUS_DEVICES_PV_PARKING_BIT		1
-#define JAUS_DEVICES_PV_GEAR_BIT		2
-#define JAUS_DEVICES_PV_TRANSFER_BIT	3
-#endif
-
-#ifndef JAUS_DEVICES_PROPULSION_BF
-#define JAUS_DEVICES_PROPULSION_BF
-#define JAUS_DEVICES_PROPULSION_BF_MAIN_POWER_BIT		0
-#define JAUS_DEVICES_PROPULSION_BF_MAIN_FUEL_BIT		1
-#define JAUS_DEVICES_PROPULSION_BF_AUXILARY_FUEL_BIT	2
-#define JAUS_DEVICES_PROPULSION_BF_AUXILARY_POWER_BIT	3
-#define JAUS_DEVICES_PROPULSION_BF_STARTING_DEVICE_BIT	4
-#define JAUS_DEVICES_PROPULSION_BF_COLD_START_BIT		5
-#define JAUS_DEVICES_PROPULSION_BF_AUTO_START_BIT		6
-#define JAUS_DEVICES_PROPULSION_BF_AUTO_SHUTDOWN_BIT	7
-#endif
-
-#ifndef JAUS_DEVICES_OTHER_BF
-#define JAUS_DEVICES_OTHER_BF
-#define JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT	0
-#define JAUS_DEVICES_OTHER_BF_HORN_BIT			1
-#endif
-
 
 typedef struct
 {
@@ -111,38 +84,35 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	JausByte presenceVector;
-	JausByte gear;
-	JausByte transferCase;
-
-	// Main Propulsion
-	JausBoolean mainPropulsion;
-	JausBoolean mainFuelSupply;
-	JausBoolean auxFuelSupply;
-	JausBoolean powerAuxDevices;
-	JausBoolean startingDevice;
-	JausBoolean coldStart;
-	JausBoolean automaticStart;
-	JausBoolean automaticStop;
-
-	// Parking, Brake and Horn
-	JausBoolean parkingBrake;
-	JausBoolean horn;
+	// MESSAGE DATA MEMBERS GO HERE
 	
-}ReportDiscreteDevicesMessageStruct;
+	// Example from ReportGlobalPoseMessage
+	//
+	//	JausUnsignedShort presenceVector;
+	//	JausDouble latitudeDegrees;				// Scaled Int (-90, 90)
+	//	JausDouble longitudeDegrees;			// Scaled Int (-180, 180)
+	//	JausDouble elevationMeters;				// Scaled Int (-10000, 35000)
+	//	JausDouble positionRmsMeters;			// Scaled UInt (0, 100)
+	//	JausDouble rollRadians;					// Scaled Short (-JAUS_PI, JAUS_PI)
+	//	JausDouble pitchRadians;				// Scaled Short (-JAUS_PI, JAUS_PI)
+	//	JausDouble yawRadians;					// Scaled Short (-JAUS_PI, JAUS_PI)
+	//	JausDouble attitudeRmsRadians;			// Scaled Short (0, JAUS_PI)
+	//	JausUnsignedInteger timeStamp;	
+	
+}QueryFileDataMessageStruct;
 
-typedef ReportDiscreteDevicesMessageStruct* ReportDiscreteDevicesMessage;
+typedef QueryFileDataMessageStruct* QueryFileDataMessage;
 
-JAUS_EXPORT ReportDiscreteDevicesMessage reportDiscreteDevicesMessageCreate(void);
-JAUS_EXPORT void reportDiscreteDevicesMessageDestroy(ReportDiscreteDevicesMessage);
+JAUS_EXPORT QueryFileDataMessage queryFileDataMessageCreate(void);
+JAUS_EXPORT void queryFileDataMessageDestroy(QueryFileDataMessage);
 
-JAUS_EXPORT JausBoolean reportDiscreteDevicesMessageFromBuffer(ReportDiscreteDevicesMessage message, unsigned char* buffer, unsigned int bufferSizeBytes);
-JAUS_EXPORT JausBoolean reportDiscreteDevicesMessageToBuffer(ReportDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean queryFileDataMessageFromBuffer(QueryFileDataMessage message, unsigned char* buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean queryFileDataMessageToBuffer(QueryFileDataMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
 
-JAUS_EXPORT ReportDiscreteDevicesMessage reportDiscreteDevicesMessageFromJausMessage(JausMessage jausMessage);
-JAUS_EXPORT JausMessage reportDiscreteDevicesMessageToJausMessage(ReportDiscreteDevicesMessage message);
+JAUS_EXPORT QueryFileDataMessage queryFileDataMessageFromJausMessage(JausMessage jausMessage);
+JAUS_EXPORT JausMessage queryFileDataMessageToJausMessage(QueryFileDataMessage message);
 
-JAUS_EXPORT unsigned int reportDiscreteDevicesMessageSize(ReportDiscreteDevicesMessage message);
+JAUS_EXPORT unsigned int queryFileDataMessageSize(QueryFileDataMessage message);
 
-JAUS_EXPORT char* reportDiscreteDevicesMessageToString(ReportDiscreteDevicesMessage message);
-#endif // REPORT_DISCRETE_DEVICES_MESSAGE_H
+JAUS_EXPORT char* queryFileDataMessageToString(QueryFileDataMessage message);
+#endif // QUERY_FILE_DATA_MESSAGE_H

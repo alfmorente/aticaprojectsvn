@@ -206,12 +206,6 @@ char *jausComponentGetTypeString(JausComponent component)
 				return "VisualSensor";
 		case JAUS_RANGE_SENSOR:
 				return "RangeSensor";
-		case JAUS_NAVEGATION_SENSOR:
-				return "NavegationSensor";
-		case JAUS_METEO_SENSOR:
-				return "MeteoSensor";
-		case JAUS_ALARMAS_SENSOR:
-				return "AlarmasSensor";
 		default:
 				return "Experimental/UnknownComponent";
 	}

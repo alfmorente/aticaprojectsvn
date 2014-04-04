@@ -44,7 +44,7 @@
 #ifndef JAUS_NODE_H
 #define JAUS_NODE_H
 
-#define NODE_TIMEOUT_SEC 10.0
+#define NODE_TIMEOUT_SEC 5.0
 
 #include <time.h>
 #include "jaus.h"

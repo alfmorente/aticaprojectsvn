@@ -69,7 +69,6 @@
 #include "command/environment/setCameraPoseMessage.h"
 #include "command/environment/setCameraCapabilitiesMessage.h"
 #include "command/environment/setCameraFormatOptionsMessage.h"
-#include "command/environment/setCameraOptionsMessage.h"
 #include "command/manipulator/setJointEffortsMessage.h"
 #include "command/manipulator/setJointPositionsMessage.h"
 #include "command/manipulator/setJointVelocitiesMessage.h"
@@ -80,14 +79,12 @@
 #include "command/manipulator/setEndEffectorPathMotionMessage.h"
 #include "command/platform/setWrenchEffortMessage.h"
 #include "command/platform/setDiscreteDevicesMessage.h"
-#include "command/platform/setDriveByWire.h"
 #include "command/platform/setGlobalVectorMessage.h"
 #include "command/platform/setLocalVectorMessage.h"
 #include "command/platform/setTravelSpeedMessage.h"
 #include "command/platform/setGlobalWaypointMessage.h"
 #include "command/platform/setLocalWaypointMessage.h"
 #include "command/platform/setVelocityStateMessage.h"
-#include "command/platform/setModeDriveMessage.h"
 #include "command/platform/setGlobalPathSegmentMessage.h"
 #include "command/platform/setLocalPathSegmentMessage.h"
 #include "command/planning/abortMissionMessage.h"
@@ -133,7 +130,6 @@
 #include "inform/platform/reportPlatformSpecificationsMessage.h"
 #include "inform/platform/reportPlatformOperationalDataMessage.h"
 #include "inform/platform/reportGlobalPoseMessage.h"
-#include "inform/platform/reportCheckingMessage.h"
 #include "inform/platform/reportLocalPoseMessage.h"
 #include "inform/platform/reportVelocityStateMessage.h"
 #include "inform/platform/reportWrenchEffortMessage.h"
@@ -147,7 +143,6 @@
 #include "inform/platform/reportPathSegmentCountMessage.h"
 #include "inform/platform/reportGlobalPathSegmentMessage.h"
 #include "inform/platform/reportLocalPathSegmentMessage.h"
-#include "inform/platform/reportUltrasonidosMessage.h"
 #include "inform/planning/reportMissionStatusMessage.h"
 #include "inform/planning/reportSpoolingPreferenceMessage.h"
 #include "inform/dynamicConfiguration/reportIdentificationMessage.h"
@@ -163,7 +158,6 @@
 #include "inform/worldModel/reportVksDataTransferTerminationMessage.h"
 #include "inform/event/reportEventsMessage.h"
 #include "inform/event/eventMessage.h"
-#include "inform/error/reportErrorMessage.h"
 
 // Query Class
 #include "query/core/queryComponentAuthorityMessage.h"
@@ -216,7 +210,13 @@
 #include "query/event/queryEventsMessage.h"
 
 // Experimental
-#include "experimental/messageExperimentalMessage.h"
-#include "experimental/environmentTelemetry.h"
+#include "experimental/queryFileDataMessage.h"
+#include "experimental/reportFileDataMessage.h"
+#include "experimental/queryAvailableMessage.h"
+#include "experimental/reportAvailableMessage.h"
+#include "experimental/setFunctionAuxiliarMessage.h"
+#include "experimental/reportErrorMessage.h"
+#include "experimental/reportInfoStopMessage.h"
+
 
 #endif //JAUS_MESSAGE_HEADERS_H

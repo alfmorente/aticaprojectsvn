@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: setDiscreteDevicesMessage.c
+// File Name: reportErrorMessage.c
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo (galluzzo AT gmail DOT com)
 //
@@ -39,7 +39,7 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the functionality of a SetDiscreteDevicesMessage
+// Description: This file defines the functionality of a ReportErrorMessage
 
 
 #include <stdio.h>
@@ -47,106 +47,60 @@
 #include <string.h>
 #include "jaus.h"
 
-static const int commandCode = JAUS_SET_DISCRETE_DEVICES;
+static const int commandCode = JAUS_REPORT_ERROR;
 static const int maxDataSizeBytes = 5;
 
-static JausBoolean headerFromBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static JausBoolean headerToBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int headerToString(SetDiscreteDevicesMessage message, char **buf);
+static JausBoolean headerFromBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static JausBoolean headerToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int headerToString(ReportErrorMessage message, char **buf);
 
-static JausBoolean dataFromBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int dataToBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static void dataInitialize(SetDiscreteDevicesMessage message);
-static unsigned int dataSize(SetDiscreteDevicesMessage message);
+static JausBoolean dataFromBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int dataToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static void dataInitialize(ReportErrorMessage message);
+static unsigned int dataSize(ReportErrorMessage message);
 
 // ************************************************************************************************************** //
 //                                    USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
 // Initializes the message-specific fields
-static void dataInitialize(SetDiscreteDevicesMessage message)
+static void dataInitialize(ReportErrorMessage message)
 {
 	// Set initial values of message fields
-	message->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
-	message->gear = newJausByte(0);
-	message->transferCase = newJausByte(0);
-
-	// Main Propulsion
-	message->mainPropulsion = JAUS_FALSE;
-	message->mainFuelSupply = JAUS_FALSE;
-	message->auxFuelSupply = JAUS_FALSE;
-	message->powerAuxDevices = JAUS_FALSE;
-	message->startingDevice = JAUS_FALSE;
-	message->coldStart = JAUS_FALSE;
-	message->automaticStart = JAUS_FALSE;
-	message->automaticStop = JAUS_FALSE;
-
-	// Parking, Brake and Horn
-	message->parkingBrake = JAUS_FALSE;
-	message->horn = JAUS_FALSE;
-	message->lightIR = JAUS_FALSE;
-	message->lightConventional = JAUS_FALSE;
-	message->diferentialLock = JAUS_FALSE;
-	message->enableLaser2D = JAUS_FALSE;
+	message->subsystem=newJausUnsignedShort(0);
+	message->idError=newJausUnsignedShort(0);
+	message->typeError=newJausByte(0);
 }
 
 // Return boolean of success
-static JausBoolean dataFromBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static JausBoolean dataFromBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	int index = 0;
 	JausByte tempByte;
+	JausUnsignedShort tempUShort;
 
 	if(bufferSizeBytes == message->dataSize)
 	{
 		// Unpack Message Fields from Buffer
 		// Unpack according to presence vector
-		if(!jausByteFromBuffer(&message->presenceVector, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+
+
+		if(!jausUnsignedShortFromBuffer(&tempUShort, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+
+		message->subsystem = tempUShort;
+
+		if(!jausUnsignedShortFromBuffer(&tempUShort, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+
+		message->idError = tempUShort;
+
+
+		if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
 		index += JAUS_BYTE_SIZE_BYTES;
 
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PROPULSION_BIT))
-		{
-			//unpack
-			if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-
-			message->mainPropulsion = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_MAIN_POWER_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->mainFuelSupply = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_MAIN_FUEL_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->auxFuelSupply = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_AUXILARY_FUEL_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->powerAuxDevices = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_AUXILARY_POWER_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->startingDevice = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_STARTING_DEVICE_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->coldStart = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_COLD_START_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->automaticStart = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_AUTO_START_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->automaticStop = jausByteIsBitSet(tempByte, JAUS_DEVICES_PROPULSION_BF_AUTO_SHUTDOWN_BIT)? JAUS_TRUE : JAUS_FALSE;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PARKING_BIT))
-		{
-			//unpack
-			if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-
-			message->parkingBrake = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->horn = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_HORN_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->lightIR = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_LIGHT_IR_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->lightConventional = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_LIGHT_CONVENTIONAL_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->diferentialLock = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_DIFERENTIAL_LOCK_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->enableLaser2D = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_ENABLE_LASER2D_BIT)? JAUS_TRUE : JAUS_FALSE;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_GEAR_BIT))
-		{
-			//unpack
-			if(!jausByteFromBuffer(&message->gear, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TRANSFER_BIT))
-		{
-			//unpack
-			if(!jausByteFromBuffer(&message->transferCase, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-
+		message->typeError = tempByte;
+		
 		return JAUS_TRUE;
 	}
 	else
@@ -156,218 +110,67 @@ static JausBoolean dataFromBuffer(SetDiscreteDevicesMessage message, unsigned ch
 }
 
 // Returns number of bytes put into the buffer
-static int dataToBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static int dataToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	int index = 0;
-	JausByte tempByte = 0;
 
 	if(bufferSizeBytes >= dataSize(message))
 	{
 		// Pack Message Fields to Buffer
 		// Pack according to presence vector
-		if(!jausByteToBuffer(message->presenceVector, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+
+
+		if(!jausUnsignedShortToBuffer(message->subsystem, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+
+
+		if(!jausUnsignedShortToBuffer(message->idError, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+
+		if(!jausByteToBuffer(message->typeError, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
 		index += JAUS_BYTE_SIZE_BYTES;
 
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PROPULSION_BIT))
-		{
-			tempByte = 0;
-			if(message->mainPropulsion) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_MAIN_POWER_BIT);
-			if(message->mainFuelSupply) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_MAIN_FUEL_BIT);
-			if(message->auxFuelSupply) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_AUXILARY_FUEL_BIT);
-			if(message->powerAuxDevices) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_AUXILARY_POWER_BIT);
-			if(message->startingDevice) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_STARTING_DEVICE_BIT);
-			if(message->coldStart) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_COLD_START_BIT);
-			if(message->automaticStart) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_AUTO_START_BIT);
-			if(message->automaticStop) jausByteSetBit(&tempByte, JAUS_DEVICES_PROPULSION_BF_AUTO_SHUTDOWN_BIT);
-
-			//pack
-			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PARKING_BIT))
-		{
-			tempByte = 0;
-			if(message->parkingBrake) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT);
-			if(message->horn) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_HORN_BIT);
-			if(message->lightIR) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_LIGHT_IR_BIT);
-			if(message->lightConventional) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_LIGHT_CONVENTIONAL_BIT);
-			if(message->diferentialLock) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_DIFERENTIAL_LOCK_BIT);
-			if(message->enableLaser2D) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_ENABLE_LASER2D_BIT);
-
-			//pack
-			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_GEAR_BIT))
-		{
-			//pack
-			if(!jausByteToBuffer(message->gear, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TRANSFER_BIT))
-		{
-			//pack
-			if(!jausByteToBuffer(message->transferCase, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
 	}
 
 	return index;
 }
 
-static int dataToString(SetDiscreteDevicesMessage message, char **buf)
+static int dataToString(ReportErrorMessage message, char **buf)
 {
   //message already verified
 
   //Setup temporary string buffer
 
-  unsigned int bufSize = 450;
+  unsigned int bufSize = 50;
   (*buf) = (char*)malloc(sizeof(char)*bufSize);
 
-  strcpy((*buf), "\nPresence Vector: " );
+   strcat((*buf), "\nsubsystem: ");
+   jausUnsignedShortToString(message->subsystem, (*buf)+strlen(*buf));  
+ 
+   strcat((*buf), "\nid error: ");
+   jausUnsignedShortToString(message->idError, (*buf)+strlen(*buf));
 
-  jausByteToHexString(message->presenceVector, (*buf)+strlen(*buf));
+   strcat((*buf), "\ntype error: ");
+   jausByteToString(message->typeError, (*buf)+strlen(*buf));
 
-  strcat((*buf), "\nMain Propulsion\n  Main Propulsion: " );
+   return (int)strlen(*buf);
 
-  if( message->mainPropulsion == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nMain Energy/Fuel Supply: " );
-
-  if( message->mainFuelSupply == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nAuxiliary Energy/Fuel Supply: " );
-
-  if( message->auxFuelSupply == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nPower to Auxiliary Devices: " );
-
-  if( message->powerAuxDevices == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nStarting Device: " );
-
-  if( message->startingDevice == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nCold Start: " );
-
-  jausBooleanToString(message->coldStart, (*buf)+strlen(*buf));
-
-  strcpy((*buf), "\nCommence Automatic Start Sequence: " );
-
-  jausBooleanToString(message->automaticStart, (*buf)+strlen(*buf));
-
-  strcpy((*buf), "\nCommence Automatic Shutdown Sequence: " );
-
-  jausBooleanToString(message->automaticStop, (*buf)+strlen(*buf));
-
-  strcpy((*buf), "\nParking Brake: " );
-
-  if( message->parkingBrake == JAUS_TRUE  )
-    strcat((*buf), "Set");
-  else
-    strcat((*buf), "Release");
-
-  strcpy((*buf), "\nHorn: " );
-
-  if( message->horn == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nLight IR: " );
-  if( message->lightIR == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nLight Conventional: " );
-  if( message->lightConventional == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nDiferential Lock: " );
-  if( message->diferentialLock == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nEnable laser2D: " );
-  if( message->enableLaser2D == JAUS_TRUE )
-    strcat((*buf), "On");
-  else
-    strcat((*buf), "Off");
-
-  strcpy((*buf), "\nGear: " );
-
-  jausByteToString(message->gear, (*buf)+strlen(*buf));
-
-  if( message->gear == 0 )
-    strcat((*buf), " Park");
-  else if ( message->gear == 128 )
-    strcat((*buf), " Neutral");
-  else if ( (message->gear >= 1) && (message->gear <= 127) )
-    strcat((*buf), " Forward");
-  else if ( message->gear > 128 )
-    strcat((*buf), " Reverse");
-
-  strcpy((*buf), "\nTransfer Case: " );
-
-  jausByteToString(message->transferCase, (*buf)+strlen(*buf));
-
-  if ( message->transferCase == 128 )
-    strcat((*buf), " Neutral");
-  else if ( message->transferCase <= 127 )
-    strcat((*buf), " Low");
-  else if ( message->transferCase > 128 )
-    strcat((*buf), " High");
-
-  return (int)strlen(*buf);
 }
 
-static unsigned int dataSize(SetDiscreteDevicesMessage message)
+// Returns number of bytes put into the buffer
+static unsigned int dataSize(ReportErrorMessage message)
 {
 	int index = 0;
 
+	//subsystem
+	index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+
+	//id error
+	index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+
+	//type Error
 	index += JAUS_BYTE_SIZE_BYTES;
 
-	if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PROPULSION_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-
-	if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PARKING_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-
-	if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_GEAR_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-
-	if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TRANSFER_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
 
 	return index;
 }
@@ -376,11 +179,11 @@ static unsigned int dataSize(SetDiscreteDevicesMessage message)
 //                                    NON-USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
-SetDiscreteDevicesMessage setDiscreteDevicesMessageCreate(void)
+ReportErrorMessage reportErrorMessageCreate(void)
 {
-	SetDiscreteDevicesMessage message;
+	ReportErrorMessage message;
 
-	message = (SetDiscreteDevicesMessage)malloc( sizeof(SetDiscreteDevicesMessageStruct) );
+	message = (ReportErrorMessage)malloc( sizeof(ReportErrorMessageStruct) );
 	if(message == NULL)
 	{
 		return NULL;
@@ -406,14 +209,14 @@ SetDiscreteDevicesMessage setDiscreteDevicesMessageCreate(void)
 	return message;
 }
 
-void setDiscreteDevicesMessageDestroy(SetDiscreteDevicesMessage message)
+void reportErrorMessageDestroy(ReportErrorMessage message)
 {
 	jausAddressDestroy(message->source);
 	jausAddressDestroy(message->destination);
 	free(message);
 }
 
-JausBoolean setDiscreteDevicesMessageFromBuffer(SetDiscreteDevicesMessage message, unsigned char* buffer, unsigned int bufferSizeBytes)
+JausBoolean reportErrorMessageFromBuffer(ReportErrorMessage message, unsigned char* buffer, unsigned int bufferSizeBytes)
 {
 	int index = 0;
 
@@ -435,9 +238,9 @@ JausBoolean setDiscreteDevicesMessageFromBuffer(SetDiscreteDevicesMessage messag
 	}
 }
 
-JausBoolean setDiscreteDevicesMessageToBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+JausBoolean reportErrorMessageToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
-	if(bufferSizeBytes < setDiscreteDevicesMessageSize(message))
+	if(bufferSizeBytes < reportErrorMessageSize(message))
 	{
 		return JAUS_FALSE; //improper size
 	}
@@ -450,14 +253,14 @@ JausBoolean setDiscreteDevicesMessageToBuffer(SetDiscreteDevicesMessage message,
 		}
 		else
 		{
-			return JAUS_FALSE; // headerToSetDiscreteDevicesBuffer failed
+			return JAUS_FALSE; // headerToReportDescreteDevicesBuffer failed
 		}
 	}
 }
 
-SetDiscreteDevicesMessage setDiscreteDevicesMessageFromJausMessage(JausMessage jausMessage)
+ReportErrorMessage reportErrorMessageFromJausMessage(JausMessage jausMessage)
 {
-	SetDiscreteDevicesMessage message;
+	ReportErrorMessage message;
 
 	if(jausMessage->commandCode != commandCode)
 	{
@@ -465,7 +268,7 @@ SetDiscreteDevicesMessage setDiscreteDevicesMessageFromJausMessage(JausMessage j
 	}
 	else
 	{
-		message = (SetDiscreteDevicesMessage)malloc( sizeof(SetDiscreteDevicesMessageStruct) );
+		message = (ReportErrorMessage)malloc( sizeof(ReportErrorMessageStruct) );
 		if(message == NULL)
 		{
 			return NULL;
@@ -498,7 +301,7 @@ SetDiscreteDevicesMessage setDiscreteDevicesMessageFromJausMessage(JausMessage j
 	}
 }
 
-JausMessage setDiscreteDevicesMessageToJausMessage(SetDiscreteDevicesMessage message)
+JausMessage reportErrorMessageToJausMessage(ReportErrorMessage message)
 {
 	JausMessage jausMessage;
 
@@ -530,12 +333,12 @@ JausMessage setDiscreteDevicesMessageToJausMessage(SetDiscreteDevicesMessage mes
 }
 
 
-unsigned int setDiscreteDevicesMessageSize(SetDiscreteDevicesMessage message)
+unsigned int reportErrorMessageSize(ReportErrorMessage message)
 {
 	return (unsigned int)(dataSize(message) + JAUS_HEADER_SIZE_BYTES);
 }
 
-char* setDiscreteDevicesMessageToString(SetDiscreteDevicesMessage message)
+char* reportErrorMessageToString(ReportErrorMessage message)
 {
   if(message)
   {
@@ -562,7 +365,7 @@ buf = (char*)malloc(strlen(buf1)+strlen(buf2)+1);
   }
   else
   {
-    char* buf = "Invalid SetDiscreteDevices Message";
+    char* buf = "Invalid ReportError Message";
     char* msg = (char*)malloc(strlen(buf)+1);
     strcpy(msg, buf);
     return msg;
@@ -570,7 +373,7 @@ buf = (char*)malloc(strlen(buf1)+strlen(buf2)+1);
 }
 //********************* PRIVATE HEADER FUNCTIONS **********************//
 
-static JausBoolean headerFromBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static JausBoolean headerFromBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	if(bufferSizeBytes < JAUS_HEADER_SIZE_BYTES)
 	{
@@ -608,7 +411,7 @@ static JausBoolean headerFromBuffer(SetDiscreteDevicesMessage message, unsigned 
 	}
 }
 
-static JausBoolean headerToBuffer(SetDiscreteDevicesMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
+static JausBoolean headerToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes)
 {
 	JausUnsignedShort *propertiesPtr = (JausUnsignedShort*)&message->properties;
 
@@ -644,7 +447,7 @@ static JausBoolean headerToBuffer(SetDiscreteDevicesMessage message, unsigned ch
 	}
 }
 
-static int headerToString(SetDiscreteDevicesMessage message, char **buf)
+static int headerToString(ReportErrorMessage message, char **buf)
 {
   //message existance already verified
 

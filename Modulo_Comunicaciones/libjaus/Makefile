@@ -90,7 +90,6 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/inform/core/reportComponentStatusMessage.c \
 		./src/message/inform/core/reportTimeMessage.c \
 		./src/message/inform/core/reportComponentAuthorityMessage.c \
-		./src/message/inform/platform/reportCheckingMessage.c \
 		./src/message/inform/platform/reportLocalPoseMessage.c \
 		./src/message/inform/platform/reportGlobalWaypointMessage.c \
 		./src/message/inform/platform/reportWrenchEffortMessage.c \
@@ -107,7 +106,6 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/inform/platform/reportLocalVectorMessage.c \
 		./src/message/inform/platform/reportVelocityStateMessage.c \
 		./src/message/inform/platform/reportPathSegmentCountMessage.c \
-		./src/message/inform/platform/reportUltrasonidosMessage.c \
 		./src/message/inform/payload/reportPayloadDataElementMessage.c \
 		./src/message/inform/payload/reportPayloadInterfaceMessage.c \
 		./src/message/inform/event/eventMessage.c \
@@ -126,7 +124,6 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/inform/environment/reportCameraCountMessage.c \
 		./src/message/inform/environment/reportRelativeObjectPositionMessage.c \
 		./src/message/inform/environment/reportCameraPoseMessage.c \
-		./src/message/inform/error/reportErrorMessage.c \
 		./src/message/jausMessage.c \
 		./src/message/command/communications/setDataLinkStatusMessage.c \
 		./src/message/command/communications/setSelectedDataLinkStateMessage.c \
@@ -156,8 +153,6 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/command/core/activateServiceConnectionMessage.c \
 		./src/message/command/core/clearEmergencyMessage.c \
 		./src/message/command/core/createServiceConnectionMessage.c \
-		./src/message/command/platform/setDriveByWire.c \
-		./src/message/command/platform/setModeDriveMessage.c \
 		./src/message/command/platform/setTravelSpeedMessage.c \
 		./src/message/command/platform/setGlobalPathSegmentMessage.c \
 		./src/message/command/platform/setWrenchEffortMessage.c \
@@ -189,9 +184,13 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/command/environment/setCameraCapabilitiesMessage.c \
 		./src/message/command/environment/setCameraPoseMessage.c \
 		./src/message/command/environment/selectCameraMessage.c \
-		./src/message/command/environment/setCameraOptionsMessage.c \
-		./src/message/experimental/messageExperimentalMessage.c \
-		./src/message/experimental/environmentTelemetry.c \
+		./src/message/experimental/queryFileDataMessage.c \
+		./src/message/experimental/reportFileDataMessage.c \
+		./src/message/experimental/queryAvailableMessage.c \
+		./src/message/experimental/reportAvailableMessage.c \
+		./src/message/experimental/setFunctionAuxiliarMessage.c \
+		./src/message/experimental/reportErrorMessage.c \
+		./src/message/experimental/reportInfoStopMessage.c \
 		./src/jausSubsystem.c
 
 OBJECTS =	./Build/jausComponent.o \
@@ -284,7 +283,6 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportComponentStatusMessage.o \
 		./Build/reportTimeMessage.o \
 		./Build/reportComponentAuthorityMessage.o \
-		./Build/reportCheckingMessage.o \
 		./Build/reportLocalPoseMessage.o \
 		./Build/reportGlobalWaypointMessage.o \
 		./Build/reportWrenchEffortMessage.o \
@@ -301,7 +299,6 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportLocalVectorMessage.o \
 		./Build/reportVelocityStateMessage.o \
 		./Build/reportPathSegmentCountMessage.o \
-		./Build/reportUltrasonidosMessage.o \
 		./Build/reportPayloadDataElementMessage.o \
 		./Build/reportPayloadInterfaceMessage.o \
 		./Build/eventMessage.o \
@@ -320,7 +317,6 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportCameraCountMessage.o \
 		./Build/reportRelativeObjectPositionMessage.o \
 		./Build/reportCameraPoseMessage.o \
-		./Build/reportErrorMessage.o \
 		./Build/jausMessage.o \
 		./Build/setDataLinkStatusMessage.o \
 		./Build/setSelectedDataLinkStateMessage.o \
@@ -350,8 +346,6 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/activateServiceConnectionMessage.o \
 		./Build/clearEmergencyMessage.o \
 		./Build/createServiceConnectionMessage.o \
-		./Build/setDriveByWire.o \
-		./Build/setModeDriveMessage.o \
 		./Build/setTravelSpeedMessage.o \
 		./Build/setGlobalPathSegmentMessage.o \
 		./Build/setWrenchEffortMessage.o \
@@ -382,11 +376,15 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/setCameraFormatOptionsMessage.o \
 		./Build/setCameraCapabilitiesMessage.o \
 		./Build/setCameraPoseMessage.o \
-		./Build/setCameraOptionsMessage.o \
 		./Build/selectCameraMessage.o \
-		./Build/messageExperimentalMessage.o \
-		./Build/environmentTelemetry.o \
-		./Build/jausSubsystem.o 
+		./Build/queryFileDataMessage.o \
+		./Build/reportFileDataMessage.o \
+		./Build/queryAvailableMessage.o \
+		./Build/reportAvailableMessage.o \
+		./Build/setFunctionAuxiliarMessage.o \
+		./Build/reportErrorMessage.o \
+		./Build/reportInfoStopMessage.o \
+		./Build/jausSubsystem.o
 
 default : all
 
@@ -670,9 +668,6 @@ $(TARGET) : $(OBJECTS)
 ./Build/reportComponentAuthorityMessage.o : ./src/message/inform/core/reportComponentAuthorityMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportComponentAuthorityMessage.o ./src/message/inform/core/reportComponentAuthorityMessage.c
 
-./Build/reportCheckingMessage.o : ./src/message/inform/platform/reportCheckingMessage.c
-	gcc $(CCFLAGS) -o ./Build/reportCheckingMessage.o ./src/message/inform/platform/reportCheckingMessage.c
-
 ./Build/reportLocalPoseMessage.o : ./src/message/inform/platform/reportLocalPoseMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportLocalPoseMessage.o ./src/message/inform/platform/reportLocalPoseMessage.c
 
@@ -720,9 +715,6 @@ $(TARGET) : $(OBJECTS)
 
 ./Build/reportPathSegmentCountMessage.o : ./src/message/inform/platform/reportPathSegmentCountMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportPathSegmentCountMessage.o ./src/message/inform/platform/reportPathSegmentCountMessage.c
-
-./Build/reportUltrasonidosMessage.o : ./src/message/inform/platform/reportUltrasonidosMessage.c
-	gcc $(CCFLAGS) -o ./Build/reportUltrasonidosMessage.o ./src/message/inform/platform/reportUltrasonidosMessage.c
 
 ./Build/reportPayloadDataElementMessage.o : ./src/message/inform/payload/reportPayloadDataElementMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportPayloadDataElementMessage.o ./src/message/inform/payload/reportPayloadDataElementMessage.c
@@ -777,9 +769,6 @@ $(TARGET) : $(OBJECTS)
 
 ./Build/reportCameraPoseMessage.o : ./src/message/inform/environment/reportCameraPoseMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportCameraPoseMessage.o ./src/message/inform/environment/reportCameraPoseMessage.c
-
-./Build/reportErrorMessage.o : ./src/message/inform/error/reportErrorMessage.c
-	gcc $(CCFLAGS) -o ./Build/reportErrorMessage.o ./src/message/inform/error/reportErrorMessage.c
 
 ./Build/jausMessage.o : ./src/message/jausMessage.c
 	gcc $(CCFLAGS) -o ./Build/jausMessage.o ./src/message/jausMessage.c
@@ -889,12 +878,6 @@ $(TARGET) : $(OBJECTS)
 ./Build/setVelocityStateMessage.o : ./src/message/command/platform/setVelocityStateMessage.c
 	gcc $(CCFLAGS) -o ./Build/setVelocityStateMessage.o ./src/message/command/platform/setVelocityStateMessage.c
 
-./Build/setDriveByWire.o : ./src/message/command/platform/setDriveByWire.c
-	gcc $(CCFLAGS) -o ./Build/setDriveByWire.o ./src/message/command/platform/setDriveByWire.c
-
-./Build/setModeDriveMessage.o : ./src/message/command/platform/setModeDriveMessage.c
-	gcc $(CCFLAGS) -o ./Build/setModeDriveMessage.o ./src/message/command/platform/setModeDriveMessage.c
-
 ./Build/setLocalPathSegmentMessage.o : ./src/message/command/platform/setLocalPathSegmentMessage.c
 	gcc $(CCFLAGS) -o ./Build/setLocalPathSegmentMessage.o ./src/message/command/platform/setLocalPathSegmentMessage.c
 
@@ -967,17 +950,26 @@ $(TARGET) : $(OBJECTS)
 ./Build/selectCameraMessage.o : ./src/message/command/environment/selectCameraMessage.c
 	gcc $(CCFLAGS) -o ./Build/selectCameraMessage.o ./src/message/command/environment/selectCameraMessage.c
 
-./Build/setCameraOptionsMessage.o : ./src/message/command/environment/setCameraOptionsMessage.c
-	gcc $(CCFLAGS) -o ./Build/setCameraOptionsMessage.o ./src/message/command/environment/setCameraOptionsMessage.c
+./Build/queryFileDataMessage.o : ./src/message/experimental/queryFileDataMessage.c
+	gcc $(CCFLAGS) -o ./Build/queryFileDataMessage.o ./src/message/experimental/queryFileDataMessage.c
 
-./Build/messageExperimentalMessage.o : ./src/message/experimental/messageExperimentalMessage.c
-	gcc $(CCFLAGS) -o ./Build/messageExperimentalMessage.o ./src/message/experimental/messageExperimentalMessage.c
+./Build/reportFileDataMessage.o : ./src/message/experimental/reportFileDataMessage.c
+	gcc $(CCFLAGS) -o ./Build/reportFileDataMessage.o ./src/message/experimental/reportFileDataMessage.c
 
-./Build/environmentTelemetry.o : ./src/message/experimental/environmentTelemetry.c
-	gcc $(CCFLAGS) -o ./Build/environmentTelemetry.o ./src/message/experimental/environmentTelemetry.c
+./Build/queryAvailableMessage.o : ./src/message/experimental/queryAvailableMessage.c
+	gcc $(CCFLAGS) -o ./Build/queryAvailableMessage.o ./src/message/experimental/queryAvailableMessage.c
+
+./Build/reportAvailableMessage.o : ./src/message/experimental/reportAvailableMessage.c
+	gcc $(CCFLAGS) -o ./Build/reportAvailableMessage.o ./src/message/experimental/reportAvailableMessage.c
+
+./Build/setFunctionAuxiliarMessage.o : ./src/message/experimental/setFunctionAuxiliarMessage.c
+	gcc $(CCFLAGS) -o ./Build/setFunctionAuxiliarMessage.o ./src/message/experimental/setFunctionAuxiliarMessage.c
+
+./Build/reportErrorMessage.o : ./src/message/experimental/reportErrorMessage.c
+	gcc $(CCFLAGS) -o ./Build/reportErrorMessage.o ./src/message/experimental/reportErrorMessage.c
+
+./Build/reportInfoStopMessage.o : ./src/message/experimental/reportInfoStopMessage.c
+	gcc $(CCFLAGS) -o ./Build/reportInfoStopMessage.o ./src/message/experimental/reportInfoStopMessage.c
 
 ./Build/jausSubsystem.o : ./src/jausSubsystem.c
 	gcc $(CCFLAGS) -o ./Build/jausSubsystem.o ./src/jausSubsystem.c
-
-install: 
-	cp ../libjaus/lib/libjaus.so /usr/lib

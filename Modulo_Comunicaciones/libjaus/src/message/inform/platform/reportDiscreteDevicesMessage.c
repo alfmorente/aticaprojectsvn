@@ -70,7 +70,6 @@ static void dataInitialize(ReportDiscreteDevicesMessage message)
 	message->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 	message->gear = newJausByte(0);
 	message->transferCase = newJausByte(0);
-	message->tipper = newJausByte(0); //Nuevo
 
 	// Main Propulsion
 	message->mainPropulsion = JAUS_FALSE;
@@ -85,11 +84,6 @@ static void dataInitialize(ReportDiscreteDevicesMessage message)
 	// Parking, Brake and Horn
 	message->parkingBrake = JAUS_FALSE;
 	message->horn = JAUS_FALSE;
-	message->crossing_light=JAUS_FALSE;
-	message->beam=JAUS_FALSE;
-	message->position_light=JAUS_FALSE;
-	message->cruise=JAUS_FALSE;
-	message->brakeEmergency=JAUS_FALSE;
 }
 
 // Return boolean of success
@@ -129,20 +123,8 @@ static JausBoolean dataFromBuffer(ReportDiscreteDevicesMessage message, unsigned
 
 			message->parkingBrake = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT)? JAUS_TRUE : JAUS_FALSE;
 			message->horn = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_HORN_BIT)? JAUS_TRUE : JAUS_FALSE;
-			//Nuevo
-			message->crossing_light = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_CROSSING_LIGHT_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->beam = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_BEAM_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->position_light = jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_POSITION_LIGHT_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->cruise= jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_CRUISE_BIT)? JAUS_TRUE : JAUS_FALSE;
-			message->brakeEmergency= jausByteIsBitSet(tempByte, JAUS_DEVICES_OTHER_BF_BRAKE_EMERGENCY_BIT)? JAUS_TRUE : JAUS_FALSE;
 		}
-		//Nuevo
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TIPPER_BIT))
-		{
-			//unpack
-			if(!jausByteFromBuffer(&message->tipper, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
+
 		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_GEAR_BIT))
 		{
 			//unpack
@@ -200,21 +182,9 @@ static int dataToBuffer(ReportDiscreteDevicesMessage message, unsigned char *buf
 			tempByte = 0;
 			if(message->parkingBrake) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT);
 			if(message->horn) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_HORN_BIT);
-			//Nuevo
-			if(message->crossing_light) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_CROSSING_LIGHT_BIT);
-			if(message->beam) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_BEAM_BIT);
-			if(message->position_light) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_POSITION_LIGHT_BIT);
-			if(message->cruise) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_CRUISE_BIT);
-			if(message->brakeEmergency) jausByteSetBit(&tempByte, JAUS_DEVICES_OTHER_BF_BRAKE_EMERGENCY_BIT);
 
 			//pack
 			if(!jausByteToBuffer(tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-			index += JAUS_BYTE_SIZE_BYTES;
-		}
-		if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TIPPER_BIT))
-		{
-			//pack
-			if(!jausByteToBuffer(message->tipper, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
 			index += JAUS_BYTE_SIZE_BYTES;
 		}
 
@@ -314,50 +284,6 @@ static int dataToString(ReportDiscreteDevicesMessage message, char **buf)
       strcat((*buf), "On");
     else
       strcat((*buf), "Off");
-
-    strcat((*buf), "\n  Crossing_light: " );
-    if( message->crossing_light == JAUS_TRUE )
-      strcat((*buf), "On");
-    else
-      strcat((*buf), "Off");
-	
-    strcat((*buf), "\n  Beam: " );
-    if( message->beam == JAUS_TRUE )
-      strcat((*buf), "On");
-    else
-      strcat((*buf), "Off");
-
-    strcat((*buf), "\n  Position_Light: " );
-    if( message->position_light == JAUS_TRUE )
-      strcat((*buf), "On");
-    else
-      strcat((*buf), "Off");
-
-    strcat((*buf), "\n  Cruise: " );
-    if( message->cruise == JAUS_TRUE )
-      strcat((*buf), "On");
-    else
-      strcat((*buf), "Off");
-
-    strcpy((*buf), "\nBrake emergency: " );
-    if( message->brakeEmergency == JAUS_TRUE )
-   	strcat((*buf), "ON");
-    else
-    	strcat((*buf), "OFF");
-
-  }
-
-  if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TIPPER_BIT))
-  {
-    strcat((*buf), "\nTipper: " );
-    jausByteToString(message->tipper, (*buf)+strlen(*buf));
-
-    if( message->tipper == 0 )
-      strcat((*buf), " Stop");
-    else if (message->tipper > 128)
-      strcat((*buf), " Up");
-    else  
-     strcat((*buf), " Down");
   }
 
   if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_GEAR_BIT))
@@ -391,7 +317,6 @@ static int dataToString(ReportDiscreteDevicesMessage message, char **buf)
   }
 
   return (int)strlen(*buf);
-
 }
 
 // Returns number of bytes put into the buffer
@@ -407,11 +332,6 @@ static unsigned int dataSize(ReportDiscreteDevicesMessage message)
 	}
 
 	if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_PARKING_BIT))
-	{
-		index += JAUS_BYTE_SIZE_BYTES;
-	}
-
-	if(jausByteIsBitSet(message->presenceVector, JAUS_DEVICES_PV_TIPPER_BIT))
 	{
 		index += JAUS_BYTE_SIZE_BYTES;
 	}

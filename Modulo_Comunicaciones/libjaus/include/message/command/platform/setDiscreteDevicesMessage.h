@@ -52,7 +52,6 @@
 #define JAUS_DEVICES_PV_PARKING_BIT		1
 #define JAUS_DEVICES_PV_GEAR_BIT		2
 #define JAUS_DEVICES_PV_TRANSFER_BIT	3
-#define JAUS_DEVICES_PV_TIPPER_BIT	4   //Nuevo
 #endif
 
 #ifndef JAUS_DEVICES_PROPULSION_BF
@@ -71,11 +70,10 @@
 #define JAUS_DEVICES_OTHER_BF
 #define JAUS_DEVICES_OTHER_BF_PARKING_BRAKE_BIT	0
 #define JAUS_DEVICES_OTHER_BF_HORN_BIT			1
-#define JAUS_DEVICES_OTHER_BF_CROSSING_LIGHT_BIT			2
-#define JAUS_DEVICES_OTHER_BF_BEAM_BIT			3
-#define JAUS_DEVICES_OTHER_BF_POSITION_LIGHT_BIT			4
-#define JAUS_DEVICES_OTHER_BF_CRUISE_BIT			5
-#define JAUS_DEVICES_OTHER_BF_BRAKE_EMERGENCY_BIT			6
+#define JAUS_DEVICES_OTHER_BF_LIGHT_IR_BIT			2
+#define JAUS_DEVICES_OTHER_BF_LIGHT_CONVENTIONAL_BIT			3
+#define JAUS_DEVICES_OTHER_BF_DIFERENTIAL_LOCK_BIT			4
+#define JAUS_DEVICES_OTHER_BF_ENABLE_LASER2D_BIT			5
 #endif
 
 typedef struct
@@ -118,9 +116,7 @@ typedef struct
 
 	JausByte presenceVector;
 	JausByte gear;
-	JausByte tipper; //Nuevo
 	JausByte transferCase;
-
 	
 	// Main Propulsion
 	JausBoolean mainPropulsion;
@@ -132,16 +128,15 @@ typedef struct
 	JausBoolean automaticStart;
 	JausBoolean automaticStop;
 
-	JausByte auxiliarComandos; //0- pkbrake, 1- horn,2- luz cruce 3- luz larga 4- luz posicion 6-vel crucero 7- emerg 8- off todas las luces
 	// Parking, Brake and Horn
 	JausBoolean parkingBrake;
 	JausBoolean horn;
-	JausBoolean crossing_light; //Luz corta  //Nuevo
-	JausBoolean beam; //luz larga  //Nuevo
-	JausBoolean position_light; // luz posicion //Nuevo
-	JausBoolean cruise; // luz posicion //Nuevo
-	JausBoolean brakeEmergency; // luz posicion //Nuevo
 
+	//Nuevos 
+	JausBoolean lightIR;
+	JausBoolean lightConventional;
+	JausBoolean diferentialLock;
+	JausBoolean enableLaser2D;
 
 }SetDiscreteDevicesMessageStruct;
 

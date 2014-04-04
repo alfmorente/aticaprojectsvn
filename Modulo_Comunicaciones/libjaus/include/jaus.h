@@ -72,14 +72,13 @@ typedef enum
 #define JAUS_RAD_PER_DEG	1.745329251994328e-2
 
 // Define Target System Endianess Here
-/**#if defined(i386) || defined(__i386__)   defined(_M_IX86) || defined(_X86_) || defined(__arm__) 
+#if defined(__i386__) || defined(i386) || defined(_M_IX86) || defined(_X86_) || defined(__arm__)
 	#define JAUS_LITTLE_ENDIAN 1
 #elif defined(__ppc__) || defined(__powerpc) || defined(__powerpc__) || defined(__POWERPC__) || defined(_M_PPC)
 	#define JAUS_BIG_ENDIAN 1
 #else
 	#error "Please define system endianess in jaus.h. #define either JAUS_LITTLE_ENDIAN or JAUS_BIG_ENDIAN"
-#endif**/
-#define JAUS_LITTLE_ENDIAN 1
+#endif
 
 #include "jausArray.h"
 #include "type/jausType.h"
