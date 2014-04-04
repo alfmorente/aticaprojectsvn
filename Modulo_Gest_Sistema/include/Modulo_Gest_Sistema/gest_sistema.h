@@ -21,7 +21,7 @@ extern "C" {
 // Defines propios del módulo
 
 // Timeout para activacion de modulos
-#define TIMEOUT_ACTIVATION_MODULE 100 //segundos
+#define TIMEOUT_ACTIVATION_MODULE 10 //segundos
 #define NUM_MODULES 12
 
 // Tipo de ack
@@ -29,8 +29,8 @@ extern "C" {
 #define EMERGENCY_ACK 1
 
 // Modo convoy follower
-#define MODE_CONVOY_LEADER 40
-#define MODE_CONVOY_FOLLOWER 41
+#define LEADER 0
+#define FOLLOWER 1
 
 // Mensajes
 #include "Common_files/msg_error.h"
@@ -40,6 +40,7 @@ extern "C" {
 #include "Common_files/msg_emergency_stop.h"
 #include "Common_files/msg_switch.h"
 #include "Common_files/msg_fcn_aux.h"
+#include "Common_files/srv_data.h"
 
 
 
@@ -67,8 +68,10 @@ int state_communication;
 int actualMode;
 bool emergencyACK;
 bool convoyACK;
+bool carType;
 
 
+//Publicadores
 ros::Publisher pub_module_enable;
 ros::Publisher pub_error;
 ros::Publisher pub_mode_error;
@@ -77,9 +80,10 @@ ros::Publisher pub_mode_convoy;
 ros::Publisher pub_fcn_aux;
 ros::Publisher pub_emergency_stop;
 
+//Servidor de Parametros
+ros::ServiceServer server;
 
-
-bool modesAvailables[12];
+bool modesAvailables[13];
 
 // Funciones de suscripcion
 void fcn_sub_mode_error(const Common_files::msg_mode);
@@ -89,6 +93,8 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux);
 void fcn_sub_switch(const Common_files::msg_switch);
 void fcn_sub_available(const Common_files::msg_available);
 void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
+
+bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
 
 
