@@ -189,7 +189,8 @@ void fcn_sub_mode(const Common_files::msg_mode msg)
     {
         int numTrying=0;
         bool msgOK=false;
-        do
+        sendJAUSMessage(convertROStoJAUS(msg_ROS));
+        /**do
         {
                 ackMode=false;
                 sendJAUSMessage(convertROStoJAUS(msg_ROS));
@@ -206,7 +207,7 @@ void fcn_sub_mode(const Common_files::msg_mode msg)
         if(msgOK)
             ackMode=false;
         else
-            ROS_INFO("Numero maximo de intentos realizado");
+            ROS_INFO("Numero maximo de intentos realizado");**/
     }
         
 }
