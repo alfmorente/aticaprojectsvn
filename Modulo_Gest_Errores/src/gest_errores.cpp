@@ -1,11 +1,5 @@
 #include "../include/Modulo_Gest_Errores/gest_errores.h"
 
-// Publicadores
-ros::Publisher pub_modo;
-ros::Publisher pub_errores;
-ros::Publisher pub_com_teleop;
-ros::Publisher pub_avail_mode;
-
 using namespace std;
 ofstream flog;
 
@@ -22,6 +16,7 @@ int main(int argc, char **argv)
 
   // Manejador ROS
   ros::NodeHandle n;
+  
 
   // Espera activa de inicio de modulo
   int estado_actual=STATE_OK;       // Para poder probar
@@ -31,7 +26,7 @@ int main(int argc, char **argv)
   }
   cout << "Atica GEST. ERRORES :: Iniciando configuración..." << endl;
 */
-
+  initialize(n);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("estado_modulo_gestErrores",STATE_OK);
   cout << "Atica GEST. ERRORES :: Configurado y funcionando" << endl;
@@ -79,8 +74,9 @@ int main(int argc, char **argv)
  * ****************************************************************************/
 
 // Suscriptor de modo
-void fcn_sub_modo(const Common_files::msg_mode msg)
+void fcn_sub_mode(const Common_files::msg_mode msg)
 {
+    ROS_INFO("Cambio de modo");
     if ((msg.status == MODE_START) && (msg.type_msg == INFO))
         currentMode= msg.mode;
 
@@ -89,10 +85,10 @@ void fcn_sub_modo(const Common_files::msg_mode msg)
 }
 
 // Suscriptor de errores
-void fcn_sub_errores(const Common_files::msg_error msg)
+void fcn_sub_error(const Common_files::msg_error msg)
 {
     short type_error = 0;
-
+    bool av_mode_aux[13];
     if(msg.type_error==TOE_UNDEFINED){                              // Evita leer mensajes que el mismo haya enviado
         cout << "Me ha llegado el mensaje de error: " << msg;
         type_error = isWarningOrCritical(msg,currentMode);           // Comprueba gravedad del error (CRIT o WARN)
@@ -103,7 +99,7 @@ void fcn_sub_errores(const Common_files::msg_error msg)
                     msg_err.id_subsystem=msg.id_subsystem;
                     msg_err.id_error=convertOutputError(msg);
                     msg_err.type_error=TOE_CRITICAL;
-                    pub_errores.publish(msg_err);
+                    pub_error.publish(msg_err);
                     writeToLog(msg_err);
                     switchNeutral();            // Al ser un error critico se pasa a modo neutro
                     break;
@@ -112,19 +108,28 @@ void fcn_sub_errores(const Common_files::msg_error msg)
                     msg_err.id_subsystem=msg.id_subsystem;
                     msg_err.id_error=convertOutputError(msg);
                     msg_err.type_error=TOE_WARNING;
-                    pub_errores.publish(msg_err);
+                    pub_error.publish(msg_err);
                     writeToLog(msg_err);
                     break;
             default:
                     cout << "Atica Gest. Errores :: Se ha recibido un error no clasificado" << endl;
         }
         // Actualización del registro de modos disponibles
-        updateModeAvailable(msg);
-        pub_avail_mode.publish(avail_mode);
+        for(int i=MODE_REMOTE;i<=MODE_TEACH;i++){
+            av_mode_aux[i]=avail_mode.available[i];
+            //cout << av_mode_aux[i] << endl;
+        }
+        if (updateModeAvailable(msg,av_mode_aux)==false)
+            pub_avail_mode.publish(avail_mode);
     }
     // Ordenes para actualizar msg de modos disponibles al recibir un mensaje fin de error
-    else if (msg.type_error==TOE_END_ERROR)
-        updateEndError(msg);
+    else if (msg.type_error==TOE_END_ERROR){
+        ROS_INFO("Fin de error recibido");
+        for(int i=MODE_REMOTE;i<=MODE_TEACH;i++)
+            av_mode_aux[i]=avail_mode.available[i];
+        if (updateEndError(msg,av_mode_aux)==false)
+            pub_avail_mode.publish(avail_mode);
+    }
 }
 
 /*******************************************************************************
@@ -134,15 +139,14 @@ void fcn_sub_errores(const Common_files::msg_error msg)
  * ****************************************************************************/
 // Inicialización de variables
 void initialize(ros::NodeHandle n) {
-    // Inicializacion de publicadores
-    pub_modo = n.advertise<Common_files::msg_mode>("modeES", 1000);
-    pub_errores = n.advertise<Common_files::msg_error>("error", 1000);
-    pub_avail_mode = n.advertise<Common_files::msg_available>("avail", 1000);
-
     // Creacion de suscriptores
-    ros::Subscriber sub_errores = n.subscribe("error", 1000, fcn_sub_errores);
-    ros::Subscriber sub_modo = n.subscribe("modeSE", 1000, fcn_sub_modo);
-
+    sub_error = n.subscribe("error", 1000, fcn_sub_error);
+    sub_mode = n.subscribe("modeSE", 1000, fcn_sub_mode);
+    // Inicializacion de publicadores
+    pub_mode = n.advertise<Common_files::msg_mode>("modeES", 1000);
+    pub_error = n.advertise<Common_files::msg_error>("error", 1000);
+    pub_avail_mode = n.advertise<Common_files::msg_available>("avail", 1000);
+    
     // Inicialización de variables globales
     currentMode = MODE_NEUTRAL;
     exitModule = false;
@@ -152,9 +156,9 @@ void initialize(ros::NodeHandle n) {
     int i,j,k;
     for (i = AVAILABLE_POS_REMOTE; i <= AVAILABLE_POS_TEACH; i++)
         avail_mode.available[i] = true;
-    for (i=0;i<=12;i++){
-        for(j=0;j<=14;j++){
-            for(k=0;k<=27;k++){
+    for (i=0;i<MAX_MODES;i++){
+        for(j=0;j<MAX_MODULES;j++){
+            for(k=0;k<MAX_ERRORS;k++){
                 numErrorMode[i][j][k]=0;
             }
         }
@@ -260,7 +264,7 @@ short mode_remote_error(Common_files::msg_error msg)
                             type_error=TOE_CRITICAL;
                         break;
                         case (NAVIGATION_MODULE_NA):
-                            type_error=TOE_CRITICAL;
+                            type_error=TOE_WARNING;
                         break;
                         case (CAMERA_MODULE_NA):
                             type_error=TOE_WARNING;
@@ -6323,7 +6327,7 @@ void switchNeutral(){
     msg_ch_neutral.mode=currentMode;
     msg_ch_neutral.status=MODE_EXIT;
     msg_ch_neutral.type_msg=SET;
-    pub_modo.publish(msg_ch_neutral);
+    pub_mode.publish(msg_ch_neutral);
 }
 
 // Convierte los errores de entrada en sus correspondientes errores de salida
@@ -6652,54 +6656,80 @@ void writeToLog(Common_files::msg_error msg) {
 }
 
 // Actualiza la tabla de modos disponibles ante la llegada de un mensaje de error
-void updateModeAvailable (Common_files::msg_error msg){
+bool updateModeAvailable (Common_files::msg_error msg,bool originalTable[13]){
     int i=0;
     short type_error;
-    for (i=AVAILABLE_POS_REMOTE; i<=AVAILABLE_POS_TEACH; i++){
+    for (i=MODE_REMOTE; i<=MODE_TEACH; i++){
         type_error=isWarningOrCritical(msg,i);                  // Comprueba si el error recibido es CRIT o WARN para cada modo
         if (type_error == TOE_CRITICAL){
             numErrorMode[i][msg.id_subsystem][msg.id_error]++;
             avail_mode.available[i] = false;                    // ACTUALIZA CAMPO AVAILABLE_MODE
         }
-    }
-    /* Versión anterior a 4/4/14 */
-    /*short type_error_mode;
-    for (i = AVAILABLE_POS_REMOTE; i <= AVAILABLE_POS_TEACH; i++) {
-        if (i != currentMode) {
-            type_error_mode = isWarningOrCritical(msg, i); // Comprueba si el error recibido es CRIT o WARN para cada modo
-            if (type_error_mode == TOE_CRITICAL) { // independientemente del modo actual
-                num_err_mode[i]++;
-                avail_mode.available[i] = false; // ACTUALIZA CAMPO AVAILABLE_MODE
-            }
+        /******* Ordenes para debug parte available mode *******/
+        int summ=0,j,k;
+        for(j=0;j<MAX_MODULES;j++){
+            for(k=0;k<MAX_ERRORS;k++)
+                summ+=numErrorMode[i][j][k];
         }
-        //cout << "Numeros de errores en modo " << i << " es igual a " << num_err_mode[i] << endl;
+        //cout << "Numeros de errores en modo " << i << " es igual a " << summ << endl;
         //cout << "Modo disponible con ID " << i << " es " << (short) avail_mode.available[i] << endl;
-    }*/
+        /*******************************************************/
+    }
+    return compareTable(originalTable,avail_mode);      // La función devuelve false si ha habido cambios en la tabla de modos disponibles
 }
 
 // Actualiza la tabla de modos disponibles ante la llegada de un mensaje fin de error
-void updateEndError(Common_files::msg_error msg){
+bool updateEndError(Common_files::msg_error msg, bool originalTable[13]){
     short type_error;
+    int i,j,summ=0;
+        if ((msg.id_subsystem==SUBS_GPS) && (msg.id_error==GPS_GLOBAL_ERROR)){          // Probando, no puedo comparar solo id_error
+            for(i=MODE_REMOTE;i<=MODE_TEACH;i++){
+                for(j=0;j<MAX_ERRORS;j++){
+                    numErrorMode[i][SUBS_GPS][j]=0;             // Este error provoca que la columna del módulo GPS se reseteen a cero
+                }
+                summ=checkErrorTable(i);
+                if (summ == 0)                                  // Si no es cero, el modo sigue sin estar disponible 
+                    avail_mode.available[i] = true;
+            }
+        }
+        else{
+            for (i=MODE_REMOTE; i<=MODE_TEACH; i++) {
+                type_error = isWarningOrCritical(msg, i); // Comprueba para cada modo si el error finalizado es critico o warning
+                if ((type_error == TOE_CRITICAL) && (numErrorMode[i][msg.id_subsystem][msg.id_error] > 0)) {
+                    numErrorMode[i][msg.id_subsystem][msg.id_error]--;
+                    summ=checkErrorTable(i);
+                }
+                if (summ == 0)                            // Si no es cero, el modo sigue sin estar disponible
+                    avail_mode.available[i] = true; 
+            }
+        }
+    summ=0;
+    return compareTable(originalTable,avail_mode);      // La función devuelve false si ha habido cambios en la tabla de modos disponibles
+}
+
+// Comprueba el número de errores de la tabla de errores global
+int checkErrorTable(int mode)
+{
     int i,j;
     int summ=0;
-    switch(msg.id_error){
-        case GPS_GLOBAL_ERROR:
-            
-            break;
-        default:
-            for (i=AVAILABLE_POS_REMOTE; i<=AVAILABLE_POS_TEACH; i++) {
-                type_error = isWarningOrCritical(msg, i);       // Comprueba para cada modo si el error finalizado es critico o warning
-                if ((type_error == TOE_CRITICAL) && (numErrorMode[i][msg.id_subsystem][msg.id_error] > 0)) {
-                    numErrorMode[i][msg.id_subsystem][msg.id_error]--;  
-                    for(j=0;j<=14;j++)                          // Comprueba si el num de errores CRIT acumulados en un modo es cero
-                        summ+=numErrorMode[i][j][msg.id_error];
-                    if(summ==0){                
-                        avail_mode.available[i] = true;         // Si no es cero, el modo sigue sin estar disponible
-                        pub_avail_mode.publish(avail_mode);
-                    }
-                }
-                summ=0;
-            }
-           break;
+    for (i=0;i<MAX_MODULES;i++){
+        for(j=0;j<MAX_ERRORS;j++){
+            summ+=numErrorMode[mode][i][j];
+        }
     }
+    return summ;
+    /******* Pruebas modo debug **********/
+    //cout << "Numeros de errores en modo " << mode << " es igual a " << summ << endl;
+    //cout << "Modo disponible con ID " << mode << " es " << (short) avail_mode.available[mode] << endl;
+}
+
+// Compara las tablas de modos disponibles para publicar o no
+bool compareTable(bool original[13],Common_files::msg_available msg)
+{
+    for (int i=1;i<13;i++){
+        if (original[i]!=msg.available[i]){
+            return false;
+        }
+    }
+    return true;
 }

@@ -37,7 +37,26 @@ extern "C" {
 #include <signal.h>
 #include "interaction.h"
 
+// Definicion constantes propias del modulo
+#define MODE_START_ENGINE 8
+#define MODE_STOP_ENGINE 9
+#define MODE_ENGAGE_BRAKE 10
+#define MODE_MAPPING 11
+#define MODE_TEACH 12
+
+#define TOE_UNAVAILABLE 99
+#define MIN_MODES 1
+#define MAX_MODES 13
+#define MAX_MODULES 15
+#define MAX_ERRORS 28
+
 // Definición de variables globales
+// Publicadores y suscriptores
+ros::Publisher pub_mode;
+ros::Publisher pub_error;
+ros::Publisher pub_avail_mode;
+ros::Subscriber sub_error;
+ros::Subscriber sub_mode;
 // Variable de control de modo
 short currentMode;
 // Variable de continuacion de modulo
@@ -45,11 +64,11 @@ bool exitModule;
 // Variable control modos disponibles
 Common_files::msg_available avail_mode;
 // Variable con el número de errores por modo
-int numErrorMode[13][15][28];
+int numErrorMode[MAX_MODES][MAX_MODULES][MAX_ERRORS];
 
 // Funciones de suscripcion
-void fcn_sub_modo(const Common_files::msg_mode);
-void fcn_sub_errores(const Common_files::msg_error);
+void fcn_sub_mode(const Common_files::msg_mode);
+void fcn_sub_error(const Common_files::msg_error);
 
 // Funciones propias
 void initialize(ros::NodeHandle n);
@@ -69,14 +88,7 @@ short mode_convoy_error(Common_files::msg_error);
 short mode_conv_teleop_error(Common_files::msg_error);
 short mode_conv_auto_error(Common_files::msg_error);
 void writeToLog(Common_files::msg_error);
-void updateModeAvailable (Common_files::msg_error);
-void updateEndError(Common_files::msg_error);
-
-// Definicion constantes propias del modulo
-#define MODE_START_ENGINE 8
-#define MODE_STOP_ENGINE 9
-#define MODE_ENGAGE_BRAKE 10
-#define MODE_MAPPING 11
-#define MODE_TEACH 12
-
-#define TOE_UNAVAILABLE 99
+bool updateModeAvailable (Common_files::msg_error, bool[13]);
+bool updateEndError(Common_files::msg_error, bool[13]);
+int checkErrorTable(int);
+bool compareTable(bool original[13],Common_files::msg_available);
