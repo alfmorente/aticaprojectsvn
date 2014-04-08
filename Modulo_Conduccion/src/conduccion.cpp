@@ -35,27 +35,12 @@ int main(int argc, char **argv)
   //}
   cout << "Atica CONDUCCION :: Iniciando configuración..." << endl;
 
-  // Generación de publicadores
-  pub_error = n.advertise<Common_files::msg_error>("error",1000);
-  pub_switch = n.advertise<Common_files::msg_switch>("switch",1000);
-  pub_backup = n.advertise<Common_files::msg_backup>("backup",1000);
-  pub_info_stop = n.advertise<Common_files::msg_info_stop>("infoStop",1000);
-  pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop>("emergInfo",1000);
-
-  // Generación de subscriptores  
-  sub_navigation = n.subscribe("pre_navigation", 1000, fcn_sub_navigation);
-  sub_com_teleop = n.subscribe("commands_clean",1000,fcn_sub_com_teleop);
-  sub_fcn_aux = n.subscribe("engBrake",1000,fcn_sub_engine_brake);
-  sub_emergency_stop = n.subscribe("emergSet",1000,fcn_sub_emergency_stop);
+  inicializate(n); 
   
-  // Todo esta correcto, lo especificamos con el correspondiente parametro
-  n.setParam("estado_modulo_conduccion",STATE_OK);
   cout << "Atica CONDUCCION :: Configurado y funcionando" << endl;
 
   // Inicializacion de la comunicacion CAN
-  finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos.
-  
-  inicializa_variables();   
+  finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos.  
   
   // Envío de erorr si no hay comunicacion CAN 
   if (!finDePrograma) {       
@@ -545,7 +530,24 @@ bool disconnectCommunication(){
 }
 
 
-void inicializa_variables() {
+void inicialize(ros::NodeHandle n) {
+    
+  // Generación de publicadores
+  pub_error = n.advertise<Common_files::msg_error>("error",1000);
+  pub_switch = n.advertise<Common_files::msg_switch>("switch",1000);
+  pub_backup = n.advertise<Common_files::msg_backup>("backup",1000);
+  pub_info_stop = n.advertise<Common_files::msg_info_stop>("infoStop",1000);
+  pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop>("emergInfo",1000);
+
+  // Generación de subscriptores  
+  sub_navigation = n.subscribe("pre_navigation", 1000, fcn_sub_navigation);
+  sub_com_teleop = n.subscribe("commands_clean",1000,fcn_sub_com_teleop);
+  sub_fcn_aux = n.subscribe("engBrake",1000,fcn_sub_engine_brake);
+  sub_emergency_stop = n.subscribe("emergSet",1000,fcn_sub_emergency_stop);
+  
+  // Todo esta correcto, lo especificamos con el correspondiente parametro
+  n.setParam("estado_modulo_conduccion",STATE_OK);  
+    
   msg_err.id_subsystem = SUBS_DRIVING;  // Flag que indica a errores que estamos en el subsistema Driving
   parada_emergencia = false;            // Al principio siempre es falsa la parada de emergencia. Se pondra a true cuando verdaderamente haya una parada.
   valor_conmutador = 9;                 // Al principio se le asigna un valor cualquiera para que en la primera itereacion cambio de valor y lo publique

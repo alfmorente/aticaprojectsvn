@@ -114,7 +114,7 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
 //Funciones propias
 bool createCommunication();
 bool disconnectCommunication();
-void inicializa_variables();
+void inicialize(ros::NodeHandle n);
 void checkEmergencyStop();
 void checkSwitch();
 void checkInfoStop();
