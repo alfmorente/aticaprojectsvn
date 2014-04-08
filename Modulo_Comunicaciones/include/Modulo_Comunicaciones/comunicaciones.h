@@ -66,15 +66,6 @@ extern "C" {
 #define JAUS_NEUTRAL_LOW 178
 #define JAUS_LOW 229
 
-#define MISSION 0
-#define TASK 1
-
-#define SPOOLING 0
-#define PENDINGM 1
-#define PAUSED 2
-#define ABORTED 3
-#define FINISHED 4
-
 //Estado de las comunicaciones
 #define COM_OFF 0
 #define COM_ON 1
@@ -139,6 +130,9 @@ int communicationState;
 
 // Otras Variables
 int numberWaypoints; //Numero de waypoints del camino
+bool ackMode;
+bool ackError;
+bool ackAvailable;
 
 // Estructura de datos que maneja los mensajes ROS
 typedef struct{
@@ -235,4 +229,5 @@ bool setDebugConfiguration(string);
 void losedCommunication();
 int getStateModule(ros::NodeHandle);
 void setStateModule(ros::NodeHandle,int);
+bool waitForACK(int type,int timeout);
 

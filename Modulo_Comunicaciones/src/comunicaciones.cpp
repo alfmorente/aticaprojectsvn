@@ -177,6 +177,7 @@ void fcn_sub_camera(const Common_files::msg_camera msg)
 //Suscriptor de modo
 void fcn_sub_mode(const Common_files::msg_mode msg)
 {
+    ROS_INFO("Estado del modo");
     // Se genera el mensaje a enviar
     ROSmessage msg_ROS;
     msg_ROS.tipo_mensaje=TOM_MODE;
@@ -185,7 +186,29 @@ void fcn_sub_mode(const Common_files::msg_mode msg)
     // Espera que la comunicacion este activa
     if(communicationState==COM_ON)
     // Se envia el mensaje por JAUS
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    {
+        int numTrying=0;
+        bool msgOK=false;
+        do
+        {
+                ackMode=false;
+                sendJAUSMessage(convertROStoJAUS(msg_ROS));
+                if(waitForACK(TOM_MODE,10))
+                    msgOK=true;
+                else
+                {
+                    ROS_INFO("Reintentando enviar el mensaje.....");
+                    numTrying++;
+                }
+
+        }while(!msgOK && numTrying<3);
+        
+        if(msgOK)
+            ackMode=false;
+        else
+            ROS_INFO("Numero maximo de intentos realizado");
+    }
+        
 }
 
 // Suscriptor de backup
@@ -416,26 +439,28 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             tipoMensajeJAUS.error->subsystem=msg_ROS.mens_error.id_subsystem;
             tipoMensajeJAUS.error->idError=msg_ROS.mens_error.id_error;
             tipoMensajeJAUS.error->typeError=msg_ROS.mens_error.type_error;
+            tipoMensajeJAUS.error->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
             msg_JAUS = reportErrorMessageToJausMessage(tipoMensajeJAUS.error);
             reportErrorMessageDestroy(tipoMensajeJAUS.error);
             break;
         case TOM_MODE:
             tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
-            tipoMensajeJAUS.missionStatus->type=MISSION;
+            tipoMensajeJAUS.missionStatus->type=JAUS_MISSION;
             tipoMensajeJAUS.missionStatus->missionId=msg_ROS.mens_mode.mode;
-	    //Camino finalizado o modo terminado
-	    if(msg_ROS.mens_mode.mode==MODE_FINISH)
-		tipoMensajeJAUS.missionStatus->status=FINISHED;
-            else if(msg_ROS.mens_mode.mode==MODE_START)
-                tipoMensajeJAUS.missionStatus->status=SPOOLING;
-            else if(msg_ROS.mens_mode.mode==MODE_EXIT)
-                tipoMensajeJAUS.missionStatus->status=ABORTED; 
-            else if(msg_ROS.mens_mode.mode==MODE_STOP)
-                tipoMensajeJAUS.missionStatus->status=PAUSED;
-            else if(msg_ROS.mens_mode.mode==MODE_RUN)
-                tipoMensajeJAUS.missionStatus->status=SPOOLING;
-            
+            tipoMensajeJAUS.missionStatus->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
+	    
+            //Camino finalizado o modo terminado
+	    if(msg_ROS.mens_mode.status==MODE_FINISH)
+		tipoMensajeJAUS.missionStatus->status=JAUS_FINISHED;
+            else if(msg_ROS.mens_mode.status==MODE_START)
+                tipoMensajeJAUS.missionStatus->status=JAUS_SPOOLING;
+            else if(msg_ROS.mens_mode.status==MODE_EXIT)
+                tipoMensajeJAUS.missionStatus->status=JAUS_ABORTED; 
+            else if(msg_ROS.mens_mode.status==MODE_STOP)
+                tipoMensajeJAUS.missionStatus->status=JAUS_PAUSED;
+            else if(msg_ROS.mens_mode.status==MODE_RUN)
+                tipoMensajeJAUS.missionStatus->status=JAUS_SPOOLING;
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
             msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);
             reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus);           
@@ -490,6 +515,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             tipoMensajeJAUS.avail->convoy=(JausBoolean)msg_ROS.mens_available.available[AVAILABLE_POS_CONVOY]; 
             tipoMensajeJAUS.avail->convoy_auto=(JausBoolean)msg_ROS.mens_available.available[AVAILABLE_POS_CONVOY_AUTO]; 
             tipoMensajeJAUS.avail->convoy_teleop=(JausBoolean)msg_ROS.mens_available.available[AVAILABLE_POS_CONVOY_TELEOP];             
+            tipoMensajeJAUS.avail->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
             msg_JAUS = reportAvailableMessageToJausMessage(tipoMensajeJAUS.avail);
             reportAvailableMessageDestroy(tipoMensajeJAUS.avail);
             break;
@@ -704,7 +730,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
         
         //Funciones auxiliares
         case JAUS_SET_FUNCTION_AUXILIAR:
-            ROS_INFO("Función auxiliar: ");
+            ROS_INFO("Funcion auxiliar: ");
             tipoMensajeJAUS.faux=setFunctionAuxiliarMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.faux)
             {
@@ -726,7 +752,6 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
             break;
         //Report de fichero actualizado
         case JAUS_REPORT_FILE_DATA:
-            ROS_INFO("Fichero de datos");
             tipoMensajeJAUS.file=reportFileDataMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.file)
             {
@@ -735,6 +760,8 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
                 for(unsigned int i=0;i< tipoMensajeJAUS.file->bufferSizeBytes;i++)
                         msg_ROS.mens_file.stream.push_back( tipoMensajeJAUS.file->data[i]);               
                 reportFileDataMessageDestroy(tipoMensajeJAUS.file);
+                ROS_INFO("Fichero de datos con %d bytes: ",tipoMensajeJAUS.file->bufferSizeBytes);
+                cout << msg_ROS.mens_file;
             }            
             break; 
           //Camaras
@@ -804,6 +831,16 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
                 }                    
             }
             break;
+            
+          //Ack de mensajes enviados 
+          case JAUS_REPORT_MISSION_STATUS:
+              break;
+          case JAUS_REPORT_ERROR:
+              break;    
+          case JAUS_REPORT_AVAILABLE:
+              break;                  
+              
+          
             
         default:
             break;
@@ -969,4 +1006,32 @@ int redondea(float value)
 	else
 		res=(int)(value-0.5);
 	return res;
+}
+
+bool waitForACK(int type,int timeout)
+{
+   time_t tstart, tend; // gestiona los timeout's
+   tstart=time(0);
+   bool ack;
+   
+   do
+   {
+       tend=time(0);
+       if(type==TOM_MODE)
+           ack=ackMode;
+       //ROS_INFO("dIFERENCIA DE TIEMPO: %f",difftime(tend,tstart));
+   }
+   while((difftime(tend,tstart)< timeout) && !ack);
+   
+   if(ack)
+   {
+       ROS_INFO("ACK recibido");
+       return true;
+   }
+   else
+   {
+       ROS_INFO("Timeout expirado");
+       return false;
+   }
+       
 }
