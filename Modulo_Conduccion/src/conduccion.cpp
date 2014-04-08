@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   //}
   cout << "Atica CONDUCCION :: Iniciando configuración..." << endl;
 
-  inicializate(n); 
+  initialize(n); 
   
   cout << "Atica CONDUCCION :: Configurado y funcionando" << endl;
 
@@ -530,7 +530,7 @@ bool disconnectCommunication(){
 }
 
 
-void inicialize(ros::NodeHandle n) {
+void initialize(ros::NodeHandle n) {
     
   // Generación de publicadores
   pub_error = n.advertise<Common_files::msg_error>("error",1000);
