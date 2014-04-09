@@ -115,7 +115,8 @@ void fcn_sub_mode_communication(const Common_files::msg_mode msg)
             carType=LEADER;
             if(msg.status==MODE_START)
             {
-                if(actualMode==MODE_NEUTRAL)
+                if((actualMode==MODE_NEUTRAL) || (actualMode==MODE_CONVOY 
+                    && (msg.mode==MODE_CONVOY_TELEOP || msg.mode==MODE_CONVOY_AUTO)))
                 {
                     if(modeRUN(msg.mode))
                     {
@@ -324,8 +325,10 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
 
 void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg)
 {
-    if(msg.value==INFO)
+    if(msg.value==INFO){
         emergencyACK=true;
+        ROS_INFO("Recibido ACK Parada emergencia");
+    }
 }
 
 void fcn_sub_switch(const Common_files::msg_switch msg)
@@ -336,7 +339,6 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
         ROS_INFO("SWITCH MANUAL");
         ROS_INFO("EMERGENCY STOP");
 
-        ROS_INFO("EMERGENCY STOP DONE");
         if(actualMode!=MODE_NEUTRAL)
         {
             modeEXIT(actualMode);
@@ -832,6 +834,7 @@ bool modeEXIT(int mode)
 {
    bool exitOK;
    //if(emergencySTOP())
+   ROS_INFO("EMERGENCY STOP");
    emergencySTOP();
    {
         Common_files::msg_module_enable module_enable;
@@ -854,7 +857,7 @@ bool modeEXIT(int mode)
                  exitOK=true;                 
                  break;
              case MODE_FOLLOW_ME:
-                 ROS_INFO("MODE FOLLO_ME EXIT"); 
+                 ROS_INFO("MODE FOLLOW_ME EXIT"); 
                  module_enable.id_module=ID_MOD_NAVIGATION;
                  module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
                  module_enable.status=MOD_OFF;
@@ -970,7 +973,7 @@ bool emergencySTOP()
     emergency.value=SET;
     pub_emergency_stop.publish(emergency);
 
-    if(timerACK(5,EMERGENCY_ACK))
+    if(timerACK(30,EMERGENCY_ACK))
         return true;
     else
         return false;
