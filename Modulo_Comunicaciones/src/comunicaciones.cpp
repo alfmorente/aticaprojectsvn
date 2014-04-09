@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
   // Espera activa de inicio de modulo
   int state_aux;
-  /**do
+  do
   {
     state_aux=getStateModule(n);
     if(state_aux==STATE_ERROR)
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
           exit(1);
     }   
     usleep(500000);
-  }while(state_aux!=STATE_CONF);**/
+  }while(state_aux!=STATE_CONF);
 
 
           
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
  
   // Creación de suscriptores
   ros::Subscriber sub_gps = n.subscribe("gps", 1000, fcn_sub_gps);
-  ros::Subscriber sub_error = n.subscribe("error", 1000, fcn_sub_error);
+  ros::Subscriber sub_error = n.subscribe("errorToUCR", 1000, fcn_sub_error);
   ros::Subscriber sub_camera = n.subscribe("camera", 1000, fcn_sub_camera);
   ros::Subscriber sub_mode = n.subscribe("modeSC", 1000, fcn_sub_mode);
   ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);
@@ -56,11 +56,11 @@ int main(int argc, char **argv)
   pthread_create (&threadSpin, NULL,&spinThread,NULL);
 
   //Configuracion de JAUS
-  /**if(!configureJAUS())
+  if(!configureJAUS())
   {
       setStateModule(n,STATE_ERROR); //completar
       exit(1);
-  }**/
+  }
 
   // Realización de la conexión JAUS
   communicationState=COM_OFF;
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
   ROS_INFO("ATICA COMMUNICATION VEHICLE:: Configurate and Run");
 
   while (ros::ok() && getStateModule(n)!=STATE_OFF){
-      /**if(communicationState==COM_ON)
+      if(communicationState==COM_ON)
       {
         if(!checkConnection())
           communicationState=COM_LOSED;
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 	  disconnect();
           communicationState=COM_OFF;          
       }
-      else**/ if(communicationState==COM_OFF)
+      else if(communicationState==COM_OFF)
       {
 	  if(connect())
            communicationState=COM_ON;   
@@ -293,10 +293,10 @@ bool configureJAUS(){
 bool connect(){
 
     string nameComponent="VEHICLE";
-    /**if(handler->controlJaus()!=JAUS_EVENT_CONNECT)
+    if(handler->controlJaus()!=JAUS_EVENT_CONNECT)
         return false;
     
-    else**/
+    else
     {
 
         //Creo componente
@@ -701,7 +701,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
                         //activacion laser 2D
                         msg_ROS.mens_teleop.id_element=ID_REMOTE_ACT_LASER2D;
                         msg_ROS.mens_teleop.value=tipoMensajeJAUS.auxCommand->enableLaser2D;
-                        ROS_INFO("Activacion laser 2D",msg_ROS.mens_teleop.value);
+                        ROS_INFO("Activacion laser 2D: %d",msg_ROS.mens_teleop.value);
                         break;
  
                     case PRESENCE_VECTOR_GEAR:
@@ -731,10 +731,11 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
         
         //Funciones auxiliares
         case JAUS_SET_FUNCTION_AUXILIAR:
-            ROS_INFO("Funcion auxiliar: ");
+            
             tipoMensajeJAUS.faux=setFunctionAuxiliarMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.faux)
             {
+                ROS_INFO("Funcion auxiliar: %d %d",msg_ROS.mens_fcn_aux.function,msg_ROS.mens_fcn_aux.value);
                 msg_ROS.tipo_mensaje=TOM_FUNC_AUX;
                 msg_ROS.mens_fcn_aux.function=tipoMensajeJAUS.faux->function;
                 msg_ROS.mens_fcn_aux.value=tipoMensajeJAUS.faux->activated;
@@ -965,6 +966,7 @@ void losedCommunication()
     {
         if(servMode.response.value==MODE_REMOTE)
         {
+            ROS_INFO("PARADA DEL VEHICULO POR SEGURIDAD");
             Common_files::msg_com_teleop stopVehicle;
             stopVehicle.id_element=ID_REMOTE_THROTTLE;
             stopVehicle.value=0;
@@ -983,7 +985,7 @@ void losedCommunication()
     //Envia error de comunicación 
     Common_files::msg_error error;
     error.id_subsystem=0;
-    error.id_error=0;
+    error.id_error=8;           /************ PRUEBA **********************/
     error.type_error=0;
     pub_error.publish(error);
     

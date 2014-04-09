@@ -19,9 +19,9 @@ void MyHandler::handleEvent(NodeManagerEvent *e)
 		case NodeManagerEvent::SystemTreeEvent:
 			treeEvent = (SystemTreeEvent *)e;
 			evento=treeEvent->toString();
-			if(treeEvent->getSubType()==SystemTreeEvent::NodeRemoved)
+			if(treeEvent->getSubType()==SystemTreeEvent::SubsystemRemoved)
 				eventConexion=JAUS_EVENT_DISCONNECT;
-			else if(treeEvent->getSubType()==SystemTreeEvent::NodeAdded)
+			else if(treeEvent->getSubType()==SystemTreeEvent::SubsystemAdded)
 				eventConexion=JAUS_EVENT_CONNECT;
 			printf("%s\n", treeEvent->toString().c_str());
 			delete e;
