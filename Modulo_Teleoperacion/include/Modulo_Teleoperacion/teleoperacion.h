@@ -20,10 +20,6 @@ extern "C" {
 #endif	/* TELEOPERACION_H */
 
 //Mensajes
-//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_com_teleop.h"
-//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_error.h"
-//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_module_enable.h"
-//#include "../../msg_gen/cpp/include/Modulo_Teleoperacion/msg_mode.h"
 #include "Common_files/msg_com_teleop.h"
 #include "Common_files/msg_error.h"
 #include "Common_files/msg_module_enable.h"

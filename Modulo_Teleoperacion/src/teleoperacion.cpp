@@ -127,13 +127,13 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
             pub_error.publish(msg_err);
             error_count=0;
         }
-        else if (end_error == true){
+        /*else if (end_error == true){
             msg_err.id_subsystem=SUBS_REMOTE;
             msg_err.id_error=REMOTE_PARAMETER_OUTRANGE;
             msg_err.type_error=TOE_END_ERROR;
             pub_error.publish(msg_err);
             end_error=false;
-        }
+        }*/
     }
 }
 
