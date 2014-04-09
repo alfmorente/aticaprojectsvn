@@ -19,16 +19,16 @@ int main(int argc, char **argv)
   
 
   // Espera activa de inicio de modulo
-  int estado_actual=STATE_OK;       // Para poder probar
- /* int estado_actual=STATE_OFF;
+  //int estado_actual=STATE_OK;       // Para poder probar
+  int estado_actual=STATE_OFF;
   while(estado_actual!=STATE_CONF){
-          n.getParam("estado_modulo_gestErrores",estado_actual);
+          n.getParam("state_module_error_management",estado_actual);
   }
   cout << "Atica GEST. ERRORES :: Iniciando configuración..." << endl;
-*/
+
   initialize(n);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
-  n.setParam("estado_modulo_gestErrores",STATE_OK);
+  n.setParam("state_module_error_management",STATE_OK);
   cout << "Atica GEST. ERRORES :: Configurado y funcionando" << endl;
 
   while (ros::ok() && !exitModule)
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
        switch (operationMode) {
         case OPERATION_MODE_DEBUG:
             // Funcionamiento del modo debug
-            n.getParam("estado_modulo_gestErrores",estado_actual);
+            n.getParam("state_module_error_management",estado_actual);
             if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
                 exitModule=true;
             } 
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
             break;
         case OPERATION_MODE_RELEASE:
             // Funcionamiento del modo release
-            n.getParam("estado_modulo_gestErrores",estado_actual);
+            n.getParam("state_module_error_management",estado_actual);
             if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
                 exitModule=true;
             } 
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
             break;
         case OPERATION_MODE_SIMULATION:
             // Funcionamiento del modo simulacion
-            n.getParam("estado_modulo_gestErrores",estado_actual);
+            n.getParam("state_module_error_management",estado_actual);
             if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
                 exitModule=true;
             } 
@@ -144,7 +144,7 @@ void initialize(ros::NodeHandle n) {
     sub_mode = n.subscribe("modeSE", 1000, fcn_sub_mode);
     // Inicializacion de publicadores
     pub_mode = n.advertise<Common_files::msg_mode>("modeES", 1000);
-    pub_error = n.advertise<Common_files::msg_error>("error", 1000);
+    pub_error = n.advertise<Common_files::msg_error>("errorToUCR", 1000);
     pub_avail_mode = n.advertise<Common_files::msg_available>("avail", 1000);
     
     // Inicialización de variables globales
