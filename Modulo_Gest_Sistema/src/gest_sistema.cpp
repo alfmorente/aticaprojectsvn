@@ -190,17 +190,19 @@ void fcn_sub_mode_error(const Common_files::msg_mode msg)
 
 void fcn_sub_available(const Common_files::msg_available msg)
 {
-    for(unsigned int i=AVAILABLE_POS_REMOTE;i<=AVAILABLE_POS_MAPPING;i++)
+    for(unsigned int i=AVAILABLE_POS_REMOTE;i<=AVAILABLE_POS_TEACH;i++)
         modesAvailables[i]=msg.available[i];
 }
 
 void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
-{
+{    
     if(msg.type_msg==SET)
     {
         switch(msg.function)
         {
             case ENGINE:
+                if(actualMode==MODE_MANUAL)
+                    return;
                 if(msg.value==ON) 
                 {
                      if(modesAvailables[AVAILABLE_POS_START_ENGINE])
@@ -237,6 +239,8 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                 }
                 break;
             case BRAKE:
+                if(actualMode==MODE_MANUAL)
+                    return;
                 if(modesAvailables[AVAILABLE_POS_ENGAGE_BRAKE])
                 {
                             pub_fcn_aux.publish(msg);
@@ -342,12 +346,12 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
         if(actualMode!=MODE_NEUTRAL)
         {
             modeEXIT(actualMode);
-            mode_aux.type_msg=INFO;
+            /*mode_aux.type_msg=INFO;   /*** Modificación ordenador Alfonso 9/4/14 
             mode_aux.mode=actualMode;
             mode_aux.status=MODE_EXIT;
             pub_mode_error.publish(mode_aux);
             pub_mode_communication.publish(mode_aux);
-            actualMode=MODE_NEUTRAL;
+            actualMode=MODE_NEUTRAL;*/
         }
         else
         {
@@ -813,18 +817,13 @@ void modeSTOP(int mode)
             module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
             module_enable.status=MOD_PAUSE;
             pub_module_enable.publish(module_enable);
+            break;
         case MODE_CONVOY_AUTO:
             ROS_INFO("MODE CONVOY AUTO STOP");             
             module_enable.id_module=ID_MOD_NAVIGATION;
             module_enable.submode=SUBMODE_NAV_CONVOY;
             module_enable.status=MOD_PAUSE;
             pub_module_enable.publish(module_enable); 
-        case MODE_CONVOY_TELEOP:
-            ROS_INFO("MODE CONVOY TELEOP STOP");             
-            module_enable.id_module=ID_MOD_REMOTE;
-            module_enable.submode=SUBMODE_REMOTE;
-            module_enable.status=MOD_PAUSE;
-            pub_module_enable.publish(module_enable);             
             break;
         default:
             break;
@@ -949,18 +948,13 @@ void modeRESUME(int mode)
             module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
             module_enable.status=MOD_ON;
             pub_module_enable.publish(module_enable);
+            break;
         case MODE_CONVOY_AUTO:
-            ROS_INFO("MODE CONVOY AUTO STOP");             
+            ROS_INFO("MODE CONVOY AUTO RESUME");             
             module_enable.id_module=ID_MOD_NAVIGATION;
             module_enable.submode=SUBMODE_NAV_CONVOY;
             module_enable.status=MOD_ON;
-            pub_module_enable.publish(module_enable); 
-        case MODE_CONVOY_TELEOP:
-            ROS_INFO("MODE CONVOY TELEOP STOP");             
-            module_enable.id_module=ID_MOD_REMOTE;
-            module_enable.submode=SUBMODE_REMOTE;
-            module_enable.status=MOD_ON;
-            pub_module_enable.publish(module_enable);             
+            pub_module_enable.publish(module_enable);         
             break;          
          default:
             break;
@@ -972,7 +966,8 @@ bool emergencySTOP()
     Common_files::msg_emergency_stop emergency;
     emergency.value=SET;
     pub_emergency_stop.publish(emergency);
-
+    emergencyACK=false;
+    
     if(timerACK(30,EMERGENCY_ACK))
         return true;
     else
