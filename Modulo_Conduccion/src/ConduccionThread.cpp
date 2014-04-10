@@ -398,17 +398,16 @@ void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
     msgEx.MSGTYPE = 0;
     
     uint8_t byte_1;
-
-    if ((valor_arranque_parada == 1) && (valor_freno_estacionamiento == 1))
+    
+    if ((valor_arranque_parada == 0) && (valor_freno_estacionamiento == 0))
+        byte_1 = 0; 
+    else if ((valor_arranque_parada == 1) && (valor_freno_estacionamiento == 0))
+        byte_1 = 1; 
+    else if ((valor_arranque_parada == 0) && (valor_freno_estacionamiento == 1))
+        byte_1 = 16; 
+    else if ((valor_arranque_parada == 1) && (valor_freno_estacionamiento == 1))
         byte_1 = 17;          
-    else {
-        byte_1 = 0;
-    }
-    if (valor_arranque_parada == 1)
-        byte_1 = 1;
-    if (valor_freno_estacionamiento == 1)
-        byte_1 = 16;
-     
+
     msgEx.DATA[0] = byte_1;
     msgEx.DATA[1] = (uint8_t) acelerador_tx;
     msgEx.DATA[2] = (uint8_t) velocidad_tx;
@@ -436,9 +435,11 @@ void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
 
     uint8_t byte_7;
 
-    if (valor_parada_emergencia == 1)
+    if (valor_parada_emergencia == 1)    
         byte_7 = 16;
-  
+    else if (valor_parada_emergencia == 0)
+        byte_7 = 0;
+    
     msgEx.DATA[0] = 0;         
     msgEx.DATA[1] = 0;
     msgEx.DATA[2] = 0;

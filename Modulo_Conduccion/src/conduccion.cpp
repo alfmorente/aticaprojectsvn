@@ -26,13 +26,13 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;        // Manejador ROS
   
-  int estado_actual = STATE_OK;    // Para hacer pruebas locales
+  //int estado_actual = STATE_OK;    // Para hacer pruebas locales
   
-  // Espera activa de inicio de modulo
-  //int estado_actual=STATE_OFF;
-  //while(estado_actual!=STATE_CONF){
-  //        n.getParam("estado_modulo_conduccion",estado_actual);
-  //}
+  //Espera activa de inicio de modulo
+  int estado_actual=STATE_OFF;
+  while(estado_actual!=STATE_CONF){
+          n.getParam("state_module_driving",estado_actual);
+  }
   cout << "Atica CONDUCCION :: Iniciando configuración..." << endl;
 
   initialize(n); 
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
             
             while (ros::ok() && finDePrograma && !can->errorWrite) { // && ((can->errorRead) || (can->errorWrite))) {     
                 
-                n.getParam("estado_modulo_conduccion",estado_actual);
+                n.getParam("state_module_driving",estado_actual);
                 if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF) {             
                    finDePrograma=disconnectCommunication();   // Fin de programa = false (se cierra el CAN)
 
@@ -66,9 +66,9 @@ int main(int argc, char **argv)
                 
                 else {
                     
-                    //checkEmergencyStop();
+                    checkEmergencyStop();
                     
-                    //checkSwitch();
+                    checkSwitch();
                         
                     //checkInfoStop();
                     
@@ -546,7 +546,7 @@ void initialize(ros::NodeHandle n) {
   sub_emergency_stop = n.subscribe("emergSet",1000,fcn_sub_emergency_stop);
   
   // Todo esta correcto, lo especificamos con el correspondiente parametro
-  n.setParam("estado_modulo_conduccion",STATE_OK);  
+  n.setParam("state_module_driving",STATE_OK);  
     
   msg_err.id_subsystem = SUBS_DRIVING;  // Flag que indica a errores que estamos en el subsistema Driving
   parada_emergencia = false;            // Al principio siempre es falsa la parada de emergencia. Se pondra a true cuando verdaderamente haya una parada.
@@ -575,6 +575,10 @@ void checkEmergencyStop () {
         //cout << "inicio del timer a 10 segundos" << endl;
         if (conduccion->t.GetTimed() > TIMER) {
             parada_emergencia = false;
+            cout << "Desactivando parada de emergencia" << endl;
+            conduccion->valor_parada_emergencia = OFF;
+            conduccion->m_emergency_stop_CAN_AUTOMATA();
+            conduccion->paradaEmergencia = false;
             conduccion->t.Disable();
             //cout << "Fin del timer a 10 segundos" << endl;
 
