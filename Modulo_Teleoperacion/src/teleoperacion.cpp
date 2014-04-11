@@ -103,8 +103,8 @@ void fcn_sub_enable_module(const Common_files::msg_module_enable msg)
 // Suscriptor de teleoperado que introduce los parametros dentro de rango
 void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 {
-    cout << "Comando recibido\n";
-    cout << msg << endl;
+    //cout << "Comando recibido\n";
+    //cout << msg << endl;
     if(enableModule==true){
         // El nuevo mensaje esta depurado y conserva el id_elemento
         Common_files::msg_com_teleop msg_cteleop;
@@ -118,7 +118,7 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
         // Publicacion de mensaje ya depurado
         pub_teleop.publish(msg_cteleop);
         
-        cout << "Numero errores: " << error_count << endl;
+        //cout << "Numero errores: " << error_count << endl;
         if (error_count>=MAX_OUTRANGE_ERROR){
             cout << "error en modulo\n";
             msg_err.id_subsystem=SUBS_REMOTE;
