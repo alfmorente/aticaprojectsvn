@@ -342,7 +342,7 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
     {
         ROS_INFO("SWITCH MANUAL");
         ROS_INFO("EMERGENCY STOP");
-
+        
         if(actualMode!=MODE_NEUTRAL)
         {
             modeEXIT(actualMode);
