@@ -11,13 +11,13 @@ int getOperationMode(int argc, char **argv){
     int a = atoi(argv[1]);
     switch (a) {
         case OPERATION_MODE_DEBUG:
-            cout << "ATICA GPS :: Mode DEBUG enabled" << endl;
+            cout << "ATICA CONDUCCION :: Mode DEBUG enabled" << endl;
             break;
         case OPERATION_MODE_RELEASE:
-            cout << "ATICA GPS :: Mode RELEASE enabled" << endl;
+            cout << "ATICA CONDUCCION :: Mode RELEASE enabled" << endl;
             break;
         case OPERATION_MODE_SIMULATION:
-            cout << "ATICA GPS :: Mode SIMULATION enabled" << endl;
+            cout << "ATICA CONDUCCION :: Mode SIMULATION enabled" << endl;
             break;
         default:
             printCorrectSyntax();

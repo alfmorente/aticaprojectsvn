@@ -70,7 +70,7 @@ int main(int argc, char **argv)
                     
                     checkSwitch();
                         
-                    //checkInfoStop();
+                    checkInfoStop();
                     
                     checkError();
                     
@@ -253,22 +253,36 @@ void publishInfoStopRemote (short valor) {
 void publishInfoStop (short valor, int i) {
     
     switch (i) {
-        case 0:           // Obstaculo
+        case 0:    // Obstaculo
 
-            if (conduccion->conmutador_m_a == OFF)
-                msg_switch.value = false; // Manual
-            else if (conduccion->conmutador_m_a == ON)
-                msg_switch.value = true; // Teleoperado
+            if (valor == ON) {
+                msg_info_stop.id_event = 0;
+                msg_info_stop.value = true;
 
-            pub_switch.publish(msg_switch);
+                /*
+                // MANDAR ACK A SYSTEM MANAGEMENT
 
-            cout << "********** Publicacion del mensaje SWITCH *********** \n";
-            cout << "Si es 0 = Manual; Si es 1 = Teleoperado \n";
-            cout << "Comuntador Manual/Automático: " << (int) msg_switch.value << "\n";
-            cout << "***************************************************** \n\n\n";
+                msg_emergency_stop.value = INFO;
+                pub_emergency_stop.publish(msg_emergency_stop);
+
+                cout << "******** Publicacion del mensaje EMERGENCY STOP  ************ \n";
+                cout << "Si es 1 = INFO;  \n";
+                cout << "Emergency Stop: " << (int) msg_emergency_stop.value << "\n";
+                cout << "************************************************************* \n\n\n";
+*/
+            } else if (valor == OFF) {
+                msg_info_stop.id_event = 0;
+                msg_info_stop.value = false;
+            }
+            pub_info_stop.publish(msg_info_stop);
+
+            cout << "******* Publicacion del mensaje INFO_STOP ON ********* \n";
+            cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia obstaculo;  \n";
+            cout << "Parada de emergencia obstaculo: " << (int) msg_info_stop.value << "\n";
+            cout << "********************************************************** \n\n\n";
             
             break;
-            
+                                   
         case 1:         // Local
 
             if (valor == ON) {
@@ -290,30 +304,17 @@ void publishInfoStop (short valor, int i) {
             
         case 2:         // Remote
 
-            if (valor == ON) {
-                msg_info_stop.id_event = 1;
-                msg_info_stop.value = true;
+            if (conduccion->conmutador_m_a == OFF)
+                msg_switch.value = false; // Manual
+            else if (conduccion->conmutador_m_a == ON)
+                msg_switch.value = true; // Teleoperado
 
-                // MANDAR ACK A SYSTEM MANAGEMENT
+            pub_switch.publish(msg_switch);
 
-                msg_emergency_stop.value = INFO;
-                pub_emergency_stop.publish(msg_emergency_stop);
-
-                cout << "******** Publicacion del mensaje EMERGENCY STOP  ************ \n";
-                cout << "Si es 1 = INFO;  \n";
-                cout << "Emergency Stop: " << msg_emergency_stop.value << "\n";
-                cout << "************************************************************* \n\n\n";
-
-            } else if (valor == OFF) {
-                msg_info_stop.id_event = 1;
-                msg_info_stop.value = false;
-            }
-            pub_info_stop.publish(msg_info_stop);
-
-            cout << "******* Publicacion del mensaje INFO_STOP REMOTE ********* \n";
-            cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia remota;  \n";
-            cout << "Parada de emergencia remota: " << (int) msg_info_stop.value << "\n";
-            cout << "********************************************************** \n\n\n";
+            cout << "********** Publicacion del mensaje SWITCH *********** \n";
+            cout << "Si es 0 = Manual; Si es 1 = Teleoperado \n";
+            cout << "Comuntador Manual/Automático: " << (int) msg_switch.value << "\n";
+            cout << "***************************************************** \n\n\n";
             
             break;
             

@@ -399,6 +399,9 @@ void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
     
     uint8_t byte_1;
     
+    cout << "valor arranque: " << valor_arranque_parada << endl;
+    cout << "valor freno estacionamiento: " << valor_freno_estacionamiento << endl;
+    
     if ((valor_arranque_parada == 0) && (valor_freno_estacionamiento == 0))
         byte_1 = 0; 
     else if ((valor_arranque_parada == 1) && (valor_freno_estacionamiento == 0))
