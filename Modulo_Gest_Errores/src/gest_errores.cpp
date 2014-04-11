@@ -80,8 +80,13 @@ void fcn_sub_mode(const Common_files::msg_mode msg)
     if ((msg.status == MODE_START) && (msg.type_msg == INFO))
         currentMode= msg.mode;
 
-    else if ((msg.status == MODE_EXIT) && (msg.type_msg == INFO))
-        currentMode=MODE_NEUTRAL;
+    else if ((msg.status == MODE_EXIT) && (msg.type_msg == INFO)){
+        if ((currentMode == MODE_CONVOY_TELEOP) || (currentMode == MODE_CONVOY_AUTO))
+            currentMode=MODE_CONVOY;
+        else
+            currentMode=MODE_NEUTRAL;
+    }
+        
 }
 
 // Suscriptor de errores
@@ -207,6 +212,9 @@ short isWarningOrCritical(Common_files::msg_error msg, short mode){
             error = mode_conv_auto_error(msg);
             break;
         case MODE_NEUTRAL:            // Modo Neutro > Todo Warning
+            error = TOE_WARNING;
+            break;
+        case MODE_MANUAL:            // Modo Manual > Todo Warning
             error = TOE_WARNING;
             break;
         default:                        // Modo incorrecto
