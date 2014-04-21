@@ -89,16 +89,13 @@ extern "C" {
 #define PRESENCE_VECTOR_HOME 0X03
 #define PRESENCE_VECTOR_ZOOM 0X04
 
+#define NO_ACK 0
+#define ACK_MODE 1
+#define ACK_ERROR 2
+#define ACK_AVAILABLE 3
+#define ACK_FUNC_AUX 3
 
-
-
-
-
-
-
-
-
-
+#define TIMEOUT_ACK 5
 //Clientes
 ros::ServiceClient clientMode;
 
@@ -133,6 +130,7 @@ int numberWaypoints; //Numero de waypoints del camino
 bool ackMode;
 bool ackError;
 bool ackAvailable;
+bool ackFunctionAuxiliar;
 
 // Estructura de datos que maneja los mensajes ROS
 typedef struct{
@@ -183,6 +181,7 @@ typedef struct{
     
     //Funciones auxiliares
     SetFunctionAuxiliarMessage faux;
+    ReportFunctionAuxiliarMessage fauxACK;
     
     //Disponibilidad
     ReportAvailableMessage avail;
@@ -209,6 +208,7 @@ void fcn_sub_backup(const Common_files::msg_backup);
 void fcn_sub_available(const Common_files::msg_available);
 void fcn_sub_teach_file(const Common_files::msg_stream);
 void fcn_sub_info_stop(const Common_files::msg_info_stop);
+void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux);
 
 
 // Funciones propias
@@ -218,7 +218,7 @@ bool checkConnection();
 bool configureJAUS();
 JausMessage convertROStoJAUS(ROSmessage msg_ROS);
 ROSmessage convertJAUStoROS(mensajeJAUS msg_JAUS);
-void sendJAUSMessage(JausMessage txMessage);
+void sendJAUSMessage(JausMessage txMessage,int type);
 void rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage);
 int redondea(float valor);
 

@@ -1,45 +1,47 @@
 #include "Modulo_Comunicaciones/comunicaciones.h"
+#include "Modulo_Comunicaciones/interaction.h"
 
 using namespace std;
-/**
- * This tutorial demonstrates simple sending of messages over the ROS system.
- */
 int main(int argc, char **argv)
 {
-
+   // Indica el modo de Operacion del modulo
+   int operationMode=getOperationMode(argc, argv);
+   if (operationMode == 0) {
+        return 1;
+   }
+   
   // Inicio de ROS
-
   ros::init(argc, argv, "COMMUNICATION_NODE");
-
-  // Manejador ROS
-  ros::NodeHandle n;
+  ros::NodeHandle n; // Manejador ROS
 
   // Espera activa de inicio de modulo
-  int state_aux;
+  int state_module;
   do
   {
-    state_aux=getStateModule(n);
-    if(state_aux==STATE_ERROR)
+    state_module=getStateModule(n);
+    if(state_module==STATE_ERROR)
     {
           ROS_INFO("ATICA COMMUNICATION VEHICLE:: Module finish for error in other module");
           exit(1);
     }   
     usleep(500000);
-  }while(state_aux!=STATE_CONF);
+  }while(state_module!=STATE_CONF);
 
-
-          
   ROS_INFO("ATICA COMMUNICATION VEHICLE :: Init configuration...");
  
-  // Creación de suscriptores
+  // Subscriptores
   ros::Subscriber sub_gps = n.subscribe("gps", 1000, fcn_sub_gps);
   ros::Subscriber sub_error = n.subscribe("errorToUCR", 1000, fcn_sub_error);
   ros::Subscriber sub_camera = n.subscribe("camera", 1000, fcn_sub_camera);
   ros::Subscriber sub_mode = n.subscribe("modeSC", 1000, fcn_sub_mode);
   ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);
   ros::Subscriber sub_file_teach = n.subscribe("teachFile", 1000, fcn_sub_teach_file);  
+  ros::Subscriber sub_available= n.subscribe("avail", 1000, fcn_sub_available); 
+  ros::Subscriber sub_info_stop = n.subscribe("infoStop", 1000, fcn_sub_info_stop); 
+  ros::Subscriber sub_fcn_aux_ack = n.subscribe("fcnAuxACK", 1000, fcn_sub_fcn_aux); 
 
-  // Inicializacion de publicadores globales
+
+  //Publicadores
   pub_mode = n.advertise<Common_files::msg_mode>("modeCS", 1000);
   pub_comteleop_unclean = n.advertise<Common_files::msg_com_teleop>("commands_unclean", 1000);
   pub_comteleop_clean = n.advertise<Common_files::msg_com_teleop>("commands_clean", 1000);
@@ -52,20 +54,19 @@ int main(int argc, char **argv)
   // Cliente ROS
   clientMode=n.serviceClient<Common_files::srv_data>("serviceParam");  
 
-  pthread_t threadSpin;
-  pthread_create (&threadSpin, NULL,&spinThread,NULL);
+  //pthread_t threadSpin;
+  //pthread_create (&threadSpin, NULL,&spinThread,NULL);
 
-  //Configuracion de JAUS
+  //Configuración de la comunicacion
+  communicationState=COM_OFF;
   if(!configureJAUS())
   {
       setStateModule(n,STATE_ERROR); //completar
       exit(1);
   }
 
-  // Realización de la conexión JAUS
-  communicationState=COM_OFF;
 
-  // Todo esta correcto, lo especificamos con el correspondiente parametro
+  //Configuracion realizada. Modulo preparado y activo
   setStateModule(n,STATE_OK); //completar
   ROS_INFO("ATICA COMMUNICATION VEHICLE:: Configurate and Run");
 
@@ -86,7 +87,7 @@ int main(int argc, char **argv)
 	  if(connect())
            communicationState=COM_ON;   
       }
-      //ros::spinOnce();
+      ros::spinOnce();
   }
   if(communicationState==COM_ON)
       disconnect();
@@ -99,11 +100,11 @@ int main(int argc, char **argv)
  *                              ROS SPIN
  * *****************************************************************************
  * ****************************************************************************/
-void* spinThread(void* obj)
+/**void* spinThread(void* obj)
 {
 	ros::spin();
         return NULL;
-}
+}**/
 /*******************************************************************************
  *******************************************************************************
  *                              SUSCRIPTORES
@@ -111,7 +112,7 @@ void* spinThread(void* obj)
  * ****************************************************************************/
 
 //Subscriptor de modos disponibles
-void fcn_sub_available_mode(const Common_files::msg_available msg)
+void fcn_sub_available(const Common_files::msg_available msg)
 {
     // Se genera el mensaje a enviar
     ROSmessage msg_ROS;
@@ -120,7 +121,26 @@ void fcn_sub_available_mode(const Common_files::msg_available msg)
 
     // Espera que la comunicacion este activa
     if(communicationState==COM_ON)
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    {
+        ackAvailable=false;
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),ACK_AVAILABLE);
+    }
+}
+//Subscriptor de ack de funcioens axuailiares
+void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
+{
+    // Se genera el mensaje a enviar
+    ROSmessage msg_ROS;
+    msg_ROS.tipo_mensaje=TOM_FUNC_AUX;
+    msg_ROS.mens_fcn_aux=msg;
+
+    // Espera que la comunicacion este activa
+    if(communicationState==COM_ON)
+    {
+        ackFunctionAuxiliar=false;
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),ACK_FUNC_AUX);
+    }
+    
 }
 // Suscriptor de gps
 void fcn_sub_gps(const Common_files::msg_gps msg)
@@ -136,7 +156,7 @@ void fcn_sub_gps(const Common_files::msg_gps msg)
     {
 	//JAUS_message_type=JAUS_REPORT_GLOBAL_POSE;
 	// Se envia el mensaje por JAUS
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);
 
 	/**JAUS_message_type=JAUS_REPORT_VELOCITY_STATE;
 	// Se envia el mensaje por JAUS
@@ -154,8 +174,11 @@ void fcn_sub_error(const Common_files::msg_error msg)
 
     // Espera que la comunicacion este activa
     if(communicationState==COM_ON)
-    // Se envia el mensaje por JAUS
-    sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    {
+        ackError=false;
+        // Se envia el mensaje por JAUS
+        sendJAUSMessage(convertROStoJAUS(msg_ROS),ACK_ERROR);
+    }
 }
 
 // Suscriptor de camaras
@@ -170,14 +193,13 @@ void fcn_sub_camera(const Common_files::msg_camera msg)
     // Espera que la comunicacion este activa
     if(communicationState==COM_ON)
   // Se envia el mensaje por JAUS
-    sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);
 	
 }
 
 //Suscriptor de modo
 void fcn_sub_mode(const Common_files::msg_mode msg)
 {
-    ROS_INFO("Estado del modo");
     // Se genera el mensaje a enviar
     ROSmessage msg_ROS;
     msg_ROS.tipo_mensaje=TOM_MODE;
@@ -187,27 +209,8 @@ void fcn_sub_mode(const Common_files::msg_mode msg)
     if(communicationState==COM_ON)
     // Se envia el mensaje por JAUS
     {
-        int numTrying=0;
-        bool msgOK=false;
-        sendJAUSMessage(convertROStoJAUS(msg_ROS));
-        /**do
-        {
-                ackMode=false;
-                sendJAUSMessage(convertROStoJAUS(msg_ROS));
-                if(waitForACK(TOM_MODE,10))
-                    msgOK=true;
-                else
-                {
-                    ROS_INFO("Reintentando enviar el mensaje.....");
-                    numTrying++;
-                }
-
-        }while(!msgOK && numTrying<3);
-        
-        if(msgOK)
-            ackMode=false;
-        else
-            ROS_INFO("Numero maximo de intentos realizado");**/
+        ackMode=false;
+        sendJAUSMessage(convertROStoJAUS(msg_ROS),ACK_MODE);
     }
         
 }
@@ -224,15 +227,15 @@ void fcn_sub_backup(const Common_files::msg_backup msg)
     {
         // Se envia el mensaje por JAUS
         msg_ROS.tipo_mensaje=TOM_BACKUP_WRENCH;
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);
       
         // Se envia el mensaje por JAUS
         msg_ROS.tipo_mensaje=TOM_BACKUP_DISCRETE;
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);
         
         // Se envia el mensaje por JAUS
         msg_ROS.tipo_mensaje=TOM_BACKUP_SPEED;
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));       
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);       
     }
 }
 
@@ -246,7 +249,7 @@ void fcn_sub_teach_file(const Common_files::msg_stream msg)
     // Espera que la comunicacion este activa
     if(communicationState==COM_ON)
     // Se envia el mensaje por JAUS
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);
     
 }
 
@@ -260,7 +263,7 @@ void fcn_sub_info_stop(const Common_files::msg_info_stop msg)
     // Espera que la comunicacion este activa
     if(communicationState==COM_ON)
     // Se envia el mensaje por JAUS
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));
+    	sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);
     
 }
 
@@ -301,22 +304,9 @@ bool connect(){
 
         //Creo componente
         compVehicle=ojCmptCreate((char*)nameComponent.c_str(),JAUS_SUBSYSTEM_COMMANDER ,1);
-        /**compCamera=ojCmptCreate("CAMERA_COMPONENT",JAUS_VISUAL_SENSOR ,1);
-        compVehicle=ojCmptCreate("VEHICLE_COMPONENT",JAUS_PRIMITIVE_DRIVER ,1);
-        compMission=ojCmptCreate("MISSION_COMPONENT",JAUS_MISSION_SPOOLER,1);
-        compGPS=ojCmptCreate("GPS_COMPONENT",JAUS_GLOBAL_POSE_SENSOR,1);
-        compNavigation=ojCmptCreate("NAVIGATION_COMPONENT",JAUS_GLOBAL_WAYPOINT_DRIVER,1);
-        compVelSensor=ojCmptCreate("VELOCITY_COMPONENT",JAUS_VELOCITY_STATE_SENSOR,1);**/
 
         //Configuro Componente
         ojCmptAddService(compVehicle, JAUS_SUBSYSTEM_COMMANDER);
-        /**ojCmptAddService(compCamera, JAUS_VISUAL_SENSOR);
-        ojCmptAddService(compVehicle, JAUS_PRIMITIVE_DRIVER);
-        ojCmptAddService(compMission, JAUS_MISSION_SPOOLER);
-        ojCmptAddService(compGPS, JAUS_GLOBAL_POSE_SENSOR);
-        ojCmptAddService(compNavigation, JAUS_GLOBAL_WAYPOINT_DRIVER);
-        ojCmptAddService(compVelSensor, JAUS_VELOCITY_STATE_SENSOR);
-        **/
 
         ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
         ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_WRENCH_EFFORT, 0xFF);
@@ -333,51 +323,17 @@ bool connect(){
         ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
         ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_POSE, 0xFF);
 
-        /**
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_SET_WRENCH_EFFORT, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
-        ojCmptAddServiceInputMessage(compNavigation, JAUS_GLOBAL_WAYPOINT_DRIVER , JAUS_REPORT_GLOBAL_WAYPOINT, 0xFF);
-        ojCmptAddServiceInputMessage(compNavigation,JAUS_GLOBAL_WAYPOINT_DRIVER , JAUS_REPORT_WAYPOINT_COUNT, 0xFF);
-        ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_RUN_MISSION, 0xFF);
-        ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_PAUSE_MISSION, 0xFF);
-        ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_RESUME_MISSION, 0xFF);
-        ojCmptAddServiceInputMessage(compMission, JAUS_MISSION_SPOOLER , JAUS_ABORT_MISSION, 0xFF);
-        ojCmptAddServiceOutputMessage(compVelSensor, JAUS_VELOCITY_STATE_SENSOR , JAUS_REPORT_VELOCITY_STATE, 0xFF);
-        ojCmptAddServiceOutputMessage(compCamera, JAUS_VISUAL_SENSOR, JAUS_REPORT_IMAGE, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
-        ojCmptAddServiceOutputMessage(compGPS, JAUS_GLOBAL_POSE_SENSOR , JAUS_REPORT_GLOBAL_POSE, 0xFF);
-        **/
-
         ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
-        /**ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
-        ojCmptSetMessageProcessorCallback(compNavigation,rcvJAUSMessage);
-        ojCmptSetMessageProcessorCallback(compMission,rcvJAUSMessage);
-        ojCmptSetMessageProcessorCallback(compVelSensor,rcvJAUSMessage);
-        ojCmptSetMessageProcessorCallback(compCamera,rcvJAUSMessage);
-        ojCmptSetMessageProcessorCallback(compGPS,rcvJAUSMessage);
-        //ojCmptSetStateCallback(compVeh, JAUS_READY_STATE,jausComunicator::process_data);
-        **/
-
-        //ojCmptSetStateCallback(compVehicle,JAUS_READY_STATE,fcn_ready);
-
+        
         //run
         ojCmptRun(compVehicle);
-        /**ojCmptRun(compVehicle);
-        ojCmptRun(compNavigation);
-        ojCmptRun(compMission);
-        ojCmptRun(compVelSensor);
-        ojCmptRun(compCamera);
-        ojCmptRun(compGPS);**/
         return true;
     }
 }
 
 // Desconexion JAUS
-
 void disconnect(){
-   // ojCmptDestroy(compSubsystem);
+    ojCmptDestroy(compVehicle);
 }
 
 
@@ -385,7 +341,6 @@ void disconnect(){
 // Comprobacion de la conexion
 bool checkConnection()
 {
-
     if(handler->controlJaus()!=JAUS_EVENT_DISCONNECT)
         return true;
     else
@@ -393,7 +348,6 @@ bool checkConnection()
 }
 
 // Conversion de mensaje ROS a JAUS (Vehiculo - UCR))
-
 JausMessage convertROStoJAUS(ROSmessage msg_ROS){
    
     JausMessage msg_JAUS=NULL;
@@ -536,8 +490,15 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             tipoMensajeJAUS.infoStop->activated=(JausBoolean)msg_ROS.mens_info_stop.value;
             msg_JAUS = reportInfoStopMessageToJausMessage(tipoMensajeJAUS.infoStop);
             reportInfoStopMessageDestroy(tipoMensajeJAUS.infoStop);            
-            
             break;
+        case TOM_FUNC_AUX:
+            tipoMensajeJAUS.fauxACK=reportFunctionAuxiliarMessageCreate();
+            jausAddressCopy(tipoMensajeJAUS.fauxACK->destination,destino);
+            tipoMensajeJAUS.fauxACK->function=msg_ROS.mens_fcn_aux.function;
+            tipoMensajeJAUS.fauxACK->activated=(JausBoolean)msg_ROS.mens_fcn_aux.value;
+            msg_JAUS = reportFunctionAuxiliarMessageToJausMessage(tipoMensajeJAUS.fauxACK);
+            reportFunctionAuxiliarMessageDestroy(tipoMensajeJAUS.fauxACK);            
+            break;            
           	
         default:
             break;
@@ -546,9 +507,8 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
 }
 
 // Conversion de mensaje JAUS a ROS
-ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
-
-    // TODO Conversion JAUS a ROS
+ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
+{
     ROSmessage msg_ROS;
     mensajeJAUS tipoMensajeJAUS;
     msg_ROS.tipo_mensaje=TOM_UNKNOW;
@@ -614,7 +574,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
             break;
 
         //Navegacion
-        //Waypoints en modo de navegación
+        //Waypoints en modo de navegación (Follow me)
         case JAUS_REPORT_GLOBAL_WAYPOINT:
             ROS_INFO("Nuevo Waypoint Follow ME");
             tipoMensajeJAUS.waypoint=reportGlobalWaypointMessageFromJausMessage(msg_JAUS);
@@ -832,18 +792,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
                         msg_ROS.mens_ctrl_cam.value=CAMERA_ZOOM_OUT;                                       
                 }                    
             }
-            break;
-            
-          //Ack de mensajes enviados 
-          case JAUS_REPORT_MISSION_STATUS:
-              break;
-          case JAUS_REPORT_ERROR:
-              break;    
-          case JAUS_REPORT_AVAILABLE:
-              break;                  
-              
-          
-            
+            break;        
         default:
             break;
 
@@ -852,52 +801,99 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS){
 }
 
 // Envio de mensaje JAUS
-void sendJAUSMessage(JausMessage msg_JAUS ){
-
-    ojCmptSendMessage(compVehicle,msg_JAUS);
+void sendJAUSMessage(JausMessage msg_JAUS, int typeACK)
+{
+    int numTrying=0;
+    bool msgOK=false;
+    if(typeACK!=NO_ACK)
+    {
+        do
+        {
+            ojCmptSendMessage(compVehicle,msg_JAUS);
+            if(waitForACK(typeACK,TIMEOUT_ACK))
+                msgOK=true;
+            else
+            {
+                ROS_INFO("Reintentando enviar el mensaje.....");
+                
+                //Generar error a gestión de errores
+                numTrying++;
+            }
+        }while(!msgOK && numTrying<3);
+        if(!msgOK)
+                ROS_INFO("Numero maximo de intentos realizado");
+    }
+    else
+        ojCmptSendMessage(compVehicle,msg_JAUS);
 }
 
 // Recepcion de mensaje JAUS
 void rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage){
-
-   ROSmessage msg_ROS=convertJAUStoROS(rxMessage);
-   if(msg_ROS.tipo_mensaje == TOM_REMOTE)
-	 pub_comteleop_unclean.publish(msg_ROS.mens_teleop);
-   else if(msg_ROS.tipo_mensaje == TOM_MODE)
-	 pub_mode.publish(msg_ROS.mens_mode);
-   else if(msg_ROS.tipo_mensaje == TOM_WAYPOINT)
-	 pub_waypoint.publish(msg_ROS.mens_waypoint);
-   else if(msg_ROS.tipo_mensaje == TOM_FUNC_AUX)
-	 pub_fcn_aux.publish(msg_ROS.mens_fcn_aux);
-   else if(msg_ROS.tipo_mensaje == TOM_FILE)
+   
+   //Recepción de ack
+   if(rxMessage->properties.ackNak==JAUS_ACKNOWLEDGE)
    {
-       if(msg_ROS.mens_file.id_file==TOF_PLAN)
-           	 pub_plan.publish(msg_ROS.mens_file); 
-       else if(msg_ROS.mens_file.id_file==TOF_CONFIGURATION){
-           /** Escribo datos de configuracion**/
-           if(!setDebugConfiguration(msg_ROS.mens_file.stream))
-           {
-               //Publico error en fichero Debug Configuration
-               
-           }  
-       }        
+       if(rxMessage->commandCode==JAUS_REPORT_FUNCTION_AUXILIAR)
+           ackFunctionAuxiliar=true;       
+       else if(rxMessage->commandCode==JAUS_REPORT_MISSION_STATUS)
+           ackMode=true;
+       else if(rxMessage->commandCode==JAUS_REPORT_ERROR)
+           ackError=true;           
+       else if(rxMessage->commandCode==JAUS_REPORT_AVAILABLE)
+           ackAvailable=true;
    }
-   else if(msg_ROS.tipo_mensaje == TOM_PET_FILE)
-   {
-       /** Leo datos de configuracion y envio a UCR **/
-       msg_ROS.tipo_mensaje=TOM_FILE;
-       msg_ROS.mens_file.id_file =TOF_CONFIGURATION;
-       msg_ROS.mens_file.stream=getDebugConfiguration();
-
-       // Espera que la comunicacion este activa
-       if(communicationState==COM_ON)
-        // Se envia el mensaje por JAUS
-    	sendJAUSMessage(convertROStoJAUS(msg_ROS));            
-   }
-   else if(msg_ROS.tipo_mensaje == TOM_CTRL_CAMERA)
-       pub_ctrl_camera.publish(msg_ROS.mens_ctrl_cam);
+   //Recepción de mensajes de UCR
    else
-	ojCmptDefaultMessageProcessor(comp,rxMessage);
+   {
+       //Si el mensaje Requiere ACK, lo envio
+       if(rxMessage->properties.ackNak==JAUS_ACK_NAK_REQUIRED)
+       {
+             JausMessage ack=jausMessageClone(rxMessage);
+             ack->dataSize=0;
+             ack->destination=rxMessage->source;
+             ack->source=rxMessage->destination;
+             ack->properties.ackNak=JAUS_ACKNOWLEDGE;
+             sendJAUSMessage(ack,NO_ACK);        
+       }
+       //Convierto a mensaje ROS
+       ROSmessage msg_ROS=convertJAUStoROS(rxMessage);
+       if(msg_ROS.tipo_mensaje == TOM_REMOTE)
+             pub_comteleop_unclean.publish(msg_ROS.mens_teleop);
+       else if(msg_ROS.tipo_mensaje == TOM_MODE)
+             pub_mode.publish(msg_ROS.mens_mode);
+       else if(msg_ROS.tipo_mensaje == TOM_WAYPOINT)
+             pub_waypoint.publish(msg_ROS.mens_waypoint);
+       else if(msg_ROS.tipo_mensaje == TOM_FUNC_AUX)
+             pub_fcn_aux.publish(msg_ROS.mens_fcn_aux);
+       else if(msg_ROS.tipo_mensaje == TOM_FILE)
+       {
+           if(msg_ROS.mens_file.id_file==TOF_PLAN)
+                     pub_plan.publish(msg_ROS.mens_file); 
+           else if(msg_ROS.mens_file.id_file==TOF_CONFIGURATION){
+               /** Escribo datos de configuracion**/
+               if(!setDebugConfiguration(msg_ROS.mens_file.stream))
+               {
+                   //Publico error en fichero Debug Configuration
+               }  
+           }        
+       }
+       else if(msg_ROS.tipo_mensaje == TOM_PET_FILE)
+       {
+           /** Leo datos de configuracion y envio a UCR **/
+           msg_ROS.tipo_mensaje=TOM_FILE;
+           msg_ROS.mens_file.id_file =TOF_CONFIGURATION;
+           msg_ROS.mens_file.stream=getDebugConfiguration();
+
+           // Espera que la comunicacion este activa
+           if(communicationState==COM_ON)
+            // Se envia el mensaje por JAUS
+            sendJAUSMessage(convertROStoJAUS(msg_ROS),NO_ACK);            
+       }
+       else if(msg_ROS.tipo_mensaje == TOM_CTRL_CAMERA)
+           pub_ctrl_camera.publish(msg_ROS.mens_ctrl_cam);
+       else
+            ojCmptDefaultMessageProcessor(comp,rxMessage);
+   }
 }
 string getDebugConfiguration()
 {
@@ -964,7 +960,7 @@ void losedCommunication()
     servMode.request.param=PARAM_MODE;
     if(clientMode.call(servMode))   
     {
-        if(servMode.response.value==MODE_REMOTE)
+        if(servMode.response.value==MODE_REMOTE || servMode.response.value==MODE_CONVOY_TELEOP)
         {
             ROS_INFO("PARADA DEL VEHICULO POR SEGURIDAD");
             Common_files::msg_com_teleop stopVehicle;
@@ -1011,20 +1007,25 @@ int redondea(float value)
 	return res;
 }
 
-bool waitForACK(int type,int timeout)
+bool waitForACK(int typeACK,int timeout)
 {
-   time_t tstart, tend; // gestiona los timeout's
-   tstart=time(0);
-   bool ack;
-   
+   clock_t tstart; // gestiona los timeout's
+   tstart=clock();
+   double diffTime;
+   bool ack=false;
    do
    {
-       tend=time(0);
-       if(type==TOM_MODE)
+       diffTime=(clock()-tstart)/(double)CLOCKS_PER_SEC;
+       if(typeACK==ACK_MODE)
            ack=ackMode;
-       //ROS_INFO("dIFERENCIA DE TIEMPO: %f",difftime(tend,tstart));
+       else if(typeACK==ACK_ERROR)
+           ack=ackError;
+       else if(typeACK==ACK_AVAILABLE)
+           ack=ackAvailable;   
+       else if(typeACK==ACK_FUNC_AUX)
+           ack=ackFunctionAuxiliar;   
    }
-   while((difftime(tend,tstart)< timeout) && !ack);
+   while((diffTime< timeout) && !ack);
    
    if(ack)
    {
