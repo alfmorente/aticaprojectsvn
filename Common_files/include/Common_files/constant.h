@@ -97,13 +97,15 @@ extern "C" {
 #define NAVIGATION_MODULE_NA 5
 #define CAMERA_MODULE_NA 6
 #define GPS_MODULE_NA 7
-#define FRONT_LASER_MODULE_NA 8
-#define REAR_LASER_MODULE_NA 9
-#define LASER3D_MODULE_NA 10
-#define BEACON_MODULE_NA 11
-#define RDF_MODULE_NA 12
-#define HL_MODULE_NA 13
-#define CONVOY_MODULE_NA 14
+#define FRONT_LASER_1_MODULE_NA 8
+#define FRONT_LASER_2_MODULE_NA 9
+#define REAR_LASER_MODULE_NA 10
+#define LASER3D_MODULE_NA 11
+#define BEACON_MODULE_NA 12
+#define RDF_MODULE_NA 13
+#define HL_MODULE_NA 14
+#define CONVOY_MODULE_NA 15
+
 // Output Errors
 #define MODE_OR_FUNCTION_NA 100
 #define MODULE_NOT_AVAILABLE 101
@@ -342,3 +344,4 @@ extern "C" {
 
 //Define parametros del servidor de datos
 #define PARAM_MODE 0
+#define PARAM_ALIVE 1
