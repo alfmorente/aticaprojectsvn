@@ -77,7 +77,7 @@ extern "C" {
 #define SUBS_RANGE_DATA_FUSION 12
 #define SUBS_HUMAN_LOCALIZATION 13
 #define SUBS_CONVOY 14
-
+#define SUBS_ERROR 15
 /**************************************
  ************** ERRORS **************
  ************************************/
