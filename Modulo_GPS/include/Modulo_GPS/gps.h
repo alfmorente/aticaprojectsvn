@@ -28,10 +28,15 @@ extern "C" {
 // Librerias 
 #include <iostream>
 #include "TeachThread.hpp"
+#include <time.h>
+#include <stdlib.h> 
+#include <stdio.h>
 
 // ROS
 #include "ros/ros.h"
 #include "../../Common_files/include/Common_files/constant.h"
+#include "Modulo_GPS/constant_gps.h"
+#include "Modulo_GPS/GPS_Management.h"
 
 // Señales externas
 #include "external_signals.h"

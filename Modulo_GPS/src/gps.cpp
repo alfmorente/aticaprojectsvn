@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
     // Generación de publicadores
     pub_gps = n.advertise<Common_files::msg_gps>("gps", 1000);
     pub_errores = n.advertise<Common_files::msg_error>("error", 1000);
-    pub_errores = n.advertise<Common_files::msg_stream>("teachfile",1000);
+    pub_stream = n.advertise<Common_files::msg_stream>("teachfile",1000);
     // Inicialización de suscriptores
     ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
     ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);    
@@ -47,11 +47,88 @@ int main(int argc, char **argv) {
     // Todo esta correcto, lo especificamos con el correspondiente parametro
     n.setParam("estado_modulo_GPS",STATE_OK);
     cout << "ATICA GPS :: Configurado y funcionando" << endl;
+    GPS_Management *gps;
 
     switch (operationMode) {
         case OPERATION_MODE_DEBUG:
+
             // Funcionamiento del modo debug
+            gps = new GPS_Management();
+            
+            if (gps->isPortOpened()) {
+
+                //gps->gps_log_general("bestgpsposa", "");
+                //gps->rcvData();
+                
+                cout << "Configurando (Modo de alineamiento inicial)..." << endl;
+                while (!gps->gps_conf_alignmentmode(ALIGNMENTMODE_UNAIDED));
+                cout << "Establecido modo de alineamiento - KINEMATIC" << endl;
+
+                cout << "Configuracion (Azimuth inicial)..." << endl;
+                while (!gps->gps_conf_setinitazimuth(-90, 5));
+                cout << "Azimuth OK" << endl;
+                /*
+                cout << "Configurando offset de la antena..." << endl;
+                while (!gps->gps_conf_setimutoantoffset(-35,15,62,0,0,0));
+                cout << "Offset antena OK" << endl;
+                 */
+                gps->gps_log_general("bestgpsposa", "ontime 0.1");
+                while (gps->getGPSPos().sol_status != "SOL_COMPUTED") {
+                    gps->rcvData();
+                    cout << "Esperando Alineamiento de GPS: " << gps->getGPSPos().sol_status << endl;
+                }
+                cout << "GPS Alineado" << endl;
+
+                //cout << "Comenzar movimiento 4km/h para alinear IMU" << endl;
+
+                gps->gps_log_general("inspvaa", "ontime 0.1");
+                while ((gps->getInspVa().status != "INS_SOLUTION_GOOD") && (gps->getInspVa().status != "INS_ALIGNMENT_COMPLETE")) {
+                    gps->rcvData();
+                    cout << "Esperando Alineamiento de IMU: " << gps->getInspVa().status << endl;
+                }
+                cout << "IMU Alineado" << endl;
+                
+                bool flagInspva = false,flagBestGPSPosa = false;
+                int typeFrame;
+                
+                while (ros::ok() && !exitModule) {
+                    n.getParam("estado_modulo_GPS",estado_actual);
+                    if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
+                        exitModule=true;
+                    }else {
+                        typeFrame = gps->rcvData();
+                        
+                        switch (typeFrame) {
+                            case TT_BESTGPSPOSA:
+                                flagBestGPSPosa = true;
+                                break;
+                            case TT_INSPVAA:
+                                flagInspva = true;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if (flagBestGPSPosa && flagInspva) {
+                            
+                            // Creacion del mensaje
+                            insMessage.latitude=gps->getGPSPos().lat;
+                            insMessage.longitude=gps->getGPSPos().lon;
+                            insMessage.altitude=gps->getGPSPos().hgt;
+                            insMessage.roll=gps->getInspVa().roll;
+                            insMessage.pitch=gps->getInspVa().pitch;
+                            insMessage.yaw=gps->getInspVa().azimuth;
+                            // Publica posicion
+                            pub_gps.publish(insMessage);
+                        }
+                    }
+                    ros::spinOnce();
+                }
+            } else {
+                cout << "El puerto no se ha abierto" << endl;
+            }
             break;
+                
         case OPERATION_MODE_RELEASE:
             // Funcionamiento del modo release
             break;
@@ -94,7 +171,7 @@ int main(int argc, char **argv) {
                     ros::spinOnce();
                 }                
             }       
-                break;
+            break;
         default:
                 break;
     }
@@ -126,6 +203,15 @@ void fcn_sub_enableModule(const Common_files::msg_module_enable msg) {
 void fcn_sub_backup(const Common_files::msg_backup msg) {
     // TODO
     // Actualizar insdata con lo de backup
+    // PROVISIONAL :: Hasta obtener la función se rellena con random
+    srand(time(NULL));
+    insdata.altitude = ((rand()%60000000)/1000)-10000;
+    insdata.latitude = ((rand()%18100000)/100000)-90;
+    insdata.longitude = ((rand()%36100000)/100000)-180;
+    insdata.roll = ((rand()%36100000)/100000)-180;
+    insdata.pitch = ((rand()%36100000)/100000)-180;
+    insdata.yaw = ((rand()%36100000)/100000);
+    
     readyToPublish=true;
 }
 /*******************************************************************************

@@ -21,8 +21,12 @@
       </df>
       <df name="src">
         <df name="Modulo_GPS">
+          <in>CksFrame.cpp</in>
+          <in>GPS_Management.cpp</in>
+          <in>PortSerial.cpp</in>
           <in>TeachThread.cpp</in>
           <in>Thread.cpp</in>
+          <in>TypeConverter.cpp</in>
           <in>external_signals.cpp</in>
           <in>interaction.cpp</in>
         </df>
@@ -142,9 +146,17 @@
           </incDir>
         </ccTool>
       </folder>
+      <item path="src/Modulo_GPS/CksFrame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/GPS_Management.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/PortSerial.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/Modulo_GPS/TeachThread.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Modulo_GPS/Thread.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/TypeConverter.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Modulo_GPS/external_signals.cpp"
             ex="false"
@@ -158,8 +170,6 @@
         </ccTool>
       </item>
       <item path="src/gps.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
     </conf>
   </confs>

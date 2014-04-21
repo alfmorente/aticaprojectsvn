@@ -422,6 +422,78 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/Modulo_GPS/CksFrame.o: src/Modulo_GPS/CksFrame.cpp.o
+.PHONY : src/Modulo_GPS/CksFrame.o
+
+# target to build an object file
+src/Modulo_GPS/CksFrame.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o
+.PHONY : src/Modulo_GPS/CksFrame.cpp.o
+
+src/Modulo_GPS/CksFrame.i: src/Modulo_GPS/CksFrame.cpp.i
+.PHONY : src/Modulo_GPS/CksFrame.i
+
+# target to preprocess a source file
+src/Modulo_GPS/CksFrame.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.i
+.PHONY : src/Modulo_GPS/CksFrame.cpp.i
+
+src/Modulo_GPS/CksFrame.s: src/Modulo_GPS/CksFrame.cpp.s
+.PHONY : src/Modulo_GPS/CksFrame.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/CksFrame.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.s
+.PHONY : src/Modulo_GPS/CksFrame.cpp.s
+
+src/Modulo_GPS/GPS_Management.o: src/Modulo_GPS/GPS_Management.cpp.o
+.PHONY : src/Modulo_GPS/GPS_Management.o
+
+# target to build an object file
+src/Modulo_GPS/GPS_Management.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o
+.PHONY : src/Modulo_GPS/GPS_Management.cpp.o
+
+src/Modulo_GPS/GPS_Management.i: src/Modulo_GPS/GPS_Management.cpp.i
+.PHONY : src/Modulo_GPS/GPS_Management.i
+
+# target to preprocess a source file
+src/Modulo_GPS/GPS_Management.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.i
+.PHONY : src/Modulo_GPS/GPS_Management.cpp.i
+
+src/Modulo_GPS/GPS_Management.s: src/Modulo_GPS/GPS_Management.cpp.s
+.PHONY : src/Modulo_GPS/GPS_Management.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/GPS_Management.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.s
+.PHONY : src/Modulo_GPS/GPS_Management.cpp.s
+
+src/Modulo_GPS/PortSerial.o: src/Modulo_GPS/PortSerial.cpp.o
+.PHONY : src/Modulo_GPS/PortSerial.o
+
+# target to build an object file
+src/Modulo_GPS/PortSerial.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o
+.PHONY : src/Modulo_GPS/PortSerial.cpp.o
+
+src/Modulo_GPS/PortSerial.i: src/Modulo_GPS/PortSerial.cpp.i
+.PHONY : src/Modulo_GPS/PortSerial.i
+
+# target to preprocess a source file
+src/Modulo_GPS/PortSerial.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.i
+.PHONY : src/Modulo_GPS/PortSerial.cpp.i
+
+src/Modulo_GPS/PortSerial.s: src/Modulo_GPS/PortSerial.cpp.s
+.PHONY : src/Modulo_GPS/PortSerial.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/PortSerial.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.s
+.PHONY : src/Modulo_GPS/PortSerial.cpp.s
+
 src/Modulo_GPS/TeachThread.o: src/Modulo_GPS/TeachThread.cpp.o
 .PHONY : src/Modulo_GPS/TeachThread.o
 
@@ -469,6 +541,30 @@ src/Modulo_GPS/Thread.s: src/Modulo_GPS/Thread.cpp.s
 src/Modulo_GPS/Thread.cpp.s:
 	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.s
 .PHONY : src/Modulo_GPS/Thread.cpp.s
+
+src/Modulo_GPS/TypeConverter.o: src/Modulo_GPS/TypeConverter.cpp.o
+.PHONY : src/Modulo_GPS/TypeConverter.o
+
+# target to build an object file
+src/Modulo_GPS/TypeConverter.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o
+.PHONY : src/Modulo_GPS/TypeConverter.cpp.o
+
+src/Modulo_GPS/TypeConverter.i: src/Modulo_GPS/TypeConverter.cpp.i
+.PHONY : src/Modulo_GPS/TypeConverter.i
+
+# target to preprocess a source file
+src/Modulo_GPS/TypeConverter.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.i
+.PHONY : src/Modulo_GPS/TypeConverter.cpp.i
+
+src/Modulo_GPS/TypeConverter.s: src/Modulo_GPS/TypeConverter.cpp.s
+.PHONY : src/Modulo_GPS/TypeConverter.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/TypeConverter.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.s
+.PHONY : src/Modulo_GPS/TypeConverter.cpp.s
 
 src/Modulo_GPS/external_signals.o: src/Modulo_GPS/external_signals.cpp.o
 .PHONY : src/Modulo_GPS/external_signals.o
@@ -576,12 +672,24 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/Modulo_GPS/CksFrame.o"
+	@echo "... src/Modulo_GPS/CksFrame.i"
+	@echo "... src/Modulo_GPS/CksFrame.s"
+	@echo "... src/Modulo_GPS/GPS_Management.o"
+	@echo "... src/Modulo_GPS/GPS_Management.i"
+	@echo "... src/Modulo_GPS/GPS_Management.s"
+	@echo "... src/Modulo_GPS/PortSerial.o"
+	@echo "... src/Modulo_GPS/PortSerial.i"
+	@echo "... src/Modulo_GPS/PortSerial.s"
 	@echo "... src/Modulo_GPS/TeachThread.o"
 	@echo "... src/Modulo_GPS/TeachThread.i"
 	@echo "... src/Modulo_GPS/TeachThread.s"
 	@echo "... src/Modulo_GPS/Thread.o"
 	@echo "... src/Modulo_GPS/Thread.i"
 	@echo "... src/Modulo_GPS/Thread.s"
+	@echo "... src/Modulo_GPS/TypeConverter.o"
+	@echo "... src/Modulo_GPS/TypeConverter.i"
+	@echo "... src/Modulo_GPS/TypeConverter.s"
 	@echo "... src/Modulo_GPS/external_signals.o"
 	@echo "... src/Modulo_GPS/external_signals.i"
 	@echo "... src/Modulo_GPS/external_signals.s"

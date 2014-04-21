@@ -104,9 +104,13 @@
       </df>
       <df name="include">
         <df name="Modulo_GPS">
+          <in>CksFrame.h</in>
+          <in>GPS_Management.h</in>
+          <in>PortSerial.h</in>
           <in>TeachThread.hpp</in>
           <in>Thread.hpp</in>
-          <in>constant.h</in>
+          <in>TypeConverter.h</in>
+          <in>constant_gps.h</in>
           <in>external_signals.h</in>
           <in>gps.h</in>
           <in>interaction.h</in>
@@ -116,8 +120,12 @@
       </df>
       <df name="src">
         <df name="Modulo_GPS">
+          <in>CksFrame.cpp</in>
+          <in>GPS_Management.cpp</in>
+          <in>PortSerial.cpp</in>
           <in>TeachThread.cpp</in>
           <in>Thread.cpp</in>
+          <in>TypeConverter.cpp</in>
           <in>external_signals.cpp</in>
           <in>interaction.cpp</in>
         </df>
