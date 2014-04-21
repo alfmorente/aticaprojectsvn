@@ -24,6 +24,7 @@ extern "C" {
 #include "Common_files/msg_error.h"
 #include "Common_files/msg_module_enable.h"
 #include "Common_files/msg_mode.h"
+#include "Common_files/srv_data.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
@@ -48,8 +49,10 @@ void printCorrectSyntax();
 //Funciones de suscripcion
 void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
 void fcn_sub_enable_module(const Common_files::msg_module_enable);
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
 //Funciones propias
+void initialize(ros::NodeHandle n);
 int convertToCorrectValues(int,int);
 
 #define MAX_OUTRANGE_ERROR 3

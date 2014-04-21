@@ -29,22 +29,8 @@ int main(int argc, char **argv)
           n.getParam("state_module_remote",estado_actual);
   }
   cout << "Atica TELEOPERACION :: Iniciando configuración..." << endl;
-  
-  // Generación de publicadores
-  pub_teleop = n.advertise<Common_files::msg_com_teleop>("commands_clean",1000);
-  pub_error = n.advertise<Common_files::msg_error>("error",1000);
-
-
-  // Creacion de suscriptores
-  ros::Subscriber sub_hab_modulo = n.subscribe("modEnable", 1000, fcn_sub_enable_module);
-  ros::Subscriber sub_com_teleop = n.subscribe("commands_unclean",1000,fcn_sub_com_teleop);
 
   sleep(1);
-  // Inicializacion de variable de habilitacion de modulo
-  exitModule=false;
-  enableModule=false;
-  error_count=0;
-  end_error=false;
 
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_remote",STATE_OK);
@@ -137,13 +123,41 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
     }
 }
 
+// Servicio de heartbeat con Gestion del sistema
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
+{
+    if(req.param==PARAM_ALIVE)
+    {  
+        resp.value=0;
+        return true;
+    }
+    else
+        return false;
+}
+
 /*******************************************************************************
  *******************************************************************************
  *                              FUNCIONES PROPIAS
  * *****************************************************************************
  * ****************************************************************************/
 
-//Funciones propias
+// Funciones propias
+// Funcion inicialización de variables
+void initialize(ros::NodeHandle n) {
+    // Creacion de suscriptores
+    ros::Subscriber sub_hab_modulo = n.subscribe("modEnable", 1000, fcn_sub_enable_module);
+    ros::Subscriber sub_com_teleop = n.subscribe("commands_unclean", 1000, fcn_sub_com_teleop);
+    ros::ServiceServer server=n.advertiseService("module_alive_2",fcn_heartbeat);
+    // Generación de publicadores
+    pub_teleop = n.advertise<Common_files::msg_com_teleop>("commands_clean", 1000);
+    pub_error = n.advertise<Common_files::msg_error>("error", 1000);
+
+    // Inicializacion de variables
+    exitModule = false;
+    enableModule = false;
+    error_count = 0;
+    end_error = false;
+}
 
 // Acota los valores para que no se salgan de rango
 int convertToCorrectValues(int id_elem, int value){
