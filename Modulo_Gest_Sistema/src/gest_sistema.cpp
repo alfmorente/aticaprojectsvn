@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
   // Manejador ROS
   ros::NodeHandle n;
-   ROS_INFO("Operation mode: %d",operationMode);
+  ROS_INFO("Operation mode: %d",operationMode);
   switch (operationMode) 
   {
         case OPERATION_MODE_DEBUG:
@@ -46,7 +46,8 @@ int main(int argc, char **argv)
                   pub_mode_communication = n.advertise<Common_files::msg_mode > ("modeSC", 1000);
                   pub_mode_convoy = n.advertise<Common_files::msg_mode > ("modeSCN", 1000);                  
                   pub_fcn_aux = n.advertise<Common_files::msg_fcn_aux > ("engBrake", 1000);  
-                  pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop > ("emergSet", 1000);        
+                  pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop > ("emergSet", 1000);
+                  pub_fcn_aux_ack = n.advertise<Common_files::msg_fcn_aux > ("fcnAuxACK", 1000);
 
 
                   // Creacion de suscriptores
@@ -58,9 +59,7 @@ int main(int argc, char **argv)
                   ros::Subscriber sub_fcn_aux = n.subscribe("fcnAux", 1000, fcn_sub_fcn_aux);
                   ros::Subscriber sub_switch = n.subscribe("switch", 1000, fcn_sub_switch); 
                   ros::Subscriber sub_emergency_stop = n.subscribe("emergInfo", 1000, fcn_sub_emergency_stop);         
-                  ros::ServiceServer server=n.advertiseService("serviceParam",fcn_server_data);
-
-                  
+                  ros::ServiceServer server=n.advertiseService("serviceParam",fcn_server_data);  
                   ros::spin();
             }
             else
@@ -106,7 +105,7 @@ bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_dat
 void fcn_sub_mode_communication(const Common_files::msg_mode msg)
 {
         Common_files::msg_mode mode;
-        if(actualMode==MODE_MANUAL)
+        if(actualMode==MODE_MANUAL || stoppingCar)
             return;
 
         //Si llega cambio de modo desde la UCR
@@ -166,7 +165,7 @@ void fcn_sub_mode_communication(const Common_files::msg_mode msg)
 //Subscriptor del modo al topic del módulo Error
 void fcn_sub_mode_error(const Common_files::msg_mode msg)
 {
-        if(actualMode==MODE_MANUAL)
+        if(actualMode==MODE_MANUAL || stoppingCar)
                  return;
 
         //Modo activo
@@ -196,18 +195,22 @@ void fcn_sub_available(const Common_files::msg_available msg)
 
 void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
 {    
+    Common_files::msg_fcn_aux msg_ack; 
+    msg_ack=msg;
+    msg_ack.type_msg=INFO;
     if(msg.type_msg==SET)
     {
         switch(msg.function)
         {
             case ENGINE:
-                if(actualMode==MODE_MANUAL)
+                if(actualMode==MODE_MANUAL || stoppingCar)
                     return;
                 if(msg.value==ON) 
                 {
                      if(modesAvailables[AVAILABLE_POS_START_ENGINE])
                      {
                             pub_fcn_aux.publish(msg);
+                            pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("START ENGINE");
                      }
                      else
@@ -225,6 +228,7 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                     if(modesAvailables[AVAILABLE_POS_STOP_ENGINE])
                     {
                             pub_fcn_aux.publish(msg);
+                            pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("STOP ENGINE");
                     }
                     else
@@ -239,11 +243,12 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                 }
                 break;
             case BRAKE:
-                if(actualMode==MODE_MANUAL)
+                if(actualMode==MODE_MANUAL || stoppingCar)
                     return;
                 if(modesAvailables[AVAILABLE_POS_ENGAGE_BRAKE])
                 {
                             pub_fcn_aux.publish(msg);
+                            pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("ENGAGE BRAKE");
                 }
                 else
@@ -266,6 +271,7 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                             enable.status=MOD_ON;
                             enable.submode=SUBMODE_TEACH;
                             pub_module_enable.publish(enable);
+                            pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("TEACH ON");
                     }
                     else
@@ -286,6 +292,7 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                         enable.status=MOD_OFF;
                         enable.submode=SUBMODE_TEACH;
                         pub_module_enable.publish(enable);
+                        pub_fcn_aux_ack.publish(msg_ack);
                         ROS_INFO("TEACH OFF");
                 }   
                 break;
@@ -299,6 +306,7 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                             enable.status=MOD_ON;
                             enable.submode=SUBMODE_MAPPING;
                             pub_module_enable.publish(enable);
+                            pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("MAPPING ON");
                     }
                     else
@@ -318,6 +326,7 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                             enable.status=MOD_OFF;
                             enable.submode=SUBMODE_MAPPING;
                             pub_module_enable.publish(enable);
+                            pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("MAPPING OFF");
                 } 
                 break;
@@ -346,7 +355,7 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
         if(actualMode!=MODE_NEUTRAL)
         {
             modeEXIT(actualMode);
-            /*mode_aux.type_msg=INFO;   /*** Modificación ordenador Alfonso 9/4/14 
+            /*mode_aux.type_msg=INFO;  Modificación ordenador Alfonso 9/4/14 
             mode_aux.mode=actualMode;
             mode_aux.status=MODE_EXIT;
             pub_mode_error.publish(mode_aux);
@@ -389,6 +398,8 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
 //Subscriptor del modo al topic del módulo Convoy
 void fcn_sub_mode_convoy(const Common_files::msg_mode msg)
 {
+     if(actualMode==MODE_MANUAL || stoppingCar)
+         return;
 
     if(msg.type_msg==SET && msg.mode==MODE_CONVOY)
     {
@@ -832,7 +843,6 @@ void modeSTOP(int mode)
 bool modeEXIT(int mode)
 {
    bool exitOK;
-   //if(emergencySTOP())
    ROS_INFO("EMERGENCY STOP");
    emergencySTOP();
    {
@@ -960,57 +970,47 @@ void modeRESUME(int mode)
             break;
     }
 }
-
 bool emergencySTOP()
 {
+    stoppingCar=true;
     Common_files::msg_emergency_stop emergency;
     emergency.value=SET;
-    pub_emergency_stop.publish(emergency);
+    
     emergencyACK=false;
+    pub_emergency_stop.publish(emergency);
     
-    if(timerACK(30,EMERGENCY_ACK))
+    if(timerACK(TIMEOUT_ACK,EMERGENCY_ACK))
+    {
+        stoppingCar=false;
         return true;
+    }
     else
+    {
+        stoppingCar=false;
         return false;
-    
+    }   
 }
 
-bool timerACK(int sec, int typeACK)
+bool timerACK(double sec, int typeACK)
 {
-    double timer=0.0;
-    if(typeACK== CONVOY_ACK)
+    int ack=false;
+    clock_t tstart; // gestiona los timeout's
+    tstart=clock();
+    
+    double diffTime;
+    //ROS_INFO("TIMER START");
+    do
     {
-            while(!convoyACK && timer < sec)
-            {
-                timer+=0.1;
-                usleep(100000);
-                ros::spinOnce();
-            }
-            if(!convoyACK)
-                return false;
-            else
-            {
-                convoyACK=false;
-                return true;
-            }
-    }
-    else if(typeACK== EMERGENCY_ACK)
-    {
-            while(!emergencyACK && timer < sec)
-            {
-                timer+=0.1;
-                usleep(100000);
-                ros::spinOnce();
-            }
-            if(!emergencyACK)
-                return false;
-            else
-            {
-                emergencyACK=false;
-                return true;
-            }            
-    }    
-    return true;
- 
+        diffTime=(clock()-tstart)/(double)CLOCKS_PER_SEC;
+        if(typeACK== CONVOY_ACK)
+            ack=convoyACK;
+        else if(typeACK== EMERGENCY_ACK)
+            ack=emergencyACK;
+    }while(!ack && diffTime< sec);
+    //ROS_INFO("TIMER END");
+    if(!ack)
+        return false;
+    else
+        return true;
 }
 

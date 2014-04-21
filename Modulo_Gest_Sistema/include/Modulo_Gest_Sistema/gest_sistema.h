@@ -22,6 +22,7 @@ extern "C" {
 
 // Timeout para activacion de modulos
 #define TIMEOUT_ACTIVATION_MODULE 10 //segundos
+#define TIMEOUT_ACK 0.9
 #define NUM_MODULES 13
 
 // Tipo de ack
@@ -69,6 +70,7 @@ int actualMode;
 bool emergencyACK;
 bool convoyACK;
 bool carType;
+bool stoppingCar;
 
 
 //Publicadores
@@ -79,6 +81,7 @@ ros::Publisher pub_mode_communication;
 ros::Publisher pub_mode_convoy;
 ros::Publisher pub_fcn_aux;
 ros::Publisher pub_emergency_stop;
+ros::Publisher pub_fcn_aux_ack;
 
 //Servidor de Parametros
 ros::ServiceServer server;
@@ -116,4 +119,4 @@ void modeSTOP(int mode);
 bool modeEXIT(int mode);
 void modeRESUME(int mode);
 bool emergencySTOP();
-bool timerACK(int,int);
+bool timerACK(double,int);
