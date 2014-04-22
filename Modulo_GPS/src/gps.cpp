@@ -160,6 +160,10 @@ int main(int argc, char **argv) {
                 }
             } else {
                 cout << "El puerto no se ha abierto" << endl;
+                errMessage.id_subsystem = SUBS_GPS;
+                errMessage.id_error = CONFIG_CONFIG_SERIALPORT_ERROR;
+                errMessage.type_error = TOE_UNDEFINED;
+                pub_errores.publish(errMessage);
             }
             break;
                 
