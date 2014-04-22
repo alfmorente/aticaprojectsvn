@@ -170,6 +170,8 @@
         </ccTool>
       </item>
       <item path="src/gps.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
     </conf>
   </confs>

@@ -6,6 +6,7 @@
  */
 #include <string>
 #include "Modulo_GPS/constant_gps.h"
+#include "../../Common_files/include/Common_files/constant.h"
 #include "PortSerial.h"
 #include <iostream>
 #include "CksFrame.h"
@@ -34,6 +35,7 @@ struct Bestgpsvel{
 };
 
 struct Bestgpspos{
+    short state;
     string sol_status;
     string pos_type;
     double lat;
@@ -94,6 +96,7 @@ struct Inspvas{
 };
 
 struct Inspva{
+    short state;
     unsigned long week;
     double seconds;
     double lat;
@@ -211,5 +214,10 @@ class GPS_Management
 
                 // Recepcion continua de datos
                 int rcvData();
+                
+                // Obtencion del estado del GPS
+                short getStateOfGPS(string);
+                // Obtencion del estado de la IMU
+                short getStateOfIMU(string);
 };
 

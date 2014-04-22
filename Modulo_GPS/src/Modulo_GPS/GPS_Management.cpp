@@ -638,6 +638,7 @@ bool GPS_Management::gps_adq_bestgpspos(Response res){
   // Rellenar atributo bestgpspos con los datos obtenidos de Response
   string *datos = getData(21,res.data);
   this->bestgpspos.sol_status=datos[0];
+  this->bestgpspos.state=getStateOfGPS(datos[0]);
   this->bestgpspos.pos_type=datos[1];
   this->bestgpspos.lat=stringToDouble(datos[2]);
   this->bestgpspos.lon=stringToDouble(datos[3]);
@@ -684,7 +685,7 @@ bool GPS_Management::gps_adq_inspvas(Response res){
 bool GPS_Management::gps_adq_inspva(Response res){
   // Rellenar atributo bestgpspos con los datos obtenidos de Response
   string *datos = getData(12,res.data);
-
+  this->inspva.state=getStateOfIMU(datos[11]);
   this->inspva.week=stringToLong(datos[0]);
   this->inspva.seconds=stringToDouble(datos[1]);
   this->inspva.lat=stringToDouble(datos[2]);
@@ -933,7 +934,7 @@ int GPS_Management::rcvData(){
       gps_adq_inspos(res);
       tt=TT_INSPOSA;
     }else if(res.header=="HEADINGA"){
-      gps_adq_inspva(res);
+      gps_adq_heading(res);
       tt=TT_HEADINGA;
     }else if(res.header=="INSPVAA"){
       gps_adq_inspva(res);
@@ -944,4 +945,58 @@ int GPS_Management::rcvData(){
   }
   
   return tt;
+}
+
+short GPS_Management::getStateOfGPS(string s){
+    if(strcmp(s.c_str(),"INSUFFICIENT_OBS")==0)
+        return INSUFFICIENT_OBS;
+    else if(strcmp(s.c_str(),"NO_CONVERGENCE")==0)
+        return NO_CONVERGENCE;
+    else if(strcmp(s.c_str(),"SINGULARITY")==0)
+        return SINGULARITY;
+    else if(strcmp(s.c_str(),"COV_TRACE")==0)
+        return COV_TRACE;
+    else if(strcmp(s.c_str(),"TEST_DIST")==0)
+        return TEST_DIST;
+    else if(strcmp(s.c_str(),"COLD_START")==0)
+        return COLD_START;
+    else if(strcmp(s.c_str(),"V_H_LIMIT")==0)
+        return V_H_LIMIT;
+    else if(strcmp(s.c_str(),"VARIANCE")==0)
+        return VARIANCE;
+    else if(strcmp(s.c_str(),"RESIDUALS")==0)
+        return RESIDUALS;
+    else if(strcmp(s.c_str(),"DELTA_POS")==0)
+        return DELTA_POS;
+    else if(strcmp(s.c_str(),"NEGATIVE_VAR")==0)
+        return NEGATIVE_VAR;
+    else if(strcmp(s.c_str(),"INTEGRITY_WARNING")==0)
+        return INTEGRITY_WARNING;
+    else if(strcmp(s.c_str(),"IMU_UNPLUGGED")==0)
+        return IMU_UNPLUGGED;
+    else if(strcmp(s.c_str(),"PENDING")==0)
+        return PENDING;
+    else if(strcmp(s.c_str(),"INVALID_FIX")==0)
+        return INVALID_FIX;
+    else if(strcmp(s.c_str(),"UNAUTHORIZED_STATE")==0)
+        return UNAUTHORIZED_STATE;
+    else
+        return GPS_GLOBAL_ERROR;
+}
+
+short GPS_Management::getStateOfIMU(string s){
+    if(strcmp(s.c_str(),"NS_INACTIVE")==0)
+        return INS_INACTIVE;
+    else if(strcmp(s.c_str(),"INS_ALIGNING")==0)
+        return INS_ALIGNING;
+    else if(strcmp(s.c_str(),"INS_SOLUTION_NOT_GOOD")==0)
+        return INS_SOLUTION_NOT_GOOD;
+    else if(strcmp(s.c_str(),"INS_BAD_GPS_AGREEMENT")==0)
+        return INS_BAD_GPS_AGREEMENT;
+    else if(strcmp(s.c_str(),"INSUFFICIENT_OBS")==0)
+        return INSUFFICIENT_OBS;
+    else if(strcmp(s.c_str(),"INS_ALIGNMENT_COMPLETE")==0)
+        return GPS_GLOBAL_ERROR;
+    else
+        return GPS_GLOBAL_ERROR;
 }

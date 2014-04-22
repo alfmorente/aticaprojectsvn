@@ -43,6 +43,8 @@ int main(int argc, char **argv) {
     ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);    
     // Creación de mensaje de publicacion de datos
     Common_files::msg_gps insMessage;
+    // Creacion de mensaje de errores
+    Common_files::msg_error errMessage;
     
     // Todo esta correcto, lo especificamos con el correspondiente parametro
     n.setParam("estado_modulo_GPS",STATE_OK);
@@ -90,6 +92,8 @@ int main(int argc, char **argv) {
                 
                 bool flagInspva = false,flagBestGPSPosa = false;
                 int typeFrame;
+                short stateOfGPS = 0;
+                short stateOfIMU = 0;
                 
                 while (ros::ok() && !exitModule) {
                     n.getParam("estado_modulo_GPS",estado_actual);
@@ -111,14 +115,44 @@ int main(int argc, char **argv) {
 
                         if (flagBestGPSPosa && flagInspva) {
                             
-                            // Creacion del mensaje
+                            // Comprobacion de estados para gestion de errores
+                            
+                            // Estados del GPS
+                            
+                            if(gps->getGPSPos().state!=stateOfGPS){
+                                stateOfGPS=gps->getGPSPos().state;
+                                errMessage.id_subsystem = SUBS_GPS;
+                                errMessage.id_error = stateOfGPS;
+                                if(stateOfGPS==GPS_GLOBAL_ERROR){
+                                    errMessage.type_error = TOE_END_ERROR;
+                                }else{
+                                    errMessage.type_error = TOE_UNDEFINED;
+                                }
+                                pub_errores.publish(errMessage);
+                            }
+                            
+                            // Estados de la IMU
+                            
+                            if(gps->getInspVa().state!=stateOfIMU){
+                                stateOfIMU=gps->getInspVa().state;
+                                errMessage.id_subsystem = SUBS_GPS;
+                                errMessage.id_error = stateOfIMU;
+                                if(stateOfIMU==GPS_GLOBAL_ERROR){
+                                    errMessage.type_error = TOE_END_ERROR;
+                                }else{
+                                    errMessage.type_error = TOE_UNDEFINED;
+                                }
+                                pub_errores.publish(errMessage);
+                            }
+                            
+                            // Creacion del mensaje de datos
+                            
                             insMessage.latitude=gps->getGPSPos().lat;
                             insMessage.longitude=gps->getGPSPos().lon;
                             insMessage.altitude=gps->getGPSPos().hgt;
                             insMessage.roll=gps->getInspVa().roll;
                             insMessage.pitch=gps->getInspVa().pitch;
                             insMessage.yaw=gps->getInspVa().azimuth;
-                            // Publica posicion
                             pub_gps.publish(insMessage);
                         }
                     }
