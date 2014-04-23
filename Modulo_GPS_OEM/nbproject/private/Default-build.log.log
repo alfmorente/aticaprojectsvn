@@ -1,0 +1,12 @@
+Scanning dependencies of target rospack_genmsg_libexe
+[  0%] Built target rospack_genmsg_libexe
+Scanning dependencies of target rosbuild_precompile
+[  0%] Built target rosbuild_precompile
+Scanning dependencies of target gps
+[ 11%] Building CXX object CMakeFiles/gps.dir/src/gps.cpp.o
+In file included from /home/atica/catkin_ws/src/Modulo_GPS_OEM/src/gps.cpp:1:0:
+/home/atica/catkin_ws/src/Modulo_GPS_OEM/include/Modulo_GPS/gps.h:22:34: error fatal: Common_files/msg_gps.h: No existe el archivo o el directorio
+compilación terminada.
+make[2]: *** [CMakeFiles/gps.dir/src/gps.cpp.o] Error 1
+make[1]: *** [CMakeFiles/gps.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,0 +1,18 @@
+called: /usr/bin/g++
+	/home/atica/catkin_ws/src/Modulo_GPS_OEM
+	/usr/bin/g++
+	-O2
+	-g
+	-I/home/atica/catkin_ws/src/Modulo_GPS_OEM/include
+	-I/opt/ros/groovy/include
+	-DROS_PACKAGE_NAME="Modulo_GPS_OEM"
+	-W
+	-Wall
+	-Wno-unused-parameter
+	-fno-strict-aliasing
+	-pthread
+	-o
+	CMakeFiles/gps.dir/src/gps.cpp.o
+	-c
+	/home/atica/catkin_ws/src/Modulo_GPS_OEM/src/gps.cpp
+

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="90">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="Modules"
+                   displayName="Modules"
+                   projectFiles="true"
+                   root="/usr/share/cmake-2.8/Modules">
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
+    </logicalFolder>
+    <df root="." name="0">
+      <df name="CMakeFiles">
+        <df name="CompilerIdC">
+          <in>CMakeCCompilerId.c</in>
+        </df>
+        <df name="CompilerIdCXX">
+          <in>CMakeCXXCompilerId.cpp</in>
+        </df>
+      </df>
+      <df name="include">
+        <df name="Modulo_GPS">
+          <in>driverNovatelFlexPakG2V1.h</in>
+        </df>
+      </df>
+      <df name="src">
+        <df name="Modulo_GPS">
+          <in>TeachThread.cpp</in>
+          <in>Thread.cpp</in>
+          <in>driverNovatelFlexPakG2V1.cpp</in>
+          <in>external_signals.cpp</in>
+          <in>interaction.cpp</in>
+        </df>
+        <in>gps.cpp</in>
+      </df>
+    </df>
+    <logicalFolder name="src"
+                   displayName="src"
+                   projectFiles="true"
+                   root="/usr/src/gtest/src">
+      <itemPath>/usr/src/gtest/src/gtest-all.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-death-test.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-filepath.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-internal-inl.h</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-port.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-printers.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-test-part.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest-typed-test.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest.cc</itemPath>
+      <itemPath>/usr/src/gtest/src/gtest_main.cc</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>CMakeLists.txt</itemPath>
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool>
+          <preprocessorList>
+            <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="/usr/src/gtest/src/gtest-all.cc" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <preprocessorList>
+            <Elem>gtest_EXPORTS</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="/usr/src/gtest/src/gtest-death-test.cc"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest-filepath.cc"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest-port.cc" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest-printers.cc"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest-test-part.cc"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest-typed-test.cc"
+            ex="true"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest.cc" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="/usr/src/gtest/src/gtest_main.cc" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <preprocessorList>
+            <Elem>gtest_main_EXPORTS</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="CMakeFiles/CompilerIdC/CMakeCCompilerId.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <folder path="0">
+        <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/src">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>ROS_PACKAGE_NAME="Modulo_GPS_OEM"</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Modules">
+        <cTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="src">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/usr/src/gtest/include</pElem>
+            <pElem>/usr/src/gtest</pElem>
+            <pElem>gtest</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>GTEST_CREATE_SHARED_LIBRARY=1</Elem>
+            <Elem>GTEST_HAS_PTHREAD=1</Elem>
+            <Elem>ROS_PACKAGE_NAME='\"Modulo_GPS_OEM\"'</Elem>
+            <Elem>__PIC__=2</Elem>
+            <Elem>__pic__=2</Elem>
+          </preprocessorList>
+          <undefinedList>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+          </undefinedList>
+        </ccTool>
+      </folder>
+      <item path="include/Modulo_GPS/driverNovatelFlexPakG2V1.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/TeachThread.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/Modulo_GPS/Thread.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/Modulo_GPS/driverNovatelFlexPakG2V1.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/external_signals.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/Modulo_GPS/interaction.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/gps.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

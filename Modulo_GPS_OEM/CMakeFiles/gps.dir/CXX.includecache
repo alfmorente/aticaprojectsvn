@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_GPS_OEM/src/Modulo_GPS/driverNovatelFlexPakG2V1.cpp
+Modulo_GPS_OEM/driverNovatelFlexPakG2V2.h
+/home/atica/catkin_ws/src/Modulo_GPS_OEM/src/Modulo_GPS/Modulo_GPS_OEM/driverNovatelFlexPakG2V2.h
+
