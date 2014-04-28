@@ -209,6 +209,7 @@ void fcn_sub_available(const Common_files::msg_available);
 void fcn_sub_teach_file(const Common_files::msg_stream);
 void fcn_sub_info_stop(const Common_files::msg_info_stop);
 void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux);
+bool fcn_server_alive(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
 
 // Funciones propias

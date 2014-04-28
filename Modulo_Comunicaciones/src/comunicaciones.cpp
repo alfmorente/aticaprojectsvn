@@ -33,13 +33,14 @@ int main(int argc, char **argv)
   ros::Subscriber sub_gps = n.subscribe("gps", 1000, fcn_sub_gps);
   ros::Subscriber sub_error = n.subscribe("errorToUCR", 1000, fcn_sub_error);
   ros::Subscriber sub_camera = n.subscribe("camera", 1000, fcn_sub_camera);
-  ros::Subscriber sub_mode = n.subscribe("modeSC", 1000, fcn_sub_mode);
+  ros::Subscriber sub_modeSC = n.subscribe("modeSC", 1000, fcn_sub_mode);
+  ros::Subscriber sub_modeNC = n.subscribe("modeNC", 1000, fcn_sub_mode);
   ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);
   ros::Subscriber sub_file_teach = n.subscribe("teachFile", 1000, fcn_sub_teach_file);  
   ros::Subscriber sub_available= n.subscribe("avail", 1000, fcn_sub_available); 
   ros::Subscriber sub_info_stop = n.subscribe("infoStop", 1000, fcn_sub_info_stop); 
   ros::Subscriber sub_fcn_aux_ack = n.subscribe("fcnAuxACK", 1000, fcn_sub_fcn_aux); 
-
+  ros::ServiceServer server_alive=n.advertiseService("module_alive_0",fcn_server_alive);
 
   //Publicadores
   pub_mode = n.advertise<Common_files::msg_mode>("modeCS", 1000);
@@ -61,6 +62,11 @@ int main(int argc, char **argv)
   communicationState=COM_OFF;
   if(!configureJAUS())
   {
+      Common_files::msg_error errorCOM;
+      errorCOM.id_subsystem=SUBS_COMMUNICATION;
+      errorCOM.type_error=TOE_UNDEFINED;
+      errorCOM.id_error=JAUS_CONFIG_ERROR;
+      pub_error.publish(errorCOM);
       setStateModule(n,STATE_ERROR); //completar
       exit(1);
   }
@@ -79,7 +85,7 @@ int main(int argc, char **argv)
       else if(communicationState==COM_LOSED)
       {
           losedCommunication();   
-	  disconnect();
+	  //disconnect();
           communicationState=COM_OFF;          
       }
       else if(communicationState==COM_OFF)
@@ -89,8 +95,7 @@ int main(int argc, char **argv)
       }
       ros::spinOnce();
   }
-  if(communicationState==COM_ON)
-      disconnect();
+  disconnect();
   ROS_INFO("ATICA COMMUNICATION VEHICLE:: Module finish");
   return 0;
 }
@@ -105,6 +110,21 @@ int main(int argc, char **argv)
 	ros::spin();
         return NULL;
 }**/
+
+
+//Funcion servidor de datos (Devuelve el dato que se le solicita)
+bool fcn_server_alive(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
+{
+
+    if(req.param==PARAM_ALIVE)
+    {      
+        resp.value=0;
+        return true;
+    }
+    else
+        return false;
+}
+
 /*******************************************************************************
  *******************************************************************************
  *                              SUSCRIPTORES
@@ -277,12 +297,58 @@ void fcn_sub_info_stop(const Common_files::msg_info_stop msg)
 bool configureJAUS(){
 
     string nombre= "NodeManager.conf";
+    string nameComponent="VEHICLE";
     ROS_INFO("OpenJAUS Node Manager %s", OJ_NODE_MANAGER_VERSION);
     try
     {
             configData = new FileLoader(nombre.c_str());
             handler = new MyHandler();
             nm = new NodeManager(configData, handler);
+           
+            //Creo componente
+            compVehicle=ojCmptCreate((char*)nameComponent.c_str(),JAUS_SUBSYSTEM_COMMANDER ,1);   
+            if(compVehicle==NULL)
+            {
+                  Common_files::msg_error errorCOM;
+                  errorCOM.id_subsystem=SUBS_COMMUNICATION;
+                  errorCOM.type_error=TOE_UNDEFINED;
+                  errorCOM.id_error=CREATE_COMPONENT_ERROR;
+                  pub_error.publish(errorCOM);
+                  ROS_INFO("Error al crear el componente JAUS");
+                  exit(1);
+            }
+
+            //Configuro Componente
+            ojCmptAddService(compVehicle, JAUS_SUBSYSTEM_COMMANDER);
+
+            ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_WRENCH_EFFORT, 0xFF);
+            ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_WAYPOINT, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle,JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_WAYPOINT_COUNT, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_RUN_MISSION, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_PAUSE_MISSION, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_RESUME_MISSION, 0xFF);
+            ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_ABORT_MISSION, 0xFF);
+            ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_VELOCITY_STATE, 0xFF);
+            ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_IMAGE, 0xFF);
+            ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
+            ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_POSE, 0xFF);
+
+            ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
+
+            //run
+            if(ojCmptRun(compVehicle)<0)
+            {
+                  Common_files::msg_error errorCOM;
+                  errorCOM.id_subsystem=SUBS_COMMUNICATION;
+                  errorCOM.type_error=TOE_UNDEFINED;
+                  errorCOM.id_error=RUN_COMPONENT_ERROR;
+                  pub_error.publish(errorCOM);
+                  ROS_INFO("Error al ejecutar el componente JAUS");
+                  exit(1);
+            }            
             return true;
     }
     catch(...)
@@ -293,47 +359,21 @@ bool configureJAUS(){
     }
 }
 
-bool connect(){
-
-    string nameComponent="VEHICLE";
+bool connect()
+{
     if(handler->controlJaus()!=JAUS_EVENT_CONNECT)
         return false;
-    
     else
-    {
-
-        //Creo componente
-        compVehicle=ojCmptCreate((char*)nameComponent.c_str(),JAUS_SUBSYSTEM_COMMANDER ,1);
-
-        //Configuro Componente
-        ojCmptAddService(compVehicle, JAUS_SUBSYSTEM_COMMANDER);
-
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_WRENCH_EFFORT, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_WAYPOINT, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle,JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_WAYPOINT_COUNT, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_RUN_MISSION, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_PAUSE_MISSION, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_RESUME_MISSION, 0xFF);
-        ojCmptAddServiceInputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_ABORT_MISSION, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_VELOCITY_STATE, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_IMAGE, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER, JAUS_REPORT_PLATFORM_OPERATIONAL_DATA, 0xFF);
-        ojCmptAddServiceOutputMessage(compVehicle, JAUS_SUBSYSTEM_COMMANDER , JAUS_REPORT_GLOBAL_POSE, 0xFF);
-
-        ojCmptSetMessageProcessorCallback(compVehicle,rcvJAUSMessage);
-        
-        //run
-        ojCmptRun(compVehicle);
         return true;
-    }
 }
 
 // Desconexion JAUS
-void disconnect(){
+void disconnect()
+{
     ojCmptDestroy(compVehicle);
+    delete nm;
+    delete handler;
+    delete configData;
 }
 
 
