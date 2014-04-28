@@ -82,6 +82,7 @@ ros::Publisher pub_mode_convoy;
 ros::Publisher pub_fcn_aux;
 ros::Publisher pub_emergency_stop;
 ros::Publisher pub_fcn_aux_ack;
+ros::ServiceClient clientAlive;
 
 //Servidor de Parametros
 ros::ServiceServer server;
@@ -120,3 +121,5 @@ bool modeEXIT(int mode);
 void modeRESUME(int mode);
 bool emergencySTOP();
 bool timerACK(double,int);
+void checkModulesAlive(const ros::TimerEvent& event);
+int getErrorModule(int subsystem);

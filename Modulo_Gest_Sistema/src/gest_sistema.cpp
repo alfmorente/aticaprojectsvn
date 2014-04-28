@@ -48,7 +48,7 @@ int main(int argc, char **argv)
                   pub_fcn_aux = n.advertise<Common_files::msg_fcn_aux > ("engBrake", 1000);  
                   pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop > ("emergSet", 1000);
                   pub_fcn_aux_ack = n.advertise<Common_files::msg_fcn_aux > ("fcnAuxACK", 1000);
-
+                  
 
                   // Creacion de suscriptores
                   //ros::Subscriber sub_errores = n.subscribe("error", 1000, fcn_sub_errores);
@@ -60,6 +60,7 @@ int main(int argc, char **argv)
                   ros::Subscriber sub_switch = n.subscribe("switch", 1000, fcn_sub_switch); 
                   ros::Subscriber sub_emergency_stop = n.subscribe("emergInfo", 1000, fcn_sub_emergency_stop);         
                   ros::ServiceServer server=n.advertiseService("serviceParam",fcn_server_data);  
+                  ros::Timer timer = n.createTimer(ros::Duration(5), checkModulesAlive);
                   ros::spin();
             }
             else
@@ -1012,5 +1013,94 @@ bool timerACK(double sec, int typeACK)
         return false;
     else
         return true;
+}
+
+/** Chequea el estado de cada uno de los subsistemas comprobando que estan vivos.
+ Se realiza mediante un cliente que va llamando a cada uno de los servidores que se 
+ encuentran en cada unos de los subsistemas**/
+void checkModulesAlive(const ros::TimerEvent& event)
+{
+    ros::NodeHandle nAlive;
+    stringstream aux_name;
+    string service_name;
+    
+    Common_files::msg_error errorAlive;
+    Common_files::srv_data petAlive;
+    petAlive.request.param=PARAM_ALIVE;
+    
+    for(int i=SUBS_COMMUNICATION;i<=SUBS_CONVOY;i++)
+    {
+        if(i!=SUBS_SYSTEM_MGMNT)
+        {
+            aux_name << "module_alive_";
+            aux_name << i;
+            aux_name >> service_name;
+            clientAlive=nAlive.serviceClient<Common_files::srv_data>(service_name.c_str());
+            if(!clientAlive.call(petAlive))
+            {
+                ROS_INFO("MODULO %d NA",i);
+                errorAlive.id_subsystem=SUBS_SYSTEM_MGMNT;
+                errorAlive.type_error=TOE_UNDEFINED;
+                errorAlive.id_error=getErrorModule(i);
+            }
+            aux_name.clear();
+            service_name.clear();
+        }
+    }
+}
+
+/**Devuelve el tipo de error segun el subsistema que no se encuentre disponible*/
+int getErrorModule(int subsystem)
+{
+    int type_error;
+    switch(subsystem)
+    {
+        case SUBS_COMMUNICATION:
+            type_error=COMM_MODULE_NA;
+            break;
+        case SUBS_REMOTE:
+            type_error=REMOTE_MODULE_NA;
+            break;            
+        case SUBS_DRIVING:
+            type_error=DRIVING_MODULE_NA;
+            break;        
+        case SUBS_GPS:
+            type_error=GPS_MODULE_NA;
+            break;
+        case SUBS_NAVIGATION:
+            type_error=NAVIGATION_MODULE_NA;
+            break;
+        case SUBS_CAMERA:
+            type_error=CAMERA_MODULE_NA;
+            break;
+        case SUBS_BEACON:
+            type_error=BEACON_MODULE_NA;
+            break;
+        case SUBS_CONVOY:
+            type_error=CONVOY_MODULE_NA;
+            break;
+        case SUBS_FRONT_LASER_1:
+            type_error=FRONT_LASER_1_MODULE_NA;
+            break;
+        case SUBS_FRONT_LASER_2:
+            type_error=FRONT_LASER_2_MODULE_NA;
+            break;
+        case SUBS_HUMAN_LOCALIZATION:
+            type_error=HL_MODULE_NA;
+            break;
+        case SUBS_RANGE_DATA_FUSION:
+            type_error=RDF_MODULE_NA;
+            break;
+        case SUBS_REAR_LASER:
+            type_error=REAR_LASER_MODULE_NA;
+            break;
+        case SUBS_LASER_3D:
+            type_error=LASER3D_MODULE_NA;            
+            break;
+        default: 
+            type_error=-1;
+            break;
+    }
+    return type_error;
 }
 
