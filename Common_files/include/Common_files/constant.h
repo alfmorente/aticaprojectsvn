@@ -160,7 +160,7 @@ extern "C" {
 #define IMU_ERROR 103
 #define GPS_RECEIVER_ERROR 104
 
-// Subsystem = LASER 2D
+// Subsystem = LASER 2D FRONTAL AND REAR
 #define LASER_SOCKET_FAIL 0
 #define CONNECTION_ERROR 1
 #define COMM_ERROR 2
@@ -180,6 +180,11 @@ extern "C" {
 #define LASER_LOG_FILE_ERROR 16
 #define LASER_CONFIG_FILE_ERROR 17
 #define LASER_CONFIG_FILE_STRUCTURE_ERROR 18
+
+// Solo para laser REAR
+#define SET_LMS_LEDS_NA 19
+#define SET_LMS_DYSPLAY_NA 20
+
 // Output Errors
 #define LASER_CONNECTION_ERROR 100
 #define LASER_COMMUNICATION_ERROR 101
