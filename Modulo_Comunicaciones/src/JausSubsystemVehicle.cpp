@@ -25,8 +25,8 @@ JausSubsystemVehicle* JausSubsystemVehicle::getInstance()
 }
 
 JausSubsystemVehicle::JausSubsystemVehicle() 
-{
-    nodeROS=NodeROSCommunication::getInstance();
+{   
+    //nodeROS=NodeROSCommunication::getInstance();
 }
 
 JausSubsystemVehicle::~JausSubsystemVehicle()
@@ -37,6 +37,7 @@ JausSubsystemVehicle::~JausSubsystemVehicle()
 
 bool JausSubsystemVehicle::connect()
 {
+    nodeROS=NodeROSCommunication::getInstance();
     if(handler->controlJaus()!=JAUS_EVENT_CONNECT)
         return false;
     else
@@ -163,6 +164,7 @@ void JausSubsystemVehicle::rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage){
    //Recepción de ack
    if(rxMessage->properties.ackNak==JAUS_ACKNOWLEDGE)
    {
+       ROS_INFO("RECIBO ACK");
        if(rxMessage->commandCode==JAUS_REPORT_FUNCTION_AUXILIAR)
            subsystemJAUS->ackReceived=ACK_FUNC_AUX;       
        else if(rxMessage->commandCode==JAUS_REPORT_MISSION_STATUS)

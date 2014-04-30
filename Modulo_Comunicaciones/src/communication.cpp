@@ -11,6 +11,7 @@ int main(int argc, char **argv)
    }
   
   NodeROSCommunication::init(argc,argv,"COMMUNICATION"); 
+
   NodeROSCommunication* rosnode=NodeROSCommunication::getInstance();
 
 

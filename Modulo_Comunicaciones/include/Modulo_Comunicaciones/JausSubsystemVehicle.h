@@ -68,9 +68,10 @@ class JausSubsystemVehicle
         bool ackFunctionAuxiliar;  **/
         static JausSubsystemVehicle* subsystemJAUS; 
         static bool instanceJAUSCreate;
-    public:
+    private:
         JausSubsystemVehicle();
         ~JausSubsystemVehicle();
+    public:
         static JausSubsystemVehicle* getInstance();
         bool connect();
         void disconnect();

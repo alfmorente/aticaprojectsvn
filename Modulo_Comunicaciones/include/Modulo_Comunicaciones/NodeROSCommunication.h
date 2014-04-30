@@ -47,12 +47,13 @@ class NodeROSCommunication {
     
     
     
-    public:
-    static NodeROSCommunication* nodeROS;
+    private:
+    static NodeROSCommunication* nodeCom;
     static bool instanceROSCreate;
     NodeROSCommunication();
     ~NodeROSCommunication();
     
+    public:
     static NodeROSCommunication* getInstance();
     static void init(int argc,char** argv,char* name);
     void createSubscribers();

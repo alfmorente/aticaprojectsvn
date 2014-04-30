@@ -8,7 +8,7 @@
 #include <Modulo_Comunicaciones/NodeROSCommunication.h>
 
 JausSubsystemVehicle* subsystemJAUS=NULL;
-NodeROSCommunication* NodeROSCommunication::nodeROS=NULL;
+NodeROSCommunication* NodeROSCommunication::nodeCom=NULL;
 bool NodeROSCommunication::instanceROSCreate=false;
 
 NodeROSCommunication* NodeROSCommunication::getInstance()
@@ -16,20 +16,22 @@ NodeROSCommunication* NodeROSCommunication::getInstance()
     if(!instanceROSCreate)
     {
         instanceROSCreate=true;
-        nodeROS=new NodeROSCommunication();
+        nodeCom=new NodeROSCommunication();
     }
-    return nodeROS;
+    
+    return  nodeCom;
 }
 
 NodeROSCommunication::NodeROSCommunication() 
 {
     n=new ros::NodeHandle();
     subsystemJAUS=JausSubsystemVehicle::getInstance();
+
 }
 
 NodeROSCommunication::~NodeROSCommunication()
 {
-    delete nodeROS;
+    delete nodeCom;
 }
 
 void NodeROSCommunication::init(int argc,char** argv,char* name)
