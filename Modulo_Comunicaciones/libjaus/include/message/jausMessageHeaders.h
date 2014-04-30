@@ -215,6 +215,7 @@
 #include "experimental/queryAvailableMessage.h"
 #include "experimental/reportAvailableMessage.h"
 #include "experimental/setFunctionAuxiliarMessage.h"
+#include "experimental/reportFunctionAuxiliarMessage.h"
 #include "experimental/reportErrorMessage.h"
 #include "experimental/reportInfoStopMessage.h"
 

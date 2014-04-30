@@ -189,6 +189,7 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/experimental/queryAvailableMessage.c \
 		./src/message/experimental/reportAvailableMessage.c \
 		./src/message/experimental/setFunctionAuxiliarMessage.c \
+		./src/message/experimental/reportFunctionAuxiliarMessage.c \
 		./src/message/experimental/reportErrorMessage.c \
 		./src/message/experimental/reportInfoStopMessage.c \
 		./src/jausSubsystem.c
@@ -382,6 +383,7 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/queryAvailableMessage.o \
 		./Build/reportAvailableMessage.o \
 		./Build/setFunctionAuxiliarMessage.o \
+		./Build/reportFunctionAuxiliarMessage.o \
 		./Build/reportErrorMessage.o \
 		./Build/reportInfoStopMessage.o \
 		./Build/jausSubsystem.o
@@ -964,6 +966,9 @@ $(TARGET) : $(OBJECTS)
 
 ./Build/setFunctionAuxiliarMessage.o : ./src/message/experimental/setFunctionAuxiliarMessage.c
 	gcc $(CCFLAGS) -o ./Build/setFunctionAuxiliarMessage.o ./src/message/experimental/setFunctionAuxiliarMessage.c
+
+./Build/reportFunctionAuxiliarMessage.o : ./src/message/experimental/reportFunctionAuxiliarMessage.c
+	gcc $(CCFLAGS) -o ./Build/reportFunctionAuxiliarMessage.o ./src/message/experimental/reportFunctionAuxiliarMessage.c
 
 ./Build/reportErrorMessage.o : ./src/message/experimental/reportErrorMessage.c
 	gcc $(CCFLAGS) -o ./Build/reportErrorMessage.o ./src/message/experimental/reportErrorMessage.c
