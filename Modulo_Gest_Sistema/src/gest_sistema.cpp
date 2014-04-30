@@ -1028,7 +1028,7 @@ void checkModulesAlive(const ros::TimerEvent& event)
     Common_files::srv_data petAlive;
     petAlive.request.param=PARAM_ALIVE;
     
-    for(int i=SUBS_COMMUNICATION;i<=SUBS_CONVOY;i++)
+    for(int i=SUBS_COMMUNICATION;i<=SUBS_ERROR;i++)
     {
         if(i!=SUBS_SYSTEM_MGMNT)
         {
@@ -1038,10 +1038,11 @@ void checkModulesAlive(const ros::TimerEvent& event)
             clientAlive=nAlive.serviceClient<Common_files::srv_data>(service_name.c_str());
             if(!clientAlive.call(petAlive))
             {
-                ROS_INFO("MODULO %d NA",i);
+                //ROS_INFO("MODULO %d NA",i);
                 errorAlive.id_subsystem=SUBS_SYSTEM_MGMNT;
                 errorAlive.type_error=TOE_UNDEFINED;
                 errorAlive.id_error=getErrorModule(i);
+                //pub_error.publish(errorAlive);
             }
             aux_name.clear();
             service_name.clear();
