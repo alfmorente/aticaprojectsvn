@@ -24,13 +24,13 @@
 #define JAUS_EVENT_CONNECT 1
 #define JAUS_EVENT_DISCONNECT 2
 
-class MyHandler : public EventHandler
+class HandlerJAUS : public EventHandler
 {
 
 	public:
 		volatile int eventConexion;
 	public:
-		MyHandler();
+		HandlerJAUS();
 	        void handleEvent(NodeManagerEvent *e);
 		int  controlJaus();
 };

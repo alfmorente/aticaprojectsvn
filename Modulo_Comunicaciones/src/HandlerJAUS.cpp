@@ -1,10 +1,10 @@
-#include "../include/Modulo_Comunicaciones/handlerJAUS.h"
+#include "../include/Modulo_Comunicaciones/HandlerJAUS.h"
 
-MyHandler::MyHandler()
+HandlerJAUS::HandlerJAUS()
 {
 	eventConexion=JAUS_NO_EVENT;
 }
-void MyHandler::handleEvent(NodeManagerEvent *e)
+void HandlerJAUS::handleEvent(NodeManagerEvent *e)
 {
 	SystemTreeEvent *treeEvent;
 	ErrorEvent *errorEvent;
@@ -56,7 +56,7 @@ void MyHandler::handleEvent(NodeManagerEvent *e)
 			break;
 	}
 }
-int MyHandler::controlJaus()
+int HandlerJAUS::controlJaus()
 {
 	if(eventConexion==JAUS_EVENT_DISCONNECT)
 	{
