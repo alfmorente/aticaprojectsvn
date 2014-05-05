@@ -6,6 +6,7 @@
  */
 
 #include <Modulo_Comunicaciones/NodeROSCommunication.h>
+#define NO_ERROR -1
 
 JausSubsystemVehicle* subsystemJAUS=NULL;
 NodeROSCommunication* NodeROSCommunication::nodeCom=NULL;
@@ -15,18 +16,18 @@ NodeROSCommunication* NodeROSCommunication::getInstance()
 {
     if(!instanceROSCreate)
     {
-        instanceROSCreate=true;
+
         nodeCom=new NodeROSCommunication();
+        instanceROSCreate=true;
+        subsystemJAUS=JausSubsystemVehicle::getInstance();
+
     }
-    
     return  nodeCom;
 }
 
 NodeROSCommunication::NodeROSCommunication() 
 {
     n=new ros::NodeHandle();
-    subsystemJAUS=JausSubsystemVehicle::getInstance();
-
 }
 
 NodeROSCommunication::~NodeROSCommunication()
@@ -264,6 +265,7 @@ void NodeROSCommunication::setStateModule(int state)
 {
     n->setParam("state_module_communication",state);
 }
+
 string NodeROSCommunication::getDebugConfiguration()
 {
     stringstream fileConf;

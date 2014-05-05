@@ -160,6 +160,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             jausAddressCopy(tipoMensajeJAUS.fauxACK->destination,destino);
             tipoMensajeJAUS.fauxACK->function=msg_ROS.mens_fcn_aux.function;
             tipoMensajeJAUS.fauxACK->activated=(JausBoolean)msg_ROS.mens_fcn_aux.value;
+            tipoMensajeJAUS.fauxACK->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
             msg_JAUS = reportFunctionAuxiliarMessageToJausMessage(tipoMensajeJAUS.fauxACK);
             reportFunctionAuxiliarMessageDestroy(tipoMensajeJAUS.fauxACK);            
             break;            
@@ -359,7 +360,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
             tipoMensajeJAUS.faux=setFunctionAuxiliarMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.faux)
             {
-                ROS_INFO("Funcion auxiliar: %d %d",msg_ROS.mens_fcn_aux.function,msg_ROS.mens_fcn_aux.value);
+                ROS_INFO("Funcion auxiliar: %d %d",tipoMensajeJAUS.faux->function,tipoMensajeJAUS.faux->activated);
                 msg_ROS.tipo_mensaje=TOM_FUNC_AUX;
                 msg_ROS.mens_fcn_aux.function=tipoMensajeJAUS.faux->function;
                 msg_ROS.mens_fcn_aux.value=tipoMensajeJAUS.faux->activated;

@@ -29,7 +29,7 @@ rosbuild_genmsg()
 include_directories(libjaus/include libopenJaus/include)
 link_directories(libjaus/lib libopenJaus/lib)
 #rosbuild_add_executable(comunicaciones src/interaction.cpp src/comunicaciones.cpp src/handlerJAUS.cpp)
-rosbuild_add_executable(comunicaciones src/NodeROSCommunication.cpp src/ConverterTypes.cpp src/JausSubsystemVehicle.cpp src/HandlerJAUS.cpp src/communication.cpp src/interaction.cpp)
+rosbuild_add_executable(comunicaciones src/NodeROSCommunication.cpp src/ConverterTypes.cpp src/JausSubsystemVehicle.cpp src/HandlerJAUS.cpp src/communication.cpp src/interaction.cpp src/Files.cpp)
 target_link_libraries(comunicaciones libjaus.so libopenJaus.so)
 #target_link_libraries(example ${PROJECT_NAME})
 

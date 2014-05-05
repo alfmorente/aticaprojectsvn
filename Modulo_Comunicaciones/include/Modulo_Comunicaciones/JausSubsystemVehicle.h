@@ -76,7 +76,7 @@ class JausSubsystemVehicle
         bool connect();
         void disconnect();
         bool checkConnection();
-        bool configureJAUS();
+        int configureJAUS();
         void sendJAUSMessage(JausMessage txMessage,int type);
         static void rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage);
         void losedCommunication();

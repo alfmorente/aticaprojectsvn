@@ -8,6 +8,7 @@
 #include <Modulo_Comunicaciones/JausSubsystemVehicle.h>
 #include <Modulo_Comunicaciones/NodeROSCommunication.h>
 #include <Modulo_Comunicaciones/ConverterTypes.h>
+#define NO_ERROR -1
 
 NodeROSCommunication* nodeROS=NULL;
 JausSubsystemVehicle* JausSubsystemVehicle::subsystemJAUS=NULL;
@@ -17,16 +18,17 @@ JausSubsystemVehicle* JausSubsystemVehicle::getInstance()
 {
     if(!instanceJAUSCreate)
     {
-        instanceJAUSCreate=true;
-        subsystemJAUS= new JausSubsystemVehicle();
 
+        subsystemJAUS= new JausSubsystemVehicle();
+        instanceJAUSCreate=true;
+        nodeROS=NodeROSCommunication::getInstance();
     }
     return subsystemJAUS;
 }
 
 JausSubsystemVehicle::JausSubsystemVehicle() 
 {   
-    //nodeROS=NodeROSCommunication::getInstance();
+
 }
 
 JausSubsystemVehicle::~JausSubsystemVehicle()
@@ -37,7 +39,6 @@ JausSubsystemVehicle::~JausSubsystemVehicle()
 
 bool JausSubsystemVehicle::connect()
 {
-    nodeROS=NodeROSCommunication::getInstance();
     if(handler->controlJaus()!=JAUS_EVENT_CONNECT)
         return false;
     else
@@ -54,7 +55,7 @@ void JausSubsystemVehicle::disconnect()
 }
 
 
-bool JausSubsystemVehicle::configureJAUS(){
+int JausSubsystemVehicle::configureJAUS(){
 
     string nombre= "NodeManager.conf";
     string nameComponent="VEHICLE";
@@ -69,13 +70,8 @@ bool JausSubsystemVehicle::configureJAUS(){
             compVehicle=ojCmptCreate((char*)nameComponent.c_str(),JAUS_SUBSYSTEM_COMMANDER ,1);   
             if(compVehicle==NULL)
             {
-                  Common_files::msg_error errorCOM;
-                  errorCOM.id_subsystem=SUBS_COMMUNICATION;
-                  errorCOM.type_error=TOE_UNDEFINED;
-                  errorCOM.id_error=CREATE_COMPONENT_ERROR;
-                  nodeROS->pub_error.publish(errorCOM);
                   ROS_INFO("Error al crear el componente JAUS");
-                  exit(1);
+                  return CREATE_COMPONENT_ERROR;
             }
 
             //Configuro Componente
@@ -101,21 +97,16 @@ bool JausSubsystemVehicle::configureJAUS(){
             //run
             if(ojCmptRun(compVehicle)<0)
             {
-                  Common_files::msg_error errorCOM;
-                  errorCOM.id_subsystem=SUBS_COMMUNICATION;
-                  errorCOM.type_error=TOE_UNDEFINED;
-                  errorCOM.id_error=RUN_COMPONENT_ERROR;
-                  nodeROS->pub_error.publish(errorCOM);
                   ROS_INFO("Error al ejecutar el componente JAUS");
-                  exit(1);
+                  return RUN_COMPONENT_ERROR;
             }            
-            return true;
+            return NO_ERROR;
     }
     catch(...)
-    {
+    {   
             ROS_INFO("Node Manager Construction Failed");
             ROS_INFO("Note: Check the NodeManager.conf...");
-            return false;
+            return JAUS_CONFIG_ERROR;
     }
 }
 
@@ -137,6 +128,7 @@ void JausSubsystemVehicle::sendJAUSMessage(JausMessage msg_JAUS, int typeACK)
     {
         do
         {
+            subsystemJAUS->ackReceived=NO_ACK;
             ojCmptSendMessage(compVehicle,msg_JAUS);
             if(waitForACK(typeACK,TIMEOUT_ACK))
                 msgOK=true;
@@ -164,13 +156,12 @@ void JausSubsystemVehicle::rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage){
    //Recepción de ack
    if(rxMessage->properties.ackNak==JAUS_ACKNOWLEDGE)
    {
-       ROS_INFO("RECIBO ACK");
        if(rxMessage->commandCode==JAUS_REPORT_FUNCTION_AUXILIAR)
            subsystemJAUS->ackReceived=ACK_FUNC_AUX;       
        else if(rxMessage->commandCode==JAUS_REPORT_MISSION_STATUS)
            subsystemJAUS->ackReceived=ACK_MODE;
        else if(rxMessage->commandCode==JAUS_REPORT_ERROR)
-           subsystemJAUS->ackReceived=ACK_ERROR;           
+           subsystemJAUS->ackReceived=ACK_ERROR;          
        else if(rxMessage->commandCode==JAUS_REPORT_AVAILABLE)
            subsystemJAUS->ackReceived=ACK_AVAILABLE;
    }
@@ -280,9 +271,9 @@ void JausSubsystemVehicle::losedCommunication()
     
     //Envia error de comunicación 
     Common_files::msg_error error;
-    error.id_subsystem=0;
-    error.id_error=8;           /************ PRUEBA **********************/
-    error.type_error=0;
+    error.id_subsystem=SUBS_COMMUNICATION;
+    error.id_error=COMMUNICATION_UCR_FAIL;           /************ PRUEBA **********************/
+    error.type_error=TOE_UNDEFINED;
     nodeROS->pub_error.publish(error);
     
 }
