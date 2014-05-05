@@ -18,7 +18,7 @@ int Files::openFiles()
       writeErrorInLOG(COMM_LOG_FILE_ERROR,"Fichero de datos");
       return COMM_LOG_FILE_ERROR;
     }
-    fileConfig.open("configLaser.txt");
+    fileConfig.open("configComm.txt");
     if(!fileConfig.is_open())	
     {
        writeErrorInLOG(COMM_CONFIG_FILE_ERROR,"Fichero de configuracion");
