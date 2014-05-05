@@ -22,7 +22,7 @@ extern "C" {
 
 // Timeout para activacion de modulos
 #define TIMEOUT_ACTIVATION_MODULE 10 //segundos
-#define TIMEOUT_ACK 0.9
+#define TIMEOUT_ACK 10
 #define NUM_MODULES 13
 
 // Tipo de ack

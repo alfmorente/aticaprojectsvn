@@ -1002,6 +1002,7 @@ bool timerACK(double sec, int typeACK)
     //ROS_INFO("TIMER START");
     do
     {
+        ros::spinOnce();
         diffTime=(clock()-tstart)/(double)CLOCKS_PER_SEC;
         if(typeACK== CONVOY_ACK)
             ack=convoyACK;
