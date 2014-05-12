@@ -34,6 +34,14 @@ extern "C" {
 #include <stdlib.h>
 #include <signal.h>
 
+// Publicadores y suscriptores
+ros::Publisher pub_error;
+ros::Publisher pub_teleop;
+ros::Subscriber sub_hab_modulo;
+ros::Subscriber sub_com_teleop;
+ros::ServiceServer server;
+
+
 //Variables globales
 bool enableModule;
 int error_count;

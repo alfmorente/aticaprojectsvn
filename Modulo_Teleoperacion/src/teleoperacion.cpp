@@ -1,9 +1,6 @@
 #include "../include/Modulo_Teleoperacion/teleoperacion.h"
 
-  ros::Publisher pub_error;
-  ros::Publisher pub_teleop;
-
-  using namespace std;
+using namespace std;
 
 int main(int argc, char **argv)
 {
@@ -29,9 +26,8 @@ int main(int argc, char **argv)
           n.getParam("state_module_remote",estado_actual);
   }
   cout << "Atica TELEOPERACION :: Iniciando configuración..." << endl;
-
-  sleep(1);
-
+  
+  initialize(n);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_remote",STATE_OK);
   cout << "Atica TELEOPERACION :: Configurado y funcionando" << endl;
@@ -145,9 +141,9 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
 // Funcion inicialización de variables
 void initialize(ros::NodeHandle n) {
     // Creacion de suscriptores
-    ros::Subscriber sub_hab_modulo = n.subscribe("modEnable", 1000, fcn_sub_enable_module);
-    ros::Subscriber sub_com_teleop = n.subscribe("commands_unclean", 1000, fcn_sub_com_teleop);
-    ros::ServiceServer server=n.advertiseService("module_alive_2",fcn_heartbeat);
+    sub_hab_modulo = n.subscribe("modEnable", 1000, fcn_sub_enable_module);
+    sub_com_teleop = n.subscribe("commands_unclean", 1000, fcn_sub_com_teleop);
+    server=n.advertiseService("module_alive_2",fcn_heartbeat);
     // Generación de publicadores
     pub_teleop = n.advertise<Common_files::msg_com_teleop>("commands_clean", 1000);
     pub_error = n.advertise<Common_files::msg_error>("error", 1000);
