@@ -23,6 +23,7 @@ extern "C" {
 #include "Common_files/msg_mode.h"
 #include "Common_files/msg_available.h"
 #include "Common_files/msg_error.h"
+#include "Common_files/srv_data.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
@@ -57,6 +58,7 @@ ros::Publisher pub_error;
 ros::Publisher pub_avail_mode;
 ros::Subscriber sub_error;
 ros::Subscriber sub_mode;
+ros::ServiceServer server;
 // Variable de control de modo
 short currentMode;
 // Variable de continuacion de modulo
@@ -69,6 +71,7 @@ int numErrorMode[MAX_MODES][MAX_MODULES][MAX_ERRORS];
 // Funciones de suscripcion
 void fcn_sub_mode(const Common_files::msg_mode);
 void fcn_sub_error(const Common_files::msg_error);
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
 // Funciones propias
 void initialize(ros::NodeHandle n);

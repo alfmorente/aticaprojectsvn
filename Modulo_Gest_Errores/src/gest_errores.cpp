@@ -137,6 +137,16 @@ void fcn_sub_error(const Common_files::msg_error msg)
     }
 }
 
+// Servicio de heartbeat para Gestion de sistema
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
+{
+    if (req.param == PARAM_ALIVE) {
+        resp.value = 0;
+        return true;
+    } else
+        return false;
+}
+
 /*******************************************************************************
  *******************************************************************************
  *                              FUNCIONES PROPIAS
@@ -147,6 +157,7 @@ void initialize(ros::NodeHandle n) {
     // Creacion de suscriptores
     sub_error = n.subscribe("error", 1000, fcn_sub_error);
     sub_mode = n.subscribe("modeSE", 1000, fcn_sub_mode);
+    server = n.advertiseService("module_alive_15",fcn_heartbeat);
     // Inicializacion de publicadores
     pub_mode = n.advertise<Common_files::msg_mode>("modeES", 1000);
     pub_error = n.advertise<Common_files::msg_error>("errorToUCR", 1000);
@@ -249,6 +260,9 @@ short mode_remote_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -280,7 +294,7 @@ short mode_remote_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -757,6 +771,9 @@ short mode_startengine_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -788,7 +805,7 @@ short mode_startengine_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -1265,6 +1282,9 @@ short mode_stopengine_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -1296,7 +1316,7 @@ short mode_stopengine_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -1773,6 +1793,9 @@ short mode_engagebrake_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -1804,7 +1827,7 @@ short mode_engagebrake_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -2281,6 +2304,9 @@ short mode_plan_error(Common_files::msg_error msg) {
                 case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                     type_error = TOE_CRITICAL;
                     break;
+                case COMMUNICATION_UCR_FAIL:
+                    type_error = TOE_WARNING;
+                    break;
                 default:
                     type_error = TOE_UNAVAILABLE;
                     break; // Ha llegado un id_error no contemplado
@@ -2312,7 +2338,7 @@ short mode_plan_error(Common_files::msg_error msg) {
                 case (GPS_MODULE_NA):
                     type_error = TOE_CRITICAL;
                     break;
-                case (FRONT_LASER_MODULE_NA):
+                case (FRONT_LASER_1_MODULE_NA):
                     type_error = TOE_CRITICAL;
                     break;
                 case (REAR_LASER_MODULE_NA):
@@ -2790,6 +2816,9 @@ short mode_cometome_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -2821,7 +2850,7 @@ short mode_cometome_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -3299,6 +3328,9 @@ short mode_followme_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -3330,7 +3362,7 @@ short mode_followme_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -3808,6 +3840,9 @@ short mode_teach_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -3839,7 +3874,7 @@ short mode_teach_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -4317,6 +4352,9 @@ short mode_mapping_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -4348,7 +4386,7 @@ short mode_mapping_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -4826,6 +4864,9 @@ short mode_convoy_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -4857,7 +4898,7 @@ short mode_convoy_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_WARNING;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -5335,6 +5376,9 @@ short mode_conv_teleop_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -5366,7 +5410,7 @@ short mode_conv_teleop_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -5844,6 +5888,9 @@ short mode_conv_auto_error(Common_files::msg_error msg)
                         case (COMM_CONFIG_FILE_STRUCTURE_ERROR):
                             type_error=TOE_CRITICAL;
                             break;
+                        case COMMUNICATION_UCR_FAIL:
+                            type_error=TOE_WARNING;
+                            break;
                         default:
                             type_error=TOE_UNAVAILABLE;
                             break;     // Ha llegado un id_error no contemplado
@@ -5875,7 +5922,7 @@ short mode_conv_auto_error(Common_files::msg_error msg)
                         case (GPS_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
-                        case (FRONT_LASER_MODULE_NA):
+                        case (FRONT_LASER_1_MODULE_NA):
                             type_error=TOE_CRITICAL;
                         break;
                         case (REAR_LASER_MODULE_NA):
@@ -6354,6 +6401,9 @@ int convertOutputError(Common_files::msg_error msg){
                 case COMM_CONFIG_FILE_STRUCTURE_ERROR:
                     out_error = COMM_FILE_ERROR;
                     break;
+                case COMMUNICATION_UCR_FAIL:
+                    out_error = LINK_ERROR_OUTPUT;
+                    break;
                 default:
                     cout << "Error indefinido" << endl;
                     break;
@@ -6371,7 +6421,8 @@ int convertOutputError(Common_files::msg_error msg){
                 case NAVIGATION_MODULE_NA:
                 case CAMERA_MODULE_NA:
                 case GPS_MODULE_NA:
-                case FRONT_LASER_MODULE_NA:
+                case FRONT_LASER_1_MODULE_NA:
+                case FRONT_LASER_2_MODULE_NA:
                 case REAR_LASER_MODULE_NA:
                 case LASER3D_MODULE_NA:
                 case BEACON_MODULE_NA:
