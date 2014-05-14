@@ -5,6 +5,12 @@
       <df name="src">
         <in>Manager.cpp</in>
       </df>
+      <df name="srv">
+        <in>srv_electric.srv</in>
+        <in>srv_frontcam.srv</in>
+        <in>srv_rearcam.srv</in>
+        <in>srv_vehicle.srv</in>
+      </df>
     </df>
     <logicalFolder name="CMakeFiles"
                    displayName="CMakeFiles"
@@ -116,6 +122,14 @@
       <item path="src/Manager.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="srv/srv_electric.srv" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="srv/srv_frontcam.srv" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="srv/srv_rearcam.srv" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="srv/srv_vehicle.srv" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

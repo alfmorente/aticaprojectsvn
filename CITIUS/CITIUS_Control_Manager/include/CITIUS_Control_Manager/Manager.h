@@ -23,3 +23,7 @@ extern "C" {
 
 #include "ros/ros.h"
 #include "CITIUS_Control_Manager/srv_status.h"
+#include "CITIUS_Control_Manager/srv_electric.h"
+#include "CITIUS_Control_Manager/srv_frontcam.h"
+#include "CITIUS_Control_Manager/srv_rearcam.h"
+#include "CITIUS_Control_Manager/srv_vehicle.h"

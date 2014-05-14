@@ -115,12 +115,20 @@
         <in>Manager.cpp</in>
       </df>
       <df name="srv">
+        <in>srv_electric.srv</in>
+        <in>srv_frontcam.srv</in>
+        <in>srv_rearcam.srv</in>
+        <in>srv_vehicle.srv</in>
       </df>
       <df name="srv_gen">
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Manager">
+              <in>srv_electric.h</in>
+              <in>srv_frontcam.h</in>
+              <in>srv_rearcam.h</in>
               <in>srv_status.h</in>
+              <in>srv_vehicle.h</in>
             </df>
           </df>
         </df>

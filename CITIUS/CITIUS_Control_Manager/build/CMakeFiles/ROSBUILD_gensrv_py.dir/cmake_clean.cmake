@@ -4,7 +4,11 @@ FILE(REMOVE_RECURSE
   "../src/CITIUS_Control_Manager/srv"
   "CMakeFiles/ROSBUILD_gensrv_py"
   "../src/CITIUS_Control_Manager/srv/__init__.py"
+  "../src/CITIUS_Control_Manager/srv/_srv_vehicle.py"
+  "../src/CITIUS_Control_Manager/srv/_srv_frontcam.py"
   "../src/CITIUS_Control_Manager/srv/_srv_status.py"
+  "../src/CITIUS_Control_Manager/srv/_srv_electric.py"
+  "../src/CITIUS_Control_Manager/srv/_srv_rearcam.py"
 )
 
 # Per-language clean rules from dependency scanning.

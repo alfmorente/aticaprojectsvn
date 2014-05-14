@@ -42,7 +42,53 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build
 # Include the progress variables for this target.
 include CMakeFiles/ROSBUILD_gensrv_cpp.dir/progress.make
 
+CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h
+CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h
 CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h
+CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h
+CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h
+
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: ../srv/srv_vehicle.srv
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: ../manifest.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/cpp_common/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/rostime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/genmsg/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/genpy/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/message_runtime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/rosconsole/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/std_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_vehicle.srv
+
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: ../srv/srv_frontcam.srv
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: ../manifest.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/cpp_common/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/rostime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/genmsg/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/genpy/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/message_runtime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/rosconsole/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/std_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_frontcam.srv
 
 ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h: ../srv/srv_status.srv
 ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
@@ -61,12 +107,58 @@ CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/sr
 ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_status.srv
 
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: ../srv/srv_electric.srv
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: ../manifest.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/cpp_common/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/rostime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/genmsg/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/genpy/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/message_runtime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/rosconsole/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/std_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_electric.srv
+
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: ../srv/srv_rearcam.srv
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: ../manifest.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/cpp_common/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/rostime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/genmsg/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/genpy/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/message_runtime/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/rosconsole/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/std_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_rearcam.srv
+
 ROSBUILD_gensrv_cpp: CMakeFiles/ROSBUILD_gensrv_cpp
+ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicle.h
+ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_frontcam.h
 ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_status.h
+ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_electric.h
+ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/CITIUS_Control_Manager/srv_rearcam.h
 ROSBUILD_gensrv_cpp: CMakeFiles/ROSBUILD_gensrv_cpp.dir/build.make
 .PHONY : ROSBUILD_gensrv_cpp
 
