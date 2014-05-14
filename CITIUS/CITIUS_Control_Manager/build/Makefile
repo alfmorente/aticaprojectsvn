@@ -137,6 +137,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Manager
+
+# Build rule for target.
+Manager: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Manager
+.PHONY : Manager
+
+# fast build rule for target.
+Manager/fast:
+	$(MAKE) -f CMakeFiles/Manager.dir/build.make CMakeFiles/Manager.dir/build
+.PHONY : Manager/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -319,6 +332,19 @@ rospack_gensrv/fast:
 .PHONY : rospack_gensrv/fast
 
 #=============================================================================
+# Target rules for targets named rospack_gensrv_all
+
+# Build rule for target.
+rospack_gensrv_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_gensrv_all
+.PHONY : rospack_gensrv_all
+
+# fast build rule for target.
+rospack_gensrv_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_gensrv_all.dir/build.make CMakeFiles/rospack_gensrv_all.dir/build
+.PHONY : rospack_gensrv_all/fast
+
+#=============================================================================
 # Target rules for targets named run_tests
 
 # Build rule for target.
@@ -422,12 +448,37 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/Manager.o: src/Manager.cpp.o
+.PHONY : src/Manager.o
+
+# target to build an object file
+src/Manager.cpp.o:
+	$(MAKE) -f CMakeFiles/Manager.dir/build.make CMakeFiles/Manager.dir/src/Manager.cpp.o
+.PHONY : src/Manager.cpp.o
+
+src/Manager.i: src/Manager.cpp.i
+.PHONY : src/Manager.i
+
+# target to preprocess a source file
+src/Manager.cpp.i:
+	$(MAKE) -f CMakeFiles/Manager.dir/build.make CMakeFiles/Manager.dir/src/Manager.cpp.i
+.PHONY : src/Manager.cpp.i
+
+src/Manager.s: src/Manager.cpp.s
+.PHONY : src/Manager.s
+
+# target to generate assembly for a file
+src/Manager.cpp.s:
+	$(MAKE) -f CMakeFiles/Manager.dir/build.make CMakeFiles/Manager.dir/src/Manager.cpp.s
+.PHONY : src/Manager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... Manager"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_gensrv_cpp"
@@ -448,6 +499,7 @@ help:
 	@echo "... rospack_genmsg"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
+	@echo "... rospack_gensrv_all"
 	@echo "... run_tests"
 	@echo "... test"
 	@echo "... test-future"
@@ -456,6 +508,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/Manager.o"
+	@echo "... src/Manager.i"
+	@echo "... src/Manager.s"
 .PHONY : help
 
 

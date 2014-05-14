@@ -25,6 +25,7 @@
                    root="/usr/share/cmake-2.8/Modules">
       <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
       <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h</itemPath>
       <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -87,7 +88,20 @@
             tool="1"
             flavor2="0">
       </item>
-      <folder path="usr/share/cmake-2.8/Modules">
+      <folder path="0">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
+            <pElem>build</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>ROS_PACKAGE_NAME="CITIUS_Control_Manager"</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Modules">
         <cTool>
           <incDir>
             <pElem>build/CMakeFiles/CMakeTmp</pElem>
