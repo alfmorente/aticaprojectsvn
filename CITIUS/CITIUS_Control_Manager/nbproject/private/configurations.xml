@@ -38,6 +38,8 @@
           </df>
           <df name="Manager.dir">
             <df name="src">
+              <df name="CITIUS_Control_Manager">
+              </df>
             </df>
           </df>
           <df name="rosbuild_clean-test-results.dir">
@@ -45,6 +47,8 @@
           <df name="ROSBUILD_genmsg_cpp.dir">
           </df>
           <df name="ROSBUILD_genmsg_lisp.dir">
+          </df>
+          <df name="ROSBUILD_genmsg_py.dir">
           </df>
           <df name="ROSBUILD_gensrv_cpp.dir">
           </df>
@@ -57,6 +61,8 @@
           <df name="rosbuild_premsgsrvgen.dir">
           </df>
           <df name="rospack_genmsg.dir">
+          </df>
+          <df name="rospack_genmsg_all.dir">
           </df>
           <df name="rospack_genmsg_libexe.dir">
           </df>
@@ -102,15 +108,38 @@
       </df>
       <df name="include">
         <df name="CITIUS_Control_Manager">
-          <in>Manager.h</in>
+          <in>ROSNode_Manager.h</in>
         </df>
       </df>
       <df name="lib">
       </df>
+      <df name="msg">
+        <in>msg_cameraStatus.msg</in>
+        <in>msg_command.msg</in>
+        <in>msg_electricInfo.msg</in>
+        <in>msg_vehicleInfo.msg</in>
+      </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Manager">
+              <in>msg_cameraStatus.h</in>
+              <in>msg_command.h</in>
+              <in>msg_electricInfo.h</in>
+              <in>msg_vehicleInfo.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
       <df name="src">
         <df name="CITIUS_Control_Manager">
+          <df name="msg">
+          </df>
           <df name="srv">
           </df>
+          <in>ROSNode_Manager.cpp</in>
         </df>
         <in>Manager.cpp</in>
       </df>
