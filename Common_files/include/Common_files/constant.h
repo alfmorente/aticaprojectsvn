@@ -30,6 +30,10 @@ extern "C" {
 #define STATE_OK 2
 #define STATE_ERROR 3
 
+// Constantes para el inicio de funcionamiento del sistema para todos los modulos
+#define STATE_SYSTEM_ON 0
+#define STATE_SYSTEM_OFF 1
+
 // Constante para gestión de interruptores/banderas
 #define OFF 0
 #define ON 1
