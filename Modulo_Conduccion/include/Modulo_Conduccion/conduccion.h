@@ -80,7 +80,7 @@ short valor_parada_obstaculo;           // Flag que contrala el cambio de la par
 short valor_parada_local;               // Flag que contrala el cambio de la parada de emergencia local
 short valor_parada_remote;              // Flag que contrala el cambio de la parada de emergencia remota
 short error_a_p;                        // Flag que controla el error del arranque y la parada
-short error_acelerador;                  // Flag que controla el error del acelerador
+short error_acelerador;                 // Flag que controla el error del acelerador
 short error_freno_estacionamiento;      // Flag que controla el error del freno de estacionamiento
 short error_freno_servicio;             // Flag que controla el error del freno de servicio
 short error_cambio_marcha;              // Flag que controla el error del cambio de amrcha

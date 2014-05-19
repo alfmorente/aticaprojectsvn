@@ -31,8 +31,8 @@ using namespace std;
 // DEFINES
 
 #define DEFAULT_NODE "/dev/pcan0"
-#define ERROR_WRITE_FRAME 2000
-#define ERROR_READ_FRAME 2000
+#define ERROR_WRITE_FRAME 10
+#define ERROR_READ_FRAME 10
 
 
 #ifndef bool
