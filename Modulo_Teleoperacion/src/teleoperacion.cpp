@@ -23,42 +23,60 @@ int main(int argc, char **argv)
   // Espera activa de inicio de modulo
   int estado_actual=STATE_OFF;
   while(estado_actual!=STATE_CONF){
-          n.getParam("state_module_remote",estado_actual);
+        n.getParam("state_module_remote",estado_actual);
+        usleep(50000);
   }
   cout << "Atica TELEOPERACION :: Iniciando configuración..." << endl;
   
   initialize(n);
+  usleep(100000);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_remote",STATE_OK);
   cout << "Atica TELEOPERACION :: Configurado y funcionando" << endl;
   
-  while (ros::ok() && !exitModule){
-    switch (operationMode) {
-          case OPERATION_MODE_DEBUG:
-                n.getParam("state_module_remote", estado_actual);
-                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
-                    exitModule = true;
-                }
-                ros::spinOnce();
-                break;
-          case OPERATION_MODE_RELEASE:
-                n.getParam("state_module_remote", estado_actual);
-                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
-                    exitModule = true;
-                }
-                ros::spinOnce();
-                break;
-          case OPERATION_MODE_SIMULATION:
-                n.getParam("state_module_remote", estado_actual);
-                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
-                    exitModule = true;
-                }
-                ros::spinOnce();    
-                break;
-          default:
-              break;
-    }
+  // Espera la señal de OK proviniento de Gestion del sistema
+  int system_status=STATE_SYSTEM_OFF;
+  while(system_status!=STATE_SYSTEM_ON && estado_actual != STATE_OFF){
+        n.getParam("state_system", system_status);
+        n.getParam("state_module_remote", estado_actual);
+        usleep(50000);
   }
+  
+  switch (operationMode) {
+      case OPERATION_MODE_DEBUG:
+          while (ros::ok() && !exitModule){  
+          n.getParam("state_module_remote", estado_actual);
+                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+            }
+          break;
+      case OPERATION_MODE_RELEASE:
+          while (ros::ok() && !exitModule){
+            n.getParam("state_module_remote", estado_actual);
+                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+          }
+            break;
+      case OPERATION_MODE_SIMULATION:
+          while (ros::ok() && !exitModule) {
+                n.getParam("state_module_remote", estado_actual);
+                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+          }
+            break;
+      default:
+            break;
+  }
+  
   cout << "Atica TELEOPERACION :: Módulo finalizado" << endl;
   return 0;
 }
@@ -95,8 +113,8 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 
         // Proceso de depuracion de valores
         msg_cteleop.value = convertToCorrectValues(msg.id_element,msg.value);
-        cout << "Comando depurado\n";
-        cout << msg_cteleop;
+        //cout << "Comando depurado\n";
+        //cout << msg_cteleop;
         // Publicacion de mensaje ya depurado
         pub_teleop.publish(msg_cteleop);
         
@@ -153,6 +171,7 @@ void initialize(ros::NodeHandle n) {
     enableModule = false;
     error_count = 0;
     end_error = false;
+    
 }
 
 // Acota los valores para que no se salgan de rango
@@ -317,7 +336,7 @@ int convertToCorrectValues(int id_elem, int value){
 
 // Obtener el modo de operacion
 int getOperationMode(int argc, char **argv){
-    if(argc!=2){
+    if(argc!=4){
         printCorrectSyntax();
         return 0;
     }
