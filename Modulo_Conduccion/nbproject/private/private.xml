@@ -12,9 +12,9 @@
         <group>
             <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/include/Modulo_Conduccion/ConduccionThread.hpp</file>
             <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/ConduccionThread.cpp</file>
-            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeLists.txt</file>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/interaction.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/CANCommunication.cpp</file>
             <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp</file>
-            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion/include/Modulo_Conduccion/conduccion.h</file>
         </group>
     </open-files>
 </project-private>
