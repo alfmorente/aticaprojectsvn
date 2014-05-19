@@ -18,15 +18,28 @@ extern "C" {
 
 #endif	/* GPS_H */
 
-// Mensajes
-#include "../../msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h"
-#include "../../msg_gen/cpp/include/Modulo_Camaras/msg_errores.h"
+#include <Common_files/msg_error.h>
+#include <Common_files/msg_ctrl_camera.h>
+#include "../../../Common_files/include/Common_files/constant.h"
+#include <Modulo_Camaras/ProtPelcoD.h>
+
 
 // ROS y demas librerias
 #include "ros/ros.h"
-#include "constant.h"
+#define NAME_SERIAL "/dev/ttyUSB0"
+#define VELOCITY B9600
 
-// NO hay suscriptores
+//Variables
+bool exitModule;
+ProtPelcoD*camara;
+bool cameraAlive;
+
+
+//Subscriptores
+ros::Subscriber sub_cam;
+
+// Publicadores
+ros::Publisher pub_error;
 
 // Funciones propias
 
@@ -38,3 +51,5 @@ bool recvData();
 bool isAlive();
 bool checkStateCamera();
 
+//Funciones de subscripcion
+void fcn_sub_ctrl_camera(Common_files::msg_ctrl_camera msg);
