@@ -23,46 +23,55 @@ int main(int argc, char **argv)
   int estado_actual=STATE_OFF;
   while(estado_actual!=STATE_CONF){
           n.getParam("state_module_error_management",estado_actual);
+          usleep(50000);
   }
   cout << "Atica GEST. ERRORES :: Iniciando configuración..." << endl;
 
   initialize(n);
+  usleep(100000);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_error_management",STATE_OK);
   cout << "Atica GEST. ERRORES :: Configurado y funcionando" << endl;
 
-  while (ros::ok() && !exitModule)
-  {
-       switch (operationMode) {
+  switch (operationMode) {
         case OPERATION_MODE_DEBUG:
             // Funcionamiento del modo debug
-            n.getParam("state_module_error_management",estado_actual);
-            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-                exitModule=true;
-            } 
-            ros::spinOnce();
+            while (ros::ok() && !exitModule) {
+                n.getParam("state_module_error_management", estado_actual);
+                if (estado_actual == STATE_ERROR || estado_actual == STATE_OFF) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+            }
             break;
         case OPERATION_MODE_RELEASE:
             // Funcionamiento del modo release
-            n.getParam("state_module_error_management",estado_actual);
-            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-                exitModule=true;
-            } 
-            ros::spinOnce();
+            while (ros::ok() && !exitModule) {
+                n.getParam("state_module_error_management", estado_actual);
+                if (estado_actual == STATE_ERROR || estado_actual == STATE_OFF) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+            }
             break;
         case OPERATION_MODE_SIMULATION:
             // Funcionamiento del modo simulacion
-            n.getParam("state_module_error_management",estado_actual);
-            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-                exitModule=true;
-            } 
-            ros::spinOnce();
+            while (ros::ok() && !exitModule) {
+                n.getParam("state_module_error_management", estado_actual);
+                if (estado_actual == STATE_ERROR || estado_actual == STATE_OFF) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+            }
             break;
         default:
             break;
     }
       
-  }
+  
   cout << "Atica GEST. ERRORES :: Módulo finalizado" << endl;
   return 0;
 }
