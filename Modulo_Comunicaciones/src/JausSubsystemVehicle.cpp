@@ -57,7 +57,7 @@ void JausSubsystemVehicle::disconnect()
 
 int JausSubsystemVehicle::configureJAUS(){
 
-    string nombre= "NodeManager.conf";
+    string nombre= "/home/atica/catkin_ws/src/Modulo_Comunicaciones/bin/NodeManager.conf";
     string nameComponent="VEHICLE";
     ROS_INFO("OpenJAUS Node Manager %s", OJ_NODE_MANAGER_VERSION);
     try

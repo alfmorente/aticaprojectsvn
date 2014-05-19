@@ -18,25 +18,26 @@
 #define NO_ERROR -1
 
 using namespace std;
+//Estructura de configuracion
+
 typedef struct dataConfig
 {
-    
-    
+    //Por rellenar
 }ComConfig;
 
 class Files
 {
         public:
             //Fichero LOG
-            ofstream fileError;
-            ofstream fileData;
+            static ofstream fileError;
+            static ofstream fileData;
             ifstream fileConfig;
 
         public:
             Files();
             int openFiles();
-            void writeErrorInLOG(int error, string typeResponse);
-            void writeDataInLOG(string info);
+            static void  writeErrorInLOG(int error, string typeResponse);
+            static void  writeDataInLOG(string info);
             bool setValueConfiguration(string parametro,string valor,ComConfig* config);
             int  readConfig(ComConfig* config);
             int getTimeout(int outputInterval,int scanningFrecuency);            

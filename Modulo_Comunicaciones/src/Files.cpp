@@ -1,6 +1,10 @@
 #include <Modulo_Comunicaciones/Files.h>
 #include "../../Common_files/include/Common_files/constant.h"
 
+ofstream Files::fileError;
+ofstream Files::fileData;
+
+
 Files::Files()
 {
     
@@ -8,20 +12,20 @@ Files::Files()
 
 int Files::openFiles()
 {
-    fileError.open("fileError.txt");
+    fileError.open("/home/atica/catkin_ws/src/Modulo_Comunicaciones/bin/fileError.txt");
     if(fileError.bad())
       return COMM_LOG_FILE_ERROR;
 
-    fileData.open("fileData.txt");
+    fileData.open("/home/atica/catkin_ws/src/Modulo_Comunicaciones/bin/fileData.txt");
     if(fileData.bad())
     {
-      writeErrorInLOG(COMM_LOG_FILE_ERROR,"Fichero de datos");
+      //writeErrorInLOG(COMM_LOG_FILE_ERROR,"Fichero de datos");
       return COMM_LOG_FILE_ERROR;
     }
-    fileConfig.open("configComm.txt");
+    fileConfig.open("/home/atica/catkin_ws/src/Modulo_Comunicaciones/bin/configComm.txt");
     if(!fileConfig.is_open())	
     {
-       writeErrorInLOG(COMM_CONFIG_FILE_ERROR,"Fichero de configuracion");
+       //writeErrorInLOG(COMM_CONFIG_FILE_ERROR,"Fichero de configuracion");
        return COMM_CONFIG_FILE_ERROR;
     }
     return NO_ERROR;
@@ -59,8 +63,9 @@ int Files::readConfig(ComConfig* config)
 
 
 void Files::writeErrorInLOG(int error, string typeResponse)
-{
-	struct timeval timeLog;
+{   
+
+        struct timeval timeLog;
 
 	gettimeofday(&timeLog,NULL);
      	fileError << timeLog.tv_sec%18000 << "." << timeLog.tv_usec << ":\t";
@@ -95,7 +100,8 @@ void Files::writeErrorInLOG(int error, string typeResponse)
 
 void Files::writeDataInLOG(string info)
 {
-    	struct timeval timeLog;
+
+        struct timeval timeLog;
 	gettimeofday(&timeLog,NULL);
         fileData<< timeLog.tv_sec%18000 << "." << timeLog.tv_usec << ":\t";
         fileData <<info<< endl;

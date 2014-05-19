@@ -1,4 +1,5 @@
 #include <Modulo_Comunicaciones/ConverterTypes.h>
+#include <Modulo_Comunicaciones/Files.h>
 
 // Conversion de mensaje ROS a JAUS (Vehiculo - UCR))
 JausMessage convertROStoJAUS(ROSmessage msg_ROS){
@@ -17,6 +18,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
     switch (msg_ROS.tipo_mensaje){
         case TOM_CAMERA:
             ROS_INFO("ENVIO IMAGEN");
+            //Files::writeDataInLOG("ENVIO IMAGEN");
             tipoMensajeJAUS.image = reportImageMessageCreate();
 	    jausAddressCopy(tipoMensajeJAUS.image->destination, destino);
 	    tipoMensajeJAUS.image->cameraID=0;
@@ -31,6 +33,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
 
         case TOM_GPS:
             ROS_INFO("ENVIO GPS");
+            //Files::writeDataInLOG("ENVIO GPS");
             tipoMensajeJAUS.posGPS=reportGlobalPoseMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.posGPS->destination, destino);
             tipoMensajeJAUS.posGPS->latitudeDegrees=msg_ROS.mens_gps.latitude;
@@ -45,6 +48,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
 
         case TOM_ERROR:
             ROS_INFO("ENVIO ERROR");
+            //Files::writeDataInLOG("ENVIO ERROR");
             tipoMensajeJAUS.error=reportErrorMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.error->destination, destino);
             tipoMensajeJAUS.error->subsystem=msg_ROS.mens_error.id_subsystem;
@@ -56,6 +60,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break;
         case TOM_MODE:
             ROS_INFO("ENVIO ESTADO MODO");
+            //Files::writeDataInLOG("ENVIO ESTADO MODO");
             tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
             tipoMensajeJAUS.missionStatus->type=JAUS_MISSION;
@@ -79,6 +84,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break;
         case TOM_BACKUP_WRENCH:
             ROS_INFO("ENVIO BACKUP WRENCH");
+            //Files::writeDataInLOG("ENVIO BACKUP WRENCH");            
             tipoMensajeJAUS.backupWrench=reportWrenchEffortMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.backupWrench->destination, destino);
             tipoMensajeJAUS.backupWrench->propulsiveLinearEffortXPercent=msg_ROS.mens_backup.throttle;
@@ -89,6 +95,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break;
         case TOM_BACKUP_DISCRETE:
             ROS_INFO("ENVIO BACKUP DISCRETE");
+            //Files::writeDataInLOG("ENVIO BACKUP DISCRETE"); 
             tipoMensajeJAUS.backupDiscrete=reportDiscreteDevicesMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.backupDiscrete->destination, destino);
             tipoMensajeJAUS.backupDiscrete->mainPropulsion=(JausBoolean)msg_ROS.mens_backup.engine;
@@ -108,6 +115,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break; 
         case TOM_BACKUP_SPEED:
             ROS_INFO("ENVIO BACKUP SPEED");   
+            //Files::writeDataInLOG("ENVIO BACKUP SPEED"); 
             tipoMensajeJAUS.backupSpeed=reportVelocityStateMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.backupSpeed->destination, destino);
             tipoMensajeJAUS.backupSpeed->velocityRmsMps=msg_ROS.mens_backup.speed;       
@@ -117,6 +125,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
           
         case TOM_AVAILABLE:
             ROS_INFO("ENVIO AVAILABLE");         
+            //Files::writeDataInLOG("ENVIO AVAILABLE"); 
             tipoMensajeJAUS.avail=reportAvailableMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.avail->destination,destino);
             tipoMensajeJAUS.avail->remote=(JausBoolean)msg_ROS.mens_available.available[AVAILABLE_POS_REMOTE];
@@ -137,6 +146,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break;
         case TOM_FILE:
             ROS_INFO("ENVIO FICHERO");
+            //Files::writeDataInLOG("ENVIO FICHERO"); 
             tipoMensajeJAUS.file=reportFileDataMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.file->destination,destino);
             tipoMensajeJAUS.file->typeFile=msg_ROS.mens_file.id_file;
@@ -146,7 +156,8 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             msg_JAUS = reportFileDataMessageToJausMessage(tipoMensajeJAUS.file);
             reportFileDataMessageDestroy(tipoMensajeJAUS.file);
         case TOM_INFO_STOP:
-            ROS_INFO("ENVIO INFO STOP");
+            ROS_INFO("ENVIO INFO STOP");            
+            //Files::writeDataInLOG("ENVIO INFO STOP"); 
             tipoMensajeJAUS.infoStop=reportInfoStopMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.infoStop->destination,destino);
             tipoMensajeJAUS.infoStop->stopType=msg_ROS.mens_info_stop.id_event;
@@ -156,6 +167,7 @@ JausMessage convertROStoJAUS(ROSmessage msg_ROS){
             break;
         case TOM_FUNC_AUX:
             ROS_INFO("ENVIO ESTADO FUNCION AUXILIAR");
+            //Files::writeDataInLOG("ENVIO ESTADO FUNCION AUXILIAR"); 
             tipoMensajeJAUS.fauxACK=reportFunctionAuxiliarMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.fauxACK->destination,destino);
             tipoMensajeJAUS.fauxACK->function=msg_ROS.mens_fcn_aux.function;
@@ -187,6 +199,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
 
         case JAUS_RUN_MISSION:
             ROS_INFO("Mensaje de Modo RUN recibido");
+            //Files::writeDataInLOG("ENVIO ESTADO FUNCION AUXILIAR"); 
             tipoMensajeJAUS.startMode=runMissionMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.startMode)
             {
@@ -200,6 +213,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
             break;
         case JAUS_PAUSE_MISSION:
             ROS_INFO("Mensaje de Modo PAUSE recibido");
+            //Files::writeDataInLOG("ENVIO ESTADO FUNCION AUXILIAR"); 
             tipoMensajeJAUS.pauseMode=pauseMissionMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.pauseMode)
             {
@@ -213,6 +227,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
             break;
         case JAUS_RESUME_MISSION:
             ROS_INFO("Mensaje de Modo RESUME recibido");
+            //Files::writeDataInLOG("ENVIO ESTADO FUNCION AUXILIAR"); 
             tipoMensajeJAUS.resumeMode=resumeMissionMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.resumeMode)
             {
@@ -226,6 +241,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
             break;
         case JAUS_ABORT_MISSION:
             ROS_INFO("Mensaje de Modo ABORT recibido");
+            //Files::writeDataInLOG("ENVIO ESTADO FUNCION AUXILIAR"); 
             tipoMensajeJAUS.exitMode=abortMissionMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.exitMode)
             {
@@ -242,6 +258,7 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
         //Waypoints en modo de navegación (Follow me)
         case JAUS_REPORT_GLOBAL_WAYPOINT:
             ROS_INFO("Nuevo Waypoint Follow ME");
+            //Files::writeDataInLOG("ENVIO ESTADO FUNCION AUXILIAR");  
             tipoMensajeJAUS.waypoint=reportGlobalWaypointMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.waypoint)
             {
@@ -253,6 +270,8 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
             
         //Conducción
         case JAUS_SET_WRENCH_EFFORT:
+            ROS_INFO("Nuevo comando de teleoperacion");
+            //Files::writeDataInLOG("Nuevo comando de teleoperacion");  
             tipoMensajeJAUS.mainCommand=setWrenchEffortMessageFromJausMessage(msg_JAUS);
             if(tipoMensajeJAUS.mainCommand)
             {
@@ -278,7 +297,6 @@ ROSmessage convertJAUStoROS(JausMessage msg_JAUS)
                         break;
                 }
                 setWrenchEffortMessageDestroy(tipoMensajeJAUS.mainCommand);
-
             }
             break;
 
