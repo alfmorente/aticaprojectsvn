@@ -56,7 +56,7 @@ beb1e0d63937a95ce9399a2df0b96c6c msg_gen/lisp/msg_mode.lisp
 e5efc02651836f859149fa91c53db8b5 msg_gen/lisp/msg_stream.lisp
 c19602ad7cb66c10cc85c0ea1e4c5c25 msg_gen/lisp/msg_switch.lisp
 52209aaf2cd4b1237b6eca2cc2b879e7 msg_gen/lisp/msg_waypoint.lisp
-c64752c932dc189ccd18f2a24873db08 src/Common_files/msg/__init__.py
+91c411d8936e52509215650eb5a38820 src/Common_files/msg/__init__.py
 3ad6f492f2a00d7fba7fb618369230de src/Common_files/msg/_msg_available.py
 0e21924aa4b614b97fe1b1e898c2031b src/Common_files/msg/_msg_backup.py
 b311985f7b33b75ae2cf0a781ae4d228 src/Common_files/msg/_msg_camera.py

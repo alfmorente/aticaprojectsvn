@@ -6,13 +6,13 @@ import struct
 
 
 class msg_available(genpy.Message):
-  _md5sum = "537c2fa61f5a5b28fe6de222ff385320"
+  _md5sum = "c7a5549b98bc1534d37670462e49eac6"
   _type = "Common_files/msg_available"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """bool[12] available
+  _full_text = """bool[13] available
 """
   __slots__ = ['available']
-  _slot_types = ['bool[12]']
+  _slot_types = ['bool[13]']
 
   def __init__(self, *args, **kwds):
     """
@@ -32,9 +32,9 @@ class msg_available(genpy.Message):
       super(msg_available, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.available is None:
-        self.available = [False,False,False,False,False,False,False,False,False,False,False,False]
+        self.available = [False,False,False,False,False,False,False,False,False,False,False,False,False]
     else:
-      self.available = [False,False,False,False,False,False,False,False,False,False,False,False]
+      self.available = [False,False,False,False,False,False,False,False,False,False,False,False,False]
 
   def _get_types(self):
     """
@@ -48,7 +48,7 @@ class msg_available(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_12B.pack(*self.available))
+      buff.write(_struct_13B.pack(*self.available))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -60,8 +60,8 @@ class msg_available(genpy.Message):
     try:
       end = 0
       start = end
-      end += 12
-      self.available = _struct_12B.unpack(str[start:end])
+      end += 13
+      self.available = _struct_13B.unpack(str[start:end])
       self.available = map(bool, self.available)
       return self
     except struct.error as e:
@@ -88,12 +88,12 @@ class msg_available(genpy.Message):
     try:
       end = 0
       start = end
-      end += 12
-      self.available = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=12)
+      end += 13
+      self.available = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=13)
       self.available = map(bool, self.available)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_12B = struct.Struct("<12B")
+_struct_13B = struct.Struct("<13B")

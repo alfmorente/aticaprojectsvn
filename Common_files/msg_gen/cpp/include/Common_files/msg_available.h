@@ -33,8 +33,8 @@ struct msg_available_ {
     available.assign(false);
   }
 
-  typedef boost::array<uint8_t, 12>  _available_type;
-  boost::array<uint8_t, 12>  available;
+  typedef boost::array<uint8_t, 13>  _available_type;
+  boost::array<uint8_t, 13>  available;
 
 
   typedef boost::shared_ptr< ::Common_files::msg_available_<ContainerAllocator> > Ptr;
@@ -65,12 +65,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::Common_files::msg_available_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "537c2fa61f5a5b28fe6de222ff385320";
+    return "c7a5549b98bc1534d37670462e49eac6";
   }
 
   static const char* value(const  ::Common_files::msg_available_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x537c2fa61f5a5b28ULL;
-  static const uint64_t static_value2 = 0xfe6de222ff385320ULL;
+  static const uint64_t static_value1 = 0xc7a5549b98bc1534ULL;
+  static const uint64_t static_value2 = 0xd37670462e49eac6ULL;
 };
 
 template<class ContainerAllocator>
@@ -87,7 +87,7 @@ template<class ContainerAllocator>
 struct Definition< ::Common_files::msg_available_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "bool[12] available\n\
+    return "bool[13] available\n\
 ";
   }
 
