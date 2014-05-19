@@ -4,7 +4,7 @@
 using namespace std;
 
 int getOperationMode(int argc, char **argv){
-    if(argc!=2){
+    if(argc!=4){
         printCorrectSyntax();
         return 0;
     }
@@ -27,7 +27,7 @@ int getOperationMode(int argc, char **argv){
 }
 
 void printCorrectSyntax() {
-    cout << "Invalid option. Syntax: ./gps [mode option]" << endl;
+    cout << "Invalid option. Syntax: ./driving [mode option]" << endl;
     cout << "Options: " << endl;
     cout << "1: Debug" << endl;
     cout << "2: Release" << endl;

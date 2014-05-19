@@ -13,6 +13,7 @@
 
 ConduccionThread::ConduccionThread(CANCommunication * canCOND) {
     CONDUCCION_ACTIVE = true;
+    paradaEmergencia = false;
     CANCONDUCCION = canCOND;
 }
 
@@ -21,17 +22,18 @@ ConduccionThread::~ConduccionThread() {
 
 void ConduccionThread::DoWork(){
 
-    int QueueSize;
+    //int QueueSize;
     TPCANRdMsg MsgAux;
 
     while (CONDUCCION_ACTIVE) {
 
+        if (!CANCONDUCCION->ConduccionQueue.empty()) {
         // RX de mensajes
-        pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
-        QueueSize = CANCONDUCCION->ConduccionQueue.size();
-        pthread_mutex_unlock (&CANCONDUCCION->ConduccionQueue_mutex);
+        //pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
+        //QueueSize = CANCONDUCCION->ConduccionQueue.size();
+        //pthread_mutex_unlock (&CANCONDUCCION->ConduccionQueue_mutex);
 
-        for (int i=0;i<QueueSize; i++) {        
+        //for (int i=0;i<QueueSize; i++) {        
         
             pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
             MsgAux=CANCONDUCCION->ConduccionQueue.front();
@@ -66,7 +68,7 @@ void ConduccionThread::DoWork(){
              }
                         
         }
-
+                //usleep(1000);
         // TX de mensajes
         //m_Change_Command_CAN_AUTOMATA();
         //cout << "Tiempo de envio: " << time1.GetTime() << "\n";
@@ -399,8 +401,8 @@ void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
     
     uint8_t byte_1;
     
-    cout << "valor arranque: " << valor_arranque_parada << endl;
-    cout << "valor freno estacionamiento: " << valor_freno_estacionamiento << endl;
+    //cout << "valor arranque: " << valor_arranque_parada << endl;
+    //cout << "valor freno estacionamiento: " << valor_freno_estacionamiento << endl;
     
     if ((valor_arranque_parada == 0) && (valor_freno_estacionamiento == 0))
         byte_1 = 0; 

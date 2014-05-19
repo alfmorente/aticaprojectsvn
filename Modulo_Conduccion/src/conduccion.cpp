@@ -7,40 +7,69 @@
 
 #include "../include/Modulo_Conduccion/conduccion.h"
 
-
+// Tratamiento de señales (CTRL+C)
+#include <signal.h>
 
 using namespace std;
 
+
+/*******************************************************************************
+ *******************************************************************************
+ *                     FUNCIONES TRATAMIENTO DE SEÑALES
+ * *****************************************************************************
+ * ****************************************************************************/
+
+// the signal handler for manual break Ctrl-C
+void signal_handler(int signal)
+{
+  printf("finished Driving (%d).\n\n", signal);
+  disconnectCommunication();
+  exit(signal);
+}
+
+/*******************************************************************************
+ *******************************************************************************
+ *                                           MAIN
+ * *****************************************************************************
+ * ****************************************************************************/
+
+
 int main(int argc, char **argv)
 {
-  // Obtencion del modo de operacion y comprobacion de que es correcto
+  // Orden para la parada manual con CTtrl+C
+  signal(SIGTERM, signal_handler);
+  signal(SIGINT, signal_handler);  
+    
+  //Obtencion del modo de operacion y comprobacion de que es correcto
+   
   if ((operationMode = getOperationMode(argc, argv)) == 0) {
       return 1;
   }
 
-  // Orden para la parada manual con CTtrl+C
-  init_signals();
+  //operationMode = 1;
   
   // Inicio de ROS
   ros::init(argc, argv, "conduccion");
-
+ 
   ros::NodeHandle n;        // Manejador ROS
   
   //int estado_actual = STATE_OK;    // Para hacer pruebas locales
   
   //Espera activa de inicio de modulo
-  int estado_actual=STATE_OFF;
+  int estado_actual=STATE_OFF; 
   while(estado_actual!=STATE_CONF){
           n.getParam("state_module_driving",estado_actual);
+          usleep(50000);
   }
   cout << "Atica CONDUCCION :: Iniciando configuración..." << endl;
 
   initialize(n); 
+  usleep(100000);
   
   cout << "Atica CONDUCCION :: Configurado y funcionando" << endl;
 
   // Inicializacion de la comunicacion CAN
-  finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos.  
+  finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos. 
   
   // Envío de erorr si no hay comunicacion CAN 
   if (!finDePrograma) {       
@@ -48,14 +77,23 @@ int main(int argc, char **argv)
         pub_error.publish(msg_err);
         
         cout << "CONNECTION_CAN_FAIL \n";
+        cout << "Atica CONDUCCION :: Módulo finalizado" << endl;
+        return 0;
   }
-   
+  
+  //Espera activa de inicio de operacion de cada modulo
+  int estado_sistema = STATE_SYSTEM_OFF;
+  while(estado_sistema != STATE_SYSTEM_ON){
+       n.getParam("state_system",estado_sistema);
+       usleep(50000);   
+  }
+  
   switch (operationMode) {
         case OPERATION_MODE_DEBUG:
-            
-            cout << "FUNCIONAMIENTO EN MODO DEBUG \n\n";
-            
-            while (ros::ok() && finDePrograma && !can->errorWrite) { // && ((can->errorRead) || (can->errorWrite))) {     
+                       
+            //cout << "FUNCIONAMIENTO EN MODO DEBUG \n\n";
+          
+            while (ros::ok() && finDePrograma && !can->errorWrite && !can->errorRead) {  
                 
                 n.getParam("state_module_driving",estado_actual);
                 if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF) {             
@@ -66,19 +104,21 @@ int main(int argc, char **argv)
                 
                 else {
                     
-                    checkEmergencyStop();
+                    //checkEmergencyStop();
                     
-                    checkSwitch();
-                        
-                    checkInfoStop();
+                    //checkSwitch();
+                      
+                    //checkInfoStop();
                     
-                    checkError();
+                    //checkError();
                     
                     //publishBackup();
-                                                          
+
+        	                                 
                 }
                 
                 ros::spinOnce();
+                usleep(25000);
 
             }
         break;
@@ -108,7 +148,9 @@ int main(int argc, char **argv)
         
         cout << "COMMUNICATION_CAN_FAIL \n";
   }
-      
+  
+  disconnectCommunication();
+  usleep(100000);
   cout << "Atica CONDUCCION :: Módulo finalizado" << endl;
   return 0;
 
@@ -303,7 +345,7 @@ void publishInfoStop (short valor, int i) {
             break;
             
         case 2:         // Remote
-
+/*
             if (conduccion->conmutador_m_a == OFF)
                 msg_switch.value = false; // Manual
             else if (conduccion->conmutador_m_a == ON)
@@ -315,7 +357,7 @@ void publishInfoStop (short valor, int i) {
             cout << "Si es 0 = Manual; Si es 1 = Teleoperado \n";
             cout << "Comuntador Manual/Automático: " << (int) msg_switch.value << "\n";
             cout << "***************************************************** \n\n\n";
-            
+  */          
             break;
             
         default:
@@ -447,7 +489,7 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 // Suscriptor al Módulo de System Management
 void fcn_sub_engine_brake(const Common_files::msg_fcn_aux msg)  {
     
-    ROS_INFO("I heard a FUNCTION AUX message from SYSTEM MANAGEMENT \n");
+    //ROS_INFO("I heard a FUNCTION AUX message from SYSTEM MANAGEMENT \n");
     
     if (msg.function == BRAKE) {          
         if (msg.value){
@@ -473,7 +515,7 @@ void fcn_sub_engine_brake(const Common_files::msg_fcn_aux msg)  {
 // Suscriptor al Módulo de System Management
 void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg) {
 
-    ROS_INFO("I heard a EMERGENCY STOP message from SYSTEM MANAGEMENT \n");
+    //ROS_INFO("I heard a EMERGENCY STOP message from SYSTEM MANAGEMENT \n");
 
     parada_emergencia = true;
     cout << "Parada de emergencia = SET \n";
@@ -550,7 +592,7 @@ void initialize(ros::NodeHandle n) {
   n.setParam("state_module_driving",STATE_OK);  
     
   msg_err.id_subsystem = SUBS_DRIVING;  // Flag que indica a errores que estamos en el subsistema Driving
-  parada_emergencia = false;            // Al principio siempre es falsa la parada de emergencia. Se pondra a true cuando verdaderamente haya una parada.
+  parada_emergencia = false;            // Al principio siempre es falsa la parada de emergencia. Se pondra a true cuando verdaderamente haya una parada.  
   valor_conmutador = 9;                 // Al principio se le asigna un valor cualquiera para que en la primera itereacion cambio de valor y lo publique
   valor_parada_obstaculo = 0;           // Al principio se le asigna el valor 0 que indica que no hay ninguna parada de emergencia de obstaculo. 
   valor_parada_local = 0;               // Al principio se le asigna el valor 0 que indica que no hay ninguna parada de emergencia local. 
@@ -571,7 +613,8 @@ void checkEmergencyStop () {
         publishEmergencyStop();
         conduccion->paradaEmergencia = false;
     }
-
+    
+    
     if (parada_emergencia) {
         //cout << "inicio del timer a 10 segundos" << endl;
         if (conduccion->t.GetTimed() > TIMER) {
@@ -600,19 +643,19 @@ void checkSwitch() {
 
 
 void checkInfoStop() {
-    
+    //cout << "parada_emergencia_obstaculo: " << conduccion->parada_emergencia_obstaculo << endl;
     if (valor_parada_obstaculo != conduccion->parada_emergencia_obstaculo) {
         valor_parada_obstaculo = conduccion->parada_emergencia_obstaculo;
         //publishInfoStopObstacule(conduccion->parada_emergencia_obstaculo);
         publishInfoStop(conduccion->parada_emergencia_obstaculo, 0);
     }
-
+    //cout << "parada_emergencia_local: " << conduccion->parada_emergencia_local << endl;
     if (valor_parada_local != conduccion->parada_emergencia_local) {
         valor_parada_local = conduccion->parada_emergencia_local;
         //publishInfoStopLocal(conduccion->parada_emergencia_obstaculo);
         publishInfoStop(conduccion->parada_emergencia_local, 1);
     }
-
+    //cout << "parada_emergencia_remota: " << conduccion->parada_emergencia_remota << endl;
     if (valor_parada_remote != conduccion->parada_emergencia_remota) {
         valor_parada_remote = conduccion->parada_emergencia_remota;
         //publishInfoStopRemote(conduccion->parada_emergencia_obstaculo);
@@ -668,30 +711,5 @@ void checkError() {
     
 }
 
-/*******************************************************************************
- *******************************************************************************
- *                     FUNCIONES TRATAMIENTO DE SEÑALES
- * *****************************************************************************
- * ****************************************************************************/
 
-// what has to be done at program exit
-void do_exit(int error)
-{
-  printf("finished Driving (%d).\n\n", error);
-  exit(error);
-}
-
-// the signal handler for manual break Ctrl-C
-void signal_handler(int signal)
-{
-  do_exit(0);
-}
-
-// what has to be done at program start
-void init_signals()
-{
-  /* install signal handlers */
-  signal(SIGTERM, signal_handler);
-  signal(SIGINT, signal_handler);
-}
 

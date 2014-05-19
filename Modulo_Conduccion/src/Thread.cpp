@@ -43,4 +43,5 @@ void Thread::Terminate() throw (ThreadException) {
 void* Thread::Executer(void* param) {
     Thread *thread = (Thread*) param;
     thread->DoWork();
+    
 }

@@ -40,7 +40,8 @@ bool CANCommunication::EstablishCommunication() {
     if ((bDevNodeGiven) || (!bDevNodeGiven && !bTypeGiven)) 
     {
        
-      h = LINUX_CAN_Open(DEFAULT_NODE, O_RDWR);     
+      h = LINUX_CAN_Open(DEFAULT_NODE, O_RDWR);   
+
       if (!h)
       {	
          
@@ -58,6 +59,7 @@ bool CANCommunication::EstablishCommunication() {
       //                                 HW_ISA_SJA, HW_PCI y HW_USB
       
         h = CAN_Open(nType, dwPort, wIrq);
+
       if (!h)
       {
         
@@ -127,7 +129,9 @@ bool CANCommunication::SendMessage(TPCANMsg* msgTx) {
 
     bool res = false;
     
-    errno_can = CAN_Write (h, msgTx);
+    //errno_can = CAN_Write (h, msgTx);
+    errno_can = LINUX_CAN_Write_Timeout(h, msgTx, 2000000);
+    
     if (errno_can != CAN_ERR_OK){
         cout << "canWrite() failed() with error " << errno_can << "!\n";
         checkErrorWrite (contWrite);
@@ -145,10 +149,12 @@ bool CANCommunication::SendMessage(TPCANMsg* msgTx) {
 
 int32_t CANCommunication::ReceiveMessage(TPCANRdMsg* msgRx) {
 
-    errno_can = LINUX_CAN_Read(h, msgRx);
+    //errno_can = LINUX_CAN_Read(h, msgRx);
+    errno_can = LINUX_CAN_Read_Timeout(h, msgRx, 2000000);
+    
     if (errno_can != CAN_ERR_OK) {
          cout << "canRead() failed with error " << errno_can << "!\n";
-         checkErrorRead (contWrite);
+         checkErrorRead (contRead);
          contRead++;                    // Contador de tramas fail.      
     } else {
         //cout << "function canRead() returned OK !\n";
@@ -161,13 +167,13 @@ int32_t CANCommunication::ReceiveMessage(TPCANRdMsg* msgRx) {
 }
 
 void CANCommunication::checkErrorWrite (int contWrite) {
-    if (contWrite >= ERROR_WRITE_FRAME)
+    if (contWrite == ERROR_WRITE_FRAME)
         errorWrite = true;       
     
 }
  
 void CANCommunication::checkErrorRead (int contRead) {
-    if (contRead >= ERROR_READ_FRAME)
+    if (contRead == ERROR_READ_FRAME)
         errorRead = true;
 }
 
@@ -179,7 +185,7 @@ void CANCommunication::DoWork() {
     while (flagActive) {
         
         i = ReceiveMessage(&msgRx);
-        
+                      
         if (i==0) {   
             
             if (this->id == "Conduccion"){
