@@ -4,7 +4,7 @@
 using namespace std;
 
 int getOperationMode(int argc, char **argv){
-    if(argc!=2){
+    if(argc!=4){
         printCorrectSyntax();
         return 0;
     }

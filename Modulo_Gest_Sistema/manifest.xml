@@ -9,6 +9,7 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Modulo_Gest_Sistema</url>
   <depend package="roscpp"/>
+  <depend package="Common_files"/>
 
 </package>
 

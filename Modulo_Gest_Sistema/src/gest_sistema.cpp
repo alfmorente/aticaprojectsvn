@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 
             // Inicio de configuracion de los modulos
             ROS_INFO("Start activing modules");
+            n.setParam("state_system",STATE_SYSTEM_OFF);
             modeManagement(n,STATE_CONF);
 
             //Inicio variables del módulo
@@ -61,6 +62,9 @@ int main(int argc, char **argv)
                   ros::Subscriber sub_emergency_stop = n.subscribe("emergInfo", 1000, fcn_sub_emergency_stop);         
                   ros::ServiceServer server=n.advertiseService("serviceParam",fcn_server_data);  
                   ros::Timer timer = n.createTimer(ros::Duration(5), checkModulesAlive);
+                  
+                  usleep(100000);
+                  n.setParam("state_system",STATE_SYSTEM_ON);
                   ros::spin();
             }
             else
