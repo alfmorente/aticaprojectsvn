@@ -98,7 +98,7 @@ int main(int argc, char **argv)
       usleep(500000);
     }while(state_system!=STATE_SYSTEM_ON);
     
-    
+
     while (ros::ok() && rosnode->getStateModule()!=STATE_OFF){
         if(subsystemVehicle->communicationState==COM_ON)
         {
@@ -118,6 +118,8 @@ int main(int argc, char **argv)
             {
                 Files::writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Communication stablished");
                 subsystemVehicle->communicationState=COM_ON; 
+                subsystemVehicle->establishedCommunication();
+                
             }
         }
         ros::spinOnce();

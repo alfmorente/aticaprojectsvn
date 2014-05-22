@@ -77,6 +77,9 @@ class NodeROSCommunication {
     void setStateModule(int);
     string getDebugConfiguration();
     bool setDebugConfiguration(string file);
+    bool requestMode(int* mode);
+    bool requestAvailable();
+    bool requestErrors();
 };
 
 #endif	/* NODEROSCOMMUNICATION_H */

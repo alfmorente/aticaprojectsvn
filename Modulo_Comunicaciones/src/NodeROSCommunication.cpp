@@ -324,3 +324,50 @@ bool NodeROSCommunication::setDebugConfiguration(string file)
     return error;
     
 }
+
+bool NodeROSCommunication::requestMode(int*mode)
+{
+    Common_files::srv_data servMode;
+    servMode.request.param=PARAM_MODE;
+    if(clientMode.call(servMode))   
+    {
+        *mode=servMode.response.value;
+        return true;
+    }
+    else
+    {
+        //Envia error no se pudo acceder al servicio
+        return false;
+    }
+    
+}
+
+/**
+bool NodeROSCommunication::requestAvailable()
+{
+    Common_files::srv_data servMode;
+    servMode.request.param=PARAM_MODE;
+    if(clientMode.call(servMode))   
+    {
+        return true;
+    }
+    else
+    {
+        //Envia error no se pudo acceder al servicio
+        return false;
+    }  
+}
+
+bool NodeROSCommunication::requestErrors()
+{
+    Common_files::srv_data servMode;
+    servMode.request.param=PARAM_MODE;
+    if(clientMode.call(servMode))   
+        return true;
+    else
+    {
+        //Envia error no se pudo acceder al servicio        
+        return false;
+    }
+
+}**/

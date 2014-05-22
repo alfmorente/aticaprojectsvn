@@ -80,6 +80,7 @@ class JausSubsystemVehicle
         void sendJAUSMessage(JausMessage txMessage,int type);
         static void rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage);
         void losedCommunication();
+        void establishedCommunication();        
         bool waitForACK(int type,int timeout);
 
 };

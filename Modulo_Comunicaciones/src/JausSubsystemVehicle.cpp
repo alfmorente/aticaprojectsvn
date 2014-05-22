@@ -247,11 +247,10 @@ bool JausSubsystemVehicle::waitForACK(int typeACK,int timeout)
 
 void JausSubsystemVehicle::losedCommunication()
 {
-    Common_files::srv_data servMode;
-    servMode.request.param=PARAM_MODE;
-    if(nodeROS->clientMode.call(servMode))   
+    int mode;
+    if(nodeROS->requestMode(&mode))   
     {
-        if(servMode.response.value==MODE_REMOTE || servMode.response.value==MODE_CONVOY_TELEOP)
+        if(mode==MODE_REMOTE || mode==MODE_CONVOY_TELEOP)
         {
             ROS_INFO("PARADA DEL VEHICULO POR SEGURIDAD");
             Common_files::msg_com_teleop stopVehicle;
@@ -276,4 +275,36 @@ void JausSubsystemVehicle::losedCommunication()
     error.type_error=TOE_UNDEFINED;
     nodeROS->pub_error.publish(error);
     
+}
+
+void JausSubsystemVehicle::establishedCommunication()
+{
+    int modeActual;
+    JausMessage msg_JAUS=NULL;
+    JausAddress destino;
+    mensajeJAUS tipoMensajeJAUS;
+
+    // Destino al que se envia el mensaje
+    destino = jausAddressCreate(); // Destino.
+    destino->subsystem = 1; // TODO a definir
+    destino->node = 1; // TODO a definir
+    destino->instance = 1; // TODO a definir
+    destino->component = JAUS_SUBSYSTEM_COMMANDER;
+    
+    //Envio a la UCR el modo actual tras iniciarse la comunicacion
+    if(nodeROS->requestMode(&modeActual))
+    {
+            ROS_INFO("ENVIO ESTADO MODO");
+            //Files::writeDataInLOG("ENVIO ESTADO MODO");
+            tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
+            jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
+            tipoMensajeJAUS.missionStatus->type=JAUS_MISSION;
+            tipoMensajeJAUS.missionStatus->missionId=modeActual;
+            tipoMensajeJAUS.missionStatus->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
+            jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
+            msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);
+            reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus); 
+            subsystemJAUS->sendJAUSMessage(msg_JAUS,NO_ACK);
+            jausMessageDestroy(msg_JAUS);
+    }
 }
