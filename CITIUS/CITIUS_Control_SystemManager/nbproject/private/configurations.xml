@@ -78,6 +78,14 @@
       </df>
       <df name="gtest">
         <df name="CMakeFiles">
+          <df name="gtest.dir">
+            <df name="src">
+            </df>
+          </df>
+          <df name="gtest_main.dir">
+            <df name="src">
+            </df>
+          </df>
         </df>
       </df>
       <df name="lib">
