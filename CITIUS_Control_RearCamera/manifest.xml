@@ -1,0 +1,15 @@
+<package>
+  <description brief="CITIUS_Control_RearCamera">
+
+     CITIUS_Control_RearCamera
+
+  </description>
+  <author>Carlos</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/CITIUS_Control_RearCamera</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
