@@ -1,0 +1,15 @@
+<package>
+  <description brief="CITIUS_Control_Electric">
+
+     CITIUS_Control_Electric
+
+  </description>
+  <author>Carlos</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/CITIUS_Control_Electric</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
