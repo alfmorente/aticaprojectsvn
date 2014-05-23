@@ -45,8 +45,6 @@ int main(int argc, char **argv)
   if ((operationMode = getOperationMode(argc, argv)) == 0) {
       return 1;
   }
-
-  //operationMode = 1;
   
   // Inicio de ROS
   ros::init(argc, argv, "conduccion");
@@ -71,7 +69,18 @@ int main(int argc, char **argv)
   // Inicializacion de la comunicacion CAN
   finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos. 
   
-  // Envío de erorr si no hay comunicacion CAN 
+
+  //Espera activa de inicio de operacion de cada modulo
+ 
+  int estado_sistema = STATE_SYSTEM_OFF;
+  while(estado_sistema != STATE_SYSTEM_ON){
+       n.getParam("state_system",estado_sistema);
+       usleep(50000); 
+       can->inicio_read_write_CAN_frame = false; // Para que no empiece a contar tramas CAN 
+                                            // antes de que se inicie el modulo
+  }
+  can->inicio_read_write_CAN_frame = true;
+    // Envío de erorr si no hay comunicacion CAN 
   if (!finDePrograma) {       
         msg_err.id_error = CONNECTION_CAN_FAIL; // Error en conduccion (0: comunicacion)
         pub_error.publish(msg_err);
@@ -81,19 +90,12 @@ int main(int argc, char **argv)
         return 0;
   }
   
-  //Espera activa de inicio de operacion de cada modulo
-  int estado_sistema = STATE_SYSTEM_OFF;
-  while(estado_sistema != STATE_SYSTEM_ON){
-       n.getParam("state_system",estado_sistema);
-       usleep(50000);   
-  }
-  
   switch (operationMode) {
         case OPERATION_MODE_DEBUG:
                        
             //cout << "FUNCIONAMIENTO EN MODO DEBUG \n\n";
           
-            while (ros::ok() && finDePrograma && !can->errorWrite && !can->errorRead) {  
+            while (ros::ok() && finDePrograma && !(can->errorWrite) && !(can->errorRead)) {  
                 
                 n.getParam("state_module_driving",estado_actual);
                 if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF) {             
@@ -104,13 +106,13 @@ int main(int argc, char **argv)
                 
                 else {
                     
-                    //checkEmergencyStop();
+                    checkEmergencyStop();
                     
-                    //checkSwitch();
+                    checkSwitch();
                       
-                    //checkInfoStop();
+                    checkInfoStop();
                     
-                    //checkError();
+                    checkError();
                     
                     //publishBackup();
 

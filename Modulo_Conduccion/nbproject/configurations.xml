@@ -172,11 +172,6 @@
       </folder>
       <folder path="0/src">
         <ccTool>
-          <incDir>
-            <pElem>include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
           <preprocessorList>
             <Elem>ROS_PACKAGE_NAME="Modulo_Conduccion"</Elem>
           </preprocessorList>
@@ -219,26 +214,61 @@
       </folder>
       <item path="src/CANCommunication.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/ConduccionThread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Thread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Timer.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/conduccion.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/interaction.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
     </conf>

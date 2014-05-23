@@ -89,6 +89,7 @@ public:
     //Comprueba el número de veces que se deja de escribir/leer
     int contWrite;
     int contRead;
+    bool inicio_read_write_CAN_frame;
     
     bool errorWrite; // flag que controla si se ha producido error de escritura
     bool errorRead;  // flag que contrala si se ha producido error de lectura

@@ -68,7 +68,7 @@ void ConduccionThread::DoWork(){
              }
                         
         }
-                //usleep(1000);
+        usleep(10000);
         // TX de mensajes
         //m_Change_Command_CAN_AUTOMATA();
         //cout << "Tiempo de envio: " << time1.GetTime() << "\n";

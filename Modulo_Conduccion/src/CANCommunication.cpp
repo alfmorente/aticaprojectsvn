@@ -134,8 +134,10 @@ bool CANCommunication::SendMessage(TPCANMsg* msgTx) {
     
     if (errno_can != CAN_ERR_OK){
         cout << "canWrite() failed() with error " << errno_can << "!\n";
-        checkErrorWrite (contWrite);
-        contWrite++;  // Contador de tramas fail. 
+        if (inicio_read_write_CAN_frame) {
+                checkErrorWrite (contWrite);
+                contWrite++;  // Contador de tramas fail. 
+        }
     }        
     else {
         //cout << "function canWrite() returned OK !\n";
@@ -155,7 +157,7 @@ int32_t CANCommunication::ReceiveMessage(TPCANRdMsg* msgRx) {
     if (errno_can != CAN_ERR_OK) {
          cout << "canRead() failed with error " << errno_can << "!\n";
          checkErrorRead (contRead);
-         contRead++;                    // Contador de tramas fail.      
+         contRead++;  // Contador de tramas fail.      
     } else {
         //cout << "function canRead() returned OK !\n";
         contRead = 0;  // Se resetea el contador de tramas.
@@ -175,6 +177,7 @@ void CANCommunication::checkErrorWrite (int contWrite) {
 void CANCommunication::checkErrorRead (int contRead) {
     if (contRead == ERROR_READ_FRAME)
         errorRead = true;
+    
 }
 
 
@@ -184,7 +187,8 @@ void CANCommunication::DoWork() {
           
     while (flagActive) {
         
-        i = ReceiveMessage(&msgRx);
+      if (inicio_read_write_CAN_frame) {
+           i = ReceiveMessage(&msgRx);
                       
         if (i==0) {   
             
@@ -219,6 +223,8 @@ void CANCommunication::DoWork() {
             else 
                 cout << "\n Error en lectura en hilo de conducción\n";
         }
+      }  
+        //usleep(10000);
     }
 }
 
