@@ -1,0 +1,15 @@
+<package>
+  <description brief="CITIUS_Control_Driving">
+
+     CITIUS_Control_Driving
+
+  </description>
+  <author>Carlos</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/CITIUS_Control_Driving</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
