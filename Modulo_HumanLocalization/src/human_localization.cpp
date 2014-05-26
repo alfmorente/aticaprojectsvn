@@ -8,9 +8,9 @@
 #include "../include/Modulo_HumanLocalization/human_localization.h"
 
  // Publicadores
-
  ros::Publisher pub_waypoints;
  ros::Publisher pub_error;
+ ros::ServiceServer server;
 
 using namespace std;
 
@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
   int estado_actual=STATE_OFF;
   while(estado_actual!=STATE_CONF){
           n.getParam("estado_modulo_humanLocalization",estado_actual);
+          usleep(50000);
   }
   cout << "Atica HUMAN LOCALIZATION :: Iniciando configuración..." << endl;
 
@@ -51,6 +52,7 @@ int main(int argc, char** argv) {
   ros::Subscriber sub_waypoints = n.subscribe("wpCH", 1000, fcn_sub_waypoint);
   ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
   ros::Subscriber sub_rangedatafusion = n.subscribe("rangedata", 1000, fcn_sub_rangedatafusion);
+  server=n.advertiseService("module_alive_13",fcn_heartbeat);
 
   // Variable de continuacion de modulo
   exitModule=false;
@@ -59,36 +61,39 @@ int main(int argc, char** argv) {
   n.setParam("estado_modulo_humanLocaliz",STATE_OK);
   cout << "Atica HUMAN LOCALIZATION :: Configurado y funcionando" << endl;
 
-  while (ros::ok() && !exitModule)
-  {
-      switch (operationMode) {
-        case OPERATION_MODE_DEBUG:
-            // Funcionamiento del modo debug
-            n.getParam("estado_modulo_humanLocalization",estado_actual);
-            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-                exitModule=true;
-            } 
-            ros::spinOnce();
+  switch (operationMode) {
+      case OPERATION_MODE_DEBUG:
+          while (ros::ok() && !exitModule){  
+          n.getParam("stado_modulo_humanLocalization", estado_actual);
+                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+            }
+          break;
+      case OPERATION_MODE_RELEASE:
+          while (ros::ok() && !exitModule){
+            n.getParam("stado_modulo_humanLocalization", estado_actual);
+                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+          }
             break;
-        case OPERATION_MODE_RELEASE:
-            // Funcionamiento del modo release
-            n.getParam("estado_modulo_humanLocalization",estado_actual);
-            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-                exitModule=true;
-            } 
-            ros::spinOnce();
+      case OPERATION_MODE_SIMULATION:
+          while (ros::ok() && !exitModule) {
+                n.getParam("stado_modulo_humanLocalization", estado_actual);
+                if (estado_actual == STATE_OFF || estado_actual == STATE_ERROR) {
+                    exitModule = true;
+                }
+                ros::spinOnce();
+                usleep(25000);
+          }
             break;
-        case OPERATION_MODE_SIMULATION:
-            // Funcionamiento del modo simulacion
-            n.getParam("estado_modulo_humanLocalization",estado_actual);
-            if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF){
-                exitModule=true;
-            } 
-            ros::spinOnce();
+      default:
             break;
-        default:
-            break;
-    }
   }
   cout << "Atica HUMAN LOCALIZATION :: Módulo finalizado" << endl;
 
@@ -115,12 +120,24 @@ void fcn_sub_enableModule(const Common_files::msg_module_enable module)
     if ((module.id_module == ID_MOD_NAVIGATION) && (module.submode == SUBMODE_NAV_FOLLOW_ME) && (module.status == MOD_ON)){
         enableModule = true;
     }
-    else
+    else if((module.id_module == ID_MOD_NAVIGATION) && (module.submode == SUBMODE_NAV_FOLLOW_ME) && (module.status == MOD_OFF)){
         enableModule = false;
+    }
 }
 
 // Suscriptor de RangeDataFusion
 void fcn_sub_rangedatafusion(const Common_files::msg_rangedatafusion msg)
 {
     
+}
+
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
+{
+    if(req.param==PARAM_ALIVE)
+    {  
+        resp.value=0;
+        return true;
+    }
+    else
+        return false;
 }
