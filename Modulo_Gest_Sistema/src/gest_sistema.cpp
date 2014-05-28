@@ -19,6 +19,7 @@ int main(int argc, char **argv)
   // Manejador ROS
   ros::NodeHandle n;
   ROS_INFO("Operation mode: %d",operationMode);
+  ros::Rate loop_rate(40);
   switch (operationMode) 
   {
         case OPERATION_MODE_DEBUG:
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
                   ros::ServiceServer server=n.advertiseService("serviceParam",fcn_server_data);  
                   ros::Timer timer = n.createTimer(ros::Duration(5), checkModulesAlive);
                   
-                  usleep(100000);
+                  loop_rate.sleep();
                   n.setParam("state_system",STATE_SYSTEM_ON);
                   ros::spin();
             }
@@ -1033,7 +1034,9 @@ void checkModulesAlive(const ros::TimerEvent& event)
     Common_files::srv_data petAlive;
     petAlive.request.param=PARAM_ALIVE;
     
-    for(int i=SUBS_COMMUNICATION;i<=SUBS_ERROR;i++)
+    //for(int i=SUBS_COMMUNICATION;i<=SUBS_ERROR;i++)
+    int i=3;
+    if(i==SUBS_DRIVING)
     {
         if(i!=SUBS_SYSTEM_MGMNT)
         {
