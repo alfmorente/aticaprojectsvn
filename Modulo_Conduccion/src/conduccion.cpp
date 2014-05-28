@@ -7,6 +7,7 @@
 
 #include "../include/Modulo_Conduccion/conduccion.h"
 
+
 // Tratamiento de señales (CTRL+C)
 #include <signal.h>
 
@@ -53,6 +54,9 @@ int main(int argc, char **argv)
   
   //int estado_actual = STATE_OK;    // Para hacer pruebas locales
   
+  
+  //(new Common_files::msg_emergency_stop);
+  
   //Espera activa de inicio de modulo
   int estado_actual=STATE_OFF; 
   while(estado_actual!=STATE_CONF){
@@ -69,7 +73,7 @@ int main(int argc, char **argv)
   // Inicializacion de la comunicacion CAN
   finDePrograma = createCommunication(); // Es true: si la comunicaion se crea correctamente y false: si no se crea bien o da fallos. 
   
-
+  
   //Espera activa de inicio de operacion de cada modulo
  
   int estado_sistema = STATE_SYSTEM_OFF;
@@ -89,12 +93,15 @@ int main(int argc, char **argv)
         cout << "Atica CONDUCCION :: Módulo finalizado" << endl;
         return 0;
   }
+  usleep(100000);
+  
+  ros::Rate loop_rate(40); //Equivale a 50 milisegundos
   
   switch (operationMode) {
         case OPERATION_MODE_DEBUG:
                        
             //cout << "FUNCIONAMIENTO EN MODO DEBUG \n\n";
-          
+             
             while (ros::ok() && finDePrograma && !(can->errorWrite) && !(can->errorRead)) {  
                 
                 n.getParam("state_module_driving",estado_actual);
@@ -120,7 +127,8 @@ int main(int argc, char **argv)
                 }
                 
                 ros::spinOnce();
-                usleep(25000);
+                //usleep(25000);
+                loop_rate.sleep();
 
             }
         break;
@@ -528,6 +536,19 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg) {
 }
 
 
+// Servicio de heartbeat con Gestion del sistema
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
+{
+    if(req.param==PARAM_ALIVE)
+    {  
+        resp.value=0;
+        return true;
+    }
+    else 
+        return false;
+}
+
+
 /*******************************************************************************
  *******************************************************************************
  *                              FUNCIONES PROPIAS
@@ -589,7 +610,9 @@ void initialize(ros::NodeHandle n) {
   sub_com_teleop = n.subscribe("commands_clean",1000,fcn_sub_com_teleop);
   sub_fcn_aux = n.subscribe("engBrake",1000,fcn_sub_engine_brake);
   sub_emergency_stop = n.subscribe("emergSet",1000,fcn_sub_emergency_stop);
-  
+
+  server = n.advertiseService("module_alive_3", fcn_heartbeat);
+  //server = n.advertiseService("module_alive_3",fcn_heartbeat);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_driving",STATE_OK);  
     

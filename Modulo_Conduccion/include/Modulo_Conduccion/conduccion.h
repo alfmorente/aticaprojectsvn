@@ -30,6 +30,10 @@ extern "C" {
 #include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_fcn_aux.h"
 #include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_emergency_stop.h"
 
+// Cabeceras de servicio ROS
+#include "../../../Common_files/srv_gen/cpp/include/Common_files/srv_data.h"
+
+
 //ROS
 #include "ros/ros.h"
 
@@ -46,14 +50,13 @@ extern "C" {
 #define TIMER 10.0
 
 
-
 /*******************************************************************************
  *******************************************************************************
  *                              ATRIBUTOS
  * *****************************************************************************
  * ****************************************************************************/
 
-// Para interraccionar con los usuarios
+// Para interaccionar con los usuarios
 int operationMode;
 
 // ----- Publicadores
@@ -62,12 +65,16 @@ ros::Publisher pub_error, pub_switch, pub_backup, pub_info_stop, pub_emergency_s
 // ----- Subscriptores
 ros::Subscriber sub_navigation, sub_com_teleop, sub_fcn_aux, sub_emergency_stop;  
 
+// ----- Servicios
+ros::ServiceServer server;
+
 // ----- Mensajes
 Common_files::msg_error msg_err;
 Common_files::msg_switch msg_switch;
 Common_files::msg_backup msg_backup;
 Common_files::msg_info_stop msg_info_stop;
 Common_files::msg_emergency_stop msg_emergency_stop;
+//Common_files::msg_emergency_stopPtr msg_emergency_stop(new Common_files::msg_emergency_stop);
 
 ConduccionThread * conduccion;
 CANCommunication * can;
@@ -110,6 +117,8 @@ void fcn_sub_navigation(const Common_files::msg_navigation);
 void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
 void fcn_sub_engine_brake(const Common_files::msg_fcn_aux);
 void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
+bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
+
 
 //Funciones propias
 bool createCommunication();
@@ -121,6 +130,4 @@ void checkInfoStop();
 void checkError();
 
 // Funciones tratamiento de señales
-void do_exit(int);              // what has to be done at program exit
 void signal_handler(int);       // the signal handler for manual break Ctrl-C
-void init_signals();            // what has to be done at program start

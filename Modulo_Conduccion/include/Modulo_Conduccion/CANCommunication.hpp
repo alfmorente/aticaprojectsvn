@@ -34,13 +34,13 @@ using namespace std;
 #define ERROR_WRITE_FRAME 10
 #define ERROR_READ_FRAME 10
 
-
+/*
 #ifndef bool
   #define bool  int
   #define true  1
   #define false 0
 #endif
-
+*/
 //****************************************************************************
 // GLOBALS
 
