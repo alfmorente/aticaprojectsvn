@@ -163,6 +163,19 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmsg_py
+
+# Build rule for target.
+ROSBUILD_genmsg_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_py
+.PHONY : ROSBUILD_genmsg_py
+
+# fast build rule for target.
+ROSBUILD_genmsg_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
+.PHONY : ROSBUILD_genmsg_py/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -189,6 +202,19 @@ ROSBUILD_gensrv_lisp/fast:
 .PHONY : ROSBUILD_gensrv_lisp/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_gensrv_py
+
+# Build rule for target.
+ROSBUILD_gensrv_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_py
+.PHONY : ROSBUILD_gensrv_py
+
+# fast build rule for target.
+ROSBUILD_gensrv_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
+.PHONY : ROSBUILD_gensrv_py/fast
+
+#=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
 
 # Build rule for target.
@@ -213,6 +239,19 @@ clean_test_results: cmake_check_build_system
 clean_test_results/fast:
 	$(MAKE) -f CMakeFiles/clean_test_results.dir/build.make CMakeFiles/clean_test_results.dir/build
 .PHONY : clean_test_results/fast
+
+#=============================================================================
+# Target rules for targets named deivicra2
+
+# Build rule for target.
+deivicra2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 deivicra2
+.PHONY : deivicra2
+
+# fast build rule for target.
+deivicra2/fast:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/build
+.PHONY : deivicra2/fast
 
 #=============================================================================
 # Target rules for targets named doxygen
@@ -280,6 +319,19 @@ rospack_genmsg/fast:
 .PHONY : rospack_genmsg/fast
 
 #=============================================================================
+# Target rules for targets named rospack_genmsg_all
+
+# Build rule for target.
+rospack_genmsg_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
+.PHONY : rospack_genmsg_all
+
+# fast build rule for target.
+rospack_genmsg_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
+.PHONY : rospack_genmsg_all/fast
+
+#=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
 
 # Build rule for target.
@@ -304,6 +356,19 @@ rospack_gensrv: cmake_check_build_system
 rospack_gensrv/fast:
 	$(MAKE) -f CMakeFiles/rospack_gensrv.dir/build.make CMakeFiles/rospack_gensrv.dir/build
 .PHONY : rospack_gensrv/fast
+
+#=============================================================================
+# Target rules for targets named rospack_gensrv_all
+
+# Build rule for target.
+rospack_gensrv_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_gensrv_all
+.PHONY : rospack_gensrv_all
+
+# fast build rule for target.
+rospack_gensrv_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_gensrv_all.dir/build.make CMakeFiles/rospack_gensrv_all.dir/build
+.PHONY : rospack_gensrv_all/fast
 
 #=============================================================================
 # Target rules for targets named run_tests
@@ -409,6 +474,78 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/DrivingConnectionManager.o: src/DrivingConnectionManager.cpp.o
+.PHONY : src/DrivingConnectionManager.o
+
+# target to build an object file
+src/DrivingConnectionManager.cpp.o:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o
+.PHONY : src/DrivingConnectionManager.cpp.o
+
+src/DrivingConnectionManager.i: src/DrivingConnectionManager.cpp.i
+.PHONY : src/DrivingConnectionManager.i
+
+# target to preprocess a source file
+src/DrivingConnectionManager.cpp.i:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.i
+.PHONY : src/DrivingConnectionManager.cpp.i
+
+src/DrivingConnectionManager.s: src/DrivingConnectionManager.cpp.s
+.PHONY : src/DrivingConnectionManager.s
+
+# target to generate assembly for a file
+src/DrivingConnectionManager.cpp.s:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.s
+.PHONY : src/DrivingConnectionManager.cpp.s
+
+src/MenuHandler.o: src/MenuHandler.cpp.o
+.PHONY : src/MenuHandler.o
+
+# target to build an object file
+src/MenuHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o
+.PHONY : src/MenuHandler.cpp.o
+
+src/MenuHandler.i: src/MenuHandler.cpp.i
+.PHONY : src/MenuHandler.i
+
+# target to preprocess a source file
+src/MenuHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.i
+.PHONY : src/MenuHandler.cpp.i
+
+src/MenuHandler.s: src/MenuHandler.cpp.s
+.PHONY : src/MenuHandler.s
+
+# target to generate assembly for a file
+src/MenuHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.s
+.PHONY : src/MenuHandler.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -417,10 +554,13 @@ help:
 	@echo "... depend"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
+	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
+	@echo "... ROSBUILD_gensrv_py"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
+	@echo "... deivicra2"
 	@echo "... doxygen"
 	@echo "... edit_cache"
 	@echo "... install"
@@ -432,8 +572,10 @@ help:
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
+	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
+	@echo "... rospack_gensrv_all"
 	@echo "... run_tests"
 	@echo "... test"
 	@echo "... test-future"
@@ -442,6 +584,15 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/DrivingConnectionManager.o"
+	@echo "... src/DrivingConnectionManager.i"
+	@echo "... src/DrivingConnectionManager.s"
+	@echo "... src/MenuHandler.o"
+	@echo "... src/MenuHandler.i"
+	@echo "... src/MenuHandler.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

@@ -1,13 +1,32 @@
 
-#include <memory>
 
 #include "CITIUS_Control_Driving/DrivingConnectionManager.h"
 
 using namespace std;
 
+// Rutina de suscripcion a msgcommandVehicle
+
+void fnc_subs_command(CITIUS_Control_Driving::msg_command msg)
+{
+    char *deviceName = 
+    short value = 
+}
+
+// Rutina de servicio a nodeStatus
+
+bool fcn_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp)
+{
+  ROS_INFO("Recibida peticion de servicio de cambio de nodo");
+  return true;
+}
+
+// Constructor de la clase
+
 DrivingConnectionManager::DrivingConnectionManager(char *serial_name) {
     
-    channel = open(serial_name, O_RDWR | O_NOCTTY);
+    this->channel = open(serial_name, O_RDWR | O_NOCTTY);
+    this->portOpened = false;
+    
     if (channel < 0) {
         perror(serial_name);
     } else {
@@ -60,16 +79,28 @@ DrivingConnectionManager::DrivingConnectionManager(char *serial_name) {
          */
         tcflush(channel, TCIFLUSH);
         tcsetattr(channel, TCSANOW, &newtio);
+        this->portOpened = true;
+        
+        // Inicializacion de publicadores
+        publisher_vehicleInformation = this->nh.advertise<CITIUS_Control_Driving::msg_vehicleInformation>("vehicleInformation", 1000);
+        // Inicializacion de suscriptores
+        subscriber_command = this->nh.subscribe("command",1000,fnc_subs_command);
+        // Inicializacion de servidores
+        server_nodeState = this->nh.advertiseService("nodeStateDriving",fcn_serv_nodeStatus);
     }
 }
 
-DrivingConnectionManager::setSpeed(int speed){
+// Configurar la velocidad de transmision serie
+
+void DrivingConnectionManager::setSpeed(int speed){
     newtio.c_cflag = speed | CS8 | CLOCAL | CREAD;
     tcflush(channel, TCIFLUSH);
     tcsetattr(channel, TCSANOW, &newtio);
 }
 
-DrivingConnectionManager::disconnect(){
+// Desconexion con Mecanica
+
+void DrivingConnectionManager::disconnect(){
     tcsetattr(channel, TCSANOW, &oldtio);
     close(channel);
 }
@@ -77,82 +108,82 @@ DrivingConnectionManager::disconnect(){
 char *DrivingConnectionManager::createCommand(char* typeOfCommand, short device, int value){
     stringstream ss;
     ss << typeOfCommand << " " << this->obtainDeviceName(device) << " " << this->adjustValue(device,value);
-    return ss.str().c_str();
+    return (char *)ss.str().c_str();
 }
 
-DrivingConnectionManager::obtainDeviceName(short deviceID){
+char *DrivingConnectionManager::obtainDeviceName(short deviceID){
     switch(deviceID){
         case ID_BLINKER_RIGHT:
-            return "RIGHT_BLINKER";
+            return (char *)"RIGHT_BLINKER";
             break;
         case ID_BLINKER_LEFT:
-            return "LEFT_BLINKER";
+            return (char *)"LEFT_BLINKER";
             break;
         case ID_BLINKER_EMERGENCY:
-            return "EMERGENCY_BLINKER";
+            return (char *)"EMERGENCY_BLINKER";
             break;
         case ID_DIPSP:
-            return "DIPSP";
+            return (char *)"DIPSP";
             break;
         case ID_DIPSS:
-            return "DIPSS";
+            return (char *)"DIPSS";
             break;
         case ID_DIPSR:
-            return "DIPSR";
+            return (char *)"DIPSR";
             break;
         case ID_KLAXON:
-            return "KLAXON";
+            return (char *)"KLAXON";
             break;
         case ID_GEAR:
-            return "GEAR";
+            return (char *)"GEAR";
             break;
         case ID_THROTTLE:
-            return "THROTTLE";
+            return (char *)"THROTTLE";
             break;
         case ID_MOTOR_RPM:
-            return "MOTOR_RPM";
+            return (char *)"MOTOR_RPM";
             break;
         case ID_CRUISING_SPEED:
-            return "CRUISING_SPEED";
+            return (char *)"CRUISING_SPEED";
             break;
         case ID_MOTOR_TEMPERATURE:
-            return "MOTOR_TEMPERATURE";
+            return (char *)"MOTOR_TEMPERATURE";
             break;
         case ID_HANDBRAKE:
-            return "HANDBRAKE";
+            return (char *)"HANDBRAKE";
             break;
         case ID_BRAKE:
-            return "BRAKE";
+            return (char *)"BRAKE";
             break;
         case ID_STEERING:
-            return "STEERING";
+            return (char *)"STEERING";
             break;
         case ID_ALARMS:
-            return "ALARMS";
+            return (char *)"ALARMS";
             break;
         case MT_BLINKERS:
-            return "MT_BLINKERS";
+            return (char *)"MT_BLINKERS";
             break;
         case MT_BRAKE:
-            return "MT_BRAKE";
+            return (char *)"MT_BRAKE";
             break;
         case MT_GEAR:
-            return "MT_GEAR";
+            return (char *)"MT_GEAR";
             break;
         case MT_HANDBRAKE:
-            return "MT_HANDBRAKE";
+            return (char *)"MT_HANDBRAKE";
             break;
         case MT_LIGHTS:
-            return "MT_LIGHTS";
+            return (char *)"MT_LIGHTS";
             break;
         case MT_STEERING:
-            return "MT_STEERING";
+            return (char *)"MT_STEERING";
             break;
         case MT_THROTTLE:
-            return "MT_THROTTLE";
+            return (char *)"MT_THROTTLE";
             break;
         default:
-            return "NO DEVICE FOUND";
+            return (char *)"NO DEVICE FOUND";
             break;
     }
 }
@@ -323,4 +354,8 @@ int DrivingConnectionManager::adjustValue(short deviceID, int value){
             return value;
             break;
     }
+}
+
+bool DrivingConnectionManager::getPortOpened(){
+    return this->portOpened;
 }

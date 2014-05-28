@@ -25,7 +25,13 @@ extern "C" {
 #include <fcntl.h>
 #include <sstream>
 #include <iostream>
-#include <string>
+#include <stdio.h>
+#include <strings.h>
+#include "ros/ros.h"
+#include "CITIUS_Control_Driving/msg_vehicleInformation.h"
+#include "CITIUS_Control_Driving/msg_command.h"
+#include "CITIUS_Control_Driving/srv_nodeStatus.h"
+
 
 /*******************************************************************************
  *              CONSTANTES IDENTIFICADORES DE DISPOSITIVOS
@@ -87,8 +93,8 @@ class DrivingConnectionManager{
     public:
         DrivingConnectionManager(char *serial_name);
         // Manejadores de la transmisión
-        bool setSpeed(int speed);
-        bool disconnect();
+        void setSpeed(int speed);
+        void disconnect();
         bool send(char * command);
         char *recieve();
         // Manejadores de comandos
@@ -97,9 +103,19 @@ class DrivingConnectionManager{
         // Funciones auxiliares
         char* obtainDeviceName(short deviceID);
         int adjustValue(short device, int value);
-        
+        bool getPortOpened();        
     private:
         struct termios newtio;
         struct termios oldtio;
         int channel;
+        bool portOpened;
+        // Manejadores de nodos ROS
+        ros::NodeHandle nh;
+        // Publicadores
+        ros::Publisher publisher_vehicleInformation;
+        // Suscriptores
+        ros::Subscriber subscriber_command;
+        // Servidores
+        ros::ServiceServer server_nodeState;
+        
 };

@@ -1,5 +1,12 @@
 FILE(REMOVE_RECURSE
+  "msg_gen"
+  "srv_gen"
+  "msg_gen"
+  "srv_gen"
+  "src/CITIUS_Control_Driving/msg"
+  "src/CITIUS_Control_Driving/srv"
   "CMakeFiles/ROSBUILD_gensrv_cpp"
+  "srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h"
 )
 
 # Per-language clean rules from dependency scanning.

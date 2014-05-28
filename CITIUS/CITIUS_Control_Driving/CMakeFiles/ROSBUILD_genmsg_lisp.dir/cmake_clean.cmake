@@ -1,5 +1,17 @@
 FILE(REMOVE_RECURSE
+  "msg_gen"
+  "srv_gen"
+  "msg_gen"
+  "srv_gen"
+  "src/CITIUS_Control_Driving/msg"
+  "src/CITIUS_Control_Driving/srv"
   "CMakeFiles/ROSBUILD_genmsg_lisp"
+  "msg_gen/lisp/msg_vehicleInformation.lisp"
+  "msg_gen/lisp/_package.lisp"
+  "msg_gen/lisp/_package_msg_vehicleInformation.lisp"
+  "msg_gen/lisp/msg_command.lisp"
+  "msg_gen/lisp/_package.lisp"
+  "msg_gen/lisp/_package_msg_command.lisp"
 )
 
 # Per-language clean rules from dependency scanning.
