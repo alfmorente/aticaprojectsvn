@@ -29,6 +29,7 @@ int main(int argc, char **argv)
   cout << "Atica TELEOPERACION :: Iniciando configuración..." << endl;
   
   initialize(n);
+  ros::Rate loop_rate(40);
   usleep(100000);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_remote",STATE_OK);
@@ -50,7 +51,8 @@ int main(int argc, char **argv)
                     exitModule = true;
                 }
                 ros::spinOnce();
-                usleep(25000);
+                loop_rate.sleep();
+                //usleep(25000);
             }
           break;
       case OPERATION_MODE_RELEASE:
@@ -127,7 +129,7 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
             pub_error.publish(msg_err);
             error_count=0;
         }
-        /*else if (end_error == true){
+        /*else if (end_error == true){                  // Fin de error, siempre será Warning por eso está comentado
             msg_err.id_subsystem=SUBS_REMOTE;
             msg_err.id_error=REMOTE_PARAMETER_OUTRANGE;
             msg_err.type_error=TOE_END_ERROR;
