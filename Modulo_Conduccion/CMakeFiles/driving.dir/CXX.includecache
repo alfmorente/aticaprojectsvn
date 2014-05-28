@@ -302,6 +302,20 @@ stdlib.h
 iostream
 -
 
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/CANCommunication.cpp
+../include/Modulo_Conduccion/CANCommunication.hpp
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/CANCommunication.hpp
+libpcan.h
+-
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/ConduccionThread.cpp
+../include/Modulo_Conduccion/ConduccionThread.hpp
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/ConduccionThread.hpp
+queue
+-
+iostream
+-
+
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp
 ../include/Modulo_Conduccion/conduccion.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/conduccion.h

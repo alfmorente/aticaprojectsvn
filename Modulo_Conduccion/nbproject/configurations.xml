@@ -215,7 +215,6 @@
       <item path="src/CANCommunication.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
           <incDir>
-            <pElem>msg_gen/cpp/include</pElem>
             <pElem>include</pElem>
             <pElem>/opt/ros/groovy/include</pElem>
             <pElem>.</pElem>
@@ -225,7 +224,6 @@
       <item path="src/ConduccionThread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
           <incDir>
-            <pElem>msg_gen/cpp/include</pElem>
             <pElem>include</pElem>
             <pElem>/opt/ros/groovy/include</pElem>
             <pElem>.</pElem>
