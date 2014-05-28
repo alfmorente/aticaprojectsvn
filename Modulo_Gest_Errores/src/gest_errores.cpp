@@ -28,7 +28,7 @@ int main(int argc, char **argv)
   cout << "Atica GEST. ERRORES :: Iniciando configuración..." << endl;
 
   initialize(n);
-  usleep(100000);
+  ros::Rate loop_rate(40);
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_error_management",STATE_OK);
   cout << "Atica GEST. ERRORES :: Configurado y funcionando" << endl;
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
                     exitModule = true;
                 }
                 ros::spinOnce();
-                usleep(25000);
+                loop_rate.sleep();
             }
             break;
         case OPERATION_MODE_RELEASE:
