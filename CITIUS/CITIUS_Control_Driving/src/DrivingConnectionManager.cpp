@@ -1,6 +1,7 @@
 
 
 #include "CITIUS_Control_Driving/DrivingConnectionManager.h"
+#include "CITIUS_Control_Driving/MenuHandler.h"
 
 using namespace std;
 
@@ -8,7 +9,7 @@ using namespace std;
 
 void fnc_subs_command(CITIUS_Control_Driving::msg_command msg)
 {
-    char *deviceName = 
+    char *deviceName =
     short value = 
 }
 

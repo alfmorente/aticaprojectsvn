@@ -15,12 +15,11 @@ DrivingConnectionManager *drivingManager;
 using namespace std;
 
 int main(int argc, char** argv) {
-    
-    
+        
     ros::init(argc,argv,"CITIUS_ROSNODE_Driving"); 
     drivingManager = new DrivingConnectionManager((char *)"/dev/ttyUSB0");
     ros::spin();
-
+    
     /*MenuHandler *menuManager = new MenuHandler();
     if(drivingManager->getPortOpened()){
         short selection = menuManager->printMainMenu();

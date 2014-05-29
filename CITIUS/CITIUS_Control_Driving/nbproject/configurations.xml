@@ -138,6 +138,8 @@
         </ccTool>
       </item>
       <item path="src/MenuHandler.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

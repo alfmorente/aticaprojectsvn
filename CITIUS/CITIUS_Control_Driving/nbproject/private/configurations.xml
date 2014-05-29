@@ -111,8 +111,6 @@
       <df name="lib">
       </df>
       <df name="msg">
-        <in>msg_command.msg</in>
-        <in>msg_vehicleInformation.msg</in>
       </df>
       <df name="msg_gen">
         <df name="cpp">
@@ -128,6 +126,8 @@
       </df>
       <df name="src">
         <df name="CITIUS_Control_Driving">
+          <df name="msg">
+          </df>
           <df name="srv">
           </df>
         </df>
@@ -136,7 +136,6 @@
         <in>main.cpp</in>
       </df>
       <df name="srv">
-        <in>srv_nodeStatus.srv</in>
       </df>
       <df name="srv_gen">
         <df name="cpp">
