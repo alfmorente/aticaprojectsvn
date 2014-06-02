@@ -9,16 +9,6 @@
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
 CITIUS_Control_Driving/DrivingConnectionManager.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/CITIUS_Control_Driving/DrivingConnectionManager.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp
-CITIUS_Control_Driving/MenuHandler.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/CITIUS_Control_Driving/MenuHandler.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
-cstdlib
--
-CITIUS_Control_Driving/DrivingConnectionManager.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/CITIUS_Control_Driving/DrivingConnectionManager.h
 CITIUS_Control_Driving/MenuHandler.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/CITIUS_Control_Driving/MenuHandler.h
 
@@ -655,6 +645,8 @@ CITIUS_Control_Driving/msg_vehicleInformation.h
 include/CITIUS_Control_Driving/CITIUS_Control_Driving/msg_vehicleInformation.h
 CITIUS_Control_Driving/msg_command.h
 include/CITIUS_Control_Driving/CITIUS_Control_Driving/msg_command.h
+CITIUS_Control_Driving/srv_nodeStatus.h
+include/CITIUS_Control_Driving/CITIUS_Control_Driving/srv_nodeStatus.h
 
 include/CITIUS_Control_Driving/MenuHandler.h
 iostream
@@ -703,4 +695,28 @@ ros/macros.h
 msg_gen/cpp/include/CITIUS_Control_Driving/ros/macros.h
 ros/assert.h
 msg_gen/cpp/include/CITIUS_Control_Driving/ros/assert.h
+
+srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/serialization.h
+ros/builtin_message_traits.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/builtin_message_traits.h
+ros/message_operations.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/message_operations.h
+ros/time.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/time.h
+ros/macros.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/macros.h
+ros/assert.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/assert.h
+ros/service_traits.h
+srv_gen/cpp/include/CITIUS_Control_Driving/ros/service_traits.h
 

@@ -6,8 +6,8 @@
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/ROSBUILD_gensrv_py.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/_catkin_empty_exported_target.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/clean_test_results.dir
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/deivicra2.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/doxygen.dir
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/driving.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/gtest/CMakeFiles/gtest.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/gtest/CMakeFiles/gtest_main.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/rosbuild_clean-test-results.dir

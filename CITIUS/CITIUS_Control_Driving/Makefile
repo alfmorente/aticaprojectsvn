@@ -241,19 +241,6 @@ clean_test_results/fast:
 .PHONY : clean_test_results/fast
 
 #=============================================================================
-# Target rules for targets named deivicra2
-
-# Build rule for target.
-deivicra2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 deivicra2
-.PHONY : deivicra2
-
-# fast build rule for target.
-deivicra2/fast:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/build
-.PHONY : deivicra2/fast
-
-#=============================================================================
 # Target rules for targets named doxygen
 
 # Build rule for target.
@@ -265,6 +252,19 @@ doxygen: cmake_check_build_system
 doxygen/fast:
 	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/build
 .PHONY : doxygen/fast
+
+#=============================================================================
+# Target rules for targets named driving
+
+# Build rule for target.
+driving: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 driving
+.PHONY : driving
+
+# fast build rule for target.
+driving/fast:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/build
+.PHONY : driving/fast
 
 #=============================================================================
 # Target rules for targets named rosbuild_clean-test-results
@@ -479,7 +479,7 @@ src/DrivingConnectionManager.o: src/DrivingConnectionManager.cpp.o
 
 # target to build an object file
 src/DrivingConnectionManager.cpp.o:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
 .PHONY : src/DrivingConnectionManager.cpp.o
 
 src/DrivingConnectionManager.i: src/DrivingConnectionManager.cpp.i
@@ -487,7 +487,7 @@ src/DrivingConnectionManager.i: src/DrivingConnectionManager.cpp.i
 
 # target to preprocess a source file
 src/DrivingConnectionManager.cpp.i:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.i
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.i
 .PHONY : src/DrivingConnectionManager.cpp.i
 
 src/DrivingConnectionManager.s: src/DrivingConnectionManager.cpp.s
@@ -495,7 +495,7 @@ src/DrivingConnectionManager.s: src/DrivingConnectionManager.cpp.s
 
 # target to generate assembly for a file
 src/DrivingConnectionManager.cpp.s:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.s
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
 .PHONY : src/DrivingConnectionManager.cpp.s
 
 src/MenuHandler.o: src/MenuHandler.cpp.o
@@ -503,7 +503,7 @@ src/MenuHandler.o: src/MenuHandler.cpp.o
 
 # target to build an object file
 src/MenuHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.o
 .PHONY : src/MenuHandler.cpp.o
 
 src/MenuHandler.i: src/MenuHandler.cpp.i
@@ -511,7 +511,7 @@ src/MenuHandler.i: src/MenuHandler.cpp.i
 
 # target to preprocess a source file
 src/MenuHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.i
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.i
 .PHONY : src/MenuHandler.cpp.i
 
 src/MenuHandler.s: src/MenuHandler.cpp.s
@@ -519,32 +519,8 @@ src/MenuHandler.s: src/MenuHandler.cpp.s
 
 # target to generate assembly for a file
 src/MenuHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.s
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.s
 .PHONY : src/MenuHandler.cpp.s
-
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
-
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
-
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -560,8 +536,8 @@ help:
 	@echo "... ROSBUILD_gensrv_py"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
-	@echo "... deivicra2"
 	@echo "... doxygen"
+	@echo "... driving"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
@@ -590,9 +566,6 @@ help:
 	@echo "... src/MenuHandler.o"
 	@echo "... src/MenuHandler.i"
 	@echo "... src/MenuHandler.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 .PHONY : help
 
 

@@ -6,7 +6,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o"
-  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/deivicra2.dir/src/main.cpp.o"
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/deivicra2.dir/src/Thread.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

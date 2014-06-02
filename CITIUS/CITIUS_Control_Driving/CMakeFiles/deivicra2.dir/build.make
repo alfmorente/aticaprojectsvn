@@ -46,42 +46,6 @@ include CMakeFiles/deivicra2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/deivicra2.dir/flags.make
 
-CMakeFiles/deivicra2.dir/src/main.cpp.o: CMakeFiles/deivicra2.dir/flags.make
-CMakeFiles/deivicra2.dir/src/main.cpp.o: src/main.cpp
-CMakeFiles/deivicra2.dir/src/main.cpp.o: manifest.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/deivicra2.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/deivicra2.dir/src/main.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/deivicra2.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
-
-CMakeFiles/deivicra2.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/deivicra2.dir/src/main.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp > CMakeFiles/deivicra2.dir/src/main.cpp.i
-
-CMakeFiles/deivicra2.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/deivicra2.dir/src/main.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp -o CMakeFiles/deivicra2.dir/src/main.cpp.s
-
-CMakeFiles/deivicra2.dir/src/main.cpp.o.requires:
-.PHONY : CMakeFiles/deivicra2.dir/src/main.cpp.o.requires
-
-CMakeFiles/deivicra2.dir/src/main.cpp.o.provides: CMakeFiles/deivicra2.dir/src/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/main.cpp.o.provides.build
-.PHONY : CMakeFiles/deivicra2.dir/src/main.cpp.o.provides
-
-CMakeFiles/deivicra2.dir/src/main.cpp.o.provides.build: CMakeFiles/deivicra2.dir/src/main.cpp.o
-
 CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: CMakeFiles/deivicra2.dir/flags.make
 CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: src/DrivingConnectionManager.cpp
 CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: manifest.xml
@@ -97,7 +61,7 @@ CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/sha
 CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
 
@@ -133,7 +97,7 @@ CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/std_msgs/p
 CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp
 
@@ -154,18 +118,54 @@ CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o.provides: CMakeFiles/deivicra2.di
 
 CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o.provides.build: CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o
 
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: CMakeFiles/deivicra2.dir/flags.make
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: src/Thread.cpp
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: manifest.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/deivicra2.dir/src/Thread.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/deivicra2.dir/src/Thread.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp
+
+CMakeFiles/deivicra2.dir/src/Thread.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/deivicra2.dir/src/Thread.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp > CMakeFiles/deivicra2.dir/src/Thread.cpp.i
+
+CMakeFiles/deivicra2.dir/src/Thread.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/deivicra2.dir/src/Thread.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp -o CMakeFiles/deivicra2.dir/src/Thread.cpp.s
+
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o.requires:
+.PHONY : CMakeFiles/deivicra2.dir/src/Thread.cpp.o.requires
+
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o.provides: CMakeFiles/deivicra2.dir/src/Thread.cpp.o.requires
+	$(MAKE) -f CMakeFiles/deivicra2.dir/build.make CMakeFiles/deivicra2.dir/src/Thread.cpp.o.provides.build
+.PHONY : CMakeFiles/deivicra2.dir/src/Thread.cpp.o.provides
+
+CMakeFiles/deivicra2.dir/src/Thread.cpp.o.provides.build: CMakeFiles/deivicra2.dir/src/Thread.cpp.o
+
 # Object files for target deivicra2
 deivicra2_OBJECTS = \
-"CMakeFiles/deivicra2.dir/src/main.cpp.o" \
 "CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o" \
-"CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o"
+"CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o" \
+"CMakeFiles/deivicra2.dir/src/Thread.cpp.o"
 
 # External object files for target deivicra2
 deivicra2_EXTERNAL_OBJECTS =
 
-bin/deivicra2: CMakeFiles/deivicra2.dir/src/main.cpp.o
 bin/deivicra2: CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o
 bin/deivicra2: CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o
+bin/deivicra2: CMakeFiles/deivicra2.dir/src/Thread.cpp.o
 bin/deivicra2: CMakeFiles/deivicra2.dir/build.make
 bin/deivicra2: CMakeFiles/deivicra2.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/deivicra2"
@@ -175,9 +175,9 @@ bin/deivicra2: CMakeFiles/deivicra2.dir/link.txt
 CMakeFiles/deivicra2.dir/build: bin/deivicra2
 .PHONY : CMakeFiles/deivicra2.dir/build
 
-CMakeFiles/deivicra2.dir/requires: CMakeFiles/deivicra2.dir/src/main.cpp.o.requires
 CMakeFiles/deivicra2.dir/requires: CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o.requires
 CMakeFiles/deivicra2.dir/requires: CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o.requires
+CMakeFiles/deivicra2.dir/requires: CMakeFiles/deivicra2.dir/src/Thread.cpp.o.requires
 .PHONY : CMakeFiles/deivicra2.dir/requires
 
 CMakeFiles/deivicra2.dir/clean:

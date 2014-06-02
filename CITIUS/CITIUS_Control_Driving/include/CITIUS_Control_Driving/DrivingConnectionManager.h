@@ -1,6 +1,6 @@
 /* 
  * File:   ConnectionManager.h
- * Author: atica
+ * Author: Carlos Amores
  *
  * Created on 27 de mayo de 2014, 12:15
  */
@@ -83,7 +83,14 @@ extern "C" {
 #define MAX_TEMPERATURE 400
 #define MIN_TEMPERATURE 0
 
+/*******************************************************************************
+ *                              ESTADOS DEL NODO
+*******************************************************************************/
 
+#define NODESTATUS_INIT 0
+#define NODESTATUS_OK 1
+#define NODESTATUS_CORRUPT 2
+#define NODESTATUS_OFF 3
 
 /*******************************************************************************
  *              CLASE MANEJADOR DE CONEXION CON DRIVING
@@ -91,24 +98,15 @@ extern "C" {
 
 class DrivingConnectionManager{
     public:
-        DrivingConnectionManager(char *serial_name);
-        // Manejadores de la transmisión
-        void setSpeed(int speed);
-        void disconnect();
-        bool send(char * command);
-        char *recieve();
-        // Manejadores de comandos
-        char *createCommand(char *typeOfCommand, short device, int value);
-        void extractCommand(char *command);
-        // Funciones auxiliares
-        char* obtainDeviceName(short deviceID);
-        int adjustValue(short device, int value);
-        bool getPortOpened();        
+        // Constructor
+        DrivingConnectionManager();        
+        // Actuacion sobre atributos
+        void setNodeStatus(short newStatus);
+        short getNodeStatus();
+
     private:
-        struct termios newtio;
-        struct termios oldtio;
-        int channel;
-        bool portOpened;
+        // Estado del nodo ROS
+        short nodeStatus;
         // Manejadores de nodos ROS
         ros::NodeHandle nh;
         // Publicadores
@@ -117,5 +115,5 @@ class DrivingConnectionManager{
         ros::Subscriber subscriber_command;
         // Servidores
         ros::ServiceServer server_nodeState;
-        
+       
 };

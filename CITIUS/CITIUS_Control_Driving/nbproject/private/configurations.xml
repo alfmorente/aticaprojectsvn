@@ -41,6 +41,10 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="driving.dir">
+          <df name="src">
+          </df>
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
@@ -133,7 +137,6 @@
         </df>
         <in>DrivingConnectionManager.cpp</in>
         <in>MenuHandler.cpp</in>
-        <in>main.cpp</in>
       </df>
       <df name="srv">
       </df>

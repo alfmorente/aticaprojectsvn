@@ -5,7 +5,6 @@
       <df name="src">
         <in>DrivingConnectionManager.cpp</in>
         <in>MenuHandler.cpp</in>
-        <in>main.cpp</in>
       </df>
     </df>
     <logicalFolder name="src"
@@ -140,8 +139,6 @@
       <item path="src/MenuHandler.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
-      </item>
-      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

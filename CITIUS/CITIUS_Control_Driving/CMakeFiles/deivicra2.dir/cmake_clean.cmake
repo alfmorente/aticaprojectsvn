@@ -5,9 +5,9 @@ FILE(REMOVE_RECURSE
   "srv_gen"
   "src/CITIUS_Control_Driving/msg"
   "src/CITIUS_Control_Driving/srv"
-  "CMakeFiles/deivicra2.dir/src/main.cpp.o"
   "CMakeFiles/deivicra2.dir/src/DrivingConnectionManager.cpp.o"
   "CMakeFiles/deivicra2.dir/src/MenuHandler.cpp.o"
+  "CMakeFiles/deivicra2.dir/src/Thread.cpp.o"
   "bin/deivicra2.pdb"
   "bin/deivicra2"
 )
