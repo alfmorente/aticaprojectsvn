@@ -62,6 +62,11 @@ short DrivingConnectionManager::getNodeStatus() {
     return this->nodeStatus;
 }
 
+ros::Publisher DrivingConnectionManager::getPublisherVehicleInformation(){
+    return this->publisher_vehicleInformation;
+}
+
+
 // Main del nodo
 int main(int argc, char** argv) {
     

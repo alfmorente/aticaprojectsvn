@@ -103,6 +103,7 @@ class DrivingConnectionManager{
         // Actuacion sobre atributos
         void setNodeStatus(short newStatus);
         short getNodeStatus();
+        ros::Publisher getPublisherVehicleInformation();
 
     private:
         // Estado del nodo ROS
