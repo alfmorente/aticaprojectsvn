@@ -33,7 +33,6 @@ extern "C" {
 // Constantes para el inicio de funcionamiento del sistema para todos los modulos
 #define STATE_SYSTEM_OFF 0
 #define STATE_SYSTEM_ON 1
- 
 
 // Constante para gestión de interruptores/banderas
 #define OFF 0
@@ -210,6 +209,7 @@ extern "C" {
 // Output Errors
 #define JAUS_ERROR 100
 #define COMM_FILE_ERROR 101
+#define LINK_ERROR_OUTPUT 102
 
 // Subsystem = Camera
 #define ERROR_CAMERA_CONFIGURATION 1
@@ -247,6 +247,7 @@ extern "C" {
 #define FOLLOWER_LASER_ERROR 5
 #define FOLLOWER_NAVIGATION_ERROR 6
 #define FOLLOWER_CAMERA_ERROR 7
+#define FOLLOWER_LINK_ERROR 8
 // Output Errors
 #define CONVOY_CONNECTION_ERROR 100
 #define CONVOY_SOCKET_RECEIVE_ERROR 101
