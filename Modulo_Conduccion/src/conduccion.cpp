@@ -54,8 +54,7 @@ int main(int argc, char **argv)
   
   //int estado_actual = STATE_OK;    // Para hacer pruebas locales
   
-  
-  //(new Common_files::msg_emergency_stop);
+ 
   
   //Espera activa de inicio de modulo
   int estado_actual=STATE_OFF; 
@@ -86,7 +85,7 @@ int main(int argc, char **argv)
   can->inicio_read_write_CAN_frame = true;
     // Envío de erorr si no hay comunicacion CAN 
   if (!finDePrograma) {       
-        msg_err.id_error = CONNECTION_CAN_FAIL; // Error en conduccion (0: comunicacion)
+        msg_err->id_error = CONNECTION_CAN_FAIL; // Error en conduccion (0: comunicacion)
         pub_error.publish(msg_err);
         
         cout << "CONNECTION_CAN_FAIL \n";
@@ -152,7 +151,7 @@ int main(int argc, char **argv)
             
   // Envío de erorr si no hay envio/recepcion de tramas CAN 
   if ((can->errorWrite) || (can->errorRead)){
-        msg_err.id_error = COMMUNICATION_CAN_FAIL; // Error en conduccion (1: envio/recepcion tramas CAN)
+        msg_err->id_error = COMMUNICATION_CAN_FAIL; // Error en conduccion (1: envio/recepcion tramas CAN)
         pub_error.publish(msg_err); 
         conduccion->CONDUCCION_ACTIVE= false;
         
@@ -177,7 +176,7 @@ int main(int argc, char **argv)
 void publishEmergencyStop(){
 
     cout << "Publicacion de la parada de emergencia = INFORM \n";
-    msg_emergency_stop.value = true;
+    msg_emergency_stop->value = true;
     pub_emergency_stop.publish(msg_emergency_stop);
         
 }
@@ -196,25 +195,25 @@ void publishBackup() {
                      cout << "***************************************************** \n\n\n";
      */
     // Publicacion del mensaje de Backup
-    msg_backup.throttle = (short) conduccion->acelerador; // acelerador
-    msg_backup.brake = (short) conduccion->freno_servicio; // freno de servicio
-    msg_backup.steer = (short) (conduccion->sentido_marcha) * (conduccion->direccion); // direccion
-    msg_backup.handbrake = (short) conduccion->freno_estacionamiento; // freno de mano
-    msg_backup.gear = (short) conduccion->marcha_actual; // marcha
-    msg_backup.engine = (short) conduccion->arranque_parada; // arranque/parada
-    msg_backup.speed = (short) conduccion->velocidad; // velocidad
+    msg_backup->throttle = (short) conduccion->acelerador; // acelerador
+    msg_backup->brake = (short) conduccion->freno_servicio; // freno de servicio
+    msg_backup->steer = (short) (conduccion->sentido_marcha) * (conduccion->direccion); // direccion
+    msg_backup->handbrake = (short) conduccion->freno_estacionamiento; // freno de mano
+    msg_backup->gear = (short) conduccion->marcha_actual; // marcha
+    msg_backup->engine = (short) conduccion->arranque_parada; // arranque/parada
+    msg_backup->speed = (short) conduccion->velocidad; // velocidad
     pub_backup.publish(msg_backup);
 
     // Impresion del mensaje de Backup
 
     cout << "********** Publicacion del mensaje BACKUP *********** \n";
-    cout << "Acelerador: " << (int) msg_backup.throttle << "\n";
-    cout << "Freno de Servicio: " << (int) msg_backup.brake << "\n";
-    cout << "Direccion: " << (int) msg_backup.steer << "\n";
-    cout << "Freno de mano: " << (int) msg_backup.handbrake << "\n";
-    cout << "Marcha: " << (int) msg_backup.gear << "\n";
-    cout << "Arranque/Parada: " << (int) msg_backup.engine << "\n";
-    cout << "Velocidad: " << (int) msg_backup.speed << "\n";
+    cout << "Acelerador: " << (int) msg_backup->throttle << "\n";
+    cout << "Freno de Servicio: " << (int) msg_backup->brake << "\n";
+    cout << "Direccion: " << (int) msg_backup->steer << "\n";
+    cout << "Freno de mano: " << (int) msg_backup->handbrake << "\n";
+    cout << "Marcha: " << (int) msg_backup->gear << "\n";
+    cout << "Arranque/Parada: " << (int) msg_backup->engine << "\n";
+    cout << "Velocidad: " << (int) msg_backup->speed << "\n";
     cout << "***************************************************** \n\n\n";
   
 }
@@ -223,15 +222,15 @@ void publishBackup() {
 void publishSwitch(){
 
     if (conduccion->conmutador_m_a == OFF)
-        msg_switch.value = false; // Manual
+        msg_switch->value = false; // Manual
     else if (conduccion->conmutador_m_a == ON)
-        msg_switch.value = true; // Teleoperado
+        msg_switch->value = true; // Teleoperado
 
     pub_switch.publish(msg_switch);
 
     cout << "********** Publicacion del mensaje SWITCH *********** \n";
     cout << "Si es 0 = Manual; Si es 1 = Teleoperado \n";
-    cout << "Comuntador Manual/Automático: " << (int) msg_switch.value << "\n";
+    cout << "Comuntador Manual/Automático: " << (int) msg_switch->value << "\n";
     cout << "***************************************************** \n\n\n";
     
 }
@@ -308,8 +307,8 @@ void publishInfoStop (short valor, int i) {
         case 0:    // Obstaculo
 
             if (valor == ON) {
-                msg_info_stop.id_event = 0;
-                msg_info_stop.value = true;
+                msg_info_stop->id_event = 0;
+                msg_info_stop->value = true;
 
                 /*
                 // MANDAR ACK A SYSTEM MANAGEMENT
@@ -323,14 +322,14 @@ void publishInfoStop (short valor, int i) {
                 cout << "************************************************************* \n\n\n";
 */
             } else if (valor == OFF) {
-                msg_info_stop.id_event = 0;
-                msg_info_stop.value = false;
+                msg_info_stop->id_event = 0;
+                msg_info_stop->value = false;
             }
             pub_info_stop.publish(msg_info_stop);
 
             cout << "******* Publicacion del mensaje INFO_STOP ON ********* \n";
             cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia obstaculo;  \n";
-            cout << "Parada de emergencia obstaculo: " << (int) msg_info_stop.value << "\n";
+            cout << "Parada de emergencia obstaculo: " << (int) msg_info_stop->value << "\n";
             cout << "********************************************************** \n\n\n";
             
             break;
@@ -338,18 +337,18 @@ void publishInfoStop (short valor, int i) {
         case 1:         // Local
 
             if (valor == ON) {
-                msg_info_stop.id_event = 2;
-                msg_info_stop.value = true;
+                msg_info_stop->id_event = 2;
+                msg_info_stop->value = true;
             } else if (valor == OFF) {
-                msg_info_stop.id_event = 2;
-                msg_info_stop.value = false;
+                msg_info_stop->id_event = 2;
+                msg_info_stop->value = false;
             }
 
             pub_info_stop.publish(msg_info_stop);
 
             cout << "******* Publicacion del mensaje INFO_STOP LOCAL ********* \n";
             cout << "Si es 0 = NADA ; Si es 1 = Parada de emergencia local;  \n";
-            cout << "Parada de emergencia local: " << (int) msg_info_stop.value << "\n";
+            cout << "Parada de emergencia local: " << (int) msg_info_stop->value << "\n";
             cout << "********************************************************** \n\n\n";
     
             break;
@@ -380,31 +379,31 @@ void publishInfoStop (short valor, int i) {
 void publishError (short valor, int i) {
     // Publicacion del mensaje error
     if (valor == ON)
-        msg_err.type_error = TOE_UNDEFINED;
+        msg_err->type_error = TOE_UNDEFINED;
     else if (valor == OFF)
-        msg_err.type_error = TOE_END_ERROR;
+        msg_err->type_error = TOE_END_ERROR;
                 
     switch (i) {
         case START_STOP_FAILURE: // Fallo arranque/Parada
-            msg_err.id_error = START_STOP_FAILURE;            
+            msg_err->id_error = START_STOP_FAILURE;            
            break;
         case THROTTLE_FAILURE: // Fallo acelerador
-            msg_err.id_error = THROTTLE_FAILURE;
+            msg_err->id_error = THROTTLE_FAILURE;
             break;
         case HANDBRAKE_FAILURE: // Fallo freno de estacionamiento
-            msg_err.id_error = HANDBRAKE_FAILURE;
+            msg_err->id_error = HANDBRAKE_FAILURE;
             break;
         case BRAKE_FAILURE: // Fallo freno de servicio
-            msg_err.id_error = BRAKE_FAILURE;
+            msg_err->id_error = BRAKE_FAILURE;
             break;
         case GEAR_SHIFT_FAILURE: // Fallo cambio de marcha
-            msg_err.id_error = GEAR_SHIFT_FAILURE;
+            msg_err->id_error = GEAR_SHIFT_FAILURE;
             break;
         case STEER_FAILURE: // Fallo de direccion
-            msg_err.id_error = STEER_FAILURE;
+            msg_err->id_error = STEER_FAILURE;
             break;
         case DIFFERENTIAL_LOCK_FAILURE: // Fallo bloqueo de diferenciales
-            msg_err.id_error = DIFFERENTIAL_LOCK_FAILURE;
+            msg_err->id_error = DIFFERENTIAL_LOCK_FAILURE;
             break;
         default:
             break;
@@ -418,8 +417,8 @@ void publishError (short valor, int i) {
     cout << "---------------------------------------------------------------------- \n";
     cout << "TIPO DE ERROR => 0 = TOE_UNDEFINED; 3 = TOE_END_ERROR \n";
     cout << "---------------------------------------------------------------------- \n";
-    cout << "ERROR: " << (int) msg_err.id_error << "\n";
-    cout << "TIPO ERROR: " << (int) msg_err.type_error << "\n";
+    cout << "ERROR: " << (int) msg_err->id_error << "\n";
+    cout << "TIPO ERROR: " << (int) msg_err->type_error << "\n";
     cout << "********************************************************************** \n\n\n";
     
 }
@@ -434,58 +433,58 @@ void publishError (short valor, int i) {
  * ****************************************************************************/
 
 // Suscriptor al Módulo de Navegacion
-void fcn_sub_navigation(const Common_files::msg_navigation msg)
+void fcn_sub_navigation(const Common_files::msg_navigationPtr& msg)
 {
   ROS_INFO("I heard a NAVIGATION message \n");
 }
 
 // Suscriptor al Módulo de Remote
-void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
+void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
 {
        // ROS_INFO("I heard a TELEOP DEPURADO. message \n");
         
     if (!parada_emergencia) {
 
-        switch (msg.id_element) {
+        switch (msg->id_element) {
               case ID_REMOTE_THROTTLE:   // Acelerador
                   //cout << "acelerador = " << msg.value << "\n";
-                  conduccion->acelerador_tx = (short) msg.value;
+                  conduccion->acelerador_tx = (short) msg->value;
                   break;              
               case ID_REMOTE_BRAKE:   // Freno de servicio
                   //cout << "Freno de servicio = " << msg.value << "\n";
-                  conduccion->freno_servicio_tx = (short) msg.value;
+                  conduccion->freno_servicio_tx = (short) msg->value;
                   break;
               case ID_REMOTE_STEER:   // Direccion                  
                   //cout << "Direccion = " << msg.value << "\n";
-                  conduccion->valor_direccion = (short) msg.value;
+                  conduccion->valor_direccion = (short) msg->value;
                   break;
               case ID_REMOTE_GEAR:   // Marcha
                   //cout << "Marcha = " << msg.value << "\n";
-                  conduccion->valor_marcha = (short) msg.value;
+                  conduccion->valor_marcha = (short) msg->value;
                   break;
               case ID_REMOTE_HANDBRAKE:   // Freno de mano
                   //cout << "Freno de mano = " << msg.value << "\n";
-                  conduccion->valor_freno_estacionamiento = (short) msg.value;
+                  conduccion->valor_freno_estacionamiento = (short) msg->value;
                   break;
               case ID_REMOTE_ENGINE:   // Encendido del motor
                   //cout << "Encendido del motor = " << msg.value << "\n";
-                  conduccion->valor_arranque_parada = (short) msg.value;
+                  conduccion->valor_arranque_parada = (short) msg->value;
                   break;
               case ID_REMOTE_LIGHT_IR:   // Luces IR
                   //cout << "Luces IR = " << msg.value << "\n";
-                  conduccion->valor_luces_IR = (short) msg.value;
+                  conduccion->valor_luces_IR = (short) msg->value;
                   break;
               case ID_REMOTE_LIGHT_CONVENTIONAL:   // Luces 
                   //cout << "Luces = " << msg.value << "\n";
-                  conduccion->valor_luces = (short) msg.value;
+                  conduccion->valor_luces = (short) msg->value;
                   break;
               case ID_REMOTE_DIFF:   // Diferenciales
                   //cout << "Diferenciales = " << msg.value << "\n";
-                  conduccion->valor_diferencial = (short) msg.value;
+                  conduccion->valor_diferencial = (short) msg->value;
                   break;
               case ID_REMOTE_ACT_LASER2D:   // Activacion Laser
                   //cout << "Activacion del laser = " << msg.value << "\n";
-                  conduccion->valor_laser = (short) msg.value;
+                  conduccion->valor_laser = (short) msg->value;
                   break;
               default:          
                   break;          
@@ -497,12 +496,12 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
 }
 
 // Suscriptor al Módulo de System Management
-void fcn_sub_engine_brake(const Common_files::msg_fcn_aux msg)  {
+void fcn_sub_engine_brake(const Common_files::msg_fcn_auxPtr& msg)  {
     
     //ROS_INFO("I heard a FUNCTION AUX message from SYSTEM MANAGEMENT \n");
     
-    if (msg.function == BRAKE) {          
-        if (msg.value){
+    if (msg->function == BRAKE) {          
+        if (msg->value){
             cout << "Freno de estacionamiento = ON \n";
             conduccion->valor_freno_estacionamiento = ON;    
         }else{
@@ -510,8 +509,8 @@ void fcn_sub_engine_brake(const Common_files::msg_fcn_aux msg)  {
             conduccion->valor_freno_estacionamiento = OFF;     
         }
     }
-    else if (msg.function == ENGINE) {                      
-        if (msg.value){
+    else if (msg->function == ENGINE) {                      
+        if (msg->value){
             cout << "Arranque / Parada = ON \n";
             conduccion->valor_arranque_parada = ON;        
         }else {
@@ -523,7 +522,7 @@ void fcn_sub_engine_brake(const Common_files::msg_fcn_aux msg)  {
 }
 
 // Suscriptor al Módulo de System Management
-void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg) {
+void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg) {
 
     //ROS_INFO("I heard a EMERGENCY STOP message from SYSTEM MANAGEMENT \n");
 
@@ -616,7 +615,7 @@ void initialize(ros::NodeHandle n) {
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_driving",STATE_OK);  
     
-  msg_err.id_subsystem = SUBS_DRIVING;  // Flag que indica a errores que estamos en el subsistema Driving
+  msg_err->id_subsystem = SUBS_DRIVING;  // Flag que indica a errores que estamos en el subsistema Driving
   parada_emergencia = false;            // Al principio siempre es falsa la parada de emergencia. Se pondra a true cuando verdaderamente haya una parada.  
   valor_conmutador = 9;                 // Al principio se le asigna un valor cualquiera para que en la primera itereacion cambio de valor y lo publique
   valor_parada_obstaculo = 0;           // Al principio se le asigna el valor 0 que indica que no hay ninguna parada de emergencia de obstaculo. 

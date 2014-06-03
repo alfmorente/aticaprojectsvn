@@ -69,13 +69,19 @@ ros::Subscriber sub_navigation, sub_com_teleop, sub_fcn_aux, sub_emergency_stop;
 ros::ServiceServer server;
 
 // ----- Mensajes
-Common_files::msg_error msg_err;
-Common_files::msg_switch msg_switch;
-Common_files::msg_backup msg_backup;
-Common_files::msg_info_stop msg_info_stop;
-Common_files::msg_emergency_stop msg_emergency_stop;
-//Common_files::msg_emergency_stopPtr msg_emergency_stop(new Common_files::msg_emergency_stop);
+//Common_files::msg_error msg_err;
+//Common_files::msg_switch msg_switch;
+//Common_files::msg_backup msg_backup;
+//Common_files::msg_info_stop msg_info_stop;
+//Common_files::msg_emergency_stop msg_emergency_stop;
 
+
+// ----- Mensajes Ptr
+Common_files::msg_errorPtr msg_err(new Common_files::msg_error);
+Common_files::msg_switchPtr msg_switch(new Common_files::msg_switch);
+Common_files::msg_backupPtr msg_backup(new Common_files::msg_backup);
+Common_files::msg_info_stopPtr msg_info_stop(new Common_files::msg_info_stop);
+Common_files::msg_emergency_stopPtr msg_emergency_stop(new Common_files::msg_emergency_stop);
 ConduccionThread * conduccion;
 CANCommunication * can;
 
@@ -113,11 +119,17 @@ void publishInfoStop (short valor, int i);
 void publishError (short valor, int i);
 
 //Funciones de suscripcion
-void fcn_sub_navigation(const Common_files::msg_navigation);
-void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
-void fcn_sub_engine_brake(const Common_files::msg_fcn_aux);
-void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
+//void fcn_sub_navigation(const Common_files::msg_navigation);
+//void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
+//void fcn_sub_engine_brake(const Common_files::msg_fcn_aux);
+//void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
+
+//Funciones de suscripcion Ptr
+void fcn_sub_navigation(const Common_files::msg_navigationPtr&);
+void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr&);
+void fcn_sub_engine_brake(const Common_files::msg_fcn_auxPtr&);
+void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr&);
 
 
 //Funciones propias
