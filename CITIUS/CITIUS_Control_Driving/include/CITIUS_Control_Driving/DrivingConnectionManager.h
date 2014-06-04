@@ -27,7 +27,14 @@ extern "C" {
 #include <iostream>
 #include <stdio.h>
 #include <strings.h>
+#include <string>
+#include <string.h>
 #include "ros/ros.h"
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sstream>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include "CITIUS_Control_Driving/msg_vehicleInformation.h"
 #include "CITIUS_Control_Driving/msg_command.h"
 #include "CITIUS_Control_Driving/srv_nodeStatus.h"
@@ -93,6 +100,22 @@ extern "C" {
 #define NODESTATUS_OFF 3
 
 /*******************************************************************************
+ *                   SOCKET PAYLOAD DE CONDUCCION
+*******************************************************************************/
+
+#define IP_PAYLOAD_CONDUCCION "localhost"
+#define PORT_PAYLOAD_CONDUCCION 5000
+
+/*******************************************************************************
+ *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
+*******************************************************************************/
+
+typedef struct{
+    short id_device;
+    short value;
+}FrameDriving;
+
+/*******************************************************************************
  *              CLASE MANEJADOR DE CONEXION CON DRIVING
 *******************************************************************************/
 
@@ -103,7 +126,12 @@ class DrivingConnectionManager{
         // Actuacion sobre atributos
         void setNodeStatus(short newStatus);
         short getNodeStatus();
+        void setSocketDescriptor(int newSocketDescriptor);
+        int getSocketDescriptor();
         ros::Publisher getPublisherVehicleInformation();
+        // Callbacks
+        void fnc_subs_command(CITIUS_Control_Driving::msg_command msg);
+        bool fcn_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp);
 
     private:
         // Estado del nodo ROS
@@ -116,5 +144,8 @@ class DrivingConnectionManager{
         ros::Subscriber subscriber_command;
         // Servidores
         ros::ServiceServer server_nodeState;
-       
+        // Socket
+        int socketDescriptor;
+        // Estructura de recepcion
+        FrameDriving recvFrame;
 };
