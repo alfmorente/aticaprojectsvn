@@ -498,29 +498,29 @@ src/DrivingConnectionManager.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
 .PHONY : src/DrivingConnectionManager.cpp.s
 
-src/MenuHandler.o: src/MenuHandler.cpp.o
-.PHONY : src/MenuHandler.o
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
 
 # target to build an object file
-src/MenuHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.o
-.PHONY : src/MenuHandler.cpp.o
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-src/MenuHandler.i: src/MenuHandler.cpp.i
-.PHONY : src/MenuHandler.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-src/MenuHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.i
-.PHONY : src/MenuHandler.cpp.i
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-src/MenuHandler.s: src/MenuHandler.cpp.s
-.PHONY : src/MenuHandler.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-src/MenuHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.s
-.PHONY : src/MenuHandler.cpp.s
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -563,9 +563,9 @@ help:
 	@echo "... src/DrivingConnectionManager.o"
 	@echo "... src/DrivingConnectionManager.i"
 	@echo "... src/DrivingConnectionManager.s"
-	@echo "... src/MenuHandler.o"
-	@echo "... src/MenuHandler.i"
-	@echo "... src/MenuHandler.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

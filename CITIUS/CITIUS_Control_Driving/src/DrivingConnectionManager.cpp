@@ -1,40 +1,85 @@
 #include "CITIUS_Control_Driving/DrivingConnectionManager.h"
-#include "CITIUS_Control_Driving/MenuHandler.h"
 
 using namespace std;
 
-// Rutina de suscripcion a msgcommandVehicle
+/*******************************************************************************
+ *******************************************************************************
+ *          IMPLEMENTACION DE LA CLASE QUE IMPLEMENTA AL NODO DRIVING          *
+ *******************************************************************************
+ ******************************************************************************/
 
+/*******************************************************************************
+ *                  CALLBACKS DE SUSCRIPTORES Y SERVICIOS                     *
+ ******************************************************************************/
+
+// Rutina de suscripcion a msg_commandVehicle
 void DrivingConnectionManager::fnc_subs_command(CITIUS_Control_Driving::msg_command msg) {
-    // Criba y comprobacion de valores dentro de rango
-    ROS_INFO("%d - %d", msg.id_device, msg.value);
-    // Conversion de comando y envio por socket
-    FrameDriving frame;
-    frame.id_device = msg.id_device;
-    frame.value = msg.value;
     
-    if (send(this->socketDescriptor, &frame, sizeof(frame), 0) < 0) {
-        ROS_INFO("[Control] Driving :: No se ha podido enviar una trama por el socket");
+    // Comprobacion de que el vehículo se encuentra en estado de operacion CONDUCCION
+    int vehicleStatus;
+    this->nh.getParam("vehicleStatus",vehicleStatus);
+    if(vehicleStatus == OPERATION_MODE_CONDUCCION){
+        
+        // Comprobacion de valores fuera de rango
+        if(this->checkCommandInterval(msg.id_device,msg.value)){
+
+            // Conversion de comando y envio por socket
+            FrameDriving frame;
+            frame.instruction = SET;
+            frame.element = msg.id_device;
+            frame.value = msg.value;
+
+            if (send(this->socketDescriptor, &frame, sizeof(frame), 0) < 0) {
+                ROS_INFO("[Control] Driving :: No se ha podido enviar una trama por el socket");
+            }else{
+                 ROS_INFO("[Control] Driving :: Enviado comando a Payload de conduccion");
+            }
+
+        }else{
+            ROS_INFO("[Control] Driving :: Se descarta comando por valor fuera de rango");
+        }
+    
     }else{
-         ROS_INFO("[Control] Driving :: Enviado comando a Payload de conduccion");
+    
+        ROS_INFO("[Control] Driving :: Se descarta comando por vehiculo en modo de nodo CONDUCCION");
+    
     }
 }
 
-// Rutina de servicio a nodeStatus
-
+// Rutina de servicio a srv_nodeStatus
 bool DrivingConnectionManager::fcn_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp) {
-    ROS_INFO("Recibida peticion de servicio de cambio de nodo");
-    // TODO
-    // Tratamiento del cambio de estado del nodo y generacion de respuesta
+    
+    // Solo se contempla la posibilidad de recibir una peticion de apagado por parte del nodo Manager
+    // Comprobacion de que la solicitud es de apagado
+    if(rq.status == NODESTATUS_OFF){
+    
+        ROS_INFO("[Control] Driving :: Finalizando nodo ROS...");
+        
+        // Cierre del socket
+        shutdown(this->socketDescriptor, 2);
+        close(this->socketDescriptor);
+        
+        // Cambio del estado del nodo
+        this->setNodeStatus(NODESTATUS_OFF);
+        
+        // Respuesta del servidor
+        rsp.confirmation = true;
+        
+        
+    }else{
+        
+        ROS_INFO("[Control] Driving :: Descartada la peticion de cambio en el estado del nodo");
+        rsp.confirmation = false;
+    }
+    
     return true;
 }
 
 /*******************************************************************************
- *                          IMPLEMENTACION DE LA CLASE                        *
+ *                       CONSTRUCTOR -> INICIALIZADOR                          *
  ******************************************************************************/
 
 // Constructor de la clase
-
 DrivingConnectionManager::DrivingConnectionManager() {
     
     // Inicializacion del estado del nodo;
@@ -60,11 +105,11 @@ DrivingConnectionManager::DrivingConnectionManager() {
         }else{
             
             ROS_INFO("[Control] Driving :: Socket establecido como no bloqueante en operaciones de L/E");
+            
             struct sockaddr_in socketAddr;
-
             socketAddr.sin_family = AF_INET;
-            socketAddr.sin_addr.s_addr = inet_addr(IP_PAYLOAD_CONDUCCION);
-            socketAddr.sin_port = htons(PORT_PAYLOAD_CONDUCCION);
+            socketAddr.sin_addr.s_addr = inet_addr(IP_PAYLOAD_CONDUCCION_DRIVING);
+            socketAddr.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
             
             // Establecimiento de la conexion
             if (connect(this->socketDescriptor, (struct sockaddr *) &socketAddr, sizeof (socketAddr)) < 0) {
@@ -94,6 +139,10 @@ DrivingConnectionManager::DrivingConnectionManager() {
     }
 }
 
+/*******************************************************************************
+ *                        GETTER & SETTER NECESARIOS                          *
+ ******************************************************************************/
+
 // Actuacion sobre atributos
 void DrivingConnectionManager::setNodeStatus(short newStatus) {
     this->nodeStatus = newStatus;
@@ -115,40 +164,230 @@ ros::Publisher DrivingConnectionManager::getPublisherVehicleInformation(){
     return this->publisher_vehicleInformation;
 }
 
+/*******************************************************************************
+ *               GESTION DE MENSAJES RECIBIDOS VIA SOCKET                     *
+ ******************************************************************************/
 
-// Main del nodo
-int main(int argc, char** argv) {
+// Tratamiento de mensajes recibidos del Payload de Conduccion
+void DrivingConnectionManager::messageManager(FrameDriving fd){
     
-    // Iniciacion del middleware (ROS) para el nodo Driving
-    ros::init(argc,argv,"ROSNODE_Control_Driving");
-    
-    // Con la creacion de dcm, se crean e inician suscriptores, publicadores,
-    // y servicios. Tambien se abre el socket y se pone a disposicion del nodo.
-    DrivingConnectionManager *dcm = new DrivingConnectionManager();
-    
-    // Compronbacion de una correcta inicializacion
-    if(dcm->getNodeStatus()==NODESTATUS_OK){
+    // Comprobacion de que se trata de una instruccion INFO
+    if(fd.instruction == INFO){
         
-        FrameDriving recvFrame;
-        
-        // Bucle principal. Control+C y Estado del nodo
-        while(ros::ok() && (dcm->getNodeStatus()!=NODESTATUS_OFF)){    
-
-            // Comprobacion mensajeria (topics/servicios)
-            ros::spinOnce();
-            // Comprobacion mensajeria (socket)
-            if (recv(dcm->getSocketDescriptor(), &recvFrame, sizeof (recvFrame), 0) >= 0) {
-                ROS_INFO("Recibida una trama del Payload de Conduccion");
-            }
+        // Comprobacion de que son alarmas
+        if(fd.element == DRIVE_ALARMS){
+            // Gestion de las alarmas
+            // TODO
             
+        }else{
+            
+            // Publicacion de informacion del vehiculo
+            CITIUS_Control_Driving::msg_vehicleInformation vMsg;
+            vMsg.id_device = fd.element;
+            vMsg.value = fd.value;
+            this->getPublisherVehicleInformation().publish(vMsg);
+        
         }
-        
+    
     }else{
-        
-        ROS_INFO("[Control] Driving :: Fallo en la inicializacion del nodo");
-        ROS_INFO("[Control] Driving :: Nodo finalizado");
-        
+    
+        ROS_INFO("[Control] Driving :: Se ha recibido una instruccion distinta de INFO del Payload de conduccion ");
+    
+    }
+}
+
+// Comprobacion de comando con valores en rangos establecidos
+bool DrivingConnectionManager::checkCommandInterval(short element, short value){
+    bool ret = true;
+    switch(element){
+        case (RESET):
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case BLINKER_RIGHT:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case BLINKER_LEFT:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case BLINKER_EMERGENCY:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case MT_BLINKERS:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case DIPSP:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case DIPSS:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case DIPSR:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case KLAXON:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case MT_LIGHTS:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case GEAR:
+            if(value < 0 || value > 2) ret = false;
+            break;
+        case MT_GEAR:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case THROTTLE:
+            if(value < 0 || value > 100) ret = false;
+            break;
+        case CRUISING_SPEED:
+            if(value < 0 || value > 1000) ret = false;
+            break;
+        case MT_THROTTLE:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case HANDBRAKE:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case MT_HANDBRAKE:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case BRAKE:
+            if(value < 0 || value > 100) ret = false;
+            break;
+        case MT_BRAKE:
+            if(value < 0 || value > 1) ret = false;
+            break;
+        case STEERING:
+            if(value < -100 || value > 100) ret = false;
+            break;
+        case MT_STEERING:
+            if(value < 0 || value > 1) ret = false;
+            break;
+    };
+    return ret;
+}
+
+/*******************************************************************************
+ *                   SOLICITUD DE INFORMACION DE VEHICULO                     *
+ ******************************************************************************/
+
+void DrivingConnectionManager::reqVehicleInformation() {
+    
+    // Montaje de instrucciones de solicitud y envio por socket
+    FrameDriving frame;
+    
+    frame.instruction = GET;
+    frame.element = GEAR;
+    frame.value = 0;
+
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
-    return 0;
+    frame.element = THROTTLE;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = CRUISING_SPEED;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = HANDBRAKE;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = BRAKE;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = STEERING;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = BLINKER_RIGHT;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = BLINKER_LEFT;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = BLINKER_EMERGENCY;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = DIPSP;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = DIPSS;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = DIPSR;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = KLAXON;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = MOTOR_RPM;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = MOTOR_TEMPERATURE;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
+    
+    frame.element = DRIVE_ALARMS;
+    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+        ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
+    } else {
+        ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
+    }
 }

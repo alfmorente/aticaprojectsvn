@@ -5,8 +5,8 @@ FILE(REMOVE_RECURSE
   "srv_gen"
   "src/CITIUS_Control_Driving/msg"
   "src/CITIUS_Control_Driving/srv"
+  "CMakeFiles/driving.dir/src/main.cpp.o"
   "CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
-  "CMakeFiles/driving.dir/src/MenuHandler.cpp.o"
   "bin/driving.pdb"
   "bin/driving"
 )

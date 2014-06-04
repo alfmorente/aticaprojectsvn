@@ -109,7 +109,7 @@
       <df name="include">
         <df name="CITIUS_Control_Driving">
           <in>DrivingConnectionManager.h</in>
-          <in>MenuHandler.h</in>
+          <in>constant.h</in>
         </df>
       </df>
       <df name="lib">
@@ -136,7 +136,7 @@
           </df>
         </df>
         <in>DrivingConnectionManager.cpp</in>
-        <in>MenuHandler.cpp</in>
+        <in>main.cpp</in>
       </df>
       <df name="srv">
       </df>

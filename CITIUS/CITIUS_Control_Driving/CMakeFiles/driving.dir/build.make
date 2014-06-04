@@ -46,6 +46,42 @@ include CMakeFiles/driving.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/driving.dir/flags.make
 
+CMakeFiles/driving.dir/src/main.cpp.o: CMakeFiles/driving.dir/flags.make
+CMakeFiles/driving.dir/src/main.cpp.o: src/main.cpp
+CMakeFiles/driving.dir/src/main.cpp.o: manifest.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/main.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
+
+CMakeFiles/driving.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/main.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp > CMakeFiles/driving.dir/src/main.cpp.i
+
+CMakeFiles/driving.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/main.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp -o CMakeFiles/driving.dir/src/main.cpp.s
+
+CMakeFiles/driving.dir/src/main.cpp.o.requires:
+.PHONY : CMakeFiles/driving.dir/src/main.cpp.o.requires
+
+CMakeFiles/driving.dir/src/main.cpp.o.provides: CMakeFiles/driving.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/driving.dir/src/main.cpp.o.provides
+
+CMakeFiles/driving.dir/src/main.cpp.o.provides.build: CMakeFiles/driving.dir/src/main.cpp.o
+
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: CMakeFiles/driving.dir/flags.make
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: src/DrivingConnectionManager.cpp
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: manifest.xml
@@ -61,7 +97,7 @@ CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
 
@@ -82,52 +118,16 @@ CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.provides: CMakeFiles/d
 
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.provides.build: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
 
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: src/MenuHandler.cpp
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: manifest.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/MenuHandler.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/MenuHandler.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp
-
-CMakeFiles/driving.dir/src/MenuHandler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/MenuHandler.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp > CMakeFiles/driving.dir/src/MenuHandler.cpp.i
-
-CMakeFiles/driving.dir/src/MenuHandler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/MenuHandler.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp -o CMakeFiles/driving.dir/src/MenuHandler.cpp.s
-
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/MenuHandler.cpp.o.requires
-
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o.provides: CMakeFiles/driving.dir/src/MenuHandler.cpp.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/MenuHandler.cpp.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/MenuHandler.cpp.o.provides
-
-CMakeFiles/driving.dir/src/MenuHandler.cpp.o.provides.build: CMakeFiles/driving.dir/src/MenuHandler.cpp.o
-
 # Object files for target driving
 driving_OBJECTS = \
-"CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o" \
-"CMakeFiles/driving.dir/src/MenuHandler.cpp.o"
+"CMakeFiles/driving.dir/src/main.cpp.o" \
+"CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
 
 # External object files for target driving
 driving_EXTERNAL_OBJECTS =
 
+bin/driving: CMakeFiles/driving.dir/src/main.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
-bin/driving: CMakeFiles/driving.dir/src/MenuHandler.cpp.o
 bin/driving: CMakeFiles/driving.dir/build.make
 bin/driving: CMakeFiles/driving.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/driving"
@@ -137,8 +137,8 @@ bin/driving: CMakeFiles/driving.dir/link.txt
 CMakeFiles/driving.dir/build: bin/driving
 .PHONY : CMakeFiles/driving.dir/build
 
+CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/main.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/MenuHandler.cpp.o.requires
 .PHONY : CMakeFiles/driving.dir/requires
 
 CMakeFiles/driving.dir/clean:

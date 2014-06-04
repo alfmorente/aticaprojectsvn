@@ -5,7 +5,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
-  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/MenuHandler.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/driving.dir/src/MenuHandler.cpp.o"
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles/driving.dir/src/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
