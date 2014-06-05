@@ -1,4 +1,7 @@
 FILE(REMOVE_RECURSE
+  "srv_gen"
+  "srv_gen"
+  "src/CITIUS_Control_SystemManager/srv"
   "CMakeFiles/rospack_genmsg_libexe"
 )
 
