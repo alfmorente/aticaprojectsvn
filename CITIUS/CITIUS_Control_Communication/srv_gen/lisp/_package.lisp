@@ -1,0 +1,10 @@
+(cl:defpackage CITIUS_Control_Communication-srv
+  (:use )
+  (:export
+   "SRV_VEHICLESTATUS"
+   "<SRV_VEHICLESTATUS-REQUEST>"
+   "SRV_VEHICLESTATUS-REQUEST"
+   "<SRV_VEHICLESTATUS-RESPONSE>"
+   "SRV_VEHICLESTATUS-RESPONSE"
+  ))
+
