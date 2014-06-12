@@ -6,14 +6,14 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/msg"
   "src/CITIUS_Control_Communication/srv"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
-  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h"
-  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_posOriInfo.h"
-  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h"
-  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h"
-  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_command.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h"
 )
 
 # Per-language clean rules from dependency scanning.

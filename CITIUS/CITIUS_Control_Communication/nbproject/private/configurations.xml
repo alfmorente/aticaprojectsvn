@@ -41,8 +41,6 @@
         </df>
         <df name="doxygen.dir">
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
@@ -112,13 +110,6 @@
       <df name="lib">
       </df>
       <df name="msg">
-        <in>msg_command.msg</in>
-        <in>msg_ctrlFrontCamera.msg</in>
-        <in>msg_ctrlRearCamera.msg</in>
-        <in>msg_electricInfo.msg</in>
-        <in>msg_frontCameraInfo.msg</in>
-        <in>msg_posOriInfo.msg</in>
-        <in>msg_rearCameraInfo.msg</in>
       </df>
       <df name="msg_gen">
         <df name="cpp">
@@ -146,6 +137,7 @@
           </df>
         </df>
         <in>Communication.cpp</in>
+        <in>main.cpp</in>
       </df>
       <df name="srv">
         <in>main.cpp</in>

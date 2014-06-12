@@ -33,16 +33,16 @@ extern "C" {
 class Communications{
 public:
   Communications();
-  // Get de publicadores
-  /*ros::Publisher getPublisherFrontCamera();
+  // Get de publicadores ROS
+  ros::Publisher getPublisherFrontCamera();
   ros::Publisher getPublisherRearCamera();
   ros::Publisher getPublisherCommand();
-  // Callbacks
+  // Callbacks ROS
   void fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg);
   void fnc_subs_rearCameraInfo(CITIUS_Control_Communication::msg_rearCameraInfo msg);
   void fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg);
   void fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg);
-  void fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg);*/
+  void fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg);
 private:
   ros::NodeHandle nh;
   ros::Subscriber subsFrontCameraInfo;

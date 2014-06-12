@@ -3,6 +3,8 @@
 
 CMakeFiles/communications.dir/src/Communication.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Communication.cpp
+CMakeFiles/communications.dir/src/main.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
  /opt/ros/groovy/include/XmlRpcValue.h
  /opt/ros/groovy/include/ros/advertise_options.h

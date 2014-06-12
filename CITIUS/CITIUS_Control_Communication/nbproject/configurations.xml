@@ -4,8 +4,6 @@
     <df root="." name="0">
       <df name="src">
         <in>Communication.cpp</in>
-      </df>
-      <df name="srv">
         <in>main.cpp</in>
       </df>
     </df>
@@ -118,6 +116,7 @@
       <folder path="src">
         <ccTool>
           <incDir>
+            <pElem>include/CITIUS_Control_Communication</pElem>
             <pElem>/usr/src/gtest/include</pElem>
             <pElem>/usr/src/gtest</pElem>
             <pElem>gtest</pElem>
@@ -136,7 +135,7 @@
       </folder>
       <item path="src/Communication.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="srv/main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
