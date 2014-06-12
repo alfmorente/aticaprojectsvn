@@ -2,6 +2,8 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="bin">
+      </df>
       <df name="catkin">
         <df name="catkin_generated">
           <df name="version">
@@ -35,15 +37,25 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="electric.dir">
+          <df name="src">
+          </df>
+        </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir">
         </df>
+        <df name="ROSBUILD_genmsg_py.dir">
+        </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
+        </df>
+        <df name="ROSBUILD_gensrv_py.dir">
         </df>
         <df name="rosbuild_precompile.dir">
         </df>
@@ -51,9 +63,13 @@
         </df>
         <df name="rospack_genmsg.dir">
         </df>
+        <df name="rospack_genmsg_all.dir">
+        </df>
         <df name="rospack_genmsg_libexe.dir">
         </df>
         <df name="rospack_gensrv.dir">
+        </df>
+        <df name="rospack_gensrv_all.dir">
         </df>
         <df name="run_tests.dir">
         </df>
@@ -78,15 +94,60 @@
       </df>
       <df name="gtest">
         <df name="CMakeFiles">
+          <df name="gtest.dir">
+            <df name="src">
+            </df>
+          </df>
+          <df name="gtest_main.dir">
+            <df name="src">
+            </df>
+          </df>
         </df>
       </df>
       <df name="include">
         <df name="CITIUS_Control_Electric">
+          <in>ElectricConnectionManager.h</in>
+          <in>constant.h</in>
         </df>
       </df>
       <df name="lib">
       </df>
+      <df name="msg">
+      </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Electric">
+              <in>msg_electricInfo.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
       <df name="src">
+        <df name="CITIUS_Control_Electric">
+          <df name="msg">
+          </df>
+          <df name="srv">
+          </df>
+        </df>
+        <in>ElectricConnectionManager.cpp</in>
+        <in>main.cpp</in>
+      </df>
+      <df name="srv">
+      </df>
+      <df name="srv_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Electric">
+              <in>srv_nodeStatus.h</in>
+              <in>srv_vehicleStatus.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
       </df>
       <df name="test_results">
       </df>

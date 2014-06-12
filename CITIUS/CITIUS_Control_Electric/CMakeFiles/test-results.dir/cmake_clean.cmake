@@ -1,4 +1,10 @@
 FILE(REMOVE_RECURSE
+  "msg_gen"
+  "srv_gen"
+  "msg_gen"
+  "srv_gen"
+  "src/CITIUS_Control_Electric/msg"
+  "src/CITIUS_Control_Electric/srv"
   "CMakeFiles/test-results"
 )
 
