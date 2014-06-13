@@ -7,39 +7,6 @@
  ******************************************************************************/
 
 /*******************************************************************************
- *                  CALLBACKS DE SUSCRIPTORES Y SERVICIOS                     *
- ******************************************************************************/
-
-// Rutina de servicio a srv_nodeStatus
-bool ElectricConnectionManager::fcn_serv_nodeStatus(CITIUS_Control_Electric::srv_nodeStatus::Request &rq, CITIUS_Control_Electric::srv_nodeStatus::Response &rsp) {
-    
-    // Solo se contempla la posibilidad de recibir una peticion de apagado por parte del nodo Manager
-    // Comprobacion de que la solicitud es de apagado
-    if(rq.status == NODESTATUS_OFF){
-    
-        ROS_INFO("[Control] Driving :: Finalizando nodo ROS...");
-        
-        // Cierre del socket
-        shutdown(this->socketDescriptor, 2);
-        close(this->socketDescriptor);
-        
-        // Cambio del estado del nodo
-        this->setNodeStatus(NODESTATUS_OFF);
-        
-        // Respuesta del servidor
-        rsp.confirmation = true;
-        
-        
-    }else{
-        
-        ROS_INFO("[Control] Driving :: Descartada la peticion de cambio en el estado del nodo");
-        rsp.confirmation = false;
-    }
-    
-    return true;
-}
-
-/*******************************************************************************
  *                       CONSTRUCTOR -> INICIALIZADOR                          *
  ******************************************************************************/
 
@@ -88,8 +55,9 @@ ElectricConnectionManager::ElectricConnectionManager() {
                 
                 // Inicializacion de publicadores
                 this->publisher_electricInformation = this->nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInformation", 1000);
-                // Inicializacion de servidores
-                this->server_nodeState = this->nh.advertiseService("nodeStateElectric", &ElectricConnectionManager::fcn_serv_nodeStatus,this);
+                // Inicializacion de clientes
+                this->client_nodeStatus = this->nh.serviceClient<CITIUS_Control_Electric::srv_nodeStatus>("veNodeStatus");
+                this->client_vehicleStatus = this->nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
                 // Inicialización de clientes
                 
                 ROS_INFO("[Control] Electric :: Publicadores, suscriptores, servidores y clientes inicializados");

@@ -53,8 +53,6 @@ class ElectricConnectionManager {
         ros::Publisher getPublisherElectricInformation();
         // Tratamiento de mensajes procedentes del payload de conduccion
         void messageManager(FrameDriving fd);
-        // Callbacks
-        bool fcn_serv_nodeStatus(CITIUS_Control_Electric::srv_nodeStatus::Request &rq, CITIUS_Control_Electric::srv_nodeStatus::Response &rsp);
         // Solicitud de información al vehículo
         void reqVehicleInformation();
    private:
@@ -65,7 +63,7 @@ class ElectricConnectionManager {
         // Publicadores
         ros::Publisher publisher_electricInformation;
         // Servidores
-        ros::ServiceServer server_nodeState;
+        ros::ServiceClient client_nodeStatus;
         // Clientes
         ros::ServiceClient client_vehicleStatus;
         // Socket
