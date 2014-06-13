@@ -7,8 +7,8 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Driving/srv"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/CITIUS_Control_Driving/msg/__init__.py"
-  "src/CITIUS_Control_Driving/msg/_msg_vehicleInformation.py"
   "src/CITIUS_Control_Driving/msg/_msg_command.py"
+  "src/CITIUS_Control_Driving/msg/_msg_vehicleInfo.py"
 )
 
 # Per-language clean rules from dependency scanning.

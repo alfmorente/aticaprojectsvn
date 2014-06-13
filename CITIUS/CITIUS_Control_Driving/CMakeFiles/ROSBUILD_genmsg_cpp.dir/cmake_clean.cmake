@@ -6,8 +6,8 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Driving/msg"
   "src/CITIUS_Control_Driving/srv"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
-  "msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInformation.h"
   "msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h"
+  "msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -121,7 +121,7 @@
           <df name="include">
             <df name="CITIUS_Control_Driving">
               <in>msg_command.h</in>
-              <in>msg_vehicleInformation.h</in>
+              <in>msg_vehicleInfo.h</in>
             </df>
           </df>
         </df>

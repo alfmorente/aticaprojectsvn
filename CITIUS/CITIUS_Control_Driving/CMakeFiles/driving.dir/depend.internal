@@ -60,7 +60,7 @@ CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
  include/CITIUS_Control_Driving/DrivingConnectionManager.h
  include/CITIUS_Control_Driving/constant.h
  msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
- msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInformation.h
+ msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h
  srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h
 CMakeFiles/driving.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
@@ -121,5 +121,5 @@ CMakeFiles/driving.dir/src/main.cpp.o
  include/CITIUS_Control_Driving/DrivingConnectionManager.h
  include/CITIUS_Control_Driving/constant.h
  msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
- msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInformation.h
+ msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h
  srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h

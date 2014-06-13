@@ -123,7 +123,7 @@ DrivingConnectionManager::DrivingConnectionManager() {
                 ROS_INFO("[Control] Driving :: Conexión con socket para comunicacion con Payload de Conduccion establecida");
                 
                 // Inicializacion de publicadores
-                this->publisher_vehicleInformation = this->nh.advertise<CITIUS_Control_Driving::msg_vehicleInformation>("vehicleInformation", 1000);
+                this->publisher_vehicleInfo = this->nh.advertise<CITIUS_Control_Driving::msg_vehicleInfo>("vehicleInfo", 1000);
                 // Inicializacion de suscriptores
                 this->subscriber_command = this->nh.subscribe("command", 1000, &DrivingConnectionManager::fnc_subs_command,this);
                 // Inicializacion de servidores
@@ -160,8 +160,8 @@ int DrivingConnectionManager::getSocketDescriptor() {
     return this->socketDescriptor;
 }
 
-ros::Publisher DrivingConnectionManager::getPublisherVehicleInformation(){
-    return this->publisher_vehicleInformation;
+ros::Publisher DrivingConnectionManager::getPublisherVehicleInfo(){
+    return this->publisher_vehicleInfo;
 }
 
 /*******************************************************************************
@@ -182,10 +182,10 @@ void DrivingConnectionManager::messageManager(FrameDriving fd){
         }else{
             
             // Publicacion de informacion del vehiculo
-            CITIUS_Control_Driving::msg_vehicleInformation vMsg;
+            CITIUS_Control_Driving::msg_vehicleInfo vMsg;
             vMsg.id_device = fd.element;
             vMsg.value = fd.value;
-            this->getPublisherVehicleInformation().publish(vMsg);
+            this->getPublisherVehicleInfo().publish(vMsg);
         
         }
     
@@ -280,112 +280,112 @@ void DrivingConnectionManager::reqVehicleInformation() {
     frame.element = GEAR;
     frame.value = 0;
 
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = THROTTLE;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = CRUISING_SPEED;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = HANDBRAKE;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = BRAKE;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = STEERING;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = BLINKER_RIGHT;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = BLINKER_LEFT;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = BLINKER_EMERGENCY;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = DIPSP;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = DIPSS;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = DIPSR;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = KLAXON;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = MOTOR_RPM;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = MOTOR_TEMPERATURE;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");
     }
     
     frame.element = DRIVE_ALARMS;
-    if (send(this->socketDescriptor, &frame, sizeof (frame), 0) < 0) {
+    if (send(this->getSocketDescriptor(), &frame, sizeof (frame), 0) < 0) {
         ROS_INFO("[Control] Driving :: No se ha podido enviar solicitud de informacion por el socket a Payload de conduccion");
     } else {
         ROS_INFO("[Control] Driving :: Enviada solicitud de informacion a Payload de conduccion");

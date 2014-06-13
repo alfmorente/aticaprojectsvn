@@ -35,7 +35,7 @@ extern "C" {
 #include <sstream>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "CITIUS_Control_Driving/msg_vehicleInformation.h"
+#include "CITIUS_Control_Driving/msg_vehicleInfo.h"
 #include "CITIUS_Control_Driving/msg_command.h"
 #include "CITIUS_Control_Driving/srv_nodeStatus.h"
 #include "constant.h"
@@ -54,7 +54,7 @@ class DrivingConnectionManager{
         short getNodeStatus();
         void setSocketDescriptor(int newSocketDescriptor);
         int getSocketDescriptor();
-        ros::Publisher getPublisherVehicleInformation();
+        ros::Publisher getPublisherVehicleInfo();
         // Callbacks
         void fnc_subs_command(CITIUS_Control_Driving::msg_command msg);
         bool fcn_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp);
@@ -70,7 +70,7 @@ class DrivingConnectionManager{
         // Manejadores de nodos ROS
         ros::NodeHandle nh;
         // Publicadores
-        ros::Publisher publisher_vehicleInformation;
+        ros::Publisher publisher_vehicleInfo;
         // Suscriptores
         ros::Subscriber subscriber_command;
         // Servidores

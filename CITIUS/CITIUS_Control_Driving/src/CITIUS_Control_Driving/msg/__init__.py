@@ -1,2 +1,2 @@
 from ._msg_command import *
-from ._msg_vehicleInformation import *
+from ._msg_vehicleInfo import *
