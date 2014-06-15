@@ -71,6 +71,12 @@ void RosNode_Electric::manageMessage(FrameDriving frame){
                 this->getDriverMng()->setParam(TURN_OFF,1);
                 // Desconexion del vehiculo
                 this->getDriverMng()->disconnectVehicle();
+                // Cambio de estado de nodo
+                this->setEMNodeStatus(NODESTATUS_OFF);
+                // Cambio de estado vehiculo
+                ros::NodeHandle nh;
+                nh.setParam("vehicleStatus",OPERATION_MODE_APAGANDO);
+                
             }
             
         }else{
