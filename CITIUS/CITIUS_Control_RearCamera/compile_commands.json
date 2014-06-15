@@ -1,5 +1,20 @@
 [
 {
+  "directory": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/msg_gen/cpp/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"CITIUS_Control_RearCamera\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/rearCamera.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/main.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/main.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/msg_gen/cpp/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"CITIUS_Control_RearCamera\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/msg_gen/cpp/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"CITIUS_Control_RearCamera\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.cpp"
+},
+{
   "directory": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/gtest",
   "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"CITIUS_Control_RearCamera\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
   "file": "/usr/src/gtest/src/gtest-all.cc"
