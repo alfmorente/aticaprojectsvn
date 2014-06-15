@@ -4,6 +4,7 @@
     <df root="." name="0">
       <df name="src">
         <in>ElectricConnectionManager.cpp</in>
+        <in>RosNode_Electric.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -53,6 +54,8 @@
           <ccTool>
             <incDir>
               <pElem>include</pElem>
+              <pElem>msg_gen/cpp/include</pElem>
+              <pElem>srv_gen/cpp/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="CITIUS_Control_Electric"</Elem>
@@ -134,6 +137,8 @@
         </ccTool>
       </folder>
       <item path="src/ElectricConnectionManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/RosNode_Electric.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

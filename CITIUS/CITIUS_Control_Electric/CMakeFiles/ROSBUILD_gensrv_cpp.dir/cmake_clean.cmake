@@ -7,7 +7,6 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Electric/srv"
   "CMakeFiles/ROSBUILD_gensrv_cpp"
   "srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h"
-  "srv_gen/cpp/include/CITIUS_Control_Electric/srv_nodeStatus.h"
 )
 
 # Per-language clean rules from dependency scanning.

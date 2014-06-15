@@ -45,10 +45,9 @@ include CMakeFiles/ROSBUILD_gensrv_py.dir/progress.make
 CMakeFiles/ROSBUILD_gensrv_py: src/CITIUS_Control_Electric/srv/__init__.py
 
 src/CITIUS_Control_Electric/srv/__init__.py: src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py
-src/CITIUS_Control_Electric/srv/__init__.py: src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Electric/srv/__init__.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --initpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/srv/srv_vehicleStatus.srv /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/srv/srv_nodeStatus.srv
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --initpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/srv/srv_vehicleStatus.srv
 
 src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py: srv/srv_vehicleStatus.srv
 src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py
@@ -70,30 +69,9 @@ src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py: /opt/ros/groovy/share/ros
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/srv/srv_vehicleStatus.srv
 
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: srv/srv_nodeStatus.srv
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: manifest.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/rostime/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/genmsg/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/genpy/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/srv/srv_nodeStatus.srv
-
 ROSBUILD_gensrv_py: CMakeFiles/ROSBUILD_gensrv_py
 ROSBUILD_gensrv_py: src/CITIUS_Control_Electric/srv/__init__.py
 ROSBUILD_gensrv_py: src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py
-ROSBUILD_gensrv_py: src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py
 ROSBUILD_gensrv_py: CMakeFiles/ROSBUILD_gensrv_py.dir/build.make
 .PHONY : ROSBUILD_gensrv_py
 

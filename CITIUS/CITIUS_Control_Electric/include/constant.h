@@ -68,7 +68,7 @@ extern "C" {
 #define SUPPLY_TURN_ON 29
 #define SUPPLY_CHECK 30
 #define TURN_OFF 31
-#define SUPPLY_S 32
+#define SUPPLY_5 32
 #define SUPPLY_12 33
 #define SUPPLY_24_DRIVE 34
 #define SUPPLY_24_OCC 35
@@ -92,6 +92,8 @@ extern "C" {
 #define OBSERVATION_SYSTEM_SUPPLY_12 53
 #define OBSERVATION_SYSTEM_SUPPLY_24 54
 #define OBSERVATION_SYSTEM_SUPPLY_48 55
+#define SUPPLY_ALARMS 56
+
 
 
 
@@ -120,6 +122,15 @@ extern "C" {
 
 #define IP_PAYLOAD_CONDUCCION_DRIVING "localhost"
 #define PORT_PAYLOAD_CONDUCCION_DRIVING 5000
+
+/*******************************************************************************
+ * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO
+ ******************************************************************************/
+
+#define FREC_10HZ 0.1
+#define FREC_5HZ 0.2
+#define FREC_2HZ 0.5
+#define FREC_1HZ 1
 
 /*******************************************************************************
  *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION

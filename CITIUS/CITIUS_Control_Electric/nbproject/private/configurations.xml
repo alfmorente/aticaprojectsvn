@@ -106,9 +106,10 @@
       </df>
       <df name="include">
         <df name="CITIUS_Control_Electric">
-          <in>ElectricConnectionManager.h</in>
-          <in>constant.h</in>
         </df>
+        <in>ElectricConnectionManager.h</in>
+        <in>RosNode_Electric.h</in>
+        <in>constant.h</in>
       </df>
       <df name="lib">
       </df>
@@ -118,6 +119,7 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Electric">
+              <in>msg_command.h</in>
               <in>msg_electricInfo.h</in>
             </df>
           </df>
@@ -133,6 +135,7 @@
           </df>
         </df>
         <in>ElectricConnectionManager.cpp</in>
+        <in>RosNode_Electric.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">
@@ -141,7 +144,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Electric">
-              <in>srv_nodeStatus.h</in>
               <in>srv_vehicleStatus.h</in>
             </df>
           </df>

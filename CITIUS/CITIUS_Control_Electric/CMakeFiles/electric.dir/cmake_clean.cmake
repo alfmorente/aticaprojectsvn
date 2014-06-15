@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Electric/srv"
   "CMakeFiles/electric.dir/src/main.cpp.o"
   "CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o"
+  "CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o"
   "bin/electric.pdb"
   "bin/electric"
 )

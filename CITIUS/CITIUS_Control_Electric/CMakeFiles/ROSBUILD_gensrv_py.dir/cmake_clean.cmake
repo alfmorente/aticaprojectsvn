@@ -8,7 +8,6 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/ROSBUILD_gensrv_py"
   "src/CITIUS_Control_Electric/srv/__init__.py"
   "src/CITIUS_Control_Electric/srv/_srv_vehicleStatus.py"
-  "src/CITIUS_Control_Electric/srv/_srv_nodeStatus.py"
 )
 
 # Per-language clean rules from dependency scanning.

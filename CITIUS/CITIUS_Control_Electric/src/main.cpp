@@ -9,59 +9,59 @@
 
 using namespace std;
 
-#include "CITIUS_Control_Electric/ElectricConnectionManager.h"
+#include "RosNode_Electric.h"
 
 /*******************************************************************************
- *                     METODO MAIN DEL NODO DRIVING                            *
+ *                     METODO MAIN DEL NODO ELECTRIC                            *
  ******************************************************************************/
 
+// Main del nodo
 int main(int argc, char** argv) {
+    
+    // Iniciacion del middleware (ROS) para el nodo Driving
+    ros::init(argc,argv,"[Control] ROS Node - Electric");
+    
+    RosNode_Electric *nodeElectric = new RosNode_Electric();
+    
+    if(nodeElectric->getDriverMng()->connectVehicle()){
+     // Inicio de artefactos ROS
+        nodeElectric->initROS();
 
-        // Iniciacion del middleware (ROS) para el nodo Driving
-    ros::init(argc,argv,"ROSNODE_Control_Electric");
-    
-    // Con la creacion de dcm, se crean e inician suscriptores, publicadores,
-    // y servicios. Tambien se abre el socket y se pone a disposicion del nodo.
-    ElectricConnectionManager *ecm = new ElectricConnectionManager();
-    
-    // Comprobacion de una correcta inicializacion
-    if(ecm->getNodeStatus()==NODESTATUS_OK){
+        // Espera a permiso para comenzar a operar ROSNODE_OK
+        ROS_INFO("[Control] Electric - Esperando activacion de nodo");
+        nodeElectric->setEMNodeStatus(NODESTATUS_OK);
+        ROS_INFO("[Control] Electric - Nodo listo para operar");
         
-        // Almacenaje de informacion procedente de Payload de conduccion
-        FrameDriving recvFrame;
-        
-        // Temporizador para requerimiento de informacion a Payload de conduccion
+        // Temporizador de requerimiento de informacion
         clock_t initTime, finalTime;
         initTime = clock();
         
-        // Bucle principal. Control+C y Estado del nodo
-        while(ros::ok() && (ecm->getNodeStatus()!=NODESTATUS_OFF)){    
+        // Estructura receptora
+        FrameDriving frameRcv;
 
-            // Comprobacion mensajeria (topics/servicios) - No bloqueante
+        //Bucle principal
+        while (ros::ok() && nodeElectric->getEMNodeStatus() != NODESTATUS_OFF) {
+            // Recepcion de mensaje
             ros::spinOnce();
-            
-            // Comprobacion mensajeria (socket) - Establecido lectura no bloqueante
-            if (recv(ecm->getSocketDescriptor(), &recvFrame, sizeof (recvFrame), 0) >= 0) {
-                ROS_INFO("[Control] Electric :: Mensaje recibido del Payload de conduccion");
-                ecm->messageManager(recvFrame);
+
+            // Lectura via socket (NO BLOQUEANTE)
+            if (read(nodeElectric->getDriverMng()->getSocketDescriptor(), &frameRcv, sizeof(frameRcv)) >= 0) {
+                ROS_INFO("[Control] Electric - Recibida trama via socket");
+                nodeElectric->manageMessage(frameRcv);
             }
             
-            // Cada segundo se solicita informacion del vehiculo
+            // Comprobación del temporizador y requerimiento de info
             finalTime = clock() - initTime;
-            if(((double)finalTime / ((double)CLOCKS_PER_SEC))>=1){
-                ecm->reqVehicleInformation();
+            if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
+                // Requerimiento de informacion de dispositivo
+                nodeElectric->getDriverMng()->reqElectricInfo();
+                // Clear del timer
+                initTime = clock();
             }
-            
         }
-        
-    }else{
-        
-        ROS_INFO("[Control] Driving :: Fallo en la inicializacion del nodo");
-        
+    } else {
+        ROS_INFO("[Control] Electric - No se puede conectar al vehículo");
     }
-    
-    ROS_INFO("[Control] Driving :: Nodo finalizado");
-    
+    ROS_INFO("[Control] Electric - Nodo finalizado");
     return 0;
 }
-

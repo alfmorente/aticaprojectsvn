@@ -5,6 +5,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o"
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles/electric.dir/src/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")

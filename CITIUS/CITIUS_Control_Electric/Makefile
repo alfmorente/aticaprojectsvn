@@ -498,6 +498,30 @@ src/ElectricConnectionManager.cpp.s:
 	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.s
 .PHONY : src/ElectricConnectionManager.cpp.s
 
+src/RosNode_Electric.o: src/RosNode_Electric.cpp.o
+.PHONY : src/RosNode_Electric.o
+
+# target to build an object file
+src/RosNode_Electric.cpp.o:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
+.PHONY : src/RosNode_Electric.cpp.o
+
+src/RosNode_Electric.i: src/RosNode_Electric.cpp.i
+.PHONY : src/RosNode_Electric.i
+
+# target to preprocess a source file
+src/RosNode_Electric.cpp.i:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode_Electric.cpp.i
+.PHONY : src/RosNode_Electric.cpp.i
+
+src/RosNode_Electric.s: src/RosNode_Electric.cpp.s
+.PHONY : src/RosNode_Electric.s
+
+# target to generate assembly for a file
+src/RosNode_Electric.cpp.s:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode_Electric.cpp.s
+.PHONY : src/RosNode_Electric.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -563,6 +587,9 @@ help:
 	@echo "... src/ElectricConnectionManager.o"
 	@echo "... src/ElectricConnectionManager.i"
 	@echo "... src/ElectricConnectionManager.s"
+	@echo "... src/RosNode_Electric.o"
+	@echo "... src/RosNode_Electric.i"
+	@echo "... src/RosNode_Electric.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
