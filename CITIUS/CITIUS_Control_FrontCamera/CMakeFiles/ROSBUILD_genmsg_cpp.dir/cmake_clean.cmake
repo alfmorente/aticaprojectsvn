@@ -1,5 +1,13 @@
 FILE(REMOVE_RECURSE
+  "msg_gen"
+  "srv_gen"
+  "msg_gen"
+  "srv_gen"
+  "src/CITIUS_Control_FrontCamera/msg"
+  "src/CITIUS_Control_FrontCamera/srv"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
+  "msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h"
+  "msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_frontCameraInfo.h"
 )
 
 # Per-language clean rules from dependency scanning.
