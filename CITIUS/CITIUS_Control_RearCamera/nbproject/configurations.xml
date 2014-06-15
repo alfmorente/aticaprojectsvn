@@ -54,6 +54,7 @@
           <ccTool>
             <incDir>
               <pElem>include</pElem>
+              <pElem>msg_gen/cpp/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="CITIUS_Control_RearCamera"</Elem>
