@@ -55,6 +55,8 @@
             <incDir>
               <pElem>include</pElem>
               <pElem>.</pElem>
+              <pElem>msg_gen/cpp/include</pElem>
+              <pElem>srv_gen/cpp/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="CITIUS_Control_FrontCamera"</Elem>
