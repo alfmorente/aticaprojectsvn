@@ -1,4 +1,4 @@
-#include "CITIUS_Control_Driving/DrivingConnectionManager.h"
+#include "RosNode_Driving.h"
 
 /*******************************************************************************
  *                     METODO MAIN DEL NODO DRIVING                            *
@@ -8,49 +8,51 @@
 int main(int argc, char** argv) {
     
     // Iniciacion del middleware (ROS) para el nodo Driving
-    ros::init(argc,argv,"ROSNODE_Control_Driving");
+    ros::init(argc,argv,"[Control] ROS Node - Driving");
     
-    // Con la creacion de dcm, se crean e inician suscriptores, publicadores,
-    // y servicios. Tambien se abre el socket y se pone a disposicion del nodo.
-    DrivingConnectionManager *dcm = new DrivingConnectionManager();
+    RosNode_Driving *nodeDriving = new RosNode_Driving();
     
-    // Comprobacion de una correcta inicializacion
-    if(dcm->getNodeStatus()==NODESTATUS_OK){
+    if(nodeDriving->getDriverMng()->connectVehicle()){
+     // Inicio de artefactos ROS
+        nodeDriving->initROS();
+
+        // Espera a permiso para comenzar a operar ROSNODE_OK
+        ROS_INFO("[Control] Driving - Esperando activacion de nodo");
+        while (nodeDriving->getVMNodeStatus() != NODESTATUS_OK) {
+            ros::spinOnce();
+        }
+        ROS_INFO("[Control] Driving - Nodo listo para operar");
         
-        // Almacenaje de informacion procedente de Payload de conduccion
-        FrameDriving recvFrame;
-        
-        // Temporizador para requerimiento de informacion a Payload de conduccion
+        // Temporizador de requerimiento de informacion
         clock_t initTime, finalTime;
         initTime = clock();
         
-        // Bucle principal. Control+C y Estado del nodo
-        while(ros::ok() && (dcm->getNodeStatus()!=NODESTATUS_OFF)){    
+        // Estructura receptora
+        FrameDriving frameRcv;
 
-            // Comprobacion mensajeria (topics/servicios) - No bloqueante
+        //Bucle principal
+        while (ros::ok() && nodeDriving->getVMNodeStatus() != NODESTATUS_OFF) {
+            // Recepcion de mensaje
             ros::spinOnce();
-            
-            // Comprobacion mensajeria (socket) - Establecido lectura no bloqueante
-            if (recv(dcm->getSocketDescriptor(), &recvFrame, sizeof (recvFrame), 0) >= 0) {
-                ROS_INFO("[Control] Driving :: Mensaje recibido del Payload de conduccion");
-                dcm->messageManager(recvFrame);
+
+            // Lectura via socket (NO BLOQUEANTE)
+            if (read(nodeDriving->getDriverMng()->getSocketDescriptor(), &frameRcv, sizeof(frameRcv)) >= 0) {
+                ROS_INFO("[Control] Driving - Recibida trama via socket");
+                nodeDriving->manageMessage(frameRcv);
             }
             
-            // Cada segundo se solicita informacion del vehiculo
+            // Comprobación del temporizador y requerimiento de info
             finalTime = clock() - initTime;
-            if(((double)finalTime / ((double)CLOCKS_PER_SEC))>=1){
-                dcm->reqVehicleInformation();
+            if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
+                // Requerimiento de informacion de dispositivo
+                nodeDriving->getDriverMng()->reqVehicleInfo();
+                // Clear del timer
+                initTime = clock();
             }
-            
         }
-        
-    }else{
-        
-        ROS_INFO("[Control] Driving :: Fallo en la inicializacion del nodo");
-        
+    } else {
+        ROS_INFO("[Control] Driving - No se puede conectar al vehículo");
     }
-    
-    ROS_INFO("[Control] Driving :: Nodo finalizado");
-    
+    ROS_INFO("[Control] Driving - Nodo finalizado");
     return 0;
 }

@@ -498,6 +498,30 @@ src/DrivingConnectionManager.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
 .PHONY : src/DrivingConnectionManager.cpp.s
 
+src/RosNode_Driving.o: src/RosNode_Driving.cpp.o
+.PHONY : src/RosNode_Driving.o
+
+# target to build an object file
+src/RosNode_Driving.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o
+.PHONY : src/RosNode_Driving.cpp.o
+
+src/RosNode_Driving.i: src/RosNode_Driving.cpp.i
+.PHONY : src/RosNode_Driving.i
+
+# target to preprocess a source file
+src/RosNode_Driving.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/RosNode_Driving.cpp.i
+.PHONY : src/RosNode_Driving.cpp.i
+
+src/RosNode_Driving.s: src/RosNode_Driving.cpp.s
+.PHONY : src/RosNode_Driving.s
+
+# target to generate assembly for a file
+src/RosNode_Driving.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/RosNode_Driving.cpp.s
+.PHONY : src/RosNode_Driving.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -563,6 +587,9 @@ help:
 	@echo "... src/DrivingConnectionManager.o"
 	@echo "... src/DrivingConnectionManager.i"
 	@echo "... src/DrivingConnectionManager.s"
+	@echo "... src/RosNode_Driving.o"
+	@echo "... src/RosNode_Driving.i"
+	@echo "... src/RosNode_Driving.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

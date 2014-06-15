@@ -108,9 +108,10 @@
       </df>
       <df name="include">
         <df name="CITIUS_Control_Driving">
-          <in>DrivingConnectionManager.h</in>
-          <in>constant.h</in>
         </df>
+        <in>DrivingConnectionManager.h</in>
+        <in>RosNode_Driving.h</in>
+        <in>constant.h</in>
       </df>
       <df name="lib">
       </df>
@@ -136,6 +137,7 @@
           </df>
         </df>
         <in>DrivingConnectionManager.cpp</in>
+        <in>RosNode_Driving.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">

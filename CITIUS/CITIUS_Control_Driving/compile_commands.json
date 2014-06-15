@@ -10,6 +10,11 @@
   "file": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp"
 },
 {
+  "directory": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/msg_gen/cpp/include -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"CITIUS_Control_Driving\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp"
+},
+{
   "directory": "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/gtest",
   "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"CITIUS_Control_Driving\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
   "file": "/usr/src/gtest/src/gtest-all.cc"

@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Driving/srv"
   "CMakeFiles/driving.dir/src/main.cpp.o"
   "CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
+  "CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o"
   "bin/driving.pdb"
   "bin/driving"
 )

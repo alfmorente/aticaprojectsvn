@@ -122,6 +122,15 @@ extern "C" {
 #define PORT_PAYLOAD_CONDUCCION_DRIVING 5000
 
 /*******************************************************************************
+ * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO
+ ******************************************************************************/
+
+#define FREC_10HZ 0.1
+#define FREC_5HZ 0.2
+#define FREC_2HZ 0.5
+#define FREC_1HZ 1
+
+/*******************************************************************************
  *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
 *******************************************************************************/
 
