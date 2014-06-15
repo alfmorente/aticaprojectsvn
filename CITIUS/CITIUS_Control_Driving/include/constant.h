@@ -68,7 +68,7 @@ extern "C" {
 #define SUPPLY_TURN_ON 29
 #define SUPPLY_CHECK 30
 #define TURN_OFF 31
-#define SUPPLY_S 32
+#define SUPPLY_5 32
 #define SUPPLY_12 33
 #define SUPPLY_24_DRIVE 34
 #define SUPPLY_24_OCC 35
@@ -92,6 +92,7 @@ extern "C" {
 #define OBSERVATION_SYSTEM_SUPPLY_12 53
 #define OBSERVATION_SYSTEM_SUPPLY_24 54
 #define OBSERVATION_SYSTEM_SUPPLY_48 55
+#define SUPPLY_ALARMS 56
 
 
 
