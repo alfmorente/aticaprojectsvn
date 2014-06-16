@@ -30,9 +30,11 @@ extern "C" {
 #include "CITIUS_Control_Communication/msg_rearCameraInfo.h"
 #include "CITIUS_Control_Communication/srv_vehicleStatus.h"
 
-class Communications{
+class RosNode_Communications{
 public:
-  Communications();
+  RosNode_Communications();
+  // Inicializacion de artefactos ROS
+  void initROS();
   // Get de publicadores ROS
   ros::Publisher getPublisherFrontCamera();
   ros::Publisher getPublisherRearCamera();
@@ -44,7 +46,6 @@ public:
   void fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg);
   void fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg);
 private:
-  ros::NodeHandle nh;
   ros::Subscriber subsFrontCameraInfo;
   ros::Subscriber subsRearCameraInfo;
   ros::Subscriber subsVehicleInfo;

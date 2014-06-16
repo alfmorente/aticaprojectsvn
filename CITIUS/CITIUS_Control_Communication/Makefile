@@ -474,29 +474,29 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-src/Communication.o: src/Communication.cpp.o
-.PHONY : src/Communication.o
+src/RosNode_Communications.o: src/RosNode_Communications.cpp.o
+.PHONY : src/RosNode_Communications.o
 
 # target to build an object file
-src/Communication.cpp.o:
-	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/Communication.cpp.o
-.PHONY : src/Communication.cpp.o
+src/RosNode_Communications.cpp.o:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o
+.PHONY : src/RosNode_Communications.cpp.o
 
-src/Communication.i: src/Communication.cpp.i
-.PHONY : src/Communication.i
+src/RosNode_Communications.i: src/RosNode_Communications.cpp.i
+.PHONY : src/RosNode_Communications.i
 
 # target to preprocess a source file
-src/Communication.cpp.i:
-	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/Communication.cpp.i
-.PHONY : src/Communication.cpp.i
+src/RosNode_Communications.cpp.i:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode_Communications.cpp.i
+.PHONY : src/RosNode_Communications.cpp.i
 
-src/Communication.s: src/Communication.cpp.s
-.PHONY : src/Communication.s
+src/RosNode_Communications.s: src/RosNode_Communications.cpp.s
+.PHONY : src/RosNode_Communications.s
 
 # target to generate assembly for a file
-src/Communication.cpp.s:
-	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/Communication.cpp.s
-.PHONY : src/Communication.cpp.s
+src/RosNode_Communications.cpp.s:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s
+.PHONY : src/RosNode_Communications.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -560,9 +560,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... src/Communication.o"
-	@echo "... src/Communication.i"
-	@echo "... src/Communication.s"
+	@echo "... src/RosNode_Communications.o"
+	@echo "... src/RosNode_Communications.i"
+	@echo "... src/RosNode_Communications.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

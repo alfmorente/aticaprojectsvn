@@ -104,8 +104,8 @@
       </df>
       <df name="include">
         <df name="CITIUS_Control_Communication">
-          <in>Communication.h</in>
         </df>
+        <in>RosNode_Communications.h</in>
       </df>
       <df name="lib">
       </df>
@@ -136,11 +136,10 @@
           <df name="srv">
           </df>
         </df>
-        <in>Communication.cpp</in>
+        <in>RosNode_Communications.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">
-        <in>main.cpp</in>
       </df>
       <df name="srv_gen">
         <df name="cpp">
