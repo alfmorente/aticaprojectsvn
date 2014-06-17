@@ -30,6 +30,7 @@ extern "C" {
 #include "CITIUS_Control_Communication/msg_rearCameraInfo.h"
 #include "CITIUS_Control_Communication/srv_vehicleStatus.h"
 #include "constant.h"
+#include "TranslatorROSJAUS.h"
 
 // Librerias de JAUS
 #include "jaus.h"
@@ -51,7 +52,13 @@ public:
   void fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg);
   void fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg);
   void fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg);
+  // Generacion de mensaje de estado para Controller
+  void informStatus();
 private:
+  // Controlador activo
+  int subsystemController;
+  int nodeController;
+  // Artefactos ROS
   ros::Subscriber subsFrontCameraInfo;
   ros::Subscriber subsRearCameraInfo;
   ros::Subscriber subsVehicleInfo;
@@ -62,5 +69,11 @@ private:
   ros::Publisher pubCommand;
   ros::ServiceClient clientStatus;
   // Componentes JAUS
+  OjCmpt missionSpoolerComponent;
   OjCmpt primitiveDriverComponent;
+  OjCmpt visualSensorComponent;
+  OjCmpt platformSensorComponent;
+  OjCmpt globalWaypointDriverComponent;
+  OjCmpt velocityStateSensorComponent;
+  OjCmpt globalPoseSensorComponent;
 };

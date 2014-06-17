@@ -33,8 +33,14 @@ void RosNode_Communications::initROS() {
  ******************************************************************************/
 void RosNode_Communications::initJAUS() {
     // Primitive Driver
-    this->primitiveDriverComponent = ojCmptCreate("Primitive Driver",JAUS_PRIMITIVE_DRIVER,1);
-    
+    this->primitiveDriverComponent = ojCmptCreate((char *)"Primitive Driver",JAUS_PRIMITIVE_DRIVER,1);
+    this->missionSpoolerComponent = ojCmptCreate((char *)"Mission Spooler",JAUS_MISSION_SPOOLER,1);
+    this->primitiveDriverComponent = ojCmptCreate((char *)"Primitive Driver",JAUS_PRIMITIVE_DRIVER,1);
+    this->visualSensorComponent = ojCmptCreate((char *)"Visual Sensor",JAUS_VISUAL_SENSOR,1);
+    this->platformSensorComponent = ojCmptCreate((char *)"Platform Sensor",JAUS_PLATFORM_SENSOR,1);
+    this->globalWaypointDriverComponent = ojCmptCreate((char *)"Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER,1);
+    this->velocityStateSensorComponent = ojCmptCreate((char *)"Velocity State Sensor",JAUS_VELOCITY_STATE_SENSOR,1);
+    this->globalPoseSensorComponent = ojCmptCreate((char *)"Global Pose Sensor",JAUS_GLOBAL_POSE_SENSOR,1);
 }
 
 /*******************************************************************************
@@ -56,7 +62,7 @@ ros::Publisher RosNode_Communications::getPublisherCommand() {
 
 /*******************************************************************************
  *******************************************************************************
- *                     CALLBACKS                         *
+ *                               CALLBACKS                                     *
  *******************************************************************************
  ******************************************************************************/
 
@@ -66,6 +72,20 @@ ros::Publisher RosNode_Communications::getPublisherCommand() {
  */
 void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg) {
     ROS_INFO("[Control] Communications - Recibida informacion de camara delantera");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromCameraInfo(this->subsystemController,this->nodeController,FRONT_CAMERA_ID,msg.pan,msg.tilt);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->visualSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de camara delantera");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
 }
 
 /* 
@@ -74,6 +94,20 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
  */
 void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communication::msg_rearCameraInfo msg) {
     ROS_INFO("[Control] Communications - Recibida informacion de camara trasera");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromCameraInfo(this->subsystemController,this->nodeController,REAR_CAMERA_ID,msg.pan,msg.tilt);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->visualSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de camara trasera");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
 }
 
 /* 
@@ -83,23 +117,18 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
 void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg) {
     ROS_INFO("[Control] Communications - Recibida informacion de vehiculo");
     
-    JausMessage jMsg;
-    
-    JausAddress address = jausAddressCreate();
-    address->subsystem = 0;
-    address->node = 0;
-    address->component = 0;
-    address->instance = 0;
-    
-    if(msg.id_device == THROTTLE){
-        ReportWrenchEffortMessage rwem = reportWrenchEffortMessageCreate();
-        rwem->propulsiveLinearEffortXPercent = msg.value;
-        jausAddressCopy(rwem->destination,address);
-        jMsg = reportWrenchEffortMessageToJausMessage(rwem);
-        reportWrenchEffortMessageDestroy(rwem);
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromVehicleInfo(this->subsystemController,this->nodeController,msg.id_device,msg.value);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
     }
-    
-    ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
+    // Destruccion del mensaje
     jausMessageDestroy(jMsg);
 }
 
@@ -109,6 +138,20 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
  */
 void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg) {
     ROS_INFO("[Control] Communications - Recibida informacion electrica");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromElectricInfo(this->subsystemController,this->nodeController,msg.id_device,msg.value);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
 }
 
 /* 
@@ -117,5 +160,42 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
  */
 void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg) {
     ROS_INFO("[Control] Communications - Recibida informacion de posicionamiento");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromPosOriInfo(this->subsystemController,this->nodeController,msg.latitude,msg.longitude,msg.altitude,msg.roll,msg.pitch,msg.yaw);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->globalPoseSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
 }
 
+// Informa a Controller del estado
+
+void RosNode_Communications::informStatus() {
+    ROS_INFO("[Control] Communications - Comunicando modo de operacion al controlador");
+    
+    // Obtencion del estado
+    int status;
+    ros::NodeHandle nh;
+    nh.getParam("vehicleStatus",status);
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromStatus(this->subsystemController, this->nodeController, status);
+    if (jMsg != NULL) {
+        // Envio via JAUS    
+        ojCmptSendMessage(this->missionSpoolerComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    } else {
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
+}

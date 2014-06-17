@@ -82,28 +82,27 @@
 #define JAUS_MANIPULATOR_JOINT_MOVE_DRIVER 					58
 #define JAUS_MANIPULATOR_END_EFFECTOR_DISCRETE_POSE_DRIVER 	59
 #define JAUS_WORLD_MODEL_VECTOR_KNOWLEDGE_STORE				61
+#define JAUS_PLATFORM_SENSOR    62
 
 #define COMPONENT_TIMEOUT_SEC 3.0
 
-typedef struct
-{
-	char *identification;
-	JausAddress address;
-	JausState state;
-	JausByte authority;
-	JausNode node;
-	JausArray services;
-	
-	struct
-	{
-		JausAddress address;
-		JausState state;
-		JausByte authority;
-		JausBoolean active;
-	}controller;
-	
-	time_t timeStampSec;
-}JausComponentStruct;
+typedef struct {
+  char *identification;
+  JausAddress address;
+  JausState state;
+  JausByte authority;
+  JausNode node;
+  JausArray services;
+
+  struct {
+    JausAddress address;
+    JausState state;
+    JausByte authority;
+    JausBoolean active;
+  } controller;
+
+  time_t timeStampSec;
+} JausComponentStruct;
 
 typedef JausComponentStruct *JausComponent;
 

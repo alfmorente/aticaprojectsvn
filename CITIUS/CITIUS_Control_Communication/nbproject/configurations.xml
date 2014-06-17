@@ -2,8 +2,29 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="lib">
+        <df name="libjaus">
+          <df name="include">
+            <df name="message">
+              <df name="experimental">
+                <in>reportSignalingElements25Message.h</in>
+                <in>ugvInfo12Message.h</in>
+              </df>
+            </df>
+          </df>
+          <df name="src">
+            <df name="message">
+              <df name="experimental">
+                <in>reportSignalingElements25Message.c</in>
+                <in>ugvInfo12Message.c</in>
+              </df>
+            </df>
+          </df>
+        </df>
+      </df>
       <df name="src">
         <in>RosNode_Communications.cpp</in>
+        <in>TranslatorROSJAUS.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -137,7 +158,31 @@
           </undefinedList>
         </ccTool>
       </folder>
+      <item path="lib/libjaus/include/message/experimental/reportSignalingElements25Message.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lib/libjaus/include/message/experimental/ugvInfo12Message.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="lib/libjaus/src/message/experimental/reportSignalingElements25Message.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="lib/libjaus/src/message/experimental/ugvInfo12Message.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="src/RosNode_Communications.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/TranslatorROSJAUS.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

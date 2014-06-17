@@ -108,6 +108,8 @@
         <df name="CITIUS_Control_Communication">
         </df>
         <in>RosNode_Communications.h</in>
+        <in>TranslatorROSJAUS.h</in>
+        <in>constant.h</in>
       </df>
       <df name="lib">
         <df name="libjaus">
@@ -197,6 +199,8 @@
                 </df>
               </df>
               <df name="experimental">
+                <in>reportSignalingElements25Message.h</in>
+                <in>ugvInfo12Message.h</in>
               </df>
               <df name="inform">
                 <df name="communications">
@@ -462,6 +466,8 @@
                 </df>
               </df>
               <df name="experimental">
+                <in>reportSignalingElements25Message.c</in>
+                <in>ugvInfo12Message.c</in>
               </df>
               <df name="inform">
                 <df name="communications">
@@ -739,16 +745,46 @@
       <df name="msg">
       </df>
       <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Communication">
+              <in>msg_command.h</in>
+              <in>msg_ctrlFrontCamera.h</in>
+              <in>msg_ctrlRearCamera.h</in>
+              <in>msg_electricInfo.h</in>
+              <in>msg_frontCameraInfo.h</in>
+              <in>msg_posOriInfo.h</in>
+              <in>msg_rearCameraInfo.h</in>
+              <in>msg_vehicleInfo.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
       </df>
       <df name="src">
         <df name="CITIUS_Control_Communication">
+          <df name="msg">
+          </df>
+          <df name="srv">
+          </df>
         </df>
         <in>RosNode_Communications.cpp</in>
+        <in>TranslatorROSJAUS.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">
       </df>
       <df name="srv_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Communication">
+              <in>srv_vehicleStatus.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
       </df>
       <df name="test_results">
       </df>

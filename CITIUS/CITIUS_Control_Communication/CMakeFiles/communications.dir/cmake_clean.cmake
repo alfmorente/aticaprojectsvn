@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/srv"
   "CMakeFiles/communications.dir/src/main.cpp.o"
   "CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o"
+  "CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o"
   "bin/communications.pdb"
   "bin/communications"
 )

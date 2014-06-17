@@ -28,6 +28,6 @@ rosbuild_gensrv()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 include_directories(lib/libjaus/include lib/libopenJaus/include)
 link_directories(lib/libjaus/lib lib/libopenJaus/lib)
-rosbuild_add_executable(communications src/main.cpp src/RosNode_Communications.cpp)
+rosbuild_add_executable(communications src/main.cpp src/RosNode_Communications.cpp src/TranslatorROSJAUS.cpp)
 target_link_libraries(communications libjaus.so libopenJaus.so)
 

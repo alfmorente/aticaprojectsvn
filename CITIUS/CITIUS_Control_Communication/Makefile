@@ -498,6 +498,30 @@ src/RosNode_Communications.cpp.s:
 	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s
 .PHONY : src/RosNode_Communications.cpp.s
 
+src/TranslatorROSJAUS.o: src/TranslatorROSJAUS.cpp.o
+.PHONY : src/TranslatorROSJAUS.o
+
+# target to build an object file
+src/TranslatorROSJAUS.cpp.o:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o
+.PHONY : src/TranslatorROSJAUS.cpp.o
+
+src/TranslatorROSJAUS.i: src/TranslatorROSJAUS.cpp.i
+.PHONY : src/TranslatorROSJAUS.i
+
+# target to preprocess a source file
+src/TranslatorROSJAUS.cpp.i:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.i
+.PHONY : src/TranslatorROSJAUS.cpp.i
+
+src/TranslatorROSJAUS.s: src/TranslatorROSJAUS.cpp.s
+.PHONY : src/TranslatorROSJAUS.s
+
+# target to generate assembly for a file
+src/TranslatorROSJAUS.cpp.s:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.s
+.PHONY : src/TranslatorROSJAUS.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -563,6 +587,9 @@ help:
 	@echo "... src/RosNode_Communications.o"
 	@echo "... src/RosNode_Communications.i"
 	@echo "... src/RosNode_Communications.s"
+	@echo "... src/TranslatorROSJAUS.o"
+	@echo "... src/TranslatorROSJAUS.i"
+	@echo "... src/TranslatorROSJAUS.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

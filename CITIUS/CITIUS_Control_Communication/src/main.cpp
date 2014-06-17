@@ -25,7 +25,22 @@ int main(int argc, char** argv) {
 
     ROS_INFO("[Control] Communications - Nodo listo para operar");
 
-    ros::spin();
+    // Temporizador de envio de estado
+    clock_t initTime, finalTime;
+    initTime = clock();
+
+    while (ros::ok()) {
+        // Recepcion de mensajeria
+        ros::spinOnce();
+        // Temporizador para envio de estado
+        finalTime = clock() - initTime;
+        if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_10HZ) {
+            // Requerimiento de informacion de dispositivo
+            nodeComm->informStatus();
+            // Clear del timer
+            initTime = clock();
+        }
+    }
 
     ROS_INFO("[Control] Communications - Nodo finalizado");
     
