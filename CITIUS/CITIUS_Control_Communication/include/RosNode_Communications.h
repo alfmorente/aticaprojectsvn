@@ -29,12 +29,18 @@ extern "C" {
 #include "CITIUS_Control_Communication/msg_frontCameraInfo.h"
 #include "CITIUS_Control_Communication/msg_rearCameraInfo.h"
 #include "CITIUS_Control_Communication/srv_vehicleStatus.h"
+#include "constant.h"
+
+// Librerias de JAUS
+#include "jaus.h"
+#include "openJaus.h"
 
 class RosNode_Communications{
 public:
   RosNode_Communications();
   // Inicializacion de artefactos ROS
   void initROS();
+  void initJAUS();
   // Get de publicadores ROS
   ros::Publisher getPublisherFrontCamera();
   ros::Publisher getPublisherRearCamera();
@@ -55,4 +61,6 @@ private:
   ros::Publisher pubCtrlRearCamera;
   ros::Publisher pubCommand;
   ros::ServiceClient clientStatus;
+  // Componentes JAUS
+  OjCmpt primitiveDriverComponent;
 };

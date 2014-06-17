@@ -53,8 +53,6 @@
           <ccTool>
             <incDir>
               <pElem>include</pElem>
-              <pElem>msg_gen/cpp/include</pElem>
-              <pElem>srv_gen/cpp/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="CITIUS_Control_Communication"</Elem>
@@ -111,6 +109,8 @@
             <pElem>/opt/ros/groovy/include</pElem>
             <pElem>msg_gen/cpp/include</pElem>
             <pElem>srv_gen/cpp/include</pElem>
+            <pElem>lib/libjaus/include</pElem>
+            <pElem>lib/libopenJaus/include</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
@@ -118,6 +118,8 @@
       <folder path="src">
         <ccTool>
           <incDir>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
             <pElem>include/CITIUS_Control_Communication</pElem>
             <pElem>/usr/src/gtest/include</pElem>
             <pElem>/usr/src/gtest</pElem>

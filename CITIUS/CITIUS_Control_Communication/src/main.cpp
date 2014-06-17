@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
     RosNode_Communications *nodeComm = new RosNode_Communications();
 
     nodeComm->initROS();
+    nodeComm->initJAUS();
 
     ROS_INFO("[Control] Communications - Nodo listo para operar");
 

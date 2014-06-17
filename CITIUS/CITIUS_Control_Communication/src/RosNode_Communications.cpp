@@ -28,6 +28,17 @@ void RosNode_Communications::initROS() {
 
 /*******************************************************************************
  *******************************************************************************
+ *                     INICIALIZACION DE ARTEFACTOS JAUS                        *
+ *******************************************************************************
+ ******************************************************************************/
+void RosNode_Communications::initJAUS() {
+    // Primitive Driver
+    this->primitiveDriverComponent = ojCmptCreate("Primitive Driver",JAUS_PRIMITIVE_DRIVER,1);
+    
+}
+
+/*******************************************************************************
+ *******************************************************************************
  *                     GETTER AND SETTER DE ATRIBUTOS                          *
  *******************************************************************************
  ******************************************************************************/
@@ -71,6 +82,25 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
  */
 void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg) {
     ROS_INFO("[Control] Communications - Recibida informacion de vehiculo");
+    
+    JausMessage jMsg;
+    
+    JausAddress address = jausAddressCreate();
+    address->subsystem = 0;
+    address->node = 0;
+    address->component = 0;
+    address->instance = 0;
+    
+    if(msg.id_device == THROTTLE){
+        ReportWrenchEffortMessage rwem = reportWrenchEffortMessageCreate();
+        rwem->propulsiveLinearEffortXPercent = msg.value;
+        jausAddressCopy(rwem->destination,address);
+        jMsg = reportWrenchEffortMessageToJausMessage(rwem);
+        reportWrenchEffortMessageDestroy(rwem);
+    }
+    
+    ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
+    jausMessageDestroy(jMsg);
 }
 
 /* 
