@@ -25,6 +25,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         case THROTTLE:{
             // Generacion de mensaje especifico Report Wrench Effort
             ReportWrenchEffortMessage rwem = reportWrenchEffortMessageCreate();
+            // Presence vector
+            rwem->presenceVector = PRESENCE_VECTOR_THROTTLE;
             rwem->propulsiveLinearEffortXPercent = value;
             jausAddressCopy(rwem->destination,jAdd);
             // Generacion de mensaje JUAS global
@@ -34,6 +36,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BRAKE:{
             // Generacion de mensaje especifico Report Wrench Effort
             ReportWrenchEffortMessage rwem = reportWrenchEffortMessageCreate();
+            // Presence vector
+            rwem->presenceVector = PRESENCE_VECTOR_BRAKE;
             rwem->resistiveLinearEffortXPercent = value;
             jausAddressCopy(rwem->destination,jAdd);
             // Generacion de mensaje JUAS global
@@ -43,7 +47,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case HANDBRAKE:{
             // Generacion de mensaje especifico Report Discrete Device
             ReportDiscreteDevicesMessage rddm = reportDiscreteDevicesMessageCreate();
-            rddm->parkingBrake = value;
+            rddm->parkingBrake = (JausBoolean)value;
             jausAddressCopy(rddm->destination,jAdd);
             // Generacion de mensaje JUAS global
             jMsg = reportDiscreteDevicesMessageToJausMessage(rddm);
@@ -97,7 +101,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BLINKER_RIGHT:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->intermitenteDerechoActivo = value;
+            rsem->intermitenteDerechoActivo = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -106,7 +110,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BLINKER_LEFT:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->intermitenteIzquierdoActivo = value;
+            rsem->intermitenteIzquierdoActivo = (JausBoolean) value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -115,8 +119,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BLINKER_EMERGENCY:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->intermitenteDerechoActivo = value;
-            rsem->intermitenteIzquierdoActivo = value;
+            rsem->intermitenteDerechoActivo = (JausBoolean)value;
+            rsem->intermitenteIzquierdoActivo = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -129,7 +133,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case DIPSS:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->lucesCortasActivas = value;
+            rsem->lucesCortasActivas = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -142,7 +146,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case KLAXON:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->claxonActivo = value;
+            rsem->claxonActivo = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);

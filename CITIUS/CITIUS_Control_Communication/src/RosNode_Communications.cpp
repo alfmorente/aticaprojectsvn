@@ -32,12 +32,23 @@ void RosNode_Communications::initROS() {
  *******************************************************************************
  ******************************************************************************/
 void RosNode_Communications::initJAUS() {
+    // Inicializacion de JAUS
+    this->configData = new FileLoader("nodeManager.conf");
+    this->handler = new JausHandler();
+    try {
+        this->configData = new FileLoader("nodeManager.conf");
+        this->handler = new JausHandler();
+        this->nm = new NodeManager(this->configData, this->handler);
+    }catch(...){
+        ROS_INFO("[Control] Communications - No se ha podido inicializar JAUS");
+    }
+    
     // Primitive Driver
-    this->primitiveDriverComponent = ojCmptCreate((char *)"Primitive Driver",JAUS_PRIMITIVE_DRIVER,1);
-    this->missionSpoolerComponent = ojCmptCreate((char *)"Mission Spooler",JAUS_MISSION_SPOOLER,1);
-    this->primitiveDriverComponent = ojCmptCreate((char *)"Primitive Driver",JAUS_PRIMITIVE_DRIVER,1);
-    this->visualSensorComponent = ojCmptCreate((char *)"Visual Sensor",JAUS_VISUAL_SENSOR,1);
-    this->platformSensorComponent = ojCmptCreate((char *)"Platform Sensor",JAUS_PLATFORM_SENSOR,1);
+    this->primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
+    this->missionSpoolerComponent = ojCmptCreate((char *) "Mission Spooler", JAUS_MISSION_SPOOLER, 1);
+    this->primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
+    this->visualSensorComponent = ojCmptCreate((char *) "Visual Sensor", JAUS_VISUAL_SENSOR, 1);
+    this->platformSensorComponent = ojCmptCreate((char *) "Platform Sensor", JAUS_PLATFORM_SENSOR, 1);
     this->globalWaypointDriverComponent = ojCmptCreate((char *)"Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER,1);
     this->velocityStateSensorComponent = ojCmptCreate((char *)"Velocity State Sensor",JAUS_VELOCITY_STATE_SENSOR,1);
     this->globalPoseSensorComponent = ojCmptCreate((char *)"Global Pose Sensor",JAUS_GLOBAL_POSE_SENSOR,1);

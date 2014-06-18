@@ -474,6 +474,30 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/JausHandler.o: src/JausHandler.cpp.o
+.PHONY : src/JausHandler.o
+
+# target to build an object file
+src/JausHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/JausHandler.cpp.o
+.PHONY : src/JausHandler.cpp.o
+
+src/JausHandler.i: src/JausHandler.cpp.i
+.PHONY : src/JausHandler.i
+
+# target to preprocess a source file
+src/JausHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/JausHandler.cpp.i
+.PHONY : src/JausHandler.cpp.i
+
+src/JausHandler.s: src/JausHandler.cpp.s
+.PHONY : src/JausHandler.s
+
+# target to generate assembly for a file
+src/JausHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/JausHandler.cpp.s
+.PHONY : src/JausHandler.cpp.s
+
 src/RosNode_Communications.o: src/RosNode_Communications.cpp.o
 .PHONY : src/RosNode_Communications.o
 
@@ -584,6 +608,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/JausHandler.o"
+	@echo "... src/JausHandler.i"
+	@echo "... src/JausHandler.s"
 	@echo "... src/RosNode_Communications.o"
 	@echo "... src/RosNode_Communications.i"
 	@echo "... src/RosNode_Communications.s"
