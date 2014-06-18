@@ -112,6 +112,8 @@
       </df>
       <df name="lib">
         <df name="libjaus">
+          <df name="Build">
+          </df>
           <df name="include">
             <df name="message">
               <df name="command">
@@ -364,6 +366,7 @@
               </df>
               <in>jausMessage.h</in>
               <in>jausMessageHeaders.h</in>
+              <in>skeletonMessage.h</in>
             </df>
             <df name="type">
               <in>jausBoolean.h</in>
@@ -396,14 +399,290 @@
             <in>jausState.h</in>
             <in>jausSubsystem.h</in>
           </df>
+          <df name="lib">
+          </df>
           <df name="src">
             <df name="message">
-              <df name="experimental">
-                <in>reportSignalingElements25Message.c</in>
-                <in>ugvInfo12Message.c</in>
+              <df name="command">
+                <df name="communications">
+                  <in>setDataLinkSelectMessage.c</in>
+                  <in>setDataLinkStatusMessage.c</in>
+                  <in>setSelectedDataLinkStateMessage.c</in>
+                </df>
+                <df name="core">
+                  <in>activateServiceConnectionMessage.c</in>
+                  <in>clearEmergencyMessage.c</in>
+                  <in>confirmComponentControlMessage.c</in>
+                  <in>confirmServiceConnectionMessage.c</in>
+                  <in>createServiceConnectionMessage.c</in>
+                  <in>rejectComponentControlMessage.c</in>
+                  <in>releaseComponentControlMessage.c</in>
+                  <in>requestComponentControlMessage.c</in>
+                  <in>resetMessage.c</in>
+                  <in>resumeMessage.c</in>
+                  <in>setComponentAuthorityMessage.c</in>
+                  <in>setEmergencyMessage.c</in>
+                  <in>setTimeMessage.c</in>
+                  <in>shutdownMessage.c</in>
+                  <in>standbyMessage.c</in>
+                  <in>suspendServiceConnectionMessage.c</in>
+                  <in>terminateServiceConnectionMessage.c</in>
+                </df>
+                <df name="environment">
+                  <in>selectCameraMessage.c</in>
+                  <in>setCameraCapabilitiesMessage.c</in>
+                  <in>setCameraFormatOptionsMessage.c</in>
+                  <in>setCameraPoseMessage.c</in>
+                </df>
+                <df name="event">
+                  <in>cancelEventMessage.c</in>
+                  <in>confirmEventRequestMessage.c</in>
+                  <in>createEventMessage.c</in>
+                  <in>rejectEventRequestMessage.c</in>
+                  <in>updateEventMessage.c</in>
+                </df>
+                <df name="manipulator">
+                  <in>setEndEffectorPathMotionMessage.c</in>
+                  <in>setEndEffectorPoseMessage.c</in>
+                  <in>setEndEffectorVelocityStateMessage.c</in>
+                  <in>setJointEffortsMessage.c</in>
+                  <in>setJointMotionMessage.c</in>
+                  <in>setJointPositionsMessage.c</in>
+                  <in>setJointVelocitiesMessage.c</in>
+                  <in>setToolPointMessage.c</in>
+                </df>
+                <df name="payload">
+                  <in>setPayloadDataElementMessage.c</in>
+                </df>
+                <df name="planning">
+                  <in>abortMissionMessage.c</in>
+                  <in>pauseMissionMessage.c</in>
+                  <in>removeMessagesMessage.c</in>
+                  <in>replaceMessagesMessage.c</in>
+                  <in>resumeMissionMessage.c</in>
+                  <in>runMissionMessage.c</in>
+                  <in>spoolMissionMessage.c</in>
+                </df>
+                <df name="platform">
+                  <in>setDiscreteDevicesMessage.c</in>
+                  <in>setGlobalPathSegmentMessage.c</in>
+                  <in>setGlobalVectorMessage.c</in>
+                  <in>setGlobalWaypointMessage.c</in>
+                  <in>setLocalPathSegmentMessage.c</in>
+                  <in>setLocalVectorMessage.c</in>
+                  <in>setLocalWaypointMessage.c</in>
+                  <in>setTravelSpeedMessage.c</in>
+                  <in>setVelocityStateMessage.c</in>
+                  <in>setWrenchEffortMessage.c</in>
+                </df>
+                <df name="worldModel">
+                  <in>createVksObjectsMessage.c</in>
+                  <in>deleteVksObjectsMessage.c</in>
+                  <in>setVksFeatureClassMetadataMessage.c</in>
+                  <in>terminateVksDataTransferMessage.c</in>
+                </df>
               </df>
+              <df name="experimental">
+                <in>aditionalGPSINSInfo4Message.c</in>
+                <in>anemometerInfo5Message.c</in>
+                <in>heartbeatChannelState16Message.c</in>
+                <in>heartbeatPositionInfo17Message.c</in>
+                <in>reportDayTimeCamera22Message.c</in>
+                <in>reportListOfWaypoints15Message.c</in>
+                <in>reportNightTimeCamera24Message.c</in>
+                <in>reportPositioner20Message.c</in>
+                <in>reportScientificOperations13Message.c</in>
+                <in>reportSignalingElements25Message.c</in>
+                <in>reportUSVObservationsConfig8Message.c</in>
+                <in>reportUSVRemoteControl2Message.c</in>
+                <in>scpmInfo6Message.c</in>
+                <in>setDayTimeCamera21Message.c</in>
+                <in>setListOfWaypoints14Message.c</in>
+                <in>setNightTimeCamera23Message.c</in>
+                <in>setPositioner19Message.c</in>
+                <in>setScientificsOperations11Message.c</in>
+                <in>setSignalingElements18Message.c</in>
+                <in>setUSVObservationsConfig7Message.c</in>
+                <in>setUSVRemote1Message.c</in>
+                <in>telemeterInfo10Message.c</in>
+                <in>ugvInfo12Message.c</in>
+                <in>usvInfo3Message.c</in>
+              </df>
+              <df name="inform">
+                <df name="communications">
+                  <in>reportDataLinkStatusMessage.c</in>
+                  <in>reportHeartbeatPulseMessage.c</in>
+                  <in>reportSelectedDataLinkStatusMessage.c</in>
+                </df>
+                <df name="core">
+                  <in>reportComponentAuthorityMessage.c</in>
+                  <in>reportComponentControlMessage.c</in>
+                  <in>reportComponentStatusMessage.c</in>
+                  <in>reportTimeMessage.c</in>
+                </df>
+                <df name="dynamicConfiguration">
+                  <in>reportConfigurationMessage.c</in>
+                  <in>reportIdentificationMessage.c</in>
+                  <in>reportServicesMessage.c</in>
+                  <in>reportSubsystemListMessage.c</in>
+                </df>
+                <df name="environment">
+                  <in>reportCameraCapabilitiesMessage.c</in>
+                  <in>reportCameraCountMessage.c</in>
+                  <in>reportCameraFormatOptionsMessage.c</in>
+                  <in>reportCameraPoseMessage.c</in>
+                  <in>reportImageMessage.c</in>
+                  <in>reportRelativeObjectPositionMessage.c</in>
+                  <in>reportSelectedCameraMessage.c</in>
+                </df>
+                <df name="event">
+                  <in>eventMessage.c</in>
+                  <in>reportEventsMessage.c</in>
+                </df>
+                <df name="manipulator">
+                  <in>reportJointEffortsMessage.c</in>
+                  <in>reportJointForceTorquesMessage.c</in>
+                  <in>reportJointPositionsMessage.c</in>
+                  <in>reportJointVelocitiesMessage.c</in>
+                  <in>reportManipulatorSpecificationsMessage.c</in>
+                  <in>reportToolPointMessage.c</in>
+                </df>
+                <df name="payload">
+                  <in>reportPayloadDataElementMessage.c</in>
+                  <in>reportPayloadInterfaceMessage.c</in>
+                </df>
+                <df name="planning">
+                  <in>reportMissionStatusMessage.c</in>
+                  <in>reportSpoolingPreferenceMessage.c</in>
+                </df>
+                <df name="platform">
+                  <in>reportDiscreteDevicesMessage.c</in>
+                  <in>reportGlobalPathSegmentMessage.c</in>
+                  <in>reportGlobalPoseMessage.c</in>
+                  <in>reportGlobalVectorMessage.c</in>
+                  <in>reportGlobalWaypointMessage.c</in>
+                  <in>reportLocalPathSegmentMessage.c</in>
+                  <in>reportLocalPoseMessage.c</in>
+                  <in>reportLocalVectorMessage.c</in>
+                  <in>reportLocalWaypointMessage.c</in>
+                  <in>reportPathSegmentCountMessage.c</in>
+                  <in>reportPlatformOperationalDataMessage.c</in>
+                  <in>reportPlatformSpecificationsMessage.c</in>
+                  <in>reportTravelSpeedMessage.c</in>
+                  <in>reportVelocityStateMessage.c</in>
+                  <in>reportWaypointCountMessage.c</in>
+                  <in>reportWrenchEffortMessage.c</in>
+                </df>
+                <df name="worldModel">
+                  <in>reportVksBoundsMessage.c</in>
+                  <in>reportVksDataTransferTerminationMessage.c</in>
+                  <in>reportVksFeatureClassMetadataMessage.c</in>
+                  <in>reportVksObjectsCreationMessage.c</in>
+                  <in>reportVksObjectsMessage.c</in>
+                </df>
+              </df>
+              <df name="query">
+                <df name="communications">
+                  <in>queryDataLinkStatusMessage.c</in>
+                  <in>queryHeartbeatPulseMessage.c</in>
+                  <in>querySelectedDataLinkStatusMessage.c</in>
+                </df>
+                <df name="core">
+                  <in>queryComponentAuthorityMessage.c</in>
+                  <in>queryComponentControlMessage.c</in>
+                  <in>queryComponentStatusMessage.c</in>
+                  <in>queryTimeMessage.c</in>
+                </df>
+                <df name="dynamicConfiguration">
+                  <in>queryConfigurationMessage.c</in>
+                  <in>queryIdentificationMessage.c</in>
+                  <in>queryServicesMessage.c</in>
+                  <in>querySubsystemListMessage.c</in>
+                </df>
+                <df name="environment">
+                  <in>queryCameraCapabilitiesMessage.c</in>
+                  <in>queryCameraCountMessage.c</in>
+                  <in>queryCameraFormatOptionsMessage.c</in>
+                  <in>queryCameraPoseMessage.c</in>
+                  <in>queryImageMessage.c</in>
+                  <in>queryRelativeObjectPositionMessage.c</in>
+                  <in>querySelectedCameraMessage.c</in>
+                </df>
+                <df name="event">
+                  <in>queryEventsMessage.c</in>
+                </df>
+                <df name="manipulator">
+                  <in>queryJointEffortsMessage.c</in>
+                  <in>queryJointForceTorquesMessage.c</in>
+                  <in>queryJointPositionsMessage.c</in>
+                  <in>queryJointVelocitiesMessage.c</in>
+                  <in>queryManipulatorSpecificationsMessage.c</in>
+                  <in>queryToolPointMessage.c</in>
+                </df>
+                <df name="payload">
+                  <in>queryPayloadDataElementMessage.c</in>
+                  <in>queryPayloadInterfaceMessage.c</in>
+                </df>
+                <df name="planning">
+                  <in>queryMissionStatusMessage.c</in>
+                  <in>querySpoolingPreferenceMessage.c</in>
+                </df>
+                <df name="platform">
+                  <in>queryDiscreteDevicesMessage.c</in>
+                  <in>queryGlobalPathSegmentMessage.c</in>
+                  <in>queryGlobalPoseMessage.c</in>
+                  <in>queryGlobalVectorMessage.c</in>
+                  <in>queryGlobalWaypointMessage.c</in>
+                  <in>queryLocalPathSegmentMessage.c</in>
+                  <in>queryLocalPoseMessage.c</in>
+                  <in>queryLocalVectorMessage.c</in>
+                  <in>queryLocalWaypointMessage.c</in>
+                  <in>queryPathSegmentCountMessage.c</in>
+                  <in>queryPlatformOperationalDataMessage.c</in>
+                  <in>queryPlatformSpecificationsMessage.c</in>
+                  <in>queryTravelSpeedMessage.c</in>
+                  <in>queryVelocityStateMessage.c</in>
+                  <in>queryWaypointCountMessage.c</in>
+                  <in>queryWrenchEffortMessage.c</in>
+                </df>
+                <df name="worldModel">
+                  <in>queryVksBoundsMessage.c</in>
+                  <in>queryVksFeatureClassMetadataMessage.c</in>
+                  <in>queryVksObjectsMessage.c</in>
+                </df>
+              </df>
+              <in>jausMessage.c</in>
             </df>
+            <df name="type">
+              <in>jausBoolean.c</in>
+              <in>jausByte.c</in>
+              <in>jausDouble.c</in>
+              <in>jausEventLimit.c</in>
+              <in>jausFloat.c</in>
+              <in>jausGeometryPointLLA.c</in>
+              <in>jausGeometryPointXYZ.c</in>
+              <in>jausInteger.c</in>
+              <in>jausLong.c</in>
+              <in>jausMissionCommand.c</in>
+              <in>jausMissionTask.c</in>
+              <in>jausShort.c</in>
+              <in>jausTime.c</in>
+              <in>jausUnsignedInteger.c</in>
+              <in>jausUnsignedLong.c</in>
+              <in>jausUnsignedShort.c</in>
+              <in>jausWorldModelFeatureClass.c</in>
+              <in>jausWorldModelVectorObject.c</in>
+            </df>
+            <in>jausAddress.c</in>
+            <in>jausArray.c</in>
+            <in>jausComponent.c</in>
+            <in>jausNode.c</in>
+            <in>jausPayloadInterface.c</in>
+            <in>jausService.c</in>
+            <in>jausState.c</in>
+            <in>jausSubsystem.c</in>
           </df>
+          <in>Makefile</in>
         </df>
         <df name="libopenJaus">
           <df name="Build">

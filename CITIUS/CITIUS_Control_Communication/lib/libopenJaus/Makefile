@@ -179,6 +179,3 @@ $(TARGET) : $(OBJECTS)
 
 ./Build/JausOpcUdpInterface.o : ./src/nodeManager/JausOpcUdpInterface.cpp
 	g++ $(CCFLAGS) -o ./Build/JausOpcUdpInterface.o ./src/nodeManager/JausOpcUdpInterface.cpp
-
-install: 
-	cp lib/libopenJaus.so /usr/lib
