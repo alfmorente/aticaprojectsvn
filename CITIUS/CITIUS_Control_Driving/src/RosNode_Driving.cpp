@@ -16,8 +16,8 @@ RosNode_Driving::RosNode_Driving() {
 void RosNode_Driving::initROS() {
     ros::NodeHandle nh;
     this->pubVehicleInfo = nh.advertise<CITIUS_Control_Driving::msg_vehicleInfo>("vehicleInfo",1000);
-    this->subsCommand = nh.subscribe("ctrlFrontCamera",1000,&RosNode_Driving::fcn_sub_command,this);
-    this->servNodeStatus = nh.advertiseService("fcNodeStatus",&RosNode_Driving::fcv_serv_nodeStatus,this);
+    this->subsCommand = nh.subscribe("command",1000,&RosNode_Driving::fcn_sub_command,this);
+    this->servNodeStatus = nh.advertiseService("vmNodeStatus",&RosNode_Driving::fcv_serv_nodeStatus,this);
 }
 
 /*******************************************************************************
@@ -25,12 +25,19 @@ void RosNode_Driving::initROS() {
  ******************************************************************************/
 
 // Control de la camara
-void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg){
-    if(checkCommand(msg)){
-        this->getDriverMng()->setParam(msg.id_device,msg.value);
+
+void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
+    if (this->vmNodeStatus == NODESTATUS_OK) {
+        ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
+        if (checkCommand(msg)) {
+            this->getDriverMng()->setParam(msg.id_device, msg.value);
+        } else {
+            ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
+        }
     }else{
-        ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
+        ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d",this->vmNodeStatus);
     }
+
 }
     
 // Gestion del estado del nodo

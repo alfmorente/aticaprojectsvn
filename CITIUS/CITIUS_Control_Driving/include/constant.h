@@ -119,8 +119,8 @@ extern "C" {
  *                   SOCKET PAYLOAD DE CONDUCCION
 *******************************************************************************/
 
-#define IP_PAYLOAD_CONDUCCION_DRIVING "localhost"
-#define PORT_PAYLOAD_CONDUCCION_DRIVING 5000
+#define IP_PAYLOAD_CONDUCCION_DRIVING "127.0.0.1"
+#define PORT_PAYLOAD_CONDUCCION_DRIVING 10000
 
 /*******************************************************************************
  * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO

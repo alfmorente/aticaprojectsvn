@@ -46,7 +46,6 @@ public:
     void reqVehicleInfo();
     bool disconnectVehicle();
     // Getter y setter necesarios
-    void setSocketDescriptor(int newSocketDescriptor);
     int getSocketDescriptor();
 
 };

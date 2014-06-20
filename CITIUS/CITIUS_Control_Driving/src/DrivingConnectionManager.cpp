@@ -6,7 +6,7 @@
  ******************************************************************************/
 
 DrivingConnectionManager::DrivingConnectionManager() {
-    this->setSocketDescriptor(-1);
+    this->socketDescriptor = -1;
 }
 
 /*******************************************************************************
@@ -14,33 +14,52 @@ DrivingConnectionManager::DrivingConnectionManager() {
  ******************************************************************************/
 
 // Conexión con dispositivo
-bool DrivingConnectionManager::connectVehicle(){
+
+bool DrivingConnectionManager::connectVehicle() {
     // Creacion y apertura del socket
-    this->setSocketDescriptor(socket(AF_INET, SOCK_STREAM, 0));
-    if (this->getSocketDescriptor() < 0) {
+    this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+    if (this->socketDescriptor < 0) {
         ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conducción");
         return false;
-    }else{
-        // Establecimiento de modo no bloqueante en operaciones de L/E
-        if ( fcntl(this->getSocketDescriptor(), F_SETFL, O_NONBLOCK) < 0 ){
-            ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones de L/E");
-            return false;
+    } else {
+        struct hostent *he;
+        /* estructura que recibirá información sobre el nodo remoto */
+
+        struct sockaddr_in server;
+        /* información sobre la dirección del servidor */
+
+        if ((he = gethostbyname(IP_PAYLOAD_CONDUCCION_DRIVING)) == NULL) {
+            /* llamada a gethostbyname() */
+            ROS_INFO("[Control] Driving - Imposible obtener el nombre del servidor socket");
+            exit(-1);
+        }
+        
+        if ((this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+            /* llamada a socket() */
+            ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conducción");
+            exit(-1);
+        }
+
+        server.sin_family = AF_INET;
+        server.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
+        /* htons() es necesaria nuevamente ;-o */
+        server.sin_addr = *((struct in_addr *) he->h_addr);
+        /*he->h_addr pasa la información de ``*he'' a "h_addr" */
+        bzero(&(server.sin_zero), 8);
+
+        if (connect(this->socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+            /* llamada a connect() */
+            ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicacion con Payload de Conducción");
+            exit(-1);
+
+        }
+        ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con exito y conectado");
+        // Test if the socket is in non-blocking mode:
+        // Put the socket in non-blocking mode:
+        if (fcntl(this->socketDescriptor, F_SETFL, fcntl(this->socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
+            ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones L/E");
         }else{
-            ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones de L/E");
-            
-            struct sockaddr_in socketAddr;
-            socketAddr.sin_family = AF_INET;
-            socketAddr.sin_addr.s_addr = inet_addr(IP_PAYLOAD_CONDUCCION_DRIVING);
-            socketAddr.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
-            // Conexión
-            if (connect(this->getSocketDescriptor(), (struct sockaddr *) &socketAddr, sizeof (socketAddr)) < 0) {
-                ROS_INFO("[Control] Driving :: Imposible conectar con socket para comunicacion con Payload de Conduccion");
-                shutdown(this->getSocketDescriptor(), 2);
-                close(this->getSocketDescriptor());
-                return false;
-            } else {   
-                ROS_INFO("[Control] Driving :: Conexión con socket para comunicacion con Payload de Conduccion establecida");
-            }
+            ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones L/E");
         }
     }
     return true;
@@ -50,35 +69,45 @@ bool DrivingConnectionManager::connectVehicle(){
 
 bool DrivingConnectionManager::disconnectVehicle() {
     // Cierre del socket
-    shutdown(this->getSocketDescriptor(), 2);
-    close(this->getSocketDescriptor());
-    ROS_INFO("[Control] Driving :: Socket cerrado correctamente");
+    shutdown(this->socketDescriptor, 2);
+    close(this->socketDescriptor);
+    ROS_INFO("[Control] Driving - Socket cerrado correctamente");
     return true;
 }
 
 // Mandar comando de control
-void DrivingConnectionManager::setParam(short idParam, float value){
+
+void DrivingConnectionManager::setParam(short idParam, float value) {
+    // Estructura de envio
     FrameDriving fd;
     fd.instruction = SET;
     fd.element = idParam;
     fd.value = value;
-    if (send(this->getSocketDescriptor(), &fd, sizeof (fd), 0) < 0) {
-        ROS_INFO("[Control] Driving :: No se ha podido enviar una trama por el socket");
-    } else {
-        ROS_INFO("[Control] Driving :: Enviado comando a Payload de conduccion");
-    }
+    // Buffer de envio
+    char bufData[6];
+    // Rellenado del buffer
+    memcpy(&bufData[0], &fd.instruction, sizeof (fd.instruction));
+    memcpy(&bufData[2], &fd.element, sizeof (fd.element));
+    memcpy(&bufData[4], &fd.value, sizeof (fd.value));
+    send(this->socketDescriptor, bufData, sizeof(bufData), 0);
+    usleep(100);
 }
 
 // Solicitar informacion mediante comando
 void DrivingConnectionManager::getParam(short idParam){
+    // Estructura de envio
     FrameDriving fd;
     fd.instruction = GET;
     fd.element = idParam;
-    if (send(this->getSocketDescriptor(), &fd, sizeof (fd), 0) < 0) {
-        ROS_INFO("[Control] Driving :: No se ha podido enviar una trama por el socket");
-    } else {
-        ROS_INFO("[Control] Driving :: Enviado comando a Payload de conduccion");
-    }
+    fd.value = 0;
+    // Buffer de envio
+    char bufData[6];
+    // Rellenado del buffer
+    memcpy(&bufData[0], &fd.instruction, sizeof (fd.instruction));
+    memcpy(&bufData[2], &fd.element, sizeof (fd.element));
+    memcpy(&bufData[4], &fd.value, sizeof (fd.value));
+    send(this->socketDescriptor, bufData, sizeof(bufData), 0);
+    usleep(100);
 }
 
 // Solicitar informacion completa de vehiculo
@@ -104,11 +133,6 @@ void DrivingConnectionManager::reqVehicleInfo(){
 /*******************************************************************************
  * GETTER Y SETTER NECESARIOS
  ******************************************************************************/
-
-// Set del descriptor de socket
-void DrivingConnectionManager::setSocketDescriptor(int newSocketDescriptor){
-    this->socketDescriptor = newSocketDescriptor;
-}
 
 // Get del descriptor de socket
 int DrivingConnectionManager::getSocketDescriptor(){
