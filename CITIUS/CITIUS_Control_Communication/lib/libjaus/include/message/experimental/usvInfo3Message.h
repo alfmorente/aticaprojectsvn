@@ -46,6 +46,21 @@
 
 #include "jaus.h"
 
+#ifndef  JAUS_3_PV 
+#define  JAUS_3_PV_ACTIVE_RUDDER_ANGLE_BIT                        0
+#define  JAUS_3_PV_ACTIVE_RPM_M1_BIT                              1
+#define  JAUS_3_PV_ACTIVE_RPM_M2_BIT                              2
+#define  JAUS_3_PV_FUEL_LEVEL_BIT                                 3
+#define  JAUS_3_PV_PRESSURE_M1_BIT                                4
+#define  JAUS_3_PV_PRESSURE_M2_BIT                                5
+#define  JAUS_3_PV_TEMPERATURE_M1_BIT                             6
+#define  JAUS_3_PV_TEMPERATURE_M2_BIT                             7
+#define  JAUS_3_PV_VOLTAGE_M1_BIT                                 8
+#define  JAUS_3_PV_VOLTAGE_M2_BIT                                 9
+#define  JAUS_3_PV_ALARMS_BIT                                    10
+#endif
+
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,18 +100,21 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
-	
-  JausDouble anguloDeTimonActivo;     // Scaled Short (-90,90), Res:0.003
-  JausDouble rpmM1Activo;             // Scaled Short (-5000,5000), Res: 0.15
-  JausDouble rpmM2Activo;             // Scaled Short (-5000,5000), Res: 0.15
-  JausDouble nivelCombustible;        // Scaled Byte (0,100), Res: 0.3945
-  JausDouble presionM1;               // Scaled Byte (0,100), Res: 0.4
-  JausDouble presionM2;               // Scaled Byte (0,100), Res: 0.4
-  JausDouble temperaturaM1;           // Scaled Short (0,400), Res: 0.006
-  JausDouble temperaturaM2;           // Scaled Short (0,400), Res: 0.006
-  JausDouble tensionBateriaM1;        // Scaled Byte (0,24), Res: 0.1
-  JausDouble tensionBateriaM2;        // Scaled Byte (0,24), Res: 0.1
-  JausDouble alarmas;                 // Scaled Short POR DEFINIR!!
+        
+  // PRESENCE VECTOR
+  JausShort presenceVector; 
+  
+  JausDouble active_rudder_angle;     // Scaled Short (-90,90), Res:0.003
+  JausDouble active_rpm_m1;             // Scaled Short (-5000,5000), Res: 0.15
+  JausDouble active_rpm_m2;             // Scaled Short (-5000,5000), Res: 0.15
+  JausDouble fuel_level;        // Scaled Byte (0,100), Res: 0.3945
+  JausDouble pressure_m1;               // Scaled Byte (0,100), Res: 0.4
+  JausDouble pressure_m2;               // Scaled Byte (0,100), Res: 0.4
+  JausDouble temperature_m1;           // Scaled Short (0,400), Res: 0.006
+  JausDouble temperature_m2;           // Scaled Short (0,400), Res: 0.006
+  JausDouble voltage_m1;        // Scaled Byte (0,24), Res: 0.1
+  JausDouble voltage_m2;        // Scaled Byte (0,24), Res: 0.1
+  JausDouble alarms;                 // Scaled Short POR DEFINIR!!
 
 }USVInfo3MessageStruct;
 

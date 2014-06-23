@@ -70,12 +70,12 @@ static void dataInitialize(SetSignalingElements18Message message) {
 
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message->lucesCortas = JAUS_FALSE;
-    message->lucesPosicion = JAUS_FALSE;
-    message->lucesLargas = JAUS_FALSE;
-    message->intermitenteIzquierda = JAUS_FALSE;
-    message->intermitenteDerecha = JAUS_FALSE;
-    message->claxon = JAUS_FALSE;
+    message->dipss = JAUS_FALSE;
+    message->dipsp = JAUS_FALSE;
+    message->dipsr = JAUS_FALSE;
+    message->blinker_left = JAUS_FALSE;
+    message->blinker_right = JAUS_FALSE;
+    message->klaxon = JAUS_FALSE;
 
     message-> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -104,23 +104,23 @@ static JausBoolean dataFromBuffer(SetSignalingElements18Message message, unsigne
         if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_LUCES_CORTAS_BIT)) {
-            message->lucesCortas = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_DIPSS_BIT)) {
+            message->dipss = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_LUCES_POSICION_BIT)) {
-            message->lucesPosicion = jausByteIsBitSet(tempByte, 1) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_DIPSP_BIT)) {
+            message->dipsp = jausByteIsBitSet(tempByte, 1) ? JAUS_TRUE : JAUS_FALSE;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_LUCES_LARGAS_BIT)) {
-            message->lucesLargas = jausByteIsBitSet(tempByte, 2) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_DIPSR_BIT)) {
+            message->dipsr = jausByteIsBitSet(tempByte, 2) ? JAUS_TRUE : JAUS_FALSE;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_INTERMITENTE_IZQUIERDA_BIT)) {
-            message->intermitenteIzquierda = jausByteIsBitSet(tempByte, 3) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_BKINKER_LEFT_BIT)) {
+            message->blinker_left = jausByteIsBitSet(tempByte, 3) ? JAUS_TRUE : JAUS_FALSE;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_INTERMITENTE_DERECHA_BIT)) {
-            message->intermitenteDerecha = jausByteIsBitSet(tempByte, 4) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_BLINKER_RIGHT_BIT)) {
+            message->blinker_right = jausByteIsBitSet(tempByte, 4) ? JAUS_TRUE : JAUS_FALSE;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_CLAXON_BIT)) {
-            message->claxon = jausByteIsBitSet(tempByte, 5) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_KLAXON_BIT)) {
+            message->klaxon = jausByteIsBitSet(tempByte, 5) ? JAUS_TRUE : JAUS_FALSE;
         }
 
         return JAUS_TRUE;
@@ -145,23 +145,23 @@ static int dataToBuffer(SetSignalingElements18Message message, unsigned char *bu
 
 
         tempByte = 0;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_LUCES_CORTAS_BIT)) {
-            if (message->lucesCortas) jausByteSetBit(&tempByte, 0);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_DIPSS_BIT)) {
+            if (message->dipss) jausByteSetBit(&tempByte, 0);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_LUCES_POSICION_BIT)) {
-            if (message->lucesPosicion) jausByteSetBit(&tempByte, 1);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_DIPSP_BIT)) {
+            if (message->dipsp) jausByteSetBit(&tempByte, 1);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_LUCES_LARGAS_BIT)) {
-            if (message->lucesLargas) jausByteSetBit(&tempByte, 2);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_DIPSR_BIT)) {
+            if (message->dipsr) jausByteSetBit(&tempByte, 2);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_INTERMITENTE_IZQUIERDA_BIT)) {
-            if (message->intermitenteIzquierda) jausByteSetBit(&tempByte, 3);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_BKINKER_LEFT_BIT)) {
+            if (message->blinker_left) jausByteSetBit(&tempByte, 3);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_INTERMITENTE_DERECHA_BIT)) {
-            if (message->intermitenteDerecha) jausByteSetBit(&tempByte, 4);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_BLINKER_RIGHT_BIT)) {
+            if (message->blinker_right) jausByteSetBit(&tempByte, 4);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_CLAXON_BIT)) {
-            if (message->claxon) jausByteSetBit(&tempByte, 5);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_18_PV_KLAXON_BIT)) {
+            if (message->klaxon) jausByteSetBit(&tempByte, 5);
         }
 
         //pack

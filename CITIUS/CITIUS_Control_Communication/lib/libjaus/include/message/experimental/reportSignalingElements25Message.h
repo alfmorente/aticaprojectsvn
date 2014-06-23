@@ -46,6 +46,15 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_25_PV 
+#define  JAUS_25_PV_DIPSS_BIT                		0
+#define  JAUS_25_PV_DIPSP_BIT                           1
+#define  JAUS_25_PV_DIPSR_BIT                           2
+#define  JAUS_25_PV_BKINKER_LEFT_BIT                	3
+#define  JAUS_25_PV_BLINKER_RIGHT_BIT               	4
+#define  JAUS_25_PV_KLAXON_BIT    			5
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -84,12 +93,17 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	// MESSAGE DATA MEMBERS GO HERE
-  
-  JausBoolean lucesCortasActivas;
-  JausBoolean intermitenteIzquierdoActivo;
-  JausBoolean intermitenteDerechoActivo;
-  JausBoolean claxonActivo;
+  // PRESENCE VECTOR
+  JausByte presenceVector; 
+
+  // MESSAGE DATA MEMBERS GO HERE
+	
+  JausBoolean dipss;
+  JausBoolean dipsp;
+  JausBoolean dipsr;
+  JausBoolean blinker_left;
+  JausBoolean blinker_right;
+  JausBoolean klaxon;
   
 }ReportSignalingElements25MessageStruct;
 

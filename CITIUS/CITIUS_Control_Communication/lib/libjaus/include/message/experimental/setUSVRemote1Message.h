@@ -48,8 +48,8 @@
 
 
 #ifndef   JAUS_1_PV 
-#define  JAUS_1_PV_ORDEN_RPM_BIT    	0
-#define  JAUS_1_PV_ANGULO_TIMON_BIT    	1
+#define  JAUS_1_PV_RPM_ORDER_BIT    	0
+#define  JAUS_1_PV_RUDDER_ANGLE_BIT    	1
 #endif
 typedef struct
 {
@@ -94,8 +94,8 @@ typedef struct
 
   // MESSAGE DATA MEMBERS GO HERE
 	
-  JausDouble ordenRPM;    	// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble anguloTimon;    	// Scaled Short (-90,90), Res: 0.003
+  JausDouble rpm_order;    	// Scaled Short (-5000,5000), Res: 0.15
+  JausDouble rudder_angle;    	// Scaled Short (-90,90), Res: 0.003
  
 }SetUSVRemote1MessageStruct;
 

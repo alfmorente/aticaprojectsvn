@@ -68,8 +68,8 @@ static unsigned int dataSize(SetUSVRemote1Message message);
 static void dataInitialize(SetUSVRemote1Message message) {
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> ordenRPM = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
-    message -> anguloTimon = newJausDouble(0); // Scaled Short (-90,90), Res: 0.003
+    message->rpm_order  = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
+    message->rudder_angle = newJausDouble(0); // Scaled Short (-90,90), Res: 0.003
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 
@@ -96,7 +96,7 @@ static JausBoolean dataFromBuffer(SetUSVRemote1Message message, unsigned char *b
         index += JAUS_BYTE_SIZE_BYTES;
         //Desempaquetar el campo.
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_ORDEN_RPM_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_RPM_ORDER_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
@@ -104,9 +104,9 @@ static JausBoolean dataFromBuffer(SetUSVRemote1Message message, unsigned char *b
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
 
-            message->ordenRPM = jausShortToDouble(tempShort, -5000, 5000);
+            message->rpm_order = jausShortToDouble(tempShort, -5000, 5000);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_ANGULO_TIMON_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_RUDDER_ANGLE_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
@@ -114,7 +114,7 @@ static JausBoolean dataFromBuffer(SetUSVRemote1Message message, unsigned char *b
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
 
-            message->anguloTimon = jausShortToDouble(tempShort, -90, 90);
+            message->rudder_angle = jausShortToDouble(tempShort, -90, 90);
         }
 
         return JAUS_TRUE;
@@ -136,14 +136,14 @@ static int dataToBuffer(SetUSVRemote1Message message, unsigned char *buffer, uns
         //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_ORDEN_RPM_BIT)) {
-            tempShort = jausShortFromDouble(message->ordenRPM, -5000, 5000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_RPM_ORDER_BIT)) {
+            tempShort = jausShortFromDouble(message->rpm_order, -5000, 5000);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_ANGULO_TIMON_BIT)) {
-            tempShort = jausShortFromDouble(message->anguloTimon, -90, 90);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_RUDDER_ANGLE_BIT)) {
+            tempShort = jausShortFromDouble(message->rudder_angle, -90, 90);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
@@ -186,10 +186,10 @@ static unsigned int dataSize(SetUSVRemote1Message message) {
 
     index += JAUS_BYTE_SIZE_BYTES;
 
-    if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_ORDEN_RPM_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_RPM_ORDER_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_ANGULO_TIMON_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_1_PV_RUDDER_ANGLE_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
     return index;

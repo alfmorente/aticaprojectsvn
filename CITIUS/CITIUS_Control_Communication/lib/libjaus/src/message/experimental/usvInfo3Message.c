@@ -67,18 +67,20 @@ static unsigned int dataSize(USVInfo3Message message);
 
 static void dataInitialize(USVInfo3Message message) {
     // Set initial values of message fields
+    
+    message ->presenceVector = newJausShort(JAUS_SHORT_PRESENCE_VECTOR_ALL_ON);
 
-    message -> anguloDeTimonActivo = newJausDouble(0); // Scaled Short (-90,90), Res:0.003
-    message -> rpmM1Activo = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
-    message -> rpmM2Activo = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
-    message -> nivelCombustible = newJausDouble(0); // Scaled Byte (0,100), Res: 0.3945
-    message -> presionM1 = newJausDouble(0); // Scaled Byte (0,100), Res: 0.4
-    message -> presionM2 = newJausDouble(0); // Scaled Byte (0,100), Res: 0.4
-    message -> temperaturaM1 = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
-    message -> temperaturaM2 = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
-    message -> tensionBateriaM1 = newJausDouble(0); // Scaled Byte (0,24), Res: 0.1
-    message -> tensionBateriaM2 = newJausDouble(0); // Scaled Byte (0,24), Res: 0.1
-    message -> alarmas = newJausDouble(0); // Scaled Short POR DEFINIR!!
+    message -> active_rudder_angle = newJausDouble(0); // Scaled Short (-90,90), Res:0.003
+    message -> active_rpm_m1 = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
+    message -> active_rpm_m2 = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
+    message -> fuel_level = newJausDouble(0); // Scaled Byte (0,100), Res: 0.3945
+    message -> pressure_m1 = newJausDouble(0); // Scaled Byte (0,100), Res: 0.4
+    message -> pressure_m2 = newJausDouble(0); // Scaled Byte (0,100), Res: 0.4
+    message -> temperature_m1 = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
+    message -> temperature_m2 = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
+    message -> voltage_m1 = newJausDouble(0); // Scaled Byte (0,24), Res: 0.1
+    message -> voltage_m2 = newJausDouble(0); // Scaled Byte (0,24), Res: 0.1
+    message -> alarms = newJausDouble(0); // Scaled Short POR DEFINIR!!
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -97,72 +99,98 @@ static JausBoolean dataFromBuffer(USVInfo3Message message, unsigned char *buffer
     JausShort tempShort = 0; //Variable temporal para desempaquetar	
 
     if (bufferSizeBytes == message->dataSize) {
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+        
+        if (!jausShortFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
+
+        //Se suma tamaño del Presence Vector
         index += JAUS_SHORT_SIZE_BYTES;
-        message->anguloDeTimonActivo = jausShortToDouble(tempShort, -90, 90);
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RUDDER_ANGLE_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_rudder_angle = jausShortToDouble(tempShort, -90, 90);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RPM_M1_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_rpm_m1 = jausShortToDouble(tempShort, -5000, 5000);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RPM_M2_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_rpm_m2 = jausShortToDouble(tempShort, -5000, 5000);
+        }
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->rpmM1Activo = jausShortToDouble(tempShort, -5000, 5000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_FUEL_LEVEL_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->fuel_level = jausByteToDouble(tempByte, 0, 100);
+        }
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->rpmM2Activo = jausShortToDouble(tempShort, -5000, 5000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_PRESSURE_M1_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->pressure_m1 = jausByteToDouble(tempByte, 0, 100);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_PRESSURE_M2_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->pressure_m2 = jausByteToDouble(tempByte, 0, 100);
+        }
 
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
-        message->nivelCombustible = jausByteToDouble(tempByte, 0, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_TEMPERATURE_M1_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->temperature_m1 = jausShortToDouble(tempShort, 0, 400);
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_TEMPERATURE_M2_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->temperature_m2 = jausShortToDouble(tempShort, 0, 400);
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_VOLTAGE_M1_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->voltage_m1 = jausByteToDouble(tempByte, 0, 24);
+        }
 
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
-        message->presionM1 = jausByteToDouble(tempByte, 0, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_VOLTAGE_M2_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->voltage_m2 = jausByteToDouble(tempByte, 0, 24);
+        }
 
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
-        message->presionM2 = jausByteToDouble(tempByte, 0, 100);
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->temperaturaM1 = jausShortToDouble(tempShort, 0, 400);
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->temperaturaM2 = jausShortToDouble(tempShort, 0, 400);
-
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
-        message->tensionBateriaM1 = jausByteToDouble(tempByte, 0, 24);
-
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
-        message->tensionBateriaM2 = jausByteToDouble(tempByte, 0, 24);
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->alarmas = jausShortToDouble(tempShort, 0, 1000); // Valor Por especificar!!
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ALARMS_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->alarms = jausShortToDouble(tempShort, 0, 1000); // Valor Por especificar!!
+        }
 
         return JAUS_TRUE;
     } else {
@@ -178,61 +206,91 @@ static int dataToBuffer(USVInfo3Message message, unsigned char *buffer, unsigned
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-
-        tempShort = jausShortFromDouble(message->anguloDeTimonActivo, -90, 90);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+        
+        //Se empaqueta el Presence Vector
+        if (!jausShortToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
+
+        //Se suma tamaño del presence Vector
         index += JAUS_SHORT_SIZE_BYTES;
 
-        tempShort = jausShortFromDouble(message->rpmM1Activo, -5000, 5000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RUDDER_ANGLE_BIT)) {
+            tempShort = jausShortFromDouble(message->active_rudder_angle, -90, 90);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RPM_M1_BIT)) {
+            tempShort = jausShortFromDouble(message->active_rpm_m1, -5000, 5000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RPM_M2_BIT)) {
+            tempShort = jausShortFromDouble(message->active_rpm_m2, -5000, 5000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->rpmM2Activo, -5000, 5000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_FUEL_LEVEL_BIT)) {
+            tempByte = jausByteFromDouble(message->fuel_level, 0, 100);
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
 
-        tempByte = jausByteFromDouble(message->nivelCombustible, 0, 100);
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_PRESSURE_M1_BIT)) {
+            tempByte = jausByteFromDouble(message->pressure_m1, 0, 100);
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_PRESSURE_M2_BIT)) {
+            tempByte = jausByteFromDouble(message->pressure_m2, 0, 100);
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
 
-        tempByte = jausByteFromDouble(message->presionM1, 0, 100);
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_TEMPERATURE_M1_BIT)) {
+            tempShort = jausShortFromDouble(message->temperature_m1, 0, 400);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_TEMPERATURE_M2_BIT)) {
+            tempShort = jausShortFromDouble(message->temperature_m2, 0, 400);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
-        tempByte = jausByteFromDouble(message->presionM2, 0, 100);
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_VOLTAGE_M1_BIT)) {
+            tempByte = jausByteFromDouble(message->voltage_m1, 0, 24);
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_VOLTAGE_M2_BIT)) {
+            tempByte = jausByteFromDouble(message->voltage_m2, 0, 24);
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->temperaturaM1, 0, 400);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ALARMS_BIT)) {
+            tempShort = jausShortFromDouble(message->alarms, 0, 1000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->temperaturaM2, 0, 400);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-
-        tempByte = jausByteFromDouble(message->tensionBateriaM1, 0, 24);
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
-
-        tempByte = jausByteFromDouble(message->tensionBateriaM2, 0, 24);
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
-
-        tempShort = jausShortFromDouble(message->alarmas, 0, 1000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
     }
 
     return index;

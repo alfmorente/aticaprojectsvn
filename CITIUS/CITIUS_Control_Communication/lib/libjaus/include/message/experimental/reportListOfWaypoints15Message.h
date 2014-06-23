@@ -86,8 +86,8 @@ typedef struct
 
 	// MESSAGE DATA MEMBERS GO HERE
 		
-  JausByte idListaObjetivo;			// Scaled Byte (0,255)
-  JausByte idWaypointObjetivo;			// Scaled Byte (0,255)
+  JausByte objetive_list_id;			// Scaled Byte (0,255)
+  JausByte objetive_waypoint_id;			// Scaled Byte (0,255)
 
 }ReportListOfWaypoints15MessageStruct;
 

@@ -46,6 +46,18 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_2_PV 
+#define  JAUS_2_PV_APPLIED_DIRECTION_BIT                	0
+#define  JAUS_2_PV_REQUESTED_RPM_BIT                            1
+#define  JAUS_2_PV_REQUESTED_RUDDER_ANGLE_BIT                   2
+#define  JAUS_2_PV_APPLIED_RPM_M1_BIT                           3
+#define  JAUS_2_PV_APPLIED_RPM_M2_BIT                           4
+#define  JAUS_2_PV_APPLIED_RUDDER_ANGLE_BIT    			5
+#define  JAUS_2_PV_VELOCITY_LIMITATIONS_BIT                         6
+#define  JAUS_2_PV_DIRECTION_LIMITATIONS_BIT                        7
+#define  JAUS_2_PV_MODE_SWITCHING_STATUS_BIT                        8
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -83,17 +95,20 @@ typedef struct
 	JausUnsignedInteger dataFlag;
 	
 	JausUnsignedShort sequenceNumber;
+        
+        // PRESENCE VECTOR
+  JausShort presenceVector; 
 
 	// MESSAGE DATA MEMBERS GO HERE
-	
-  JausDouble rpmDemandadas;					// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble anguloDeTimonDemandado;				// Scaled Short (-90,90), Res: 0.003
-  JausDouble rpmAplicadasM1;					// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble rpmAplicadasM2;					// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble anguloDeTimonAplicado;				// Scaled Short (-90,90), Res: 0.003
-  JausByte limitacionOrdenesDeVelocidad;			// Scaled Byte (1,n)=>(0,255) Enumerado
-  JausByte limitacionOrdenesDeRumbo;				// Scaled Byte (1,n)=>(0,255) Enumerado
-  JausByte estadoDelCambioDeModo;				// Scaled Byte (1,7)=>(0,255) Enumerado
+  JausDouble applied_direction;                                 // Scaled Short (-PI,PI), Res: 9e-5
+  JausDouble requested_rpm;					// Scaled Short (-5000,5000), Res: 0.15
+  JausDouble requested_rudder_angle;				// Scaled Short (-90,90), Res: 0.003
+  JausDouble applied_rpm_m1;					// Scaled Short (-5000,5000), Res: 0.15
+  JausDouble applied_rpm_m2;					// Scaled Short (-5000,5000), Res: 0.15
+  JausDouble applied_rudder_angle;				// Scaled Short (-90,90), Res: 0.003
+  JausByte velocity_limitations;                                // Scaled Byte (1,n)=>(0,255) Enumerado
+  JausByte direction_limitations;				// Scaled Byte (1,n)=>(0,255) Enumerado
+  JausByte mode_switching_status;				// Scaled Byte (1,7)=>(0,255) Enumerado
   
 
 }ReportUSVRemoteControl2MessageStruct;

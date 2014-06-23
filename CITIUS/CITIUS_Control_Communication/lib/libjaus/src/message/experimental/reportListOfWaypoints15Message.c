@@ -68,8 +68,8 @@ static unsigned int dataSize(ReportListOfWaypoints15Message message);
 static void dataInitialize(ReportListOfWaypoints15Message message) {
     // Set initial values of message fields
 
-    message -> idListaObjetivo = newJausByte(0); // Scaled Byte (0,255)
-    message -> idWaypointObjetivo = newJausByte(0); // Scaled Byte (0,255)
+    message -> objetive_list_id = newJausByte(0); // Scaled Byte (0,255)
+    message -> objetive_waypoint_id = newJausByte(0); // Scaled Byte (0,255)
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 
@@ -89,13 +89,13 @@ static JausBoolean dataFromBuffer(ReportListOfWaypoints15Message message, unsign
     if (bufferSizeBytes == message->dataSize) {
 
         //Desempaquetar el campo.
-        if (!jausByteFromBuffer(&message->idListaObjetivo, buffer + index, bufferSizeBytes - index))
+        if (!jausByteFromBuffer(&message->objetive_list_id, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
 
         //Se suma tamaño del parámetro
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (!jausByteFromBuffer(&message->idWaypointObjetivo, buffer + index, bufferSizeBytes - index))
+        if (!jausByteFromBuffer(&message->objetive_waypoint_id, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
 
         //Se suma tamaño del parámetro
@@ -115,10 +115,10 @@ static int dataToBuffer(ReportListOfWaypoints15Message message, unsigned char *b
 
     if (bufferSizeBytes >= dataSize(message)) {
 
-        if (!jausByteToBuffer(message->idListaObjetivo, buffer + index, bufferSizeBytes - index))
+        if (!jausByteToBuffer(message->objetive_list_id, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
         index += JAUS_BYTE_SIZE_BYTES;
-        if (!jausByteToBuffer(message->idWaypointObjetivo, buffer + index, bufferSizeBytes - index))
+        if (!jausByteToBuffer(message->objetive_waypoint_id, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
         index += JAUS_BYTE_SIZE_BYTES;
 
