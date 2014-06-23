@@ -209,7 +209,7 @@ static unsigned int dataSize(SetSignalingElements18Message message) {
     int index = 0;
 
     // PresenceVector
-    index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+    index += JAUS_BYTE_SIZE_BYTES;
 
     // Los Booleanos han de ser definidos minimo en un Byte.
     index += JAUS_BYTE_SIZE_BYTES;

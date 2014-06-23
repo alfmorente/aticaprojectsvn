@@ -46,6 +46,19 @@
 
 #include "jaus.h"
 
+#ifndef  JAUS_4_PV 
+#define  JAUS_4_PV_LONGITUDINAL_ACC_BIT                         0
+#define  JAUS_4_PV_LATERAL_ACC_BIT                              1
+#define  JAUS_4_PV_VERTICAL_ACC_BIT                             2
+#define  JAUS_4_PV_GPSINS_STATUS_BIT                            3
+#define  JAUS_4_PV_MEASURE_QUALITY_BIT                          4
+#define  JAUS_4_PV_ST_LAT_DEVIATION_BIT    			5
+#define  JAUS_4_PV_ST_LON_DEVIATION_BIT    			6
+#define  JAUS_4_PV_ST_ALT_DEVIATION_BIT    			7
+#define  JAUS_4_PV_DGPS_CORRECTIONS_BIT    			8
+#define  JAUS_4_PV_GPSINS_AVAILABILITY_BIT    			9
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,19 +98,24 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
-	
-  JausDouble aceleracionLongitudinal;             // Scaled Int (-65534,65534), Res: 3e-5
-  JausDouble aceleracionLateral;                  // Scaled Int (-65534,65534), Res: 3e-5
-  JausDouble aceleracionVertical;                 // Scaled Int (-65534,65534), Res: 3e-5
-  JausByte estadoDelGPSINS;                       // Scaled Byte (0,10), Enum
-  JausDouble calidadDeLaMedida0;                  // Scaled Short (0,100), Res:  0.3906
+        
+        // Presence vector
+  JausShort presenceVector;
+  
+  JausDouble longitudinal_acc;             // Scaled Int (-65534,65534), Res: 3e-5
+  JausDouble lateral_acc;                  // Scaled Int (-65534,65534), Res: 3e-5
+  JausDouble vertical_acc;                 // Scaled Int (-65534,65534), Res: 3e-5
+  JausByte gpsins_status;                       // Scaled Byte (0,10), Enum
+  // COMO HACERLO
+  /*JausDouble measure_quality;                  // Scaled Short (0,100), Res:  0.3906
   JausDouble calidadDeLaMedida1;                  // Scaled Short (0,100), Res:  0.3906
-  JausDouble calidadDeLaMedida2;                  // Scaled Short (0,100), Res:  0.3906
-  JausDouble desviacionEstantarEnLatitud;         // Scaled Short (0,1000), Res:  0.0153
-  JausDouble desviacionEstantarEnLongitud;        // Scaled Short (0,1000), Res:  0.0153
-  JausDouble desviacionEstantarEnAltura;          // Scaled Short (0,1000), Res:  0.0153
-  JausBoolean correccionDGPS;
-  JausBoolean gpsINSDisponible;
+  JausDouble calidadDeLaMedida2;                  // Scaled Short (0,100), Res:  0.3906*/
+  //
+  JausDouble st_lat_deviation;         // Scaled Short (0,1000), Res:  0.0153
+  JausDouble st_lon_deviation;        // Scaled Short (0,1000), Res:  0.0153
+  JausDouble st_alt_deviation;          // Scaled Short (0,1000), Res:  0.0153
+  JausBoolean dgps_corrections;
+  JausBoolean gpsins_availability;
 
 
 }AditionalGPSINSInfo4MessageStruct;

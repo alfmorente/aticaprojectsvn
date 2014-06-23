@@ -67,11 +67,16 @@ static unsigned int dataSize(UGVInfo12Message message);
 
 static void dataInitialize(UGVInfo12Message message) {
     // Set initial values of message fields
-    message -> nivelDeBateria = newJausDouble(0); // Scaled Short (0,100), Res: 0.3945
-    message -> tensionBateria = newJausDouble(0); // Scaled Byte (0,24), Res: 0.1
-    message -> temperaturaMotor = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
-    message -> rpmMotor = newJausDouble(0); // Scaled Short (-5000,5000): 0.15
-    message -> alarmas = newJausDouble(0); // Scaled Short POR DEFINIR!!
+    
+    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
+    
+    message -> battery_level = newJausDouble(0); // Scaled Short (0,100), Res: 0.3945
+    message -> battery_voltage = newJausDouble(0); // Scaled Byte (0,24), Res: 0.1
+    message -> battery_current = newJausDouble(0);  // Scaled Short (0,300), Res:0.004
+    message -> battery_temperature = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
+    message -> motor_temperature = newJausDouble(0); // Scaled Short (0,400), Res: 0.006
+    message -> motor_rpm = newJausDouble(0); // Scaled Short (-5000,5000): 0.15
+    message -> alarms = newJausDouble(0); // Scaled Short POR DEFINIR!!
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -90,37 +95,69 @@ static JausBoolean dataFromBuffer(UGVInfo12Message message, unsigned char *buffe
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+        
+        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->nivelDeBateria = jausShortToDouble(tempShort, 0, 100);
 
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
+        //Se suma tamaño del Presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
-        message->tensionBateria = jausByteToDouble(tempByte, 0, 24);
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->temperaturaMotor = jausShortToDouble(tempShort, 0, 400);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_LEVEL_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->battery_level = jausShortToDouble(tempShort, 0, 100);
+        }
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->rpmMotor = jausShortToDouble(tempShort, -5000, 5000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_VOLTAGE_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->battery_voltage = jausByteToDouble(tempByte, 0, 24);
+        }
+        
+         if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_CURRENT_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->battery_current = jausShortToDouble(tempByte, 0, 300);
+        }
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->alarmas = jausShortToDouble(tempShort, 0, 1000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_TEMPERATURE_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->battery_temperature = jausShortToDouble(tempShort, 0, 400);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_MOTOR_TEMPERATURE_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->motor_temperature = jausShortToDouble(tempShort, 0, 400);
+        }
 
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_MOTOR_RPM_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->motor_rpm = jausShortToDouble(tempShort, -5000, 5000);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_ALARMS_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->alarms = jausShortToDouble(tempShort, 0, 1000);
+        }
+        
         return JAUS_TRUE;
     } else {
         return JAUS_FALSE;
@@ -135,32 +172,62 @@ static int dataToBuffer(UGVInfo12Message message, unsigned char *buffer, unsigne
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-
-        tempShort = jausShortFromDouble(message->nivelDeBateria, 0, 100);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+        
+        //Se empaqueta el Presence Vector
+        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
 
-        tempByte = jausByteFromDouble(message->tensionBateria, 0, 24);
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
+        //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        tempShort = jausShortFromDouble(message->temperaturaMotor, 0, 400);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_LEVEL_BIT)) {
+            tempShort = jausShortFromDouble(message->battery_level, 0, 100);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->rpmMotor, -5000, 5000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-
-        tempShort = jausShortFromDouble(message->alarmas, 0, 1000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_VOLTAGE_BIT)) {
+            tempByte = jausByteFromDouble(message->battery_voltage, 0, 24);
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_CURRENT_BIT)) {
+            tempShort = jausShortFromDouble(message->battery_current, 0, 300);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_TEMPERATURE_BIT)) {
+            tempShort = jausShortFromDouble(message->battery_temperature, 0, 400);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_MOTOR_TEMPERATURE_BIT)) {
+            tempShort = jausShortFromDouble(message->motor_temperature, 0, 400);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_MOTOR_RPM_BIT)) {
+            tempShort = jausShortFromDouble(message->motor_rpm, -5000, 5000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_ALARMS_BIT)) {
+            tempShort = jausShortFromDouble(message->alarms, 0, 1000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
     }
 
@@ -199,14 +266,36 @@ static int dataToString(UGVInfo12Message message, char **buf) {
 static unsigned int dataSize(UGVInfo12Message message) {
     int index = 0;
 
+    // PresenceVector
+    index += JAUS_BYTE_SIZE_BYTES;
 
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_LEVEL_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
+    }
 
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_VOLTAGE_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
+    }
 
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_CURRENT_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_TEMPERATURE_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_MOTOR_TEMPERATURE_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_MOTOR_RPM_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_ALARMS_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
     return index;
 }

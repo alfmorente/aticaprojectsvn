@@ -193,7 +193,7 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/experimental/reportUSVRemoteControl2Message.c \
 		./src/message/experimental/usvInfo3Message.c \
 		./src/message/experimental/ugvInfo12Message.c \
-		./src/message/experimental/aditionalGPSINSInfo4Message.c \
+		./src/message/experimental/additionalGPSINSInfo4Message.c \
 		./src/message/experimental/anemometerInfo5Message.c \
 		./src/message/experimental/scpmInfo6Message.c \
 		./src/message/experimental/setUSVObservationsConfig7Message.c \
@@ -404,7 +404,7 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportUSVRemoteControl2Message.o \
 		./Build/usvInfo3Message.o \
 		./Build/ugvInfo12Message.o \
-		./Build/aditionalGPSINSInfo4Message.o \
+		./Build/additionalGPSINSInfo4Message.o \
 		./Build/anemometerInfo5Message.o \
 		./Build/scpmInfo6Message.o \
 		./Build/setUSVObservationsConfig7Message.o \
@@ -1013,8 +1013,8 @@ $(TARGET) : $(OBJECTS)
 ./Build/ugvInfo12Message.o: ./src/message/experimental/ugvInfo12Message.c
 	gcc $(CCFLAGS) -o ./Build/ugvInfo12Message.o ./src/message/experimental/ugvInfo12Message.c
 
-./Build/aditionalGPSINSInfo4Message.o: ./src/message/experimental/aditionalGPSINSInfo4Message.c
-	gcc $(CCFLAGS) -o ./Build/aditionalGPSINSInfo4Message.o ./src/message/experimental/aditionalGPSINSInfo4Message.c
+./Build/additionalGPSINSInfo4Message.o: ./src/message/experimental/additionalGPSINSInfo4Message.c
+	gcc $(CCFLAGS) -o ./Build/additionalGPSINSInfo4Message.o ./src/message/experimental/additionalGPSINSInfo4Message.c
 	
 ./Build/anemometerInfo5Message.o: ./src/message/experimental/anemometerInfo5Message.c
 	gcc $(CCFLAGS) -o ./Build/anemometerInfo5Message.o ./src/message/experimental/anemometerInfo5Message.c

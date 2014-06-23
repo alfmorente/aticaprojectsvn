@@ -46,6 +46,16 @@
 
 #include "jaus.h"
 
+#ifndef  JAUS_12_PV 
+#define  JAUS_12_PV_BATTERY_LEVEL_BIT                                   0
+#define  JAUS_12_PV_BATTERY_VOLTAGE_BIT                                 1
+#define  JAUS_12_PV_BATTERY_CURRENT_BIT                                 2
+#define  JAUS_12_PV_BATTERY_TEMPERATURE_BIT                             3
+#define  JAUS_12_PV_MOTOR_TEMPERATURE_BIT                               4
+#define  JAUS_12_PV_MOTOR_RPM_BIT                                       5
+#define  JAUS_12_PV_ALARMS_BIT                                          6
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,12 +95,17 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
+        
+        // PRESENCE VECTOR
+  JausByte presenceVector; 
 	
-  JausDouble nivelDeBateria;                  // Scaled Short (0,100), Res: 0.3945
-  JausDouble tensionBateria;                  // Scaled Byte (0,24), Res: 0.1
-  JausDouble temperaturaMotor;                // Scaled Short (0,400), Res: 0.006
-  JausDouble rpmMotor;                        // Scaled Short (-5000,5000): 0.15
-  JausDouble alarmas;                         // Scaled Short POR DEFINIR!!
+  JausDouble battery_level;                  // Scaled Short (0,100), Res: 0.3945
+  JausDouble battery_voltage;                  // Scaled Byte (0,24), Res: 0.1
+  JausDouble battery_current;                     // Scaled Short (0,300), Res:0.004
+  JausDouble battery_temperature;               // Scaled Short (0,400), Res: 0.006
+  JausDouble motor_temperature;                // Scaled Short (0,400), Res: 0.006
+  JausDouble motor_rpm;                        // Scaled Short (-5000,5000): 0.15
+  JausDouble alarms;                         // Scaled Short POR DEFINIR!!
 
 
 }UGVInfo12MessageStruct;

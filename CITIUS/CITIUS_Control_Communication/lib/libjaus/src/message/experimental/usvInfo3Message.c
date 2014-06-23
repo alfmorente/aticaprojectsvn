@@ -328,22 +328,52 @@ static int dataToString(USVInfo3Message message, char **buf) {
 static unsigned int dataSize(USVInfo3Message message) {
     int index = 0;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    // PresenceVector
+    index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
 
-    index += JAUS_BYTE_SIZE_BYTES;
-    index += JAUS_BYTE_SIZE_BYTES;
-    index += JAUS_BYTE_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RUDDER_ANGLE_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RPM_M1_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
-    index += JAUS_BYTE_SIZE_BYTES;
-    index += JAUS_BYTE_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ACTIVE_RPM_M2_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
-    index += JAUS_SHORT_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_FUEL_LEVEL_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
 
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_PRESSURE_M1_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_PRESSURE_M2_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_TEMPERATURE_M1_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_TEMPERATURE_M2_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_VOLTAGE_M1_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_VOLTAGE_M2_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_3_PV_ALARMS_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
     return index;
 }
 

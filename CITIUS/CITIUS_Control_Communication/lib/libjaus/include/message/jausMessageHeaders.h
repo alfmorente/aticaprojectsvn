@@ -218,7 +218,7 @@
 #include "experimental/reportUSVRemoteControl2Message.h"
 #include "experimental/usvInfo3Message.h" 
 #include "experimental/ugvInfo12Message.h" 
-#include "experimental/aditionalGPSINSInfo4Message.h" 
+#include "experimental/additionalGPSINSInfo4Message.h" 
 #include "experimental/anemometerInfo5Message.h" 
 #include "experimental/scpmInfo6Message.h" 
 #include "experimental/setUSVObservationsConfig7Message.h" 

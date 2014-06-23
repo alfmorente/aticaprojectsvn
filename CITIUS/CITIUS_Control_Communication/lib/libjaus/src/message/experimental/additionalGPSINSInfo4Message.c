@@ -67,19 +67,21 @@ static unsigned int dataSize(AditionalGPSINSInfo4Message message);
 
 static void dataInitialize(AditionalGPSINSInfo4Message message) {
     // Set initial values of message fields
+    
+    message ->presenceVector = newJaussHORT(JAUS_SHORT_PRESENCE_VECTOR_ALL_ON);
 
-    message -> aceleracionLongitudinal = newJausDouble(0); // Scaled Int (-65534,65534), Res: 3e-5
-    message -> aceleracionLateral = newJausDouble(0); // Scaled Int (-65534,65534), Res: 3e-5
-    message -> aceleracionVertical = newJausDouble(0); // Scaled Int (-65534,65534), Res: 3e-5
-    message -> estadoDelGPSINS = newJausByte(0); // Scaled Byte (0,10), Enum
-    message -> calidadDeLaMedida0 = newJausDouble(0); // Scaled Short (0,100), Res:  0.3906
+    message -> longitudinal_acc = newJausDouble(0); // Scaled Int (-65534,65534), Res: 3e-5
+    message -> lateral_acc = newJausDouble(0); // Scaled Int (-65534,65534), Res: 3e-5
+    message -> vertical_acc = newJausDouble(0); // Scaled Int (-65534,65534), Res: 3e-5
+    message -> gpsins_status = newJausByte(0); // Scaled Byte (0,10), Enum
+    /*message -> calidadDeLaMedida0 = newJausDouble(0); // Scaled Short (0,100), Res:  0.3906
     message -> calidadDeLaMedida1 = newJausDouble(0); // Scaled Short (0,100), Res:  0.3906
-    message -> calidadDeLaMedida2 = newJausDouble(0); // Scaled Short (0,100), Res:  0.3906
-    message -> desviacionEstantarEnLatitud = newJausDouble(0); // Scaled Short (0,1000), Res:  0.0153
-    message -> desviacionEstantarEnLongitud = newJausDouble(0); // Scaled Short (0,1000), Res:  0.0153
-    message -> desviacionEstantarEnAltura = newJausDouble(0); // Scaled Short (0,1000), Res:  0.0153
-    message -> correccionDGPS = JAUS_FALSE;
-    message -> gpsINSDisponible = JAUS_FALSE;
+    message -> calidadDeLaMedida2 = newJausDouble(0); // Scaled Short (0,100), Res:  0.3906*/
+    message -> st_lat_deviation = newJausDouble(0); // Scaled Short (0,1000), Res:  0.0153
+    message -> st_lon_deviation = newJausDouble(0); // Scaled Short (0,1000), Res:  0.0153
+    message -> st_alt_deviation = newJausDouble(0); // Scaled Short (0,1000), Res:  0.0153
+    message -> dgps_corrections = JAUS_FALSE;
+    message -> gpsins_availability = JAUS_FALSE;
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -99,31 +101,81 @@ static JausBoolean dataFromBuffer(AditionalGPSINSInfo4Message message, unsigned 
     JausInteger tempInt = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-
-        if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
+        
+        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
+        if (!jausShortFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_INTEGER_SIZE_BYTES;
-        message->aceleracionLongitudinal = jausIntegerToDouble(tempInt, -65534, 65534);
 
-        if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_INTEGER_SIZE_BYTES;
-        message->aceleracionLateral = jausIntegerToDouble(tempInt, -65534, 65534);
+        //Se suma tamaño del Presence Vector
+        index += JAUS_SHORT_SIZE_BYTES;
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_LONGITUDINAL_ACC_BIT)) {
+            if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_INTEGER_SIZE_BYTES;
+            message->longitudinal_acc = jausIntegerToDouble(tempInt, -65534, 65534);
+        }
 
-        if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_INTEGER_SIZE_BYTES;
-        message->aceleracionVertical = jausIntegerToDouble(tempInt, -65534, 65534);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_LATERAL_ACC_BIT)) {
+            if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_INTEGER_SIZE_BYTES;
+            message->lateral_acc = jausIntegerToDouble(tempInt, -65534, 65534);
+        }
 
-        if (!jausByteFromBuffer(&message->estadoDelGPSINS, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_VERTICAL_ACC_BIT)) {
+            if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_INTEGER_SIZE_BYTES;
+            message->vertical_acc = jausIntegerToDouble(tempInt, -65534, 65534);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_GPSINS_STATUS_BIT)) {
+            if (!jausByteFromBuffer(&message->gpsins_status, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+            message->gpsins_status = jausByteToByte(tempInt, 0, 10); // ?????????????????
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_LAT_DEVIATION_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->st_lat_deviation = jausShortToDouble(tempShort, 0, 1000);
+        }
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_LON_DEVIATION_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->st_lon_deviation = jausShortToDouble(tempShort, 0, 1000);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_ALT_DEVIATION_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->st_alt_deviation = jausShortToDouble(tempShort, 0, 1000);
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_DGPS_CORRECTIONS_BIT) || jausByteIsBitSet(message->presenceVector, JAUS_4_PV_GPSINS_AVAILABILITY_BIT)) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+
+            message->dgps_corrections = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+            message->gpsins_availability = jausByteIsBitSet(tempByte, 1) ? JAUS_TRUE : JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+
+
+        /*if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
         //Se suma tamaño del parámetro
         index += JAUS_SHORT_SIZE_BYTES;
@@ -137,30 +189,8 @@ static JausBoolean dataFromBuffer(AditionalGPSINSInfo4Message message, unsigned 
             return JAUS_FALSE;
         //Se suma tamaño del parámetro
         index += JAUS_SHORT_SIZE_BYTES;
-        message->calidadDeLaMedida2 = jausShortToDouble(tempShort, 0, 100);
+        message->calidadDeLaMedida2 = jausShortToDouble(tempShort, 0, 100);*/
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->desviacionEstantarEnLatitud = jausShortToDouble(tempShort, 0, 1000);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->desviacionEstantarEnLongitud = jausShortToDouble(tempShort, 0, 1000);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->desviacionEstantarEnAltura = jausShortToDouble(tempShort, 0, 1000);
-
-        //Se desempaqueta el Byte completo que guarda los distintos booleanos.
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-
-        message->correccionDGPS = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
-        message->gpsINSDisponible = jausByteIsBitSet(tempByte, 1) ? JAUS_TRUE : JAUS_FALSE;
 
         return JAUS_TRUE;
     } else {
@@ -177,25 +207,75 @@ static int dataToBuffer(AditionalGPSINSInfo4Message message, unsigned char *buff
     JausInteger tempInt = 0; //Variable temporal para desempaquetar
     
     if (bufferSizeBytes >= dataSize(message)) {
+        
+        //Se empaqueta el Presence Vector
+        if (!jausShortToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
+            return JAUS_FALSE;
 
-        tempInt = jausIntegerFromDouble(message->aceleracionLongitudinal, -65534, 65534);
-        if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_INTEGER_SIZE_BYTES;
-        tempInt = jausIntegerFromDouble(message->aceleracionLateral, -65534, 65534);
-        if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_INTEGER_SIZE_BYTES;
-        tempInt = jausIntegerFromDouble(message->aceleracionVertical, -65534, 65534);
-        if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_INTEGER_SIZE_BYTES;
+        //Se suma tamaño del presence Vector
+        index += JAUS_SHORT_SIZE_BYTES;
 
-        if (!jausByteToBuffer(message->estadoDelGPSINS, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_LONGITUDINAL_ACC_BIT)) {
+            tempInt = jausIntegerFromDouble(message->longitudinal_acc, -65534, 65534);
+            if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_INTEGER_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->calidadDeLaMedida0, 0, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_LATERAL_ACC_BIT)) {
+            tempInt = jausIntegerFromDouble(message->lateral_acc, -65534, 65534);
+            if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_INTEGER_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_VERTICAL_ACC_BIT)) {
+            tempInt = jausIntegerFromDouble(message->vertical_acc, -65534, 65534);
+            if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_INTEGER_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_GPSINS_STATUS_BIT)) {
+            if (!jausByteToBuffer(message->gpsins_status, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_LAT_DEVIATION_BIT)) {
+            tempShort = jausShortFromDouble(message->st_lat_deviation, 0, 1000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_LON_DEVIATION_BIT)) {
+            tempShort = jausShortFromDouble(message->st_lon_deviation, 0, 1000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_ALT_DEVIATION_BIT)) {
+            tempShort = jausShortFromDouble(message->st_alt_deviation, 0, 1000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_DGPS_CORRECTIONS_BIT) || jausByteIsBitSet(message->presenceVector, JAUS_4_PV_GPSINS_AVAILABILITY_BIT)) {
+            tempByte = 0;
+
+            if (message->dgps_corrections) jausByteSetBit(&tempByte, 0);
+            if (message->gpsins_availability) jausByteSetBit(&tempByte, 1);
+            //pack
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        
+
+
+        /*tempShort = jausShortFromDouble(message->calidadDeLaMedida0, 0, 100);
         if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
         index += JAUS_SHORT_SIZE_BYTES;
@@ -208,31 +288,10 @@ static int dataToBuffer(AditionalGPSINSInfo4Message message, unsigned char *buff
         tempShort = jausShortFromDouble(message->calidadDeLaMedida2, 0, 100);
         if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        index += JAUS_SHORT_SIZE_BYTES;*/
 
-        tempShort = jausShortFromDouble(message->desviacionEstantarEnLatitud, 0, 1000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
 
-        tempShort = jausShortFromDouble(message->desviacionEstantarEnLongitud, 0, 1000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
 
-        tempShort = jausShortFromDouble(message->desviacionEstantarEnAltura, 0, 1000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-
-        tempByte = 0;
-
-        if (message->correccionDGPS) jausByteSetBit(&tempByte, 0);
-        if (message->gpsINSDisponible) jausByteSetBit(&tempByte, 1);
-
-        //pack
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
     }
 
     return index;
@@ -269,22 +328,53 @@ static int dataToString(AditionalGPSINSInfo4Message message, char **buf) {
 
 static unsigned int dataSize(AditionalGPSINSInfo4Message message) {
     int index = 0;
-
-    index += JAUS_INTEGER_SIZE_BYTES;
-    index += JAUS_INTEGER_SIZE_BYTES;
-    index += JAUS_INTEGER_SIZE_BYTES;
-
-    index += JAUS_BYTE_SIZE_BYTES;
-
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    //Presence vector
     index += JAUS_SHORT_SIZE_BYTES;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_LONGITUDINAL_ACC_BIT)) {
+        index += JAUS_INTEGER_SIZE_BYTES;
 
-    index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_LATERAL_ACC_BIT)) {
+        index += JAUS_INTEGER_SIZE_BYTES;
+
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_VERTICAL_ACC_BIT)) {
+        index += JAUS_INTEGER_SIZE_BYTES;
+
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_GPSINS_STATUS_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_LAT_DEVIATION_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_LON_DEVIATION_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_ST_ALT_DEVIATION_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_4_PV_DGPS_CORRECTIONS_BIT) || jausByteIsBitSet(message->presenceVector, JAUS_4_PV_GPSINS_AVAILABILITY_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+
+    /*index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_SHORT_SIZE_BYTES;*/
+
 
     return index;
 }

@@ -204,8 +204,11 @@ static int dataToString(ReportSignalingElements25Message message, char **buf) {
 
 static unsigned int dataSize(ReportSignalingElements25Message message) {
     int index = 0;
+    
+    // PresenceVector
+    index += JAUS_BYTE_SIZE_BYTES;
 
-    index += JAUS_INTEGER_SIZE_BYTES;
+    index += JAUS_BYTE_SIZE_BYTES;
 
     return index;
 }

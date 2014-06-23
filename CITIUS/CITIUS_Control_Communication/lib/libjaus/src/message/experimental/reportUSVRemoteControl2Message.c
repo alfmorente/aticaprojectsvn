@@ -286,16 +286,44 @@ static int dataToString(ReportUSVRemoteControl2Message message, char **buf) {
 static unsigned int dataSize(ReportUSVRemoteControl2Message message) {
     int index = 0;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    // PresenceVector
+    index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
 
-    index += JAUS_BYTE_SIZE_BYTES;
-    index += JAUS_BYTE_SIZE_BYTES;
-    index += JAUS_BYTE_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_DIRECTION_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RPM_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RUDDER_ANGLE_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M1_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M2_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RUDDER_ANGLE_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
 
     return index;
 }
