@@ -82,8 +82,17 @@
 #define JAUS_MANIPULATOR_JOINT_MOVE_DRIVER 					58
 #define JAUS_MANIPULATOR_END_EFFECTOR_DISCRETE_POSE_DRIVER 	59
 #define JAUS_WORLD_MODEL_VECTOR_KNOWLEDGE_STORE				61
-#define JAUS_WORLD_MODEL_VECTOR_KNOWLEDGE_STORE				61
-#define JAUS_PLATFORM_SENSOR    62
+
+/*******************************************************************************
+        CITIUS: Componentes propios
+ *              - PLATFORM SENSOR: ID-> 62
+ *              - HEARTBEAT INFORMATION -> 63
+ * 
+ ******************************************************************************/
+#define JAUS_PLATFORM_SENSOR                                            62
+#define JAUS_HEARTBEAT_INFORMATION                                      63
+/* ************************************************************************** */
+
 #define JAUS_EXPERIMENTAL   99
 #define COMPONENT_TIMEOUT_SEC 3.0
 

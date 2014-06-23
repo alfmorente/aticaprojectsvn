@@ -46,11 +46,13 @@
 
 #include "jaus.h"
 
-#ifndef   JAUS_18_PV 
+#ifndef  JAUS_18_PV 
 #define  JAUS_18_PV_LUCES_CORTAS_BIT    		0
-#define  JAUS_18_PV_INTERMITENTE_IZQUIERDA_BIT    	1
-#define  JAUS_18_PV_INTERMITENTE_DERECHA_BIT    	2
-#define  JAUS_18_PV_CLAXON_BIT    			3
+#define  JAUS_18_PV_LUCES_POSICION_BIT                  1
+#define  JAUS_18_PV_LUCES_LARGAS_BIT                    2
+#define  JAUS_18_PV_INTERMITENTE_IZQUIERDA_BIT    	3
+#define  JAUS_18_PV_INTERMITENTE_DERECHA_BIT    	4
+#define  JAUS_18_PV_CLAXON_BIT    			5
 #endif
 
 typedef struct
@@ -97,6 +99,8 @@ typedef struct
   // MESSAGE DATA MEMBERS GO HERE
 	
   JausBoolean lucesCortas;
+  JausBoolean lucesPosicion;
+  JausBoolean lucesLargas;
   JausBoolean intermitenteIzquierda;
   JausBoolean intermitenteDerecha;
   JausBoolean claxon;

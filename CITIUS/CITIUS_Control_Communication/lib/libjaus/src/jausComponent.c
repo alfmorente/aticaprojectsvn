@@ -169,7 +169,7 @@ char *jausComponentGetTypeString(JausComponent component) {
         case JAUS_LOCAL_PATH_SEGMENT_DRIVER:
             return "LocalPathSegmentDriver";
         case JAUS_PRIMITIVE_MANIPULATOR:
-            return "PrimativeManipulator";
+            return "PrimitiveManipulator";
         case JAUS_MANIPULATOR_JOINT_POSITION_SENSOR:
             return "ManipulatorJointPositionSensor";
         case JAUS_MANIPULATOR_JOINT_VELOCITY_SENSOR:
@@ -190,6 +190,21 @@ char *jausComponentGetTypeString(JausComponent component) {
             return "ManipulatorEndEffectorDiscretePoseDriver";
         case JAUS_VISUAL_SENSOR:
             return "VisualSensor";
+/*******************************************************************************
+        CITIUS: Componentes propios y omitidos
+ *              - PLATFORM SENSOR
+ *              - HEARTBEAT INFORMATION
+ *              - MISSION SPOOLER
+ * 
+ ******************************************************************************/
+        case JAUS_PLATFORM_SENSOR:
+            return "PlatformSensor";
+        case JAUS_MISSION_SPOOLER:
+            return "MissionSpooler";
+        case JAUS_HEARTBEAT_INFORMATION:
+            return "HeartBeatInformation";
+/* ************************************************************************** */
+            
         case JAUS_RANGE_SENSOR:
             return "RangeSensor";
         case JAUS_EXPERIMENTAL:

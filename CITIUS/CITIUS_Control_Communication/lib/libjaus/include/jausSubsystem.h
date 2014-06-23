@@ -49,6 +49,18 @@
 
 #define SUBSYSTEM_TIMEOUT_SEC 5.0
 
+/*******************************************************************************
+        CITIUS: Identificadores de subsistemas presentes en la arquitectura
+ *              - Subsystem 'MyC' -> ID = 1
+ *              - Subsystem 'UGV' -> ID = 2
+ *              - Subsystem 'USV' -> ID = 3
+ * 
+ ******************************************************************************/
+#define JAUSSUBSYTEM_ID_MYC 1
+#define JAUSSUBSYTEM_ID_USV 2
+#define JAUSSUBSYTEM_ID_UGV 3
+/* ************************************************************************** */
+
 typedef struct
 {
 	char *identification;
