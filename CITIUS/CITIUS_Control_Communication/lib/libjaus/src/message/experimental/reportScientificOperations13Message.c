@@ -67,15 +67,17 @@ static unsigned int dataSize(ReportScientificOperations13Message message);
 
 static void dataInitialize(ReportScientificOperations13Message message) {
     
-    message -> valorVelocidadSonido = newJausDouble(0); // Scaled Short (0,3000),   Res: 0.05
-    message -> valorCorriente = newJausDouble(0); // Scaled Short (0,250),    Res: 1.0
-    message -> profundidadDeLaMedida = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
-    message -> direccionDeLaCorriente = newJausDouble(0); // Scaled Short (0,360),    Res: 0.005
-    message -> velocidadDelSonidoDeAgua = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
-    message -> profundidadDeLaMedidaAgua = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
-    message -> idContacto = newJausByte(0); // ENUM NO DEFINIDO!!
-    message -> demoraContacto = newJausDouble(0); // Scaled Short (-180,180), Res: 0.005
-    message -> distanciaContacto = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
+    message ->presenceVector = newJausShort(JAUS_SHORT_PRESENCE_VECTOR_ALL_ON);
+    
+    message -> sound_speed = newJausDouble(0); // Scaled Short (0,3000),   Res: 0.05
+    message -> flow_value = newJausDouble(0); // Scaled Short (0,250),    Res: 1.0
+    message -> flow_depth = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
+    message -> flow_direction = newJausDouble(0); // Scaled Short (0,360),    Res: 0.005
+    message -> water_sound_speed = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
+    message -> water_sound_depth = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
+    message -> contact_id = newJausByte(0); // ENUM NO DEFINIDO!!
+    message -> contact_delay = newJausDouble(0); // Scaled Short (-180,180), Res: 0.005
+    message -> contact_distance = newJausDouble(0); // Scaled Short (0,10000),  Res: 0.15
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -94,53 +96,83 @@ static JausBoolean dataFromBuffer(ReportScientificOperations13Message message, u
 
     if (bufferSizeBytes == message->dataSize) {
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
+        if (!jausShortFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->valorVelocidadSonido = jausShortToDouble(tempShort, 0, 3000);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->valorCorriente = jausShortToDouble(tempShort, 0, 250);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->profundidadDeLaMedida = jausShortToDouble(tempShort, 0, 10000);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->direccionDeLaCorriente = jausShortToDouble(tempShort, 0, 360);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->velocidadDelSonidoDeAgua = jausShortToDouble(tempShort, 0, 10000);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->profundidadDeLaMedidaAgua = jausShortToDouble(tempShort, 0, 10000);
 
-        if (!jausByteFromBuffer(&message->idContacto, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_BYTE_SIZE_BYTES;
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
+        //Se suma tamaño del Presence Vector
         index += JAUS_SHORT_SIZE_BYTES;
-        message->demoraContacto = jausShortToDouble(tempShort, -180, 180);
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->distanciaContacto = jausShortToDouble(tempShort, 0, 10000);
 
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_SOUND_SPEED_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->sound_speed = jausShortToDouble(tempShort, 0, 3000);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_VALUE_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->flow_value = jausShortToDouble(tempShort, 0, 250);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_DEPTH_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->flow_depth = jausShortToDouble(tempShort, 0, 10000);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_DIRECTION_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->flow_direction = jausShortToDouble(tempShort, 0, 360);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_WATER_SOUND_SPEED_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->water_sound_speed = jausShortToDouble(tempShort, 0, 10000);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_WATER_SOUND_DEPTH_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->water_sound_depth = jausShortToDouble(tempShort, 0, 10000);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_ID_BIT)) {
+            if (!jausByteFromBuffer(&message->contact_id, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_DELAY_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->contact_delay = jausShortToDouble(tempShort, -180, 180);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_DISTANCE_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->contact_distance = jausShortToDouble(tempShort, 0, 10000);
+        }
 
         return JAUS_TRUE;
     } else {
@@ -155,43 +187,75 @@ static int dataToBuffer(ReportScientificOperations13Message message, unsigned ch
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-        tempShort = jausShortFromDouble(message->valorVelocidadSonido, 0, 3000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+        
+         //Se empaqueta el Presence Vector
+        if (!jausShortToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-        tempShort = jausShortFromDouble(message->valorCorriente, 0, 250);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-        tempShort = jausShortFromDouble(message->profundidadDeLaMedida, 0, 10000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-        tempShort = jausShortFromDouble(message->direccionDeLaCorriente, 0, 360);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-        tempShort = jausShortFromDouble(message->velocidadDelSonidoDeAgua, 0, 10000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-        tempShort = jausShortFromDouble(message->profundidadDeLaMedidaAgua, 0, 10000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
+
+        //Se suma tamaño del presence Vector
         index += JAUS_SHORT_SIZE_BYTES;
 
-        if (!jausByteToBuffer(message->idContacto, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_SOUND_SPEED_BIT)) {
+            tempShort = jausShortFromDouble(message->sound_speed, 0, 3000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->demoraContacto, -180, 180);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-        tempShort = jausShortFromDouble(message->distanciaContacto, 0, 10000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_VALUE_BIT)) {
+            tempShort = jausShortFromDouble(message->flow_value, 0, 250);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_DEPTH_BIT)) {
+            tempShort = jausShortFromDouble(message->flow_depth, 0, 10000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_DIRECTION_BIT)) {
+            tempShort = jausShortFromDouble(message->flow_direction, 0, 360);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_WATER_SOUND_SPEED_BIT)) {
+            tempShort = jausShortFromDouble(message->water_sound_speed, 0, 10000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_WATER_SOUND_DEPTH_BIT)) {
+            tempShort = jausShortFromDouble(message->water_sound_depth, 0, 10000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_ID_BIT)) {
+            if (!jausByteToBuffer(message->contact_id, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_DELAY_BIT)) {
+            tempShort = jausShortFromDouble(message->contact_delay, -180, 180);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_DISTANCE_BIT)) {
+            tempShort = jausShortFromDouble(message->contact_distance, 0, 10000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
     }
 
@@ -231,16 +295,44 @@ static unsigned int dataSize(ReportScientificOperations13Message message) {
     int index = 0;
 
     index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
 
-    index += JAUS_BYTE_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_SOUND_SPEED_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_VALUE_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_DEPTH_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_FLOW_DIRECTION_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_WATER_SOUND_SPEED_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_WATER_SOUND_DEPTH_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_ID_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_DELAY_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_13_PV_CONTACT_DISTANCE_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+
 
     return index;
 }

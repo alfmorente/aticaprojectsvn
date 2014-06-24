@@ -66,16 +66,14 @@ static unsigned int dataSize(HeartbeatChannelState16Message message);
 // Initializes the message-specific fields
 
 static void dataInitialize(HeartbeatChannelState16Message message) {
+    
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> identificadorDeNodoOut = newJausByte(0); //Enum (1,4)
-    message -> estadoDelCanalPrimarioOut = newJausByte(0); //Enum (1,3)
-    message -> estadoDelCanalDeBackUpOut = newJausByte(0); //Enum (1,3)
-    message -> snrOut = newJausDouble(0); // Scaled Short (0,70), Res: 0.001
-    message -> identificadorDeNodoIn = newJausByte(0); //Enum (1,4)
-    message -> estadoDelCanalPrimarioIn = newJausByte(0); //Enum (1,3)
-    message -> estadoDelCanalDeBackUpIn = newJausByte(0); //Enum (1,3)
-    message -> snrIn = newJausDouble(0); // Scaled Short (0,70), Res: 0.001
+    message -> node_id = newJausByte(0); //Enum (1,4)
+    message -> primary_channel_status = newJausByte(0); //Enum (1,3)
+    message -> backup_channel_status = newJausByte(0); //Enum (1,3)
+    message -> primary_channel_snr = newJausDouble(0); // Scaled Short (0,70), Res: 0.001
+    message -> backup_channel_snr = newJausDouble(0); // Scaled Short (0,70), Res: 0.001
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -101,66 +99,44 @@ static JausBoolean dataFromBuffer(HeartbeatChannelState16Message message, unsign
 
         //OUT.
         //Desempaquetar el campo.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_IDENFITICADOR_DE_NODO_OUT_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_NODE_ID_BIT)) {
             //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->identificadorDeNodoOut, buffer + index, bufferSizeBytes - index))
+            if (!jausByteFromBuffer(&message->node_id, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_OUT_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_STATUS_BIT)) {
             //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->estadoDelCanalPrimarioOut, buffer + index, bufferSizeBytes - index))
+            if (!jausByteFromBuffer(&message->primary_channel_status, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_OUT_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_STATUS_BIT)) {
             //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->estadoDelCanalDeBackUpOut, buffer + index, bufferSizeBytes - index))
+            if (!jausByteFromBuffer(&message->backup_channel_status, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_SNR_OUT_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_SNR_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->snrOut = jausShortToDouble(tempShort, 0, 70);
+            message->primary_channel_snr = jausShortToDouble(tempShort, 0, 70);
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_SNR_BIT)) {
+            //Se desempaqueta el parámetro temperature
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->backup_channel_snr = jausShortToDouble(tempShort, 0, 70);
         }
 
-        //IN.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_IDENFITICADOR_DE_NODO_IN_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->identificadorDeNodoIn, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_IN_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->estadoDelCanalPrimarioIn, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_IN_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->estadoDelCanalDeBackUpIn, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_SNR_IN_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->snrIn = jausShortToDouble(tempShort, 0, 70);
-        }
         return JAUS_TRUE;
     } else {
         return JAUS_FALSE;
@@ -182,50 +158,34 @@ static int dataToBuffer(HeartbeatChannelState16Message message, unsigned char *b
         index += JAUS_BYTE_SIZE_BYTES;
 
         //OUT
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_IDENFITICADOR_DE_NODO_OUT_BIT)) {
-            if (!jausByteToBuffer(message->identificadorDeNodoOut, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_NODE_ID_BIT)) {
+            if (!jausByteToBuffer(message->node_id, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_OUT_BIT)) {
-            if (!jausByteToBuffer(message->estadoDelCanalPrimarioOut, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_STATUS_BIT)) {
+            if (!jausByteToBuffer(message->primary_channel_status, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_OUT_BIT)) {
-            if (!jausByteToBuffer(message->estadoDelCanalDeBackUpOut, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_STATUS_BIT)) {
+            if (!jausByteToBuffer(message->backup_channel_status, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_SNR_OUT_BIT)) {
-            tempShort = jausShortFromDouble(message->snrOut, 0, 70);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_SNR_BIT)) {
+            tempShort = jausShortFromDouble(message->primary_channel_snr, 0, 70);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_SNR_BIT)) {
+            tempShort = jausShortFromDouble(message->backup_channel_snr, 0, 70);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
 
-        //IN
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_IDENFITICADOR_DE_NODO_IN_BIT)) {
-            if (!jausByteToBuffer(message->identificadorDeNodoIn, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_IN_BIT)) {
-            if (!jausByteToBuffer(message->estadoDelCanalPrimarioIn, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_IN_BIT)) {
-            if (!jausByteToBuffer(message->estadoDelCanalDeBackUpIn, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_SNR_IN_BIT)) {
-            tempShort = jausShortFromDouble(message->snrIn, 0, 70);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
     }
 
     return index;
@@ -264,33 +224,21 @@ static unsigned int dataSize(HeartbeatChannelState16Message message) {
     int index = 0;
     index += JAUS_BYTE_SIZE_BYTES;
 
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_IDENFITICADOR_DE_NODO_OUT_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_NODE_ID_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_OUT_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_STATUS_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_OUT_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_STATUS_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_SNR_OUT_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_SNR_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-
-    //IN
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_IDENFITICADOR_DE_NODO_IN_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_IN_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_IN_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_SNR_IN_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_SNR_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-
     return index;
 }
 

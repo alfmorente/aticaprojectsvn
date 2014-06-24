@@ -68,11 +68,11 @@ static unsigned int dataSize(HeartbeatPositionInfo17Message message);
 static void dataInitialize(HeartbeatPositionInfo17Message message) {
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> latitud = newJausDouble(0); // Scaled Int (-90, 90), Res: 4e-8
-    message -> longitud = newJausDouble(0); // Scaled Int (-180, 180), Res: 8e-8
-    message -> altitud = newJausDouble(0); // Scaled Int (-10000, 35000), Res: 1e-5
+    message -> latitude = newJausDouble(0); // Scaled Int (-90, 90), Res: 4e-8
+    message -> longitude = newJausDouble(0); // Scaled Int (-180, 180), Res: 8e-8
+    message -> altitude = newJausDouble(0); // Scaled Int (-10000, 35000), Res: 1e-5
     message -> heading = newJausDouble(0); // Scaled Short (-JAUS_PI, JAUS_PI), Res: 1e-5
-    message -> velocidadActual = newJausDouble(0); // Scaled Short (0,10000), Res: 0.1526
+    message -> speed = newJausDouble(0); // Scaled Short (0,10000), Res: 0.1526
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 
@@ -100,29 +100,29 @@ static JausBoolean dataFromBuffer(HeartbeatPositionInfo17Message message, unsign
         index += JAUS_BYTE_SIZE_BYTES;
 
         //Desempaquetar el campo.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LATITUD_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LATITUDE_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_INTEGER_SIZE_BYTES;
-            message->latitud = jausIntegerToDouble(tempInt, -90, 90);
+            message->latitude = jausIntegerToDouble(tempInt, -90, 90);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LONGITUD_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LONGITUDE_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_INTEGER_SIZE_BYTES;
-            message->longitud = jausIntegerToDouble(tempInt, -180, 180);
+            message->longitude = jausIntegerToDouble(tempInt, -180, 180);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_ALTITUD_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_ALTITUDE_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_INTEGER_SIZE_BYTES;
-            message->altitud = jausIntegerToDouble(tempInt, -10000, 35000);
+            message->altitude = jausIntegerToDouble(tempInt, -10000, 35000);
         }
         if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_HEADING_BIT)) {
             //Se desempaqueta el parámetro temperature
@@ -132,13 +132,13 @@ static JausBoolean dataFromBuffer(HeartbeatPositionInfo17Message message, unsign
             index += JAUS_SHORT_SIZE_BYTES;
             message->heading = jausShortToDouble(tempShort, -JAUS_PI, JAUS_PI);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_VELOCIDAD_ACTUAL_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_SPEED_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->velocidadActual = jausShortToDouble(tempShort, 0, 10000);
+            message->speed = jausShortToDouble(tempShort, 0, 10000);
         }
 
         return JAUS_TRUE;
@@ -162,20 +162,20 @@ static int dataToBuffer(HeartbeatPositionInfo17Message message, unsigned char *b
         //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LATITUD_BIT)) {
-            tempInt = jausIntegerFromDouble(message->latitud, -90, 90);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LATITUDE_BIT)) {
+            tempInt = jausIntegerFromDouble(message->latitude, -90, 90);
             if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_INTEGER_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LONGITUD_BIT)) {
-            tempInt = jausIntegerFromDouble(message->longitud, -180, 180);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LONGITUDE_BIT)) {
+            tempInt = jausIntegerFromDouble(message->longitude, -180, 180);
             if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_INTEGER_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_ALTITUD_BIT)) {
-            tempInt = jausIntegerFromDouble(message->altitud, -10000, 35000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_ALTITUDE_BIT)) {
+            tempInt = jausIntegerFromDouble(message->altitude, -10000, 35000);
             if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_INTEGER_SIZE_BYTES;
@@ -186,8 +186,8 @@ static int dataToBuffer(HeartbeatPositionInfo17Message message, unsigned char *b
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_VELOCIDAD_ACTUAL_BIT)) {
-            tempShort = jausShortFromDouble(message->velocidadActual, 0, 10000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_SPEED_BIT)) {
+            tempShort = jausShortFromDouble(message->speed, 0, 10000);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
@@ -231,19 +231,19 @@ static unsigned int dataSize(HeartbeatPositionInfo17Message message) {
     int index = 0;
 
     index += JAUS_BYTE_SIZE_BYTES;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LATITUD_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LATITUDE_BIT)) {
         index += JAUS_INTEGER_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LONGITUD_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_LONGITUDE_BIT)) {
         index += JAUS_INTEGER_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_ALTITUD_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_ALTITUDE_BIT)) {
         index += JAUS_INTEGER_SIZE_BYTES;
     }
     if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_HEADING_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_VELOCIDAD_ACTUAL_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_17_PV_SPEED_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
 

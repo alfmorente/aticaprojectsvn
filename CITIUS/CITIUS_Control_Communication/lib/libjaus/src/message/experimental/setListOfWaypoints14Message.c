@@ -68,13 +68,13 @@ static unsigned int dataSize(SetListOfWaypoints14Message message);
 static void dataInitialize(SetListOfWaypoints14Message message) {
     // Set initial values of message fields
 
-    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
-
-    message -> idListaWaypoints = newJausByte(0); //Scaled Byte (0,255)
-    message -> idWaypoint = newJausByte(0); //Scaled Byte (0,255)
-    message -> latitud = newJausDouble(0); // Scaled Int (-90, 90), Res: 8e-8
-    message -> longitud = newJausDouble(0); // Scaled Int (-180, 180), Res: 8e-8
-    message -> velocidadTramo = newJausDouble(0); // Scaled Short (0,100), Res: 0.0015
+    message -> waypoints_list_id = newJausByte(0); //Scaled Byte (0,255)
+    message -> nof_waypoints = newJausByte(0); //Scaled Byte (0,255)
+    message -> waypoints_ids_list = NULL; //Scaled Byte (0,255)
+    message -> latitudes_list = NULL; // Scaled Int (-90, 90), Res: 8e-8
+    message -> longitudes_list = NULL; // Scaled Int (-180, 180), Res: 8e-8
+    message -> velocities_list = NULL; // Scaled Short (0,100), Res: 0.0015
+    
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -93,61 +93,57 @@ static JausBoolean dataFromBuffer(SetListOfWaypoints14Message message, unsigned 
     JausInteger tempInt = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
-        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
 
-        //Se suma tamaño del Presence Vector
-        index += JAUS_BYTE_SIZE_BYTES;
         //Desempaquetar el campo.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_ID_LISTA_WAYPOINTS_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->idListaWaypoints, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_ID_WAYPOINT_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&message->idWaypoint, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_LATITUD_BIT)) {
-            //Se desempaqueta el parámetro temperature
+        //Se desempaqueta el parámetro temperature
+        if (!jausByteFromBuffer(&message->waypoints_list_id, buffer + index, bufferSizeBytes - index))
+            return JAUS_FALSE;
+        //Se suma tamaño del parámetro
+        index += JAUS_BYTE_SIZE_BYTES;
+        
+        if (!jausByteFromBuffer(&message->nof_waypoints, buffer + index, bufferSizeBytes - index))
+            return JAUS_FALSE;
+        //Se suma tamaño del parámetro
+        index += JAUS_BYTE_SIZE_BYTES;
+        
+        //ID WP
+        message->waypoints_ids_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_BYTE_SIZE_BYTES);
+        memcpy(message->waypoints_ids_list, buffer + index, message->nof_waypoints);
+        index += JAUS_BYTE_SIZE_BYTES * message->nof_waypoints;
+        
+        // LATITUDES WP LIST
+        message->latitudes_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_INTEGER_SIZE_BYTES);
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
             if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
 
             //Se suma tamaño del parámetro
             index += JAUS_INTEGER_SIZE_BYTES;
-
-            message->latitud = jausIntegerToDouble(tempInt, -90, 90);
+            message->latitudes_list[ind] = jausIntegerToDouble(tempInt, -90, 90);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_LONGITUD_BIT)) {
-            //Se desempaqueta el parámetro temperature
+        
+        // LONGITUDES WP LIST
+        message->longitudes_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_INTEGER_SIZE_BYTES);
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
             if (!jausIntegerFromBuffer(&tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
 
             //Se suma tamaño del parámetro
             index += JAUS_INTEGER_SIZE_BYTES;
-
-            message->longitud = jausIntegerToDouble(tempInt, -180, 180);
+            message->longitudes_list[ind] = jausIntegerToDouble(tempInt, -180, 180);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_VELOCIDAD_TRAMO_BIT)) {
-            //Se desempaqueta el parámetro temperature
+        
+        // VELOCITIES WP LIST
+        message->velocities_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_SHORT_SIZE_BYTES);
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
 
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-
-            message->velocidadTramo = jausShortToDouble(tempShort, 0, 100);
+            message->velocities_list[ind] = jausShortToDouble(tempInt, 0, 100);
         }
+
 
         return JAUS_TRUE;
     } else {
@@ -163,41 +159,42 @@ static int dataToBuffer(SetListOfWaypoints14Message message, unsigned char *buff
     JausInteger tempInt = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-        //Se empaqueta el Presence Vector
-        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
 
-        //Se suma tamaño del presence Vector
+        if (!jausByteToBuffer(message->waypoints_list_id, buffer + index, bufferSizeBytes - index))
+            return JAUS_FALSE;
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_ID_LISTA_WAYPOINTS_BIT)) {
-            if (!jausByteToBuffer(message->idListaWaypoints, buffer + index, bufferSizeBytes - index))
+        if (!jausByteToBuffer(message->nof_waypoints, buffer + index, bufferSizeBytes - index))
+            return JAUS_FALSE;
+        index += JAUS_BYTE_SIZE_BYTES;
+        
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
+            if (!jausByteToBuffer(message->waypoints_ids_list[ind], buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_ID_WAYPOINT_BIT)) {
-            if (!jausByteToBuffer(message->idWaypoint, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_LATITUD_BIT)) {
-            tempInt = jausIntegerFromDouble(message->latitud, -90, 90);
+        
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
+            tempInt = jausIntegerFromDouble(message->latitudes_list[ind],-90,90);
             if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_INTEGER_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_LONGITUD_BIT)) {
-            tempInt = jausIntegerFromDouble(message->longitud, -180, 180);
+        
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
+            tempInt = jausIntegerFromDouble(message->longitudes_list[ind],-180,180);
             if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_INTEGER_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_VELOCIDAD_TRAMO_BIT)) {
-            tempShort = jausShortFromDouble(message->velocidadTramo, 0, 100);
+        
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
+            tempShort = jausShortFromDouble(message->velocities_list[ind],0,100);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
+
     }
 
     return index;
@@ -236,17 +233,11 @@ static unsigned int dataSize(SetListOfWaypoints14Message message) {
     int index = 0;
 
     index += JAUS_BYTE_SIZE_BYTES;
-
-    if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_ID_LISTA_WAYPOINTS_BIT))
-        index += JAUS_BYTE_SIZE_BYTES;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_ID_WAYPOINT_BIT))
-        index += JAUS_BYTE_SIZE_BYTES;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_LATITUD_BIT))
-        index += JAUS_INTEGER_SIZE_BYTES;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_LONGITUD_BIT))
-        index += JAUS_INTEGER_SIZE_BYTES;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_14_PV_VELOCIDAD_TRAMO_BIT))
-        index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_BYTE_SIZE_BYTES;
+    index += JAUS_BYTE_SIZE_BYTES * message->nof_waypoints;
+    index += JAUS_INTEGER_SIZE_BYTES * message->nof_waypoints;
+    index += JAUS_INTEGER_SIZE_BYTES * message->nof_waypoints;
+    index += JAUS_SHORT_SIZE_BYTES * message->nof_waypoints;
 
     return index;
 }

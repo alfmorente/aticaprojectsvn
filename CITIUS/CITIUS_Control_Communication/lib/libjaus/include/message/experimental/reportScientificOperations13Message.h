@@ -46,6 +46,18 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_13_PV 
+#define  JAUS_13_PV_SOUND_SPEED_BIT                		0
+#define  JAUS_13_PV_FLOW_VALUE_BIT                              1
+#define  JAUS_13_PV_FLOW_DEPTH_BIT                              2
+#define  JAUS_13_PV_FLOW_DIRECTION_BIT                          3
+#define  JAUS_13_PV_WATER_SOUND_SPEED_BIT               	4
+#define  JAUS_13_PV_WATER_SOUND_DEPTH_BIT    			5
+#define  JAUS_13_PV_CONTACT_ID_BIT                              6
+#define  JAUS_13_PV_CONTACT_DELAY_BIT    			7
+#define  JAUS_13_PV_CONTACT_DISTANCE_BIT    			8
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -84,17 +96,20 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	// MESSAGE DATA MEMBERS GO HERE
+  // PRESENCE VECTOR
+  JausByte presenceVector; 
+  
+// MESSAGE DATA MEMBERS GO HERE
 	
-  JausDouble valorVelocidadSonido;			// Scaled Short (0,3000), Res: 0.05
-  JausDouble valorCorriente;				// Scaled Short (0,250), Res: 1.0
-  JausDouble profundidadDeLaMedida;			// Scaled Short (0,10000), Res: 0.15
-  JausDouble direccionDeLaCorriente;			// Scaled Short (0,360), 0.005
-  JausDouble velocidadDelSonidoDeAgua;			// Scaled Short (0,10000), Res: 0.15
-  JausDouble profundidadDeLaMedidaAgua;			// Scaled Short (0,10000), Res: 0.15
-  JausByte idContacto;				        // ENUM NO DEFINIDO!!
-  JausDouble demoraContacto;				// Scaled Short (-180,180), Res: 0.005
-  JausDouble distanciaContacto;				// Scaled Short (0,10000), Res: 0.15
+  JausDouble sound_speed;			// Scaled Short (0,3000), Res: 0.05
+  JausDouble flow_value;				// Scaled Short (0,250), Res: 1.0
+  JausDouble flow_depth;			// Scaled Short (0,10000), Res: 0.15
+  JausDouble flow_direction;			// Scaled Short (0,360), 0.005
+  JausDouble water_sound_speed;			// Scaled Short (0,10000), Res: 0.15
+  JausDouble water_sound_depth;			// Scaled Short (0,10000), Res: 0.15
+  JausByte contact_id;				        // ENUM NO DEFINIDO!!
+  JausDouble contact_delay;				// Scaled Short (-180,180), Res: 0.005
+  JausDouble contact_distance;				// Scaled Short (0,10000), Res: 0.15
   
 }ReportScientificOperations13MessageStruct;
 

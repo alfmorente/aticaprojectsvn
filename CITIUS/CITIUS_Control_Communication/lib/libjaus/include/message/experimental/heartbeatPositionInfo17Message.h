@@ -47,11 +47,11 @@
 #include "jaus.h"
 
 #ifndef   JAUS_17_PV 
-#define  JAUS_17_PV_LATITUD_BIT    		0
-#define  JAUS_17_PV_LONGITUD_BIT    		1
-#define  JAUS_17_PV_ALTITUD_BIT    		2
+#define  JAUS_17_PV_LATITUDE_BIT    		0
+#define  JAUS_17_PV_LONGITUDE_BIT    		1
+#define  JAUS_17_PV_ALTITUDE_BIT    		2
 #define  JAUS_17_PV_HEADING_BIT    		3
-#define  JAUS_17_PV_VELOCIDAD_ACTUAL_BIT    	4
+#define  JAUS_17_PV_SPEED_BIT                   4
 #endif
 
 
@@ -98,11 +98,11 @@ typedef struct
 
   // MESSAGE DATA MEMBERS GO HERE
 
-  JausDouble latitud;			// Scaled Int (-90, 90), Res: 4e-8
-  JausDouble longitud;			// Scaled Int (-180, 180), Res: 8e-8
-  JausDouble altitud;			// Scaled Int (-10000, 35000), Res: 1e-5
+  JausDouble latitude;			// Scaled Int (-90, 90), Res: 4e-8
+  JausDouble longitude;			// Scaled Int (-180, 180), Res: 8e-8
+  JausDouble altitude;			// Scaled Int (-10000, 35000), Res: 1e-5
   JausDouble heading;			// Scaled Short (-JAUS_PI, JAUS_PI), Res: 1e-5
-  JausDouble velocidadActual;      	// Scaled Short (0,10000), Res: 0.1526
+  JausDouble speed;      	// Scaled Short (0,10000), Res: 0.1526
   
 }HeartbeatPositionInfo17MessageStruct;
 

@@ -47,14 +47,12 @@
 #include "jaus.h"
 
 #ifndef   JAUS_16_PV 
-#define  JAUS_16_PV_IDENFITICADOR_DE_NODO_OUT_BIT    		0
-#define  JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_OUT_BIT    	1
-#define  JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_OUT_BIT    	2
-#define  JAUS_16_PV_SNR_OUT_BIT    				3
-#define  JAUS_16_PV_IDENFITICADOR_DE_NODO_IN_BIT    		4
-#define  JAUS_16_PV_ESTADO_DEL_CANAL_PRIMARIO_IN_BIT    	5
-#define  JAUS_16_PV_ESTADO_DEL_CANAL_DE_BACKUP_IN_BIT    	6
-#define  JAUS_16_PV_SNR_IN_BIT    				7
+#define  JAUS_16_PV_NODE_ID_BIT                         0
+#define  JAUS_16_PV_PRIMARY_CHANNEL_STATUS_BIT    	1
+#define  JAUS_16_PV_BACKUP_CHANNEL_STATUS_BIT    	2
+#define  JAUS_16_PV_PRIMARY_CHANNEL_SNR_BIT    		3
+#define  JAUS_16_PV_BACKUP_CHANNEL_SNR_BIT    		4
+
 #endif
 
 typedef struct
@@ -100,14 +98,12 @@ typedef struct
   
   // MESSAGE DATA MEMBERS GO HERE
   
-  JausByte identificadorDeNodoOut;                         //Enum (1,4)
-  JausByte estadoDelCanalPrimarioOut;                      //Enum (1,3)
-  JausByte estadoDelCanalDeBackUpOut;                      //Enum (1,3)
-  JausDouble snrOut;                                       // Scaled Short (0,70), Res: 0.001
-  JausByte identificadorDeNodoIn;                         //Enum (1,4)
-  JausByte estadoDelCanalPrimarioIn;                      //Enum (1,3)
-  JausByte estadoDelCanalDeBackUpIn;                      //Enum (1,3)
-  JausDouble snrIn;                                       // Scaled Short (0,70), Res: 0.001
+  JausByte node_id;                  //Enum (1,4)
+  JausByte primary_channel_status;   //Enum (1,3)
+  JausByte backup_channel_status;    //Enum (1,3)
+  JausDouble primary_channel_snr;    // Scaled Short (0,70), Res: 0.001
+  JausDouble backup_channel_snr;     // Scaled Short (0,70), Res: 0.001
+
 
 }HeartbeatChannelState16MessageStruct;
 

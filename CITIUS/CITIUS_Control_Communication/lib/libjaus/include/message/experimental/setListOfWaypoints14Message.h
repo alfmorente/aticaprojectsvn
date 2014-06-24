@@ -46,13 +46,6 @@
 
 #include "jaus.h"
 
-#ifndef   JAUS_14_PV 
-#define  JAUS_14_PV_ID_LISTA_WAYPOINTS_BIT    	0
-#define  JAUS_14_PV_ID_WAYPOINT_BIT    	        1
-#define  JAUS_14_PV_LATITUD_BIT    	        2
-#define  JAUS_14_PV_LONGITUD_BIT    		3
-#define  JAUS_14_PV_VELOCIDAD_TRAMO_BIT    	4
-#endif
 
 typedef struct
 {
@@ -95,15 +88,16 @@ typedef struct
 	// MESSAGE DATA MEMBERS GO HERE
 	
   // PRESENCE VECTOR
-  JausByte presenceVector; 	
   
   // Example from ReportGlobalPoseMessage
 
-  JausByte idListaWaypoints;      //Scaled Byte (0,255)
-  JausByte idWaypoint;            //Scaled Byte (0,255)
-  JausDouble latitud;	            // Scaled Int (-90, 90), Res: 4e-8
-  JausDouble longitud;	            // Scaled Int (-180, 180), Res: 8e-8
-  JausDouble velocidadTramo;        // Scaled Short (0,100), Res: 0.0015
+  JausByte waypoints_list_id;      //Scaled Byte (0,255)
+  JausByte nof_waypoints;               //Scaled Byte (0,255)
+  JausByte *waypoints_ids_list;            //Scaled Byte (0,255)
+  JausDouble *latitudes_list;	            // Scaled Int (-90, 90), Res: 4e-8
+  JausDouble *longitudes_list;	            // Scaled Int (-180, 180), Res: 8e-8
+  JausDouble *velocities_list;        // Scaled Short (0,100), Res: 0.0015
+
 
 }SetListOfWaypoints14MessageStruct;
 
