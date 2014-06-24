@@ -66,9 +66,11 @@ static unsigned int dataSize(ReportNightTimeCamera24Message message);
 // Initializes the message-specific fields
 
 static void dataInitialize(ReportNightTimeCamera24Message message) {
+    
+    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> zoomActual = newJausByte(0); // Scaled Byte (0,2)
-    message -> polaridadActual = JAUS_FALSE;
+    message -> active_zoom = newJausByte(0); // Scaled Byte (0,2)
+    message -> active_polarity = JAUS_FALSE;
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -86,18 +88,28 @@ static JausBoolean dataFromBuffer(ReportNightTimeCamera24Message message, unsign
     JausByte tempByte = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-
-        if (!jausByteFromBuffer(&message->zoomActual, buffer + index, bufferSizeBytes - index))
+        
+        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
+        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
+
+        //Se suma tamaño del Presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        tempByte = 0;
-        //Se desempaqueta el Byte completo que guarda los distintos booleanos.
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        message->polaridadActual = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_24_PV_ZOOM_BIT)) {
+            if (!jausByteFromBuffer(&message->active_zoom, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
 
+        if (jausByteIsBitSet(message->presenceVector, JAUS_24_PV_POLARITY_BIT)) {
+            tempByte = 0;
+            //Se desempaqueta el Byte completo que guarda los distintos booleanos.
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            message->active_polarity = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+        }
         return JAUS_TRUE;
     } else {
         return JAUS_FALSE;
@@ -111,16 +123,26 @@ static int dataToBuffer(ReportNightTimeCamera24Message message, unsigned char *b
     JausByte tempByte = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-
-        if (!jausByteToBuffer(message->zoomActual, buffer + index, bufferSizeBytes - index))
+        
+        //Se empaqueta el Presence Vector
+        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
+
+        //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        tempByte = 0;
-        if (message->polaridadActual) jausByteSetBit(&tempByte, 0);
-        //pack
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
-        index += JAUS_BYTE_SIZE_BYTES;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_24_PV_ZOOM_BIT)) {
+            if (!jausByteToBuffer(message->active_zoom, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_24_PV_POLARITY_BIT)) {
+            tempByte = 0;
+            if (message->active_polarity) jausByteSetBit(&tempByte, 0);
+            //pack
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
 
     }
     return index;
@@ -159,7 +181,16 @@ static unsigned int dataSize(ReportNightTimeCamera24Message message) {
     int index = 0;
 
     index += JAUS_BYTE_SIZE_BYTES;
-    index += JAUS_BYTE_SIZE_BYTES;
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_24_PV_ZOOM_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+    if (jausByteIsBitSet(message->presenceVector, JAUS_24_PV_POLARITY_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    
+    
 
     return index;
 }

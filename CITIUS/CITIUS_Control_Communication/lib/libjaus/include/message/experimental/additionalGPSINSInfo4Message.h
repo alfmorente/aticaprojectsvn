@@ -102,10 +102,11 @@ typedef struct
         // Presence vector
   JausShort presenceVector;
   
-  JausDouble longitudinal_acc;             // Scaled Int (-65534,65534), Res: 3e-5
-  JausDouble lateral_acc;                  // Scaled Int (-65534,65534), Res: 3e-5
-  JausDouble vertical_acc;                 // Scaled Int (-65534,65534), Res: 3e-5
+  JausDouble longitudinal_acc;                   // Scaled Int (-65534,65534), Res: 3e-5
+  JausDouble lateral_acc;                       // Scaled Int (-65534,65534), Res: 3e-5
+  JausDouble vertical_acc;                      // Scaled Int (-65534,65534), Res: 3e-5
   JausByte gpsins_status;                       // Scaled Byte (0,10), Enum
+  JausDouble measure_quality[3];                  // Scaled Short (0,100)x3, Res:  0.3906
   // COMO HACERLO
   /*JausDouble measure_quality;                  // Scaled Short (0,100), Res:  0.3906
   JausDouble calidadDeLaMedida1;                  // Scaled Short (0,100), Res:  0.3906

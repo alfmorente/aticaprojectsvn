@@ -49,8 +49,8 @@
 #ifndef   JAUS_19_PV 
 #define  JAUS_19_PV_PAN_BIT    				0
 #define  JAUS_19_PV_TILT_BIT    			1
-#define  JAUS_19_PV_VELOCIDAD_DE_GIRO_BIT    		2
-#define  JAUS_19_PV_VELOCIDAD_DE_ELEVACION_BIT    	3
+#define  JAUS_19_PV_SPIN_VELOCITY_BIT    		2
+#define  JAUS_19_PV_ELEVATION_VELOCITY_BIT              3
 #endif
 
 typedef struct
@@ -98,8 +98,8 @@ typedef struct
 
   JausDouble pan;					// Scaled Short (0,6399), Res: 0.1
   JausDouble tilt;					// Scaled Short (-1600,1600), Res: 0.05
-  JausDouble velocidadDeGiro;				// Scaled Short (-100,100), Res: 0.0031
-  JausDouble velocidadDeElevacion;			// Scaled Short (-100,100), Res: 0.0031
+  JausDouble spin_velocity;				// Scaled Short (-100,100), Res: 0.0031
+  JausDouble elevation_velocity;			// Scaled Short (-100,100), Res: 0.0031
 
 }SetPositioner19MessageStruct;
 

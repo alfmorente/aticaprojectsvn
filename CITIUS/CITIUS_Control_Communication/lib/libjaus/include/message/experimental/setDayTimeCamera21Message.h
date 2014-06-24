@@ -47,10 +47,10 @@
 #include "jaus.h"
 
 #ifndef   JAUS_21_PV 
-#define  JAUS_21_PV_DIRECTO_BIT     0
-#define  JAUS_21_PV_CONTINUO_BIT    1
-#define  JAUS_21_PV_FOCO_BIT        2
-#define  JAUS_21_PV_AUTOFOCO_BIT    3
+#define  JAUS_21_PV_DIRECT_ZOOM_BIT     0
+#define  JAUS_21_PV_CONTINUOUS_ZOOM_BIT    1
+#define  JAUS_21_PV_FOCUS_BIT        2
+#define  JAUS_21_PV_AUTOFOCUS_BIT    3
 #endif
 
 typedef struct {
@@ -95,10 +95,10 @@ typedef struct {
 
     // MESSAGE DATA MEMBERS GO HERE
 
-    JausDouble zoomDirecto;     // Scaled Short (0,100), Res:0.001 
-    JausByte zoomContinuo;    // Enum (0,2) 
-    JausDouble foco;            // Scaled Short (0,100), Res:0.001 
-    JausBoolean autofoco;
+    JausDouble direct_zoom;     // Scaled Short (0,100), Res:0.001 
+    JausByte continuous_zoom;    // Enum (0,2) 
+    JausDouble focus;            // Scaled Short (0,100), Res:0.001 
+    JausBoolean autofocus;
 
 } SetDayTimeCamera21MessageStruct;
 

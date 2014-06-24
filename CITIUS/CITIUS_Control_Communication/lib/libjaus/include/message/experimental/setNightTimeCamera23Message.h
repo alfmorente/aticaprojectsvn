@@ -49,7 +49,7 @@
 
 #ifndef   JAUS_23_PV 
 #define  JAUS_23_PV_ZOOM_BIT    	0
-#define  JAUS_23_PV_POLARIDAD_BIT    	1
+#define  JAUS_23_PV_POLARITY_BIT    	1
 #endif
 
 typedef struct {
@@ -95,7 +95,7 @@ typedef struct {
     // MESSAGE DATA MEMBERS GO HERE
 
     JausByte zoom; // Scaled Byte (0,2)
-    JausBoolean polaridad;
+    JausBoolean polarity;
 
 } SetNightTimeCamera23MessageStruct;
 

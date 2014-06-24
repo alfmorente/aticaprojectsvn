@@ -47,8 +47,8 @@
 #include "jaus.h"
 
 #ifndef   JAUS_10_PV 
-#define  JAUS_10_PV_DISPARAR_BIT    		0
-#define  JAUS_10_PV_ECOS_ENCONTRADO_BIT    	1
+#define  JAUS_10_PV_SHOOT_BIT    		0
+#define  JAUS_10_PV_ECHOES_BIT                  1
 #endif
 
 typedef struct
@@ -94,12 +94,9 @@ typedef struct
   
   // MESSAGE DATA MEMBERS GO HERE
 	
-  JausBoolean disparar; 
-  JausDouble ecosEncontrado0;      	// Scaled Short (-32768,32768), Res: 1
-  JausDouble ecosEncontrado1;      	// Scaled Short (-32768,32768), Res: 1
-  JausDouble ecosEncontrado2;      	// Scaled Short (-32768,32768), Res: 1
-  JausDouble ecosEncontrado3;      	// Scaled Short (-32768,32768), Res: 1
-  JausDouble ecosEncontrado4;      	// Scaled Short (-32768,32768), Res: 1
+  JausBoolean shoot; 
+  JausDouble echoes[5];      	// Scaled Short (-32768,32768)x5, Res: 1
+
 
 }TelemeterInfo10MessageStruct;
 

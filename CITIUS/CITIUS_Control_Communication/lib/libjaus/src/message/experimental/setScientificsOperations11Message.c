@@ -69,11 +69,11 @@ static void dataInitialize(SetScientificsOperations11Message message) {
     // Set initial values of message fields
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> panelDeMedidas = newJausByte(0); // Scaled Byte (1,5), Enum
-    message -> ordenNuevoMedidas = newJausByte(0); // Scaled Byte (1,50), Enum  
-    message -> escalonEntreMedidas = newJausByte(0); // Scaled Byte (1,200), Enum
-    message -> configuracionSonarSlantRange = newJausDouble(0); // Scaled Short(0,10000), Enum
-    message -> configuracionSonarBearing = newJausDouble(0); // Scaled Short(0,180), Enum
+    message -> measure_panel = newJausByte(0); // Scaled Byte (1,5), Enum
+    message -> nof_measure_order = newJausByte(0); // Scaled Byte (1,50), Enum  
+    message -> measure_step = newJausByte(0); // Scaled Byte (1,200), Enum
+    message -> sonar_config_slant_range = newJausDouble(0); // Scaled Short(0,10000), Enum
+    message -> sonar_config_bearing = newJausDouble(0); // Scaled Short(0,180), Enum
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -98,41 +98,41 @@ static JausBoolean dataFromBuffer(SetScientificsOperations11Message message, uns
         //Se suma tamaño del Presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_PANEL_DE_MEDIDAS_BIT)) {
-            if (!jausByteFromBuffer(&message->panelDeMedidas, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_MEASURE_PANEL_BIT)) {
+            if (!jausByteFromBuffer(&message->measure_panel, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_ORDEN_NUEVO_MEDIDAS_BIT)) {
-            if (!jausByteFromBuffer(&message->ordenNuevoMedidas, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_NOF_MEASURE_ORDER_BIT)) {
+            if (!jausByteFromBuffer(&message->nof_measure_order, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_ESCALON_ENTRE_MEDIDAS_BIT)) {
-            if (!jausByteFromBuffer(&message->escalonEntreMedidas, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_MEASURE_STEP_BIT)) {
+            if (!jausByteFromBuffer(&message->measure_step, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_CONFIGURACION_SONAR_SLANT_RANGE_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_SONAR_CONFIG_SLANT_RANGE_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->configuracionSonarSlantRange = jausShortToDouble(tempShort, 0, 10000);
+            message->sonar_config_slant_range = jausShortToDouble(tempShort, 0, 10000);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_CONFIGURACION_SONAR_BEARING_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_SONAR_CONFIG_BEARING_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->configuracionSonarBearing = jausShortToDouble(tempShort, 0, 180);
+            message->sonar_config_bearing = jausShortToDouble(tempShort, 0, 180);
         }
 
         return JAUS_TRUE;
@@ -156,29 +156,29 @@ static int dataToBuffer(SetScientificsOperations11Message message, unsigned char
         //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_PANEL_DE_MEDIDAS_BIT)) {
-            if (!jausByteToBuffer(message->panelDeMedidas, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_MEASURE_PANEL_BIT)) {
+            if (!jausByteToBuffer(message->measure_panel, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_ORDEN_NUEVO_MEDIDAS_BIT)) {
-            if (!jausByteToBuffer(message->ordenNuevoMedidas, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_NOF_MEASURE_ORDER_BIT)) {
+            if (!jausByteToBuffer(message->nof_measure_order, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_ESCALON_ENTRE_MEDIDAS_BIT)) {
-            if (!jausByteToBuffer(message->escalonEntreMedidas, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_MEASURE_STEP_BIT)) {
+            if (!jausByteToBuffer(message->measure_step, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_CONFIGURACION_SONAR_SLANT_RANGE_BIT)) {
-            tempShort = jausShortFromDouble(message->configuracionSonarSlantRange, 0, 10000);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_SONAR_CONFIG_SLANT_RANGE_BIT)) {
+            tempShort = jausShortFromDouble(message->sonar_config_slant_range, 0, 10000);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_CONFIGURACION_SONAR_BEARING_BIT)) {
-            tempShort = jausShortFromDouble(message->configuracionSonarBearing, 0, 180);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_SONAR_CONFIG_BEARING_BIT)) {
+            tempShort = jausShortFromDouble(message->sonar_config_bearing, 0, 180);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
@@ -223,19 +223,19 @@ static unsigned int dataSize(SetScientificsOperations11Message message) {
     //Se suma tamaño del presence Vector
     index += JAUS_BYTE_SIZE_BYTES;
 
-    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_PANEL_DE_MEDIDAS_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_MEASURE_PANEL_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_ORDEN_NUEVO_MEDIDAS_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_NOF_MEASURE_ORDER_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_ESCALON_ENTRE_MEDIDAS_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_MEASURE_STEP_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_CONFIGURACION_SONAR_SLANT_RANGE_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_SONAR_CONFIG_SLANT_RANGE_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_CONFIGURACION_SONAR_BEARING_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_11_PV_SONAR_CONFIG_BEARING_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
 

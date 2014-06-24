@@ -46,6 +46,12 @@
 
 #include "jaus.h"
 
+#ifndef  JAUS_6_PV 
+#define  JAUS_6_PV_WAVE_ALTITUDE_BIT                        0
+#define  JAUS_6_PV_WAVE_FREQUENCY_BIT                       1
+#endif
+
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,9 +91,9 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
-  
-  JausDouble estimacionAlturaDeLaOla;					// Scaled Short (-50,50), Res: 1e-3
-  JausDouble estimacionFrecuencia;					// Scaled Short (0,1000), Res: 0,0152
+        JausByte presenceVector;
+  JausDouble wave_altitude;					// Scaled Short (-50,50), Res: 1e-3
+  JausDouble wave_frequency;					// Scaled Short (0,1000), Res: 0,0152
 
 }SCPMInfo6MessageStruct;
 

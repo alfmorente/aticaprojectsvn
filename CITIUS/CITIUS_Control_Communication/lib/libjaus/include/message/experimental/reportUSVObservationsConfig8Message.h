@@ -46,6 +46,14 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_8_PV 
+#define  JAUS_8_PV_PAN_BIT    			0 //Short
+#define  JAUS_8_PV_TILT_BIT    			1 //Short
+#define  JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT    	2 //Bool1
+#define  JAUS_8_PV_INFRARED_FILTER_BIT    	3 //Bool2
+#define  JAUS_8_PV_TRACKING_FUNCTION_BIT    	4 //Bool3
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,13 +93,14 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
+          // PRESENCE VECTOR
+  JausByte presenceVector; 
 		
-  JausDouble panActual;					// Scaled Short (-1.0, 1.0), Res: 3e-5
-  JausDouble tiltActual;				// Scaled Short (-1.0, 1.0), Res: 3e-5
-  JausBoolean funcionDiaNocheActual;		
-  JausDouble elevacionActual;				// Scaled Byte (0,5), Res: 0.019
-  JausBoolean filtroInfrarojoActual;			
-  JausBoolean funcionTrackingActual;		
+  JausDouble active_pan;					// Scaled Short (-1.0, 1.0), Res: 3e-5
+  JausDouble active_tilt;				// Scaled Short (-1.0, 1.0), Res: 3e-5
+  JausBoolean active_day_night_function;		
+  JausBoolean active_infrared_filter;			
+  JausBoolean active_tracking_function;		
   
 }ReportUSVObservationsConfig8MessageStruct;
 

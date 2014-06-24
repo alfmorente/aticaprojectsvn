@@ -46,6 +46,11 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_20_PV 
+#define  JAUS_20_PV_PAN_BIT    				0
+#define  JAUS_20_PV_TILT_BIT    			1
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,9 +90,11 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
-
-  JausDouble panActivo;					// Scaled Short (0,6399), Res: 0.1
-  JausDouble tiltActivo;				// Scaled Short (-1600,1600), Res: 0.05
+  // PRESENCE VECTOR
+  JausByte presenceVector; 
+        
+  JausDouble active_pan;					// Scaled Short (0,6399), Res: 0.1
+  JausDouble active_tilt;				// Scaled Short (-1600,1600), Res: 0.05
 	
 }ReportPositioner20MessageStruct;
 

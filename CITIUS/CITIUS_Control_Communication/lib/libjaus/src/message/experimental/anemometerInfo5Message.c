@@ -66,10 +66,12 @@ static unsigned int dataSize(AnemometerInfo5Message message);
 // Initializes the message-specific fields
 
 static void dataInitialize(AnemometerInfo5Message message) {
+    
+    message ->presenceVector = newJaussHORT(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> disponibilidadAnemometro = JAUS_FALSE;
-    message -> velocidadDelViento = newJausDouble(0); // Scaled Short (0,300), Res: 4e-3
-    message -> rumboDelViento = newJausDouble(0); // Scaled Short (-JAUS_PI, JAUS_PI), Res: 9e-5
+    message -> anemometer_availability = JAUS_FALSE;
+    message -> wind_velocity = newJausDouble(0); // Scaled Short (0,300), Res: 4e-3
+    message -> wind_direction = newJausDouble(0); // Scaled Short (-JAUS_PI, JAUS_PI), Res: 9e-5
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -88,25 +90,37 @@ static JausBoolean dataFromBuffer(AnemometerInfo5Message message, unsigned char 
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-
-        //Se desempaqueta el Byte completo que guarda los distintos booleanos.
-        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+        
+        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
+        if (!jausShortFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        message->disponibilidadAnemometro = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+
+        //Se suma tamaño del Presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->velocidadDelViento = jausShortToDouble(tempShort, 0, 300);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_ANEMOMETER_AVAILABILITY_BIT)) {
+            //Se desempaqueta el Byte completo que guarda los distintos booleanos.
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            message->anemometer_availability = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_WIND_VELOCITY_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->wind_velocity = jausShortToDouble(tempShort, 0, 300);
+        }
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->rumboDelViento = jausShortToDouble(tempShort, -JAUS_PI, JAUS_PI);
-
+        if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_WIND_DIRECTION_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->wind_direction = jausShortToDouble(tempShort, -JAUS_PI, JAUS_PI);
+        }
         return JAUS_TRUE;
     } else {
         return JAUS_FALSE;
@@ -121,23 +135,35 @@ static int dataToBuffer(AnemometerInfo5Message message, unsigned char *buffer, u
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
+        
+        //Se empaqueta el Presence Vector
+        if (!jausShortToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
+            return JAUS_FALSE;
 
-        tempByte = 0;
-        if (message->disponibilidadAnemometro) jausByteSetBit(&tempByte, 0);
-        //pack
-        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
+        //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_ANEMOMETER_AVAILABILITY_BIT)) {
+            tempByte = 0;
+            if (message->anemometer_availability) jausByteSetBit(&tempByte, 0);
+            //pack
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_WIND_VELOCITY_BIT)) {
+            tempShort = jausShortFromDouble(message->wind_velocity, 0, 300);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
-        tempShort = jausShortFromDouble(message->velocidadDelViento, 0, 300);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-
-        tempShort = jausShortFromDouble(message->rumboDelViento, -JAUS_PI, JAUS_PI);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
-
+        if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_WIND_DIRECTION_BIT)) {
+            tempShort = jausShortFromDouble(message->wind_direction, -JAUS_PI, JAUS_PI);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
     }
 
     return index;
@@ -177,8 +203,17 @@ static unsigned int dataSize(AnemometerInfo5Message message) {
 
     index += JAUS_BYTE_SIZE_BYTES;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_ANEMOMETER_AVAILABILITY_BIT)) {
+        index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_WIND_VELOCITY_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_5_PV_WIND_DIRECTION_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
     return index;
 }

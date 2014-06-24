@@ -69,10 +69,10 @@ static void dataInitialize(SetDayTimeCamera21Message message) {
 
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> zoomDirecto = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
-    message -> zoomContinuo = newJausByte(0); // Enum (0,2) 
-    message -> foco = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
-    message -> autofoco = JAUS_FALSE;
+    message -> direct_zoom = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
+    message -> continuous_zoom = newJausByte(0); // Enum (0,2) 
+    message -> focus = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
+    message -> autofocus = JAUS_FALSE;
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -99,33 +99,33 @@ static JausBoolean dataFromBuffer(SetDayTimeCamera21Message message, unsigned ch
         index += JAUS_BYTE_SIZE_BYTES;
 
         //Desempaquetar el campo.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_DIRECTO_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_DIRECT_ZOOM_BIT)) {
             //Se desempaqueta el parámetro
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->zoomDirecto = jausShortToDouble(tempShort, 0, 100);
+            message->direct_zoom = jausShortToDouble(tempShort, 0, 100);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_CONTINUO_BIT)) {
-            if (!jausByteFromBuffer(&message->zoomContinuo, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_CONTINUOUS_ZOOM_BIT)) {
+            if (!jausByteFromBuffer(&message->continuous_zoom, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_FOCO_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_FOCUS_BIT)) {
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->foco = jausShortToDouble(tempShort, 0, 100);
+            message->focus = jausShortToDouble(tempShort, 0, 100);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_AUTOFOCO_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_AUTOFOCUS_BIT)) {
             tempByte = 0;
             //Se desempaqueta el Byte completo que guarda los distintos booleanos.
             if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
-            message->autofoco = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+            message->autofocus = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
         }
 
         return JAUS_TRUE;
@@ -149,26 +149,26 @@ static int dataToBuffer(SetDayTimeCamera21Message message, unsigned char *buffer
         //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_DIRECTO_BIT)) {
-            tempShort = jausShortFromDouble(message->zoomDirecto, 0, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_DIRECT_ZOOM_BIT)) {
+            tempShort = jausShortFromDouble(message->direct_zoom, 0, 100);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_CONTINUO_BIT)) {
-            if (!jausByteToBuffer(message->zoomContinuo, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_CONTINUOUS_ZOOM_BIT)) {
+            if (!jausByteToBuffer(message->continuous_zoom, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_FOCO_BIT)) {
-            tempShort = jausShortFromDouble(message->foco, 0, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_FOCUS_BIT)) {
+            tempShort = jausShortFromDouble(message->focus, 0, 100);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
         tempByte = 0;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_AUTOFOCO_BIT)) {
-            if (message->autofoco) jausByteSetBit(&tempByte, 0);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_AUTOFOCUS_BIT)) {
+            if (message->autofocus) jausByteSetBit(&tempByte, 0);
             //pack
             if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
@@ -213,17 +213,17 @@ static unsigned int dataSize(SetDayTimeCamera21Message message) {
     //Se suma tamaño del presence Vector
     index += JAUS_BYTE_SIZE_BYTES;
 
-    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_DIRECTO_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_DIRECT_ZOOM_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_CONTINUO_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_CONTINUOUS_ZOOM_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_FOCO_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_FOCUS_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
 
-    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_AUTOFOCO_BIT)) {
+    if (jausByteIsBitSet(message->presenceVector, JAUS_21_PV_AUTOFOCUS_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
     return index;

@@ -70,10 +70,9 @@ static void dataInitialize(SetUSVObservationsConfig7Message message) {
 
     message-> pan = newJausDouble(0); // Scaled Short (-100, 100), Res: 0.0031
     message-> tilt = newJausDouble(0); // Scaled Short (-100, 100), Res: 0.0031
-    message-> funcionDiaNoche = JAUS_FALSE;
-    message-> elevacion = newJausDouble(0); // Scaled Byte (0,5), Res: 0.019
-    message-> filtroInfrarrojo = JAUS_FALSE;
-    message-> funcionTracking = JAUS_FALSE;
+    message-> day_night_function = JAUS_FALSE;
+    message-> infrared_filter = JAUS_FALSE;
+    message-> tracking_function = JAUS_FALSE;
 
     message-> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -119,26 +118,17 @@ static JausBoolean dataFromBuffer(SetUSVObservationsConfig7Message message, unsi
 
             message->tilt = jausShortToDouble(tempShort, -100, 100);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_ELEVACION_BIT)) {
-            //Se desempaqueta el parámetro temperature
-            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-            message->elevacion = jausByteToDouble(tempByte, 0, 5);
-        }
 
         char b1 = 0;
         char b2 = 0;
         char b3 = 0;
 
         //Se comprueban que bits están activos.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FUNCION_DIA_NOCHE_BIT))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT))
             b1 = 1;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FILTRO_INFRARROJO_BIT))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_INFRARED_FILTER_BIT))
             b2 = 1;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FUNCION_TRACKING_BIT))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_TRACKING_FUNCTION_BIT))
             b3 = 1;
 
         //Si hay algún bit activo se descomprime el siguiente byte.
@@ -149,13 +139,13 @@ static JausBoolean dataFromBuffer(SetUSVObservationsConfig7Message message, unsi
                 return JAUS_FALSE;
 
             if (b1 > 0) {
-                message->funcionDiaNoche = jausByteIsBitSet(tempByte, JAUS_7_PV_FUNCION_DIA_NOCHE_BIT) ? JAUS_TRUE : JAUS_FALSE;
+                message->day_night_function = jausByteIsBitSet(tempByte, JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT) ? JAUS_TRUE : JAUS_FALSE;
             }
             if (b2 > 0) {
-                message->filtroInfrarrojo = jausByteIsBitSet(tempByte, JAUS_7_PV_FILTRO_INFRARROJO_BIT) ? JAUS_TRUE : JAUS_FALSE;
+                message->infrared_filter = jausByteIsBitSet(tempByte, JAUS_7_PV_INFRARED_FILTER_BIT) ? JAUS_TRUE : JAUS_FALSE;
             }
             if (b3 > 0) {
-                message->funcionTracking = jausByteIsBitSet(tempByte, JAUS_7_PV_FUNCION_TRACKING_BIT) ? JAUS_TRUE : JAUS_FALSE;
+                message->tracking_function = jausByteIsBitSet(tempByte, JAUS_7_PV_TRACKING_FUNCTION_BIT) ? JAUS_TRUE : JAUS_FALSE;
             }
         }
         return JAUS_TRUE;
@@ -191,35 +181,29 @@ static int dataToBuffer(SetUSVObservationsConfig7Message message, unsigned char 
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_ELEVACION_BIT)) {
-            tempByte = jausByteFromDouble(message->elevacion, 0, 5);
-            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
 
         char b1 = 0;
         char b2 = 0;
         char b3 = 0;
         //Se comprueban que bits están activos.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FUNCION_DIA_NOCHE_BIT))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT))
             b1 = 1;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FILTRO_INFRARROJO_BIT))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_INFRARED_FILTER_BIT))
             b2 = 1;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FUNCION_TRACKING_BIT))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_TRACKING_FUNCTION_BIT))
             b3 = 1;
 
         //Si hay algún bit activo se descomprime el siguiente byte.
         if ((b1 + b2 + b3) > 0) {
             tempByte = 0;
             if (b1 > 0) {
-                if (message->funcionDiaNoche) jausByteSetBit(&tempByte, JAUS_7_PV_FUNCION_DIA_NOCHE_BIT);
+                if (message->day_night_function) jausByteSetBit(&tempByte, JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT);
             }
             if (b2 > 0) {
-                if (message->filtroInfrarrojo) jausByteSetBit(&tempByte, JAUS_7_PV_FILTRO_INFRARROJO_BIT);
+                if (message->infrared_filter) jausByteSetBit(&tempByte, JAUS_7_PV_INFRARED_FILTER_BIT);
             }
             if (b3 > 0) {
-                if (message->funcionTracking) jausByteSetBit(&tempByte, JAUS_7_PV_FUNCION_TRACKING_BIT);
+                if (message->tracking_function) jausByteSetBit(&tempByte, JAUS_7_PV_TRACKING_FUNCTION_BIT);
             }
 
             //pack
@@ -271,19 +255,15 @@ static unsigned int dataSize(SetUSVObservationsConfig7Message message) {
     if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_TILT_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_ELEVACION_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-
     char b1 = 0;
     char b2 = 0;
     char b3 = 0;
     //Se comprueban que bits están activos.
-    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FUNCION_DIA_NOCHE_BIT))
+    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT))
         b1 = 1;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FILTRO_INFRARROJO_BIT))
+    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_INFRARED_FILTER_BIT))
         b2 = 1;
-    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_FUNCION_TRACKING_BIT))
+    if (jausByteIsBitSet(message->presenceVector, JAUS_7_PV_TRACKING_FUNCTION_BIT))
         b3 = 1;
 
     //Si hay algún bit activo se descomprime el siguiente byte.

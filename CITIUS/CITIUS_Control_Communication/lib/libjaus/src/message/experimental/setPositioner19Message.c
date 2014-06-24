@@ -71,8 +71,8 @@ static void dataInitialize(SetPositioner19Message message) {
 
     message -> pan = newJausDouble(0); // Scaled Short (0,6399), Res: 0.1
     message -> tilt = newJausDouble(0); // Scaled Short (-1600,1600), Res: 0.05
-    message -> velocidadDeGiro = newJausDouble(0); // Scaled Short (-100,100), Res: 0.0031
-    message -> velocidadDeElevacion = newJausDouble(0); // Scaled Short (-100,100), Res: 0.0031
+    message -> spin_velocity = newJausDouble(0); // Scaled Short (-100,100), Res: 0.0031
+    message -> elevation_velocity = newJausDouble(0); // Scaled Short (-100,100), Res: 0.0031
 
     message-> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 
@@ -115,21 +115,21 @@ static JausBoolean dataFromBuffer(SetPositioner19Message message, unsigned char 
             index += JAUS_SHORT_SIZE_BYTES;
             message->tilt = jausShortToDouble(tempShort, -1600, 1600);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_VELOCIDAD_DE_GIRO_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_SPIN_VELOCITY_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->velocidadDeGiro = jausShortToDouble(tempShort, -100, 100);
+            message->spin_velocity = jausShortToDouble(tempShort, -100, 100);
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_VELOCIDAD_DE_ELEVACION_BIT)) {
+        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_ELEVATION_VELOCITY_BIT)) {
             //Se desempaqueta el parámetro temperature
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->velocidadDeElevacion = jausShortToDouble(tempShort, -100, 100);
+            message->elevation_velocity = jausShortToDouble(tempShort, -100, 100);
         }
 
         return JAUS_TRUE;
@@ -164,14 +164,14 @@ static int dataToBuffer(SetPositioner19Message message, unsigned char *buffer, u
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_VELOCIDAD_DE_GIRO_BIT)) {
-            tempShort = jausShortFromDouble(message->velocidadDeGiro, -100, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_SPIN_VELOCITY_BIT)) {
+            tempShort = jausShortFromDouble(message->spin_velocity, -100, 100);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_VELOCIDAD_DE_ELEVACION_BIT)) {
-            tempShort = jausShortFromDouble(message->velocidadDeElevacion, -100, 100);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_ELEVATION_VELOCITY_BIT)) {
+            tempShort = jausShortFromDouble(message->elevation_velocity, -100, 100);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
@@ -216,11 +216,24 @@ static unsigned int dataSize(SetPositioner19Message message) {
     // PresenceVector
     index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
 
+    if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_PAN_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_TILT_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    }
+    if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_SPIN_VELOCITY_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+
+    }
+    if (jausByteIsBitSet(message->presenceVector, JAUS_19_PV_ELEVATION_VELOCITY_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+
+    }
+
+
 
     return index;
 }

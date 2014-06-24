@@ -67,8 +67,10 @@ static unsigned int dataSize(ReportPositioner20Message message);
 
 static void dataInitialize(ReportPositioner20Message message) {
 
-    message -> panActivo = newJausDouble(0); // Scaled Short (0,6399), Res: 0.1
-    message -> tiltActivo = newJausDouble(0); // Scaled Short (-1600,1600), Res: 0.05
+    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
+    
+    message -> active_pan = newJausDouble(0); // Scaled Short (0,6399), Res: 0.1
+    message -> active_tilt = newJausDouble(0); // Scaled Short (-1600,1600), Res: 0.05
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 
@@ -87,19 +89,29 @@ static JausBoolean dataFromBuffer(ReportPositioner20Message message, unsigned ch
 JausShort tempShort = 0; //Variable temporal para desempaquetar	
 
     if (bufferSizeBytes == message->dataSize) {
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
+        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->panActivo = jausShortToDouble(tempShort, 0, 6399);
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->tiltActivo = jausShortToDouble(tempShort, -1600, 1600);
+        //Se suma tamaño del Presence Vector
+        index += JAUS_BYTE_SIZE_BYTES;
 
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_20_PV_PAN_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_pan = jausShortToDouble(tempShort, 0, 6399);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_20_PV_TILT_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_tilt = jausShortToDouble(tempShort, -1600, 1600);
+        }
 
         return JAUS_TRUE;
     } else {
@@ -114,16 +126,27 @@ static int dataToBuffer(ReportPositioner20Message message, unsigned char *buffer
     JausShort tempShort = 0; //Variable temporal para desempaquetar	
 
     if (bufferSizeBytes >= dataSize(message)) {
-
-        tempShort = jausShortFromDouble(message->panActivo, 0, 6399);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+        
+        //Se empaqueta el Presence Vector
+        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
 
-        tempShort = jausShortFromDouble(message->tiltActivo, -1600, 1600);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        //Se suma tamaño del presence Vector
+        index += JAUS_BYTE_SIZE_BYTES;
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_20_PV_PAN_BIT)) {
+            tempShort = jausShortFromDouble(message->active_pan, 0, 6399);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_20_PV_TILT_BIT)) {
+            tempShort = jausShortFromDouble(message->active_tilt, -1600, 1600);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
 
     }
 
@@ -162,8 +185,17 @@ static int dataToString(ReportPositioner20Message message, char **buf) {
 static unsigned int dataSize(ReportPositioner20Message message) {
     int index = 0;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_BYTE_SIZE_BYTES;
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_20_PV_PAN_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_20_PV_TILT_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+
+    }
+
 
     return index;
 }

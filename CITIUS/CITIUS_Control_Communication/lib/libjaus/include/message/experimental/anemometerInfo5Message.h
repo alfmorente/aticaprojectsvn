@@ -46,6 +46,12 @@
 
 #include "jaus.h"
 
+#ifndef  JAUS_5_PV 
+#define  JAUS_5_PV_ANEMOMETER_AVAILABILITY_BIT                  0
+#define  JAUS_5_PV_WIND_VELOCITY_BIT                            1
+#define  JAUS_5_PV_WIND_DIRECTION_BIT                           2
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,10 +91,11 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
-	
-  JausBoolean disponibilidadAnemometro;
-  JausDouble velocidadDelViento;                // Scaled Short (0,300), Res: 4e-3
-  JausDouble rumboDelViento;               	// Scaled Short (-JAUS_PI, JAUS_PI), Res: 9e-5
+	JausByte presenceVector;
+        
+  JausBoolean anemometer_availability;
+  JausDouble wind_velocity;                // Scaled Short (0,300), Res: 4e-3
+  JausDouble wind_direction;               	// Scaled Short (-JAUS_PI, JAUS_PI), Res: 9e-5
 
 }AnemometerInfo5MessageStruct;
 

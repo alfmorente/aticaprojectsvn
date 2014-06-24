@@ -46,6 +46,11 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_24_PV 
+#define  JAUS_24_PV_ZOOM_BIT    	0
+#define  JAUS_24_PV_POLARITY_BIT    	1
+#endif
+
 typedef struct {
     // Include all parameters from a JausMessage structure:
     // Header Properties
@@ -82,11 +87,14 @@ typedef struct {
     JausUnsignedInteger dataFlag;
 
     JausUnsignedShort sequenceNumber;
+    
+    // PRESENCE VECTOR
+    JausByte presenceVector;
 
     // MESSAGE DATA MEMBERS GO HERE
 
-    JausByte zoomActual; // Scaled Byte (0,2)
-    JausBoolean polaridadActual;
+    JausByte active_zoom; // Scaled Byte (0,2)
+    JausBoolean active_polarity;
 
 } ReportNightTimeCamera24MessageStruct;
 

@@ -46,6 +46,12 @@
 
 #include "jaus.h"
 
+#ifndef   JAUS_22_PV 
+#define  JAUS_22_PV_ZOOM_BIT            0
+#define  JAUS_22_PV_FOCUS_BIT           1
+#define  JAUS_22_PV_AUTOFOCUS_BIT       2
+#endif
+
 typedef struct
 {
 	// Include all parameters from a JausMessage structure:
@@ -85,10 +91,12 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
 	// MESSAGE DATA MEMBERS GO HERE
-	
-  JausByte zoomContinuoActivo;				// Enum (0,2) 
-  JausDouble focoActivo;				// Scaled Short (0,100), Res:0.001 
-  JausBoolean autofocoActivo;	
+    // PRESENCE VECTOR
+    JausByte presenceVector;
+    
+  JausByte active_zoom;				// Enum (0,2) 
+  JausDouble active_focus;				// Scaled Short (0,100), Res:0.001 
+  JausBoolean active_autofocus;	
 	
 }ReportDayTimeCamera22MessageStruct;
 

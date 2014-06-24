@@ -66,8 +66,11 @@ static unsigned int dataSize(SCPMInfo6Message message);
 // Initializes the message-specific fields
 
 static void dataInitialize(SCPMInfo6Message message) {
-    message -> estimacionAlturaDeLaOla = newJausDouble(0); // Scaled Short (-50,50), Res: 1e-3
-    message -> estimacionFrecuencia = newJausDouble(0); // Scaled Short (0,1000), Res: 0,0152
+    
+    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
+    
+    message -> wave_altitude = newJausDouble(0); // Scaled Short (-50,50), Res: 1e-3
+    message -> wave_frequency = newJausDouble(0); // Scaled Short (0,1000), Res: 0,0152
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 
@@ -86,19 +89,28 @@ static JausBoolean dataFromBuffer(SCPMInfo6Message message, unsigned char *buffe
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+        
+        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->estimacionAlturaDeLaOla = jausShortToDouble(tempShort, -50, 50);
 
-        if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        //Se suma tamaño del parámetro
-        index += JAUS_SHORT_SIZE_BYTES;
-        message->estimacionFrecuencia = jausShortToDouble(tempShort, 0, 1000);
+        //Se suma tamaño del Presence Vector
+        index += JAUS_BYTE_SIZE_BYTES;
 
+        if (jausByteIsBitSet(message->presenceVector, JAUS_6_PV_WAVE_ALTITUDE_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->wave_altitude = jausShortToDouble(tempShort, -50, 50);
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_6_PV_WAVE_FREQUENCY_BIT)) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->wave_frequency = jausShortToDouble(tempShort, 0, 1000);
+        }
         return JAUS_TRUE;
     } else {
         return JAUS_FALSE;
@@ -112,16 +124,26 @@ static int dataToBuffer(SCPMInfo6Message message, unsigned char *buffer, unsigne
     JausShort tempShort = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-
-        tempShort = jausShortFromDouble(message->estimacionAlturaDeLaOla, -50, 50);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+        //Se empaqueta el Presence Vector
+        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
 
-        tempShort = jausShortFromDouble(message->estimacionFrecuencia, 0, 1000);
-        if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-        index += JAUS_SHORT_SIZE_BYTES;
+        //Se suma tamaño del presence Vector
+        index += JAUS_BYTE_SIZE_BYTES;
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_6_PV_WAVE_ALTITUDE_BIT)) {
+            tempShort = jausShortFromDouble(message->wave_altitude, -50, 50);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_6_PV_WAVE_FREQUENCY_BIT)) {
+            tempShort = jausShortFromDouble(message->wave_frequency, 0, 1000);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
     }
 
     return index;
@@ -159,8 +181,15 @@ static int dataToString(SCPMInfo6Message message, char **buf) {
 static unsigned int dataSize(SCPMInfo6Message message) {
     int index = 0;
 
-    index += JAUS_SHORT_SIZE_BYTES;
-    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_BYTE_SIZE_BYTES;
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_6_PV_WAVE_ALTITUDE_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_6_PV_WAVE_FREQUENCY_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
 
     return index;
 }

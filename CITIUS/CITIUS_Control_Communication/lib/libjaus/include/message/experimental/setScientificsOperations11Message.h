@@ -47,11 +47,11 @@
 #include "jaus.h"
 
 #ifndef   JAUS_11_PV 
-#define  JAUS_11_PV_PANEL_DE_MEDIDAS_BIT    			0
-#define  JAUS_11_PV_ORDEN_NUEVO_MEDIDAS_BIT    			1
-#define  JAUS_11_PV_ESCALON_ENTRE_MEDIDAS_BIT    		2
-#define  JAUS_11_PV_CONFIGURACION_SONAR_SLANT_RANGE_BIT		3
-#define  JAUS_11_PV_CONFIGURACION_SONAR_BEARING_BIT		4
+#define  JAUS_11_PV_MEASURE_PANEL_BIT    			0
+#define  JAUS_11_PV_NOF_MEASURE_ORDER_BIT    			1
+#define  JAUS_11_PV_MEASURE_STEP_BIT                            2
+#define  JAUS_11_PV_SONAR_CONFIG_SLANT_RANGE_BIT		3
+#define  JAUS_11_PV_SONAR_CONFIG_BEARING_BIT                    4
 #endif
 
 typedef struct {
@@ -96,11 +96,11 @@ typedef struct {
 
     // MESSAGE DATA MEMBERS GO HERE
 
-    JausByte panelDeMedidas; // Scaled Byte (1,5), Enum
-    JausByte ordenNuevoMedidas; // Scaled Byte (1,50), Enum  
-    JausByte escalonEntreMedidas; // Scaled Byte (1,200), Enum
-    JausDouble configuracionSonarSlantRange; // Scaled Short(0,10000), Enum
-    JausDouble configuracionSonarBearing; // Scaled Short(0,180), Enum
+    JausByte measure_panel; // Scaled Byte (1,5), Enum
+    JausByte nof_measure_order; // Scaled Byte (1,50), Enum  
+    JausByte measure_step; // Scaled Byte (1,200), Enum
+    JausDouble sonar_config_slant_range; // Scaled Short(0,10000), Enum
+    JausDouble sonar_config_bearing; // Scaled Short(0,180), Enum
 
 } SetScientificsOperations11MessageStruct;
 

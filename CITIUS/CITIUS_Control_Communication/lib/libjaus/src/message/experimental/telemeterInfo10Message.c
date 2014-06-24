@@ -68,12 +68,10 @@ static unsigned int dataSize(TelemeterInfo10Message message);
 static void dataInitialize(TelemeterInfo10Message message) {
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message -> disparar = JAUS_FALSE;
-    message -> ecosEncontrado0 = newJausDouble(0); // Scaled Short (-32768,32768), Res: 1
-    message -> ecosEncontrado1 = newJausDouble(0); // Scaled Short (-32768,32768), Res: 1
-    message -> ecosEncontrado2 = newJausDouble(0); // Scaled Short (-32768,32768), Res: 1
-    message -> ecosEncontrado3 = newJausDouble(0); // Scaled Short (-32768,32768), Res: 1
-    message -> ecosEncontrado4 = newJausDouble(0); // Scaled Short (-32768,32768), Res: 1
+    message -> shoot = JAUS_FALSE;
+    for(int ind=0;ind<5;ind++){
+        message -> echoes[ind] = newJausDouble(0);
+    }
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -98,44 +96,26 @@ static JausBoolean dataFromBuffer(TelemeterInfo10Message message, unsigned char 
 
         //Se suma tamaño del Presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
-
-        //Desempaquetar el campo.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECOS_ENCONTRADO_BIT)) {
-            //Se desempaqueta el parámetro
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->ecosEncontrado0 = jausShortToDouble(tempShort, -32768, 32768);
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->ecosEncontrado1 = jausShortToDouble(tempShort, -32768, 32768);
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->ecosEncontrado2 = jausShortToDouble(tempShort, -32768, 32768);
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->ecosEncontrado3 = jausShortToDouble(tempShort, -32768, 32768);
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->ecosEncontrado4 = jausShortToDouble(tempShort, -32768, 32768);
-
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_DISPARAR_BIT)) {
+        
+        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
             tempByte = 0;
             //Se desempaqueta el Byte completo que guarda los distintos booleanos.
             if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
-            message->disparar = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+            message->shoot = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
         }
+
+        //Desempaquetar el campo.
+        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
+            for (int ind = 0; ind < 5; ind++) {
+                if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                    return JAUS_FALSE;
+                //Se suma tamaño del parámetro
+                index += JAUS_SHORT_SIZE_BYTES;
+                message->echoes[ind] = jausShortToDouble(tempShort, -32768, 32768);
+            }
+        }
+
         return JAUS_TRUE;
     } else {
         return JAUS_FALSE;
@@ -156,36 +136,24 @@ static int dataToBuffer(TelemeterInfo10Message message, unsigned char *buffer, u
 
         //Se suma tamaño del presence Vector
         index += JAUS_BYTE_SIZE_BYTES;
-
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECOS_ENCONTRADO_BIT)) {
-            tempShort = jausShortFromDouble(message->ecosEncontrado0, -32768, 32768);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-            tempShort = jausShortFromDouble(message->ecosEncontrado1, -32768, 32768);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-            tempShort = jausShortFromDouble(message->ecosEncontrado2, -32768, 32768);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-            tempShort = jausShortFromDouble(message->ecosEncontrado3, -32768, 32768);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-            tempShort = jausShortFromDouble(message->ecosEncontrado4, -32768, 32768);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
+        
         tempByte = 0;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_DISPARAR_BIT)) {
-            if (message->disparar) jausByteSetBit(&tempByte, 0);
+        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
+            if (message->shoot) jausByteSetBit(&tempByte, 0);
             //pack
             if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
+
+        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
+            for (int ind = 0; ind < 5; ind++) {
+                tempShort = jausShortFromDouble(message->echoes[ind], -32768, 32768);
+                if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                    return JAUS_FALSE;
+                index += JAUS_SHORT_SIZE_BYTES;
+            }
+        }
+        
     }
 
     return index;
@@ -225,16 +193,17 @@ static unsigned int dataSize(TelemeterInfo10Message message) {
 
     //Se suma tamaño del presence Vector
     index += JAUS_BYTE_SIZE_BYTES;
-
-    if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECOS_ENCONTRADO_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-    if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_DISPARAR_BIT)) {
+    
+    if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
+    }
+
+    if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+        index += JAUS_SHORT_SIZE_BYTES;
+        index += JAUS_SHORT_SIZE_BYTES;
+        index += JAUS_SHORT_SIZE_BYTES;
+        index += JAUS_SHORT_SIZE_BYTES;
     }
 
     return index;

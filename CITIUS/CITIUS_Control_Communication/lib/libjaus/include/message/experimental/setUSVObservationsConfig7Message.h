@@ -49,10 +49,9 @@
 #ifndef   JAUS_7_PV 
 #define  JAUS_7_PV_PAN_BIT    			0 //Short
 #define  JAUS_7_PV_TILT_BIT    			1 //Short
-#define  JAUS_7_PV_FUNCION_DIA_NOCHE_BIT    	2 //Bool1
-#define  JAUS_7_PV_ELEVACION_BIT    		3 //Byte
-#define  JAUS_7_PV_FILTRO_INFRARROJO_BIT    	4 //Bool2
-#define  JAUS_7_PV_FUNCION_TRACKING_BIT    	5 //Bool3
+#define  JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT    	2 //Bool1
+#define  JAUS_7_PV_INFRARED_FILTER_BIT    	3 //Bool2
+#define  JAUS_7_PV_TRACKING_FUNCTION_BIT    	4 //Bool3
 #endif
 
 typedef struct
@@ -99,10 +98,9 @@ typedef struct
   
   JausDouble pan;					// Scaled Short (-100, 100), Res: 0.0031
   JausDouble tilt;					// Scaled Short (-100, 100), Res: 0.0031
-  JausBoolean funcionDiaNoche;			
-  JausDouble elevacion;					// Scaled Byte (0,5), Res: 0.019
-  JausBoolean filtroInfrarrojo;				
-  JausBoolean funcionTracking;				
+  JausBoolean day_night_function;			
+  JausBoolean infrared_filter;				
+  JausBoolean tracking_function;				
 
 }SetUSVObservationsConfig7MessageStruct;
 
