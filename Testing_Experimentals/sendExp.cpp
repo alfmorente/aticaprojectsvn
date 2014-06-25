@@ -6,20 +6,22 @@
 
 void send_msg_exp1(OjCmpt comp, JausAddress jAdd){
     //Mensaje JAUS a enviar
-    SetUSVRemote1Message msgExp = SetUSVRemote1Message();
+    SetUSVRemote1Message msgExp = setUSVRemote1MessageCreate();
     msgExp->rpm_order = 2000;
     msgExp->rudder_angle = -30;
     //Copio la dirección al mensaje
     jausAddressCopy(msgExp->destination, jAdd);
     // Envio el mensaje JAUS
-    ojCmptSendMessage(comp, setUSVRemote1MessageToJausMessage(msgExp));
+    JausMessage jMsg = setUSVRemote1MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
     // Liberación de memoria
+    jausMessageDestroy(jMsg);
     setUSVRemote1MessageDestroy(msgExp);
 }
 
 void send_msg_exp1_pv(OjCmpt comp, JausAddress jAdd){
     //Mensaje JAUS a enviar
-    SetUSVRemote1Message msgExp = SetUSVRemote1Message();
+    SetUSVRemote1Message msgExp = setUSVRemote1MessageCreate();
     
     // Primer parametro
     msgExp->presenceVector = 0x01;
@@ -27,16 +29,19 @@ void send_msg_exp1_pv(OjCmpt comp, JausAddress jAdd){
     //Copio la dirección al mensaje
     jausAddressCopy(msgExp->destination, jAdd);
     // Envio el mensaje JAUS
-    ojCmptSendMessage(comp, setUSVRemote1MessageToJausMessage(msgExp));
+    JausMessage jMsg = setUSVRemote1MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
     
     // Segundo parametro
-    msgExp = SetUSVRemote1Message();
+    msgExp = setUSVRemote1MessageCreate();
     msgExp->presenceVector = 0x02;
     msgExp->rudder_angle = -30;
     // Envio el mensaje JAUS
-    ojCmptSendMessage(comp, setUSVRemote1MessageToJausMessage(msgExp));
+    jMsg = setUSVRemote1MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
     
     // Liberación de memoria
+    jausMessageDestroy(jMsg);
     setUSVRemote1MessageDestroy(msgExp);
 }
 

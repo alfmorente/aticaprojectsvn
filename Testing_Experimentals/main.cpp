@@ -178,7 +178,7 @@ void fcn_state_ready(OjCmpt comp) {
     destino = jausAddressCreate();
     destino->subsystem = 1; //Subsistema
     destino->node = 1; //Nodo
-    destino->component = JAUS_GLOBAL_POSE_SENSOR;
+    destino->component = JAUS_PRIMITIVE_DRIVER;
     destino->instance = 1; //Instancia
     
 /*******************************************************************************
