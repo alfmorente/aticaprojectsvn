@@ -61,7 +61,6 @@ void send_msg_exp10_pv(OjCmpt comp, JausAddress jAdd);
 void send_msg_exp11_pv(OjCmpt comp, JausAddress jAdd);
 void send_msg_exp12_pv(OjCmpt comp, JausAddress jAdd);
 void send_msg_exp13_pv(OjCmpt comp, JausAddress jAdd);
-void send_msg_exp14_pv(OjCmpt comp, JausAddress jAdd);
 void send_msg_exp15_pv(OjCmpt comp, JausAddress jAdd);
 void send_msg_exp16_pv(OjCmpt comp, JausAddress jAdd);
 void send_msg_exp17_pv(OjCmpt comp, JausAddress jAdd);

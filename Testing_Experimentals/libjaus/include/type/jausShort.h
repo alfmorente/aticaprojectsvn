@@ -65,4 +65,6 @@ JAUS_EXPORT int jausShortToString(JausShort value, char * buf);
 JAUS_EXPORT double jausShortToDouble(JausShort input, double min, double max);
 JAUS_EXPORT JausShort jausShortFromDouble(double value, double min, double max);
 
+JAUS_EXPORT JausBoolean jausShortIsBitSet(JausShort s, int bit);
+
 #endif // JAUS_SHORT_H

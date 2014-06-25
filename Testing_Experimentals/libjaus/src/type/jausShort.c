@@ -122,3 +122,8 @@ int jausShortToString(JausShort number, char *buf)
 {
   return sprintf(buf, "%d", number);
 }
+
+JausBoolean jausShortIsBitSet(JausShort input, int bit )
+{
+        return (input & (0x0001 << bit)) > 0 ? JAUS_TRUE : JAUS_FALSE;
+}

@@ -94,9 +94,9 @@ typedef struct
   JausByte waypoints_list_id;      //Scaled Byte (0,255)
   JausByte nof_waypoints;               //Scaled Byte (0,255)
   JausByte *waypoints_ids_list;            //Scaled Byte (0,255)
-  JausDouble *latitudes_list;	            // Scaled Int (-90, 90), Res: 4e-8
-  JausDouble *longitudes_list;	            // Scaled Int (-180, 180), Res: 8e-8
-  JausDouble *velocities_list;        // Scaled Short (0,100), Res: 0.0015
+  //JausDouble *latitudes_list;	            // Scaled Int (-90, 90), Res: 4e-8
+  //JausDouble *longitudes_list;	            // Scaled Int (-180, 180), Res: 8e-8
+  //JausDouble *velocities_list;        // Scaled Short (0,100), Res: 0.0015
 
 
 }SetListOfWaypoints14MessageStruct;

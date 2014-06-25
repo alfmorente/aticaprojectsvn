@@ -70,10 +70,10 @@ static void dataInitialize(SetListOfWaypoints14Message message) {
 
     message -> waypoints_list_id = newJausByte(0); //Scaled Byte (0,255)
     message -> nof_waypoints = newJausByte(0); //Scaled Byte (0,255)
-    message -> waypoints_ids_list = NULL; //Scaled Byte (0,255)
-    message -> latitudes_list = NULL; // Scaled Int (-90, 90), Res: 8e-8
-    message -> longitudes_list = NULL; // Scaled Int (-180, 180), Res: 8e-8
-    message -> velocities_list = NULL; // Scaled Short (0,100), Res: 0.0015
+    message -> waypoints_ids_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_BYTE_SIZE_BYTES);
+    //message -> latitudes_list = NULL; // Scaled Int (-90, 90), Res: 8e-8
+    //message -> longitudes_list = NULL; // Scaled Int (-180, 180), Res: 8e-8
+    //message -> velocities_list = NULL; // Scaled Short (0,100), Res: 0.0015
     
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
@@ -91,6 +91,7 @@ static JausBoolean dataFromBuffer(SetListOfWaypoints14Message message, unsigned 
     int index = 0;
     JausShort tempShort = 0; //Variable temporal para desempaquetar	
     JausInteger tempInt = 0; //Variable temporal para desempaquetar
+    JausByte tempByte = 0;
 
     if (bufferSizeBytes == message->dataSize) {
 
@@ -105,12 +106,18 @@ static JausBoolean dataFromBuffer(SetListOfWaypoints14Message message, unsigned 
             return JAUS_FALSE;
         //Se suma tamaño del parámetro
         index += JAUS_BYTE_SIZE_BYTES;
-        
         //ID WP
-        message->waypoints_ids_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_BYTE_SIZE_BYTES);
-        memcpy(message->waypoints_ids_list, buffer + index, message->nof_waypoints);
-        index += JAUS_BYTE_SIZE_BYTES * message->nof_waypoints;
-        
+        /*memcpy(message->waypoints_ids_list, buffer + index, message->nof_waypoints);
+        index += JAUS_BYTE_SIZE_BYTES * message->nof_waypoints;*/
+
+        for (int ind = 0; ind < message->nof_waypoints; ind++) {
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            message->waypoints_ids_list[ind] = tempByte;
+            //Se suma tamaño del parámetro
+            index += JAUS_BYTE_SIZE_BYTES;
+        }
+        /*
         // LATITUDES WP LIST
         message->latitudes_list = (unsigned char *) malloc(message->nof_waypoints * JAUS_INTEGER_SIZE_BYTES);
         for (int ind = 0; ind < message->nof_waypoints; ind++) {
@@ -142,7 +149,7 @@ static JausBoolean dataFromBuffer(SetListOfWaypoints14Message message, unsigned 
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
             message->velocities_list[ind] = jausShortToDouble(tempInt, 0, 100);
-        }
+        }*/
 
 
         return JAUS_TRUE;
@@ -173,7 +180,7 @@ static int dataToBuffer(SetListOfWaypoints14Message message, unsigned char *buff
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        
+        /*
         for (int ind = 0; ind < message->nof_waypoints; ind++) {
             tempInt = jausIntegerFromDouble(message->latitudes_list[ind],-90,90);
             if (!jausIntegerToBuffer(tempInt, buffer + index, bufferSizeBytes - index))
@@ -193,7 +200,7 @@ static int dataToBuffer(SetListOfWaypoints14Message message, unsigned char *buff
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
-        }
+        }*/
 
     }
 
@@ -235,9 +242,9 @@ static unsigned int dataSize(SetListOfWaypoints14Message message) {
     index += JAUS_BYTE_SIZE_BYTES;
     index += JAUS_BYTE_SIZE_BYTES;
     index += JAUS_BYTE_SIZE_BYTES * message->nof_waypoints;
-    index += JAUS_INTEGER_SIZE_BYTES * message->nof_waypoints;
-    index += JAUS_INTEGER_SIZE_BYTES * message->nof_waypoints;
-    index += JAUS_SHORT_SIZE_BYTES * message->nof_waypoints;
+    //index += JAUS_INTEGER_SIZE_BYTES * message->nof_waypoints;
+    //index += JAUS_INTEGER_SIZE_BYTES * message->nof_waypoints;
+    //index += JAUS_SHORT_SIZE_BYTES * message->nof_waypoints;
 
     return index;
 }
