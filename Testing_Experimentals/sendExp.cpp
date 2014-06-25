@@ -33,7 +33,7 @@ void send_msg_exp1_pv(OjCmpt comp, JausAddress jAdd){
     ojCmptSendMessage(comp, jMsg);
     
     // Segundo parametro
-    msgExp = setUSVRemote1MessageCreate();
+    //msgExp = setUSVRemote1MessageCreate();
     msgExp->presenceVector = 0x02;
     msgExp->rudder_angle = -30;
     // Envio el mensaje JAUS
