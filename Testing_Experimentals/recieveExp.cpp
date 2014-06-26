@@ -512,8 +512,86 @@ void fcn_receive_exp21(OjCmpt comp, JausMessage msg){
     }
 }
 
+/*******************************************************************************
+ EXP 22. REPORT DAY-TIME CAMERA
+ ******************************************************************************/ 
+void fcn_receive_exp22(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: REPORT DAY-TIME CAMERA(EXP #22)\n");
+    ReportDayTimeCamera22Message msgExp = reportDayTimeCamera22MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
+        printf("Recibido parámetro: ZOOM ACTUAL con valor: %d\n", msgExp->active_zoom);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_22_PV_FOCUS_BIT)) {
+       printf("Recibido parámetro: FOCO ACTUAL con valor: %f\n", msgExp->active_focus);
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_22_PV_AUTOFOCUS_BIT)){
+        if(msgExp->active_autofocus) printf("Recibido parámetro: AUTOFOCO ACTUAL ON\n");
+        else printf("Recibido parámetro: AUTOFOCO ACTUAL OFF\n");
+    }
+}
 
-void fcn_receive_exp22(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp23(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp24(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp25(OjCmpt comp, JausMessage msg){}
+/*******************************************************************************
+ EXP 23. SET NIGHT-TIME CAMERA
+ ******************************************************************************/
+void fcn_receive_exp23(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: SET NIGHT-TIME CAMERA(EXP #23)\n");
+    SetNightTimeCamera23Message msgExp = setNightTimeCamera23MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_23_PV_ZOOM_BIT)) {
+        printf("Recibido parámetro: ZOOM con valor: %d\n", msgExp->zoom);
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_23_PV_POLARITY_BIT)){
+        if(msgExp->polarity) printf("Recibido parámetro: POLARIDAD ON\n");
+        else printf("Recibido parámetro: POLARIDAD OFF\n");
+    }
+}
+
+/*******************************************************************************
+ EXP 24. REPORT NIGHT-TIME CAMERA
+ ******************************************************************************/ 
+void fcn_receive_exp24(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: REPORT NIGHT-TIME CAMERA(EXP #24)\n");
+    ReportNightTimeCamera24Message msgExp = reportNightTimeCamera24MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_24_PV_ZOOM_BIT)) {
+        printf("Recibido parámetro: ZOOM ACTIVO con valor: %d\n", msgExp->active_zoom);
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_24_PV_POLARITY_BIT)){
+        if(msgExp->active_polarity) printf("Recibido parámetro: POLARIDAD ON\n");
+        else printf("Recibido parámetro: POLARIDAD ACTUAL OFF\n");
+    }
+}
+
+/*******************************************************************************
+ EXP 25. REPORT SIGNALING ELEMENTS
+ ******************************************************************************/
+void fcn_receive_exp25(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: REPORT SIGNALING ELEMENTS(EXP #25)\n");
+    ReportSignalingElements25Message msgExp = reportSignalingElements25MessageFromJausMessage(msg);
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_25_PV_DIPSS_BIT)){
+        if(msgExp->dipss) printf("Recibido parámetro: DIPSS ACTUAL ON\n");
+        else printf("Recibido parámetro: DIPSS ACTUAL OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_25_PV_DIPSP_BIT)){
+        if(msgExp->dipsp) printf("Recibido parámetro: DIPSP ACTUAL ON\n");
+        else printf("Recibido parámetro: DIPSP ACTUAL OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_25_PV_DIPSR_BIT)){
+        if(msgExp->dipsr) printf("Recibido parámetro: DIPSR ACTUAL ON\n");
+        else printf("Recibido parámetro: DIPSR ACTUAL OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_25_PV_BKINKER_LEFT_BIT)){
+        if(msgExp->blinker_left) printf("Recibido parámetro: INTERMITENTE IZQUIERDA ACTUAL ON\n");
+        else printf("Recibido parámetro: INTERMITENTE IZQUIERDA ACTUAL OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_25_PV_BLINKER_RIGHT_BIT)){
+        if(msgExp->blinker_right) printf("Recibido parámetro: NTERMITENTE DERECHA ACTUAL ON\n");
+        else printf("Recibido parámetro: INTERMITENTE DERECHA ACTUAL OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_25_PV_KLAXON_BIT)){
+        if(msgExp->klaxon) printf("Recibido parámetro: CLAXON ACTUAL ON\n");
+        else printf("Recibido parámetro: CLAXON ACTUAL OFF\n");
+    }
+}

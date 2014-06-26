@@ -1313,14 +1313,14 @@ void send_msg_exp21_pv(OjCmpt comp, JausAddress jAdd){
     jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);    
     ojCmptSendMessage(comp, jMsg);
     
-    // Segundo parametro
+    // Tercer parametro
     msgExp->presenceVector = 0x04;
     msgExp->focus = 50;
     // Envio el mensaje JAUS
     jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);    
     ojCmptSendMessage(comp, jMsg);
     
-    // Segundo parametro
+    // Cuarto parametro
     msgExp->presenceVector = 0x08;
     msgExp->autofocus = JAUS_FALSE;
     // Envio el mensaje JAUS
@@ -1332,15 +1332,218 @@ void send_msg_exp21_pv(OjCmpt comp, JausAddress jAdd){
     setDayTimeCamera21MessageDestroy(msgExp);
 }
 
+/*******************************************************************************
+ EXP 22. REPORT DAY-TIME CAMERA
+ ******************************************************************************/ 
+void send_msg_exp22(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportDayTimeCamera22Message msgExp = reportDayTimeCamera22MessageCreate();
+    msgExp->active_zoom = 30;
+    msgExp->active_focus = 10;
+    msgExp->active_autofocus = JAUS_FALSE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportDayTimeCamera22MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportDayTimeCamera22MessageDestroy(msgExp);
+}
 
-void send_msg_exp22(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp23(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp24(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp25(OjCmpt comp, JausAddress jAdd){}
-// Envio test PV
+void send_msg_exp22_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportDayTimeCamera22Message msgExp = reportDayTimeCamera22MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->active_zoom = 30;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportDayTimeCamera22MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->active_focus = 10;
+    // Envio el mensaje JAUS
+    jMsg = reportDayTimeCamera22MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Tercer parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->active_autofocus = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = reportDayTimeCamera22MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
 
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportDayTimeCamera22MessageDestroy(msgExp);
+}
 
-void send_msg_exp22_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp23_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp24_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp25_pv(OjCmpt comp, JausAddress jAdd){}
+/*******************************************************************************
+ EXP 23. SET NIGHT-TIME CAMERA
+ ******************************************************************************/
+void send_msg_exp23(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetNightTimeCamera23Message msgExp = setNightTimeCamera23MessageCreate();
+    msgExp->zoom = 30;
+    msgExp->polarity = JAUS_TRUE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setNightTimeCamera23MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setNightTimeCamera23MessageDestroy(msgExp);
+}
+
+void send_msg_exp23_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetNightTimeCamera23Message msgExp = setNightTimeCamera23MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->zoom = 30;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setNightTimeCamera23MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->polarity = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = setNightTimeCamera23MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setNightTimeCamera23MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 24. REPORT NIGHT-TIME CAMERA
+ ******************************************************************************/ 
+void send_msg_exp24(OjCmpt comp, JausAddress jAdd){
+//Mensaje JAUS a enviar
+    ReportNightTimeCamera24Message msgExp = reportNightTimeCamera24MessageCreate();
+    msgExp->active_zoom = 30;
+    msgExp->active_polarity = JAUS_TRUE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportNightTimeCamera24MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportNightTimeCamera24MessageDestroy(msgExp);
+}
+
+void send_msg_exp24_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportNightTimeCamera24Message msgExp = reportNightTimeCamera24MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->active_zoom = 30;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportNightTimeCamera24MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->active_polarity = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = reportNightTimeCamera24MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportNightTimeCamera24MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 25. REPORT SIGNALING ELEMENTS
+ ******************************************************************************/ 
+void send_msg_exp25(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportSignalingElements25Message msgExp = reportSignalingElements25MessageCreate();
+    msgExp->dipss = JAUS_TRUE;
+    msgExp->dipsp = JAUS_FALSE;
+    msgExp->dipsr = JAUS_TRUE;
+    msgExp->blinker_left = JAUS_FALSE;
+    msgExp->blinker_right = JAUS_TRUE;
+    msgExp->klaxon = JAUS_FALSE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportSignalingElements25MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportSignalingElements25MessageDestroy(msgExp);
+}
+
+void send_msg_exp25_pv(OjCmpt comp, JausAddress jAdd){
+        //Mensaje JAUS a enviar
+    ReportSignalingElements25Message msgExp = reportSignalingElements25MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->dipss = JAUS_TRUE;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportSignalingElements25MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->dipsp = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = reportSignalingElements25MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Tercer parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->dipsr = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = reportSignalingElements25MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Cuarto parametro
+    msgExp->presenceVector = 0x08;
+    msgExp->blinker_left = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = reportSignalingElements25MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Quinto parametro
+    msgExp->presenceVector = 0x10;
+    msgExp->blinker_right = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = reportSignalingElements25MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Sexto parametro
+    msgExp->presenceVector = 0x20;
+    msgExp->klaxon = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = reportSignalingElements25MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportSignalingElements25MessageDestroy(msgExp);
+}

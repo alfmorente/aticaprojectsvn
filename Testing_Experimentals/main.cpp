@@ -295,10 +295,34 @@ void fcn_state_ready(OjCmpt comp) {
     
     
 /*******************************************************************************
- EXP 21. REPORT DAY-TIME CAMERA
+ EXP 21. SET DAY-TIME CAMERA
  ******************************************************************************/ 
     send_msg_exp21(comp, destino);
     send_msg_exp21_pv(comp, destino);
+    
+/*******************************************************************************
+ EXP 22. REPORT DAY-TIME CAMERA
+ ******************************************************************************/ 
+    send_msg_exp22(comp, destino);
+    send_msg_exp22_pv(comp, destino);
+        
+/*******************************************************************************
+ EXP 23. SET NIGHT-TIME CAMERA
+ ******************************************************************************/ 
+    send_msg_exp23(comp, destino);
+    send_msg_exp23_pv(comp, destino);
+        
+/*******************************************************************************
+ EXP 24. REPORT NIGHT-TIME CAMERA
+ ******************************************************************************/ 
+    send_msg_exp24(comp, destino);
+    send_msg_exp24_pv(comp, destino);
+        
+/*******************************************************************************
+ EXP 25. REPORT SIGNALING ELEMENTS
+ ******************************************************************************/ 
+    send_msg_exp25(comp, destino);
+    send_msg_exp25_pv(comp, destino);
     
     // Liberacion de memoria
     jausAddressDestroy(destino);
