@@ -13,9 +13,9 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals
+OUTPUT_PATH=./testing_experimentals
 OUTPUT_BASENAME=testing_experimentals
-PACKAGE_TOP_DIR=testingexperimentals/
+PACKAGE_TOP_DIR=testing_experimentals/
 
 # Functions
 function checkReturnCode
@@ -54,21 +54,21 @@ function copyFileToTmpDir
 
 # Setup
 cd "${TOP}"
-mkdir -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package
+mkdir -p .
 rm -rf ${NBTMPDIR}
 mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/testingexperimentals/bin"
+makeDirectory "${NBTMPDIR}/testing_experimentals/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/testingexperimentals.tar
+rm -f ./testing_experimentals
 cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/testingexperimentals.tar *
+tar -vcf ../../../.././testing_experimentals *
 checkReturnCode
 
 # Cleanup

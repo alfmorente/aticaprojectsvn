@@ -58,15 +58,15 @@ LDLIBSOPTIONS=libjaus/lib/libjaus.so libopenJaus/lib/libopenJaus.so -lpthread
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ./testing_experimentals
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals: libjaus/lib/libjaus.so
+./testing_experimentals: libjaus/lib/libjaus.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals: libopenJaus/lib/libopenJaus.so
+./testing_experimentals: libopenJaus/lib/libopenJaus.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals: ${OBJECTFILES}
-	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals ${OBJECTFILES} ${LDLIBSOPTIONS}
+./testing_experimentals: ${OBJECTFILES}
+	${MKDIR} -p .
+	${LINK.cc} -o ./testing_experimentals ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -89,7 +89,7 @@ ${OBJECTDIR}/sendExp.o: sendExp.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/testing_experimentals
+	${RM} ./testing_experimentals
 
 # Subprojects
 .clean-subprojects:

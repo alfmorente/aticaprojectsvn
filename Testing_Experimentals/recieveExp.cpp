@@ -13,7 +13,7 @@ void fcn_receive_exp1(OjCmpt comp, JausMessage msg){
     if(jausByteIsBitSet(msgExp->presenceVector, JAUS_1_PV_RUDDER_ANGLE_BIT)){
         printf("Recibido parámetro: RUDDER_ANGLE con valor: %f\n",msgExp->rudder_angle);
     }
-    printf("*****************************\n");
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -50,7 +50,7 @@ void fcn_receive_exp2(OjCmpt comp, JausMessage msg){
     if(jausShortIsBitSet(msgExp->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)){
         printf("Recibido parámetro: ESTADO DEL CAMBIO DE MODO con valor: %d\n",msgExp->mode_switching_status);
     }
-    printf("*****************************\n");
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -93,8 +93,7 @@ void fcn_receive_exp3(OjCmpt comp, JausMessage msg){
     if(jausShortIsBitSet(msgExp->presenceVector, JAUS_3_PV_ALARMS_BIT)){
         printf("Recibido parámetro: ALARMAS M2 con valor: %f\n",msgExp->alarms);
     }
-    
-    printf("*****************************\n");
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -137,7 +136,7 @@ void fcn_receive_exp4(OjCmpt comp, JausMessage msg){
         if(msgExp->gpsins_availability) printf("Recibido parámetro: GPSINS DISPONIBLE ON\n");
         else printf("Recibido parámetro: GPSINS DISPONIBLE OFF\n");
     }
-    
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -157,6 +156,7 @@ void fcn_receive_exp5(OjCmpt comp, JausMessage msg){
     if(jausByteIsBitSet(msgExp->presenceVector, JAUS_5_PV_WIND_DIRECTION_BIT)){
         printf("Recibido parámetro: DIRECCION DEL VIENTO con valor: %f\n",msgExp->wind_direction);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -172,6 +172,7 @@ void fcn_receive_exp6(OjCmpt comp, JausMessage msg){
     if(jausByteIsBitSet(msgExp->presenceVector, JAUS_6_PV_WAVE_FREQUENCY_BIT)){
         printf("Recibido parámetro: EST FRECUENCIA DE LA OLA con valor: %f\n",msgExp->wave_frequency);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -199,7 +200,7 @@ void fcn_receive_exp7(OjCmpt comp, JausMessage msg){
         if(msgExp->tracking_function) printf("Recibido parámetro: FUNCION TRACKING ON\n");
         else printf("Recibido parámetro: FUNCION TRACKING OFF\n");
     }
-    
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -227,6 +228,7 @@ void fcn_receive_exp8(OjCmpt comp, JausMessage msg) {
         if (msgExp->active_tracking_function) printf("Recibido parámetro: FUNCION TRACKING ACTUAL ON\n");
         else printf("Recibido parámetro: FUNCION TRACKING ACTUAL OFF\n");
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -244,6 +246,7 @@ void fcn_receive_exp10(OjCmpt comp, JausMessage msg){
         printf("Recibido parámetro: ECOS:\n");
         for(int ind=0;ind<5;ind++) printf("E%d: %f\n",ind+1,msgExp->echoes[ind]);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -268,6 +271,7 @@ void fcn_receive_exp11(OjCmpt comp, JausMessage msg){
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_11_PV_SONAR_CONFIG_BEARING_BIT)) {
         printf("Recibido parámetro: CONFIG SONAR (BEARING) con valor: %f\n", msgExp->sonar_config_bearing);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -299,6 +303,7 @@ void fcn_receive_exp12(OjCmpt comp, JausMessage msg){
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_12_PV_ALARMS_BIT)) {
         printf("Recibido parámetro: ALARMAS con valor: %f\n", msgExp->alarms);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -336,7 +341,7 @@ void fcn_receive_exp13(OjCmpt comp, JausMessage msg){
     if (jausShortIsBitSet(msgExp->presenceVector, JAUS_13_PV_CONTACT_DISTANCE_BIT)) {
         printf("Recibido parámetro: DISTANCIA CONTACTO con valor: %f\n", msgExp->contact_distance);
     }
-   
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -355,6 +360,7 @@ void fcn_receive_exp14(OjCmpt comp, JausMessage msg){
     for(int ind=0;ind<msgExp->nof_waypoints;ind++){
         printf("ID WP %d: %d LAT %d: %f LON %d: %f VEL %d: %f\n",ind+1, msgExp->waypoints_ids_list[ind],ind+1, msgExp->latitudes_list[ind],ind+1, msgExp->longitudes_list[ind],ind+1, msgExp->velocities_list[ind]);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -368,7 +374,7 @@ void fcn_receive_exp15(OjCmpt comp, JausMessage msg){
     printf("Recibido parámetro: ID DE LISTA con valor: %d\n", msgExp->objetive_list_id);
     // Identificador de WP
     printf("Recibido parámetro: ID DE WP con valor: %d\n", msgExp->objetive_waypoint_id);
-
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -393,7 +399,7 @@ void fcn_receive_exp16(OjCmpt comp, JausMessage msg){
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_SNR_BIT)) {
         printf("Recibido parámetro: SNR CANAL BACKUP con valor: %f\n", msgExp->backup_channel_snr);
     }
-   
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -418,6 +424,7 @@ void fcn_receive_exp17(OjCmpt comp, JausMessage msg){
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_17_PV_SPEED_BIT)) {
         printf("Recibido parámetro: VELOCIDAD con valor: %f\n", msgExp->speed);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -451,6 +458,7 @@ void fcn_receive_exp18(OjCmpt comp, JausMessage msg){
         if(msgExp->klaxon) printf("Recibido parámetro: CLAXON ON\n");
         else printf("Recibido parámetro: CLAXON OFF\n");
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -472,7 +480,7 @@ void fcn_receive_exp19(OjCmpt comp, JausMessage msg){
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_19_PV_ELEVATION_VELOCITY_BIT)) {
         printf("Recibido parámetro: VELOCIDAD ELEVACION con valor: %f\n", msgExp->elevation_velocity);
     }
-
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -488,6 +496,7 @@ void fcn_receive_exp20(OjCmpt comp, JausMessage msg){
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_20_PV_TILT_BIT)) {
        printf("Recibido parámetro: TILT ACTIVO con valor: %f\n", msgExp->active_tilt);
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -510,6 +519,7 @@ void fcn_receive_exp21(OjCmpt comp, JausMessage msg){
         if(msgExp->autofocus) printf("Recibido parámetro: AUTOFOCO ON\n");
         else printf("Recibido parámetro: AUTOFOCO OFF\n");
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -529,6 +539,7 @@ void fcn_receive_exp22(OjCmpt comp, JausMessage msg){
         if(msgExp->active_autofocus) printf("Recibido parámetro: AUTOFOCO ACTUAL ON\n");
         else printf("Recibido parámetro: AUTOFOCO ACTUAL OFF\n");
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -545,6 +556,7 @@ void fcn_receive_exp23(OjCmpt comp, JausMessage msg){
         if(msgExp->polarity) printf("Recibido parámetro: POLARIDAD ON\n");
         else printf("Recibido parámetro: POLARIDAD OFF\n");
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -561,6 +573,7 @@ void fcn_receive_exp24(OjCmpt comp, JausMessage msg){
         if(msgExp->active_polarity) printf("Recibido parámetro: POLARIDAD ON\n");
         else printf("Recibido parámetro: POLARIDAD ACTUAL OFF\n");
     }
+    printf("\n");
 }
 
 /*******************************************************************************
@@ -594,4 +607,5 @@ void fcn_receive_exp25(OjCmpt comp, JausMessage msg){
         if(msgExp->klaxon) printf("Recibido parámetro: CLAXON ACTUAL ON\n");
         else printf("Recibido parámetro: CLAXON ACTUAL OFF\n");
     }
+    printf("\n");
 }

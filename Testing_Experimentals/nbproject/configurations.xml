@@ -46,6 +46,7 @@
           </incDir>
         </ccTool>
         <linkerTool>
+          <output>./testing_experimentals</output>
           <linkerLibItems>
             <linkerLibFileItem>libjaus/lib/libjaus.so</linkerLibFileItem>
             <linkerLibFileItem>libopenJaus/lib/libopenJaus.so</linkerLibFileItem>
@@ -53,6 +54,18 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <packaging>
+        <packType>Tar</packType>
+        <output>./testing_experimentals</output>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+      </packaging>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="recieveExp.cpp" ex="false" tool="1" flavor2="0">
