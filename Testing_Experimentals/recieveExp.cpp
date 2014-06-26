@@ -350,36 +350,169 @@ void fcn_receive_exp14(OjCmpt comp, JausMessage msg){
     printf("Recibido parámetro: ID DE LISTA con valor: %d\n", msgExp->waypoints_list_id);
     // Identificador de lista
     printf("Recibido parámetro: NUMERO DE WPs con valor: %d\n", msgExp->nof_waypoints);
-    // Id.waypoints
+    // Listas
     printf("Recibido parámetro: LISTA DE IDENTIFICADORES DE WPs\n");
     for(int ind=0;ind<msgExp->nof_waypoints;ind++){
-        printf("ID WP %d: %d\n",ind+1, msgExp->waypoints_ids_list[ind]);
+        printf("ID WP %d: %d LAT %d: %f LON %d: %f VEL %d: %f\n",ind+1, msgExp->waypoints_ids_list[ind],ind+1, msgExp->latitudes_list[ind],ind+1, msgExp->longitudes_list[ind],ind+1, msgExp->velocities_list[ind]);
     }
-    // Latitudes
-    /*printf("Recibido parámetro: LISTA DE LATITUDES\n");
-    for(int ind=0;ind<msgExp->nof_waypoints;ind++){
-        printf("LAT %d: %f\n",ind+1, msgExp->latitudes_list[ind]);
-    }
-    // Latitudes
-    printf("Recibido parámetro: LISTA DE LONGITUDES\n");
-    for(int ind=0;ind<msgExp->nof_waypoints;ind++){
-        printf("LON %d: %f\n",ind+1, msgExp->longitudes_list[ind]);
-    }
-    // Velocidades
-    printf("Recibido parámetro: LISTA DE VELOCIDADES\n");
-    for(int ind=0;ind<msgExp->nof_waypoints;ind++){
-        printf("VEL %d: %f\n",ind+1, msgExp->velocities_list[ind]);
-    }*/
+}
+
+/*******************************************************************************
+ EXP 15. REPORT LIST OF WAYPOINTS
+ ******************************************************************************/ 
+void fcn_receive_exp15(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: REPORT LIST OF WAYPOINTS(EXP #15)\n");
+    ReportListOfWaypoints15Message msgExp = reportListOfWaypoints15MessageFromJausMessage(msg);
+    // Identificador de lista
+    printf("Recibido parámetro: ID DE LISTA con valor: %d\n", msgExp->objetive_list_id);
+    // Identificador de WP
+    printf("Recibido parámetro: ID DE WP con valor: %d\n", msgExp->objetive_waypoint_id);
 
 }
 
-void fcn_receive_exp15(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp16(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp17(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp18(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp19(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp20(OjCmpt comp, JausMessage msg){}
-void fcn_receive_exp21(OjCmpt comp, JausMessage msg){}
+/*******************************************************************************
+ EXP 16. HEARTBEAT - CHANNEL STATE MESSAGE OPERATIONS
+ ******************************************************************************/ 
+void fcn_receive_exp16(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: HEARTBEAT - CHANNEL STATE MESSAGE OPERATIONS(EXP #16)\n");
+    HeartbeatChannelState16Message msgExp = heartbeatChannelState16MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_16_PV_NODE_ID_BIT)) {
+        printf("Recibido parámetro: ID DE NODO con valor: %d\n", msgExp->node_id);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_STATUS_BIT)) {
+       printf("Recibido parámetro: ESTADO CANAL PRIMARIO con valor: %d\n", msgExp->primary_channel_status);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_STATUS_BIT)) {
+        printf("Recibido parámetro: ESTADO CANAL BACKUP con valor: %d\n", msgExp->backup_channel_status);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_16_PV_PRIMARY_CHANNEL_SNR_BIT)) {
+        printf("Recibido parámetro: SNR CANAL PRIMARIO con valor: %f\n", msgExp->primary_channel_snr);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_16_PV_BACKUP_CHANNEL_SNR_BIT)) {
+        printf("Recibido parámetro: SNR CANAL BACKUP con valor: %f\n", msgExp->backup_channel_snr);
+    }
+   
+}
+
+/*******************************************************************************
+ EXP 17. HEARTBEAT - POSITION INFO
+ ******************************************************************************/ 
+void fcn_receive_exp17(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: HEARTBEAT - POSITION INFO(EXP #17)\n");
+    HeartbeatPositionInfo17Message msgExp = heartbeatPositionInfo17MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_17_PV_LATITUDE_BIT)) {
+        printf("Recibido parámetro: LATITUD con valor: %f\n", msgExp->latitude);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_17_PV_LONGITUDE_BIT)) {
+       printf("Recibido parámetro: LONGITUD con valor: %f\n", msgExp->longitude);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_17_PV_ALTITUDE_BIT)) {
+        printf("Recibido parámetro: ALTITUD con valor: %f\n", msgExp->altitude);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_17_PV_HEADING_BIT)) {
+        printf("Recibido parámetro: HEADING con valor: %f\n", msgExp->heading);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_17_PV_SPEED_BIT)) {
+        printf("Recibido parámetro: VELOCIDAD con valor: %f\n", msgExp->speed);
+    }
+}
+
+/*******************************************************************************
+ EXP 18. SET SIGNALING ELEMENTS
+ ******************************************************************************/ 
+void fcn_receive_exp18(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: SET SIGNALING ELEMENTS(EXP #18)\n");
+    SetSignalingElements18Message msgExp = setSignalingElements18MessageFromJausMessage(msg);
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_18_PV_DIPSS_BIT)){
+        if(msgExp->dipss) printf("Recibido parámetro: DIPSS ON\n");
+        else printf("Recibido parámetro: DIPSS OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_18_PV_DIPSP_BIT)){
+        if(msgExp->dipsp) printf("Recibido parámetro: DIPSP ON\n");
+        else printf("Recibido parámetro: DIPSP OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_18_PV_DIPSR_BIT)){
+        if(msgExp->dipsr) printf("Recibido parámetro: DIPSR ON\n");
+        else printf("Recibido parámetro: DIPSR OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_18_PV_BKINKER_LEFT_BIT)){
+        if(msgExp->blinker_left) printf("Recibido parámetro: INTERMITENTE IZQUIERDA ON\n");
+        else printf("Recibido parámetro: INTERMITENTE IZQUIERDA OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_18_PV_BLINKER_RIGHT_BIT)){
+        if(msgExp->blinker_right) printf("Recibido parámetro: NTERMITENTE DERECHA ON\n");
+        else printf("Recibido parámetro: INTERMITENTE DERECHA OFF\n");
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_18_PV_KLAXON_BIT)){
+        if(msgExp->klaxon) printf("Recibido parámetro: CLAXON ON\n");
+        else printf("Recibido parámetro: CLAXON OFF\n");
+    }
+}
+
+/*******************************************************************************
+ EXP 19. SET POSITIONER
+ ******************************************************************************/ 
+void fcn_receive_exp19(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: SET POSITIONER(EXP #19)\n");
+    SetPositioner19Message msgExp = setPositioner19MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_19_PV_PAN_BIT)) {
+        printf("Recibido parámetro: PAN con valor: %f\n", msgExp->pan);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_19_PV_TILT_BIT)) {
+       printf("Recibido parámetro: TILT con valor: %f\n", msgExp->tilt);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_19_PV_SPIN_VELOCITY_BIT)) {
+        printf("Recibido parámetro: VELOCIDAD GIRO con valor: %f\n", msgExp->spin_velocity);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_19_PV_ELEVATION_VELOCITY_BIT)) {
+        printf("Recibido parámetro: VELOCIDAD ELEVACION con valor: %f\n", msgExp->elevation_velocity);
+    }
+
+}
+
+/*******************************************************************************
+ EXP 20. REPORT POSITIONER
+ ******************************************************************************/ 
+void fcn_receive_exp20(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: REPORT POSITIONER(EXP #20)\n");
+    ReportPositioner20Message msgExp = reportPositioner20MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_20_PV_PAN_BIT)) {
+        printf("Recibido parámetro: PAN ACTIVO con valor: %f\n", msgExp->active_pan);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_20_PV_TILT_BIT)) {
+       printf("Recibido parámetro: TILT ACTIVO con valor: %f\n", msgExp->active_tilt);
+    }
+}
+
+/*******************************************************************************
+ EXP 21. SET DAY-TIME CAMERA
+ ******************************************************************************/ 
+void fcn_receive_exp21(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: SET DAY-TIME CAMERA(EXP #21)\n");
+    SetDayTimeCamera21Message msgExp = setDayTimeCamera21MessageFromJausMessage(msg);
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_21_PV_DIRECT_ZOOM_BIT)) {
+        printf("Recibido parámetro: ZOOM DIRECTO con valor: %f\n", msgExp->direct_zoom);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_21_PV_CONTINUOUS_ZOOM_BIT)) {
+       printf("Recibido parámetro: ZOOM CONTINUO con valor: %d\n", msgExp->continuous_zoom);
+    }
+    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_21_PV_FOCUS_BIT)) {
+       printf("Recibido parámetro: FOCO con valor: %f\n", msgExp->focus);
+    }
+    if(jausShortIsBitSet(msgExp->presenceVector, JAUS_21_PV_AUTOFOCUS_BIT)){
+        if(msgExp->autofocus) printf("Recibido parámetro: AUTOFOCO ON\n");
+        else printf("Recibido parámetro: AUTOFOCO OFF\n");
+    }
+}
+
+
 void fcn_receive_exp22(OjCmpt comp, JausMessage msg){}
 void fcn_receive_exp23(OjCmpt comp, JausMessage msg){}
 void fcn_receive_exp24(OjCmpt comp, JausMessage msg){}

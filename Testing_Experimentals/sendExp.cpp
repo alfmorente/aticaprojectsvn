@@ -907,11 +907,17 @@ void send_msg_exp14(OjCmpt comp, JausAddress jAdd){
     SetListOfWaypoints14Message msgExp = setListOfWaypoints14MessageCreate();
     msgExp->waypoints_list_id = 5;
     msgExp->nof_waypoints = 5;
+    // Reserva de memoria para vectores
+    msgExp -> waypoints_ids_list = (unsigned char *) malloc((msgExp->nof_waypoints) * JAUS_BYTE_SIZE_BYTES);
+    msgExp -> latitudes_list = (JausDouble *) malloc((msgExp->nof_waypoints) * JAUS_DOUBLE_SIZE_BYTES);
+    msgExp -> longitudes_list = (JausDouble *) malloc((msgExp->nof_waypoints) * JAUS_DOUBLE_SIZE_BYTES);
+    msgExp -> velocities_list = (JausDouble *) malloc((msgExp->nof_waypoints) * JAUS_DOUBLE_SIZE_BYTES);
+    
     for(int ind=0;ind<msgExp->nof_waypoints;ind++){
         msgExp->waypoints_ids_list[ind]=ind+1;
-        //msgExp->latitudes_list[ind]=(ind+1)*20.63;
-        //msgExp->longitudes_list[ind]=(ind+1)*30.63;
-        //msgExp->velocities_list[ind]=(ind+1)*40.63;
+        msgExp->latitudes_list[ind]=(ind+1)*20.63;
+        msgExp->longitudes_list[ind]=(ind+1)*30.63;
+        msgExp->velocities_list[ind]=(ind+1)*40.63;
     }
     
     //Copio la dirección al mensaje
@@ -924,15 +930,409 @@ void send_msg_exp14(OjCmpt comp, JausAddress jAdd){
     setListOfWaypoints14MessageDestroy(msgExp);
 }
 
+/*******************************************************************************
+ EXP 15. REPORT LIST OF WAYPOINTS
+ ******************************************************************************/ 
+void send_msg_exp15(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportListOfWaypoints15Message msgExp = reportListOfWaypoints15MessageCreate();
+    msgExp->objetive_list_id = 2;
+    msgExp->objetive_waypoint_id = 50;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportListOfWaypoints15MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportListOfWaypoints15MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 16. HEARTBEAT - CHANNEL STATE MESSAGE OPERATIONS
+ ******************************************************************************/ 
+void send_msg_exp16(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    HeartbeatChannelState16Message msgExp = heartbeatChannelState16MessageCreate();
+    msgExp->node_id = 2;
+    msgExp->primary_channel_status = 3;
+    msgExp->backup_channel_status = 2;
+    msgExp->primary_channel_snr = 65;
+    msgExp->backup_channel_snr = 62;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = heartbeatChannelState16MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    heartbeatChannelState16MessageDestroy(msgExp);
+}
+
+void send_msg_exp16_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    HeartbeatChannelState16Message msgExp = heartbeatChannelState16MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->node_id = 2;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = heartbeatChannelState16MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->primary_channel_status = 3;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatChannelState16MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Tercer parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->backup_channel_status = 2;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatChannelState16MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Cuarto parametro
+    msgExp->presenceVector = 0x08;
+    msgExp->primary_channel_snr = 65;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatChannelState16MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Quinto parametro
+    msgExp->presenceVector = 0x10;
+    msgExp->backup_channel_snr = 62;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatChannelState16MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);    
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    heartbeatChannelState16MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 17. HEARTBEAT - POSITION INFO
+ ******************************************************************************/ 
+void send_msg_exp17(OjCmpt comp, JausAddress jAdd){
+        //Mensaje JAUS a enviar
+    HeartbeatPositionInfo17Message msgExp = heartbeatPositionInfo17MessageCreate();
+    msgExp->latitude = -25;
+    msgExp->longitude = 30;
+    msgExp->altitude = -2050;
+    msgExp->heading = -2.3;
+    msgExp->speed = 620;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    heartbeatPositionInfo17MessageDestroy(msgExp);
+}
+
+void send_msg_exp17_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    HeartbeatPositionInfo17Message msgExp = heartbeatPositionInfo17MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->latitude = -25;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->longitude = 30;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Tercer parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->altitude = -2050;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Cuarto parametro
+    msgExp->presenceVector = 0x08;
+    msgExp->heading = -2.3;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Quinto parametro
+    msgExp->presenceVector = 0x10;
+    msgExp->speed = 620;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);    
+    
+    // Quinto parametro
+    msgExp->presenceVector = 0x10;
+    msgExp->speed = 620;
+    // Envio el mensaje JAUS
+    jMsg = heartbeatPositionInfo17MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);    
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    heartbeatPositionInfo17MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 18. SET SIGNALING ELEMENTS
+ ******************************************************************************/ 
+void send_msg_exp18(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetSignalingElements18Message msgExp = setSignalingElements18MessageCreate();
+    msgExp->dipss = JAUS_FALSE;
+    msgExp->dipsp = JAUS_TRUE;
+    msgExp->dipsr = JAUS_FALSE;
+    msgExp->blinker_left = JAUS_TRUE;
+    msgExp->blinker_right = JAUS_FALSE;
+    msgExp->klaxon = JAUS_TRUE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setSignalingElements18MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setSignalingElements18MessageDestroy(msgExp);
+}
+
+void send_msg_exp18_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetSignalingElements18Message msgExp = setSignalingElements18MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->dipss = JAUS_FALSE;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setSignalingElements18MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->dipsp = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = setSignalingElements18MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Tercer parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->dipsr = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = setSignalingElements18MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Cuarto parametro
+    msgExp->presenceVector = 0x08;
+    msgExp->blinker_left = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = setSignalingElements18MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Quinto parametro
+    msgExp->presenceVector = 0x10;
+    msgExp->blinker_right = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = setSignalingElements18MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);    
+    
+    // Quinto parametro
+    msgExp->presenceVector = 0x20;
+    msgExp->klaxon = JAUS_TRUE;
+    // Envio el mensaje JAUS
+    jMsg = setSignalingElements18MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);    
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setSignalingElements18MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 19. SET POSITIONER
+ ******************************************************************************/ 
+void send_msg_exp19(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetPositioner19Message msgExp = setPositioner19MessageCreate();
+    msgExp->pan = 6200;
+    msgExp->tilt = -1200;
+    msgExp->spin_velocity = 20;
+    msgExp->elevation_velocity = -30;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setPositioner19MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setPositioner19MessageDestroy(msgExp);
+}
+
+void send_msg_exp19_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetPositioner19Message msgExp = setPositioner19MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->pan = 6200;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setPositioner19MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->tilt = -1200;
+    // Envio el mensaje JAUS
+    jMsg = setPositioner19MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Tercer parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->spin_velocity = 20;
+    // Envio el mensaje JAUS
+    jMsg = setPositioner19MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Cuarto parametro
+    msgExp->presenceVector = 0x08;
+    msgExp->elevation_velocity = -30;
+    // Envio el mensaje JAUS
+    jMsg = setPositioner19MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setPositioner19MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 20. REPORT POSITIONER
+ ******************************************************************************/ 
+void send_msg_exp20(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportPositioner20Message msgExp = reportPositioner20MessageCreate();
+    msgExp->active_pan = 6200;
+    msgExp->active_tilt = -1200;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportPositioner20MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportPositioner20MessageDestroy(msgExp);
+}
+
+void send_msg_exp20_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportPositioner20Message msgExp = reportPositioner20MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->active_pan = 6200;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportPositioner20MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->active_tilt = -1200;
+    // Envio el mensaje JAUS
+    jMsg = reportPositioner20MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportPositioner20MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 21. SET DAY-TIME CAMERA
+ ******************************************************************************/ 
+void send_msg_exp21(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetDayTimeCamera21Message msgExp = setDayTimeCamera21MessageCreate();
+    msgExp->direct_zoom = 30;
+    msgExp->continuous_zoom = 1;
+    msgExp->focus = 50;
+    msgExp->autofocus = JAUS_FALSE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setDayTimeCamera21MessageDestroy(msgExp);
+}
+
+void send_msg_exp21_pv(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetDayTimeCamera21Message msgExp = setDayTimeCamera21MessageCreate();
+        
+    // Primer parametro
+    msgExp->presenceVector = 0x01;
+    msgExp->direct_zoom = 30;
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x02;
+    msgExp->continuous_zoom = 1;
+    // Envio el mensaje JAUS
+    jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x04;
+    msgExp->focus = 50;
+    // Envio el mensaje JAUS
+    jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Segundo parametro
+    msgExp->presenceVector = 0x08;
+    msgExp->autofocus = JAUS_FALSE;
+    // Envio el mensaje JAUS
+    jMsg = setDayTimeCamera21MessageToJausMessage(msgExp);    
+    ojCmptSendMessage(comp, jMsg);
+    
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setDayTimeCamera21MessageDestroy(msgExp);
+}
 
 
-void send_msg_exp15(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp16(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp17(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp18(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp19(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp20(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp21(OjCmpt comp, JausAddress jAdd){}
 void send_msg_exp22(OjCmpt comp, JausAddress jAdd){}
 void send_msg_exp23(OjCmpt comp, JausAddress jAdd){}
 void send_msg_exp24(OjCmpt comp, JausAddress jAdd){}
@@ -940,13 +1340,6 @@ void send_msg_exp25(OjCmpt comp, JausAddress jAdd){}
 // Envio test PV
 
 
-void send_msg_exp15_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp16_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp17_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp18_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp19_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp20_pv(OjCmpt comp, JausAddress jAdd){}
-void send_msg_exp21_pv(OjCmpt comp, JausAddress jAdd){}
 void send_msg_exp22_pv(OjCmpt comp, JausAddress jAdd){}
 void send_msg_exp23_pv(OjCmpt comp, JausAddress jAdd){}
 void send_msg_exp24_pv(OjCmpt comp, JausAddress jAdd){}
