@@ -5,39 +5,7 @@
  * Created on 1 de julio de 2014, 9:55
  */
 
-#include <iostream>
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h> 
-#include <string.h>
-#include <complex>
-
-#define COMMAND_PRE 0xFA
-#define COMMAND_BID 0xFF
-#define COMMAND_MID_GOTOCONFIG 0x30
-#define COMMAND_MID_REQOUTPUTMODE 0xD0
-#define COMMAND_MID_REQDID 0x00
-#define COMMAND_LEN_0 0x00
-
-typedef struct{
-    unsigned char pre;
-    unsigned char bid;
-    unsigned char mid;
-    unsigned char len;
-    unsigned char *data;
-    unsigned char cs;
-}xsensMsg;
-
-unsigned char calcChecksum(xsensMsg);
-bool isCheckSumOK(xsensMsg);
-xsensMsg reqDeviceID();
-void sendToDevice(xsensMsg);
-xsensMsg goToConfig();
-
-struct termios newtio,oldtio;
-int canal;
+#include "constant.h"
 
 using namespace std;
 
@@ -46,44 +14,27 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-    char * serial_name = (char *)"/dev/ttyUSB0";
-    
-    canal = open(serial_name, O_RDWR | O_NOCTTY);
-    
+    char * serial_name = (char *) "/dev/ttyUSB0";
+
+    canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
+
     if (canal < 0) {
-        
+
         perror(serial_name);
         return -1;
-        //exit(-1);
-        
+
     } else {
-        
+
         tcgetattr(canal, &oldtio);
         bzero(&newtio, sizeof (newtio));
-        newtio.c_cflag = B9600 | CS8 | CLOCAL | CREAD;
-        /*	
-        BAUDRATE: Fija la tasa bps. Podria tambien usar cfsetispeed y cfsetospeed.    
-        CS8     : 8n1 (8bit,no paridad,1 bit de parada)
-        CLOCAL  : conexion local, sin control de modem
-        CREAD   : activa recepcion de caracteres
-         */
-        newtio.c_iflag = IGNPAR | ICRNL;
-        /*
-        IGNPAR  : ignora los bytes con error de paridad
-        ICRNL   : mapea CR a NL (en otro caso una entrada CR del otro ordenador no terminaria la entrada) en otro caso hace un dispositivo en bruto (sin otro proceso de entrada)
-         */
-        newtio.c_oflag = 0;
-        /*
-        Salida en bruto.
-         */
-        newtio.c_lflag = ICANON;
-        /*
-        ICANON  : activa entrada canonica desactiva todas las funcionalidades del eco, y no envia segnales al programa llamador
-         */
+        newtio.c_cflag = B115200 | CRTSCTS | CS8 | CLOCAL | CREAD;
 
-        /* 
-        inicializa todos los caracteres de control los valores por defecto se pueden encontrar en /usr/include/termios.h, y vienen dadas en los comentarios, pero no los necesitamos aqui
-         */
+        newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
+
+        newtio.c_oflag = 0;
+
+        newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
+
         newtio.c_cc[VINTR] = 0; /* Ctrl-c */
         newtio.c_cc[VQUIT] = 0; /* Ctrl-\ */
         newtio.c_cc[VERASE] = 0; /* del */
@@ -102,35 +53,139 @@ int main(int argc, char** argv) {
         newtio.c_cc[VLNEXT] = 0; /* Ctrl-v */
         newtio.c_cc[VEOL2] = 0; /* '\0' */
 
-        /* 
-        ahora limpiamos la linea del modem y activamos la configuracion del puerto
-         */
         tcflush(canal, TCIFLUSH);
         tcsetattr(canal, TCSANOW, &newtio);
 
-        //escrito = write(canal, comando, strlen(comando) - 1); // Enviamos el comando para que comience a enviarnos datos
-        //escrito = write(canal, comando2, strlen(comando2) - 1); // Enviamos el comando para que comience a enviarnos datos
-
-        /*xsensMsg msg1 = goToConfig();
-        sendToDevice(msg1);*/
+        xsensMsg msg = goToConfig();
+        sendToDevice(msg);
         
-        xsensMsg msg2 = reqDeviceID();
-        sendToDevice(msg2);
+        msg = reqDeviceID();
+        sendToDevice(msg);
+        
+        msg = reqDeviceID();
+        sendToDevice(msg);
+        
+        msg = setOutPutMode();
 
     }
     return 0;
 }
 
-// Calculo de checkSum
-unsigned char calcChecksum(xsensMsg msg){
-    unsigned char cs = 0;
+
+
+void sendToDevice(xsensMsg msg) {
+    unsigned char *msg2send = (unsigned char *) malloc(msg.len + 5);
+
+    msg2send[0] = msg.pre;
+    msg2send[1] = msg.bid;
+    msg2send[2] = msg.mid;
+    msg2send[3] = msg.len;
+
+    if (msg.len > 0) {
+        for (int i = 0; i < msg.len; i++) {
+            msg2send[i + 4] = msg.data[i];
+        }
+    }
+
+    msg2send[msg.len + 4] = msg.cs;
     
+    printf("Voy a enviar: ");
+    for(int i=0;i< (msg.len + 5);i++){
+        printf("%02X ",msg2send[i]&0xFF);
+    }
+    printf("\n");
+    
+    write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
+    waitForAck(msg.mid);
+
+}
+
+void waitForAck(unsigned char _mid) {
+
+    unsigned char byte;
+    unsigned char frameLen;
+    bool ackFound = false;
+    xsensMsg xsMsg;
+
+    while (!ackFound) {
+
+        if (read(canal, &xsMsg.pre, 1) > 0) {
+
+            // PRE
+            if (xsMsg.pre == COMMAND_PRE) {
+
+                read(canal, &xsMsg.bid, 1);
+
+                // BID
+                if (xsMsg.bid == COMMAND_BID) {
+
+                    read(canal, &xsMsg.mid, 1);
+
+                    // MID
+                    switch (xsMsg.mid) {
+                        case (COMMAND_MID_GOTOCONFIG + 1):
+
+                            //LEN
+                            read(canal, &xsMsg.len, 1);
+                            
+                            // DATA
+                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
+                            for (int i = 0; i < xsMsg.len; i++) {
+                                read(canal, &xsMsg.data[i], 1);
+                            }
+                            // CS
+                            read(canal, &xsMsg.cs, 1);
+                            if (isCheckSumOK(xsMsg)) {
+                                ackFound = true;
+                                printf("GoToConfig ACK received!\n");
+                            }else{
+                                printf("ERROR in GotoConfig ACK reception\n");
+                            }
+
+                            break;
+                        case (COMMAND_MID_REQDID + 1):
+
+                            // LEN
+                            read(canal, &xsMsg.len, 1);
+                            
+                            // DATA
+                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
+                            for (int i = 0; i < xsMsg.len; i++) {
+                                read(canal, &xsMsg.data[i], 1);
+                            }
+                            
+                            // CS
+                            read(canal, &xsMsg.cs, 1);
+                            if (isCheckSumOK(xsMsg)) {
+                                ackFound = true;
+                                printf("Device_ID ACK received!\n Device ID:");
+                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
+                                printf("\n");
+                            }else{
+                                printf("ERROR in Device_ID ACK reception\n");
+                            }
+                                
+                            break;
+                        case (COMMAND_MID_SETOUTPUTMODE + 1):
+                            break;
+                        case (COMMAND_MID_GOTOMEASUREMENT + 1):
+                            break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+unsigned char calcChecksum(xsensMsg msg) {
+    unsigned char cs = 0;
+
     cs += msg.bid;
     cs += msg.mid;
     cs += msg.len;
-    
-    if(msg.len > 0){
-        for(int i = 0; i < msg.len; i++){
+
+    if (msg.len > 0) {
+        for (int i = 0; i < msg.len; i++) {
             cs += msg.data[i];
         }
     }
@@ -138,24 +193,26 @@ unsigned char calcChecksum(xsensMsg msg){
 }
 
 // Comprobacion del checksum
-bool isCheckSumOK(xsensMsg msg){
+
+bool isCheckSumOK(xsensMsg msg) {
     unsigned char cs = 0;
     cs += msg.bid;
     cs += msg.mid;
     cs += msg.len;
-    
-    if(msg.len > 0){
-        for(int i = 0; i < msg.len; i++){
+
+    if (msg.len > 0) {
+        for (int i = 0; i < msg.len; i++) {
             cs += msg.data[i];
         }
     }
     cs += msg.cs;
-    
+
     return cs == 0x00;
 }
 
 // GetDeviceID
-xsensMsg reqDeviceID(){
+
+xsensMsg reqDeviceID() {
     xsensMsg xsMsg;
     xsMsg.pre = COMMAND_PRE;
     xsMsg.bid = COMMAND_BID;
@@ -166,7 +223,8 @@ xsensMsg reqDeviceID(){
 }
 
 // GoToConfig
-xsensMsg goToConfig(){
+
+xsensMsg goToConfig() {
     xsensMsg xsMsg;
     xsMsg.pre = COMMAND_PRE;
     xsMsg.bid = COMMAND_BID;
@@ -176,57 +234,56 @@ xsensMsg goToConfig(){
     return xsMsg;
 }
 
-void sendToDevice(xsensMsg msg){
-    unsigned char *msg2send = (unsigned char *) malloc(msg.len + 5);
-    
-    msg2send[0] = msg.pre;
-    msg2send[1] = msg.bid;
-    msg2send[2] = msg.mid;
-    msg2send[3] = msg.len;
-    
-    if(msg.len > 0){
-        for(int i = 0; i < msg.len; i++){
-            msg2send[i + 4] = msg.data[i];
-        }
-    }
-    
-    msg2send[msg.len + 4] = msg.cs;
-    
-    for(int i=0;i<msg.len+5;i++){
-        printf("%02X\n",0xFF & msg2send[i]);
-    }
-    
-    write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
-    unsigned char prueba;
-    while(true){
-        
-        read(canal,&prueba,1);
-        
-        if(prueba == COMMAND_PRE){
-            
-            read(canal,&prueba,1);
-            
-            if(prueba == COMMAND_BID){
-                
-                
-                read(canal,&prueba,1);
-                
-                printf("%02X\n",prueba & 0xFF);
-                
-                
-                if(prueba == (COMMAND_MID_REQDID + 0x01)){
-                    
-                    printf("OLEEE OLEEE OLEEEEE!!!!\n");
-                    
-                }
-                
-            }
-            
-        }
-        
-    }
-    
+// GotToMeasurement
+
+xsensMsg goToMeasurement() {
+    xsensMsg xsMsg;
+    xsMsg.pre = COMMAND_PRE;
+    xsMsg.bid = COMMAND_BID;
+    xsMsg.mid = COMMAND_MID_GOTOMEASUREMENT;
+    xsMsg.len = COMMAND_LEN_0;
+    xsMsg.cs = calcChecksum(xsMsg);
+    return xsMsg;
 }
 
+// SetOutPutMode
 
+xsensMsg setOutPutMode(){
+    xsensMsg xsMsg;
+    xsMsg.pre = COMMAND_PRE;
+    xsMsg.bid = COMMAND_BID;
+    xsMsg.mid = COMMAND_MID_SETOUTPUTMODE;
+    xsMsg.len = 0x02;
+    
+    outPutMode mode;
+    mode.temperature = true;
+    mode.calibrated_data = true;
+    mode.orientation = true;
+    mode.auxiliary_data = true;
+    mode.position = true;
+    mode.velocity = true;
+    mode.status = true;
+    mode.raw_gps = false;
+    mode.raw_ins = false;
 
+    unsigned short modeShort = 0;
+    
+    modeShort = mode.temperature |
+            mode.calibrated_data << 1 |
+            mode.orientation << 2 |
+            mode.auxiliary_data << 3 |
+            mode.position << 4 |
+            mode.velocity << 5 |
+            mode.status << 11 |
+            mode.raw_gps << 12 |
+            mode.raw_ins << 14;
+    printf("Mode: %d\n", modeShort);
+    memcpy(&xsMsg.data,&modeShort,2);
+    
+    for(int i=0;i<xsMsg.len;i++) 
+        printf("%02X ",xsMsg.data[i]);
+    printf("\n");
+    
+    xsMsg.cs = calcChecksum(xsMsg);
+    return xsMsg;
+}
