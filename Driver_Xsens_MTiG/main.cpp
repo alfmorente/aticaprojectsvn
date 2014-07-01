@@ -255,6 +255,7 @@ xsensMsg setOutPutMode(){
     xsMsg.mid = COMMAND_MID_SETOUTPUTMODE;
     xsMsg.len = 0x02;
     
+    
     outPutMode mode;
     mode.temperature = true;
     mode.calibrated_data = true;
@@ -278,11 +279,13 @@ xsensMsg setOutPutMode(){
             mode.raw_gps << 12 |
             mode.raw_ins << 14;
     printf("Mode: %d\n", modeShort);
-    memcpy(&xsMsg.data,&modeShort,2);
+        
+    memcpy(xsMsg.data,&modeShort,2);
     
-    for(int i=0;i<xsMsg.len;i++) 
+    for(int i=xsMsg.len-1;i>=0;i--) 
         printf("%02X ",xsMsg.data[i]);
     printf("\n");
+
     
     xsMsg.cs = calcChecksum(xsMsg);
     return xsMsg;
