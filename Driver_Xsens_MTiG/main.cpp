@@ -66,6 +66,7 @@ int main(int argc, char** argv) {
         sendToDevice(msg);
         
         msg = setOutPutMode();
+        sendToDevice(msg);
 
     }
     return 0;
@@ -167,6 +168,7 @@ void waitForAck(unsigned char _mid) {
                                 
                             break;
                         case (COMMAND_MID_SETOUTPUTMODE + 1):
+                            printf("BIEEEEENNN!!!!");
                             break;
                         case (COMMAND_MID_GOTOMEASUREMENT + 1):
                             break;
@@ -280,11 +282,10 @@ xsensMsg setOutPutMode(){
             mode.raw_ins << 14;
     printf("Mode: %d\n", modeShort);
         
-    memcpy(xsMsg.data,&modeShort,2);
-    
-    for(int i=xsMsg.len-1;i>=0;i--) 
-        printf("%02X ",xsMsg.data[i]);
-    printf("\n");
+    //memcpy(xsMsg.data,&modeShort,2);
+    xsMsg.data[1] = 0x3F;
+    xsMsg.data[0] = 0x08;
+
 
     
     xsMsg.cs = calcChecksum(xsMsg);
