@@ -48,7 +48,7 @@ extern "C" {
 #define TOS_MANUAL 2
 
 // Modos de operacion - msg_modo
-#define MODE_NEUTRAL -1
+#define MODE_NEUTRAL 13
 #define MODE_MANUAL 0
 #define MODE_REMOTE 1
 #define MODE_PLAN 2
@@ -247,7 +247,7 @@ extern "C" {
 #define FOLLOWER_LASER_ERROR 5
 #define FOLLOWER_NAVIGATION_ERROR 6
 #define FOLLOWER_CAMERA_ERROR 7
-#define FOLLOWER_LINK_ERROR 8
+#define LINK_ERROR 8
 // Output Errors
 #define CONVOY_CONNECTION_ERROR 100
 #define CONVOY_SOCKET_RECEIVE_ERROR 101
