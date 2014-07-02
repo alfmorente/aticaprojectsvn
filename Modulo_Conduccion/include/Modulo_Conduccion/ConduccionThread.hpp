@@ -15,12 +15,14 @@
         #define ARRANQUE_PARADA 0x01                     // En binario (0000 0001)
         #define FRENO_ESTACIONAMIENTO 0x02              // En binario (0000 0010)
         
-        // BYTE 4
-        #define MARCHA_H_ 0x00                          // En binario (0000 0000)
-        #define MARCHA_N_ 0x01                          // En binario (0000 0001)
-        #define MARCHA_R_ 0x02                          // En binario (0000 0010)
-        #define MARCHA_N1_ 0x04                         // En binario (0000 0100)
-        #define MARCHA_L_ 0x08                          // En binario (0000 1000)
+        // BYTE 2
+        #define MAN 0x00                             // En binario (0000 0000)
+        #define AUTO 0x01                               // En binario (0000 0001)
+        #define MARCHA_H_ 0x10                          // En binario (0001 0000)
+        #define MARCHA_N_ 0x20                          // En binario (0010 0000)
+        #define MARCHA_R_ 0x40                          // En binario (0100 0000)
+        #define MARCHA_N1_ 0x80                         // En binario (1000 0000)
+        #define MARCHA_L_ 0x90                          // En binario (1001 0000)
 
         // BYTE 7
         #define CONF_PARADA_EMERGENCIA 0x01             // En binario (0000 0001)

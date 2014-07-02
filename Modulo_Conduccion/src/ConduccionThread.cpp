@@ -101,14 +101,28 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
         freno_estacionamiento = 0;
     
     // BYTE 1 - Posicion conmutador M/A
-    conmutador_m_a = StatusMsg.Msg.DATA[1];
+    if ((StatusMsg.Msg.DATA[1] & MAN) == MAN) 
+        conmutador_m_a = 0;
+    if ((StatusMsg.Msg.DATA[1] & AUTO) == AUTO) 
+        conmutador_m_a = 1;
+    
+    if ((StatusMsg.Msg.DATA[1] & MARCHA_H_) == MARCHA_H_) 
+        marcha_actual = 0;
+    if ((StatusMsg.Msg.DATA[1] & MARCHA_N_) == MARCHA_N_) 
+        marcha_actual = 1;
+    if ((StatusMsg.Msg.DATA[1] & MARCHA_R_) == MARCHA_R_) 
+        marcha_actual = 2;
+    if ((StatusMsg.Msg.DATA[1] & MARCHA_N1_) == MARCHA_N1_) 
+        marcha_actual = 3;
+    if ((StatusMsg.Msg.DATA[1] & MARCHA_L_) == MARCHA_L_)     
+        marcha_actual = 4;
         
     // BYTE 2 - Velocidad
     velocidad = StatusMsg.Msg.DATA[2];
     
     // BYTE 3 - Freno de Servicio
     freno_servicio = StatusMsg.Msg.DATA[3];
-    
+    /*
     // BYTE 4 - Marcha 
     if ((StatusMsg.Msg.DATA[4] & MARCHA_H_) == MARCHA_H_) 
         marcha_actual = 0;
@@ -120,6 +134,10 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
         marcha_actual = 3;
     if ((StatusMsg.Msg.DATA[4] & MARCHA_L_) == MARCHA_L_)     
         marcha_actual = 4;
+    */
+    
+    // BYTE 4 - Acelerador
+    acelerador = StatusMsg.Msg.DATA[4];
     
     // BYTE 5 - Sentido de la direccion
     sentido_giro = StatusMsg.Msg.DATA[5];

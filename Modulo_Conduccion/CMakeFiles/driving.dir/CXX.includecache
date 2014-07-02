@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../../Common_files/include/Common_files/constant.h
+
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/include/Common_files/constant.h
 
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/../../../Common_files/msg_gen/cpp/include/Common_files/msg_backup.h
@@ -302,11 +304,43 @@ stdlib.h
 iostream
 -
 
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/CANCommunication.cpp
+../include/Modulo_Conduccion/CANCommunication.hpp
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/CANCommunication.hpp
+libpcan.h
+-
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/ConduccionThread.cpp
+../include/Modulo_Conduccion/ConduccionThread.hpp
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/ConduccionThread.hpp
+queue
+-
+iostream
+-
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/Thread.cpp
+../include/Modulo_Conduccion/Thread.hpp
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/Thread.hpp
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/Timer.cpp
+../include/Modulo_Conduccion/Timer.hpp
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/Timer.hpp
+unistd.h
+-
+sys/time.h
+-
+
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp
 ../include/Modulo_Conduccion/conduccion.h
 /home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/conduccion.h
 signal.h
 -
+
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/interaction.cpp
+../include/Modulo_Conduccion/interaction.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/interaction.h
+../../Common_files/include/Common_files/constant.h
+/home/atica/catkin_ws/src/Modulo_Conduccion/src/../../Common_files/include/Common_files/constant.h
 
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
