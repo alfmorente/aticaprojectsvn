@@ -405,6 +405,8 @@ xsensMsg setOutPutSettings(){
 
 void streamDataMng() {
     xsensMsg xsMsg;
+
+    
     while (true){
         if (read(canal, &xsMsg.pre, 1) > 0) {
 
@@ -445,7 +447,7 @@ void streamDataMng() {
                             printf("ERROR in MTData2 ACK reception\n");
                         }
                         
-                        printf("Iniciando el tratamiento de datos...\n");
+                        printf("Data management...\n");
                         dataPacketMT2 dataPacket;
                         int i = 0;
                         
@@ -453,28 +455,357 @@ void streamDataMng() {
                             
                             //unsigned char * aux = (unsigned char *)malloc(2);
 
-                            dataPacket.idPacket = (xsMsg.data[i]*256)+(xsMsg.data[i+1]);
-                            
-                            i++;
-                            i++;
-                            dataPacket.len = xsMsg.data[i];
-                            i++;
+                            dataPacket.idGroup = xsMsg.data[i++];
+                            dataPacket.idSignal = xsMsg.data[i++];
+                            dataPacket.len = xsMsg.data[i++];
                             
                             dataPacket.data = (unsigned char *) malloc(dataPacket.len);
                             
                             for(int j = 0; j < dataPacket.len;j++){
                                 
-                                dataPacket.data[j]=xsMsg.data[i];
-                                i++;                                
+                                dataPacket.data[j]=xsMsg.data[i++];
                             }
+                            packetMng(dataPacket);
                             
-                            printf("ID Packet found: %d with length %d\n",dataPacket.idPacket,dataPacket.len);
                         }
-                        printf("---\n");
+                        printf("------------------------------------------------------------------------\n");
                     }
                 }
             }
         }
     }
 
+}
+
+void packetMng(dataPacketMT2 dataPacket) {
+    //printf("ID Packet found:Group %02X Signal %02X with length %d\n",dataPacket.idGroup,dataPacket.idSignal,dataPacket.len);
+    unsigned char *auxBuf;
+    unsigned short auxShort;
+    int auxInt;
+    float auxFloat;
+    
+    switch (dataPacket.idGroup) {
+        
+        case 0x10: // Timestamp
+            printf("Got timestamp packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // UTC Time
+                    printf("   UTC time %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Packet counter
+                    auxBuf = (unsigned char *) malloc(2);
+                    auxBuf[0] = dataPacket.data[1];
+                    auxBuf[1] = dataPacket.data[0];
+                    memcpy(&auxShort,auxBuf,2);
+                    printf("   Packetcounter: %d\n",auxShort);
+                    
+                    break;
+                case 0x30: // Integer Time of Week
+                    printf("   Integer Time of Week %d bytes\n", dataPacket.len);
+                    break;
+                case 0x40: // GPS Age
+                    printf("   GPS Age %d bytes\n", dataPacket.len);
+                    break;
+                case 0x50: // Pressure Age
+                    printf("   Pressure Age %d bytes\n", dataPacket.len);
+                    break;
+                case 0x60: // Sample Time Fine
+                    printf("   Sample Time Fine %d bytes\n", dataPacket.len);
+                    break;
+                case 0x70: // Sample Time Coarse
+                    printf("   Sample Time Coarse %d bytes\n", dataPacket.len);
+                    break;
+                case 0x80: // Frame Range
+                    printf("   Frame Range %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: Timestamp %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        case 0x08: // Temperature
+            printf("Got temperature packet\n");
+            if ((dataPacket.idSignal & 0xF0) == 0x10) // Temperature
+                printf("   Temperature: %f ºC\n", hexa2float(dataPacket.data));
+            else
+                printf("   UNKNOWN :: Temperature %d bytes\n", dataPacket.len);
+            printf("\n");
+            break;
+            
+            
+        case 0x88: // GPS
+            printf("Got GPS packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x30: // DOP
+                    printf("   DOP %d bytes\n", dataPacket.len);
+                    break;
+                case 0x40: // SOL
+                    printf("   SOL %d bytes\n", dataPacket.len);
+                    break;
+                case 0x80: // Time UTC
+                    printf("   Time UTC %d bytes\n", dataPacket.len);
+                    break;
+                case 0xA0: // SV info
+                    printf("   SV info %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: GPS %d bytes\n", dataPacket.len);
+                    break;
+            }
+            
+            printf("\n");
+            break;
+            
+            
+        case 0x20: // Orientation
+            printf("Got orientation packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // Quaternion
+                    printf("   Quaternion %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Rotation Matrix
+                    printf("   Rotation Matrix %d bytes\n", dataPacket.len);
+                    break;
+                case 0x30: // Euler Angles
+                    printf("   Euler Angles %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: Orientation %d bytes\n", dataPacket.len);
+                    break;
+            }
+            
+            printf("\n");
+            break;
+            
+            
+        case 0x30: // Pressure
+            printf("Got pressure packet\n");
+            if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
+                printf("   Pressure: %f mbar\n",  (float) hexa2int(dataPacket.data) / 100);
+            else
+                printf("   UNKNOWN :: Pressure %d bytes \n", dataPacket.len);
+            printf("\n");
+            break;
+            
+            
+        case 0x40: // Acceleration
+            printf("Got acceleration packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // Delta V
+                    printf("   Delta V %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Acceleration
+                    printf("   Acceleration %d bytes\n", dataPacket.len);
+                    break;
+                case 0x30: // Free acceleration
+                    printf("   Free acceleration %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: Acceleration %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        case 0x50: // Position
+            printf("Got position packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // Altitude MSL
+                    printf("   Altitude MSL V %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Altitude Ellipsoid
+                    printf("   Altitude Ellipsoid %d bytes\n", dataPacket.len);
+                    break;
+                case 0x30: // Position ECEF
+                    printf("   Position ECEF %d bytes\n", dataPacket.len);
+                    break;
+                case 0x40: // LatLon
+                    printf("   LatLon %d bytes\n", dataPacket.len);
+                    
+                                        
+                    auxBuf = (unsigned char *) malloc(6);
+                    for(int i=0;i<6;i++){
+                        auxBuf[i] = dataPacket.data[i];
+                    }
+                    printf("Latitud: %f \n",parseFixPointFormat(auxBuf));
+                                        
+                    auxBuf = (unsigned char *) malloc(6);
+                    for(int i=6;i<12;i++){
+                        auxBuf[i-6] = dataPacket.data[i];
+                    }
+                    printf("Longitud: %f \n",parseFixPointFormat(auxBuf));
+                    
+                    for(int i = 0; i < dataPacket.len ; i++) printf("%02X ", dataPacket.data[i]);
+                    printf("\n");
+                    break;
+                default:
+                    printf("   UNKNOWN :: position %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        case 0x80: // Angular velocity
+            printf("Got angular velocity packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x20: // Rate of Turn
+                    printf("   Rate of Turn %d bytes\n", dataPacket.len);
+                    break;
+                case 0x30: // Delta Q
+                    printf("   Delta Q %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: angular velocity %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        case 0xA0: // Sensor component readout
+            printf("Got sensor component readout packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // ACC+GYR+MAG+Temperature
+                    printf("   ACC+GYR+MAG+Temperature V %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Gyro Temperature
+                    printf("   Gyro Temperature %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: SCR %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        case 0xB0: // Analog in
+            printf("Got analog in packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // Analog in 1
+                    printf("   Analog in 1 %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Analog in 2
+                    printf("   Analog in 2 %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: Analog in %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        case 0xC0: // Magnetic
+            printf("Got magnetic packet\n");
+            if((dataPacket.idSignal & 0xF0) == 0x20) // Magnetic field
+                printf("   Magnetic field %d bytes\n", dataPacket.len);
+            else
+                printf("   UNKNOWN :: Magnetic %d bytes\n", dataPacket.len);            
+            printf("\n");
+            break;
+            
+            
+        case 0xD0: // Velocity
+            printf("Got velocity packet\n");
+            if((dataPacket.idSignal & 0xF0) == 0x10) // Velocity XYZ
+                printf("   Velocity XYZ %d bytes\n", dataPacket.len);
+            else
+                printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len);            
+            printf("\n");
+            break;
+            
+            
+        case 0xE0: // Status
+            printf("Got status packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
+                case 0x10: // Status Byte
+                    printf("   Status Byte %d bytes\n", dataPacket.len);
+                    break;
+                case 0x20: // Status Word
+                    printf("   Status Word %d bytes\n", dataPacket.len);
+                    break;
+                case 0x40: // RSSI
+                    printf("   RSSI %d bytes\n", dataPacket.len);
+                    break;
+                default:
+                    printf("   UNKNOWN :: Status in %d bytes\n", dataPacket.len);
+                    break;
+            }
+            printf("\n");
+            break;
+            
+            
+        default: // Unknown
+            printf("Got KNOWN packet: %02X\n", dataPacket.idGroup);
+            printf("\n");
+            break;
+
+    }
+}
+
+float hexa2float(unsigned char * buffer)
+{
+    union
+    {
+        float value;
+        unsigned char buffer[4];
+
+    }floatUnion;
+
+    floatUnion.buffer[0] = buffer[3];
+    floatUnion.buffer[1] = buffer[2];
+    floatUnion.buffer[2] = buffer[1];
+    floatUnion.buffer[3] = buffer[0];
+
+    return floatUnion.value;
+}
+
+int hexa2int(unsigned char * buffer)
+{
+    union
+    {
+        int value;
+        unsigned char buffer[4];
+
+    }floatUnion;
+
+    floatUnion.buffer[0] = buffer[3];
+    floatUnion.buffer[1] = buffer[2];
+    floatUnion.buffer[2] = buffer[1];
+    floatUnion.buffer[3] = buffer[0];
+
+    return floatUnion.value;
+}
+
+float parseFixPointFormat(unsigned char * data) {
+    
+    unsigned char *buf = (unsigned char *) malloc(2);
+    short auxShort;
+    int ent;
+    buf[0] = data[1];
+    buf[1] = data[0];
+    memcpy(&auxShort, buf, 2);
+    
+    
+    
+    buf = (unsigned char *) malloc(4);
+    buf[0] = data[3];
+    buf[1] = data[2];
+    buf[2] = data[1];
+    buf[3] = data[0];
+    memcpy(&ent, buf, 2);
+
+    for (int i = 0; i < 6; i++) {
+        printf("%02X ",data[i]);
+    }
+    printf("\n");
+    
+
+    return ent/auxShort;
 }

@@ -63,7 +63,8 @@ typedef struct {
 } outPutMode;
 
 typedef struct {
-  unsigned short idPacket;
+  unsigned short idGroup;
+  unsigned short idSignal;
   unsigned char len;
   unsigned char *data;
 } dataPacketMT2;
@@ -79,6 +80,11 @@ xsensMsg goToConfig();
 xsensMsg setOutPutMode();
 xsensMsg setOutPutSettings();
 void streamDataMng();
+void packetMng(dataPacketMT2);
+
+float hexa2float(unsigned char * );
+int hexa2int(unsigned char * );
+float parseFixPointFormat(unsigned char *);
 
 
 
