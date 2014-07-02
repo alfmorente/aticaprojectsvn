@@ -36,7 +36,9 @@ extern "C" {
 #define COMMAND_MID_GOTOCONFIG 0x30
 #define COMMAND_MID_GOTOMEASUREMENT 0x10
 #define COMMAND_MID_SETOUTPUTMODE 0xD0
+#define COMMAND_MID_SETOUTPUTSETTINGS 0xD2
 #define COMMAND_MID_REQDID 0x00
+#define COMMAND_MID_MTDATA2 0x36
 #define COMMAND_LEN_0 0x00
 
 typedef struct {
@@ -60,6 +62,12 @@ typedef struct {
   bool raw_ins;
 } outPutMode;
 
+typedef struct {
+  unsigned short idPacket;
+  unsigned char len;
+  unsigned char *data;
+} dataPacketMT2;
+
 
 void sendToDevice(xsensMsg);
 void waitForAck(unsigned char);
@@ -69,6 +77,8 @@ xsensMsg reqDeviceID();
 xsensMsg goToMeasurement();
 xsensMsg goToConfig();
 xsensMsg setOutPutMode();
+xsensMsg setOutPutSettings();
+void streamDataMng();
 
 
 
