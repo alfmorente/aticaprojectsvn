@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
         msg = goToMeasurement();
         sendToDevice(msg);
         
-        streamDataMng();
+        //streamDataMng();
 
     }
     return 0;
@@ -394,10 +394,10 @@ xsensMsg setOutPutSettings(){
     xsMsg.bid = COMMAND_BID;
     xsMsg.mid = COMMAND_MID_SETOUTPUTSETTINGS;
     xsMsg.len = 0x04;
-    xsMsg.data[3] = 0x75;
-    xsMsg.data[2] = 0x00;
-    xsMsg.data[1] = 0x00;
     xsMsg.data[0] = 0x00;
+    xsMsg.data[1] = 0x00;
+    xsMsg.data[2] = 0x02;
+    xsMsg.data[3] = 0x05;
     
     xsMsg.cs = calcChecksum(xsMsg);
     return xsMsg;
@@ -447,7 +447,10 @@ void streamDataMng() {
                             printf("ERROR in MTData2 ACK reception\n");
                         }
                         
+                       printf("Iniciando el tratamiento de datos...\n");
+
                         printf("Data management...\n");
+
                         dataPacketMT2 dataPacket;
                         int i = 0;
                         
@@ -595,7 +598,15 @@ void packetMng(dataPacketMT2 dataPacket) {
             printf("Got acceleration packet\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Delta V
-                    printf("   Delta V %d bytes\n", dataPacket.len);
+                    //printf("   Delta V %d bytes\n", dataPacket.len);
+                    unsigned char * buf;
+                    buf = (unsigned char *) malloc(4);
+                    for(int i = 0 ; i < 4; i ++) buf[i] = dataPacket.data[i];
+                    printf("   Delta V (X): %f\n",hexa2float(buf));
+                    for(int i = 4 ; i < 8; i ++) buf[i-4] = dataPacket.data[i];
+                    printf("   Delta V (Y): %f\n",hexa2float(buf));
+                    for(int i = 8 ; i < 12; i ++) buf[i-8] = dataPacket.data[i];
+                    printf("   Delta V (Z): %f\n",hexa2float(buf));
                     break;
                 case 0x20: // Acceleration
                     printf("   Acceleration %d bytes\n", dataPacket.len);
@@ -657,7 +668,16 @@ void packetMng(dataPacketMT2 dataPacket) {
                     printf("   Rate of Turn %d bytes\n", dataPacket.len);
                     break;
                 case 0x30: // Delta Q
-                    printf("   Delta Q %d bytes\n", dataPacket.len);
+                    unsigned char * buf;
+                    buf = (unsigned char *) malloc(4);
+                    for(int i = 0 ; i < 4; i ++) buf[i] = dataPacket.data[i];
+                    printf("   Delta q0: %f\n",hexa2float(buf));
+                    for(int i = 4 ; i < 8; i ++) buf[i-4] = dataPacket.data[i];
+                    printf("   Delta q1: %f\n",hexa2float(buf));
+                    for(int i = 8 ; i < 12; i ++) buf[i-8] = dataPacket.data[i];
+                    printf("   Delta q2: %f\n",hexa2float(buf));
+                    for(int i = 12 ; i < 16; i ++) buf[i-12] = dataPacket.data[i];
+                    printf("   Delta q3: %f\n",hexa2float(buf));
                     break;
                 default:
                     printf("   UNKNOWN :: angular velocity %d bytes\n", dataPacket.len);
@@ -699,14 +719,22 @@ void packetMng(dataPacketMT2 dataPacket) {
             }
             printf("\n");
             break;
-            
-            
+
+
         case 0xC0: // Magnetic
             printf("Got magnetic packet\n");
-            if((dataPacket.idSignal & 0xF0) == 0x20) // Magnetic field
+            if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
                 printf("   Magnetic field %d bytes\n", dataPacket.len);
-            else
-                printf("   UNKNOWN :: Magnetic %d bytes\n", dataPacket.len);            
+                unsigned char * buf;
+                buf = (unsigned char *) malloc(4);
+                for (int i = 0; i < 4; i++) buf[i] = dataPacket.data[i];
+                printf("   Mag (X): %f\n", hexa2float(buf));
+                for (int i = 4; i < 8; i++) buf[i - 4] = dataPacket.data[i];
+                printf("   Mag (Y): %f\n", hexa2float(buf));
+                for (int i = 8; i < 12; i++) buf[i - 8] = dataPacket.data[i];
+                printf("   Mag (Z): %f\n", hexa2float(buf));
+            } else
+                printf("   UNKNOWN :: Magnetic %d bytes\n", dataPacket.len);
             printf("\n");
             break;
             
@@ -728,6 +756,10 @@ void packetMng(dataPacketMT2 dataPacket) {
                     printf("   Status Byte %d bytes\n", dataPacket.len);
                     break;
                 case 0x20: // Status Word
+                    unsigned char * buf;
+                    buf = (unsigned char *) malloc(4);
+                    for(int i = 0 ; i < 4; i ++) buf[i] = dataPacket.data[i];
+                    printf("   Status: %d\n",hexa2int(buf));
                     printf("   Status Word %d bytes\n", dataPacket.len);
                     break;
                 case 0x40: // RSSI
