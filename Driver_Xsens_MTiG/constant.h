@@ -38,6 +38,9 @@ extern "C" {
 #define COMMAND_MID_SETOUTPUTMODE 0xD0
 #define COMMAND_MID_SETOUTPUTSETTINGS 0xD2
 #define COMMAND_MID_REQDID 0x00
+#define COMMAND_MID_SETOUTPUTSKIPFACTOR 0xD4
+#define COMMAND_MID_SETPERIOD 0x04
+#define COMMAND_MID_SETOUTPUTCONFIGURATION 0xC0
 #define COMMAND_MID_MTDATA2 0x36
 #define COMMAND_LEN_0 0x00
 
@@ -79,10 +82,14 @@ xsensMsg goToMeasurement();
 xsensMsg goToConfig();
 xsensMsg setOutPutMode();
 xsensMsg setOutPutSettings();
+xsensMsg setOutPutSkipFactor();
+xsensMsg setOutPutConfiguration();
+xsensMsg setPeriod();
 void streamDataMng();
 void packetMng(dataPacketMT2);
 
 float hexa2float(unsigned char * );
+float hexa2double(unsigned char * );
 int hexa2int(unsigned char * );
 float parseFixPointFormat(unsigned char *);
 

@@ -58,6 +58,12 @@ int main(int argc, char** argv) {
 
         xsensMsg msg = goToConfig();
         sendToDevice(msg);
+                
+        /*msg = setOutPutSkipFactor();
+        sendToDevice(msg);
+        
+        msg = setPeriod();
+        sendToDevice(msg);
         
         msg = reqDeviceID();
         sendToDevice(msg);
@@ -66,12 +72,14 @@ int main(int argc, char** argv) {
         sendToDevice(msg);
         
         msg = setOutPutSettings();
+        sendToDevice(msg);*/
+        msg = setOutPutConfiguration();
         sendToDevice(msg);
         
         msg = goToMeasurement();
         sendToDevice(msg);
         
-        //streamDataMng();
+        streamDataMng();
 
     }
     return 0;
@@ -266,6 +274,87 @@ void waitForAck(unsigned char _mid) {
                             }
                             printf("---\n");
                             break;
+                        case (COMMAND_MID_SETPERIOD + 1):
+                            // LEN
+                            read(canal, &xsMsg.len, 1);
+                            printf("LEN found! :: %02X\n",xsMsg.len);
+                            
+                            // DATA
+                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
+                            printf("DATA found! :: ");
+                            for (int i = 0; i < xsMsg.len; i++) {
+                                read(canal, &xsMsg.data[i], 1);
+                                printf("%02X ",xsMsg.data[i]);
+                            }
+                            printf("\n");
+                            
+                            // CS
+                            read(canal, &xsMsg.cs, 1);
+                            printf("CS found! :: %02X\n",xsMsg.cs);
+                            if (isCheckSumOK(xsMsg)) {
+                                ackFound = true;
+                                //printf("Device_ID ACK received!\n Device ID:");
+                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
+                                printf("\n");
+                            }else{
+                                //printf("ERROR in Device_ID ACK reception\n");
+                            }
+                            printf("---\n");
+                            break;
+                        case (COMMAND_MID_SETOUTPUTSKIPFACTOR + 1):
+                            // LEN
+                            read(canal, &xsMsg.len, 1);
+                            printf("LEN found! :: %02X\n",xsMsg.len);
+                            
+                            // DATA
+                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
+                            printf("DATA found! :: ");
+                            for (int i = 0; i < xsMsg.len; i++) {
+                                read(canal, &xsMsg.data[i], 1);
+                                printf("%02X ",xsMsg.data[i]);
+                            }
+                            printf("\n");
+                            
+                            // CS
+                            read(canal, &xsMsg.cs, 1);
+                            printf("CS found! :: %02X\n",xsMsg.cs);
+                            if (isCheckSumOK(xsMsg)) {
+                                ackFound = true;
+                                //printf("Device_ID ACK received!\n Device ID:");
+                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
+                                printf("\n");
+                            }else{
+                                //printf("ERROR in Device_ID ACK reception\n");
+                            }
+                            printf("---\n");
+                            break;
+                        case (COMMAND_MID_SETOUTPUTCONFIGURATION + 1):
+                            // LEN
+                            read(canal, &xsMsg.len, 1);
+                            printf("LEN found! :: %02X\n",xsMsg.len);
+                            
+                            // DATA
+                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
+                            printf("DATA found! :: ");
+                            for (int i = 0; i < xsMsg.len; i++) {
+                                read(canal, &xsMsg.data[i], 1);
+                                printf("%02X ",xsMsg.data[i]);
+                            }
+                            printf("\n");
+                            
+                            // CS
+                            read(canal, &xsMsg.cs, 1);
+                            printf("CS found! :: %02X\n",xsMsg.cs);
+                            if (isCheckSumOK(xsMsg)) {
+                                ackFound = true;
+                                //printf("Device_ID ACK received!\n Device ID:");
+                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
+                                printf("\n");
+                            }else{
+                                //printf("ERROR in Device_ID ACK reception\n");
+                            }
+                            printf("---\n");
+                            break;
                     }
                 }
             }
@@ -377,8 +466,8 @@ xsensMsg setOutPutMode(){
     printf("Mode: %d\n", modeShort);
         
     //memcpy(xsMsg.data,&modeShort,2);
-    xsMsg.data[1] = 0x3F;
-    xsMsg.data[0] = 0x08;
+    xsMsg.data[1] = 0x06;
+    xsMsg.data[0] = 0x00;
 
 
     
@@ -396,9 +485,66 @@ xsensMsg setOutPutSettings(){
     xsMsg.len = 0x04;
     xsMsg.data[0] = 0x00;
     xsMsg.data[1] = 0x00;
-    xsMsg.data[2] = 0x02;
-    xsMsg.data[3] = 0x05;
+    xsMsg.data[2] = 0x00;
+    xsMsg.data[3] = 0x09;
     
+    xsMsg.cs = calcChecksum(xsMsg);
+    return xsMsg;
+}
+
+// SetOupPutSkipFactor
+
+xsensMsg setOutPutSkipFactor(){
+    xsensMsg xsMsg;
+    xsMsg.pre = COMMAND_PRE;
+    xsMsg.bid = COMMAND_BID;
+    xsMsg.mid = COMMAND_MID_SETOUTPUTSKIPFACTOR;
+    xsMsg.len = 0x02;
+    xsMsg.data[0] = 0x00;
+    xsMsg.data[1] = 0x63;
+    
+    xsMsg.cs = calcChecksum(xsMsg);
+    return xsMsg;
+}
+
+// SetPeriod
+
+xsensMsg setPeriod(){
+    xsensMsg xsMsg;
+    xsMsg.pre = COMMAND_PRE;
+    xsMsg.bid = COMMAND_BID;
+    xsMsg.mid = COMMAND_MID_SETPERIOD;
+    xsMsg.len = 0x02;
+    xsMsg.data[0] = 0x04;
+    xsMsg.data[1] = 0x80;
+    
+    xsMsg.cs = calcChecksum(xsMsg);
+    return xsMsg;
+}
+
+// SetOutPutConfiguration
+
+xsensMsg setOutPutConfiguration(){
+    xsensMsg xsMsg;
+    xsMsg.pre = COMMAND_PRE;
+    xsMsg.bid = COMMAND_BID;
+    xsMsg.mid = COMMAND_MID_SETOUTPUTCONFIGURATION;
+    xsMsg.len = 0x0C;
+    // Temperatura
+    xsMsg.data[0] = 0x08;
+    xsMsg.data[1] = 0x13;
+    xsMsg.data[2] = 0x00;
+    xsMsg.data[3] = 0x01;
+    // Orientacion
+    xsMsg.data[4] = 0x20;
+    xsMsg.data[5] = 0x33;
+    xsMsg.data[6] = 0x00;
+    xsMsg.data[7] = 0x01;
+    // Posicion
+    xsMsg.data[8] = 0x50;
+    xsMsg.data[9] = 0x43;
+    xsMsg.data[10] = 0x00;
+    xsMsg.data[11] = 0x01;
     xsMsg.cs = calcChecksum(xsMsg);
     return xsMsg;
 }
@@ -491,7 +637,7 @@ void packetMng(dataPacketMT2 dataPacket) {
         
         case 0x10: // Timestamp
             printf("Got timestamp packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // UTC Time
                     printf("   UTC time %d bytes\n", dataPacket.len);
                     break;
@@ -524,7 +670,7 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: Timestamp %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             printf("\n");
             break;
             
@@ -532,7 +678,8 @@ void packetMng(dataPacketMT2 dataPacket) {
         case 0x08: // Temperature
             printf("Got temperature packet\n");
             if ((dataPacket.idSignal & 0xF0) == 0x10) // Temperature
-                printf("   Temperature: %f ºC\n", hexa2float(dataPacket.data));
+                printf("   Temperature: %d bytes\n", dataPacket.len);
+            // printf("   Temperature: %f ºC\n", hexa2float(dataPacket.data));
             else
                 printf("   UNKNOWN :: Temperature %d bytes\n", dataPacket.len);
             printf("\n");
@@ -541,7 +688,7 @@ void packetMng(dataPacketMT2 dataPacket) {
             
         case 0x88: // GPS
             printf("Got GPS packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x30: // DOP
                     printf("   DOP %d bytes\n", dataPacket.len);
                     break;
@@ -557,7 +704,7 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: GPS %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             
             printf("\n");
             break;
@@ -574,6 +721,15 @@ void packetMng(dataPacketMT2 dataPacket) {
                     break;
                 case 0x30: // Euler Angles
                     printf("   Euler Angles %d bytes\n", dataPacket.len);
+                    auxBuf = (unsigned char *)malloc(8);
+                    for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
+                    printf("   Roll: %3.8lf\n", hexa2double(auxBuf));
+                    auxBuf = (unsigned char *)malloc(8);
+                    for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
+                    printf("   Pitch: %3.8lf\n", hexa2double(auxBuf));
+                    auxBuf = (unsigned char *)malloc(8);
+                    for(int i = 16; i < 24; i++) auxBuf[i-16]=dataPacket.data[i];
+                    printf("   Yaw: %3.8lf\n", hexa2double(auxBuf));
                     break;
                 default:
                     printf("   UNKNOWN :: Orientation %d bytes\n", dataPacket.len);
@@ -586,17 +742,17 @@ void packetMng(dataPacketMT2 dataPacket) {
             
         case 0x30: // Pressure
             printf("Got pressure packet\n");
-            if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
+            /*if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
                 printf("   Pressure: %f mbar\n",  (float) hexa2int(dataPacket.data) / 100);
             else
-                printf("   UNKNOWN :: Pressure %d bytes \n", dataPacket.len);
+                printf("   UNKNOWN :: Pressure %d bytes \n", dataPacket.len);*/
             printf("\n");
             break;
             
             
         case 0x40: // Acceleration
             printf("Got acceleration packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Delta V
                     //printf("   Delta V %d bytes\n", dataPacket.len);
                     unsigned char * buf;
@@ -617,7 +773,7 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: Acceleration %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             printf("\n");
             break;
             
@@ -636,22 +792,12 @@ void packetMng(dataPacketMT2 dataPacket) {
                     break;
                 case 0x40: // LatLon
                     printf("   LatLon %d bytes\n", dataPacket.len);
-                    
-                                        
-                    auxBuf = (unsigned char *) malloc(6);
-                    for(int i=0;i<6;i++){
-                        auxBuf[i] = dataPacket.data[i];
-                    }
-                    printf("Latitud: %f \n",parseFixPointFormat(auxBuf));
-                                        
-                    auxBuf = (unsigned char *) malloc(6);
-                    for(int i=6;i<12;i++){
-                        auxBuf[i-6] = dataPacket.data[i];
-                    }
-                    printf("Longitud: %f \n",parseFixPointFormat(auxBuf));
-                    
-                    for(int i = 0; i < dataPacket.len ; i++) printf("%02X ", dataPacket.data[i]);
-                    printf("\n");
+                    auxBuf = (unsigned char *)malloc(8);
+                    for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
+                    printf("   Latitud: %2.8lf\n", hexa2double(auxBuf));
+                    auxBuf = (unsigned char *)malloc(8);
+                    for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
+                    printf("   Longitud: %2.8lf\n", hexa2double(auxBuf));
                     break;
                 default:
                     printf("   UNKNOWN :: position %d bytes\n", dataPacket.len);
@@ -663,7 +809,7 @@ void packetMng(dataPacketMT2 dataPacket) {
             
         case 0x80: // Angular velocity
             printf("Got angular velocity packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x20: // Rate of Turn
                     printf("   Rate of Turn %d bytes\n", dataPacket.len);
                     break;
@@ -682,14 +828,14 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: angular velocity %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             printf("\n");
             break;
             
             
         case 0xA0: // Sensor component readout
             printf("Got sensor component readout packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // ACC+GYR+MAG+Temperature
                     printf("   ACC+GYR+MAG+Temperature V %d bytes\n", dataPacket.len);
                     break;
@@ -699,14 +845,14 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: SCR %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             printf("\n");
             break;
             
             
         case 0xB0: // Analog in
             printf("Got analog in packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Analog in 1
                     printf("   Analog in 1 %d bytes\n", dataPacket.len);
                     break;
@@ -716,14 +862,14 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: Analog in %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             printf("\n");
             break;
 
 
         case 0xC0: // Magnetic
             printf("Got magnetic packet\n");
-            if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
+            /*if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
                 printf("   Magnetic field %d bytes\n", dataPacket.len);
                 unsigned char * buf;
                 buf = (unsigned char *) malloc(4);
@@ -734,24 +880,24 @@ void packetMng(dataPacketMT2 dataPacket) {
                 for (int i = 8; i < 12; i++) buf[i - 8] = dataPacket.data[i];
                 printf("   Mag (Z): %f\n", hexa2float(buf));
             } else
-                printf("   UNKNOWN :: Magnetic %d bytes\n", dataPacket.len);
+                printf("   UNKNOWN :: Magnetic %d bytes\n", dataPacket.len);*/
             printf("\n");
             break;
             
             
         case 0xD0: // Velocity
             printf("Got velocity packet\n");
-            if((dataPacket.idSignal & 0xF0) == 0x10) // Velocity XYZ
+            /*if((dataPacket.idSignal & 0xF0) == 0x10) // Velocity XYZ
                 printf("   Velocity XYZ %d bytes\n", dataPacket.len);
             else
-                printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len);            
+                printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len); */           
             printf("\n");
             break;
             
             
         case 0xE0: // Status
             printf("Got status packet\n");
-            switch (dataPacket.idSignal & 0xF0) {
+            /*switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Status Byte
                     printf("   Status Byte %d bytes\n", dataPacket.len);
                     break;
@@ -768,7 +914,7 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: Status in %d bytes\n", dataPacket.len);
                     break;
-            }
+            }*/
             printf("\n");
             break;
             
@@ -811,6 +957,24 @@ int hexa2int(unsigned char * buffer)
     floatUnion.buffer[1] = buffer[2];
     floatUnion.buffer[2] = buffer[1];
     floatUnion.buffer[3] = buffer[0];
+
+    return floatUnion.value;
+}
+
+float hexa2double(unsigned char * buffer){
+    union{
+        double value;
+        unsigned char buffer[8];
+    }floatUnion;
+
+    floatUnion.buffer[0] = buffer[7];
+    floatUnion.buffer[1] = buffer[6];
+    floatUnion.buffer[2] = buffer[5];
+    floatUnion.buffer[3] = buffer[4];
+    floatUnion.buffer[4] = buffer[3];
+    floatUnion.buffer[5] = buffer[2];
+    floatUnion.buffer[6] = buffer[1];
+    floatUnion.buffer[7] = buffer[0];
 
     return floatUnion.value;
 }
