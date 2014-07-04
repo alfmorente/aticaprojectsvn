@@ -55,8 +55,8 @@ int getOperationMode(int,char **);
 void printCorrectSyntax();
 
 //Funciones de suscripcion
-void fcn_sub_com_teleop(const Common_files::msg_com_teleop);
-void fcn_sub_enable_module(const Common_files::msg_module_enable);
+void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr&);
+void fcn_sub_enable_module(const Common_files::msg_module_enablePtr&);
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
 //Funciones propias

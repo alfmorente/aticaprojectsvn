@@ -90,31 +90,34 @@ int main(int argc, char **argv)
  * ****************************************************************************/
 
 // Suscriptor de habilitacion de modulo
-void fcn_sub_enable_module(const Common_files::msg_module_enable msg)
+void fcn_sub_enable_module(const Common_files::msg_module_enablePtr& msg)
 {    
-    if((msg.id_module==ID_MOD_REMOTE) && (msg.status==1)){
+    if((msg->id_module==ID_MOD_REMOTE) && (msg->status==1)){
         cout << "Modulo activado\n";
         enableModule=true;
     }
-    else if ((msg.id_module==ID_MOD_REMOTE) && (msg.status==0)){
+    else if ((msg->id_module==ID_MOD_REMOTE) && (msg->status==0)){
         enableModule=false;
         cout << "Modulo desactivado\n";
     }
 }
 
 // Suscriptor de teleoperado que introduce los parametros dentro de rango
-void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
+void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
 {
     //cout << "Comando recibido\n";
     //cout << msg << endl;
     if(enableModule==true){
         // El nuevo mensaje esta depurado y conserva el id_elemento
-        Common_files::msg_com_teleop msg_cteleop;
-        Common_files::msg_error msg_err;
-        msg_cteleop.id_element=msg.id_element;
+        /*Common_files::msg_com_teleop msg_cteleop;
+        Common_files::msg_error msg_err;*/
+        Common_files::msg_com_teleopPtr msg_cteleop(new Common_files::msg_com_teleop);
+        Common_files::msg_errorPtr msg_err(new Common_files::msg_error);
+        msg_cteleop->id_element=msg->id_element;
+        //msg_cteleop.id_element=msg.id_element;
 
         // Proceso de depuracion de valores
-        msg_cteleop.value = convertToCorrectValues(msg.id_element,msg.value);
+        msg_cteleop->value = convertToCorrectValues(msg->id_element,msg->value);
         //cout << "Comando depurado\n";
         //cout << msg_cteleop;
         // Publicacion de mensaje ya depurado
@@ -123,9 +126,9 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleop msg)
         //cout << "Numero errores: " << error_count << endl;
         if (error_count>=MAX_OUTRANGE_ERROR){
             cout << "error en modulo\n";
-            msg_err.id_subsystem=SUBS_REMOTE;
-            msg_err.id_error=REMOTE_PARAMETER_OUTRANGE;
-            msg_err.type_error=TOE_UNDEFINED;
+            msg_err->id_subsystem=SUBS_REMOTE;
+            msg_err->id_error=REMOTE_PARAMETER_OUTRANGE;
+            msg_err->type_error=TOE_UNDEFINED;
             pub_error.publish(msg_err);
             error_count=0;
         }
