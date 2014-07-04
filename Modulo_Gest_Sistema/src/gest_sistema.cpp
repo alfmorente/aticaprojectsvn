@@ -108,83 +108,83 @@ bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_dat
 
 
 //Subscriptor del modo al topic del módulo Communicator
-void fcn_sub_mode_communication(const Common_files::msg_mode msg)
+void fcn_sub_mode_communication(const Common_files::msg_modePtr& msg)
 {
-        Common_files::msg_mode mode;
+        Common_files::msg_modePtr mode(new Common_files::msg_mode);
         if(actualMode==MODE_MANUAL || stoppingCar)
             return;
 
         //Si llega cambio de modo desde la UCR
-        if(msg.type_msg==SET)
+        if(msg->type_msg==SET)
         {
             carType=LEADER;
-            if(msg.status==MODE_START)
+            if(msg->status==MODE_START)
             {
                 if((actualMode==MODE_NEUTRAL) || (actualMode==MODE_CONVOY 
-                    && (msg.mode==MODE_CONVOY_TELEOP || msg.mode==MODE_CONVOY_AUTO)))
+                    && (msg->mode==MODE_CONVOY_TELEOP || msg->mode==MODE_CONVOY_AUTO)))
                 {
-                    if(modeRUN(msg.mode))
+                    if(modeRUN(msg->mode))
                     {
-                        mode.type_msg=INFO;
-                        mode.mode=msg.mode;
-                        mode.status=msg.status;
+                        mode->type_msg=INFO;
+                        mode->mode=msg->mode;
+                        mode->status=msg->status;
                         pub_mode_error.publish(mode);
                         pub_mode_communication.publish(mode);
                     }
                     else
                     {
                         ROS_INFO("Error to change mode");
-                        Common_files::msg_error error;
-                        error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                        error.id_error=MODE_NOT_AVAILABLE;
-                        error.type_error=TOE_UNDEFINED;
+                        Common_files::msg_errorPtr error(new Common_files::msg_error);
+                        error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                        error->id_error=MODE_NOT_AVAILABLE;
+                        error->type_error=TOE_UNDEFINED;
                         pub_error.publish(error);
                     }
                 }
             }
             //Modo activo
-            else if(actualMode==msg.mode)
+            else if(actualMode==msg->mode)
             {
-                if(msg.status==MODE_EXIT)
+                if(msg->status==MODE_EXIT)
                 {
-                    modeEXIT(msg.mode);
-                    Common_files::msg_mode mode;
-                    mode.type_msg=INFO;
-                    mode.mode=actualMode;
-                    mode.status=MODE_EXIT;
+                    modeEXIT(msg->mode);
+                    Common_files::msg_modePtr mode(new Common_files::msg_mode);
+                    mode->type_msg=INFO;
+                    mode->mode=actualMode;
+                    mode->status=MODE_EXIT;
                     pub_mode_communication.publish(mode);
                     pub_mode_error.publish(mode);
-                    if(msg.mode!=MODE_CONVOY_TELEOP && msg.mode!=MODE_CONVOY_AUTO )
+                    if(msg->mode!=MODE_CONVOY_TELEOP && msg->mode!=MODE_CONVOY_AUTO )
                         actualMode=MODE_NEUTRAL;
                     else
                         actualMode=MODE_CONVOY;                        
                         
                 }
-                else if(msg.status==MODE_RUN)
-                    modeRESUME(msg.mode);
-                else if(msg.status==MODE_STOP)
-                    modeSTOP(msg.mode);
+                else if(msg->status==MODE_RUN)
+                    modeRESUME(msg->mode);
+                else if(msg->status==MODE_STOP)
+                    modeSTOP(msg->mode);
             }
         }
 }
 
 //Subscriptor del modo al topic del módulo Error
-void fcn_sub_mode_error(const Common_files::msg_mode msg)
+void fcn_sub_mode_error(const Common_files::msg_modePtr& msg)
 {
         if(actualMode==MODE_MANUAL || stoppingCar)
                  return;
 
         //Modo activo
-        if(actualMode==msg.mode)
+        if(actualMode==msg->mode)
         {
-            if(msg.type_msg==SET && msg.status==MODE_EXIT)
+            if(msg->type_msg==SET && msg->status==MODE_EXIT)
             {
                 ROS_INFO("ERROR: MODE ACTUAL EXIT ");
-                modeEXIT(msg.mode);
-                Common_files::msg_mode mode;
-                mode.type_msg=INFO;
-                mode.mode=actualMode;
-                mode.status=MODE_EXIT;
+                modeEXIT(msg->mode);
+                Common_files::msg_modePtr mode(new Common_files::msg_mode);
+                mode->type_msg=INFO;
+                mode->mode=actualMode;
+                mode->status=MODE_EXIT;
                 pub_mode_error.publish(mode);
                 actualMode=MODE_NEUTRAL;
                 ROS_INFO("MODE NEUTRO");          
@@ -193,25 +193,25 @@ void fcn_sub_mode_error(const Common_files::msg_mode msg)
 }
 
 
-void fcn_sub_available(const Common_files::msg_available msg)
+void fcn_sub_available(const Common_files::msg_availablePtr& msg)
 {
     for(unsigned int i=AVAILABLE_POS_REMOTE;i<=AVAILABLE_POS_TEACH;i++)
-        modesAvailables[i]=msg.available[i];
+        modesAvailables[i]=msg->available[i];
 }
 
-void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
+void fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr& msg)
 {    
-    Common_files::msg_fcn_aux msg_ack; 
+    Common_files::msg_fcn_auxPtr msg_ack(new Common_files::msg_fcn_aux); 
     msg_ack=msg;
-    msg_ack.type_msg=INFO;
-    if(msg.type_msg==SET)
+    msg_ack->type_msg=INFO;
+    if(msg->type_msg==SET)
     {
-        switch(msg.function)
+        switch(msg->function)
         {
             case ENGINE:
                 if(actualMode==MODE_MANUAL || stoppingCar)
                     return;
-                if(msg.value==ON) 
+                if(msg->value==ON) 
                 {
                      if(modesAvailables[AVAILABLE_POS_START_ENGINE])
                      {
@@ -222,10 +222,10 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                      else
                      {
                         ROS_INFO("FUNCTION ENGINE START AVAILABLE"); 
-                        Common_files::msg_error error;
-                        error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                        error.id_error=FUNCTION_NOT_AVAILABLE;
-                        error.type_error=TOE_UNDEFINED;
+                        Common_files::msg_errorPtr error(new Common_files::msg_error);
+                        error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                        error->id_error=FUNCTION_NOT_AVAILABLE;
+                        error->type_error=TOE_UNDEFINED;
                         pub_error.publish(error);
                      }                     
                 }
@@ -240,10 +240,10 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                     else
                     {
                         ROS_INFO("FUNCTION ENGINE STOP AVAILABLE"); 
-                        Common_files::msg_error error;
-                        error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                        error.id_error=FUNCTION_NOT_AVAILABLE;
-                        error.type_error=TOE_UNDEFINED;
+                        Common_files::msg_errorPtr error(new Common_files::msg_error);
+                        error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                        error->id_error=FUNCTION_NOT_AVAILABLE;
+                        error->type_error=TOE_UNDEFINED;
                         pub_error.publish(error);
                     }                    
                 }
@@ -260,22 +260,22 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                 else
                 {
                     ROS_INFO("FUNCTION ENGAGE BRAKE NOT AVAILABLE");                     
-                    Common_files::msg_error error;
-                    error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                    error.id_error=FUNCTION_NOT_AVAILABLE;
-                    error.type_error=TOE_UNDEFINED;
+                    Common_files::msg_errorPtr error(new Common_files::msg_error);
+                    error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                    error->id_error=FUNCTION_NOT_AVAILABLE;
+                    error->type_error=TOE_UNDEFINED;
                     pub_error.publish(error);
                 }
                 break;
             case TEACH:
-                if(msg.value==ON)
+                if(msg->value==ON)
                 {
                     if(modesAvailables[AVAILABLE_POS_TEACH])
                     {
-                            Common_files::msg_module_enable enable;
-                            enable.id_module=ID_MOD_TEACH;
-                            enable.status=MOD_ON;
-                            enable.submode=SUBMODE_TEACH;
+                            Common_files::msg_module_enablePtr enable(new Common_files::msg_module_enable);
+                            enable->id_module=ID_MOD_TEACH;
+                            enable->status=MOD_ON;
+                            enable->submode=SUBMODE_TEACH;
                             pub_module_enable.publish(enable);
                             pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("TEACH ON");
@@ -283,34 +283,34 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                     else
                     {
                         ROS_INFO("FUNCTION TEACH NOT AVAILABLE"); 
-                        Common_files::msg_error error;
-                        error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                        error.id_error=FUNCTION_NOT_AVAILABLE;
-                        error.type_error=TOE_UNDEFINED;
+                        Common_files::msg_errorPtr error(new Common_files::msg_error);
+                        error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                        error->id_error=FUNCTION_NOT_AVAILABLE;
+                        error->type_error=TOE_UNDEFINED;
                         pub_error.publish(error);
                     }
                     
                 }
                 else
                 {
-                        Common_files::msg_module_enable enable;
-                        enable.id_module=ID_MOD_TEACH;
-                        enable.status=MOD_OFF;
-                        enable.submode=SUBMODE_TEACH;
+                        Common_files::msg_module_enablePtr enable(new Common_files::msg_module_enable);
+                        enable->id_module=ID_MOD_TEACH;
+                        enable->status=MOD_OFF;
+                        enable->submode=SUBMODE_TEACH;
                         pub_module_enable.publish(enable);
                         pub_fcn_aux_ack.publish(msg_ack);
                         ROS_INFO("TEACH OFF");
                 }   
                 break;
             case MAPPING:
-                if(msg.value==ON)
+                if(msg->value==ON)
                 {
                     if(modesAvailables[AVAILABLE_POS_MAPPING])
                     {
-                            Common_files::msg_module_enable enable;
-                            enable.id_module=ID_MOD_MAPPING;
-                            enable.status=MOD_ON;
-                            enable.submode=SUBMODE_MAPPING;
+                            Common_files::msg_module_enablePtr enable(new Common_files::msg_module_enable);
+                            enable->id_module=ID_MOD_MAPPING;
+                            enable->status=MOD_ON;
+                            enable->submode=SUBMODE_MAPPING;
                             pub_module_enable.publish(enable);
                             pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("MAPPING ON");
@@ -318,19 +318,19 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
                     else
                     {
                         ROS_INFO("FUNCTION MAPPING NOT AVAILABLE"); 
-                        Common_files::msg_error error;
-                        error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                        error.id_error=FUNCTION_NOT_AVAILABLE;
-                        error.type_error=TOE_UNDEFINED;
+                        Common_files::msg_errorPtr error(new Common_files::msg_error);
+                        error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                        error->id_error=FUNCTION_NOT_AVAILABLE;
+                        error->type_error=TOE_UNDEFINED;
                         pub_error.publish(error);
                     }                    
                 }
                 else
                 {
-                            Common_files::msg_module_enable enable;
-                            enable.id_module=ID_MOD_MAPPING;
-                            enable.status=MOD_OFF;
-                            enable.submode=SUBMODE_MAPPING;
+                            Common_files::msg_module_enablePtr enable(new Common_files::msg_module_enable);
+                            enable->id_module=ID_MOD_MAPPING;
+                            enable->status=MOD_OFF;
+                            enable->submode=SUBMODE_MAPPING;
                             pub_module_enable.publish(enable);
                             pub_fcn_aux_ack.publish(msg_ack);
                             ROS_INFO("MAPPING OFF");
@@ -342,18 +342,18 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux msg)
     }
 }
 
-void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop msg)
+void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg)
 {
-    if(msg.value==INFO){
+    if(msg->value==INFO){
         emergencyACK=true;
         ROS_INFO("Recibido ACK Parada emergencia");
     }
 }
 
-void fcn_sub_switch(const Common_files::msg_switch msg)
+void fcn_sub_switch(const Common_files::msg_switchPtr& msg)
 {
-    Common_files::msg_mode mode_aux;
-    if(msg.value==MANUAL && actualMode!=MODE_MANUAL)
+    Common_files::msg_modePtr mode_aux(new Common_files::msg_mode);
+    if(msg->value==MANUAL && actualMode!=MODE_MANUAL)
     {
         ROS_INFO("SWITCH MANUAL");
         ROS_INFO("EMERGENCY STOP");
@@ -374,24 +374,24 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
         }
         
         actualMode=MODE_MANUAL;
-        mode_aux.type_msg=INFO;
-        mode_aux.mode=MODE_MANUAL;
-        mode_aux.status=MODE_RUN;
+        mode_aux->type_msg=INFO;
+        mode_aux->mode=MODE_MANUAL;
+        mode_aux->status=MODE_RUN;
         pub_mode_error.publish(mode_aux);
         pub_mode_communication.publish(mode_aux);
         ROS_INFO("CAR MANUAL");           
  
     }
-    else if(msg.value==TELEOP && actualMode==MODE_MANUAL)
+    else if(msg->value==TELEOP && actualMode==MODE_MANUAL)
     {
         ROS_INFO("SWITCH TELEOP");
         ROS_INFO("EMERGENCY STOP");
 
         emergencySTOP();
         ROS_INFO("EMERGENCY STOP DONE");
-        mode_aux.type_msg=INFO;
-        mode_aux.mode=MODE_MANUAL;
-        mode_aux.status=MODE_EXIT;
+        mode_aux->type_msg=INFO;
+        mode_aux->mode=MODE_MANUAL;
+        mode_aux->status=MODE_EXIT;
         pub_mode_error.publish(mode_aux);
         pub_mode_communication.publish(mode_aux);
         ROS_INFO("CAR TELEOP");
@@ -402,53 +402,53 @@ void fcn_sub_switch(const Common_files::msg_switch msg)
 }
 
 //Subscriptor del modo al topic del módulo Convoy
-void fcn_sub_mode_convoy(const Common_files::msg_mode msg)
+void fcn_sub_mode_convoy(const Common_files::msg_modePtr& msg)
 {
      if(actualMode==MODE_MANUAL || stoppingCar)
          return;
 
-    if(msg.type_msg==SET && msg.mode==MODE_CONVOY)
+    if(msg->type_msg==SET && msg->mode==MODE_CONVOY)
     {
         carType=FOLLOWER;        
-        if(msg.status==MODE_START)
+        if(msg->status==MODE_START)
         {
  
             if(modeRUN(MODE_CONVOY))
             {
                     ROS_INFO("MODE CONVOY FOLLOWER ON ");
-                    Common_files::msg_mode modeAct;
-                    modeAct.type_msg=INFO;
-                    modeAct.mode=MODE_CONVOY;
-                    modeAct.status=MODE_START;
+                    Common_files::msg_modePtr modeAct(new Common_files::msg_mode);
+                    modeAct->type_msg=INFO;
+                    modeAct->mode=MODE_CONVOY;
+                    modeAct->status=MODE_START;
                     pub_mode_convoy.publish(modeAct);  
                     pub_mode_error.publish(modeAct);
             }
             else
             {
                    ROS_INFO("MODE CONVOY FOLLOWER ERROR ");
-                   Common_files::msg_error error;
-                   error.id_subsystem=SUBS_SYSTEM_MGMNT;
-                   error.id_error=MODE_NOT_AVAILABLE;
-                   error.type_error=TOE_UNDEFINED;
+                   Common_files::msg_errorPtr error(new Common_files::msg_error);
+                   error->id_subsystem=SUBS_SYSTEM_MGMNT;
+                   error->id_error=MODE_NOT_AVAILABLE;
+                   error->type_error=TOE_UNDEFINED;
                    pub_error.publish(error);              
             }
         }
-        else if(msg.status==MODE_EXIT)
+        else if(msg->status==MODE_EXIT)
         {
             modeEXIT(MODE_CONVOY);
             ROS_INFO("MODE CONVOY FOLLOWER ON ");
-            Common_files::msg_mode modeAct;
-            modeAct.type_msg=INFO;
-            modeAct.mode=MODE_CONVOY;
-            modeAct.status=MODE_EXIT;
+            Common_files::msg_modePtr modeAct(new Common_files::msg_mode);
+            modeAct->type_msg=INFO;
+            modeAct->mode=MODE_CONVOY;
+            modeAct->status=MODE_EXIT;
             pub_mode_convoy.publish(modeAct);  
             pub_mode_error.publish(modeAct);            
         }
     }
-    else if(msg.type_msg==INFO && msg.mode==MODE_CONVOY)
+    else if(msg->type_msg==INFO && msg->mode==MODE_CONVOY)
     {
         //el if es opcional
-        //if((actualMode==MODE_NEUTRAL && msg.status==MODE_START)||(actualMode==MODE_CONVOY && && msg.status==MODE_EXIT))
+        //if((actualMode==MODE_NEUTRAL && msg->status==MODE_START)||(actualMode==MODE_CONVOY && && msg->status==MODE_EXIT))
                 convoyACK=true;
     }
 
@@ -676,7 +676,7 @@ void updateStatusModules(ros::NodeHandle n)
 bool modeRUN(int mode)
 {
     bool runOK;
-    Common_files::msg_module_enable module_enable;
+    Common_files::msg_module_enablePtr module_enable(new Common_files::msg_module_enable);
     switch (mode)
     {
         case MODE_REMOTE:
@@ -684,9 +684,9 @@ bool modeRUN(int mode)
             {
                 ROS_INFO("MODE REMOTE ON");
                 actualMode=MODE_REMOTE;
-                module_enable.id_module=ID_MOD_REMOTE;
-                module_enable.submode=SUBMODE_REMOTE;
-                module_enable.status=MOD_ON;
+                module_enable->id_module=ID_MOD_REMOTE;
+                module_enable->submode=SUBMODE_REMOTE;
+                module_enable->status=MOD_ON;
                 pub_module_enable.publish(module_enable);
                 runOK=true;
             }
@@ -698,9 +698,9 @@ bool modeRUN(int mode)
             {
                 ROS_INFO("MODE PLAN ON");
                 actualMode=MODE_PLAN;
-                module_enable.id_module=ID_MOD_NAVIGATION;
-                module_enable.submode=SUBMODE_NAV_PLAN;
-                module_enable.status=MOD_ON;
+                module_enable->id_module=ID_MOD_NAVIGATION;
+                module_enable->submode=SUBMODE_NAV_PLAN;
+                module_enable->status=MOD_ON;
                 pub_module_enable.publish(module_enable);
                 runOK=true;
             }
@@ -712,9 +712,9 @@ bool modeRUN(int mode)
             {
                 ROS_INFO("MODE COME_TO_ME ON"); 
                 actualMode=MODE_COME_TO_ME;
-                module_enable.id_module=ID_MOD_NAVIGATION;
-                module_enable.submode=SUBMODE_NAV_PLAN;
-                module_enable.status=MOD_ON;
+                module_enable->id_module=ID_MOD_NAVIGATION;
+                module_enable->submode=SUBMODE_NAV_PLAN;
+                module_enable->status=MOD_ON;
                 pub_module_enable.publish(module_enable);
                 runOK=true;
             }
@@ -726,9 +726,9 @@ bool modeRUN(int mode)
             {
                 ROS_INFO("MODE FOLLOW_ME ON");
                 actualMode=MODE_FOLLOW_ME;
-                module_enable.id_module=ID_MOD_NAVIGATION;
-                module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
-                module_enable.status=MOD_ON;
+                module_enable->id_module=ID_MOD_NAVIGATION;
+                module_enable->submode=SUBMODE_NAV_FOLLOW_ME;
+                module_enable->status=MOD_ON;
                 pub_module_enable.publish(module_enable);
                 runOK=true;
             }
@@ -741,9 +741,9 @@ bool modeRUN(int mode)
                 
                 if(modesAvailables[AVAILABLE_POS_CONVOY])
                 {
-                    module_enable.id_module=ID_MOD_CONVOY;
-                    module_enable.submode=SUBMODE_CONVOY;
-                    module_enable.status=MOD_ON;
+                    module_enable->id_module=ID_MOD_CONVOY;
+                    module_enable->submode=SUBMODE_CONVOY;
+                    module_enable->status=MOD_ON;
                     pub_module_enable.publish(module_enable);
                     convoyACK=false;
                     if(timerACK(5,CONVOY_ACK))
@@ -765,9 +765,9 @@ bool modeRUN(int mode)
                 {
                     ROS_INFO("MODE CONVOY FOLLOWER ON");                 
                     actualMode=MODE_CONVOY_AUTO;
-                    module_enable.id_module=ID_MOD_NAVIGATION;
-                    module_enable.submode=SUBMODE_CONVOY; // Dfinir el submode nav_convoy;
-                    module_enable.status=MOD_ON;
+                    module_enable->id_module=ID_MOD_NAVIGATION;
+                    module_enable->submode=SUBMODE_CONVOY; // Dfinir el submode nav_convoy;
+                    module_enable->status=MOD_ON;
                     pub_module_enable.publish(module_enable);
                     runOK=true;
                 }
@@ -780,9 +780,9 @@ bool modeRUN(int mode)
             {
                 ROS_INFO("MODE CONVOY TELEOP ON");
                 actualMode=MODE_CONVOY_TELEOP;
-                module_enable.id_module=ID_MOD_REMOTE;
-                module_enable.submode=SUBMODE_REMOTE;
-                module_enable.status=MOD_ON;
+                module_enable->id_module=ID_MOD_REMOTE;
+                module_enable->submode=SUBMODE_REMOTE;
+                module_enable->status=MOD_ON;
                 pub_module_enable.publish(module_enable);
                 runOK=true;
             }
@@ -794,9 +794,9 @@ bool modeRUN(int mode)
             {
                 ROS_INFO("MODE CONVOY AUTO ON");                
                 actualMode=MODE_CONVOY_AUTO;
-                module_enable.id_module=ID_MOD_NAVIGATION;
-                module_enable.submode=SUBMODE_NAV_CONVOY;
-                module_enable.status=MOD_ON;
+                module_enable->id_module=ID_MOD_NAVIGATION;
+                module_enable->submode=SUBMODE_NAV_CONVOY;
+                module_enable->status=MOD_ON;
                 pub_module_enable.publish(module_enable);
                 runOK=true;
             }
@@ -811,35 +811,35 @@ bool modeRUN(int mode)
 }
 void modeSTOP(int mode)
 {
-    Common_files::msg_module_enable module_enable;
+    Common_files::msg_module_enablePtr module_enable(new Common_files::msg_module_enable);
     switch (mode)
     {
         case MODE_PLAN:
             ROS_INFO("MODE PLAN STOP");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_PLAN;
-            module_enable.status=MOD_PAUSE;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_PLAN;
+            module_enable->status=MOD_PAUSE;
             pub_module_enable.publish(module_enable);
             break;
         case MODE_COME_TO_ME:
             ROS_INFO("MODE COME_TO_ME STOP");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_COME_TO_ME;
-            module_enable.status=MOD_PAUSE;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_COME_TO_ME;
+            module_enable->status=MOD_PAUSE;
             pub_module_enable.publish(module_enable);
             break;
         case MODE_FOLLOW_ME:
             ROS_INFO("MODE FOLLOW_ME STOP");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
-            module_enable.status=MOD_PAUSE;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_FOLLOW_ME;
+            module_enable->status=MOD_PAUSE;
             pub_module_enable.publish(module_enable);
             break;
         case MODE_CONVOY_AUTO:
             ROS_INFO("MODE CONVOY AUTO STOP");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_CONVOY;
-            module_enable.status=MOD_PAUSE;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_CONVOY;
+            module_enable->status=MOD_PAUSE;
             pub_module_enable.publish(module_enable); 
             break;
         default:
@@ -852,38 +852,38 @@ bool modeEXIT(int mode)
    ROS_INFO("EMERGENCY STOP");
    emergencySTOP();
    {
-        Common_files::msg_module_enable module_enable;
+        Common_files::msg_module_enablePtr module_enable(new Common_files::msg_module_enable);
         switch (mode)
         {
              case MODE_PLAN:
                  ROS_INFO("MODE PLAN EXIT");             
-                 module_enable.id_module=ID_MOD_NAVIGATION;
-                 module_enable.submode=SUBMODE_NAV_PLAN;
-                 module_enable.status=MOD_OFF;
+                 module_enable->id_module=ID_MOD_NAVIGATION;
+                 module_enable->submode=SUBMODE_NAV_PLAN;
+                 module_enable->status=MOD_OFF;
                  pub_module_enable.publish(module_enable);
                  exitOK=true;
                  break;
              case MODE_COME_TO_ME:
                  ROS_INFO("MODE COME_TO_ME EXIT");             
-                 module_enable.id_module=ID_MOD_NAVIGATION;
-                 module_enable.submode=SUBMODE_NAV_COME_TO_ME;
-                 module_enable.status=MOD_OFF;
+                 module_enable->id_module=ID_MOD_NAVIGATION;
+                 module_enable->submode=SUBMODE_NAV_COME_TO_ME;
+                 module_enable->status=MOD_OFF;
                  pub_module_enable.publish(module_enable);   
                  exitOK=true;                 
                  break;
              case MODE_FOLLOW_ME:
                  ROS_INFO("MODE FOLLOW_ME EXIT"); 
-                 module_enable.id_module=ID_MOD_NAVIGATION;
-                 module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
-                 module_enable.status=MOD_OFF;
+                 module_enable->id_module=ID_MOD_NAVIGATION;
+                 module_enable->submode=SUBMODE_NAV_FOLLOW_ME;
+                 module_enable->status=MOD_OFF;
                  pub_module_enable.publish(module_enable);   
                  exitOK=true;                 
                  break;            
              case MODE_REMOTE:
                  ROS_INFO("MODE REMOTE EXIT");             
-                 module_enable.id_module=ID_MOD_REMOTE;
-                 module_enable.submode=SUBMODE_REMOTE;
-                 module_enable.status=MOD_OFF;
+                 module_enable->id_module=ID_MOD_REMOTE;
+                 module_enable->submode=SUBMODE_REMOTE;
+                 module_enable->status=MOD_OFF;
                  pub_module_enable.publish(module_enable);   
                  exitOK=true;                 
                  break;
@@ -891,9 +891,9 @@ bool modeEXIT(int mode)
                  if(carType==LEADER)
                  {
                     ROS_INFO("MODE CONVOY EXIT");             
-                    module_enable.id_module=ID_MOD_CONVOY;
-                    module_enable.submode=SUBMODE_CONVOY;
-                    module_enable.status=MOD_OFF;
+                    module_enable->id_module=ID_MOD_CONVOY;
+                    module_enable->submode=SUBMODE_CONVOY;
+                    module_enable->status=MOD_OFF;
                     pub_module_enable.publish(module_enable);  
                     convoyACK=false;
                     if(timerACK(5,CONVOY_ACK))
@@ -905,26 +905,26 @@ bool modeEXIT(int mode)
                  else 
                  {
                     ROS_INFO("MODE CONVOY FOLLOWER ON"); 
-                    module_enable.id_module=ID_MOD_NAVIGATION;
-                    module_enable.submode=SUBMODE_CONVOY; // Dfinir el submode nav_convoy;
-                    module_enable.status=MOD_OFF;
+                    module_enable->id_module=ID_MOD_NAVIGATION;
+                    module_enable->submode=SUBMODE_CONVOY; // Dfinir el submode nav_convoy;
+                    module_enable->status=MOD_OFF;
                     pub_module_enable.publish(module_enable);
                     exitOK=true;
                  }
                  break;   
              case MODE_CONVOY_AUTO:
                 ROS_INFO("MODE CONVOY AUTO EXIT");             
-                module_enable.id_module=ID_MOD_NAVIGATION;
-                module_enable.submode=SUBMODE_NAV_CONVOY;
-                module_enable.status=MOD_OFF;
+                module_enable->id_module=ID_MOD_NAVIGATION;
+                module_enable->submode=SUBMODE_NAV_CONVOY;
+                module_enable->status=MOD_OFF;
                 pub_module_enable.publish(module_enable);
                 exitOK=true;
                 break; 
              case MODE_CONVOY_TELEOP:
                 ROS_INFO("MODE CONVOY TELEOP EXIT");             
-                module_enable.id_module=ID_MOD_REMOTE;
-                module_enable.submode=SUBMODE_REMOTE;
-                module_enable.status=MOD_OFF;
+                module_enable->id_module=ID_MOD_REMOTE;
+                module_enable->submode=SUBMODE_REMOTE;
+                module_enable->status=MOD_OFF;
                 pub_module_enable.publish(module_enable);
                 exitOK=true;
                 break;                   
@@ -941,35 +941,35 @@ bool modeEXIT(int mode)
 }
 void modeRESUME(int mode)
 {
-   Common_files::msg_module_enable module_enable;
+   Common_files::msg_module_enablePtr module_enable(new Common_files::msg_module_enable);
    switch (mode)
    {
        case MODE_PLAN:
             ROS_INFO("MODE PLAN RESUME");            
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_PLAN;
-            module_enable.status=MOD_ON;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_PLAN;
+            module_enable->status=MOD_ON;
             pub_module_enable.publish(module_enable);
             break;
         case MODE_COME_TO_ME:
             ROS_INFO("MODE COME_TO_ME RESUME");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_COME_TO_ME;
-            module_enable.status=MOD_ON;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_COME_TO_ME;
+            module_enable->status=MOD_ON;
             pub_module_enable.publish(module_enable);
             break;
         case MODE_FOLLOW_ME:
             ROS_INFO("MODE FOLLO_ME RESUME");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_FOLLOW_ME;
-            module_enable.status=MOD_ON;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_FOLLOW_ME;
+            module_enable->status=MOD_ON;
             pub_module_enable.publish(module_enable);
             break;
         case MODE_CONVOY_AUTO:
             ROS_INFO("MODE CONVOY AUTO RESUME");             
-            module_enable.id_module=ID_MOD_NAVIGATION;
-            module_enable.submode=SUBMODE_NAV_CONVOY;
-            module_enable.status=MOD_ON;
+            module_enable->id_module=ID_MOD_NAVIGATION;
+            module_enable->submode=SUBMODE_NAV_CONVOY;
+            module_enable->status=MOD_ON;
             pub_module_enable.publish(module_enable);         
             break;          
          default:
@@ -979,8 +979,8 @@ void modeRESUME(int mode)
 bool emergencySTOP()
 {
     stoppingCar=true;
-    Common_files::msg_emergency_stop emergency;
-    emergency.value=SET;
+    Common_files::msg_emergency_stopPtr emergency(new Common_files::msg_emergency_stop);
+    emergency->value=SET;
     
     emergencyACK=false;
     pub_emergency_stop.publish(emergency);
@@ -1030,7 +1030,7 @@ void checkModulesAlive(const ros::TimerEvent& event)
     stringstream aux_name;
     string service_name;
     
-    Common_files::msg_error errorAlive;
+    Common_files::msg_errorPtr errorAlive(new Common_files::msg_error);
     Common_files::srv_data petAlive;
     petAlive.request.param=PARAM_ALIVE;
     
@@ -1047,9 +1047,9 @@ void checkModulesAlive(const ros::TimerEvent& event)
             if(!clientAlive.call(petAlive))
             {
                 //ROS_INFO("MODULO %d NA",i);
-                errorAlive.id_subsystem=SUBS_SYSTEM_MGMNT;
-                errorAlive.type_error=TOE_UNDEFINED;
-                errorAlive.id_error=getErrorModule(i);
+                errorAlive->id_subsystem=SUBS_SYSTEM_MGMNT;
+                errorAlive->type_error=TOE_UNDEFINED;
+                errorAlive->id_error=getErrorModule(i);
                 //pub_error.publish(errorAlive);
             }
             aux_name.clear();

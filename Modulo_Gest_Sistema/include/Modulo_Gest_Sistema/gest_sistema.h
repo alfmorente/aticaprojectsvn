@@ -90,13 +90,13 @@ ros::ServiceServer server;
 bool modesAvailables[13];
 
 // Funciones de suscripcion
-void fcn_sub_mode_error(const Common_files::msg_mode);
-void fcn_sub_mode_communication(const Common_files::msg_mode);
-void fcn_sub_mode_convoy(const Common_files::msg_mode);
-void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux);
-void fcn_sub_switch(const Common_files::msg_switch);
-void fcn_sub_available(const Common_files::msg_available);
-void fcn_sub_emergency_stop(const Common_files::msg_emergency_stop);
+void fcn_sub_mode_error(const Common_files::msg_modePtr&);
+void fcn_sub_mode_communication(const Common_files::msg_modePtr&);
+void fcn_sub_mode_convoy(const Common_files::msg_modePtr&);
+void fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr&);
+void fcn_sub_switch(const Common_files::msg_switchPtr&);
+void fcn_sub_available(const Common_files::msg_availablePtr&);
+void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr&);
 
 bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
