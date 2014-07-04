@@ -17,13 +17,11 @@ extern "C" {
 }
 #endif
 
-#endif	/* GEST_ERRORES_H */
-
 // Mensajes
-#include "Common_files/msg_mode.h"
-#include "Common_files/msg_available.h"
-#include "Common_files/msg_error.h"
-#include "Common_files/srv_data.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_mode.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_available.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h"
+#include "../../../Common_files/srv_gen/cpp/include/Common_files/srv_data.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
@@ -47,7 +45,7 @@ extern "C" {
 
 #define TOE_UNAVAILABLE 99
 #define MIN_MODES 1
-#define MAX_MODES 13
+#define MAX_MODES 14
 #define MAX_MODULES 15
 #define MAX_ERRORS 28
 
@@ -64,34 +62,39 @@ short currentMode;
 // Variable de continuacion de modulo
 bool exitModule;
 // Variable control modos disponibles
-Common_files::msg_available avail_mode;
-// Variable con el número de errores por modo
+Common_files::msg_availablePtr avail_mode(new Common_files::msg_available);
+Common_files::msg_modePtr msg_ch_neutral(new Common_files::msg_mode);
+// Variables con el número de errores por modo
 int numErrorMode[MAX_MODES][MAX_MODULES][MAX_ERRORS];
+int numWarning[MAX_MODES][MAX_MODULES][MAX_ERRORS];
 
 // Funciones de suscripcion
-void fcn_sub_mode(const Common_files::msg_mode);
-void fcn_sub_error(const Common_files::msg_error);
+void fcn_sub_mode(const Common_files::msg_modePtr&);
+void fcn_sub_error(const Common_files::msg_errorPtr&);
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
 // Funciones propias
 void initialize(ros::NodeHandle n);
-short isWarningOrCritical(Common_files::msg_error, short modo);
+short isWarningOrCritical(const Common_files::msg_errorPtr&, short modo);
 void switchNeutral();
-int convertOutputError(Common_files::msg_error);
-short mode_remote_error(Common_files::msg_error);
-short mode_startengine_error(Common_files::msg_error);
-short mode_stopengine_error(Common_files::msg_error);
-short mode_engagebrake_error(Common_files::msg_error);
-short mode_plan_error(Common_files::msg_error);
-short mode_cometome_error(Common_files::msg_error);
-short mode_followme_error(Common_files::msg_error);
-short mode_teach_error(Common_files::msg_error);
-short mode_mapping_error(Common_files::msg_error);
-short mode_convoy_error(Common_files::msg_error);
-short mode_conv_teleop_error(Common_files::msg_error);
-short mode_conv_auto_error(Common_files::msg_error);
-void writeToLog(Common_files::msg_error);
-bool updateModeAvailable (Common_files::msg_error, bool[13]);
-bool updateEndError(Common_files::msg_error, bool[13]);
+int convertOutputError(const Common_files::msg_errorPtr&);
+short mode_remote_error(const Common_files::msg_errorPtr&);
+short mode_startengine_error(const Common_files::msg_errorPtr&);
+short mode_stopengine_error(const Common_files::msg_errorPtr&);
+short mode_engagebrake_error(const Common_files::msg_errorPtr&);
+short mode_plan_error(const Common_files::msg_errorPtr&);
+short mode_cometome_error(const Common_files::msg_errorPtr&);
+short mode_followme_error(const Common_files::msg_errorPtr&);
+short mode_teach_error(const Common_files::msg_errorPtr&);
+short mode_mapping_error(const Common_files::msg_errorPtr&);
+short mode_convoy_error(const Common_files::msg_errorPtr&);
+short mode_conv_teleop_error(const Common_files::msg_errorPtr&);
+short mode_conv_auto_error(const Common_files::msg_errorPtr&);
+void writeToLog(const Common_files::msg_errorPtr&);
+bool updateModeAvailable (const Common_files::msg_errorPtr&, bool[13]);
+bool updateEndError(const Common_files::msg_errorPtr&, bool[13]);
 int checkErrorTable(int);
-bool compareTable(bool original[13],Common_files::msg_available);
+bool compareTable(bool original[13],const Common_files::msg_availablePtr&);
+
+#endif	/* GEST_ERRORES_H */
+
