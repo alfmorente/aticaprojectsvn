@@ -86,8 +86,8 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
-	JausUnsignedShort subsystem;
-	JausUnsignedShort idError;
+	JausByte subsystem;
+	JausByte idError;
 	JausByte typeError;
 	
 

@@ -23,6 +23,7 @@
 #define JAUS_NO_EVENT 0
 #define JAUS_EVENT_CONNECT 1
 #define JAUS_EVENT_DISCONNECT 2
+#define JAUS_EVENT_LOSED 2
 
 class HandlerJAUS : public EventHandler
 {

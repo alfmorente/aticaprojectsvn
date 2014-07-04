@@ -17,7 +17,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-rosbuild_genmsg()
+#rosbuild_genmsg()
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
@@ -29,7 +29,7 @@ rosbuild_genmsg()
 include_directories(libjaus/include libopenJaus/include)
 link_directories(libjaus/lib libopenJaus/lib)
 #rosbuild_add_executable(comunicaciones src/interaction.cpp src/comunicaciones.cpp src/handlerJAUS.cpp)
-rosbuild_add_executable(comunicaciones src/NodeROSCommunication.cpp src/ConverterTypes.cpp src/JausSubsystemVehicle.cpp src/HandlerJAUS.cpp src/communication.cpp src/interaction.cpp src/Files.cpp)
+rosbuild_add_executable(comunicaciones src/NodeROSCommunication.cpp src/JausSubsystemVehicle.cpp src/HandlerJAUS.cpp src/communication.cpp src/interaction.cpp src/Files.cpp)
 target_link_libraries(comunicaciones libjaus.so libopenJaus.so)
 #target_link_libraries(example ${PROJECT_NAME})
 

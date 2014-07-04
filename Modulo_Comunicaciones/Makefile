@@ -166,19 +166,6 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmsg_py
-
-# Build rule for target.
-ROSBUILD_genmsg_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_py
-.PHONY : ROSBUILD_genmsg_py
-
-# fast build rule for target.
-ROSBUILD_genmsg_py/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
-.PHONY : ROSBUILD_genmsg_py/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -307,19 +294,6 @@ rospack_genmsg: cmake_check_build_system
 rospack_genmsg/fast:
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 .PHONY : rospack_genmsg/fast
-
-#=============================================================================
-# Target rules for targets named rospack_genmsg_all
-
-# Build rule for target.
-rospack_genmsg_all: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
-.PHONY : rospack_genmsg_all
-
-# fast build rule for target.
-rospack_genmsg_all/fast:
-	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
-.PHONY : rospack_genmsg_all/fast
 
 #=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
@@ -451,29 +425,149 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-src/comunicaciones.o: src/comunicaciones.cpp.o
-.PHONY : src/comunicaciones.o
+src/Files.o: src/Files.cpp.o
+.PHONY : src/Files.o
 
 # target to build an object file
-src/comunicaciones.cpp.o:
-	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/comunicaciones.cpp.o
-.PHONY : src/comunicaciones.cpp.o
+src/Files.cpp.o:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/Files.cpp.o
+.PHONY : src/Files.cpp.o
 
-src/comunicaciones.i: src/comunicaciones.cpp.i
-.PHONY : src/comunicaciones.i
+src/Files.i: src/Files.cpp.i
+.PHONY : src/Files.i
 
 # target to preprocess a source file
-src/comunicaciones.cpp.i:
-	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/comunicaciones.cpp.i
-.PHONY : src/comunicaciones.cpp.i
+src/Files.cpp.i:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/Files.cpp.i
+.PHONY : src/Files.cpp.i
 
-src/comunicaciones.s: src/comunicaciones.cpp.s
-.PHONY : src/comunicaciones.s
+src/Files.s: src/Files.cpp.s
+.PHONY : src/Files.s
 
 # target to generate assembly for a file
-src/comunicaciones.cpp.s:
-	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/comunicaciones.cpp.s
-.PHONY : src/comunicaciones.cpp.s
+src/Files.cpp.s:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/Files.cpp.s
+.PHONY : src/Files.cpp.s
+
+src/HandlerJAUS.o: src/HandlerJAUS.cpp.o
+.PHONY : src/HandlerJAUS.o
+
+# target to build an object file
+src/HandlerJAUS.cpp.o:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/HandlerJAUS.cpp.o
+.PHONY : src/HandlerJAUS.cpp.o
+
+src/HandlerJAUS.i: src/HandlerJAUS.cpp.i
+.PHONY : src/HandlerJAUS.i
+
+# target to preprocess a source file
+src/HandlerJAUS.cpp.i:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/HandlerJAUS.cpp.i
+.PHONY : src/HandlerJAUS.cpp.i
+
+src/HandlerJAUS.s: src/HandlerJAUS.cpp.s
+.PHONY : src/HandlerJAUS.s
+
+# target to generate assembly for a file
+src/HandlerJAUS.cpp.s:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/HandlerJAUS.cpp.s
+.PHONY : src/HandlerJAUS.cpp.s
+
+src/JausSubsystemVehicle.o: src/JausSubsystemVehicle.cpp.o
+.PHONY : src/JausSubsystemVehicle.o
+
+# target to build an object file
+src/JausSubsystemVehicle.cpp.o:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/JausSubsystemVehicle.cpp.o
+.PHONY : src/JausSubsystemVehicle.cpp.o
+
+src/JausSubsystemVehicle.i: src/JausSubsystemVehicle.cpp.i
+.PHONY : src/JausSubsystemVehicle.i
+
+# target to preprocess a source file
+src/JausSubsystemVehicle.cpp.i:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/JausSubsystemVehicle.cpp.i
+.PHONY : src/JausSubsystemVehicle.cpp.i
+
+src/JausSubsystemVehicle.s: src/JausSubsystemVehicle.cpp.s
+.PHONY : src/JausSubsystemVehicle.s
+
+# target to generate assembly for a file
+src/JausSubsystemVehicle.cpp.s:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/JausSubsystemVehicle.cpp.s
+.PHONY : src/JausSubsystemVehicle.cpp.s
+
+src/NodeROSCommunication.o: src/NodeROSCommunication.cpp.o
+.PHONY : src/NodeROSCommunication.o
+
+# target to build an object file
+src/NodeROSCommunication.cpp.o:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/NodeROSCommunication.cpp.o
+.PHONY : src/NodeROSCommunication.cpp.o
+
+src/NodeROSCommunication.i: src/NodeROSCommunication.cpp.i
+.PHONY : src/NodeROSCommunication.i
+
+# target to preprocess a source file
+src/NodeROSCommunication.cpp.i:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/NodeROSCommunication.cpp.i
+.PHONY : src/NodeROSCommunication.cpp.i
+
+src/NodeROSCommunication.s: src/NodeROSCommunication.cpp.s
+.PHONY : src/NodeROSCommunication.s
+
+# target to generate assembly for a file
+src/NodeROSCommunication.cpp.s:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/NodeROSCommunication.cpp.s
+.PHONY : src/NodeROSCommunication.cpp.s
+
+src/communication.o: src/communication.cpp.o
+.PHONY : src/communication.o
+
+# target to build an object file
+src/communication.cpp.o:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/communication.cpp.o
+.PHONY : src/communication.cpp.o
+
+src/communication.i: src/communication.cpp.i
+.PHONY : src/communication.i
+
+# target to preprocess a source file
+src/communication.cpp.i:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/communication.cpp.i
+.PHONY : src/communication.cpp.i
+
+src/communication.s: src/communication.cpp.s
+.PHONY : src/communication.s
+
+# target to generate assembly for a file
+src/communication.cpp.s:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/communication.cpp.s
+.PHONY : src/communication.cpp.s
+
+src/interaction.o: src/interaction.cpp.o
+.PHONY : src/interaction.o
+
+# target to build an object file
+src/interaction.cpp.o:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/interaction.cpp.o
+.PHONY : src/interaction.cpp.o
+
+src/interaction.i: src/interaction.cpp.i
+.PHONY : src/interaction.i
+
+# target to preprocess a source file
+src/interaction.cpp.i:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/interaction.cpp.i
+.PHONY : src/interaction.cpp.i
+
+src/interaction.s: src/interaction.cpp.s
+.PHONY : src/interaction.s
+
+# target to generate assembly for a file
+src/interaction.cpp.s:
+	$(MAKE) -f CMakeFiles/comunicaciones.dir/build.make CMakeFiles/comunicaciones.dir/src/interaction.cpp.s
+.PHONY : src/interaction.cpp.s
 
 # Help Target
 help:
@@ -483,7 +577,6 @@ help:
 	@echo "... depend"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
-	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... _catkin_empty_exported_target"
@@ -500,7 +593,6 @@ help:
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
-	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... run_tests"
@@ -511,9 +603,24 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... src/comunicaciones.o"
-	@echo "... src/comunicaciones.i"
-	@echo "... src/comunicaciones.s"
+	@echo "... src/Files.o"
+	@echo "... src/Files.i"
+	@echo "... src/Files.s"
+	@echo "... src/HandlerJAUS.o"
+	@echo "... src/HandlerJAUS.i"
+	@echo "... src/HandlerJAUS.s"
+	@echo "... src/JausSubsystemVehicle.o"
+	@echo "... src/JausSubsystemVehicle.i"
+	@echo "... src/JausSubsystemVehicle.s"
+	@echo "... src/NodeROSCommunication.o"
+	@echo "... src/NodeROSCommunication.i"
+	@echo "... src/NodeROSCommunication.s"
+	@echo "... src/communication.o"
+	@echo "... src/communication.i"
+	@echo "... src/communication.s"
+	@echo "... src/interaction.o"
+	@echo "... src/interaction.i"
+	@echo "... src/interaction.s"
 .PHONY : help
 
 

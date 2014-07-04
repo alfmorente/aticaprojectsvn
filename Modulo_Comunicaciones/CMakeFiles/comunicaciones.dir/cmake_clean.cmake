@@ -1,8 +1,10 @@
 FILE(REMOVE_RECURSE
-  "msg_gen"
-  "msg_gen"
-  "src/Modulo_Comunicaciones/msg"
-  "CMakeFiles/comunicaciones.dir/src/comunicaciones.cpp.o"
+  "CMakeFiles/comunicaciones.dir/src/NodeROSCommunication.cpp.o"
+  "CMakeFiles/comunicaciones.dir/src/JausSubsystemVehicle.cpp.o"
+  "CMakeFiles/comunicaciones.dir/src/HandlerJAUS.cpp.o"
+  "CMakeFiles/comunicaciones.dir/src/communication.cpp.o"
+  "CMakeFiles/comunicaciones.dir/src/interaction.cpp.o"
+  "CMakeFiles/comunicaciones.dir/src/Files.cpp.o"
   "bin/comunicaciones.pdb"
   "bin/comunicaciones"
 )

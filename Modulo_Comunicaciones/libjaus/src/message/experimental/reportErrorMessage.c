@@ -48,7 +48,7 @@
 #include "jaus.h"
 
 static const int commandCode = JAUS_REPORT_ERROR;
-static const int maxDataSizeBytes = 5;
+static const int maxDataSizeBytes = 3;
 
 static JausBoolean headerFromBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
 static JausBoolean headerToBuffer(ReportErrorMessage message, unsigned char *buffer, unsigned int bufferSizeBytes);
@@ -67,8 +67,8 @@ static unsigned int dataSize(ReportErrorMessage message);
 static void dataInitialize(ReportErrorMessage message)
 {
 	// Set initial values of message fields
-	message->subsystem=newJausUnsignedShort(0);
-	message->idError=newJausUnsignedShort(0);
+	message->subsystem=newJausByte(0);
+	message->idError=newJausByte(0);
 	message->typeError=newJausByte(0);
 }
 
@@ -77,7 +77,6 @@ static JausBoolean dataFromBuffer(ReportErrorMessage message, unsigned char *buf
 {
 	int index = 0;
 	JausByte tempByte;
-	JausUnsignedShort tempUShort;
 
 	if(bufferSizeBytes == message->dataSize)
 	{
@@ -85,15 +84,15 @@ static JausBoolean dataFromBuffer(ReportErrorMessage message, unsigned char *buf
 		// Unpack according to presence vector
 
 
-		if(!jausUnsignedShortFromBuffer(&tempUShort, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+		if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_BYTE_SIZE_BYTES;
 
-		message->subsystem = tempUShort;
+		message->subsystem = tempByte;
 
-		if(!jausUnsignedShortFromBuffer(&tempUShort, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+		if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_BYTE_SIZE_BYTES;
 
-		message->idError = tempUShort;
+		message->idError = tempByte;
 
 
 		if(!jausByteFromBuffer(&tempByte, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
@@ -120,12 +119,12 @@ static int dataToBuffer(ReportErrorMessage message, unsigned char *buffer, unsig
 		// Pack according to presence vector
 
 
-		if(!jausUnsignedShortToBuffer(message->subsystem, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+		if(!jausByteToBuffer(message->subsystem, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_BYTE_SIZE_BYTES;
 
 
-		if(!jausUnsignedShortToBuffer(message->idError, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
-		index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+		if(!jausByteToBuffer(message->idError, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
+		index += JAUS_BYTE_SIZE_BYTES;
 
 		if(!jausByteToBuffer(message->typeError, buffer+index, bufferSizeBytes-index)) return JAUS_FALSE;
 		index += JAUS_BYTE_SIZE_BYTES;
@@ -145,10 +144,10 @@ static int dataToString(ReportErrorMessage message, char **buf)
   (*buf) = (char*)malloc(sizeof(char)*bufSize);
 
    strcat((*buf), "\nsubsystem: ");
-   jausUnsignedShortToString(message->subsystem, (*buf)+strlen(*buf));  
+   jausByteToString(message->subsystem, (*buf)+strlen(*buf));  
  
    strcat((*buf), "\nid error: ");
-   jausUnsignedShortToString(message->idError, (*buf)+strlen(*buf));
+   jausByteToString(message->idError, (*buf)+strlen(*buf));
 
    strcat((*buf), "\ntype error: ");
    jausByteToString(message->typeError, (*buf)+strlen(*buf));
@@ -163,10 +162,10 @@ static unsigned int dataSize(ReportErrorMessage message)
 	int index = 0;
 
 	//subsystem
-	index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+	index += JAUS_BYTE_SIZE_BYTES;
 
 	//id error
-	index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
+	index += JAUS_BYTE_SIZE_BYTES;
 
 	//type Error
 	index += JAUS_BYTE_SIZE_BYTES;

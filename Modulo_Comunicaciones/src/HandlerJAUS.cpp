@@ -20,9 +20,25 @@ void HandlerJAUS::handleEvent(NodeManagerEvent *e)
 			treeEvent = (SystemTreeEvent *)e;
 			evento=treeEvent->toString();
 			if(treeEvent->getSubType()==SystemTreeEvent::SubsystemRemoved)
+                        {                           
+                            if(treeEvent->getSubsystem()->id==1)
+                            {
 				eventConexion=JAUS_EVENT_DISCONNECT;
+                                printf("Desconectado Subsistema %d\n",treeEvent->getSubsystem()->id);                        
+                            }
+                        }
 			else if(treeEvent->getSubType()==SystemTreeEvent::SubsystemAdded)
-				eventConexion=JAUS_EVENT_CONNECT;
+                        {
+                            printf("Conectado Subsistema %d\n",treeEvent->getSubsystem()->id);                            
+                            if(treeEvent->getSubsystem()->id==1)
+                                   eventConexion=JAUS_EVENT_CONNECT;
+                        }
+			/**else if(treeEvent->getSubType()==SystemTreeEvent::SubsystemTimeout)
+                        {
+                            if(treeEvent->getSubsystem()->id==1)
+                                   eventConexion=JAUS_EVENT_LOSED;
+                        }**/                        
+
 			printf("%s\n", treeEvent->toString().c_str());
 			delete e;
 			break;

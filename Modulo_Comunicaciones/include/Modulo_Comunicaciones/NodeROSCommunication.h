@@ -7,10 +7,10 @@
 
 #ifndef NODEROSCOMMUNICATION_H
 #define	NODEROSCOMMUNICATION_H
-#include<ros/ros.h>
-#include <Modulo_Comunicaciones/ConverterTypes.h>
 
-
+#include <ros/ros.h>
+#include <Modulo_Comunicaciones/constantCommunication.h>
+#include "../../../Common_files/include/Common_files/constant.h"
 
 class NodeROSCommunication {
 
@@ -62,15 +62,15 @@ class NodeROSCommunication {
     void createServers();
     
     // Funciones de suscripcion
-    static void fcn_sub_gps(const Common_files::msg_gps);
-    static void fcn_sub_error(const Common_files::msg_error);
-    static void fcn_sub_camera(const Common_files::msg_camera);
-    static void fcn_sub_mode(const Common_files::msg_mode);
-    static void fcn_sub_backup(const Common_files::msg_backup);
-    static void fcn_sub_available(const Common_files::msg_available);
-    static void fcn_sub_teach_file(const Common_files::msg_stream);
-    static void fcn_sub_info_stop(const Common_files::msg_info_stop);
-    static void fcn_sub_fcn_aux(const Common_files::msg_fcn_aux);
+    static void fcn_sub_gps(const Common_files::msg_gpsPtr&);
+    static void fcn_sub_error(const Common_files::msg_errorPtr&);
+    static void fcn_sub_camera(const Common_files::msg_cameraPtr&);
+    static void fcn_sub_mode(const Common_files::msg_modePtr&);
+    static void fcn_sub_backup(const Common_files::msg_backupPtr&);
+    static void fcn_sub_available(const Common_files::msg_availablePtr&);
+    static void fcn_sub_teach_file(const Common_files::msg_streamPtr&);
+    static void fcn_sub_info_stop(const Common_files::msg_info_stopPtr&);
+    static void fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr&);
     static bool fcn_server_alive(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp);
 
     int getStateModule();

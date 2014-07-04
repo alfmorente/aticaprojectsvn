@@ -1,421 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="69">
-  <logicalFolder name="root" displayName="root" projectFiles="true">
-    <df name="Modulo_Comunicaciones" root=".">
-      <df name="bin">
-      </df>
-      <df name="catkin">
-        <df name="catkin_generated" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="version" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-        </df>
-      </df>
-      <df name="catkin_generated">
-        <df name="installspace" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="stamps" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="Modulo_Comunicaciones" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-        </df>
-      </df>
+<configurationDescriptor version="90">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="Modules"
+                   displayName="Modules"
+                   projectFiles="true"
+                   root="/usr/share/cmake-2.8/Modules">
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
+    </logicalFolder>
+    <df root="." name="0">
       <df name="CMakeFiles">
-        <df name="_catkin_empty_exported_target.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="clean_test_results.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="CMakeTmp" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="CMakeFiles" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="cmTryCompileExec.dir" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-          </df>
-        </df>
-        <df name="CompilerIdC" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
         </df>
-        <df name="CompilerIdCXX" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="CompilerIdCXX">
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
-        <df name="comunicaciones.dir" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="src" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-        </df>
-        <df name="doxygen.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="Progress">
-          <df name=".svn">
-            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-            </df>
-            <in>entries</in>
-          </df>
-        </df>
-        <df name="rosbuild_clean-test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="ROSBUILD_genmsg_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="ROSBUILD_genmsg_lisp.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="ROSBUILD_genmsg_py.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="ROSBUILD_gensrv_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="ROSBUILD_gensrv_lisp.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="rosbuild_precompile.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="rosbuild_premsgsrvgen.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="rospack_genmsg.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="rospack_genmsg_all.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="rospack_genmsg_libexe.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="rospack_gensrv.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="run_tests.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="test-future.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="test-results-run.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="test.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="tests.dir" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-      </df>
-      <df name="devel">
-        <df name="etc" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="catkin" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="profile.d" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-          </df>
-        </df>
-      </df>
-      <df name="gtest">
-        <df name="CMakeFiles" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="gtest.dir" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="src" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-          </df>
-          <df name="gtest_main.dir" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="src" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-          </df>
-        </df>
-      </df>
-      <df name="include" kind="SOURCE_LOGICAL_FOLDER">
-        <df name="Modulo_Comunicaciones" kind="SOURCE_LOGICAL_FOLDER">
-          <in>comunicaciones.h</in>
-          <in>constant.h</in>
-          <in>handlerJAUS.h</in>
-        </df>
-      </df>
-      <df name="lib">
       </df>
       <df name="libjaus">
-        <df name="Build" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="include" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="message" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="command" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
-                <in>setDataLinkSelectMessage.h</in>
-                <in>setDataLinkStatusMessage.h</in>
-                <in>setSelectedDataLinkStateMessage.h</in>
-              </df>
-              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
-                <in>activateServiceConnectionMessage.h</in>
-                <in>clearEmergencyMessage.h</in>
-                <in>confirmComponentControlMessage.h</in>
-                <in>confirmServiceConnectionMessage.h</in>
-                <in>createServiceConnectionMessage.h</in>
-                <in>rejectComponentControlMessage.h</in>
-                <in>releaseComponentControlMessage.h</in>
-                <in>requestComponentControlMessage.h</in>
-                <in>resetMessage.h</in>
-                <in>resumeMessage.h</in>
-                <in>setComponentAuthorityMessage.h</in>
-                <in>setEmergencyMessage.h</in>
-                <in>setTimeMessage.h</in>
-                <in>shutdownMessage.h</in>
-                <in>standbyMessage.h</in>
-                <in>suspendServiceConnectionMessage.h</in>
-                <in>terminateServiceConnectionMessage.h</in>
-              </df>
-              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
-                <in>selectCameraMessage.h</in>
-                <in>setCameraCapabilitiesMessage.h</in>
-                <in>setCameraFormatOptionsMessage.h</in>
-                <in>setCameraOptionsMessage.h</in>
-                <in>setCameraPoseMessage.h</in>
-              </df>
-              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
-                <in>cancelEventMessage.h</in>
-                <in>confirmEventRequestMessage.h</in>
-                <in>createEventMessage.h</in>
-                <in>rejectEventRequestMessage.h</in>
-                <in>updateEventMessage.h</in>
-              </df>
-              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
-                <in>setEndEffectorPathMotionMessage.h</in>
-                <in>setEndEffectorPoseMessage.h</in>
-                <in>setEndEffectorVelocityStateMessage.h</in>
-                <in>setJointEffortsMessage.h</in>
-                <in>setJointMotionMessage.h</in>
-                <in>setJointPositionsMessage.h</in>
-                <in>setJointVelocitiesMessage.h</in>
-                <in>setToolPointMessage.h</in>
-              </df>
-              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
-                <in>setPayloadDataElementMessage.h</in>
-              </df>
-              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
-                <in>abortMissionMessage.h</in>
-                <in>pauseMissionMessage.h</in>
-                <in>removeMessagesMessage.h</in>
-                <in>replaceMessagesMessage.h</in>
-                <in>resumeMissionMessage.h</in>
-                <in>runMissionMessage.h</in>
-                <in>spoolMissionMessage.h</in>
-              </df>
-              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
-                <in>setDiscreteDevicesMessage.h</in>
-                <in>setDriveByWire.h</in>
-                <in>setGlobalPathSegmentMessage.h</in>
-                <in>setGlobalVectorMessage.h</in>
-                <in>setGlobalWaypointMessage.h</in>
-                <in>setLocalPathSegmentMessage.h</in>
-                <in>setLocalVectorMessage.h</in>
-                <in>setLocalWaypointMessage.h</in>
-                <in>setModeDriveMessage.h</in>
-                <in>setTravelSpeedMessage.h</in>
-                <in>setVelocityStateMessage.h</in>
-                <in>setWrenchEffortMessage.h</in>
-              </df>
-              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
-                <in>createVksObjectsMessage.h</in>
-                <in>deleteVksObjectsMessage.h</in>
-                <in>setVksFeatureClassMetadataMessage.h</in>
-                <in>terminateVksDataTransferMessage.h</in>
-              </df>
-            </df>
-            <df name="experimental" kind="SOURCE_LOGICAL_FOLDER">
-              <in>environmentTelemetry.h</in>
-              <in>messageExperimentalMessage.h</in>
-            </df>
-            <df name="inform" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="alarmas">
-                <in>reportAlarmaMessage.h</in>
-              </df>
-              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportDataLinkStatusMessage.h</in>
-                <in>reportHeartbeatPulseMessage.h</in>
-                <in>reportSelectedDataLinkStatusMessage.h</in>
-              </df>
-              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportComponentAuthorityMessage.h</in>
-                <in>reportComponentControlMessage.h</in>
-                <in>reportComponentStatusMessage.h</in>
-                <in>reportTimeMessage.h</in>
-              </df>
-              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportConfigurationMessage.h</in>
-                <in>reportIdentificationMessage.h</in>
-                <in>reportServicesMessage.h</in>
-                <in>reportSubsystemListMessage.h</in>
-              </df>
-              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportCameraCapabilitiesMessage.h</in>
-                <in>reportCameraCountMessage.h</in>
-                <in>reportCameraFormatOptionsMessage.h</in>
-                <in>reportCameraPoseMessage.h</in>
-                <in>reportImageMessage.h</in>
-                <in>reportRelativeObjectPositionMessage.h</in>
-                <in>reportSelectedCameraMessage.h</in>
-              </df>
-              <df name="error">
-                <in>reportErrorMessage.h</in>
-              </df>
-              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
-                <in>eventMessage.h</in>
-                <in>reportEventsMessage.h</in>
-              </df>
-              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportJointEffortsMessage.h</in>
-                <in>reportJointForceTorquesMessage.h</in>
-                <in>reportJointPositionsMessage.h</in>
-                <in>reportJointVelocitiesMessage.h</in>
-                <in>reportManipulatorSpecificationsMessage.h</in>
-                <in>reportToolPointMessage.h</in>
-              </df>
-              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportPayloadDataElementMessage.h</in>
-                <in>reportPayloadInterfaceMessage.h</in>
-              </df>
-              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportMissionStatusMessage.h</in>
-                <in>reportSpoolingPreferenceMessage.h</in>
-              </df>
-              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportCheckingMessage.h</in>
-                <in>reportDiscreteDevicesMessage.h</in>
-                <in>reportGlobalPathSegmentMessage.h</in>
-                <in>reportGlobalPoseMessage.h</in>
-                <in>reportGlobalVectorMessage.h</in>
-                <in>reportGlobalWaypointMessage.h</in>
-                <in>reportLocalPathSegmentMessage.h</in>
-                <in>reportLocalPoseMessage.h</in>
-                <in>reportLocalVectorMessage.h</in>
-                <in>reportLocalWaypointMessage.h</in>
-                <in>reportPathSegmentCountMessage.h</in>
-                <in>reportPlatformOperationalDataMessage.h</in>
-                <in>reportPlatformSpecificationsMessage.h</in>
-                <in>reportTravelSpeedMessage.h</in>
-                <in>reportUltrasonidosMessage.h</in>
-                <in>reportVelocityStateMessage.h</in>
-                <in>reportWaypointCountMessage.h</in>
-                <in>reportWrenchEffortMessage.h</in>
-              </df>
-              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
-                <in>reportVksBoundsMessage.h</in>
-                <in>reportVksDataTransferTerminationMessage.h</in>
-                <in>reportVksFeatureClassMetadataMessage.h</in>
-                <in>reportVksObjectsCreationMessage.h</in>
-                <in>reportVksObjectsMessage.h</in>
-              </df>
-            </df>
-            <df name="query" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryDataLinkStatusMessage.h</in>
-                <in>queryHeartbeatPulseMessage.h</in>
-                <in>querySelectedDataLinkStatusMessage.h</in>
-              </df>
-              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryComponentAuthorityMessage.h</in>
-                <in>queryComponentControlMessage.h</in>
-                <in>queryComponentStatusMessage.h</in>
-                <in>queryTimeMessage.h</in>
-              </df>
-              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryConfigurationMessage.h</in>
-                <in>queryIdentificationMessage.h</in>
-                <in>queryServicesMessage.h</in>
-                <in>querySubsystemListMessage.h</in>
-              </df>
-              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryCameraCapabilitiesMessage.h</in>
-                <in>queryCameraCountMessage.h</in>
-                <in>queryCameraFormatOptionsMessage.h</in>
-                <in>queryCameraPoseMessage.h</in>
-                <in>queryImageMessage.h</in>
-                <in>queryRelativeObjectPositionMessage.h</in>
-                <in>querySelectedCameraMessage.h</in>
-              </df>
-              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryEventsMessage.h</in>
-              </df>
-              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryJointEffortsMessage.h</in>
-                <in>queryJointForceTorquesMessage.h</in>
-                <in>queryJointPositionsMessage.h</in>
-                <in>queryJointVelocitiesMessage.h</in>
-                <in>queryManipulatorSpecificationsMessage.h</in>
-                <in>queryToolPointMessage.h</in>
-              </df>
-              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryPayloadDataElementMessage.h</in>
-                <in>queryPayloadInterfaceMessage.h</in>
-              </df>
-              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryMissionStatusMessage.h</in>
-                <in>querySpoolingPreferenceMessage.h</in>
-              </df>
-              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryDiscreteDevicesMessage.h</in>
-                <in>queryGlobalPathSegmentMessage.h</in>
-                <in>queryGlobalPoseMessage.h</in>
-                <in>queryGlobalVectorMessage.h</in>
-                <in>queryGlobalWaypointMessage.h</in>
-                <in>queryLocalPathSegmentMessage.h</in>
-                <in>queryLocalPoseMessage.h</in>
-                <in>queryLocalVectorMessage.h</in>
-                <in>queryLocalWaypointMessage.h</in>
-                <in>queryPathSegmentCountMessage.h</in>
-                <in>queryPlatformOperationalDataMessage.h</in>
-                <in>queryPlatformSpecificationsMessage.h</in>
-                <in>queryTravelSpeedMessage.h</in>
-                <in>queryVelocityStateMessage.h</in>
-                <in>queryWaypointCountMessage.h</in>
-                <in>queryWrenchEffortMessage.h</in>
-              </df>
-              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
-                <in>queryVksBoundsMessage.h</in>
-                <in>queryVksFeatureClassMetadataMessage.h</in>
-                <in>queryVksObjectsMessage.h</in>
-              </df>
-            </df>
-            <in>jausMessage.h</in>
-            <in>jausMessageHeaders.h</in>
-            <in>skeletonMessage.h</in>
-          </df>
-          <df name="type" kind="SOURCE_LOGICAL_FOLDER">
-            <in>jausBoolean.h</in>
-            <in>jausByte.h</in>
-            <in>jausDouble.h</in>
-            <in>jausEventLimit.h</in>
-            <in>jausFloat.h</in>
-            <in>jausGeometryPointLLA.h</in>
-            <in>jausGeometryPointXYZ.h</in>
-            <in>jausInteger.h</in>
-            <in>jausLong.h</in>
-            <in>jausMissionCommand.h</in>
-            <in>jausMissionTask.h</in>
-            <in>jausShort.h</in>
-            <in>jausTime.h</in>
-            <in>jausType.h</in>
-            <in>jausUnsignedInteger.h</in>
-            <in>jausUnsignedLong.h</in>
-            <in>jausUnsignedShort.h</in>
-            <in>jausWorldModelFeatureClass.h</in>
-            <in>jausWorldModelVectorObject.h</in>
-          </df>
-          <in>jaus.h</in>
-          <in>jausAddress.h</in>
-          <in>jausArray.h</in>
-          <in>jausComponent.h</in>
-          <in>jausNode.h</in>
-          <in>jausPayloadInterface.h</in>
-          <in>jausService.h</in>
-          <in>jausState.h</in>
-          <in>jausSubsystem.h</in>
-        </df>
-        <df name="lib" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="src" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="message" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="command" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="src">
+          <df name="message">
+            <df name="command">
+              <df name="communications">
                 <in>setDataLinkSelectMessage.c</in>
                 <in>setDataLinkStatusMessage.c</in>
                 <in>setSelectedDataLinkStateMessage.c</in>
               </df>
-              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="core">
                 <in>activateServiceConnectionMessage.c</in>
                 <in>clearEmergencyMessage.c</in>
                 <in>confirmComponentControlMessage.c</in>
@@ -434,23 +47,21 @@
                 <in>suspendServiceConnectionMessage.c</in>
                 <in>terminateServiceConnectionMessage.c</in>
               </df>
-              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="environment">
                 <in>selectCameraMessage.c</in>
                 <in>setCameraCapabilitiesMessage.c</in>
                 <in>setCameraFormatOptionsMessage.c</in>
                 <in>setCameraOptionsMessage.c</in>
                 <in>setCameraPoseMessage.c</in>
               </df>
-              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="event">
                 <in>cancelEventMessage.c</in>
                 <in>confirmEventRequestMessage.c</in>
                 <in>createEventMessage.c</in>
                 <in>rejectEventRequestMessage.c</in>
                 <in>updateEventMessage.c</in>
               </df>
-              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="manipulator">
                 <in>setEndEffectorPathMotionMessage.c</in>
                 <in>setEndEffectorPoseMessage.c</in>
                 <in>setEndEffectorVelocityStateMessage.c</in>
@@ -460,10 +71,10 @@
                 <in>setJointVelocitiesMessage.c</in>
                 <in>setToolPointMessage.c</in>
               </df>
-              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="payload">
                 <in>setPayloadDataElementMessage.c</in>
               </df>
-              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="planning">
                 <in>abortMissionMessage.c</in>
                 <in>pauseMissionMessage.c</in>
                 <in>removeMessagesMessage.c</in>
@@ -472,7 +83,7 @@
                 <in>runMissionMessage.c</in>
                 <in>spoolMissionMessage.c</in>
               </df>
-              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="platform">
                 <in>setDiscreteDevicesMessage.c</in>
                 <in>setDriveByWire.c</in>
                 <in>setGlobalPathSegmentMessage.c</in>
@@ -486,39 +97,48 @@
                 <in>setVelocityStateMessage.c</in>
                 <in>setWrenchEffortMessage.c</in>
               </df>
-              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="worldModel">
                 <in>createVksObjectsMessage.c</in>
                 <in>deleteVksObjectsMessage.c</in>
                 <in>setVksFeatureClassMetadataMessage.c</in>
                 <in>terminateVksDataTransferMessage.c</in>
               </df>
             </df>
-            <df name="experimental" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="experimental">
               <in>environmentTelemetry.c</in>
               <in>messageExperimentalMessage.c</in>
+              <in>queryAvailableMessage.c</in>
+              <in>queryFileDataMessage.c</in>
+              <in>reportAvailableMessage.c</in>
+              <in>reportErrorMessage.c</in>
+              <in>reportFileDataMessage.c</in>
+              <in>reportFunctionAuxiliarMessage.c</in>
+              <in>reportInfoStopMessage.c</in>
+              <in>setFunctionAuxiliarMessage.c</in>
             </df>
-            <df name="inform" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="inform">
               <df name="alarmas">
                 <in>reportAlarmaMessage.c</in>
+                <in>reportErrorMessage.c</in>
               </df>
-              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="communications">
                 <in>reportDataLinkStatusMessage.c</in>
                 <in>reportHeartbeatPulseMessage.c</in>
                 <in>reportSelectedDataLinkStatusMessage.c</in>
               </df>
-              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="core">
                 <in>reportComponentAuthorityMessage.c</in>
                 <in>reportComponentControlMessage.c</in>
                 <in>reportComponentStatusMessage.c</in>
                 <in>reportTimeMessage.c</in>
               </df>
-              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="dynamicConfiguration">
                 <in>reportConfigurationMessage.c</in>
                 <in>reportIdentificationMessage.c</in>
                 <in>reportServicesMessage.c</in>
                 <in>reportSubsystemListMessage.c</in>
               </df>
-              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="environment">
                 <in>reportCameraCapabilitiesMessage.c</in>
                 <in>reportCameraCountMessage.c</in>
                 <in>reportCameraFormatOptionsMessage.c</in>
@@ -530,11 +150,11 @@
               <df name="error">
                 <in>reportErrorMessage.c</in>
               </df>
-              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="event">
                 <in>eventMessage.c</in>
                 <in>reportEventsMessage.c</in>
               </df>
-              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="manipulator">
                 <in>reportJointEffortsMessage.c</in>
                 <in>reportJointForceTorquesMessage.c</in>
                 <in>reportJointPositionsMessage.c</in>
@@ -542,15 +162,15 @@
                 <in>reportManipulatorSpecificationsMessage.c</in>
                 <in>reportToolPointMessage.c</in>
               </df>
-              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="payload">
                 <in>reportPayloadDataElementMessage.c</in>
                 <in>reportPayloadInterfaceMessage.c</in>
               </df>
-              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="planning">
                 <in>reportMissionStatusMessage.c</in>
                 <in>reportSpoolingPreferenceMessage.c</in>
               </df>
-              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="platform">
                 <in>reportCheckingMessage.c</in>
                 <in>reportDiscreteDevicesMessage.c</in>
                 <in>reportGlobalPathSegmentMessage.c</in>
@@ -570,7 +190,7 @@
                 <in>reportWaypointCountMessage.c</in>
                 <in>reportWrenchEffortMessage.c</in>
               </df>
-              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="worldModel">
                 <in>reportVksBoundsMessage.c</in>
                 <in>reportVksDataTransferTerminationMessage.c</in>
                 <in>reportVksFeatureClassMetadataMessage.c</in>
@@ -578,25 +198,25 @@
                 <in>reportVksObjectsMessage.c</in>
               </df>
             </df>
-            <df name="query" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="query">
+              <df name="communications">
                 <in>queryDataLinkStatusMessage.c</in>
                 <in>queryHeartbeatPulseMessage.c</in>
                 <in>querySelectedDataLinkStatusMessage.c</in>
               </df>
-              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="core">
                 <in>queryComponentAuthorityMessage.c</in>
                 <in>queryComponentControlMessage.c</in>
                 <in>queryComponentStatusMessage.c</in>
                 <in>queryTimeMessage.c</in>
               </df>
-              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="dynamicConfiguration">
                 <in>queryConfigurationMessage.c</in>
                 <in>queryIdentificationMessage.c</in>
                 <in>queryServicesMessage.c</in>
                 <in>querySubsystemListMessage.c</in>
               </df>
-              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="environment">
                 <in>queryCameraCapabilitiesMessage.c</in>
                 <in>queryCameraCountMessage.c</in>
                 <in>queryCameraFormatOptionsMessage.c</in>
@@ -605,10 +225,10 @@
                 <in>queryRelativeObjectPositionMessage.c</in>
                 <in>querySelectedCameraMessage.c</in>
               </df>
-              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="event">
                 <in>queryEventsMessage.c</in>
               </df>
-              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="manipulator">
                 <in>queryJointEffortsMessage.c</in>
                 <in>queryJointForceTorquesMessage.c</in>
                 <in>queryJointPositionsMessage.c</in>
@@ -616,15 +236,15 @@
                 <in>queryManipulatorSpecificationsMessage.c</in>
                 <in>queryToolPointMessage.c</in>
               </df>
-              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="payload">
                 <in>queryPayloadDataElementMessage.c</in>
                 <in>queryPayloadInterfaceMessage.c</in>
               </df>
-              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="planning">
                 <in>queryMissionStatusMessage.c</in>
                 <in>querySpoolingPreferenceMessage.c</in>
               </df>
-              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="platform">
                 <in>queryDiscreteDevicesMessage.c</in>
                 <in>queryGlobalPathSegmentMessage.c</in>
                 <in>queryGlobalPoseMessage.c</in>
@@ -642,7 +262,7 @@
                 <in>queryWaypointCountMessage.c</in>
                 <in>queryWrenchEffortMessage.c</in>
               </df>
-              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="worldModel">
                 <in>queryVksBoundsMessage.c</in>
                 <in>queryVksFeatureClassMetadataMessage.c</in>
                 <in>queryVksObjectsMessage.c</in>
@@ -650,7 +270,7 @@
             </df>
             <in>jausMessage.c</in>
           </df>
-          <df name="type" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="type">
             <in>jausBoolean.c</in>
             <in>jausByte.c</in>
             <in>jausDouble.c</in>
@@ -681,62 +301,12 @@
         </df>
       </df>
       <df name="libopenJaus">
-        <df name="Build" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="include" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="componentLibrary" kind="SOURCE_LOGICAL_FOLDER">
-            <in>ojCmpt.h</in>
-          </df>
-          <df name="nodeManager" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="events" kind="SOURCE_LOGICAL_FOLDER">
-              <in>ConfigurationEvent.h</in>
-              <in>DebugEvent.h</in>
-              <in>ErrorEvent.h</in>
-              <in>JausMessageEvent.h</in>
-              <in>NodeManagerEvent.h</in>
-              <in>SystemTreeEvent.h</in>
-            </df>
-            <in>CommunicatorComponent.h</in>
-            <in>EventHandler.h</in>
-            <in>JausCommunicationManager.h</in>
-            <in>JausComponentCommunicationManager.h</in>
-            <in>JausNodeCommunicationManager.h</in>
-            <in>JausOpcUdpInterface.h</in>
-            <in>JausSubsystemCommunicationManager.h</in>
-            <in>JausTransportInterface.h</in>
-            <in>JausTransportQueue.h</in>
-            <in>JudpInterface.h</in>
-            <in>LocalComponent.h</in>
-            <in>MessageRouter.h</in>
-            <in>NodeManager.h</in>
-            <in>NodeManagerComponent.h</in>
-            <in>OjUdpComponentInterface.h</in>
-            <in>SystemTree.h</in>
-          </df>
-          <df name="nodeManagerInterface" kind="SOURCE_LOGICAL_FOLDER">
-            <in>nodeManagerInterface.h</in>
-          </df>
-          <df name="utils" kind="SOURCE_LOGICAL_FOLDER">
-            <in>FileLoader.h</in>
-            <in>datagramPacket.h</in>
-            <in>datagramSocket.h</in>
-            <in>hashMap.h</in>
-            <in>inetAddress.h</in>
-            <in>multicastSocket.h</in>
-            <in>queue.h</in>
-            <in>timeLib.h</in>
-            <in>timeval.h</in>
-          </df>
-          <in>openJaus.h</in>
-        </df>
-        <df name="lib" kind="SOURCE_LOGICAL_FOLDER">
-        </df>
-        <df name="src" kind="SOURCE_LOGICAL_FOLDER">
-          <df name="componentLibrary" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="src">
+          <df name="componentLibrary">
             <in>ojCmpt.c</in>
           </df>
-          <df name="nodeManager" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="events" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="nodeManager">
+            <df name="events">
               <in>ConfigurationEvent.cpp</in>
               <in>DebugEvent.cpp</in>
               <in>ErrorEvent.cpp</in>
@@ -760,13 +330,13 @@
             <in>OjUdpComponentInterface.cpp</in>
             <in>SystemTree.cpp</in>
           </df>
-          <df name="nodeManagerInterface" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="nodeManagerInterface">
             <in>defaultJausMessageProcessor.c</in>
             <in>lmHandler.c</in>
             <in>nodeManagerInterface.c</in>
             <in>scManager.c</in>
           </df>
-          <df name="utils" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="utils">
             <in>FileLoader.cpp</in>
             <in>datagramPacket.c</in>
             <in>datagramSocket.c</in>
@@ -777,112 +347,13 @@
           </df>
         </df>
       </df>
-      <df name="msg" kind="SOURCE_LOGICAL_FOLDER">
-      </df>
-      <df name="msg_gen">
-        <df name=".svn">
-          <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-          </df>
-          <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-          </df>
-          <in>entries</in>
-        </df>
-        <df name="cpp" kind="SOURCE_LOGICAL_FOLDER">
-          <df name=".svn">
-            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-            </df>
-            <in>entries</in>
-          </df>
-          <df name="include" kind="SOURCE_LOGICAL_FOLDER">
-            <df name=".svn">
-              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-              </df>
-              <in>entries</in>
-            </df>
-            <df name="Modulo_Comunicaciones" kind="SOURCE_LOGICAL_FOLDER">
-              <df name=".svn">
-                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-                <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-                  <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-                  </df>
-                  <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-                  </df>
-                  <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-                  </df>
-                </df>
-                <in>entries</in>
-              </df>
-            </df>
-          </df>
-        </df>
-        <df name="lisp" kind="SOURCE_LOGICAL_FOLDER">
-          <df name=".svn">
-            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-            </df>
-            <in>entries</in>
-          </df>
-        </df>
-      </df>
-      <df name="src" kind="SOURCE_LOGICAL_FOLDER">
-        <df name="Modulo_Comunicaciones">
-          <df name="msg">
-          </df>
-        </df>
-        <in>comunicaciones.cpp</in>
-        <in>handlerJAUS.cpp</in>
-      </df>
-      <df name="test_results">
+      <df name="src">
+        <in>Files.cpp</in>
+        <in>HandlerJAUS.cpp</in>
+        <in>JausSubsystemVehicle.cpp</in>
+        <in>NodeROSCommunication.cpp</in>
+        <in>communication.cpp</in>
+        <in>interaction.cpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -901,18 +372,1715 @@
   <confs>
     <conf name="Default" type="0">
       <toolsSet>
-        <developmentServer>localhost</developmentServer>
         <compilerSet>GNU|GNU</compilerSet>
-        <platform>2</platform>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>$(MAKE) -f Makefile</buildCommand>
-          <cleanCommand>$(MAKE) -f Makefile clean</cleanCommand>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
         </makeTool>
       </makefileType>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+          <preprocessorList>
+            <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="CMakeFiles/CompilerIdC/CMakeCCompilerId.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <folder path="0/libopenJaus">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>ROS_PACKAGE_NAME="Modulo_Comunicaciones"</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="0/src">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>ROS_PACKAGE_NAME="Modulo_Comunicaciones"</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Modules">
+        <cTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <item path="libjaus/src/jausAddress.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausArray.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausComponent.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausNode.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausPayloadInterface.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausService.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausState.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/jausSubsystem.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/communications/setDataLinkSelectMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/communications/setDataLinkStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/communications/setSelectedDataLinkStateMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/activateServiceConnectionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/clearEmergencyMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/confirmComponentControlMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/confirmServiceConnectionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/createServiceConnectionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/rejectComponentControlMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/releaseComponentControlMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/requestComponentControlMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/resetMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/resumeMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/setComponentAuthorityMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/setEmergencyMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/setTimeMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/shutdownMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/standbyMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/suspendServiceConnectionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/core/terminateServiceConnectionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/environment/selectCameraMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/environment/setCameraCapabilitiesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/environment/setCameraFormatOptionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/environment/setCameraOptionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/environment/setCameraPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/event/cancelEventMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/event/confirmEventRequestMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/event/createEventMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/event/rejectEventRequestMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/event/updateEventMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setEndEffectorPathMotionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setEndEffectorPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setEndEffectorVelocityStateMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setJointEffortsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setJointMotionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setJointPositionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setJointVelocitiesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/manipulator/setToolPointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/payload/setPayloadDataElementMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/abortMissionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/pauseMissionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/removeMessagesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/replaceMessagesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/resumeMissionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/runMissionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/planning/spoolMissionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setDiscreteDevicesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setDriveByWire.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setGlobalPathSegmentMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setGlobalVectorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setGlobalWaypointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setLocalPathSegmentMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setLocalVectorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setLocalWaypointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setModeDriveMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setTravelSpeedMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setVelocityStateMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/platform/setWrenchEffortMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/worldModel/createVksObjectsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/worldModel/deleteVksObjectsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/worldModel/setVksFeatureClassMetadataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/command/worldModel/terminateVksDataTransferMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/environmentTelemetry.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/messageExperimentalMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/queryAvailableMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/queryFileDataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/reportAvailableMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/reportErrorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/reportFileDataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/reportFunctionAuxiliarMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/reportInfoStopMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/experimental/setFunctionAuxiliarMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/alarmas/reportAlarmaMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/alarmas/reportErrorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/communications/reportDataLinkStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/communications/reportHeartbeatPulseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/communications/reportSelectedDataLinkStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/core/reportComponentAuthorityMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/core/reportComponentControlMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/core/reportComponentStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/core/reportTimeMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/dynamicConfiguration/reportConfigurationMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/dynamicConfiguration/reportIdentificationMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/dynamicConfiguration/reportServicesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/dynamicConfiguration/reportSubsystemListMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportCameraCapabilitiesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportCameraCountMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportCameraFormatOptionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportCameraPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportImageMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportRelativeObjectPositionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/environment/reportSelectedCameraMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/error/reportErrorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/event/eventMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/event/reportEventsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/manipulator/reportJointEffortsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/manipulator/reportJointForceTorquesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/manipulator/reportJointPositionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/manipulator/reportJointVelocitiesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/manipulator/reportManipulatorSpecificationsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/manipulator/reportToolPointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/payload/reportPayloadDataElementMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/payload/reportPayloadInterfaceMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/planning/reportMissionStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/planning/reportSpoolingPreferenceMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportCheckingMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportDiscreteDevicesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportGlobalPathSegmentMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportGlobalPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportGlobalVectorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportGlobalWaypointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportLocalPathSegmentMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportLocalPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportLocalVectorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportLocalWaypointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportPathSegmentCountMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportPlatformOperationalDataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportPlatformSpecificationsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportTravelSpeedMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportUltrasonidosMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportVelocityStateMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportWaypointCountMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/platform/reportWrenchEffortMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/worldModel/reportVksBoundsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/worldModel/reportVksDataTransferTerminationMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/worldModel/reportVksFeatureClassMetadataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/worldModel/reportVksObjectsCreationMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/inform/worldModel/reportVksObjectsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/jausMessage.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/communications/queryDataLinkStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/communications/queryHeartbeatPulseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/communications/querySelectedDataLinkStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/core/queryComponentAuthorityMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/core/queryComponentControlMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/core/queryComponentStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/core/queryTimeMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/dynamicConfiguration/queryConfigurationMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/dynamicConfiguration/queryIdentificationMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/dynamicConfiguration/queryServicesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/dynamicConfiguration/querySubsystemListMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/queryCameraCapabilitiesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/queryCameraCountMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/queryCameraFormatOptionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/queryCameraPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/queryImageMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/queryRelativeObjectPositionMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/environment/querySelectedCameraMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/event/queryEventsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/manipulator/queryJointEffortsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/manipulator/queryJointForceTorquesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/manipulator/queryJointPositionsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/manipulator/queryJointVelocitiesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/manipulator/queryManipulatorSpecificationsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/manipulator/queryToolPointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/payload/queryPayloadDataElementMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/payload/queryPayloadInterfaceMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/planning/queryMissionStatusMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/planning/querySpoolingPreferenceMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryDiscreteDevicesMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryGlobalPathSegmentMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryGlobalPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryGlobalVectorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryGlobalWaypointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryLocalPathSegmentMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryLocalPoseMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryLocalVectorMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryLocalWaypointMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryPathSegmentCountMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryPlatformOperationalDataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryPlatformSpecificationsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryTravelSpeedMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryVelocityStateMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryWaypointCountMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/platform/queryWrenchEffortMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/worldModel/queryVksBoundsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/worldModel/queryVksFeatureClassMetadataMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/message/query/worldModel/queryVksObjectsMessage.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausBoolean.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausByte.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausDouble.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausEventLimit.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausFloat.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausGeometryPointLLA.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausGeometryPointXYZ.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausInteger.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausLong.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausMissionCommand.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausMissionTask.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausShort.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausTime.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausUnsignedInteger.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausUnsignedLong.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausUnsignedShort.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausWorldModelFeatureClass.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libjaus/src/type/jausWorldModelVectorObject.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/componentLibrary/ojCmpt.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/CommunicatorComponent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausCommunicationManager.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausComponentCommunicationManager.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausNodeCommunicationManager.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausOpcUdpInterface.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausSubsystemCommunicationManager.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausTransportInterface.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JausTransportQueue.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/JudpInterface.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/LocalComponent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/MessageRouter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/NodeManager.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/NodeManagerComponent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/OjUdpComponentInterface.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/SystemTree.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/events/ConfigurationEvent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/events/DebugEvent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/events/ErrorEvent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/events/JausMessageEvent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/events/NodeManagerEvent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManager/events/SystemTreeEvent.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/nodeManagerInterface/defaultJausMessageProcessor.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/nodeManagerInterface/lmHandler.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/nodeManagerInterface/nodeManagerInterface.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/nodeManagerInterface/scManager.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/utils/FileLoader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libopenJaus/src/utils/datagramPacket.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/utils/datagramSocket.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/utils/inetAddress.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/utils/multicastSocket.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/utils/queue.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libopenJaus/src/utils/timeLib.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="src/Files.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/HandlerJAUS.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/JausSubsystemVehicle.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/NodeROSCommunication.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/communication.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/interaction.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>

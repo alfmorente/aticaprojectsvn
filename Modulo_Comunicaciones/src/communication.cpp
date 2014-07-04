@@ -30,13 +30,14 @@ int main(int argc, char **argv)
     ComConfig configModule;
 
     int error=files.openFiles();
+
     if(error!=NO_ERROR)
     {
          //Publico el error
-        Common_files::msg_error errorCOM;
-        errorCOM.id_subsystem=SUBS_COMMUNICATION;
-        errorCOM.type_error=TOE_UNDEFINED;
-        errorCOM.id_error=error; //por definir
+        Common_files::msg_errorPtr errorCOM(new Common_files::msg_error);
+        errorCOM->id_subsystem = SUBS_COMMUNICATION;
+        errorCOM->type_error = TOE_UNDEFINED;
+        errorCOM->id_error=error; //por definir
         rosnode->pub_error.publish(errorCOM); 
         if(error==COMM_LOG_FILE_ERROR)
                 Files::writeErrorInLOG(error,"Fichero LOG data: ");
@@ -47,11 +48,11 @@ int main(int argc, char **argv)
     error =files.readConfig(&configModule);
     if(error!=NO_ERROR)
     {
-         //Publico el error
-        Common_files::msg_error errorCOM;
-        errorCOM.id_subsystem=SUBS_COMMUNICATION;
-        errorCOM.type_error=TOE_UNDEFINED;
-        errorCOM.id_error=error; 
+        //Publico el error
+        Common_files::msg_errorPtr errorCOM(new Common_files::msg_error);
+        errorCOM->id_subsystem = SUBS_COMMUNICATION;
+        errorCOM->type_error = TOE_UNDEFINED;
+        errorCOM->id_error=error; //por definir
         rosnode->pub_error.publish(errorCOM);    
         Files::writeErrorInLOG(error,"Fichero de configuracion: ");
         exit(1);
@@ -68,15 +69,15 @@ int main(int argc, char **argv)
 
     error=subsystemVehicle->configureJAUS();
     if(error!=NO_ERROR)
-    {
-          Common_files::msg_error errorCOM;
-          errorCOM.id_subsystem=SUBS_COMMUNICATION;
-          errorCOM.type_error=TOE_UNDEFINED;
-          errorCOM.id_error=error;
-          rosnode->pub_error.publish(errorCOM);
-          rosnode->setStateModule(STATE_ERROR); //completar
-          Files::writeErrorInLOG(error,"Configuracion: ");
-          exit(1);
+{
+        Common_files::msg_errorPtr errorCOM(new Common_files::msg_error);
+        errorCOM->id_subsystem = SUBS_COMMUNICATION;
+        errorCOM->type_error = TOE_UNDEFINED;
+        errorCOM->id_error = error;
+        rosnode->pub_error.publish(errorCOM);
+        rosnode->setStateModule(STATE_ERROR); //completar
+        Files::writeErrorInLOG(error, "Configuracion: ");
+        exit(1);
     }
 
     //Configuracion realizada. Modulo preparado y activo

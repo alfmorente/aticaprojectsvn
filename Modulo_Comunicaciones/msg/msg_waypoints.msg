@@ -1,2 +1,0 @@
-float32 waypoint_lon
-float32 waypoint_lat

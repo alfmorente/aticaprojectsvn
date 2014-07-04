@@ -1,9 +1,0 @@
-float32 latitude
-float32 longitude
-float32 height
-float32 pitch
-float32 yaw
-float32 roll
-float32 velocity_x
-float32 velocity_y
-float32 velocity_z
