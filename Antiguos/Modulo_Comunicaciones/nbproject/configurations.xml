@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="69">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <df name="Modulo_Comunicaciones" root=".">
+      <df name="bin">
+      </df>
+      <df name="catkin">
+        <df name="catkin_generated" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="version" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+        </df>
+      </df>
+      <df name="catkin_generated">
+        <df name="installspace" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="stamps" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="Modulo_Comunicaciones" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+        </df>
+      </df>
+      <df name="CMakeFiles">
+        <df name="_catkin_empty_exported_target.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="clean_test_results.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="CMakeTmp" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="CMakeFiles" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="cmTryCompileExec.dir" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+        </df>
+        <df name="CompilerIdC" kind="SOURCE_LOGICAL_FOLDER">
+          <in>CMakeCCompilerId.c</in>
+        </df>
+        <df name="CompilerIdCXX" kind="SOURCE_LOGICAL_FOLDER">
+          <in>CMakeCXXCompilerId.cpp</in>
+        </df>
+        <df name="comunicaciones.dir" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+        </df>
+        <df name="doxygen.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="Progress">
+          <df name=".svn">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+            </df>
+            <in>entries</in>
+          </df>
+        </df>
+        <df name="rosbuild_clean-test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="ROSBUILD_genmsg_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="ROSBUILD_genmsg_lisp.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="ROSBUILD_genmsg_py.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="ROSBUILD_gensrv_cpp.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="ROSBUILD_gensrv_lisp.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="rosbuild_precompile.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="rosbuild_premsgsrvgen.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="rospack_genmsg.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="rospack_genmsg_all.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="rospack_genmsg_libexe.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="rospack_gensrv.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="run_tests.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="test-future.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="test-results-run.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="test-results.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="test.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="tests.dir" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+      </df>
+      <df name="devel">
+        <df name="etc" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="catkin" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="profile.d" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="gtest">
+        <df name="CMakeFiles" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="gtest.dir" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+          <df name="gtest_main.dir" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="include" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="Modulo_Comunicaciones" kind="SOURCE_LOGICAL_FOLDER">
+          <in>comunicaciones.h</in>
+          <in>constant.h</in>
+          <in>handlerJAUS.h</in>
+        </df>
+      </df>
+      <df name="lib">
+      </df>
+      <df name="libjaus">
+        <df name="Build" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="include" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="message" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="command" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setDataLinkSelectMessage.h</in>
+                <in>setDataLinkStatusMessage.h</in>
+                <in>setSelectedDataLinkStateMessage.h</in>
+              </df>
+              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+                <in>activateServiceConnectionMessage.h</in>
+                <in>clearEmergencyMessage.h</in>
+                <in>confirmComponentControlMessage.h</in>
+                <in>confirmServiceConnectionMessage.h</in>
+                <in>createServiceConnectionMessage.h</in>
+                <in>rejectComponentControlMessage.h</in>
+                <in>releaseComponentControlMessage.h</in>
+                <in>requestComponentControlMessage.h</in>
+                <in>resetMessage.h</in>
+                <in>resumeMessage.h</in>
+                <in>setComponentAuthorityMessage.h</in>
+                <in>setEmergencyMessage.h</in>
+                <in>setTimeMessage.h</in>
+                <in>shutdownMessage.h</in>
+                <in>standbyMessage.h</in>
+                <in>suspendServiceConnectionMessage.h</in>
+                <in>terminateServiceConnectionMessage.h</in>
+              </df>
+              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+                <in>selectCameraMessage.h</in>
+                <in>setCameraCapabilitiesMessage.h</in>
+                <in>setCameraFormatOptionsMessage.h</in>
+                <in>setCameraOptionsMessage.h</in>
+                <in>setCameraPoseMessage.h</in>
+              </df>
+              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+                <in>cancelEventMessage.h</in>
+                <in>confirmEventRequestMessage.h</in>
+                <in>createEventMessage.h</in>
+                <in>rejectEventRequestMessage.h</in>
+                <in>updateEventMessage.h</in>
+              </df>
+              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setEndEffectorPathMotionMessage.h</in>
+                <in>setEndEffectorPoseMessage.h</in>
+                <in>setEndEffectorVelocityStateMessage.h</in>
+                <in>setJointEffortsMessage.h</in>
+                <in>setJointMotionMessage.h</in>
+                <in>setJointPositionsMessage.h</in>
+                <in>setJointVelocitiesMessage.h</in>
+                <in>setToolPointMessage.h</in>
+              </df>
+              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setPayloadDataElementMessage.h</in>
+              </df>
+              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+                <in>abortMissionMessage.h</in>
+                <in>pauseMissionMessage.h</in>
+                <in>removeMessagesMessage.h</in>
+                <in>replaceMessagesMessage.h</in>
+                <in>resumeMissionMessage.h</in>
+                <in>runMissionMessage.h</in>
+                <in>spoolMissionMessage.h</in>
+              </df>
+              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setDiscreteDevicesMessage.h</in>
+                <in>setDriveByWire.h</in>
+                <in>setGlobalPathSegmentMessage.h</in>
+                <in>setGlobalVectorMessage.h</in>
+                <in>setGlobalWaypointMessage.h</in>
+                <in>setLocalPathSegmentMessage.h</in>
+                <in>setLocalVectorMessage.h</in>
+                <in>setLocalWaypointMessage.h</in>
+                <in>setModeDriveMessage.h</in>
+                <in>setTravelSpeedMessage.h</in>
+                <in>setVelocityStateMessage.h</in>
+                <in>setWrenchEffortMessage.h</in>
+              </df>
+              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+                <in>createVksObjectsMessage.h</in>
+                <in>deleteVksObjectsMessage.h</in>
+                <in>setVksFeatureClassMetadataMessage.h</in>
+                <in>terminateVksDataTransferMessage.h</in>
+              </df>
+            </df>
+            <df name="experimental" kind="SOURCE_LOGICAL_FOLDER">
+              <in>environmentTelemetry.h</in>
+              <in>messageExperimentalMessage.h</in>
+            </df>
+            <df name="inform" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="alarmas">
+                <in>reportAlarmaMessage.h</in>
+              </df>
+              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportDataLinkStatusMessage.h</in>
+                <in>reportHeartbeatPulseMessage.h</in>
+                <in>reportSelectedDataLinkStatusMessage.h</in>
+              </df>
+              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportComponentAuthorityMessage.h</in>
+                <in>reportComponentControlMessage.h</in>
+                <in>reportComponentStatusMessage.h</in>
+                <in>reportTimeMessage.h</in>
+              </df>
+              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportConfigurationMessage.h</in>
+                <in>reportIdentificationMessage.h</in>
+                <in>reportServicesMessage.h</in>
+                <in>reportSubsystemListMessage.h</in>
+              </df>
+              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportCameraCapabilitiesMessage.h</in>
+                <in>reportCameraCountMessage.h</in>
+                <in>reportCameraFormatOptionsMessage.h</in>
+                <in>reportCameraPoseMessage.h</in>
+                <in>reportImageMessage.h</in>
+                <in>reportRelativeObjectPositionMessage.h</in>
+                <in>reportSelectedCameraMessage.h</in>
+              </df>
+              <df name="error">
+                <in>reportErrorMessage.h</in>
+              </df>
+              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+                <in>eventMessage.h</in>
+                <in>reportEventsMessage.h</in>
+              </df>
+              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportJointEffortsMessage.h</in>
+                <in>reportJointForceTorquesMessage.h</in>
+                <in>reportJointPositionsMessage.h</in>
+                <in>reportJointVelocitiesMessage.h</in>
+                <in>reportManipulatorSpecificationsMessage.h</in>
+                <in>reportToolPointMessage.h</in>
+              </df>
+              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportPayloadDataElementMessage.h</in>
+                <in>reportPayloadInterfaceMessage.h</in>
+              </df>
+              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportMissionStatusMessage.h</in>
+                <in>reportSpoolingPreferenceMessage.h</in>
+              </df>
+              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportCheckingMessage.h</in>
+                <in>reportDiscreteDevicesMessage.h</in>
+                <in>reportGlobalPathSegmentMessage.h</in>
+                <in>reportGlobalPoseMessage.h</in>
+                <in>reportGlobalVectorMessage.h</in>
+                <in>reportGlobalWaypointMessage.h</in>
+                <in>reportLocalPathSegmentMessage.h</in>
+                <in>reportLocalPoseMessage.h</in>
+                <in>reportLocalVectorMessage.h</in>
+                <in>reportLocalWaypointMessage.h</in>
+                <in>reportPathSegmentCountMessage.h</in>
+                <in>reportPlatformOperationalDataMessage.h</in>
+                <in>reportPlatformSpecificationsMessage.h</in>
+                <in>reportTravelSpeedMessage.h</in>
+                <in>reportUltrasonidosMessage.h</in>
+                <in>reportVelocityStateMessage.h</in>
+                <in>reportWaypointCountMessage.h</in>
+                <in>reportWrenchEffortMessage.h</in>
+              </df>
+              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportVksBoundsMessage.h</in>
+                <in>reportVksDataTransferTerminationMessage.h</in>
+                <in>reportVksFeatureClassMetadataMessage.h</in>
+                <in>reportVksObjectsCreationMessage.h</in>
+                <in>reportVksObjectsMessage.h</in>
+              </df>
+            </df>
+            <df name="query" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryDataLinkStatusMessage.h</in>
+                <in>queryHeartbeatPulseMessage.h</in>
+                <in>querySelectedDataLinkStatusMessage.h</in>
+              </df>
+              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryComponentAuthorityMessage.h</in>
+                <in>queryComponentControlMessage.h</in>
+                <in>queryComponentStatusMessage.h</in>
+                <in>queryTimeMessage.h</in>
+              </df>
+              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryConfigurationMessage.h</in>
+                <in>queryIdentificationMessage.h</in>
+                <in>queryServicesMessage.h</in>
+                <in>querySubsystemListMessage.h</in>
+              </df>
+              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryCameraCapabilitiesMessage.h</in>
+                <in>queryCameraCountMessage.h</in>
+                <in>queryCameraFormatOptionsMessage.h</in>
+                <in>queryCameraPoseMessage.h</in>
+                <in>queryImageMessage.h</in>
+                <in>queryRelativeObjectPositionMessage.h</in>
+                <in>querySelectedCameraMessage.h</in>
+              </df>
+              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryEventsMessage.h</in>
+              </df>
+              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryJointEffortsMessage.h</in>
+                <in>queryJointForceTorquesMessage.h</in>
+                <in>queryJointPositionsMessage.h</in>
+                <in>queryJointVelocitiesMessage.h</in>
+                <in>queryManipulatorSpecificationsMessage.h</in>
+                <in>queryToolPointMessage.h</in>
+              </df>
+              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryPayloadDataElementMessage.h</in>
+                <in>queryPayloadInterfaceMessage.h</in>
+              </df>
+              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryMissionStatusMessage.h</in>
+                <in>querySpoolingPreferenceMessage.h</in>
+              </df>
+              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryDiscreteDevicesMessage.h</in>
+                <in>queryGlobalPathSegmentMessage.h</in>
+                <in>queryGlobalPoseMessage.h</in>
+                <in>queryGlobalVectorMessage.h</in>
+                <in>queryGlobalWaypointMessage.h</in>
+                <in>queryLocalPathSegmentMessage.h</in>
+                <in>queryLocalPoseMessage.h</in>
+                <in>queryLocalVectorMessage.h</in>
+                <in>queryLocalWaypointMessage.h</in>
+                <in>queryPathSegmentCountMessage.h</in>
+                <in>queryPlatformOperationalDataMessage.h</in>
+                <in>queryPlatformSpecificationsMessage.h</in>
+                <in>queryTravelSpeedMessage.h</in>
+                <in>queryVelocityStateMessage.h</in>
+                <in>queryWaypointCountMessage.h</in>
+                <in>queryWrenchEffortMessage.h</in>
+              </df>
+              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryVksBoundsMessage.h</in>
+                <in>queryVksFeatureClassMetadataMessage.h</in>
+                <in>queryVksObjectsMessage.h</in>
+              </df>
+            </df>
+            <in>jausMessage.h</in>
+            <in>jausMessageHeaders.h</in>
+            <in>skeletonMessage.h</in>
+          </df>
+          <df name="type" kind="SOURCE_LOGICAL_FOLDER">
+            <in>jausBoolean.h</in>
+            <in>jausByte.h</in>
+            <in>jausDouble.h</in>
+            <in>jausEventLimit.h</in>
+            <in>jausFloat.h</in>
+            <in>jausGeometryPointLLA.h</in>
+            <in>jausGeometryPointXYZ.h</in>
+            <in>jausInteger.h</in>
+            <in>jausLong.h</in>
+            <in>jausMissionCommand.h</in>
+            <in>jausMissionTask.h</in>
+            <in>jausShort.h</in>
+            <in>jausTime.h</in>
+            <in>jausType.h</in>
+            <in>jausUnsignedInteger.h</in>
+            <in>jausUnsignedLong.h</in>
+            <in>jausUnsignedShort.h</in>
+            <in>jausWorldModelFeatureClass.h</in>
+            <in>jausWorldModelVectorObject.h</in>
+          </df>
+          <in>jaus.h</in>
+          <in>jausAddress.h</in>
+          <in>jausArray.h</in>
+          <in>jausComponent.h</in>
+          <in>jausNode.h</in>
+          <in>jausPayloadInterface.h</in>
+          <in>jausService.h</in>
+          <in>jausState.h</in>
+          <in>jausSubsystem.h</in>
+        </df>
+        <df name="lib" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="message" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="command" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setDataLinkSelectMessage.c</in>
+                <in>setDataLinkStatusMessage.c</in>
+                <in>setSelectedDataLinkStateMessage.c</in>
+              </df>
+              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+                <in>activateServiceConnectionMessage.c</in>
+                <in>clearEmergencyMessage.c</in>
+                <in>confirmComponentControlMessage.c</in>
+                <in>confirmServiceConnectionMessage.c</in>
+                <in>createServiceConnectionMessage.c</in>
+                <in>rejectComponentControlMessage.c</in>
+                <in>releaseComponentControlMessage.c</in>
+                <in>requestComponentControlMessage.c</in>
+                <in>resetMessage.c</in>
+                <in>resumeMessage.c</in>
+                <in>setComponentAuthorityMessage.c</in>
+                <in>setEmergencyMessage.c</in>
+                <in>setTimeMessage.c</in>
+                <in>shutdownMessage.c</in>
+                <in>standbyMessage.c</in>
+                <in>suspendServiceConnectionMessage.c</in>
+                <in>terminateServiceConnectionMessage.c</in>
+              </df>
+              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+                <in>selectCameraMessage.c</in>
+                <in>setCameraCapabilitiesMessage.c</in>
+                <in>setCameraFormatOptionsMessage.c</in>
+                <in>setCameraOptionsMessage.c</in>
+                <in>setCameraPoseMessage.c</in>
+              </df>
+              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+                <in>cancelEventMessage.c</in>
+                <in>confirmEventRequestMessage.c</in>
+                <in>createEventMessage.c</in>
+                <in>rejectEventRequestMessage.c</in>
+                <in>updateEventMessage.c</in>
+              </df>
+              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setEndEffectorPathMotionMessage.c</in>
+                <in>setEndEffectorPoseMessage.c</in>
+                <in>setEndEffectorVelocityStateMessage.c</in>
+                <in>setJointEffortsMessage.c</in>
+                <in>setJointMotionMessage.c</in>
+                <in>setJointPositionsMessage.c</in>
+                <in>setJointVelocitiesMessage.c</in>
+                <in>setToolPointMessage.c</in>
+              </df>
+              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setPayloadDataElementMessage.c</in>
+              </df>
+              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+                <in>abortMissionMessage.c</in>
+                <in>pauseMissionMessage.c</in>
+                <in>removeMessagesMessage.c</in>
+                <in>replaceMessagesMessage.c</in>
+                <in>resumeMissionMessage.c</in>
+                <in>runMissionMessage.c</in>
+                <in>spoolMissionMessage.c</in>
+              </df>
+              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+                <in>setDiscreteDevicesMessage.c</in>
+                <in>setDriveByWire.c</in>
+                <in>setGlobalPathSegmentMessage.c</in>
+                <in>setGlobalVectorMessage.c</in>
+                <in>setGlobalWaypointMessage.c</in>
+                <in>setLocalPathSegmentMessage.c</in>
+                <in>setLocalVectorMessage.c</in>
+                <in>setLocalWaypointMessage.c</in>
+                <in>setModeDriveMessage.c</in>
+                <in>setTravelSpeedMessage.c</in>
+                <in>setVelocityStateMessage.c</in>
+                <in>setWrenchEffortMessage.c</in>
+              </df>
+              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+                <in>createVksObjectsMessage.c</in>
+                <in>deleteVksObjectsMessage.c</in>
+                <in>setVksFeatureClassMetadataMessage.c</in>
+                <in>terminateVksDataTransferMessage.c</in>
+              </df>
+            </df>
+            <df name="experimental" kind="SOURCE_LOGICAL_FOLDER">
+              <in>environmentTelemetry.c</in>
+              <in>messageExperimentalMessage.c</in>
+            </df>
+            <df name="inform" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="alarmas">
+                <in>reportAlarmaMessage.c</in>
+              </df>
+              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportDataLinkStatusMessage.c</in>
+                <in>reportHeartbeatPulseMessage.c</in>
+                <in>reportSelectedDataLinkStatusMessage.c</in>
+              </df>
+              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportComponentAuthorityMessage.c</in>
+                <in>reportComponentControlMessage.c</in>
+                <in>reportComponentStatusMessage.c</in>
+                <in>reportTimeMessage.c</in>
+              </df>
+              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportConfigurationMessage.c</in>
+                <in>reportIdentificationMessage.c</in>
+                <in>reportServicesMessage.c</in>
+                <in>reportSubsystemListMessage.c</in>
+              </df>
+              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportCameraCapabilitiesMessage.c</in>
+                <in>reportCameraCountMessage.c</in>
+                <in>reportCameraFormatOptionsMessage.c</in>
+                <in>reportCameraPoseMessage.c</in>
+                <in>reportImageMessage.c</in>
+                <in>reportRelativeObjectPositionMessage.c</in>
+                <in>reportSelectedCameraMessage.c</in>
+              </df>
+              <df name="error">
+                <in>reportErrorMessage.c</in>
+              </df>
+              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+                <in>eventMessage.c</in>
+                <in>reportEventsMessage.c</in>
+              </df>
+              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportJointEffortsMessage.c</in>
+                <in>reportJointForceTorquesMessage.c</in>
+                <in>reportJointPositionsMessage.c</in>
+                <in>reportJointVelocitiesMessage.c</in>
+                <in>reportManipulatorSpecificationsMessage.c</in>
+                <in>reportToolPointMessage.c</in>
+              </df>
+              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportPayloadDataElementMessage.c</in>
+                <in>reportPayloadInterfaceMessage.c</in>
+              </df>
+              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportMissionStatusMessage.c</in>
+                <in>reportSpoolingPreferenceMessage.c</in>
+              </df>
+              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportCheckingMessage.c</in>
+                <in>reportDiscreteDevicesMessage.c</in>
+                <in>reportGlobalPathSegmentMessage.c</in>
+                <in>reportGlobalPoseMessage.c</in>
+                <in>reportGlobalVectorMessage.c</in>
+                <in>reportGlobalWaypointMessage.c</in>
+                <in>reportLocalPathSegmentMessage.c</in>
+                <in>reportLocalPoseMessage.c</in>
+                <in>reportLocalVectorMessage.c</in>
+                <in>reportLocalWaypointMessage.c</in>
+                <in>reportPathSegmentCountMessage.c</in>
+                <in>reportPlatformOperationalDataMessage.c</in>
+                <in>reportPlatformSpecificationsMessage.c</in>
+                <in>reportTravelSpeedMessage.c</in>
+                <in>reportUltrasonidosMessage.c</in>
+                <in>reportVelocityStateMessage.c</in>
+                <in>reportWaypointCountMessage.c</in>
+                <in>reportWrenchEffortMessage.c</in>
+              </df>
+              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+                <in>reportVksBoundsMessage.c</in>
+                <in>reportVksDataTransferTerminationMessage.c</in>
+                <in>reportVksFeatureClassMetadataMessage.c</in>
+                <in>reportVksObjectsCreationMessage.c</in>
+                <in>reportVksObjectsMessage.c</in>
+              </df>
+            </df>
+            <df name="query" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="communications" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryDataLinkStatusMessage.c</in>
+                <in>queryHeartbeatPulseMessage.c</in>
+                <in>querySelectedDataLinkStatusMessage.c</in>
+              </df>
+              <df name="core" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryComponentAuthorityMessage.c</in>
+                <in>queryComponentControlMessage.c</in>
+                <in>queryComponentStatusMessage.c</in>
+                <in>queryTimeMessage.c</in>
+              </df>
+              <df name="dynamicConfiguration" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryConfigurationMessage.c</in>
+                <in>queryIdentificationMessage.c</in>
+                <in>queryServicesMessage.c</in>
+                <in>querySubsystemListMessage.c</in>
+              </df>
+              <df name="environment" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryCameraCapabilitiesMessage.c</in>
+                <in>queryCameraCountMessage.c</in>
+                <in>queryCameraFormatOptionsMessage.c</in>
+                <in>queryCameraPoseMessage.c</in>
+                <in>queryImageMessage.c</in>
+                <in>queryRelativeObjectPositionMessage.c</in>
+                <in>querySelectedCameraMessage.c</in>
+              </df>
+              <df name="event" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryEventsMessage.c</in>
+              </df>
+              <df name="manipulator" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryJointEffortsMessage.c</in>
+                <in>queryJointForceTorquesMessage.c</in>
+                <in>queryJointPositionsMessage.c</in>
+                <in>queryJointVelocitiesMessage.c</in>
+                <in>queryManipulatorSpecificationsMessage.c</in>
+                <in>queryToolPointMessage.c</in>
+              </df>
+              <df name="payload" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryPayloadDataElementMessage.c</in>
+                <in>queryPayloadInterfaceMessage.c</in>
+              </df>
+              <df name="planning" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryMissionStatusMessage.c</in>
+                <in>querySpoolingPreferenceMessage.c</in>
+              </df>
+              <df name="platform" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryDiscreteDevicesMessage.c</in>
+                <in>queryGlobalPathSegmentMessage.c</in>
+                <in>queryGlobalPoseMessage.c</in>
+                <in>queryGlobalVectorMessage.c</in>
+                <in>queryGlobalWaypointMessage.c</in>
+                <in>queryLocalPathSegmentMessage.c</in>
+                <in>queryLocalPoseMessage.c</in>
+                <in>queryLocalVectorMessage.c</in>
+                <in>queryLocalWaypointMessage.c</in>
+                <in>queryPathSegmentCountMessage.c</in>
+                <in>queryPlatformOperationalDataMessage.c</in>
+                <in>queryPlatformSpecificationsMessage.c</in>
+                <in>queryTravelSpeedMessage.c</in>
+                <in>queryVelocityStateMessage.c</in>
+                <in>queryWaypointCountMessage.c</in>
+                <in>queryWrenchEffortMessage.c</in>
+              </df>
+              <df name="worldModel" kind="SOURCE_LOGICAL_FOLDER">
+                <in>queryVksBoundsMessage.c</in>
+                <in>queryVksFeatureClassMetadataMessage.c</in>
+                <in>queryVksObjectsMessage.c</in>
+              </df>
+            </df>
+            <in>jausMessage.c</in>
+          </df>
+          <df name="type" kind="SOURCE_LOGICAL_FOLDER">
+            <in>jausBoolean.c</in>
+            <in>jausByte.c</in>
+            <in>jausDouble.c</in>
+            <in>jausEventLimit.c</in>
+            <in>jausFloat.c</in>
+            <in>jausGeometryPointLLA.c</in>
+            <in>jausGeometryPointXYZ.c</in>
+            <in>jausInteger.c</in>
+            <in>jausLong.c</in>
+            <in>jausMissionCommand.c</in>
+            <in>jausMissionTask.c</in>
+            <in>jausShort.c</in>
+            <in>jausTime.c</in>
+            <in>jausUnsignedInteger.c</in>
+            <in>jausUnsignedLong.c</in>
+            <in>jausUnsignedShort.c</in>
+            <in>jausWorldModelFeatureClass.c</in>
+            <in>jausWorldModelVectorObject.c</in>
+          </df>
+          <in>jausAddress.c</in>
+          <in>jausArray.c</in>
+          <in>jausComponent.c</in>
+          <in>jausNode.c</in>
+          <in>jausPayloadInterface.c</in>
+          <in>jausService.c</in>
+          <in>jausState.c</in>
+          <in>jausSubsystem.c</in>
+        </df>
+      </df>
+      <df name="libopenJaus">
+        <df name="Build" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="include" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="componentLibrary" kind="SOURCE_LOGICAL_FOLDER">
+            <in>ojCmpt.h</in>
+          </df>
+          <df name="nodeManager" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="events" kind="SOURCE_LOGICAL_FOLDER">
+              <in>ConfigurationEvent.h</in>
+              <in>DebugEvent.h</in>
+              <in>ErrorEvent.h</in>
+              <in>JausMessageEvent.h</in>
+              <in>NodeManagerEvent.h</in>
+              <in>SystemTreeEvent.h</in>
+            </df>
+            <in>CommunicatorComponent.h</in>
+            <in>EventHandler.h</in>
+            <in>JausCommunicationManager.h</in>
+            <in>JausComponentCommunicationManager.h</in>
+            <in>JausNodeCommunicationManager.h</in>
+            <in>JausOpcUdpInterface.h</in>
+            <in>JausSubsystemCommunicationManager.h</in>
+            <in>JausTransportInterface.h</in>
+            <in>JausTransportQueue.h</in>
+            <in>JudpInterface.h</in>
+            <in>LocalComponent.h</in>
+            <in>MessageRouter.h</in>
+            <in>NodeManager.h</in>
+            <in>NodeManagerComponent.h</in>
+            <in>OjUdpComponentInterface.h</in>
+            <in>SystemTree.h</in>
+          </df>
+          <df name="nodeManagerInterface" kind="SOURCE_LOGICAL_FOLDER">
+            <in>nodeManagerInterface.h</in>
+          </df>
+          <df name="utils" kind="SOURCE_LOGICAL_FOLDER">
+            <in>FileLoader.h</in>
+            <in>datagramPacket.h</in>
+            <in>datagramSocket.h</in>
+            <in>hashMap.h</in>
+            <in>inetAddress.h</in>
+            <in>multicastSocket.h</in>
+            <in>queue.h</in>
+            <in>timeLib.h</in>
+            <in>timeval.h</in>
+          </df>
+          <in>openJaus.h</in>
+        </df>
+        <df name="lib" kind="SOURCE_LOGICAL_FOLDER">
+        </df>
+        <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="componentLibrary" kind="SOURCE_LOGICAL_FOLDER">
+            <in>ojCmpt.c</in>
+          </df>
+          <df name="nodeManager" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="events" kind="SOURCE_LOGICAL_FOLDER">
+              <in>ConfigurationEvent.cpp</in>
+              <in>DebugEvent.cpp</in>
+              <in>ErrorEvent.cpp</in>
+              <in>JausMessageEvent.cpp</in>
+              <in>NodeManagerEvent.cpp</in>
+              <in>SystemTreeEvent.cpp</in>
+            </df>
+            <in>CommunicatorComponent.cpp</in>
+            <in>JausCommunicationManager.cpp</in>
+            <in>JausComponentCommunicationManager.cpp</in>
+            <in>JausNodeCommunicationManager.cpp</in>
+            <in>JausOpcUdpInterface.cpp</in>
+            <in>JausSubsystemCommunicationManager.cpp</in>
+            <in>JausTransportInterface.cpp</in>
+            <in>JausTransportQueue.cpp</in>
+            <in>JudpInterface.cpp</in>
+            <in>LocalComponent.cpp</in>
+            <in>MessageRouter.cpp</in>
+            <in>NodeManager.cpp</in>
+            <in>NodeManagerComponent.cpp</in>
+            <in>OjUdpComponentInterface.cpp</in>
+            <in>SystemTree.cpp</in>
+          </df>
+          <df name="nodeManagerInterface" kind="SOURCE_LOGICAL_FOLDER">
+            <in>defaultJausMessageProcessor.c</in>
+            <in>lmHandler.c</in>
+            <in>nodeManagerInterface.c</in>
+            <in>scManager.c</in>
+          </df>
+          <df name="utils" kind="SOURCE_LOGICAL_FOLDER">
+            <in>FileLoader.cpp</in>
+            <in>datagramPacket.c</in>
+            <in>datagramSocket.c</in>
+            <in>inetAddress.c</in>
+            <in>multicastSocket.c</in>
+            <in>queue.c</in>
+            <in>timeLib.c</in>
+          </df>
+        </df>
+      </df>
+      <df name="msg" kind="SOURCE_LOGICAL_FOLDER">
+      </df>
+      <df name="msg_gen">
+        <df name=".svn">
+          <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+          <in>entries</in>
+        </df>
+        <df name="cpp" kind="SOURCE_LOGICAL_FOLDER">
+          <df name=".svn">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+            </df>
+            <in>entries</in>
+          </df>
+          <df name="include" kind="SOURCE_LOGICAL_FOLDER">
+            <df name=".svn">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+              </df>
+              <in>entries</in>
+            </df>
+            <df name="Modulo_Comunicaciones" kind="SOURCE_LOGICAL_FOLDER">
+              <df name=".svn">
+                <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+                  <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                  <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                  <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                </df>
+                <in>entries</in>
+              </df>
+            </df>
+          </df>
+        </df>
+        <df name="lisp" kind="SOURCE_LOGICAL_FOLDER">
+          <df name=".svn">
+            <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="tmp" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="prop-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="props" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="text-base" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+            </df>
+            <in>entries</in>
+          </df>
+        </df>
+      </df>
+      <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="Modulo_Comunicaciones">
+          <df name="msg">
+          </df>
+        </df>
+        <in>comunicaciones.cpp</in>
+        <in>handlerJAUS.cpp</in>
+      </df>
+      <df name="test_results">
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>CMakeLists.txt</itemPath>
+      <itemPath>Makefile</itemPath>
+      <itemPath>Makefile-Modulo_Comunicaciones.mk</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile-Modulo_Comunicaciones.mk</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>GNU|GNU</compilerSet>
+        <platform>2</platform>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>$(MAKE) -f Makefile</buildCommand>
+          <cleanCommand>$(MAKE) -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+      </makefileType>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -1,0 +1,17 @@
+<package>
+  <description brief="Modulo_Laser2D_Rear">
+
+     Modulo_Laser2D_Rear
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Laser2D_Rear</url>
+  <depend package="sensor_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="Common_files"/>
+
+</package>
+
+

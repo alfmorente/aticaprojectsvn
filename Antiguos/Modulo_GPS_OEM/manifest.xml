@@ -1,0 +1,16 @@
+<package>
+  <description brief="Modulo_GPS_OEM">
+
+     Modulo_GPS_OEM
+
+  </description>
+  <author>Carlos</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_GPS_OEM</url>
+  <depend package="roscpp"/>
+  <depend package="Common_files"/>
+
+</package>
+
+

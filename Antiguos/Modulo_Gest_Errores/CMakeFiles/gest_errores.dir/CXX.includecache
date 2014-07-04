@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/Modulo_Gest_Errores/src/gest_errores.cpp
+../include/Atica_Gest_Errores/gest_errores.h
+/home/atica/catkin_ws/src/Modulo_Gest_Errores/src/../include/Atica_Gest_Errores/gest_errores.h
+

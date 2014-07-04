@@ -1,0 +1,17 @@
+<package>
+  <description brief="Modulo_Laser2D_Frontal">
+
+     Modulo_Laser2D_Frontal
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Laser2D_Frontal</url>
+  <depend package="roscpp"/>
+  <depend package="Common_files"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+

@@ -1,0 +1,1 @@
+bool conf_flag

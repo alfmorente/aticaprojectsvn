@@ -1,0 +1,21 @@
+#####################################################
+#						    #
+#       FICHERO DE CONFIGURACION DE LA CAMARA       #
+#						    #
+#####################################################
+
+
+#Nombre del puerto serie
+port_name: /dev/ttyUSB0 
+
+#Velocidad del puerto serie 
+port_velocity: B9600
+
+#ID de la camara
+id_camera: 5
+
+#Velocidad del PAN
+vel_pan: 20 
+
+#velocidad del tilt:
+vel_tilt: 10
