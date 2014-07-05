@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
                 
                 // Comprobación del temporizador y requerimiento de info
                 finalTime = clock() - initTime;
-                
+
                 if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_30HZ) {
                     
                     // Requerimiento de informacion de dispositivo GPS/INS
