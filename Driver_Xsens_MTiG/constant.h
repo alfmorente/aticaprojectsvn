@@ -89,7 +89,7 @@ void streamDataMng();
 void packetMng(dataPacketMT2);
 
 float hexa2float(unsigned char * );
-float hexa2double(unsigned char * );
+double hexa2double(unsigned char * );
 int hexa2int(unsigned char * );
 float parseFixPointFormat(unsigned char *);
 

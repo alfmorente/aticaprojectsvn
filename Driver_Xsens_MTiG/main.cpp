@@ -14,7 +14,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-    char * serial_name = (char *) "/dev/ttyUSB0";
+    char * serial_name = (char *) "/dev/ttyUSB3";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
 
@@ -529,7 +529,7 @@ xsensMsg setOutPutConfiguration(){
     xsMsg.pre = COMMAND_PRE;
     xsMsg.bid = COMMAND_BID;
     xsMsg.mid = COMMAND_MID_SETOUTPUTCONFIGURATION;
-    xsMsg.len = 0x0C;
+    xsMsg.len = 0x18;
     // Temperatura
     xsMsg.data[0] = 0x08;
     xsMsg.data[1] = 0x13;
@@ -540,14 +540,32 @@ xsensMsg setOutPutConfiguration(){
     xsMsg.data[5] = 0x33;
     xsMsg.data[6] = 0x00;
     xsMsg.data[7] = 0x01;
-    // Posicion
+    // Posicion (Lat + Lon)
     xsMsg.data[8] = 0x50;
     xsMsg.data[9] = 0x43;
     xsMsg.data[10] = 0x00;
     xsMsg.data[11] = 0x01;
+    // Posicion (Alt)
+    xsMsg.data[12] = 0x50;
+    xsMsg.data[13] = 0x20;
+    xsMsg.data[14] = 0x00;
+    xsMsg.data[15] = 0x01;
+    // Aceleracion
+    xsMsg.data[16] = 0x40;
+    xsMsg.data[17] = 0x20;
+    xsMsg.data[18] = 0x00;
+    xsMsg.data[19] = 0x01;
+    // Velocity
+    xsMsg.data[20] = 0xD0;
+    xsMsg.data[21] = 0x10;
+    xsMsg.data[22] = 0x00;
+    xsMsg.data[23] = 0x01;
+    
+    
     xsMsg.cs = calcChecksum(xsMsg);
     return xsMsg;
 }
+
 
 void streamDataMng() {
     xsensMsg xsMsg;
@@ -593,8 +611,6 @@ void streamDataMng() {
                             printf("ERROR in MTData2 ACK reception\n");
                         }
                         
-                       printf("Iniciando el tratamiento de datos...\n");
-
                         printf("Data management...\n");
 
                         dataPacketMT2 dataPacket;
@@ -632,7 +648,7 @@ void packetMng(dataPacketMT2 dataPacket) {
     unsigned short auxShort;
     int auxInt;
     float auxFloat;
-    
+    printf("\n");
     switch (dataPacket.idGroup) {
         
         case 0x10: // Timestamp
@@ -676,11 +692,12 @@ void packetMng(dataPacketMT2 dataPacket) {
             
             
         case 0x08: // Temperature
-            printf("Got temperature packet\n");
-            if ((dataPacket.idSignal & 0xF0) == 0x10) // Temperature
-                printf("   Temperature: %d bytes\n", dataPacket.len);
-            // printf("   Temperature: %f ºC\n", hexa2float(dataPacket.data));
-            else
+            //printf("Got temperature packet\n");
+            if ((dataPacket.idSignal & 0xF0) == 0x10) { // Temperature
+                auxBuf = (unsigned char *) malloc(8);
+                for (int i = 0; i < 8; i++) auxBuf[i] = dataPacket.data[i];
+                printf("TEMPERATURE: %lf ºC\n", hexa2double(auxBuf));
+            } else
                 printf("   UNKNOWN :: Temperature %d bytes\n", dataPacket.len);
             printf("\n");
             break;
@@ -711,7 +728,8 @@ void packetMng(dataPacketMT2 dataPacket) {
             
             
         case 0x20: // Orientation
-            printf("Got orientation packet\n");
+            //printf("Got orientation packet\n");
+            printf("ORIENTATION:\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Quaternion
                     printf("   Quaternion %d bytes\n", dataPacket.len);
@@ -720,16 +738,16 @@ void packetMng(dataPacketMT2 dataPacket) {
                     printf("   Rotation Matrix %d bytes\n", dataPacket.len);
                     break;
                 case 0x30: // Euler Angles
-                    printf("   Euler Angles %d bytes\n", dataPacket.len);
+                    //printf("   Euler Angles %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Roll: %3.8lf\n", hexa2double(auxBuf));
+                    printf("   Roll: %3.8lf º\n", hexa2double(auxBuf));
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
-                    printf("   Pitch: %3.8lf\n", hexa2double(auxBuf));
+                    printf("   Pitch: %3.8lf º\n", hexa2double(auxBuf));
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 16; i < 24; i++) auxBuf[i-16]=dataPacket.data[i];
-                    printf("   Yaw: %3.8lf\n", hexa2double(auxBuf));
+                    printf("   Yaw: %3.8lf º\n", hexa2double(auxBuf));
                     break;
                 default:
                     printf("   UNKNOWN :: Orientation %d bytes\n", dataPacket.len);
@@ -751,21 +769,22 @@ void packetMng(dataPacketMT2 dataPacket) {
             
             
         case 0x40: // Acceleration
-            printf("Got acceleration packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            //printf("Got acceleration packet\n");
+            printf("ACCELERATION:\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Delta V
-                    //printf("   Delta V %d bytes\n", dataPacket.len);
-                    unsigned char * buf;
-                    buf = (unsigned char *) malloc(4);
-                    for(int i = 0 ; i < 4; i ++) buf[i] = dataPacket.data[i];
-                    printf("   Delta V (X): %f\n",hexa2float(buf));
-                    for(int i = 4 ; i < 8; i ++) buf[i-4] = dataPacket.data[i];
-                    printf("   Delta V (Y): %f\n",hexa2float(buf));
-                    for(int i = 8 ; i < 12; i ++) buf[i-8] = dataPacket.data[i];
-                    printf("   Delta V (Z): %f\n",hexa2float(buf));
-                    break;
+                    printf("   Delta V %d bytes\n", dataPacket.len);
                 case 0x20: // Acceleration
-                    printf("   Acceleration %d bytes\n", dataPacket.len);
+                    //printf("   Acceleration %d bytes\n", dataPacket.len);
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
+                    printf("   Acc X: %f m/s2\n", hexa2float(auxBuf));
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 4; i < 8; i++) auxBuf[i-4]=dataPacket.data[i];
+                    printf("   Acc Y: %f m/s2\n", hexa2float(auxBuf));
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 8; i < 12; i++) auxBuf[i-8]=dataPacket.data[i];
+                    printf("   Acc Z: %f m/s2", hexa2float(auxBuf));
                     break;
                 case 0x30: // Free acceleration
                     printf("   Free acceleration %d bytes\n", dataPacket.len);
@@ -773,31 +792,38 @@ void packetMng(dataPacketMT2 dataPacket) {
                 default:
                     printf("   UNKNOWN :: Acceleration %d bytes\n", dataPacket.len);
                     break;
-            }*/
+            }
             printf("\n");
             break;
             
             
         case 0x50: // Position
-            printf("Got position packet\n");
+            //printf("Got position packet\n");
+            printf("POSITION:\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Altitude MSL
-                    printf("   Altitude MSL V %d bytes\n", dataPacket.len);
+                    //printf("   Altitude MSL %d bytes\n", dataPacket.len);
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
+                    printf("   Altitude: %f m\n", hexa2float(auxBuf));
                     break;
                 case 0x20: // Altitude Ellipsoid
-                    printf("   Altitude Ellipsoid %d bytes\n", dataPacket.len);
+                    //printf("   Altitude Ellipsoid %d bytes\n", dataPacket.len);
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
+                    printf("   Altitude: %f m\n", hexa2float(auxBuf));
                     break;
                 case 0x30: // Position ECEF
                     printf("   Position ECEF %d bytes\n", dataPacket.len);
                     break;
                 case 0x40: // LatLon
-                    printf("   LatLon %d bytes\n", dataPacket.len);
+                    //printf("   LatLon %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Latitud: %2.8lf\n", hexa2double(auxBuf));
+                    printf("   Latitude: %2.10lf ºC N\n", hexa2double(auxBuf));
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
-                    printf("   Longitud: %2.8lf\n", hexa2double(auxBuf));
+                    printf("   Longitude: %2.10lf ºC W\n", hexa2double(auxBuf));
                     break;
                 default:
                     printf("   UNKNOWN :: position %d bytes\n", dataPacket.len);
@@ -887,10 +913,19 @@ void packetMng(dataPacketMT2 dataPacket) {
             
         case 0xD0: // Velocity
             printf("Got velocity packet\n");
-            /*if((dataPacket.idSignal & 0xF0) == 0x10) // Velocity XYZ
-                printf("   Velocity XYZ %d bytes\n", dataPacket.len);
-            else
-                printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len); */           
+            if((dataPacket.idSignal & 0xF0) == 0x10){ // Velocity XYZ
+                //printf("   Velocity XYZ %d bytes\n", dataPacket.len);
+                auxBuf = (unsigned char *) malloc(4);
+                for (int i = 0; i < 4; i++) auxBuf[i] = dataPacket.data[i];
+                printf("   Vel X: %f m/s\n", hexa2float(auxBuf));
+                auxBuf = (unsigned char *) malloc(4);
+                for (int i = 4; i < 8; i++) auxBuf[i - 4] = dataPacket.data[i];
+                printf("   Vel Y: %f m/s\n", hexa2float(auxBuf));
+                auxBuf = (unsigned char *) malloc(4);
+                for (int i = 8; i < 12; i++) auxBuf[i - 8] = dataPacket.data[i];
+                printf("   Vel Z: %f m/s", hexa2float(auxBuf));
+            }else
+                printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len);     
             printf("\n");
             break;
             
@@ -961,7 +996,7 @@ int hexa2int(unsigned char * buffer)
     return floatUnion.value;
 }
 
-float hexa2double(unsigned char * buffer){
+double hexa2double(unsigned char * buffer){
     union{
         double value;
         unsigned char buffer[8];
