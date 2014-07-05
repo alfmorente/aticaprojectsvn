@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="90">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="bin">
+      </df>
+      <df name="catkin">
+        <df name="catkin_generated">
+          <df name="version">
+          </df>
+        </df>
+      </df>
+      <df name="catkin_generated">
+        <df name="installspace">
+        </df>
+        <df name="stamps">
+          <df name="CITIUS_Control_PositionOrientation">
+          </df>
+        </df>
+      </df>
+      <df name="CMakeFiles">
+        <df name="_catkin_empty_exported_target.dir">
+        </df>
+        <df name="clean_test_results.dir">
+        </df>
+        <df name="CMakeTmp">
+          <df name="CMakeFiles">
+            <df name="cmTryCompileExec.dir">
+            </df>
+          </df>
+        </df>
+        <df name="CompilerIdC">
+          <in>CMakeCCompilerId.c</in>
+        </df>
+        <df name="CompilerIdCXX">
+          <in>CMakeCXXCompilerId.cpp</in>
+        </df>
+        <df name="doxygen.dir">
+        </df>
+        <df name="PositionOrientation.dir">
+          <df name="src">
+          </df>
+        </df>
+        <df name="rosbuild_clean-test-results.dir">
+        </df>
+        <df name="ROSBUILD_genmsg_cpp.dir">
+        </df>
+        <df name="ROSBUILD_genmsg_lisp.dir">
+        </df>
+        <df name="ROSBUILD_genmsg_py.dir">
+        </df>
+        <df name="ROSBUILD_gensrv_cpp.dir">
+        </df>
+        <df name="ROSBUILD_gensrv_lisp.dir">
+        </df>
+        <df name="ROSBUILD_gensrv_py.dir">
+        </df>
+        <df name="rosbuild_precompile.dir">
+        </df>
+        <df name="rosbuild_premsgsrvgen.dir">
+        </df>
+        <df name="rospack_genmsg.dir">
+        </df>
+        <df name="rospack_genmsg_all.dir">
+        </df>
+        <df name="rospack_genmsg_libexe.dir">
+        </df>
+        <df name="rospack_gensrv.dir">
+        </df>
+        <df name="rospack_gensrv_all.dir">
+        </df>
+        <df name="run_tests.dir">
+        </df>
+        <df name="test-future.dir">
+        </df>
+        <df name="test-results-run.dir">
+        </df>
+        <df name="test-results.dir">
+        </df>
+        <df name="test.dir">
+        </df>
+        <df name="tests.dir">
+        </df>
+      </df>
+      <df name="devel">
+        <df name="etc">
+          <df name="catkin">
+            <df name="profile.d">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="gtest">
+        <df name="CMakeFiles">
+          <df name="gtest.dir">
+            <df name="src">
+            </df>
+          </df>
+          <df name="gtest_main.dir">
+            <df name="src">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="include">
+        <df name="CITIUS_Control_PositionOrientation">
+        </df>
+        <in>RosNose_PositionOrientation.h</in>
+        <in>TraxAHRSDriver.h</in>
+        <in>XSensMTi700Driver.h</in>
+        <in>constant.h</in>
+      </df>
+      <df name="lib">
+      </df>
+      <df name="msg">
+      </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_PositionOrientation">
+              <in>msg_posOriInfo.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
+      <df name="src">
+        <df name="CITIUS_Control_PositionOrientation">
+          <df name="msg">
+          </df>
+          <df name="srv">
+          </df>
+        </df>
+        <in>RosNodePositionOrientation.cpp</in>
+        <in>TraxAHRSDriver.cpp</in>
+        <in>XSensMTi700Driver.cpp</in>
+        <in>main.cpp</in>
+      </df>
+      <df name="srv">
+      </df>
+      <df name="srv_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_PositionOrientation">
+              <in>srv_nodeStatus.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
+      <df name="test_results">
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

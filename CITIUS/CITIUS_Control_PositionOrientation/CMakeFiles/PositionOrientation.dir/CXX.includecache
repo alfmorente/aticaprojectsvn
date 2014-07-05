@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
+XSensMTi700Driver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
+
+include/XSensMTi700Driver.h
+iostream
+-
+stdio.h
+-
+termios.h
+-
+unistd.h
+-
+fcntl.h
+-
+stdlib.h
+-
+string.h
+-
+complex
+-
+
