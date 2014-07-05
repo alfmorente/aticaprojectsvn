@@ -35,6 +35,8 @@ extern "C" {
  * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO
  ******************************************************************************/
 
+#define FREC_30HZ 0.03
+#define FREC_25HZ 0.04
 #define FREC_10HZ 0.1
 #define FREC_5HZ 0.2
 #define FREC_2HZ 0.5

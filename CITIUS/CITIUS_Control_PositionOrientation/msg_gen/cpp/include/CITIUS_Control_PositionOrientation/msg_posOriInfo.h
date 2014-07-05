@@ -22,24 +22,52 @@ struct msg_posOriInfo_ {
   typedef msg_posOriInfo_<ContainerAllocator> Type;
 
   msg_posOriInfo_()
-  : latitude(0.0)
+  : positionStatus(0)
+  , orientationStatus(0)
+  , latitude(0.0)
   , longitude(0.0)
   , altitude(0.0)
   , roll(0.0)
   , pitch(0.0)
   , yaw(0.0)
+  , velX(0.0)
+  , velY(0.0)
+  , velZ(0.0)
+  , accX(0.0)
+  , accY(0.0)
+  , accZ(0.0)
+  , rateX(0.0)
+  , rateY(0.0)
+  , rateZ(0.0)
   {
   }
 
   msg_posOriInfo_(const ContainerAllocator& _alloc)
-  : latitude(0.0)
+  : positionStatus(0)
+  , orientationStatus(0)
+  , latitude(0.0)
   , longitude(0.0)
   , altitude(0.0)
   , roll(0.0)
   , pitch(0.0)
   , yaw(0.0)
+  , velX(0.0)
+  , velY(0.0)
+  , velZ(0.0)
+  , accX(0.0)
+  , accY(0.0)
+  , accZ(0.0)
+  , rateX(0.0)
+  , rateY(0.0)
+  , rateZ(0.0)
   {
   }
+
+  typedef uint16_t _positionStatus_type;
+  uint16_t positionStatus;
+
+  typedef uint16_t _orientationStatus_type;
+  uint16_t orientationStatus;
 
   typedef double _latitude_type;
   double latitude;
@@ -58,6 +86,33 @@ struct msg_posOriInfo_ {
 
   typedef double _yaw_type;
   double yaw;
+
+  typedef float _velX_type;
+  float velX;
+
+  typedef float _velY_type;
+  float velY;
+
+  typedef float _velZ_type;
+  float velZ;
+
+  typedef float _accX_type;
+  float accX;
+
+  typedef float _accY_type;
+  float accY;
+
+  typedef float _accZ_type;
+  float accZ;
+
+  typedef float _rateX_type;
+  float rateX;
+
+  typedef float _rateY_type;
+  float rateY;
+
+  typedef float _rateZ_type;
+  float rateZ;
 
 
   typedef boost::shared_ptr< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> > Ptr;
@@ -88,12 +143,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "ede7c952a0a170756890c7bafc4c4c52";
+    return "3ad406170761096cd906093b40795259";
   }
 
   static const char* value(const  ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xede7c952a0a17075ULL;
-  static const uint64_t static_value2 = 0x6890c7bafc4c4c52ULL;
+  static const uint64_t static_value1 = 0x3ad406170761096cULL;
+  static const uint64_t static_value2 = 0xd906093b40795259ULL;
 };
 
 template<class ContainerAllocator>
@@ -110,13 +165,23 @@ template<class ContainerAllocator>
 struct Definition< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "float64 latitude\n\
+    return "uint16 positionStatus\n\
+uint16 orientationStatus\n\
+float64 latitude\n\
 float64 longitude\n\
 float64 altitude\n\
 float64 roll\n\
 float64 pitch\n\
 float64 yaw\n\
-\n\
+float32 velX\n\
+float32 velY\n\
+float32 velZ\n\
+float32 accX\n\
+float32 accY\n\
+float32 accZ\n\
+float32 rateX\n\
+float32 rateY\n\
+float32 rateZ\n\
 ";
   }
 
@@ -136,12 +201,23 @@ template<class ContainerAllocator> struct Serializer< ::CITIUS_Control_PositionO
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
+    stream.next(m.positionStatus);
+    stream.next(m.orientationStatus);
     stream.next(m.latitude);
     stream.next(m.longitude);
     stream.next(m.altitude);
     stream.next(m.roll);
     stream.next(m.pitch);
     stream.next(m.yaw);
+    stream.next(m.velX);
+    stream.next(m.velY);
+    stream.next(m.velZ);
+    stream.next(m.accX);
+    stream.next(m.accY);
+    stream.next(m.accZ);
+    stream.next(m.rateX);
+    stream.next(m.rateY);
+    stream.next(m.rateZ);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -159,6 +235,10 @@ struct Printer< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerA
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> & v) 
   {
+    s << indent << "positionStatus: ";
+    Printer<uint16_t>::stream(s, indent + "  ", v.positionStatus);
+    s << indent << "orientationStatus: ";
+    Printer<uint16_t>::stream(s, indent + "  ", v.orientationStatus);
     s << indent << "latitude: ";
     Printer<double>::stream(s, indent + "  ", v.latitude);
     s << indent << "longitude: ";
@@ -171,6 +251,24 @@ struct Printer< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerA
     Printer<double>::stream(s, indent + "  ", v.pitch);
     s << indent << "yaw: ";
     Printer<double>::stream(s, indent + "  ", v.yaw);
+    s << indent << "velX: ";
+    Printer<float>::stream(s, indent + "  ", v.velX);
+    s << indent << "velY: ";
+    Printer<float>::stream(s, indent + "  ", v.velY);
+    s << indent << "velZ: ";
+    Printer<float>::stream(s, indent + "  ", v.velZ);
+    s << indent << "accX: ";
+    Printer<float>::stream(s, indent + "  ", v.accX);
+    s << indent << "accY: ";
+    Printer<float>::stream(s, indent + "  ", v.accY);
+    s << indent << "accZ: ";
+    Printer<float>::stream(s, indent + "  ", v.accZ);
+    s << indent << "rateX: ";
+    Printer<float>::stream(s, indent + "  ", v.rateX);
+    s << indent << "rateY: ";
+    Printer<float>::stream(s, indent + "  ", v.rateY);
+    s << indent << "rateZ: ";
+    Printer<float>::stream(s, indent + "  ", v.rateZ);
   }
 };
 

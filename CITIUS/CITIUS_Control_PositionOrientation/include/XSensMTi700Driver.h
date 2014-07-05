@@ -29,6 +29,7 @@ extern "C" {
 #include <stdlib.h> 
 #include <string.h>
 #include <complex>
+#include <pthread.h>
 
 #define COMMAND_PRE 0xFA
 #define COMMAND_BID 0xFF
@@ -45,8 +46,29 @@ extern "C" {
 
 // Informacion de GPS/INS
 typedef struct{
+  // Estado
   short positionStatus;
   short orientationStatus;
+  // Posicion
+  double latitude;
+  double longitude;
+  float altitude;
+  // Orientacion
+  double roll;
+  double pitch;
+  double yaw;
+  // Velocidad longitudinal
+  float velX;
+  float velY;
+  float velZ;
+  // Acc longitudinal
+  float accX;
+  float accY;
+  float accZ;
+  // Acc rotacional
+  float rateX;
+  float rateY;
+  float rateZ;
 } GPSINSInfo;
 
 // Mensaje XSens
@@ -69,9 +91,12 @@ typedef struct {
 
 class XSensMTi700Driver {
 private:
+  // Datos recibidos
+  GPSINSInfo posOriInfo;
+  
+  // Puerto serie
   struct termios newtio, oldtio;
   int canal;
-  
 
   // Operaciones a bajo nivel
   void sendToDevice(XsensMsg);
@@ -88,6 +113,9 @@ private:
   float hexa2float(unsigned char *);
   double hexa2double(unsigned char *);
   int hexa2int(unsigned char *);
+  
+  // Rutina de recepcion de datos (thread)
+  void packetMng(dataPacketMT2);
   
 public:
   

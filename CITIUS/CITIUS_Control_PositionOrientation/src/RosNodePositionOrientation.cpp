@@ -1,6 +1,6 @@
 /* 
  * File:   RosNodePositionOrientation.cpp
- * Author: atica
+ * Author: Carlos Amores
  *
  * Created on 4 de julio de 2014, 16:46
  */
@@ -45,9 +45,11 @@ bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOri
             
             // Configuracion de dispositivo magnetometro
             magnetometerDriver->configureDevice();
+            ROS_INFO("[Control] Position / Orientation - Configuracion de Magnetometro establecida");
             
             // Configuracion de dispositivo GPS/INS
             gpsinsDriver->configureDevice();
+            ROS_INFO("[Control] Position / Orientation - Configuracion de GPS/INS establecida");
             
             rsp.confirmation = true;
             

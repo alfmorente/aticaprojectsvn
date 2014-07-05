@@ -72,7 +72,7 @@
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
-          <executablePath></executablePath>
+          <executablePath>bin/PositionOrientation</executablePath>
           <ccTool>
             <incDir>
               <pElem>msg_gen/cpp/include</pElem>

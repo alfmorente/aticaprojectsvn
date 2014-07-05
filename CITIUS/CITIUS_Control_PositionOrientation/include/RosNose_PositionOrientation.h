@@ -51,8 +51,7 @@ public:
     short getPONodeStatus();
     void setPONodeStatus(short);
     XSensMTi700Driver *getXSensManager();
-    TraxAHRSDriver *getTraxManager();
-    
+    TraxAHRSDriver *getTraxManager();   
 };
 
 

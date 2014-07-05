@@ -1,5 +1,9 @@
 (cl:in-package CITIUS_Control_PositionOrientation-msg)
-(cl:export '(LATITUDE-VAL
+(cl:export '(POSITIONSTATUS-VAL
+          POSITIONSTATUS
+          ORIENTATIONSTATUS-VAL
+          ORIENTATIONSTATUS
+          LATITUDE-VAL
           LATITUDE
           LONGITUDE-VAL
           LONGITUDE
@@ -11,4 +15,22 @@
           PITCH
           YAW-VAL
           YAW
+          VELX-VAL
+          VELX
+          VELY-VAL
+          VELY
+          VELZ-VAL
+          VELZ
+          ACCX-VAL
+          ACCX
+          ACCY-VAL
+          ACCY
+          ACCZ-VAL
+          ACCZ
+          RATEX-VAL
+          RATEX
+          RATEY-VAL
+          RATEY
+          RATEZ-VAL
+          RATEZ
 ))
