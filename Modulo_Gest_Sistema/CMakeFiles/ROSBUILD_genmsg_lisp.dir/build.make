@@ -48,9 +48,15 @@ include CMakeFiles/ROSBUILD_genmsg_lisp.dir/progress.make
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_mode.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_mode.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_prueba.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_prueba.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_error.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_error.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_available_mode.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_available_mode.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_module_enable.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_module_enable.lisp
@@ -71,6 +77,9 @@ msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_mode.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_mode.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/lisp/msg_mode.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_mode.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_mode.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_mode.msg
@@ -78,6 +87,33 @@ msg_gen/lisp/msg_mode.lisp: /opt/ros/groovy/share/roscpp/package.xml
 msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_mode.lisp
 
 msg_gen/lisp/_package_msg_mode.lisp: msg_gen/lisp/msg_mode.lisp
+
+msg_gen/lisp/msg_prueba.lisp: msg/msg_prueba.msg
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_prueba.lisp: manifest.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_prueba.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_prueba.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_prueba.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/lisp/msg_prueba.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_prueba.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_prueba.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_prueba.msg
+
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_prueba.lisp
+
+msg_gen/lisp/_package_msg_prueba.lisp: msg_gen/lisp/msg_prueba.lisp
 
 msg_gen/lisp/msg_error.lisp: msg/msg_error.msg
 msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -95,13 +131,43 @@ msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_error.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_2)
+msg_gen/lisp/msg_error.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_error.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/lisp/msg_error.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_error.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_error.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_error.msg
 
 msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_error.lisp
 
 msg_gen/lisp/_package_msg_error.lisp: msg_gen/lisp/msg_error.lisp
+
+msg_gen/lisp/msg_available_mode.lisp: msg/msg_available_mode.msg
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_available_mode.lisp: manifest.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/lisp/msg_available_mode.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_available_mode.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/lisp/msg_available_mode.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_available_mode.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_available_mode.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_available_mode.msg
+
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_available_mode.lisp
+
+msg_gen/lisp/_package_msg_available_mode.lisp: msg_gen/lisp/msg_available_mode.lisp
 
 msg_gen/lisp/msg_module_enable.lisp: msg/msg_module_enable.msg
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -119,7 +185,10 @@ msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_module_enable.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_3)
+msg_gen/lisp/msg_module_enable.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/lisp/msg_module_enable.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/lisp/msg_module_enable.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_module_enable.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_module_enable.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_module_enable.msg
 
@@ -131,9 +200,15 @@ ROSBUILD_genmsg_lisp: CMakeFiles/ROSBUILD_genmsg_lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_mode.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_mode.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_prueba.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_prueba.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_error.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_error.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_available_mode.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_available_mode.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_module_enable.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_module_enable.lisp

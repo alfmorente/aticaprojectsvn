@@ -186,6 +186,7 @@ void fcn_sub_mode_error(const Common_files::msg_modePtr& msg)
                 mode->mode=actualMode;
                 mode->status=MODE_EXIT;
                 pub_mode_error.publish(mode);
+                pub_mode_communication.publish(mode);
                 actualMode=MODE_NEUTRAL;
                 ROS_INFO("MODE NEUTRO");          
             }

@@ -46,7 +46,9 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Gest_Sistema
 include CMakeFiles/ROSBUILD_genmsg_cpp.dir/progress.make
 
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h
+CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h
+CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h
 
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: msg/msg_mode.msg
@@ -65,9 +67,35 @@ msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /opt/ros/groovy/share/std_ms
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_mode.msg
+
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: msg/msg_prueba.msg
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_prueba.msg
 
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: msg/msg_error.msg
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -85,9 +113,35 @@ msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /opt/ros/groovy/share/std_m
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_2)
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_error.msg
+
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: msg/msg_available_mode.msg
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /opt/ros/groovy/share/roscpp/package.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_available_mode.msg
 
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: msg/msg_module_enable.msg
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -105,13 +159,18 @@ msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /opt/ros/groovy/sha
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_3)
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Gest_Sistema/msg/msg_module_enable.msg
 
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_mode.h
+ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_prueba.h
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_error.h
+ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_available_mode.h
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/Modulo_Gest_Sistema/msg_module_enable.h
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make
 .PHONY : ROSBUILD_genmsg_cpp
