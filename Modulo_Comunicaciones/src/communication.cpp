@@ -117,6 +117,7 @@ int main(int argc, char **argv)
         {
             if(subsystemVehicle->connect())
             {
+		sleep(1); //Quitarlo en breve
                 Files::writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Communication stablished");
                 subsystemVehicle->communicationState=COM_ON; 
                 subsystemVehicle->establishedCommunication();

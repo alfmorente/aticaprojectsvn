@@ -605,6 +605,7 @@ void JausSubsystemVehicle::establishedCommunication()
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
             tipoMensajeJAUS.missionStatus->type=JAUS_MISSION;
             tipoMensajeJAUS.missionStatus->missionId=modeActual;
+	    tipoMensajeJAUS.missionStatus->status=MODE_START;	
             tipoMensajeJAUS.missionStatus->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
             msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);

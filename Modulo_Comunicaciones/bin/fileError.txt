@@ -1,5 +1,2 @@
-804.149320:	CommunicationError de comunicacion con la UCR
-913.409019:	CommunicationError de comunicacion con la UCR
-1004.659961:	CommunicationError de comunicacion con la UCR
-1373.36629:	CommunicationError de comunicacion con la UCR
-2491.774472:	CommunicationError de comunicacion con la UCR
+7759.638445:	CommunicationError de comunicacion con la UCR
+7881.49351:	CommunicationError de comunicacion con la UCR
