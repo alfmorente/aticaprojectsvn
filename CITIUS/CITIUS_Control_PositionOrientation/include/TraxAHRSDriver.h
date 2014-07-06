@@ -1,6 +1,6 @@
 /* 
  * File:   TraxAHRSDriver.h
- * Author: atica
+ * Author: Carlos Amores
  *
  * Created on 4 de julio de 2014, 19:26
  */

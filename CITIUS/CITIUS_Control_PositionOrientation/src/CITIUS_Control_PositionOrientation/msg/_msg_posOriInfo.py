@@ -6,17 +6,17 @@ import struct
 
 
 class msg_posOriInfo(genpy.Message):
-  _md5sum = "3ad406170761096cd906093b40795259"
+  _md5sum = "18dcfbcc11c0eee5c95670f31271590f"
   _type = "CITIUS_Control_PositionOrientation/msg_posOriInfo"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """uint16 positionStatus
 uint16 orientationStatus
 float64 latitude
 float64 longitude
-float64 altitude
-float64 roll
-float64 pitch
-float64 yaw
+float32 altitude
+float32 roll
+float32 pitch
+float32 yaw
 float32 velX
 float32 velY
 float32 velZ
@@ -28,7 +28,7 @@ float32 rateY
 float32 rateZ
 """
   __slots__ = ['positionStatus','orientationStatus','latitude','longitude','altitude','roll','pitch','yaw','velX','velY','velZ','accX','accY','accZ','rateX','rateY','rateZ']
-  _slot_types = ['uint16','uint16','float64','float64','float64','float64','float64','float64','float32','float32','float32','float32','float32','float32','float32','float32','float32']
+  _slot_types = ['uint16','uint16','float64','float64','float32','float32','float32','float32','float32','float32','float32','float32','float32','float32','float32','float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -113,7 +113,7 @@ float32 rateZ
     """
     try:
       _x = self
-      buff.write(_struct_2H6d9f.pack(_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ))
+      buff.write(_struct_2H2d13f.pack(_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -126,8 +126,8 @@ float32 rateZ
       end = 0
       _x = self
       start = end
-      end += 88
-      (_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ,) = _struct_2H6d9f.unpack(str[start:end])
+      end += 72
+      (_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ,) = _struct_2H2d13f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -141,7 +141,7 @@ float32 rateZ
     """
     try:
       _x = self
-      buff.write(_struct_2H6d9f.pack(_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ))
+      buff.write(_struct_2H2d13f.pack(_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -155,11 +155,11 @@ float32 rateZ
       end = 0
       _x = self
       start = end
-      end += 88
-      (_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ,) = _struct_2H6d9f.unpack(str[start:end])
+      end += 72
+      (_x.positionStatus, _x.orientationStatus, _x.latitude, _x.longitude, _x.altitude, _x.roll, _x.pitch, _x.yaw, _x.velX, _x.velY, _x.velZ, _x.accX, _x.accY, _x.accZ, _x.rateX, _x.rateY, _x.rateZ,) = _struct_2H2d13f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2H6d9f = struct.Struct("<2H6d9f")
+_struct_2H2d13f = struct.Struct("<2H2d13f")

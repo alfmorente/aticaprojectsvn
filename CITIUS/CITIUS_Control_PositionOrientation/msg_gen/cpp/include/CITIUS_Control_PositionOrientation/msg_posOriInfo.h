@@ -75,17 +75,17 @@ struct msg_posOriInfo_ {
   typedef double _longitude_type;
   double longitude;
 
-  typedef double _altitude_type;
-  double altitude;
+  typedef float _altitude_type;
+  float altitude;
 
-  typedef double _roll_type;
-  double roll;
+  typedef float _roll_type;
+  float roll;
 
-  typedef double _pitch_type;
-  double pitch;
+  typedef float _pitch_type;
+  float pitch;
 
-  typedef double _yaw_type;
-  double yaw;
+  typedef float _yaw_type;
+  float yaw;
 
   typedef float _velX_type;
   float velX;
@@ -143,12 +143,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "3ad406170761096cd906093b40795259";
+    return "18dcfbcc11c0eee5c95670f31271590f";
   }
 
   static const char* value(const  ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x3ad406170761096cULL;
-  static const uint64_t static_value2 = 0xd906093b40795259ULL;
+  static const uint64_t static_value1 = 0x18dcfbcc11c0eee5ULL;
+  static const uint64_t static_value2 = 0xc95670f31271590fULL;
 };
 
 template<class ContainerAllocator>
@@ -169,10 +169,10 @@ struct Definition< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<Contain
 uint16 orientationStatus\n\
 float64 latitude\n\
 float64 longitude\n\
-float64 altitude\n\
-float64 roll\n\
-float64 pitch\n\
-float64 yaw\n\
+float32 altitude\n\
+float32 roll\n\
+float32 pitch\n\
+float32 yaw\n\
 float32 velX\n\
 float32 velY\n\
 float32 velZ\n\
@@ -244,13 +244,13 @@ struct Printer< ::CITIUS_Control_PositionOrientation::msg_posOriInfo_<ContainerA
     s << indent << "longitude: ";
     Printer<double>::stream(s, indent + "  ", v.longitude);
     s << indent << "altitude: ";
-    Printer<double>::stream(s, indent + "  ", v.altitude);
+    Printer<float>::stream(s, indent + "  ", v.altitude);
     s << indent << "roll: ";
-    Printer<double>::stream(s, indent + "  ", v.roll);
+    Printer<float>::stream(s, indent + "  ", v.roll);
     s << indent << "pitch: ";
-    Printer<double>::stream(s, indent + "  ", v.pitch);
+    Printer<float>::stream(s, indent + "  ", v.pitch);
     s << indent << "yaw: ";
-    Printer<double>::stream(s, indent + "  ", v.yaw);
+    Printer<float>::stream(s, indent + "  ", v.yaw);
     s << indent << "velX: ";
     Printer<float>::stream(s, indent + "  ", v.velX);
     s << indent << "velY: ";

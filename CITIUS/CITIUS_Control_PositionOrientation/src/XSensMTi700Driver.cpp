@@ -34,7 +34,7 @@ XSensMTi700Driver::XSensMTi700Driver() {
 
 bool XSensMTi700Driver::connectToDevice() {
     
-    char * serial_name = (char *) "/dev/ttyUSB3";
+    char * serial_name = (char *) "/dev/ttyUSB0";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
 
@@ -81,7 +81,6 @@ bool XSensMTi700Driver::connectToDevice() {
 
 void XSensMTi700Driver::disconnectDevice() {
     close(canal);
-    tcsetattr(STDOUT_FILENO, TCSANOW, &oldtio);
 }
 
 /*******************************************************************************
@@ -105,48 +104,36 @@ void XSensMTi700Driver::configureDevice(){
  * RECOPILACION DE DATOS
  ******************************************************************************/
 
-GPSINSInfo XSensMTi700Driver::getData() {
+bool XSensMTi700Driver::getData() {
     XsensMsg xsMsg;
+    short rcvdBytes;
+    
     if (read(canal, &xsMsg.pre, 1) > 0) {
 
         // PRE
         if (xsMsg.pre == COMMAND_PRE) {
-            printf("PRE found!\n");
 
-            read(canal, &xsMsg.bid, 1);
+            rcvdBytes = read(canal, &xsMsg.bid, 1);
 
             // BID
             if (xsMsg.bid == COMMAND_BID) {
-                printf("BID found!\n");
-                read(canal, &xsMsg.mid, 1);
-                printf("MID found! :: %02X\n", xsMsg.mid);
+                rcvdBytes = read(canal, &xsMsg.mid, 1);
                 // MID
                 if (xsMsg.mid == (COMMAND_MID_MTDATA2)) {
 
                     //LEN
-                    read(canal, &xsMsg.len, 1);
-                    printf("LEN found! :: %d\n", xsMsg.len);
+                    rcvdBytes = read(canal, &xsMsg.len, 1);
 
                     // DATA
                     xsMsg.data = (unsigned char*) malloc(xsMsg.len + 1);
-                    printf("DATA found! :: ");
                     for (int i = 0; i < xsMsg.len; i++) {
-                        read(canal, &xsMsg.data[i], 1);
-                        printf("%02X ", xsMsg.data[i]);
+                        rcvdBytes = read(canal, &xsMsg.data[i], 1);
                     }
-                    printf("\n");
 
                     // CS
-                    read(canal, &xsMsg.cs, 1);
-                    printf("CS found! :: %02X\n", xsMsg.cs);
+                    rcvdBytes = read(canal, &xsMsg.cs, 1);
 
-                    if (isCheckSumOK(xsMsg)) {
-                        printf("MTData2 ACK received!\n");
-                    } else {
-                        printf("ERROR in MTData2 ACK reception\n");
-                    }
-
-                    printf("Data management...\n");
+                    if (!isCheckSumOK(xsMsg)) printf("ERROR in MTData2 ACK reception\n");
 
                     dataPacketMT2 dataPacket;
                     int i = 0;
@@ -166,15 +153,14 @@ GPSINSInfo XSensMTi700Driver::getData() {
                             dataPacket.data[j] = xsMsg.data[i++];
                         }
                         packetMng(dataPacket);
+                        return true;
 
                     }
-                    printf("------------------------------------------------------------------------\n");
                 }
             }
         }
     }
-
-    return posOriInfo;
+    return false;
 }
 
 /*******************************************************************************
@@ -207,37 +193,37 @@ XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
     xsMsg.bid = COMMAND_BID;
     xsMsg.mid = COMMAND_MID_SETOUTPUTCONFIGURATION;
     xsMsg.len = 0x18;
-    // Temperatura
-    xsMsg.data[0] = 0x08;
-    xsMsg.data[1] = 0x13;
+    xsMsg.data = (unsigned char *) malloc(xsMsg.len);
+    // Velocidad angular Rate turn
+    xsMsg.data[0] = 0x80;
+    xsMsg.data[1] = 0x20;
     xsMsg.data[2] = 0x00;
-    xsMsg.data[3] = 0x01;
+    xsMsg.data[3] = FREC_REQ_DATA;
     // Orientacion
     xsMsg.data[4] = 0x20;
-    xsMsg.data[5] = 0x33;
+    xsMsg.data[5] = 0x30;
     xsMsg.data[6] = 0x00;
-    xsMsg.data[7] = 0x01;
+    xsMsg.data[7] = FREC_REQ_DATA;
     // Posicion (Lat + Lon)
     xsMsg.data[8] = 0x50;
     xsMsg.data[9] = 0x43;
     xsMsg.data[10] = 0x00;
-    xsMsg.data[11] = 0x01;
-    // Posicion (Alt)
+    xsMsg.data[11] = FREC_REQ_DATA;
+    // Posicion (Alt) MLS
     xsMsg.data[12] = 0x50;
-    xsMsg.data[13] = 0x20;
+    xsMsg.data[13] = 0x10;
     xsMsg.data[14] = 0x00;
-    xsMsg.data[15] = 0x01;
+    xsMsg.data[15] = FREC_REQ_DATA;
     // Aceleracion
     xsMsg.data[16] = 0x40;
     xsMsg.data[17] = 0x20;
     xsMsg.data[18] = 0x00;
-    xsMsg.data[19] = 0x01;
+    xsMsg.data[19] = FREC_REQ_DATA;
     // Velocity
     xsMsg.data[20] = 0xD0;
     xsMsg.data[21] = 0x10;
     xsMsg.data[22] = 0x00;
-    xsMsg.data[23] = 0x01;
-
+    xsMsg.data[23] = FREC_REQ_DATA;
 
     xsMsg.cs = calcChecksum(xsMsg);
     return xsMsg;
@@ -296,17 +282,8 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
     }
 
     msg2send[msg.len + 4] = msg.cs;
-    
-    printf("Sent: ");
-    for(int i=0;i< (msg.len + 5);i++){
-        printf("%02X ",msg2send[i]&0xFF);
-    }
-    printf("\n");
-    printf("1\n");
-    write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
-    printf("2\n");
+    short writtenBytes = write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
     waitForAck(msg.mid);
-    printf("3\n");
 
 }
 
@@ -314,6 +291,7 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
 
     bool ackFound = false;
     XsensMsg xsMsg;
+    short rcvdBytes;
 
     while (!ackFound) {
 
@@ -321,233 +299,72 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
 
             // PRE
             if (xsMsg.pre == COMMAND_PRE) {
-                printf("PRE found!\n");
                 
-                read(canal, &xsMsg.bid, 1);
+                rcvdBytes = read(canal, &xsMsg.bid, 1);
 
                 // BID
                 if (xsMsg.bid == COMMAND_BID) {
-                    printf("BID found!\n");
-                    read(canal, &xsMsg.mid, 1);
-                    printf("MID found! :: %02X\n",xsMsg.mid);
+                    
+                    rcvdBytes = read(canal, &xsMsg.mid, 1);
+                    
                     // MID
                     switch (xsMsg.mid) {
                         case (COMMAND_MID_GOTOCONFIG + 1):
 
                             //LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
+                            rcvdBytes = read(canal, &xsMsg.len, 1);
                             
                             // DATA
                             xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
                             for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
-                            }
-                            printf("\n");
-                            
+                                rcvdBytes = read(canal, &xsMsg.data[i], 1);
+                            }                            
                             // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
+                            rcvdBytes = read(canal, &xsMsg.cs, 1);
                             
                             if (isCheckSumOK(xsMsg)) {
                                 ackFound = true;
-                                //printf("GoToConfig ACK received!\n");
                             }else{
                                 printf("ERROR in GotoConfig ACK reception\n");
                             }
-                            printf("---\n"); 
                             break;
-                        case (COMMAND_MID_REQDID + 1):
-
-                            // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
-                            }
-                            printf("\n");
-                            
-                            // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
-                            }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
-                            }
-                            printf("---\n");    
-                            break;
-                        case (COMMAND_MID_SETOUTPUTMODE + 1):
-                            // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
-                            }
-                            printf("\n");
-                            
-                            // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
-                            }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
-                            }
-                            printf("---\n");    
-                            break;
-                        case (COMMAND_MID_SETOUTPUTSETTINGS + 1):
-                            // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
-                            }
-                            printf("\n");
-                            
-                            // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
-                            }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
-                            }
-                            printf("---\n");    
-                            break;
+                        
                         case (COMMAND_MID_GOTOMEASUREMENT + 1):
                             // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
+                            rcvdBytes = read(canal, &xsMsg.len, 1);
                             
                             // DATA
                             xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
                             for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
+                                rcvdBytes = read(canal, &xsMsg.data[i], 1);
                             }
-                            printf("\n");
                             
                             // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
+                            rcvdBytes = read(canal, &xsMsg.cs, 1);
                             if (isCheckSumOK(xsMsg)) {
                                 ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
                             }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
+                                printf("ERROR in GoToMeasurement ACK reception\n");
                             }
-                            printf("---\n");
                             break;
-                        case (COMMAND_MID_SETPERIOD + 1):
-                            // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
-                            }
-                            printf("\n");
-                            
-                            // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
-                            }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
-                            }
-                            printf("---\n");
-                            break;
-                        case (COMMAND_MID_SETOUTPUTSKIPFACTOR + 1):
-                            // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
-                            }
-                            printf("\n");
-                            
-                            // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
-                            }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
-                            }
-                            printf("---\n");
-                            break;
+                        
                         case (COMMAND_MID_SETOUTPUTCONFIGURATION + 1):
                             // LEN
-                            read(canal, &xsMsg.len, 1);
-                            printf("LEN found! :: %02X\n",xsMsg.len);
+                            rcvdBytes = read(canal, &xsMsg.len, 1);
                             
                             // DATA
                             xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            printf("DATA found! :: ");
                             for (int i = 0; i < xsMsg.len; i++) {
-                                read(canal, &xsMsg.data[i], 1);
-                                printf("%02X ",xsMsg.data[i]);
+                                rcvdBytes = read(canal, &xsMsg.data[i], 1);
                             }
-                            printf("\n");
                             
                             // CS
-                            read(canal, &xsMsg.cs, 1);
-                            printf("CS found! :: %02X\n",xsMsg.cs);
+                            rcvdBytes = read(canal, &xsMsg.cs, 1);
                             if (isCheckSumOK(xsMsg)) {
                                 ackFound = true;
-                                //printf("Device_ID ACK received!\n Device ID:");
-                                for(int i=0;i<xsMsg.len;i++) printf("%02X",xsMsg.data[i]);
-                                printf("\n");
                             }else{
-                                //printf("ERROR in Device_ID ACK reception\n");
+                                printf("ERROR in SetOutPutConfiguration ACK reception\n");
                             }
-                            printf("---\n");
                             break;
                     }
                 }
@@ -557,32 +374,24 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
 }
 
 /*******************************************************************************
- * FUNCION DE RECEPCION DE DATOS (THREAD)
+ * FUNCION DE TRATAMIENTO DE DATOS 
  ******************************************************************************/
-
 
 void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
     //printf("ID Packet found:Group %02X Signal %02X with length %d\n",dataPacket.idGroup,dataPacket.idSignal,dataPacket.len);
     unsigned char *auxBuf;
-    unsigned short auxShort;
-    int auxInt;
-    float auxFloat;
-    printf("\n");
+
+    //rintf("\n");
     switch (dataPacket.idGroup) {
         
         case 0x10: // Timestamp
-            printf("Got timestamp packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            /*printf("Got timestamp packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // UTC Time
                     printf("   UTC time %d bytes\n", dataPacket.len);
                     break;
                 case 0x20: // Packet counter
-                    auxBuf = (unsigned char *) malloc(2);
-                    auxBuf[0] = dataPacket.data[1];
-                    auxBuf[1] = dataPacket.data[0];
-                    memcpy(&auxShort,auxBuf,2);
                     printf("   Packetcounter: %d\n",auxShort);
-                    
                     break;
                 case 0x30: // Integer Time of Week
                     printf("   Integer Time of Week %d bytes\n", dataPacket.len);
@@ -606,25 +415,21 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     printf("   UNKNOWN :: Timestamp %d bytes\n", dataPacket.len);
                     break;
             }*/
-            printf("\n");
+            //printf("\n");
             break;
             
-            
         case 0x08: // Temperature
-            //printf("Got temperature packet\n");
+            /*printf("Got temperature packet\n");
             if ((dataPacket.idSignal & 0xF0) == 0x10) { // Temperature
-                auxBuf = (unsigned char *) malloc(8);
-                for (int i = 0; i < 8; i++) auxBuf[i] = dataPacket.data[i];
                 printf("TEMPERATURE: %lf ºC\n", hexa2double(auxBuf));
             } else
                 printf("   UNKNOWN :: Temperature %d bytes\n", dataPacket.len);
-            printf("\n");
+            //printf("\n");*/
             break;
             
-            
         case 0x88: // GPS
-            printf("Got GPS packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            /*printf("Got GPS packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x30: // DOP
                     printf("   DOP %d bytes\n", dataPacket.len);
                     break;
@@ -642,36 +447,35 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     break;
             }*/
             
-            printf("\n");
+            //printf("\n");
             break;
-            
             
         case 0x20: // Orientation
             //printf("Got orientation packet\n");
-            printf("ORIENTATION:\n");
+            //printf("ORIENTATION:\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Quaternion
-                    printf("   Quaternion %d bytes\n", dataPacket.len);
+                    //printf("   Quaternion %d bytes\n", dataPacket.len);
                     break;
                 case 0x20: // Rotation Matrix
-                    printf("   Rotation Matrix %d bytes\n", dataPacket.len);
+                    //printf("   Rotation Matrix %d bytes\n", dataPacket.len);
                     break;
                 case 0x30: // Euler Angles
                     //printf("   Euler Angles %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Roll: %3.8lf º\n", hexa2double(auxBuf));
-                    posOriInfo.roll = hexa2double(auxBuf);
+                    //printf("   Roll: %3.8lf º\n", hexa2double(auxBuf));
+                    posOriInfo.roll = hexa2float(auxBuf);
                     
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
-                    printf("   Pitch: %3.8lf º\n", hexa2double(auxBuf));
-                    posOriInfo.pitch = hexa2double(auxBuf);
+                    //printf("   Pitch: %3.8lf º\n", hexa2double(auxBuf));
+                    posOriInfo.pitch = hexa2float(auxBuf);
                     
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 16; i < 24; i++) auxBuf[i-16]=dataPacket.data[i];
-                    printf("   Yaw: %3.8lf º\n", hexa2double(auxBuf));
-                    posOriInfo.yaw = hexa2double(auxBuf);
+                    //printf("   Yaw: %3.8lf º\n", hexa2double(auxBuf));
+                    posOriInfo.yaw = hexa2float(auxBuf);
                     
                     break;
                 default:
@@ -679,64 +483,61 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     break;
             }
             
-            printf("\n");
+            //printf("\n");
             break;
             
-            
         case 0x30: // Pressure
-            printf("Got pressure packet\n");
-            /*if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
+            /*printf("Got pressure packet\n");
+            if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
                 printf("   Pressure: %f mbar\n",  (float) hexa2int(dataPacket.data) / 100);
             else
                 printf("   UNKNOWN :: Pressure %d bytes \n", dataPacket.len);*/
-            printf("\n");
+            //printf("\n");
             break;
-            
             
         case 0x40: // Acceleration
             //printf("Got acceleration packet\n");
-            printf("ACCELERATION:\n");
+           // printf("ACCELERATION:\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Delta V
-                    printf("   Delta V %d bytes\n", dataPacket.len);
+                    //printf("   Delta V %d bytes\n", dataPacket.len);
                 case 0x20: // Acceleration
                     //printf("   Acceleration %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(4);
                     for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Acc X: %f m/s2\n", hexa2float(auxBuf));
+                    //printf("   Acc X: %f m/s2\n", hexa2float(auxBuf));
                     posOriInfo.accX = hexa2float(auxBuf);
                     
                     auxBuf = (unsigned char *)malloc(4);
                     for(int i = 4; i < 8; i++) auxBuf[i-4]=dataPacket.data[i];
-                    printf("   Acc Y: %f m/s2\n", hexa2float(auxBuf));
+                    //printf("   Acc Y: %f m/s2\n", hexa2float(auxBuf));
                     posOriInfo.accY = hexa2float(auxBuf);
                     
                     auxBuf = (unsigned char *)malloc(4);
                     for(int i = 8; i < 12; i++) auxBuf[i-8]=dataPacket.data[i];
-                    printf("   Acc Z: %f m/s2", hexa2float(auxBuf));
+                    //printf("   Acc Z: %f m/s2", hexa2float(auxBuf));
                     posOriInfo.accZ = hexa2float(auxBuf);
                     
                     break;
                 case 0x30: // Free acceleration
-                    printf("   Free acceleration %d bytes\n", dataPacket.len);
+                    //printf("   Free acceleration %d bytes\n", dataPacket.len);
                     break;
                 default:
-                    printf("   UNKNOWN :: Acceleration %d bytes\n", dataPacket.len);
+                    //printf("   UNKNOWN :: Acceleration %d bytes\n", dataPacket.len);
                     break;
             }
-            printf("\n");
+            //printf("\n");
             break;
-            
             
         case 0x50: // Position
             //printf("Got position packet\n");
-            printf("POSITION:\n");
+            //printf("POSITION:\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Altitude MSL
                     //printf("   Altitude MSL %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(4);
                     for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Altitude: %f m\n", hexa2float(auxBuf));
+                    //printf("   Altitude: %f m\n", hexa2float(auxBuf));
                     posOriInfo.altitude = hexa2float(auxBuf);
                     
                     break;
@@ -744,23 +545,23 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     //printf("   Altitude Ellipsoid %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(4);
                     for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Altitude: %f m\n", hexa2float(auxBuf));
+                    //printf("   Altitude: %f m\n", hexa2float(auxBuf));
                     posOriInfo.altitude = hexa2float(auxBuf);
                     
                     break;
                 case 0x30: // Position ECEF
-                    printf("   Position ECEF %d bytes\n", dataPacket.len);
+                    //printf("   Position ECEF %d bytes\n", dataPacket.len);
                     break;
                 case 0x40: // LatLon
                     //printf("   LatLon %d bytes\n", dataPacket.len);
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
-                    printf("   Latitude: %2.10lf ºC N\n", hexa2double(auxBuf));
+                    //printf("   Latitude: %2.10lf ºC N\n", hexa2double(auxBuf));
                     posOriInfo.latitude = hexa2double(auxBuf);
                     
                     auxBuf = (unsigned char *)malloc(8);
                     for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
-                    printf("   Longitude: %2.10lf ºC W\n", hexa2double(auxBuf));
+                    //printf("   Longitude: %2.10lf ºC W\n", hexa2double(auxBuf));
                     posOriInfo.longitude = hexa2double(auxBuf);
                     
                     break;
@@ -768,39 +569,43 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     printf("   UNKNOWN :: position %d bytes\n", dataPacket.len);
                     break;
             }
-            printf("\n");
+            //printf("\n");
             break;
             
-            
         case 0x80: // Angular velocity
-            printf("Got angular velocity packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            //printf("Got angular velocity packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x20: // Rate of Turn
-                    printf("   Rate of Turn %d bytes\n", dataPacket.len);
+                    //printf("   Rate of Turn %d bytes\n", dataPacket.len);
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
+                    //printf("   Acc X: %f m/s2\n", hexa2float(auxBuf));
+                    posOriInfo.rateX = hexa2float(auxBuf);
+                    
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 4; i < 8; i++) auxBuf[i-4]=dataPacket.data[i];
+                    //printf("   Acc Y: %f m/s2\n", hexa2float(auxBuf));
+                    posOriInfo.rateY = hexa2float(auxBuf);
+                    
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 8; i < 12; i++) auxBuf[i-8]=dataPacket.data[i];
+                    //printf("   Acc Z: %f m/s2", hexa2float(auxBuf));
+                    posOriInfo.rateZ = hexa2float(auxBuf);
+                    
                     break;
                 case 0x30: // Delta Q
-                    unsigned char * buf;
-                    buf = (unsigned char *) malloc(4);
-                    for(int i = 0 ; i < 4; i ++) buf[i] = dataPacket.data[i];
-                    printf("   Delta q0: %f\n",hexa2float(buf));
-                    for(int i = 4 ; i < 8; i ++) buf[i-4] = dataPacket.data[i];
-                    printf("   Delta q1: %f\n",hexa2float(buf));
-                    for(int i = 8 ; i < 12; i ++) buf[i-8] = dataPacket.data[i];
-                    printf("   Delta q2: %f\n",hexa2float(buf));
-                    for(int i = 12 ; i < 16; i ++) buf[i-12] = dataPacket.data[i];
-                    printf("   Delta q3: %f\n",hexa2float(buf));
+                    //printf("   Delta Q %d bytes\n", dataPacket.len);
                     break;
                 default:
                     printf("   UNKNOWN :: angular velocity %d bytes\n", dataPacket.len);
                     break;
-            }*/
-            printf("\n");
+            }
+            //printf("\n");
             break;
             
-            
         case 0xA0: // Sensor component readout
-            printf("Got sensor component readout packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            /*printf("Got sensor component readout packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // ACC+GYR+MAG+Temperature
                     printf("   ACC+GYR+MAG+Temperature V %d bytes\n", dataPacket.len);
                     break;
@@ -811,13 +616,12 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     printf("   UNKNOWN :: SCR %d bytes\n", dataPacket.len);
                     break;
             }*/
-            printf("\n");
+            //printf("\n");
             break;
             
-            
         case 0xB0: // Analog in
-            printf("Got analog in packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            /*printf("Got analog in packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Analog in 1
                     printf("   Analog in 1 %d bytes\n", dataPacket.len);
                     break;
@@ -828,13 +632,12 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     printf("   UNKNOWN :: Analog in %d bytes\n", dataPacket.len);
                     break;
             }*/
-            printf("\n");
+            //printf("\n");
             break;
 
-
         case 0xC0: // Magnetic
-            printf("Got magnetic packet\n");
-            /*if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
+            /*printf("Got magnetic packet\n");
+            if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
                 printf("   Magnetic field %d bytes\n", dataPacket.len);
                 unsigned char * buf;
                 buf = (unsigned char *) malloc(4);
@@ -846,38 +649,36 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                 printf("   Mag (Z): %f\n", hexa2float(buf));
             } else
                 printf("   UNKNOWN :: Magnetic %d bytes\n", dataPacket.len);*/
-            printf("\n");
+            //printf("\n");
             break;
             
-            
         case 0xD0: // Velocity
-            printf("Got velocity packet\n");
+            //printf("Got velocity packet\n");
             if((dataPacket.idSignal & 0xF0) == 0x10){ // Velocity XYZ
                 //printf("   Velocity XYZ %d bytes\n", dataPacket.len);
                 auxBuf = (unsigned char *) malloc(4);
                 for (int i = 0; i < 4; i++) auxBuf[i] = dataPacket.data[i];
-                printf("   Vel X: %f m/s\n", hexa2float(auxBuf));
+                //printf("   Vel X: %f m/s\n", hexa2float(auxBuf));
                 posOriInfo.velX = hexa2float(auxBuf);
                 
                 auxBuf = (unsigned char *) malloc(4);
                 for (int i = 4; i < 8; i++) auxBuf[i - 4] = dataPacket.data[i];
-                printf("   Vel Y: %f m/s\n", hexa2float(auxBuf));
+                //printf("   Vel Y: %f m/s\n", hexa2float(auxBuf));
                 posOriInfo.velY = hexa2float(auxBuf);
                 
                 auxBuf = (unsigned char *) malloc(4);
                 for (int i = 8; i < 12; i++) auxBuf[i - 8] = dataPacket.data[i];
-                printf("   Vel Z: %f m/s", hexa2float(auxBuf));
+                //printf("   Vel Z: %f m/s", hexa2float(auxBuf));
                 posOriInfo.velZ = hexa2float(auxBuf);
                 
             }else
                 printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len);     
-            printf("\n");
+            //printf("\n");
             break;
             
-            
         case 0xE0: // Status
-            printf("Got status packet\n");
-            /*switch (dataPacket.idSignal & 0xF0) {
+            /*printf("Got status packet\n");
+            switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Status Byte
                     printf("   Status Byte %d bytes\n", dataPacket.len);
                     break;
@@ -895,18 +696,17 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     printf("   UNKNOWN :: Status in %d bytes\n", dataPacket.len);
                     break;
             }*/
-            printf("\n");
+            //printf("\n");
             break;
             
             
         default: // Unknown
             printf("Got KNOWN packet: %02X\n", dataPacket.idGroup);
-            printf("\n");
+            //printf("\n");
             break;
 
     }
 }
-
 
 /*******************************************************************************
  * FUNCIONES DE CONVERSION DE TIPOS
@@ -962,3 +762,8 @@ double XSensMTi700Driver::hexa2double(unsigned char * buffer){
     return floatUnion.value;
 }
 
+/*******************************************************************************
+ * GET DE DATOS OBTENIDOS
+ ******************************************************************************/
+
+GPSINSInfo XSensMTi700Driver::getInfo(){ return posOriInfo; }

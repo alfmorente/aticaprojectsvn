@@ -44,10 +44,6 @@ int main(int argc, char** argv) {
             clock_t initTime, finalTime;
             initTime = clock();
             
-            // Estructuras de manejo de datos
-            GPSINSInfo infoGPSINS;
-            //MagnetometerInfo infoMagnet;
-
             //Bucle principal
             while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
                 
@@ -58,33 +54,8 @@ int main(int argc, char** argv) {
 
                 if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_30HZ) {
                     
-                    // Requerimiento de informacion de dispositivo GPS/INS
-                    infoGPSINS = nodePosOri->getXSensManager()->getData();
-                    // Requerimiento de informacion de dispositivo Magnetometro
-                    //infoMagnet = nodePosOri->getTraxManager()->getData();
-                    CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
-                    msgSnd.positionStatus = infoGPSINS.positionStatus;
-                    msgSnd.orientationStatus = infoGPSINS.orientationStatus;
-                    msgSnd.latitude = infoGPSINS.latitude;
-                    msgSnd.longitude = infoGPSINS.longitude;
-                    msgSnd.altitude = infoGPSINS.altitude;
-                    msgSnd.roll = infoGPSINS.roll;
-                    msgSnd.pitch = infoGPSINS.pitch;
-                    msgSnd.yaw = infoGPSINS.yaw;
-                    msgSnd.velX = infoGPSINS.velX;
-                    msgSnd.velY = infoGPSINS.velY;
-                    msgSnd.velZ = infoGPSINS.velZ;
-                    msgSnd.accX = infoGPSINS.accX;
-                    msgSnd.accY = infoGPSINS.accY;
-                    msgSnd.accZ = infoGPSINS.accZ;
-                    msgSnd.rateX = infoGPSINS.rateX;
-                    msgSnd.rateY = infoGPSINS.rateY;
-                    msgSnd.rateZ = infoGPSINS.rateZ;
-                    nodePosOri->getPubPosOriInfo().publish(msgSnd);
-                    
-                    // Conversion a mensaje ROS y publicacion
-                    // TODO 
-                    
+                    // Requerimiento y publicacion de informacion de dispositivo GPS/INS
+                    nodePosOri->publishInformation();
                     
                     // Clear del timer
                     initTime = clock();

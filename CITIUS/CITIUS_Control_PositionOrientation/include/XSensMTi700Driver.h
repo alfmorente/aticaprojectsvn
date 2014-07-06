@@ -1,6 +1,6 @@
 /* 
  * File:   XSensMTi700Driver.h
- * Author: atica
+ * Author: Carlos Amores
  *
  * Created on 4 de julio de 2014, 19:01
  */
@@ -44,6 +44,8 @@ extern "C" {
 #define COMMAND_MID_MTDATA2 0x36
 #define COMMAND_LEN_0 0x00
 
+#define FREC_REQ_DATA 0x19
+
 // Informacion de GPS/INS
 typedef struct{
   // Estado
@@ -54,9 +56,9 @@ typedef struct{
   double longitude;
   float altitude;
   // Orientacion
-  double roll;
-  double pitch;
-  double yaw;
+  float roll;
+  float pitch;
+  float yaw;
   // Velocidad longitudinal
   float velX;
   float velY;
@@ -125,6 +127,9 @@ public:
   bool connectToDevice();
   void disconnectDevice();
   void configureDevice();
-  GPSINSInfo getData();
+  bool getData();
+  
+  // Retorno de estructura de datos
+  GPSINSInfo getInfo();
 };
 

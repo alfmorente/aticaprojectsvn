@@ -52,6 +52,8 @@ public:
     void setPONodeStatus(short);
     XSensMTi700Driver *getXSensManager();
     TraxAHRSDriver *getTraxManager();   
+    // Publicador de la informacion
+    void publishInformation();
 };
 
 

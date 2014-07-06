@@ -2,10 +2,10 @@ uint16 positionStatus
 uint16 orientationStatus
 float64 latitude
 float64 longitude
-float64 altitude
-float64 roll
-float64 pitch
-float64 yaw
+float32 altitude
+float32 roll
+float32 pitch
+float32 yaw
 float32 velX
 float32 velY
 float32 velZ
