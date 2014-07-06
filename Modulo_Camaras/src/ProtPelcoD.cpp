@@ -38,16 +38,20 @@ void ProtPelcoD::commandPAN(int typePAN)
     command1=PELCO_ZERO;
     if(typePAN==CAMERA_PAN_RIGHT)
     {
+	printf("PAN RIGHT\n");
         command2=PELCO_PAN_RIGHT;
         data1=velPAN;
     }
     else if(typePAN==CAMERA_PAN_LEFT)
     {
+
+	printf("PAN LEFT\n");
         command2=PELCO_PAN_LEFT;
         data1=velPAN;        
     }        
     else //CAMERA_PAN_STOP
     {
+	printf("PAN STOP\n");
         command2=PELCO_ZERO;
         data1=VEL_STOP;
     }  
@@ -61,16 +65,19 @@ void ProtPelcoD::commandTILT(int typeTILT)
     command1=PELCO_ZERO;
     if(typeTILT==CAMERA_TILT_UP)
     {
+	printf("TILT UP\n");
         command2=PELCO_TILT_UP;
         data2=velTILT;
     }
     else if(typeTILT==CAMERA_TILT_DOWN)
     {
+	printf("TILT DOWN\n");
         command2=PELCO_TILT_DOWN;
         data2=velTILT;        
     }        
     else //CAMERA_TILT_STOP
     {
+	printf("TILT STOP\n");
         command2=PELCO_ZERO;
         data2=VEL_STOP;
     }  
@@ -84,11 +91,13 @@ void ProtPelcoD::commandZOOM(int typeZOOM)
     command1=PELCO_ZERO;
     if(typeZOOM==CAMERA_ZOOM_IN)
     {
+	printf("ZOOM IN\n");
         command2=PELCO_ZOOM_IN;
 
     }
-    else // typeZOOM==CAMERA_ZOOM_OUT
+    else //typeZOOM==CAMERA_ZOOM_OUT
     {
+	printf("ZOOM OUT\n");
         command2=PELCO_ZOOM_OUT;
     
     }        

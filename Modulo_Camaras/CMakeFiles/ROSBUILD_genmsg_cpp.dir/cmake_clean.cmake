@@ -3,8 +3,8 @@ FILE(REMOVE_RECURSE
   "msg_gen"
   "src/Modulo_Camaras/msg"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
-  "msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h"
   "msg_gen/cpp/include/Modulo_Camaras/msg_errores.h"
+  "msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h"
 )
 
 # Per-language clean rules from dependency scanning.

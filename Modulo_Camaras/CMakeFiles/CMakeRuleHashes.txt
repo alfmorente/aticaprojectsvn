@@ -24,6 +24,6 @@ aad36f4cbc0aefdf115f5009e9cb39f0 msg_gen/cpp/include/Modulo_Camaras/msg_camaras.
 d8dd55c8aa92219cec10a8d01b157e71 msg_gen/cpp/include/Modulo_Camaras/msg_errores.h
 0dd0d46a7da06e3751356f2d783ebf8a msg_gen/lisp/msg_camaras.lisp
 892189068f45c73a79735f696809b681 msg_gen/lisp/msg_errores.lisp
-77c6d4f2b1ad3d0b03e35b510831dca1 src/Modulo_Camaras/msg/__init__.py
+00b8a22014ec79aaea262943c74f8138 src/Modulo_Camaras/msg/__init__.py
 2d5ece55da080029d13a93bc345fa48a src/Modulo_Camaras/msg/_msg_camaras.py
 8c4966dfeeb252e4d13aa7e3113202a6 src/Modulo_Camaras/msg/_msg_errores.py

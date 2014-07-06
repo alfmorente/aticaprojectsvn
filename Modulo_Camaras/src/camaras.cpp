@@ -60,7 +60,7 @@ int main(int argc, char **argv)
         exit(1);
     } 
 
-    ROS_INFO("Conectando con el dispositivo...");
+    ROS_INFO("Conectando con el dispositivo...%s",configModule.portName);
     // Conexion con dispositivo
     camara=new ProtPelcoD(configModule.idCamera,configModule.velPAN,configModule.velTILT);
     if(!camara->connect(configModule.portName,configModule.portVelocity))

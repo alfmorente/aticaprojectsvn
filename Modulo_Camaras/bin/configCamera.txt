@@ -6,7 +6,7 @@
 
 
 #Nombre del puerto serie
-port_name: /dev/ttyUSB0 
+port_name: /dev/ttyS0 
 
 #Velocidad del puerto serie 
 port_velocity: B9600

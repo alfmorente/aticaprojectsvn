@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
@@ -46,8 +49,8 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
-	/usr/bin/cmake -i .
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -448,6 +451,78 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/Files.o: src/Files.cpp.o
+.PHONY : src/Files.o
+
+# target to build an object file
+src/Files.cpp.o:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/Files.cpp.o
+.PHONY : src/Files.cpp.o
+
+src/Files.i: src/Files.cpp.i
+.PHONY : src/Files.i
+
+# target to preprocess a source file
+src/Files.cpp.i:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/Files.cpp.i
+.PHONY : src/Files.cpp.i
+
+src/Files.s: src/Files.cpp.s
+.PHONY : src/Files.s
+
+# target to generate assembly for a file
+src/Files.cpp.s:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/Files.cpp.s
+.PHONY : src/Files.cpp.s
+
+src/PortSerial.o: src/PortSerial.cpp.o
+.PHONY : src/PortSerial.o
+
+# target to build an object file
+src/PortSerial.cpp.o:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/PortSerial.cpp.o
+.PHONY : src/PortSerial.cpp.o
+
+src/PortSerial.i: src/PortSerial.cpp.i
+.PHONY : src/PortSerial.i
+
+# target to preprocess a source file
+src/PortSerial.cpp.i:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/PortSerial.cpp.i
+.PHONY : src/PortSerial.cpp.i
+
+src/PortSerial.s: src/PortSerial.cpp.s
+.PHONY : src/PortSerial.s
+
+# target to generate assembly for a file
+src/PortSerial.cpp.s:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/PortSerial.cpp.s
+.PHONY : src/PortSerial.cpp.s
+
+src/ProtPelcoD.o: src/ProtPelcoD.cpp.o
+.PHONY : src/ProtPelcoD.o
+
+# target to build an object file
+src/ProtPelcoD.cpp.o:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o
+.PHONY : src/ProtPelcoD.cpp.o
+
+src/ProtPelcoD.i: src/ProtPelcoD.cpp.i
+.PHONY : src/ProtPelcoD.i
+
+# target to preprocess a source file
+src/ProtPelcoD.cpp.i:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.i
+.PHONY : src/ProtPelcoD.cpp.i
+
+src/ProtPelcoD.s: src/ProtPelcoD.cpp.s
+.PHONY : src/ProtPelcoD.s
+
+# target to generate assembly for a file
+src/ProtPelcoD.cpp.s:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.s
+.PHONY : src/ProtPelcoD.cpp.s
+
 src/camaras.o: src/camaras.cpp.o
 .PHONY : src/camaras.o
 
@@ -508,6 +583,15 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/Files.o"
+	@echo "... src/Files.i"
+	@echo "... src/Files.s"
+	@echo "... src/PortSerial.o"
+	@echo "... src/PortSerial.i"
+	@echo "... src/PortSerial.s"
+	@echo "... src/ProtPelcoD.o"
+	@echo "... src/ProtPelcoD.i"
+	@echo "... src/ProtPelcoD.s"
 	@echo "... src/camaras.o"
 	@echo "... src/camaras.i"
 	@echo "... src/camaras.s"

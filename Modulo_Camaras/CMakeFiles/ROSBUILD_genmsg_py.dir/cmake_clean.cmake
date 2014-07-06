@@ -4,8 +4,8 @@ FILE(REMOVE_RECURSE
   "src/Modulo_Camaras/msg"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/Modulo_Camaras/msg/__init__.py"
-  "src/Modulo_Camaras/msg/_msg_camaras.py"
   "src/Modulo_Camaras/msg/_msg_errores.py"
+  "src/Modulo_Camaras/msg/_msg_camaras.py"
 )
 
 # Per-language clean rules from dependency scanning.
