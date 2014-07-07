@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 
         tcgetattr(canal, &oldtio);
         bzero(&newtio, sizeof (newtio));
-        newtio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL;// | CREAD;
+        newtio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
         newtio.c_cflag &= ~(PARENB | PARODD | CSTOPB | CRTSCTS | CSIZE);      // shut off parity
 
         newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
