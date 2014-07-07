@@ -4,14 +4,10 @@ FILE(REMOVE_RECURSE
   "src/Modulo_Conduccion/msg"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/Modulo_Conduccion/msg/__init__.py"
-  "src/Modulo_Conduccion/msg/_msg_switch.py"
-  "src/Modulo_Conduccion/msg/_msg_fcn_aux.py"
-  "src/Modulo_Conduccion/msg/_msg_com_teleop.py"
-  "src/Modulo_Conduccion/msg/_msg_emergency_stop.py"
-  "src/Modulo_Conduccion/msg/_msg_backup.py"
-  "src/Modulo_Conduccion/msg/_msg_error.py"
-  "src/Modulo_Conduccion/msg/_msg_info_stop.py"
-  "src/Modulo_Conduccion/msg/_msg_navigation.py"
+  "src/Modulo_Conduccion/msg/_mastil.py"
+  "src/Modulo_Conduccion/msg/_nivelBomba.py"
+  "src/Modulo_Conduccion/msg/_messageCAN.py"
+  "src/Modulo_Conduccion/msg/_bomba.py"
 )
 
 # Per-language clean rules from dependency scanning.

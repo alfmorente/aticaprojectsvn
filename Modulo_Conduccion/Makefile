@@ -163,6 +163,19 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmsg_py
+
+# Build rule for target.
+ROSBUILD_genmsg_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_py
+.PHONY : ROSBUILD_genmsg_py
+
+# fast build rule for target.
+ROSBUILD_genmsg_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
+.PHONY : ROSBUILD_genmsg_py/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -291,6 +304,19 @@ rospack_genmsg: cmake_check_build_system
 rospack_genmsg/fast:
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 .PHONY : rospack_genmsg/fast
+
+#=============================================================================
+# Target rules for targets named rospack_genmsg_all
+
+# Build rule for target.
+rospack_genmsg_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
+.PHONY : rospack_genmsg_all
+
+# fast build rule for target.
+rospack_genmsg_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
+.PHONY : rospack_genmsg_all/fast
 
 #=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
@@ -446,6 +472,30 @@ src/CANCommunication.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/CANCommunication.cpp.s
 .PHONY : src/CANCommunication.cpp.s
 
+src/ConduccionCamionThread.o: src/ConduccionCamionThread.cpp.o
+.PHONY : src/ConduccionCamionThread.o
+
+# target to build an object file
+src/ConduccionCamionThread.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.o
+.PHONY : src/ConduccionCamionThread.cpp.o
+
+src/ConduccionCamionThread.i: src/ConduccionCamionThread.cpp.i
+.PHONY : src/ConduccionCamionThread.i
+
+# target to preprocess a source file
+src/ConduccionCamionThread.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.i
+.PHONY : src/ConduccionCamionThread.cpp.i
+
+src/ConduccionCamionThread.s: src/ConduccionCamionThread.cpp.s
+.PHONY : src/ConduccionCamionThread.s
+
+# target to generate assembly for a file
+src/ConduccionCamionThread.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.s
+.PHONY : src/ConduccionCamionThread.cpp.s
+
 src/ConduccionThread.o: src/ConduccionThread.cpp.o
 .PHONY : src/ConduccionThread.o
 
@@ -469,6 +519,30 @@ src/ConduccionThread.s: src/ConduccionThread.cpp.s
 src/ConduccionThread.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionThread.cpp.s
 .PHONY : src/ConduccionThread.cpp.s
+
+src/SerialCommunication.o: src/SerialCommunication.cpp.o
+.PHONY : src/SerialCommunication.o
+
+# target to build an object file
+src/SerialCommunication.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SerialCommunication.cpp.o
+.PHONY : src/SerialCommunication.cpp.o
+
+src/SerialCommunication.i: src/SerialCommunication.cpp.i
+.PHONY : src/SerialCommunication.i
+
+# target to preprocess a source file
+src/SerialCommunication.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SerialCommunication.cpp.i
+.PHONY : src/SerialCommunication.cpp.i
+
+src/SerialCommunication.s: src/SerialCommunication.cpp.s
+.PHONY : src/SerialCommunication.s
+
+# target to generate assembly for a file
+src/SerialCommunication.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SerialCommunication.cpp.s
+.PHONY : src/SerialCommunication.cpp.s
 
 src/Thread.o: src/Thread.cpp.o
 .PHONY : src/Thread.o
@@ -566,6 +640,54 @@ src/interaction.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/interaction.cpp.s
 .PHONY : src/interaction.cpp.s
 
+src/mastil.o: src/mastil.cpp.o
+.PHONY : src/mastil.o
+
+# target to build an object file
+src/mastil.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.o
+.PHONY : src/mastil.cpp.o
+
+src/mastil.i: src/mastil.cpp.i
+.PHONY : src/mastil.i
+
+# target to preprocess a source file
+src/mastil.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.i
+.PHONY : src/mastil.cpp.i
+
+src/mastil.s: src/mastil.cpp.s
+.PHONY : src/mastil.s
+
+# target to generate assembly for a file
+src/mastil.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.s
+.PHONY : src/mastil.cpp.s
+
+src/operaciones.o: src/operaciones.c.o
+.PHONY : src/operaciones.o
+
+# target to build an object file
+src/operaciones.c.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.o
+.PHONY : src/operaciones.c.o
+
+src/operaciones.i: src/operaciones.c.i
+.PHONY : src/operaciones.i
+
+# target to preprocess a source file
+src/operaciones.c.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.i
+.PHONY : src/operaciones.c.i
+
+src/operaciones.s: src/operaciones.c.s
+.PHONY : src/operaciones.s
+
+# target to generate assembly for a file
+src/operaciones.c.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.s
+.PHONY : src/operaciones.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -574,6 +696,7 @@ help:
 	@echo "... depend"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
+	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... _catkin_empty_exported_target"
@@ -590,6 +713,7 @@ help:
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
+	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... run_tests"
@@ -603,9 +727,15 @@ help:
 	@echo "... src/CANCommunication.o"
 	@echo "... src/CANCommunication.i"
 	@echo "... src/CANCommunication.s"
+	@echo "... src/ConduccionCamionThread.o"
+	@echo "... src/ConduccionCamionThread.i"
+	@echo "... src/ConduccionCamionThread.s"
 	@echo "... src/ConduccionThread.o"
 	@echo "... src/ConduccionThread.i"
 	@echo "... src/ConduccionThread.s"
+	@echo "... src/SerialCommunication.o"
+	@echo "... src/SerialCommunication.i"
+	@echo "... src/SerialCommunication.s"
 	@echo "... src/Thread.o"
 	@echo "... src/Thread.i"
 	@echo "... src/Thread.s"
@@ -618,6 +748,12 @@ help:
 	@echo "... src/interaction.o"
 	@echo "... src/interaction.i"
 	@echo "... src/interaction.s"
+	@echo "... src/mastil.o"
+	@echo "... src/mastil.i"
+	@echo "... src/mastil.s"
+	@echo "... src/operaciones.o"
+	@echo "... src/operaciones.i"
+	@echo "... src/operaciones.s"
 .PHONY : help
 
 

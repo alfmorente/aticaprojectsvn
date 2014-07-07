@@ -19,13 +19,22 @@
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
       </df>
+      <df name="include">
+        <df name="Modulo_Conduccion">
+          <in>mastil.h</in>
+        </df>
+      </df>
       <df name="src">
         <in>CANCommunication.cpp</in>
+        <in>ConduccionCamionThread.cpp</in>
         <in>ConduccionThread.cpp</in>
+        <in>SerialCommunication.cpp</in>
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>
         <in>interaction.cpp</in>
+        <in>mastil.cpp</in>
+        <in>operaciones.c</in>
       </df>
     </df>
     <logicalFolder name="src"
@@ -171,6 +180,19 @@
         </ccTool>
       </folder>
       <folder path="0/src">
+        <cTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>ROS_PACKAGE_NAME="Modulo_Conduccion"</Elem>
+          </preprocessorList>
+        </cTool>
         <ccTool>
           <incDir>
             <pElem>include</pElem>
@@ -219,13 +241,21 @@
           </undefinedList>
         </ccTool>
       </folder>
+      <item path="include/Modulo_Conduccion/mastil.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CANCommunication.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="src/ConduccionCamionThread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
       <item path="src/ConduccionThread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="src/SerialCommunication.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Thread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
@@ -242,6 +272,12 @@
       <item path="src/interaction.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="src/mastil.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/operaciones.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
       </item>
     </conf>
   </confs>

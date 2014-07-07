@@ -41,6 +41,8 @@
           <df name="src">
           </df>
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
@@ -103,24 +105,52 @@
       <df name="include">
         <df name="Modulo_Conduccion">
           <in>CANCommunication.hpp</in>
+          <in>ConduccionCamionThread.hpp</in>
           <in>ConduccionThread.hpp</in>
+          <in>SerialCommunication.hpp</in>
           <in>Thread.hpp</in>
           <in>Timer.hpp</in>
+          <in>built_in.h</in>
           <in>conduccion.h</in>
           <in>interaction.h</in>
+          <in>ksm.h</in>
+          <in>mastil.h</in>
+          <in>operaciones.h</in>
         </df>
       </df>
       <df name="lib">
       </df>
+      <df name="msg">
+      </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="Modulo_Conduccion">
+              <in>bomba.h</in>
+              <in>mastil.h</in>
+              <in>messageCAN.h</in>
+              <in>nivelBomba.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
       <df name="src">
         <df name="Modulo_Conduccion">
+          <df name="msg">
+          </df>
         </df>
         <in>CANCommunication.cpp</in>
+        <in>ConduccionCamionThread.cpp</in>
         <in>ConduccionThread.cpp</in>
+        <in>SerialCommunication.cpp</in>
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>
         <in>interaction.cpp</in>
+        <in>mastil.cpp</in>
+        <in>operaciones.c</in>
       </df>
       <df name="test_results">
       </df>

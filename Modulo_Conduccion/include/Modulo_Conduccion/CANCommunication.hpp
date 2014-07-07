@@ -71,15 +71,13 @@ public:
     void checkErrorRead (int contRead);
 
     
-    // Creación de colas de mensakes
+    // Creación de colas de mensajes para Ática y Camión
     queue<TPCANRdMsg> ConduccionQueue;
-
-
-    // Semáforos de acceso a colas
-    pthread_mutex_t ConduccionQueue_mutex;
+    queue<TPCANRdMsg> ConduccionCamionQueue;
     
-    // Semáforos de acceso a datos comunes
-    pthread_mutex_t CANVCS_mutex;
+    // Semáforos de acceso a colas para Ática y Camión
+    pthread_mutex_t ConduccionQueue_mutex;
+    pthread_mutex_t ConduccionCamionQueue_mutex;
     
     bool flagActive;        /* Usada para indicar si debe seguirse ejecutando */
     

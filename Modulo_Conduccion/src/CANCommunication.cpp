@@ -199,9 +199,7 @@ void CANCommunication::DoWork() {
                 //printf("receivetest: 0x%08x   ", msgRx.Msg.ID); 
       
                 if (!(msgRx.Msg.MSGTYPE & MSGTYPE_RTR)) {
-                    
-                    
-                    switch (msgRx.Msg.ID) {
+                     switch (msgRx.Msg.ID) {
                         case 0x005:
                         case 0x00E:
                         case 0x080:
@@ -215,11 +213,44 @@ void CANCommunication::DoWork() {
                     //            printf("%02x ", msgRx.Msg.DATA[v]);
                     //printf("\n");
                                 break;
-                            
+                                                       
                         default:
-                            cout << "\n Error en lectura EN CAN COMUNICATION.cpp \n";
-                
-                    }
+                            cout << "\n CAN COMUNICATION - Error en lectura en el CAN de Ática\n";
+                     }
+                }
+            }
+            else if (this->id == "Camion"){
+                if (!(msgRx.Msg.MSGTYPE & MSGTYPE_RTR)) {
+                     switch (msgRx.Msg.ID) {
+                        case 0x18EFFFCC:
+                        case 0xCF00203:
+                        case 0xCF00400:
+                        case 0x18F00503:
+                        case 0x18F0010B:
+                        case 0x18FEF100:
+                        case 0x18FFA121:
+                        case 0xCF00300:
+                        case 0x18FEEE00:
+                        case 0x18FEEF00:
+                        case 0x18FEAE30:
+                        case 0x18FEF500:
+                        case 0x18FEC1EE:
+                        case 0x18FEEA0B:
+                        case 0x18FEE527:
+                        case 0xCFE6CEE:
+                        case 0x18F00029:
+                        case 0x18FED9FD:
+                        case 0x18FEF227:
+                        case 0x1CFEC703:
+                            pthread_mutex_lock (&ConduccionCamionQueue_mutex);                  
+                            ConduccionCamionQueue.push (msgRx);
+                            pthread_mutex_unlock (&ConduccionCamionQueue_mutex);
+                            this->CommunicationTimer.Reset(); // Se resetea cada vez que se reciba 1 mensaje   
+                            break;
+                        
+                        default:
+                            cout << "\n CAN COMUNICATION - Error en lectura en el CAN del Camión \n";
+                     }
                 }
             }
             else 

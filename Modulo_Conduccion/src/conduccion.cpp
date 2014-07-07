@@ -8,6 +8,7 @@
 #include "../include/Modulo_Conduccion/conduccion.h"
 
 
+
 // Tratamiento de señales (CTRL+C)
 #include <signal.h>
 
@@ -37,6 +38,8 @@ void signal_handler(int signal)
 
 int main(int argc, char **argv)
 {
+  tipo_vehiculo = 2;  //(1 == ATICA y 2 == CAMION)
+    
   // Orden para la parada manual con CTtrl+C
   signal(SIGTERM, signal_handler);
   signal(SIGINT, signal_handler);  
@@ -112,16 +115,32 @@ int main(int argc, char **argv)
                 
                 else {
                     
-                    checkEmergencyStop();
+                    if (tipo_vehiculo == ATICA) {
+                        checkEmergencyStop();
                     
-                    checkSwitch();
+                        checkSwitch();
                       
-                    checkInfoStop();
+                        checkInfoStop();
                     
-                    checkError();
+                        checkError();
                     
-                    //publishBackup();
-
+                        //publishBackup();
+                    }   
+                    else if (tipo_vehiculo == CAMION) {
+                        
+                        // Vuelca los valores de la estructura al mensaje ROS
+		  	convertMessageToROS(conduccionCamion->ksm,msg);
+				
+			// Publica el mensaje ROS
+		  	pub_camion.publish(msg);
+                        
+                        int nivel = SerialComBomba->nivelBomba();
+                        msg_mensajeNivel->nivel = nivel;
+                        		
+			//printf ("Nivel de Agua %d\n", mensajeNivel.nivel);
+			usleep(250000);
+	  		pub_nivel_bomba.publish(msg_mensajeNivel);
+                    }
         	                                 
                 }
                 
@@ -152,9 +171,17 @@ int main(int argc, char **argv)
   // Envío de erorr si no hay envio/recepcion de tramas CAN 
   if ((can->errorWrite) || (can->errorRead)){
         msg_err->id_error = COMMUNICATION_CAN_FAIL; // Error en conduccion (1: envio/recepcion tramas CAN)
-        pub_error.publish(msg_err); 
-        conduccion->CONDUCCION_ACTIVE= false;
-        
+        pub_error.publish(msg_err);
+        if (tipo_vehiculo == ATICA) {
+            conduccion->CONDUCCION_ACTIVE= false;
+        }
+        else if (tipo_vehiculo == CAMION){
+            conduccionCamion->CONDUCCION_CAMION_ACTIVE = false;
+            SerialComBomba->serialFlagActive = false;
+            SerialComMastil->serialFlagActive = false;
+            datosBajarMastil();
+	    write(canal,bajarMastil, sizeof(bajarMastil)+1);
+        }
         cout << "COMMUNICATION_CAN_FAIL \n";
   }
   
@@ -534,6 +561,256 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg) {
 
 }
 
+void fcn_sub_bomba(const Modulo_Conduccion::bombaPtr& msg)
+{
+	int comando = msg->comando;
+	int value = msg->value;
+
+	switch(comando)
+	{
+
+		case 0: 
+			{
+				if (value == 0 ) {			//DESACELERAR
+					SerialComBomba->abrir_cerrar(1, 0, true);
+					sleep (1);
+					SerialComBomba->abrir_cerrar(1, 0, false);
+					ROS_INFO("Desacelerar"); 
+					break;
+				}
+				else if (value == 1) {    //ACELERAR
+					SerialComBomba->abrir_cerrar(1, 1, true);
+					sleep (1);
+					SerialComBomba->abrir_cerrar(1, 1, false);
+					ROS_INFO("Acelerar");
+					break;
+				}
+			}		
+		case 1:
+			{ 
+				if (value == 0) {	//VÁLVULA CISTERNA
+					SerialComBomba->abrir_cerrar(1, 2, false);
+					ROS_INFO("Cerrar válvula cisterna");
+					break;
+				}
+				else if (value == 1) {
+					SerialComBomba->abrir_cerrar(1, 2, true);
+					ROS_INFO("Abrir válvula cisterna");
+					break;
+				}	
+			}	
+		case 2:
+			{ 
+				if (value == 0) {	//VÁLVULA AUTOLLENADO
+					SerialComBomba->abrir_cerrar(1, 3, false);
+					ROS_INFO("Cerrar válvula autollenado");
+					break;
+				}
+				else if (value == 1) {
+					SerialComBomba->abrir_cerrar(1, 3, true);
+					ROS_INFO("Abrir válvula autollenado");
+					break;
+				}	
+			}
+		case 3:
+			{ 
+				if (value == 0) {	//VÁLVULA MONITOR
+					SerialComBomba->abrir_cerrar(2, 0, false);
+					ROS_INFO("Cerrar válvula monitor");
+					break;
+				}
+				else if (value == 1) {
+					SerialComBomba->abrir_cerrar(2, 0, true);
+					ROS_INFO("Abrir válvula monitor");
+					break;
+				}	
+			}
+		case 4: 
+			{
+				if (value == 0 ) {			//PAN IZQUIERDA
+					SerialComBomba->abrir_cerrar(2, 2, true);
+					//sleep (1);
+					//abrir_cerrar(2, 2, false);
+					break;
+				}
+				else if (value == 1) {    //PAN DERECHA
+					SerialComBomba->abrir_cerrar(2, 1, true);
+					//sleep (1);
+					//abrir_cerrar(2, 1, false);
+					break;
+				}
+				else if (value == 2){ //PAN STOP
+					SerialComBomba->abrir_cerrar(2,2,false);
+					SerialComBomba->abrir_cerrar(2,1,false);
+					break;
+				}
+			}	
+		case 5: 
+			{
+				if (value == 0 ) {			//TILT ABAJO
+					SerialComBomba->abrir_cerrar(2, 3, true);
+					//sleep (1);
+					//abrir_cerrar(2, 3, false);
+					break;
+				}
+				else if (value == 1) {    //TILT ARRIBA
+					SerialComBomba->abrir_cerrar(2, 7, true);
+					//sleep (1);
+					//abrir_cerrar(2, 7, false);
+					break;
+				}
+				else if (value == 2){ //TILT STOP
+					SerialComBomba->abrir_cerrar(2,3,false);
+					SerialComBomba->abrir_cerrar(2,7,false);
+					break;
+				}
+			}	
+		case 6: 
+			{
+				if (value == 0 ) {			//CHORRO MONITOR
+					SerialComBomba->abrir_cerrar(2, 5, true);  // ---> abre chorro
+					usleep (200000);
+					SerialComBomba->abrir_cerrar(2, 5, false); //---> cierra chorro
+					ROS_INFO("Chorro monitor");
+					break;
+				}
+				else if (value == 1) {    //NIEBLA MONITOR
+					SerialComBomba->abrir_cerrar(2, 6, true);  // ---> abre niebla
+					usleep (200000);
+					SerialComBomba->abrir_cerrar(2, 6, false); //---> cierra niebla
+					ROS_INFO("Niebla monitor");
+					break;
+				}
+			}
+	}
+}
+
+void fcn_sub_mastil(const Modulo_Conduccion::mastilPtr& msg)
+{
+
+	int oM = msg->opcionMastil;
+	switch (oM) {
+
+		case 0:
+			{
+			datosFocoDerecho();
+			write(canal,focoDerecho, sizeof(focoDerecho)+1);	
+			ROS_INFO("Foco derecho apagado ");
+			break;
+			}
+		case 1:
+			{
+			datosFocoDerecho();
+			write(canal,focoDerecho, sizeof(focoDerecho)+1);	
+			ROS_INFO("Foco derecho encendido "); 
+			break;
+			}
+		case 2:
+			{
+			datosFocoIzquierdo();
+			write(canal,focoIzquierdo, sizeof(focoIzquierdo)+1);	
+			ROS_INFO("Foco izquierdo apagado ");
+			break;
+			}
+		case 3:
+			{
+			datosFocoIzquierdo();
+			write(canal,focoIzquierdo, sizeof(focoIzquierdo)+1);	
+			ROS_INFO("Foco izquierdo encendido ");
+			break;
+			}
+		case 4: 
+			{
+			datosTiltAbajo();
+			write(canal,tiltAbajo, sizeof(tiltAbajo)+1);	
+			ROS_INFO("Tilt abajo ");
+
+			/**sleep(1);
+
+			datosOff();
+			write(canal,off, sizeof(off)+1);
+			ROS_INFO("Fin tilt abajo ");**/
+			break;
+			}
+		case 5: 
+			{
+			datosTiltArriba();
+			write(canal,tiltArriba, sizeof(tiltArriba)+1);
+			ROS_INFO("Tilt arriba ");
+
+			/**sleep(1);
+
+			datosOff();
+			write(canal,off, sizeof(off)+1);
+			ROS_INFO("Fin tilt arriba ");**/  			
+			break;
+			}
+		case 6: 
+			{
+			datosOff();
+			write(canal,off, sizeof(off)+1);
+			ROS_INFO("Tilt stop ");  			
+			break;
+			}
+		case 7: 
+			{
+			datosPanDerecha();
+			write(canal,panDerecha, sizeof(panDerecha)+1);
+			ROS_INFO("Pan derecha ");
+						
+			/**sleep(1);
+			
+			datosOff();
+			write(canal,off, sizeof(off)+1);
+			ROS_INFO("Fin pan derecha ");**/  						
+
+			break;
+			}
+		case 8: 
+			{
+			datosPanIzquierda();
+			write(canal,panIzquierda, sizeof(panIzquierda)+1);
+			ROS_INFO("Pan izquierda "); 
+						
+			/**sleep(1);
+			
+			datosOff();
+			write(canal,off, sizeof(off)+1);
+			ROS_INFO("Fin pan izquierda ");**/
+
+			break;
+			}
+		case 9: 
+			{
+			datosOff();
+			write(canal,off, sizeof(off)+1);
+			ROS_INFO("Pan Stop ");
+			break;
+			}
+		case 10:
+			{
+			datosBajarMastil();
+			write(canal,bajarMastil, sizeof(bajarMastil)+1);
+			ROS_INFO("Abajo mástil "); 
+			break;
+			}
+		case 11:
+			{
+			datosSubirMastil();
+			write(canal,subirMastil, sizeof(subirMastil)+1);
+			ROS_INFO("Arriba mástil ");
+			break;
+			}
+		case 12:
+			{
+			datosStop();
+			write(canal,stop, sizeof(stop)+1);
+			ROS_INFO("STOP mástil "); 
+			break;
+			}
+	}
+}
+
 
 // Servicio de heartbeat con Gestion del sistema
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
@@ -548,6 +825,9 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
 }
 
 
+
+
+
 /*******************************************************************************
  *******************************************************************************
  *                              FUNCIONES PROPIAS
@@ -560,37 +840,107 @@ bool createCommunication(){
 
     while(CANflag < 3 && CANflag != 0);
     
-    can = new CANCommunication(false, false, HW_PCI, 0, 0, 0x031C, false, "Conduccion"); // Asegurarnos del BaudRate
+    // Establecimiento y configuración de las comunicaciones
+
+    if (tipo_vehiculo == ATICA) {
+        // Establecimiento de la comunicacion con ATICA
+
+        can = new CANCommunication(false, false, HW_PCI, 0, 0, 0x031C, false, "Conduccion"); // Asegurarnos del BaudRate
+
+        do {
+            if (can->EstablishCommunication() == true) {
+                can->ConfigureCommunication();
+                CANflag = 0;
+            } else {
+                CANflag++;
+                if (CANflag == 3) { // Para más de 3 errores se cierra todo
+                    can->~CANCommunication();
+                    return res = false;
+                }
+            }
+        } while (CANflag < 3 && CANflag != 0);
+
+        conduccion = new ConduccionThread(can);
     
-    conduccion = new ConduccionThread(can);
+        can->Run();
+        conduccion->Run();
+    }
     
-     // Establecimiento y configuración de las comunicaciones
+    else if (tipo_vehiculo == CAMION) {
+        // Establecimiento de la comunicacion con CAMION DE BOMBEROS   
+
+        canCamion = new CANCommunication(false, false, HW_PCI, 0, 0, 0x011C, true, "Camion"); // Asegurarnos del BaudRate
+
+        do {
+            if (canCamion->EstablishCommunication() == true) {
+                canCamion->ConfigureCommunication();
+                CANflag = 0;
+            } else {
+                CANflag++;
+                if (CANflag == 3) { // Para más de 3 errores se cierra todo
+                    canCamion->~CANCommunication();
+                    return res = false;
+                }
+            }
+        } while (CANflag < 3 && CANflag != 0);
+
+        // Manejador PuertoSerie (Arranque Motor)
+
+    SerialComBomba = new SerialCommunication ("/dev/ttyUSB0", B9600);
     
     do {
-        if (can->EstablishCommunication() == true){
-            can->ConfigureCommunication();
-            CANflag = 0;
+        if (SerialComBomba->EstablishCommunication() == true){
+            // Se configurará únicamente 1 vez, no en cada arranque
+            Serialflag = 0;
         }
         else{
-            CANflag++;
-            if (CANflag == 3){           // Para más de 3 errores se cierra todo
-                can->~CANCommunication();
+            Serialflag++;
+            if (Serialflag == 3){           // Para más de 3 errores se cierra todo   
+                SerialComBomba->~SerialCommunication();
                 return res = false;
             }
         }
-    } while(CANflag < 3 && CANflag != 0);
-
-    // Arranque de todos los manejadores
+        
+    } while(Serialflag < 3 && Serialflag != 0);
+        
+    SerialComMastil = new SerialCommunication ("/dev/ttyUSB1", B9600);
     
-    can->Run();
+    do {
+        if (SerialComMastil->EstablishCommunication() == true){
+            // Se configurará únicamente 1 vez, no en cada arranque
+            Serialflag = 0;
+        }
+        else{
+            Serialflag++;
+            if (Serialflag == 3){           // Para más de 3 errores se cierra todo   
+                SerialComMastil->~SerialCommunication();
+                return res = false;
+            }
+        }
+        
+    } while(Serialflag < 3 && Serialflag != 0);
     
-    conduccion->Run();
+        SerialComBomba->iniciar();
+        SerialComBomba->Run();
+        SerialComMastil->Run();
+        canCamion->Run();
+        conduccionCamion->Run();
+    }
     
     return res = true;
 }
 
 bool disconnectCommunication(){
-     can->~CANCommunication();
+    
+     if (tipo_vehiculo == ATICA)
+        can->~CANCommunication();
+     else if (tipo_vehiculo == CAMION){
+        canCamion->~CANCommunication();
+        SerialComBomba->serialFlagActive = false;
+        SerialComMastil->serialFlagActive = false;
+        datosBajarMastil();
+	write(canal,bajarMastil, sizeof(bajarMastil)+1);
+     }
      return false;
 }
 
@@ -604,14 +954,25 @@ void initialize(ros::NodeHandle n) {
   pub_info_stop = n.advertise<Common_files::msg_info_stop>("infoStop",1000);
   pub_emergency_stop = n.advertise<Common_files::msg_emergency_stop>("emergInfo",1000);
 
+  
+  // Generacion de publicadores para el camion de bomberos
+  pub_camion = n.advertise<Modulo_Conduccion::messageCAN>("ksm",1000);
+  pub_nivel_bomba = n.advertise<Modulo_Conduccion::nivelBomba>("pNivelBomba", 1000);
+ 
+
   // Generación de subscriptores  
   sub_navigation = n.subscribe("pre_navigation", 1000, fcn_sub_navigation);
   sub_com_teleop = n.subscribe("commands_clean",1000,fcn_sub_com_teleop);
   sub_fcn_aux = n.subscribe("engBrake",1000,fcn_sub_engine_brake);
   sub_emergency_stop = n.subscribe("emergSet",1000,fcn_sub_emergency_stop);
 
+  
+  // Generacion de subscriptores para el camion de bomberos
+  subBomba = n.subscribe("bomba", 1000, fcn_sub_bomba);
+  subMastil = n.subscribe("mastil", 2, fcn_sub_mastil);
+  
   server = n.advertiseService("module_alive_3", fcn_heartbeat);
-  //server = n.advertiseService("module_alive_3",fcn_heartbeat);
+  
   // Todo esta correcto, lo especificamos con el correspondiente parametro
   n.setParam("state_module_driving",STATE_OK);  
     
@@ -628,6 +989,11 @@ void initialize(ros::NodeHandle n) {
   error_cambio_marcha = 0;              // Al principio se le asigna el valor 0 que indica que no hay ningun error en el cambio de amrcha
   error_direccion = 0;                  // Al principio se le asigna el valor 0 que indica que no hay ningun error en la direccion
   error_diferenciales = 0;              // Al principio se le asigna el valor 0 que indica que no hay ningun error en los diferenciales
+  
+  // variables para el camion de bomberos
+  freno_Mano = "OK";
+  rev = 100.00;
+  
 }
 
 
@@ -735,5 +1101,367 @@ void checkError() {
     
 }
 
+
+void convertMessageToROS(struct ksmData ksm, Modulo_Conduccion::messageCANPtr& msg)
+{
+/*
+  if (ksm.signal1 == 'S') {
+	msg->senal = 1;    	
+	msg->opcion_etc1 = ksm.elecTransController1.opcion;
+	msg->revoluciones_etc1 = ksm.elecTransController1.revoluciones;
+	msg->porcentaje_etc1 = ksm.elecTransController1.porcentaje;
+	msg->revoluciones2_etc1 = ksm.elecTransController1.revoluciones2;
+	ksm.signal1 = 'N';
+	cont1++;
+
+	fprintf(f1, "El estado de la cadena cinética está: %s\n",ksm.elecTransController1.opcion);
+	fprintf(f1, "Las revoluciones de salida son de %.2f rpm\n",ksm.elecTransController1.revoluciones);
+
+	//printf ("REVOlUCIONES %.2f rpm\n",ksm.elecTransController1.revoluciones);
+
+	fprintf(f1, "La posición del pedal del embrague es de un: %.2f %\n",ksm.elecTransController1.porcentaje);
+	fprintf(f1, "La revoluciones de entrada son de %.2f rpm\n",ksm.elecTransController1.revoluciones2);
+
+	//printf("La revoluciones de entrada son de %.2f rpm\n",ksm.elecTransController1.revoluciones2);
+
+	fprintf(f1, "CONTADOR = %d \n",cont1);
+
+	fprintf(f1, "\n");
+  }  
+ 
+*/
+  if (ksm.signal2 == 'S') {
+	msg->senal = 2;
+	msg->revoluciones_eec1 = ksm.elecEngineController1.revoluciones;
+	msg->porcentaje_eec1 = ksm.elecEngineController1.porcentaje;
+	ksm.signal2 = 'N';
+	
+	if (rev != ksm.elecEngineController1.revoluciones) {
+		//printf("La revoluciones de entrada son de %.2f rpm\n", ksm.elecEngineController1.revoluciones);
+		rev = ksm.elecEngineController1.revoluciones;
+	}
+	/*cont2++;
+	
+	fprintf(f2, "El par motor/caudal inyectado es de un %d %\n",ksm.elecEngineController1.porcentaje);
+	fprintf(f2, "La revoluciones de entrada son de %.2f rpm\n", ksm.elecEngineController1.revoluciones);
+
+	
+
+
+	fprintf(f2, "CONTADOR = %d \n",cont2);
+	fprintf(f2, "\n");
+	*/ 
+  }
+
+
+  else if (ksm.signal3 == 'S') {
+	msg->senal = 3;
+	msg->marcha = ksm.elecTransController2.marcha;
+	msg->marcha_2 = ksm.elecTransController2.marcha2;
+	msg->marcha_3 = ksm.elecTransController2.marcha3;
+	ksm.signal3 = 'S';
+	/*cont3++;
+	
+
+	fprintf(f3, "La marcha seleccionada es la %d\n", ksm.elecTransController2.marcha);
+
+	printf ("MARCHA SELECCIONADA %d\n", ksm.elecTransController2.marcha);
+
+	fprintf(f3, "La relación entrada a revoluciones de salida de la caja es de %.2f \n", ksm.elecTransController2.marcha2);
+	fprintf(f3, "La actual/última marcha seleccionada es la %d\n", ksm.elecTransController2.marcha3);
+	fprintf(f3, "CONTADOR = %d \n",cont3);
+        fprintf(f3, "\n");
+*/
+  }
+
+
+  else if (ksm.signal4 == 'S') {
+	msg->senal = 4;
+	msg->opcion_ebc1 = ksm.elecBrakeController1.opcion;
+	msg->porcentaje_ebc1 = ksm.elecBrakeController1.porcentaje;
+	ksm.signal4 = 'N';
+	/*cont4++;
+	
+	fprintf(f4, "El ABS está: %s\n",ksm.elecBrakeController1.opcion);
+	fprintf(f4, "La posición del pedal de freno es de un %.2f %\n",ksm.elecBrakeController1.porcentaje);
+
+	//printf("La posición del pedal de freno es de un %.2f %\n",ksm.elecBrakeController1.porcentaje);
+
+	fprintf(f4, "CONTADOR = %d \n",cont4);
+	fprintf(f4, "\n");
+	*/
+  }
+ 
+
+  else if (ksm.signal5 == 'S') {
+	msg->senal = 5;
+	msg->opcion_ccvs = ksm.cruiseControlVehiSpeed.opcion;
+	msg->km_h_ccvs = ksm.cruiseControlVehiSpeed.km_h;
+	msg->opcion2_ccvs = ksm.cruiseControlVehiSpeed.opcion2;
+	msg->opcion3_ccvs = ksm.cruiseControlVehiSpeed.opcion3;
+	msg->opcion4_ccvs = ksm.cruiseControlVehiSpeed.opcion4;
+	msg->pto_state_ccvs = ksm.cruiseControlVehiSpeed.pto_state;
+	ksm.signal5 = 'N';
+
+
+	if (freno_Mano != ksm.cruiseControlVehiSpeed.opcion) {
+		printf("El freno de estacionamiento está %s\n", ksm.cruiseControlVehiSpeed.opcion);
+		freno_Mano = ksm.cruiseControlVehiSpeed.opcion;
+	}
+	/*cont5++;
+
+	fprintf(f5, "El freno de etacionamiento está %s\n",ksm.cruiseControlVehiSpeed.opcion);
+
+	
+
+	fprintf(f5, "La relación entrada a revoluciones de salida de la caja es de %.2f \n", ksm.cruiseControlVehiSpeed.km_h);
+	fprintf(f5, "El control de crucero está %s\n",ksm.cruiseControlVehiSpeed.opcion2);
+	fprintf(f5, "El pedal del freno está %s\n",ksm.cruiseControlVehiSpeed.opcion3);
+	fprintf(f5, "El pedal del embrague está %s\n",ksm.cruiseControlVehiSpeed.opcion4);
+	fprintf(f5, "El estado del PTO stá en %s\n",ksm.cruiseControlVehiSpeed.pto_state);
+	fprintf(f5, "CONTADOR = %d \n",cont5);
+	fprintf(f5, "\n");
+	*/
+  }
+
+/*	
+  else if (ksm.signal6 == 'S') {
+	msg->senal = 6;
+	msg->opcion_aux = ksm.auxiliaryState.opcion;
+	msg->opcion2_aux = ksm.auxiliaryState.opcion2;
+	msg->opcion3_aux = ksm.auxiliaryState.opcion3;
+	ksm.signal6 = 'N';
+	cont6++;
+
+	fprintf(f6, "La información del nivel del combustible está %s\n",ksm.auxiliaryState.opcion);
+	fprintf(f6, "La marcha atrás está %s\n",ksm.auxiliaryState.opcion2);
+	fprintf(f6, "El info Not-Aus stá %s\n",ksm.auxiliaryState.opcion3 );
+	fprintf(f6, "CONTADOR = %d \n",cont6); 
+	fprintf(f6, "\n");
+  }
+
+*/
+
+  else if (ksm.signal7 == 'S') {
+	msg->senal = 7;
+	msg->opcion_eec2 = ksm.elecEngineController2.opcion;
+	msg->opcion2_eec2 = ksm.elecEngineController2.opcion2;
+	msg->porcentaje_eec2 = ksm.elecEngineController2.porcentaje;
+	msg->porcentaje2_eec2 = ksm.elecEngineController2.porcentaje2;
+	ksm.signal7 = 'N';
+	/*cont7++;
+
+	fprintf(f7, "La posición del relantí está %s\n",ksm.elecEngineController2.opcion);
+	fprintf(f7, "El pedal del acelerador está %s\n",ksm.elecEngineController2.opcion2);
+	fprintf(f7, "La posición del pedal del acelerador es de un %.2f %\n",ksm.elecEngineController2.porcentaje);
+
+	//printf("La posición del pedal del acelerador es de un %.2f %\n",ksm.elecEngineController2.porcentaje);
+
+	fprintf(f7, "La carga de la velocidad actual es de un %.2f %\n",ksm.elecEngineController2.porcentaje2);
+	fprintf(f7, "CONTADOR = %d \n",cont7);
+	fprintf(f7, "\n");
+	*/
+  }
+
+
+  else if (ksm.signal8 == 'S') {
+	msg->senal = 8;
+	msg->grados_et = ksm.engineTemperature.grados;
+	msg->grados2_et = ksm.engineTemperature.grados2;
+	msg->grados3_et = ksm.engineTemperature.grados3;
+	ksm.signal8 = 'N';
+	/*cont8++;
+
+	fprintf(f8, "La temperatura del agua refrigerante es de %d ºC\n",ksm.engineTemperature.grados);
+	fprintf(f8, "La temperatura del combustible es de %d ºC\n",ksm.engineTemperature.grados2);
+	fprintf(f8, "La temperatura del aceite es de %.2f ºC\n", ksm.engineTemperature.grados3); 
+	fprintf(f8, "CONTADOR = %d \n",cont8);
+	fprintf(f8, "\n");
+	*/
+  }
+
+  else if (ksm.signal9 == 'S') {
+	msg->senal = 9;
+	msg->bares_ef = ksm.engineFluid.bares;
+	ksm.signal9 = 'N';
+	/*cont9++;
+
+	fprintf(f9, "La presión del aceite es de %.2f bares\n",ksm.engineFluid.bares);
+	fprintf(f9, "CONTADOR = %d \n",cont9);
+	fprintf(f9, "\n");
+	*/
+  }
+
+
+  else if (ksm.signal10 == 'S') {
+	msg->senal = 10;
+	msg->bares_sp = ksm.supplyPressure.bares;
+	msg->bares2_sp = ksm.supplyPressure.bares2;
+	msg->bares3_sp = ksm.supplyPressure.bares3;
+	msg->bares4_sp = ksm.supplyPressure.bares4;
+	msg->bares5_sp = ksm.supplyPressure.bares5;
+	msg->bares6_sp = ksm.supplyPressure.bares6;
+	ksm.signal10 = 'N';
+	/*cont10++;
+
+	fprintf(f10, "La presión neumática es de %.2f bares\n",ksm.supplyPressure.bares);
+	fprintf(f10, "La presión de aire del trailer es de %.2f bares\n",ksm.supplyPressure.bares2);
+	fprintf(f10, "La presión del circuito #1 del freno de servicio es de %.2f bares\n",ksm.supplyPressure.bares3);
+	fprintf(f10, "La presión del circuito #2 del freno de servicio es de %.2f bares\n",ksm.supplyPressure.bares4);
+	fprintf(f10, "La presión del equipo auxiliar es de %.2f bares\n",ksm.supplyPressure.bares5);
+	fprintf(f10, "La presión de la suspensión es de %.2f bares\n",ksm.supplyPressure.bares6);
+	fprintf(f10, "CONTADOR = %d \n",cont10);
+	fprintf(f10, "\n");
+	*/
+  }
+
+/*
+  else if (ksm.signal11 == 'S') {
+	msg->senal = 11;
+	msg->bares_ac = ksm.ambientConditions.bares;
+	msg->grados_ac = ksm.ambientConditions.grados;
+	ksm.signal11 = 'N';
+	cont11++;
+
+	fprintf(f11, "La presión barométrica es de %.2f bares\n",ksm.ambientConditions.bares);
+	fprintf(f11, "La temperatura ambiente es de %.2f ºC\n", ksm.ambientConditions.grados); 
+	fprintf(f11, "CONTADOR = %d \n",cont11);
+	fprintf(f11, "\n");
+  }
+
+
+  else if (ksm.signal12 == 'S') {
+	msg->senal = 12;
+	msg->kilometros_vdhr = ksm.vehiculeDistance.kilometros;
+	ksm.signal12 = 'N';
+	cont12++;
+
+	fprintf(f12, "El total de kilómetros es de %.2f km\n", ksm.vehiculeDistance.kilometros);
+	fprintf(f12, "CONTADOR = %d \n",cont12);
+	fprintf(f12, "\n");
+  }
+
+
+  else if (ksm.signal13 == 'S') {
+	msg->senal = 13;
+	msg->axle = ksm.vehiculeWeight.axle;
+	msg->kilogramos_vheacs = ksm.vehiculeWeight.kilogramos;
+	ksm.signal13 = 'N';
+	cont13++;
+
+	fprintf(f13, "La localización de los ejes es %s\n",ksm.vehiculeWeight.axle);
+	fprintf(f13, "El peso de los ejes es de %.2f kg\n",ksm.vehiculeWeight.kilogramos);
+	fprintf(f13, "CONTADOR = %d \n",cont13);
+	fprintf(f13, "\n");
+  }
+
+
+  else if (ksm.signal14 == 'S') {
+	msg->senal = 14;
+	msg->horas = ksm.engineHours.horas;
+	ksm.signal14 = 'N';
+	cont14++;
+
+	fprintf(f14, "Las horas totales del motor son de %.2f horas\n", ksm.engineHours.horas);
+	fprintf(f14, "CONTADOR = %d \n",cont14);
+	fprintf(f14, "\n");
+  }
+
+
+  else if (ksm.signal15 == 'S') {
+	msg->senal = 15;
+	msg->driverWorking1 = ksm.tacograph.driverWorking1;
+	msg->driverWorking2 = ksm.tacograph.driverWorking2;
+	msg->opcion_t = ksm.tacograph.opcion;
+	msg->driverTime1 = ksm.tacograph.driverTime;	
+	msg->opcion2_t = ksm.tacograph.opcion2;
+	msg->opcion3_t = ksm.tacograph.opcion3;
+	msg->driverTime2 = ksm.tacograph.driverTime;	
+	msg->opcion4_t = ksm.tacograph.opcion4;
+	msg->opcion5_t = ksm.tacograph.opcion5;
+	msg->opcion6_t = ksm.tacograph.opcion6;
+	msg->opcion7_t = ksm.tacograph.opcion7;
+	msg->km_h_t = ksm.tacograph.km_h;
+	ksm.signal15 = 'N';
+	cont15++;
+
+	fprintf(f15, "El estado de Drive 1 Working está %s\n",ksm.tacograph.driverWorking1);
+	fprintf(f15, "El estado de Drive 2 Working está %s\n",ksm.tacograph.driverWorking2);
+	fprintf(f15, "Driver recognition está %s\n",ksm.tacograph.opcion);
+	fprintf(f15, "El estado de Drive 1 time related está %s\n",ksm.tacograph.driverTime);
+	fprintf(f15, "El estado de Drive Card 1 está %s\n",ksm.tacograph.opcion2);
+	fprintf(f15, "Overspeed está %s\n",ksm.tacograph.opcion3);
+	fprintf(f15, "El estado de Drive 2 time related está %s\n",ksm.tacograph.driverTime2);
+	fprintf(f15, "El estado de Drive Card 2 está %s\n",ksm.tacograph.opcion4);
+	fprintf(f15, "El sistema de eventos está %s\n",ksm.tacograph.opcion5);
+	fprintf(f15, "El manejo de la información está %s\n",ksm.tacograph.opcion6);
+	fprintf(f15, "El sistema de rendimiento está %s\n",ksm.tacograph.opcion7);
+	fprintf(f15, "La velocidad del tacógrafo es de %.2f km/h\n",ksm.tacograph.km_h);
+	fprintf(f15, "CONTADOR = %d \n",cont15);
+	fprintf(f15, "\n");
+  }
+
+
+  else if (ksm.signal16 == 'S') {
+	msg->senal = 16;
+	msg->porcentaje_erc = ksm.elecRetarder.porcentaje;
+	ksm.signal16 = 'N';
+	cont16++;
+
+	fprintf(f16, "Actual retarder torque es de %d %	\n",ksm.elecRetarder.porcentaje);
+	fprintf(f16, "CONTADOR = %d \n",cont16);
+	fprintf(f16, "\n");
+  }
+
+
+  else if (ksm.signal17 == 'S') {
+	msg->senal = 17;
+	msg->opcion_auxstat = ksm.auxStat.opcion;
+	msg->opcion2_auxstat = ksm.auxStat.opcion2;
+	ksm.signal17 = 'N';
+	cont17++;
+
+	fprintf(f17, "El aviso de la temperatura excesiva del agua refrigerante está %s\n",ksm.auxStat.opcion);
+	fprintf(f17, "El aviso de la presión del aceite está %s\n", ksm.auxStat.opcion2);
+	fprintf(f17, "CONTADOR = %d \n",cont17);
+	fprintf(f17, "\n");
+  }
+
+
+  else if (ksm.signal18 == 'S') {
+	msg->senal = 18;
+	msg->litros = ksm.fuelEconomy.litros;
+	msg->km_l = ksm.fuelEconomy.km_l;
+	ksm.signal18 = 'N';
+	cont18++;
+
+	fprintf(f18, "La tasa de combustible es de %.2f litros\n",ksm.fuelEconomy.litros);
+	fprintf(f18, "El gasto instantáneo de fuel es de %.2f km/l\n",ksm.fuelEconomy.km_l);	
+	fprintf(f18, "CONTADOR = %d \n",cont18);
+	fprintf(f18, "\n");
+  }
+
+*/
+  else if (ksm.signal19 == 'S') {
+	msg->senal = 19;
+	msg->opcion_etc3 = ksm.elecTransController3.opcion;
+	msg->opcion2_etc3 = ksm.elecTransController3.opcion2;
+	msg->pto1state = ksm.elecTransController3.pto1state;
+	msg->pto2state = ksm.elecTransController3.pto2state;
+	msg->nmvstate = ksm.elecTransController3.nmvstate;
+	ksm.signal19 = 'N';
+	/*cont19++;
+
+	fprintf(f19, "La posición neutral de la caja está %s\n",ksm.elecTransController3.opcion);
+	fprintf(f19, "La marcha está %s\n", ksm.elecTransController3.opcion2);
+	fprintf(f19, "PTO1 State está %s\n", ksm.elecTransController3.pto1state);
+	fprintf(f19, "PTO2 State está %s\n", ksm.elecTransController3.pto2state);
+	fprintf(f19, "NMV State está %s\n", ksm.elecTransController3.nmvstate);
+	fprintf(f19, "CONTADOR = %d \n",cont19);
+	fprintf(f19, "\n");
+	*/
+  }
+ 
+}
 
 
