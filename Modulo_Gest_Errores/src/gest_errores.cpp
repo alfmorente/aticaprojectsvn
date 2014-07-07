@@ -136,9 +136,11 @@ void fcn_sub_error(const Common_files::msg_errorPtr& msg) {
             av_mode_aux[i] = avail_mode->available[i];
             //cout << av_mode_aux[i] << endl;
         }
-        if (updateModeAvailable(msg, av_mode_aux) == false)
-            pub_avail_mode.publish(avail_mode);
-    }        
+        if (!((msg->id_subsystem == SUBS_COMMUNICATION) && (msg->id_error == COMMUNICATION_UCR_FAIL))){
+            if (updateModeAvailable(msg, av_mode_aux) == false)
+                    pub_avail_mode.publish(avail_mode);
+        }        
+    }
     /* LLEGADA MENSAJE FIN DE ERROR */
     // Ordenes para actualizar mensaje de modos disponibles al recibir un mensaje fin de error
     else if (msg->type_error == TOE_END_ERROR) {
