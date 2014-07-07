@@ -28,12 +28,16 @@ int main(int argc, char** argv) {
         tcgetattr(canal, &oldtio);
         bzero(&newtio, sizeof (newtio));
         newtio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
+        newtio.c_cflag = (newtio.c_cflag & ~CSIZE) | CS8;
+        newtio.c_cflag &= ~(PARENB | PARODD);      // shut off parity
+        newtio.c_cflag &= ~CSTOPB;
+        newtio.c_cflag &= ~CRTSCTS;
 
         newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
 
         newtio.c_oflag = 0;
 
-        newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
+        newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG );
 
         newtio.c_cc[VINTR] = 0; /* Ctrl-c */
         newtio.c_cc[VQUIT] = 0; /* Ctrl-\ */
@@ -94,10 +98,10 @@ void waitForAck(unsigned char _mid) {
     while (!ackFound) {
 
         if (read(canal, &byte, 1) > 0) {
-            printf("%02X ", byte);
+            printf("%d: %02X ",cuentavieja+1, byte);
             printf("JEJEJE\n");
             cuentavieja++;
-            if(cuentavieja == 10)
+            if(cuentavieja == 20)
                 ackFound = true;
         }
         
