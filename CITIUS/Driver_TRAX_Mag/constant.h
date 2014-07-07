@@ -31,15 +31,23 @@ extern "C" {
 #include <complex>
 
 typedef struct {
-    char *len;
-    char *payload;
-    char *cs;
-} TraxMsg;
+    char idData;
+    float valueData;
+} DataStr;
 
 typedef struct {
-    unsigned char idData;
-    unsigned char Value;
+    char idCount;
+    DataStr *idData;
 } PayloadData;
+
+typedef struct {
+    char len[2];
+    char idFrame;
+    PayloadData payload;
+    char cs[2];
+} TraxMsg;
+
+
 
 void sendToDevice(TraxMsg);
 void waitForAck(unsigned char);

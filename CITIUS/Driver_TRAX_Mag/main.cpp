@@ -27,11 +27,8 @@ int main(int argc, char** argv) {
 
         tcgetattr(canal, &oldtio);
         bzero(&newtio, sizeof (newtio));
-        newtio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
-        newtio.c_cflag = (newtio.c_cflag & ~CSIZE) | CS8;
-        newtio.c_cflag &= ~(PARENB | PARODD);      // shut off parity
-        newtio.c_cflag &= ~CSTOPB;
-        newtio.c_cflag &= ~CRTSCTS;
+        newtio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL;// | CREAD;
+        newtio.c_cflag &= ~(PARENB | PARODD | CSTOPB | CRTSCTS | CSIZE);      // shut off parity
 
         newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
 
@@ -61,7 +58,6 @@ int main(int argc, char** argv) {
         tcsetattr(canal, TCSANOW, &newtio);
         
         sendToDevice(kGetData());
-;
 
     }
     return 0;
@@ -71,12 +67,23 @@ int main(int argc, char** argv) {
 
 void sendToDevice(TraxMsg msg) {
     char *msg2send = (char *) malloc(5);
-
+    
+    // Bytecount
+   
     msg2send[0] = msg.len[0];
     msg2send[1] = msg.len[1];
-    msg2send[2] = msg.payload[0];
+
+    // ID Frame
+    
+    msg2send[2] = msg.idFrame;    
+    
+    // Payload
+    
+    // CS
+    
     msg2send[3] = msg.cs[0];
     msg2send[4] = msg.cs[1];
+        
    
     printf("Sent: ");
     for(int i=0;i< 5;i++){
@@ -84,6 +91,7 @@ void sendToDevice(TraxMsg msg) {
     }
     printf("\n");
     
+    write(canal, msg2send, 5); // Enviamos el comando para que comience a enviarnos datos
     write(canal, msg2send, 5); // Enviamos el comando para que comience a enviarnos datos
     waitForAck(0);
 
@@ -99,9 +107,8 @@ void waitForAck(unsigned char _mid) {
 
         if (read(canal, &byte, 1) > 0) {
             printf("%d: %02X ",cuentavieja+1, byte);
-            printf("JEJEJE\n");
             cuentavieja++;
-            if(cuentavieja == 20)
+            if(cuentavieja == 22)
                 ackFound = true;
         }
         
@@ -145,14 +152,11 @@ bool isCheckSumOK(TraxMsg msg) {
 */
 TraxMsg kGetData() {
     TraxMsg trxMsg;
-    trxMsg.len = (char *) malloc(2);
     trxMsg.len[0] = 0x00;
     trxMsg.len[1] = 0x05;
     
-    trxMsg.payload = (char *) malloc(1);
-    trxMsg.payload[0] = 0x04;
+    trxMsg.idFrame = 0x04;
     
-    trxMsg.cs = (char *) malloc(2);
     trxMsg.cs[0] = 0xBF;
     trxMsg.cs[1] = 0x71;
 
