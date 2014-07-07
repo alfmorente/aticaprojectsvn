@@ -19,11 +19,6 @@
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
       </df>
-      <df name="include">
-        <df name="Modulo_Conduccion">
-          <in>mastil.h</in>
-        </df>
-      </df>
       <df name="src">
         <in>CANCommunication.cpp</in>
         <in>ConduccionCamionThread.cpp</in>
@@ -241,8 +236,6 @@
           </undefinedList>
         </ccTool>
       </folder>
-      <item path="include/Modulo_Conduccion/mastil.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/CANCommunication.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>

@@ -397,45 +397,6 @@ CMakeFiles/driving.dir/src/SerialCommunication.cpp.o.provides: CMakeFiles/drivin
 
 CMakeFiles/driving.dir/src/SerialCommunication.cpp.o.provides.build: CMakeFiles/driving.dir/src/SerialCommunication.cpp.o
 
-CMakeFiles/driving.dir/src/mastil.cpp.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/mastil.cpp.o: src/mastil.cpp
-CMakeFiles/driving.dir/src/mastil.cpp.o: manifest.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/driving.dir/src/mastil.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/driving.dir/src/mastil.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles $(CMAKE_PROGRESS_10)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/mastil.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/mastil.cpp.o -c /home/atica/catkin_ws/src/Modulo_Conduccion/src/mastil.cpp
-
-CMakeFiles/driving.dir/src/mastil.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/mastil.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Conduccion/src/mastil.cpp > CMakeFiles/driving.dir/src/mastil.cpp.i
-
-CMakeFiles/driving.dir/src/mastil.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/mastil.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Conduccion/src/mastil.cpp -o CMakeFiles/driving.dir/src/mastil.cpp.s
-
-CMakeFiles/driving.dir/src/mastil.cpp.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/mastil.cpp.o.requires
-
-CMakeFiles/driving.dir/src/mastil.cpp.o.provides: CMakeFiles/driving.dir/src/mastil.cpp.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/mastil.cpp.o.provides
-
-CMakeFiles/driving.dir/src/mastil.cpp.o.provides.build: CMakeFiles/driving.dir/src/mastil.cpp.o
-
 # Object files for target driving
 driving_OBJECTS = \
 "CMakeFiles/driving.dir/src/CANCommunication.cpp.o" \
@@ -446,8 +407,7 @@ driving_OBJECTS = \
 "CMakeFiles/driving.dir/src/Timer.cpp.o" \
 "CMakeFiles/driving.dir/src/interaction.cpp.o" \
 "CMakeFiles/driving.dir/src/operaciones.c.o" \
-"CMakeFiles/driving.dir/src/SerialCommunication.cpp.o" \
-"CMakeFiles/driving.dir/src/mastil.cpp.o"
+"CMakeFiles/driving.dir/src/SerialCommunication.cpp.o"
 
 # External object files for target driving
 driving_EXTERNAL_OBJECTS =
@@ -461,7 +421,6 @@ bin/driving: CMakeFiles/driving.dir/src/Timer.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/interaction.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/operaciones.c.o
 bin/driving: CMakeFiles/driving.dir/src/SerialCommunication.cpp.o
-bin/driving: CMakeFiles/driving.dir/src/mastil.cpp.o
 bin/driving: CMakeFiles/driving.dir/build.make
 bin/driving: CMakeFiles/driving.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/driving"
@@ -480,7 +439,6 @@ CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/Timer.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/interaction.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/operaciones.c.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/SerialCommunication.cpp.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/mastil.cpp.o.requires
 .PHONY : CMakeFiles/driving.dir/requires
 
 CMakeFiles/driving.dir/clean:

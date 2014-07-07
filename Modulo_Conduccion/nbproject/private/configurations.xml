@@ -122,24 +122,8 @@
       </df>
       <df name="msg">
       </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="Modulo_Conduccion">
-              <in>bomba.h</in>
-              <in>mastil.h</in>
-              <in>messageCAN.h</in>
-              <in>nivelBomba.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
-      </df>
       <df name="src">
         <df name="Modulo_Conduccion">
-          <df name="msg">
-          </df>
         </df>
         <in>CANCommunication.cpp</in>
         <in>ConduccionCamionThread.cpp</in>

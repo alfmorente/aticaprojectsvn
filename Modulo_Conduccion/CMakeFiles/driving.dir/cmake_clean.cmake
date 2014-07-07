@@ -11,7 +11,6 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/driving.dir/src/interaction.cpp.o"
   "CMakeFiles/driving.dir/src/operaciones.c.o"
   "CMakeFiles/driving.dir/src/SerialCommunication.cpp.o"
-  "CMakeFiles/driving.dir/src/mastil.cpp.o"
   "bin/driving.pdb"
   "bin/driving"
 )

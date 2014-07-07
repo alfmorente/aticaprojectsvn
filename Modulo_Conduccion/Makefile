@@ -640,30 +640,6 @@ src/interaction.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/interaction.cpp.s
 .PHONY : src/interaction.cpp.s
 
-src/mastil.o: src/mastil.cpp.o
-.PHONY : src/mastil.o
-
-# target to build an object file
-src/mastil.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.o
-.PHONY : src/mastil.cpp.o
-
-src/mastil.i: src/mastil.cpp.i
-.PHONY : src/mastil.i
-
-# target to preprocess a source file
-src/mastil.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.i
-.PHONY : src/mastil.cpp.i
-
-src/mastil.s: src/mastil.cpp.s
-.PHONY : src/mastil.s
-
-# target to generate assembly for a file
-src/mastil.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/mastil.cpp.s
-.PHONY : src/mastil.cpp.s
-
 src/operaciones.o: src/operaciones.c.o
 .PHONY : src/operaciones.o
 
@@ -748,9 +724,6 @@ help:
 	@echo "... src/interaction.o"
 	@echo "... src/interaction.i"
 	@echo "... src/interaction.s"
-	@echo "... src/mastil.o"
-	@echo "... src/mastil.i"
-	@echo "... src/mastil.s"
 	@echo "... src/operaciones.o"
 	@echo "... src/operaciones.i"
 	@echo "... src/operaciones.s"

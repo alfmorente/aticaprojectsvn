@@ -6,23 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/mastil.cpp
-stdio.h
--
-iostream
--
-fstream
--
-termios.h
--
-unistd.h
--
-fcntl.h
--
-stdlib.h
--
-string.h
--
-../include/Modulo_Conduccion/mastil.hpp
-/home/atica/catkin_ws/src/Modulo_Conduccion/src/../include/Modulo_Conduccion/mastil.hpp
-
