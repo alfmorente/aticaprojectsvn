@@ -29,36 +29,29 @@ extern "C" {
 #include <stdlib.h> 
 #include <string.h>
 #include <complex>
+#include <stdint.h>
 
-typedef struct {
-    char idData;
-    float valueData;
-} DataStr;
+typedef uint16_t bit_order_16(uint16_t value);
+typedef uint8_t bit_order_8(uint8_t value);
 
-typedef struct {
-    char idCount;
-    DataStr *idData;
-} PayloadData;
+uint16_t straight_16(uint16_t);
 
-typedef struct {
-    char len[2];
-    char idFrame;
-    PayloadData payload;
-    char cs[2];
-} TraxMsg;
+uint8_t straight_8(uint8_t);
+
+uint16_t crc16(uint8_t  *message, int nBytes,bit_order_8 , bit_order_16 ,uint16_t , uint16_t );
+
+uint16_t crc16ccitt_xmodem(uint8_t  *, int );
 
 
 
-void sendToDevice(TraxMsg);
-void waitForAck(unsigned char);
-unsigned char calcChecksum(TraxMsg);
-bool isCheckSumOK(TraxMsg);
-TraxMsg kGetData();
+void sendToDevice();
+void read();
 
 
 float hexa2float(unsigned char * );
 double hexa2double(unsigned char * );
 int hexa2int(unsigned char * );
+char *shortToHexa(short);
 
 
 

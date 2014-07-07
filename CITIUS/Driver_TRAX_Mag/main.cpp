@@ -9,6 +9,8 @@
 
 using namespace std;
 
+
+
 /*
  * 
  */
@@ -27,14 +29,10 @@ int main(int argc, char** argv) {
 
         tcgetattr(canal, &oldtio);
         bzero(&newtio, sizeof (newtio));
-        newtio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
-        newtio.c_cflag &= ~(PARENB | PARODD | CSTOPB | CRTSCTS | CSIZE);      // shut off parity
-
+        newtio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
         newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
-
         newtio.c_oflag = 0;
-
-        newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG );
+        newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
 
         newtio.c_cc[VINTR] = 0; /* Ctrl-c */
         newtio.c_cc[VQUIT] = 0; /* Ctrl-\ */
@@ -57,32 +55,25 @@ int main(int argc, char** argv) {
         tcflush(canal, TCIFLUSH);
         tcsetattr(canal, TCSANOW, &newtio);
         
-        sendToDevice(kGetData());
-
+        sendToDevice();
+        
+        close(canal);
     }
     return 0;
 }
 
 
 
-void sendToDevice(TraxMsg msg) {
+void sendToDevice() {
     char *msg2send = (char *) malloc(5);
-    
-    // Bytecount
-   
-    msg2send[0] = msg.len[0];
-    msg2send[1] = msg.len[1];
 
-    // ID Frame
-    
-    msg2send[2] = msg.idFrame;    
-    
-    // Payload
-    
-    // CS
-    
-    msg2send[3] = msg.cs[0];
-    msg2send[4] = msg.cs[1];
+    msg2send[0] = 0x00;
+    msg2send[1] = 0x05;
+    msg2send[2] = 0x04;
+    unsigned short crc = crc16ccitt_xmodem((uint8_t *)msg2send,3);
+    char *crc16 = shortToHexa(crc);
+    msg2send[3] = crc16[0];
+    msg2send[4] = crc16[1];
         
    
     printf("Sent: ");
@@ -91,13 +82,12 @@ void sendToDevice(TraxMsg msg) {
     }
     printf("\n");
     
-    write(canal, msg2send, 5); // Enviamos el comando para que comience a enviarnos datos
-    write(canal, msg2send, 5); // Enviamos el comando para que comience a enviarnos datos
-    waitForAck(0);
+    printf("%d\n",write(canal, msg2send, 5)); 
+    read();
 
 }
 
-void waitForAck(unsigned char _mid) {
+void read() {
 
     unsigned char byte;
     bool ackFound = false;    
@@ -108,59 +98,11 @@ void waitForAck(unsigned char _mid) {
         if (read(canal, &byte, 1) > 0) {
             printf("%d: %02X ",cuentavieja+1, byte);
             cuentavieja++;
-            if(cuentavieja == 22)
+            if(cuentavieja == 11)
                 ackFound = true;
         }
         
     }
-}
-/*
-unsigned char calcChecksum(TraxMsg msg) {
-    unsigned char cs = 0;
-
-    cs += msg.bid;
-    cs += msg.mid;
-    cs += msg.len;
-
-    if (msg.len > 0) {
-        for (int i = 0; i < msg.len; i++) {
-            cs += msg.data[i];
-        }
-    }
-    return 0x00 - cs;
-}
-
-// Comprobacion del checksum
-
-bool isCheckSumOK(TraxMsg msg) {
-    unsigned char cs = 0;
-    cs += msg.bid;
-    cs += msg.mid;
-    cs += msg.len;
-
-    if (msg.len > 0) {
-        for (int i = 0; i < msg.len; i++) {
-            cs += msg.data[i];
-        }
-    }
-    cs += msg.cs;
-
-    return cs == 0x00;
-}
-
-// GetDeviceID
-*/
-TraxMsg kGetData() {
-    TraxMsg trxMsg;
-    trxMsg.len[0] = 0x00;
-    trxMsg.len[1] = 0x05;
-    
-    trxMsg.idFrame = 0x04;
-    
-    trxMsg.cs[0] = 0xBF;
-    trxMsg.cs[1] = 0x71;
-
-    return trxMsg;
 }
 
 float hexa2float(unsigned char * buffer){
@@ -211,4 +153,38 @@ double hexa2double(unsigned char * buffer){
     floatUnion.buffer[7] = buffer[0];
 
     return floatUnion.value;
+}
+
+char *shortToHexa(short s){
+    char *buf = (char *) malloc(2);
+    memcpy(buf,&s,2);
+    return buf;
+
+}
+
+
+uint16_t straight_16(uint16_t value) {
+    return value;
+}
+
+uint8_t straight_8(uint8_t value) {
+    return value;
+}
+
+uint16_t crc16(uint8_t  *message, int nBytes,bit_order_8 data_order, bit_order_16 remainder_order,uint16_t remainder, uint16_t polynomial) {
+    for (int byte = 0; byte < nBytes; ++byte) {
+        remainder ^= (data_order(message[byte]) << 8);
+        for (uint8_t bit = 8; bit > 0; --bit) {
+            if (remainder & 0x8000) {
+                remainder = (remainder << 1) ^ polynomial;
+            } else {
+                remainder = (remainder << 1);
+            }
+        }
+    }
+    return remainder_order(remainder);
+}
+
+uint16_t crc16ccitt_xmodem(uint8_t  *message, int nBytes) {
+    return crc16(message, nBytes, straight_8, straight_16, 0x0000, 0x1021);
 }
