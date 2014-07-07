@@ -30,20 +30,16 @@ extern "C" {
 #include <string.h>
 #include <complex>
 
-
 typedef struct {
-    unsigned char len;
-    unsigned char *payload;
-    unsigned char cs;
+    char *len;
+    char *payload;
+    char *cs;
 } TraxMsg;
 
 typedef struct {
     unsigned char idData;
     unsigned char Value;
 } PayloadData;
-
-
-
 
 void sendToDevice(TraxMsg);
 void waitForAck(unsigned char);

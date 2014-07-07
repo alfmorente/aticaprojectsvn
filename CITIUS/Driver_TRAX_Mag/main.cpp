@@ -14,7 +14,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-    char * serial_name = (char *) "/dev/ttyUSB3";
+    char * serial_name = (char *) "/dev/ttyUSB0";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
 
@@ -66,25 +66,21 @@ int main(int argc, char** argv) {
 
 
 void sendToDevice(TraxMsg msg) {
-    unsigned char *msg2send = (unsigned char *) malloc(msg.len);
+    char *msg2send = (char *) malloc(5);
 
-    msg2send[0] = msg.len;
-
-    if (msg.len > 0) {
-        for (int i = 0; i < msg.len; i++) {
-            msg2send[i + 2] = msg.payload[i];
-        }
-    }
-
-    msg2send[msg.len - 2] = msg.cs;
-    
+    msg2send[0] = msg.len[0];
+    msg2send[1] = msg.len[1];
+    msg2send[2] = msg.payload[0];
+    msg2send[3] = msg.cs[0];
+    msg2send[4] = msg.cs[1];
+   
     printf("Sent: ");
-    for(int i=0;i< (msg.len + 5);i++){
+    for(int i=0;i< 5;i++){
         printf("%02X ",msg2send[i]&0xFF);
     }
     printf("\n");
     
-    write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
+    write(canal, msg2send, 5); // Enviamos el comando para que comience a enviarnos datos
     waitForAck(0);
 
 }
@@ -99,13 +95,15 @@ void waitForAck(unsigned char _mid) {
 
         if (read(canal, &byte, 1) > 0) {
             printf("%02X ", byte);
+            printf("JEJEJE\n");
+            cuentavieja++;
+            if(cuentavieja == 10)
+                ackFound = true;
         }
-        cuentavieja++;
-        if(cuentavieja == 10)
-            ackFound = true;
+        
     }
 }
-
+/*
 unsigned char calcChecksum(TraxMsg msg) {
     unsigned char cs = 0;
 
@@ -140,15 +138,21 @@ bool isCheckSumOK(TraxMsg msg) {
 }
 
 // GetDeviceID
-
+*/
 TraxMsg kGetData() {
-    TraxMsg xsMsg;
-    xsMsg.pre = COMMAND_PRE;
-    xsMsg.bid = COMMAND_BID;
-    xsMsg.mid = COMMAND_MID_REQDID;
-    xsMsg.len = COMMAND_LEN_0;
-    xsMsg.cs = calcChecksum(xsMsg);
-    return xsMsg;
+    TraxMsg trxMsg;
+    trxMsg.len = (char *) malloc(2);
+    trxMsg.len[0] = 0x00;
+    trxMsg.len[1] = 0x05;
+    
+    trxMsg.payload = (char *) malloc(1);
+    trxMsg.payload[0] = 0x04;
+    
+    trxMsg.cs = (char *) malloc(2);
+    trxMsg.cs[0] = 0xBF;
+    trxMsg.cs[1] = 0x71;
+
+    return trxMsg;
 }
 
 float hexa2float(unsigned char * buffer){
