@@ -185,24 +185,26 @@ void rcvResponse(char idFrame) {
     
     unsigned char* recievedFrame;
     unsigned char* tamano;
+    short tam;
     //unsigned char byte;
     TraxMsg msgRcv;
     
     switch(idFrame) {
         
         case IDFRAME_KGETMODINFO:
-            recievedFrame = (unsigned char *) malloc(13);
             tamano = (unsigned char *) malloc(2);
             while (index < 13) {
-              
+
                 if (read(canal, &tamano[index], 1) > 0) {
                     index++;
-                    if (read(canal, &tamano[index++], 1) > 0) {
-                        short tam = hexa2short((char *) tamano);
+                    if (read(canal, &tamano[index], 1) > 0) {
+                        index++;
+                        tam = hexa2short((char *) tamano);
                         printf("Tamano: %d\n", tam);
-                        
+                        recievedFrame = (unsigned char *) malloc(tam);
                         while(index<tam){
                             if(read(canal, &byte, 1)>0){
+                               recievedFrame[index-2] = byte;
                                 printf("%02X ",byte);
                                 index++;
                             }
@@ -219,8 +221,11 @@ void rcvResponse(char idFrame) {
             printf("UNKNOWN FRAME\n");
             break;
     }
-    
+    /*for(int i = 0; i < tam-2; i++){
+        printf("%02X ",recievedFrame[i]);
+    }*/
     printf("\n");
+    
 }
 
 float hexa2float(unsigned char * buffer){
