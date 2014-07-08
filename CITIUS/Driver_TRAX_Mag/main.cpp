@@ -16,7 +16,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-    char * serial_name = (char *) "/dev/ttyUSB0";
+    char * serial_name = (char *) "/dev/ttyUSB1";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
 
@@ -55,54 +55,172 @@ int main(int argc, char** argv) {
         tcflush(canal, TCIFLUSH);
         tcsetattr(canal, TCSANOW, &newtio);
         
-        sendToDevice();
+        sendToDevice(kGetModInfo());
+        //sendToDevice(kSetDataComponents());
+        //sendToDevice(kGetData());
         
         close(canal);
     }
     return 0;
 }
 
+void sendToDevice(TraxMsg traxMsg) {
+    short len = hexa2short(traxMsg.byteCount);
+    
+    char *msg2send = (char *) malloc(len);
+    
+    int index = 0;
 
-
-void sendToDevice() {
-    char *msg2send = (char *) malloc(5);
-
-    msg2send[0] = 0x00;
-    msg2send[1] = 0x05;
-    msg2send[2] = 0x04;
-    unsigned short crc = crc16ccitt_xmodem((uint8_t *)msg2send,3);
-    char *crc16 = shortToHexa(crc);
-    msg2send[3] = crc16[0];
-    msg2send[4] = crc16[1];
+    msg2send[index++] = traxMsg.byteCount[0];
+    msg2send[index++] = traxMsg.byteCount[1];
+    
+    msg2send[index++] = traxMsg.packFrame.idFrame;
+    
+    switch(traxMsg.packFrame.idFrame){
+        case IDFRAME_KGETDATA:
+            break;
+        case IDFRAME_KSETDATACOMPONENTS:
+            msg2send[index++] = traxMsg.packFrame.payload.idCount;
+            for(int i = 0; i < traxMsg.packFrame.payload.idCount; i++){
+                msg2send[index++] = traxMsg.packFrame.payload.packetData[i].idValue;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    msg2send[index++] = traxMsg.crc[0];
+    msg2send[index++] = traxMsg.crc[1];
         
    
     printf("Sent: ");
-    for(int i=0;i< 5;i++){
+    for(int i=0;i< len;i++){
         printf("%02X ",msg2send[i]&0xFF);
     }
     printf("\n");
     
-    printf("%d\n",write(canal, msg2send, 5)); 
-    read();
+    printf("%d\n",write(canal, msg2send, len)); 
+            
+    rcvResponse(traxMsg.packFrame.idFrame);
 
 }
 
-void read() {
+TraxMsg kGetModInfo(){
+    TraxMsg retTraxMsg;
+    
+    retTraxMsg.byteCount = shortToHexa(5);
+    
+    retTraxMsg.packFrame.idFrame = IDFRAME_KGETMODINFO;
+    
+    char *frame = (char *)malloc(3);
+    frame[0] = retTraxMsg.byteCount[0]; frame[1] = retTraxMsg.byteCount[1]; frame[2] = retTraxMsg.packFrame.idFrame;
+    
+    retTraxMsg.crc = shortToHexa(crc16ccitt_xmodem((uint8_t *)frame,3));
+    
+    return retTraxMsg;
+}
 
+TraxMsg kGetData(){
+    TraxMsg retTraxMsg;
+    retTraxMsg.byteCount = shortToHexa(5);
+    retTraxMsg.packFrame.idFrame = IDFRAME_KGETDATA;
+    char *frame = (char *)malloc(3);
+    frame[0] = retTraxMsg.byteCount[0]; frame[1] = retTraxMsg.byteCount[1]; frame[2] = retTraxMsg.packFrame.idFrame;
+    retTraxMsg.crc = shortToHexa(crc16ccitt_xmodem((uint8_t *)frame,3));
+    return retTraxMsg;
+}
+
+TraxMsg kSetDataComponents(){
+    TraxMsg retTraxMsg;
+    retTraxMsg.byteCount = shortToHexa(10);
+    retTraxMsg.packFrame.idFrame = IDFRAME_KSETDATACOMPONENTS;
+
+    retTraxMsg.packFrame.payload.idCount = 0x04;
+    retTraxMsg.packFrame.payload.packetData = (PacketData *)malloc(retTraxMsg.packFrame.payload.idCount);
+    
+    retTraxMsg.packFrame.payload.packetData[0].idValue = 0x05;
+    retTraxMsg.packFrame.payload.packetData[1].idValue = 0x18;
+    retTraxMsg.packFrame.payload.packetData[2].idValue = 0x19;
+    retTraxMsg.packFrame.payload.packetData[2].idValue = 0x4F;
+    
+    char *frame = (char *)malloc(3 + retTraxMsg.packFrame.payload.idCount);
+    
+    frame[0] = retTraxMsg.byteCount[0];
+    frame[1] = retTraxMsg.byteCount[1];
+    frame[2] = retTraxMsg.packFrame.idFrame = IDFRAME_KSETDATACOMPONENTS;
+    frame[3] = retTraxMsg.packFrame.payload.idCount = 0x04;
+    frame[4] = retTraxMsg.packFrame.payload.packetData[0].idValue;
+    frame[5] = retTraxMsg.packFrame.payload.packetData[1].idValue;
+    frame[6] = retTraxMsg.packFrame.payload.packetData[2].idValue;
+    frame[7] = retTraxMsg.packFrame.payload.packetData[3].idValue;
+    
+    retTraxMsg.crc = shortToHexa(crc16ccitt_xmodem((uint8_t *)frame,8));
+    
+    return retTraxMsg;
+}
+
+
+void rcvResponse(char idFrame) {
+    bool endRcv = false;
     unsigned char byte;
-    bool ackFound = false;    
-    int cuentavieja = 0;
-
-    while (!ackFound) {
-
-        if (read(canal, &byte, 1) > 0) {
-            printf("%d: %02X ",cuentavieja+1, byte);
-            cuentavieja++;
-            if(cuentavieja == 11)
-                ackFound = true;
-        }
+    int index = 0;
+/*
+    while (!endRcv) {
         
+        if(read(canal, &msgRcv.byteCount, 2) > 0){
+            
+            short a = hexa2short(msgRcv.byteCount);
+            
+            if(read(canal, &msgRcv.packFrame.idFrame,1)>0){
+                
+                printf("leida trama: %02X\n",msgRcv.packFrame.idFrame);
+                
+                endRcv = true;
+            }
+        }
     }
+    printf("\n-----\n");
+ * */
+    printf("Lectura: %d\n", idFrame);
+    
+    unsigned char* recievedFrame;
+    unsigned char* tamano;
+    //unsigned char byte;
+    TraxMsg msgRcv;
+    
+    switch(idFrame) {
+        
+        case IDFRAME_KGETMODINFO:
+            recievedFrame = (unsigned char *) malloc(13);
+            tamano = (unsigned char *) malloc(2);
+            while (index < 13) {
+              
+                if (read(canal, &tamano[index], 1) > 0) {
+                    index++;
+                    if (read(canal, &tamano[index++], 1) > 0) {
+                        short tam = hexa2short((char *) tamano);
+                        printf("Tamano: %d\n", tam);
+                        
+                        while(index<tam){
+                            if(read(canal, &byte, 1)>0){
+                                printf("%02X ",byte);
+                                index++;
+                            }
+                        }
+                        
+                    }
+                }
+                
+            }
+            
+            break;
+            
+        default:
+            printf("UNKNOWN FRAME\n");
+            break;
+    }
+    
+    printf("\n");
 }
 
 float hexa2float(unsigned char * buffer){
@@ -136,7 +254,19 @@ int hexa2int(unsigned char * buffer){
 
     return floatUnion.value;
 }
+short hexa2short(char buffer[2]){
+    union
+    {
+        short value;
+        unsigned char buffer[2];
 
+    }shortUnion;
+
+    shortUnion.buffer[0] = buffer[1];
+    shortUnion.buffer[1] = buffer[0];
+
+    return shortUnion.value;
+}
 double hexa2double(unsigned char * buffer){
     union{
         double value;
@@ -154,10 +284,12 @@ double hexa2double(unsigned char * buffer){
 
     return floatUnion.value;
 }
-
 char *shortToHexa(short s){
     char *buf = (char *) malloc(2);
     memcpy(buf,&s,2);
+    char aux = buf[1];
+    buf[1] = buf[0];
+    buf[0] = aux;
     return buf;
 
 }
