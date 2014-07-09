@@ -66,8 +66,8 @@ typedef struct {
 } outPutMode;
 
 typedef struct {
-  unsigned short idGroup;
-  unsigned short idSignal;
+  unsigned char idGroup;
+  unsigned char idSignal;
   unsigned char len;
   unsigned char *data;
 } dataPacketMT2;
@@ -76,20 +76,20 @@ typedef struct {
 void sendToDevice(xsensMsg);
 void waitForAck(unsigned char);
 unsigned char calcChecksum(xsensMsg);
-bool isCheckSumOK(xsensMsg);
-xsensMsg reqDeviceID();
+bool isCheckSumOK(unsigned char*, unsigned char);
+
 xsensMsg goToMeasurement();
 xsensMsg goToConfig();
-xsensMsg setOutPutMode();
-xsensMsg setOutPutSettings();
-xsensMsg setOutPutSkipFactor();
 xsensMsg setOutPutConfiguration();
-xsensMsg setPeriod();
+
 void streamDataMng();
+
+void frameMng(unsigned char*, unsigned char len);
 void packetMng(dataPacketMT2);
 
+
 float hexa2float(unsigned char * );
-double hexa2double(unsigned char * );
+float hexa2double(unsigned char * );
 int hexa2int(unsigned char * );
 float parseFixPointFormat(unsigned char *);
 
