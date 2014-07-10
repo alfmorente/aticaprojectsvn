@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation
 
@@ -154,48 +157,11 @@ CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o.provides: CMakeFi
 
 CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o.provides.build: CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o
 
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: CMakeFiles/PositionOrientation.dir/flags.make
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: src/TraxAHRSDriver.cpp
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: manifest.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSDriver.cpp
-
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSDriver.cpp > CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.i
-
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSDriver.cpp -o CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.s
-
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.requires:
-.PHONY : CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.requires
-
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.provides: CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.requires
-	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.provides.build
-.PHONY : CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.provides
-
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.provides.build: CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o
-
 # Object files for target PositionOrientation
 PositionOrientation_OBJECTS = \
 "CMakeFiles/PositionOrientation.dir/src/main.cpp.o" \
 "CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o" \
-"CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o" \
-"CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o"
+"CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o"
 
 # External object files for target PositionOrientation
 PositionOrientation_EXTERNAL_OBJECTS =
@@ -203,7 +169,6 @@ PositionOrientation_EXTERNAL_OBJECTS =
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/main.cpp.o
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o
-bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/build.make
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/PositionOrientation"
@@ -216,7 +181,6 @@ CMakeFiles/PositionOrientation.dir/build: bin/PositionOrientation
 CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/main.cpp.o.requires
 CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o.requires
 CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o.requires
-CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o.requires
 .PHONY : CMakeFiles/PositionOrientation.dir/requires
 
 CMakeFiles/PositionOrientation.dir/clean:

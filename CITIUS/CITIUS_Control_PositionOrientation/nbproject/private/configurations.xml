@@ -24,10 +24,6 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
-          <df name="CMakeFiles">
-            <df name="cmTryCompileExec.dir">
-            </df>
-          </df>
         </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
@@ -106,7 +102,6 @@
         <df name="CITIUS_Control_PositionOrientation">
         </df>
         <in>RosNose_PositionOrientation.h</in>
-        <in>TraxAHRSDriver.h</in>
         <in>XSensMTi700Driver.h</in>
         <in>constant.h</in>
       </df>
@@ -133,7 +128,6 @@
           </df>
         </df>
         <in>RosNodePositionOrientation.cpp</in>
-        <in>TraxAHRSDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
         <in>main.cpp</in>
       </df>

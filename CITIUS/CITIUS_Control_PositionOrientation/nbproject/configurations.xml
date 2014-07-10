@@ -11,12 +11,10 @@
         </df>
       </df>
       <df name="include">
-        <in>TraxAHRSDriver.h</in>
         <in>XSensMTi700Driver.h</in>
       </df>
       <df name="src">
         <in>RosNodePositionOrientation.cpp</in>
-        <in>TraxAHRSDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -215,13 +213,9 @@
           </undefinedList>
         </ccTool>
       </folder>
-      <item path="include/TraxAHRSDriver.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/XSensMTi700Driver.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/RosNodePositionOrientation.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/TraxAHRSDriver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/XSensMTi700Driver.cpp" ex="false" tool="1" flavor2="0">
       </item>

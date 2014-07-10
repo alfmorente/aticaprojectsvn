@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNodePositionOrientation.cpp
-ros/node_handle.h
--
-RosNose_PositionOrientation.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
-XSensMTi700Driver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/main.cpp
 cstdlib
 -
@@ -647,10 +637,6 @@ constant.h
 include/constant.h
 XSensMTi700Driver.h
 include/XSensMTi700Driver.h
-TraxAHRSDriver.h
-include/TraxAHRSDriver.h
-
-include/TraxAHRSDriver.h
 
 include/XSensMTi700Driver.h
 iostream

@@ -85,8 +85,8 @@ typedef struct {
 
 // Paquete de datos MTData2 (XSens Low level protocol)
 typedef struct {
-  unsigned short idGroup;
-  unsigned short idSignal;
+  unsigned char idGroup;
+  unsigned char idSignal;
   unsigned char len;
   unsigned char *data;
 } dataPacketMT2;
@@ -106,7 +106,7 @@ private:
   void waitForAck(unsigned char);
   
   unsigned char calcChecksum(XsensMsg);
-  bool isCheckSumOK(XsensMsg);
+  bool isCheckSumOK(unsigned char*, unsigned char);
   
   XsensMsg goToConfig();
   XsensMsg goToMeasurement();
@@ -131,5 +131,6 @@ public:
   
   // Retorno de estructura de datos
   GPSINSInfo getInfo();
+  bool frameMng(unsigned char*, unsigned char);
 };
 

@@ -50,14 +50,10 @@ CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/RosNose_PositionOrientation.h
- include/TraxAHRSDriver.h
  include/XSensMTi700Driver.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
  srv_gen/cpp/include/CITIUS_Control_PositionOrientation/srv_nodeStatus.h
-CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o
- /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSDriver.cpp
- include/TraxAHRSDriver.h
 CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
  include/XSensMTi700Driver.h
@@ -118,7 +114,6 @@ CMakeFiles/PositionOrientation.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/RosNose_PositionOrientation.h
- include/TraxAHRSDriver.h
  include/XSensMTi700Driver.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h

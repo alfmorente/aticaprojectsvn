@@ -72,6 +72,7 @@ bool XSensMTi700Driver::connectToDevice() {
         tcflush(canal, TCIFLUSH);
         tcsetattr(canal, TCSANOW, &newtio);
     }
+    
     return true;
 }
 
@@ -80,6 +81,7 @@ bool XSensMTi700Driver::connectToDevice() {
  ******************************************************************************/
 
 void XSensMTi700Driver::disconnectDevice() {
+    
     close(canal);
 }
 
@@ -91,13 +93,10 @@ void XSensMTi700Driver::configureDevice(){
     
     // Modo configuracion
     sendToDevice(goToConfig());
-    
     // Configuracion de dispositivo
     sendToDevice(setOutPutConfiguration());
-
     // Modo stream de medidas
     sendToDevice(goToMeasurement());
-
 }
 
 /*******************************************************************************
@@ -105,62 +104,48 @@ void XSensMTi700Driver::configureDevice(){
  ******************************************************************************/
 
 bool XSensMTi700Driver::getData() {
-    XsensMsg xsMsg;
-    short rcvdBytes;
+    int index = 0;
+    unsigned char * header = (unsigned char *) malloc(3);
+    unsigned char * frame;
+    unsigned char byte;
+    unsigned char len;
+    bool dataFound = false;
     
-    if (read(canal, &xsMsg.pre, 1) > 0) {
+    while(!dataFound){
+        // HEADER (PRE + BID + MID)
+        if(read(canal,&byte,1)>0){
+            header[index++] = byte;
+        }
 
-        // PRE
-        if (xsMsg.pre == COMMAND_PRE) {
+        if(index == 3){
+            
+            // LEN
+            if(read(canal,&len,1)>0){
+                frame = (unsigned char *) malloc(len);
+                frame[0] = header[0];
+                frame[1] = header[1];
+                frame[2] = header[2];
+                frame[3] = len;
+                index++;
 
-            rcvdBytes = read(canal, &xsMsg.bid, 1);
-
-            // BID
-            if (xsMsg.bid == COMMAND_BID) {
-                rcvdBytes = read(canal, &xsMsg.mid, 1);
-                // MID
-                if (xsMsg.mid == (COMMAND_MID_MTDATA2)) {
-
-                    //LEN
-                    rcvdBytes = read(canal, &xsMsg.len, 1);
-
-                    // DATA
-                    xsMsg.data = (unsigned char*) malloc(xsMsg.len + 1);
-                    for (int i = 0; i < xsMsg.len; i++) {
-                        rcvdBytes = read(canal, &xsMsg.data[i], 1);
-                    }
-
-                    // CS
-                    rcvdBytes = read(canal, &xsMsg.cs, 1);
-
-                    if (!isCheckSumOK(xsMsg)) printf("ERROR in MTData2 ACK reception\n");
-
-                    dataPacketMT2 dataPacket;
-                    int i = 0;
-
-                    while (i < xsMsg.len) {
-
-                        //unsigned char * aux = (unsigned char *)malloc(2);
-
-                        dataPacket.idGroup = xsMsg.data[i++];
-                        dataPacket.idSignal = xsMsg.data[i++];
-                        dataPacket.len = xsMsg.data[i++];
-
-                        dataPacket.data = (unsigned char *) malloc(dataPacket.len);
-
-                        for (int j = 0; j < dataPacket.len; j++) {
-
-                            dataPacket.data[j] = xsMsg.data[i++];
-                        }
-                        packetMng(dataPacket);
-                        return true;
-
+                // DATA + CS
+                while (index < len + 5) {
+                    if (read(canal, &byte, 1) > 0) {
+                        frame[index++] = byte;
                     }
                 }
+
+                index = 0;
+                if (frameMng(frame, len + 5)){
+                    
+                    dataFound = true;
+                }else{
+                    return false;
+                } 
             }
         }
     }
-    return false;
+    return true;
 }
 
 /*******************************************************************************
@@ -248,18 +233,13 @@ unsigned char XSensMTi700Driver::calcChecksum(XsensMsg msg) {
     return 0x00 - cs;
 }
 
-bool XSensMTi700Driver::isCheckSumOK(XsensMsg msg) {
+bool XSensMTi700Driver::isCheckSumOK(unsigned char *frame, unsigned char len) {
     unsigned char cs = 0;
-    cs += msg.bid;
-    cs += msg.mid;
-    cs += msg.len;
 
-    if (msg.len > 0) {
-        for (int i = 0; i < msg.len; i++) {
-            cs += msg.data[i];
-        }
+    for(int i = 1; i < len; i++){
+        cs+=frame[i];
     }
-    cs += msg.cs;
+
     return cs == 0x00;
 }
 
@@ -269,104 +249,59 @@ bool XSensMTi700Driver::isCheckSumOK(XsensMsg msg) {
 
 void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
     unsigned char *msg2send = (unsigned char *) malloc(msg.len + 5);
-
     msg2send[0] = msg.pre;
     msg2send[1] = msg.bid;
     msg2send[2] = msg.mid;
     msg2send[3] = msg.len;
-
     if (msg.len > 0) {
         for (int i = 0; i < msg.len; i++) {
             msg2send[i + 4] = msg.data[i];
         }
     }
-
     msg2send[msg.len + 4] = msg.cs;
-    short writtenBytes = write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
+    write(canal, msg2send, msg.len + 5); // Enviamos el comando para que comience a enviarnos datos
     waitForAck(msg.mid);
 
 }
 
 void XSensMTi700Driver::waitForAck(unsigned char _mid) {
-
+    int index = 0;
+    unsigned char * header = (unsigned char *) malloc(3);
+    unsigned char * frame;
+    unsigned char byte;
+    unsigned char len;
     bool ackFound = false;
-    XsensMsg xsMsg;
-    short rcvdBytes;
+    
+    while (!ackFound){
+        
+        // HEADER (PRE + BID + MID)
+        if(read(canal,&byte,1)>0){
+            header[index] = byte;
+            index++;
+        }
 
-    while (!ackFound) {
-
-        if (read(canal, &xsMsg.pre, 1) > 0) {
-
-            // PRE
-            if (xsMsg.pre == COMMAND_PRE) {
+        if(index == 3){
+            
+            // LEN
+            if(read(canal,&len,1)>0){
+                frame = (unsigned char *) malloc(len);
+                frame[0] = header[0];
+                frame[1] = header[1];
+                frame[2] = header[2];
                 
-                rcvdBytes = read(canal, &xsMsg.bid, 1);
-
-                // BID
-                if (xsMsg.bid == COMMAND_BID) {
-                    
-                    rcvdBytes = read(canal, &xsMsg.mid, 1);
-                    
-                    // MID
-                    switch (xsMsg.mid) {
-                        case (COMMAND_MID_GOTOCONFIG + 1):
-
-                            //LEN
-                            rcvdBytes = read(canal, &xsMsg.len, 1);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                rcvdBytes = read(canal, &xsMsg.data[i], 1);
-                            }                            
-                            // CS
-                            rcvdBytes = read(canal, &xsMsg.cs, 1);
-                            
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                            }else{
-                                printf("ERROR in GotoConfig ACK reception\n");
-                            }
-                            break;
-                        
-                        case (COMMAND_MID_GOTOMEASUREMENT + 1):
-                            // LEN
-                            rcvdBytes = read(canal, &xsMsg.len, 1);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                rcvdBytes = read(canal, &xsMsg.data[i], 1);
-                            }
-                            
-                            // CS
-                            rcvdBytes = read(canal, &xsMsg.cs, 1);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                            }else{
-                                printf("ERROR in GoToMeasurement ACK reception\n");
-                            }
-                            break;
-                        
-                        case (COMMAND_MID_SETOUTPUTCONFIGURATION + 1):
-                            // LEN
-                            rcvdBytes = read(canal, &xsMsg.len, 1);
-                            
-                            // DATA
-                            xsMsg.data = (unsigned char*) malloc(xsMsg.len+1);
-                            for (int i = 0; i < xsMsg.len; i++) {
-                                rcvdBytes = read(canal, &xsMsg.data[i], 1);
-                            }
-                            
-                            // CS
-                            rcvdBytes = read(canal, &xsMsg.cs, 1);
-                            if (isCheckSumOK(xsMsg)) {
-                                ackFound = true;
-                            }else{
-                                printf("ERROR in SetOutPutConfiguration ACK reception\n");
-                            }
-                            break;
+                frame[3] = len;
+                index++;
+                // DATA + CS
+                while (index < len + 5) {
+                    if (read(canal, &byte, 1) > 0) {
+                        frame[index] = byte;
+                        index++;
                     }
+                }
+
+                index = 0;
+                if (isCheckSumOK(frame, len + 5) && (_mid + 1 == frame[2])) {
+                    ackFound = true;
                 }
             }
         }
@@ -462,18 +397,16 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     break;
                 case 0x30: // Euler Angles
                     //printf("   Euler Angles %d bytes\n", dataPacket.len);
-                    auxBuf = (unsigned char *)malloc(8);
-                    for(int i = 0; i < 8; i++) auxBuf[i]=dataPacket.data[i];
+                    auxBuf = (unsigned char *)malloc(4);
+                    for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
                     //printf("   Roll: %3.8lf º\n", hexa2double(auxBuf));
                     posOriInfo.roll = hexa2float(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(8);
-                    for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
+                    for(int i = 4; i < 8; i++) auxBuf[i-4]=dataPacket.data[i];
                     //printf("   Pitch: %3.8lf º\n", hexa2double(auxBuf));
                     posOriInfo.pitch = hexa2float(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(8);
-                    for(int i = 16; i < 24; i++) auxBuf[i-16]=dataPacket.data[i];
+                    for(int i = 8; i < 12; i++) auxBuf[i-8]=dataPacket.data[i];
                     //printf("   Yaw: %3.8lf º\n", hexa2double(auxBuf));
                     posOriInfo.yaw = hexa2float(auxBuf);
                     
@@ -767,3 +700,32 @@ double XSensMTi700Driver::hexa2double(unsigned char * buffer){
  ******************************************************************************/
 
 GPSINSInfo XSensMTi700Driver::getInfo(){ return posOriInfo; }
+
+bool XSensMTi700Driver::frameMng(unsigned char* frame, unsigned char len) {
+    if (frame[0] == COMMAND_PRE) {
+        if (frame[1] == COMMAND_BID) {
+            if (frame[2] == COMMAND_MID_MTDATA2) {
+                if (isCheckSumOK(frame, len)) {
+                    
+                    short index = 4;
+                    while (index < len - 1) {
+                        dataPacketMT2 pMT2;
+                        pMT2.idGroup = frame[index++];
+                        pMT2.idSignal = frame[index++];
+                        pMT2.len = frame[index++];
+                        
+                        pMT2.data = (unsigned char *) malloc(pMT2.len);
+                        for (int i = 0; i < pMT2.len; i++) {
+                            pMT2.data[i] = frame[index++];
+                        }
+                        packetMng(pMT2);
+                    }
+                    return true;
+                } else {
+                    printf("ERROR. Frame discarted\n");
+                }
+            }
+        }
+    }
+    return false;
+}

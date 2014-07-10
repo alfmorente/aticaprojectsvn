@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation
 
@@ -498,30 +501,6 @@ src/RosNodePositionOrientation.cpp.s:
 	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.s
 .PHONY : src/RosNodePositionOrientation.cpp.s
 
-src/TraxAHRSDriver.o: src/TraxAHRSDriver.cpp.o
-.PHONY : src/TraxAHRSDriver.o
-
-# target to build an object file
-src/TraxAHRSDriver.cpp.o:
-	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.o
-.PHONY : src/TraxAHRSDriver.cpp.o
-
-src/TraxAHRSDriver.i: src/TraxAHRSDriver.cpp.i
-.PHONY : src/TraxAHRSDriver.i
-
-# target to preprocess a source file
-src/TraxAHRSDriver.cpp.i:
-	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.i
-.PHONY : src/TraxAHRSDriver.cpp.i
-
-src/TraxAHRSDriver.s: src/TraxAHRSDriver.cpp.s
-.PHONY : src/TraxAHRSDriver.s
-
-# target to generate assembly for a file
-src/TraxAHRSDriver.cpp.s:
-	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSDriver.cpp.s
-.PHONY : src/TraxAHRSDriver.cpp.s
-
 src/XSensMTi700Driver.o: src/XSensMTi700Driver.cpp.o
 .PHONY : src/XSensMTi700Driver.o
 
@@ -611,9 +590,6 @@ help:
 	@echo "... src/RosNodePositionOrientation.o"
 	@echo "... src/RosNodePositionOrientation.i"
 	@echo "... src/RosNodePositionOrientation.s"
-	@echo "... src/TraxAHRSDriver.o"
-	@echo "... src/TraxAHRSDriver.i"
-	@echo "... src/TraxAHRSDriver.s"
 	@echo "... src/XSensMTi700Driver.o"
 	@echo "... src/XSensMTi700Driver.i"
 	@echo "... src/XSensMTi700Driver.s"
