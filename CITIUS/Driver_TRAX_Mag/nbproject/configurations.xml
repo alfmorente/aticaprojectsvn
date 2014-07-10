@@ -5,6 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>constant.h</itemPath>
+      <itemPath>conversionTypes.h</itemPath>
+      <itemPath>crc16calc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,6 +15,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>conversionTypes.cpp</itemPath>
+      <itemPath>crc16calc.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -39,6 +43,14 @@
       </compileType>
       <item path="constant.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="conversionTypes.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="conversionTypes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="crc16calc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="crc16calc.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -63,6 +75,14 @@
         </asmTool>
       </compileType>
       <item path="constant.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="conversionTypes.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="conversionTypes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="crc16calc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="crc16calc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

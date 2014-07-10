@@ -21,11 +21,25 @@ extern "C" {
 
 #endif	/* CONSTANT_H */
 
+// ID Frame
 #define IDFRAME_KGETMODINFO 0x01
+#define IDFRAME_KGETMODINFORESP 0x02
 #define IDFRAME_KSETDATACOMPONENTS 0x03
 #define IDFRAME_KGETDATA 0x04
 #define IDFRAME_KGETDATARESP 0x05
 
+// ID MEASURE
+
+#define IDMEASURE_HEADING 0x05
+#define IDMEASURE_PITCH 0x18
+#define IDMEASURE_ROLL 0x19
+#define IDMEASURE_HEADING_STATUS 0x4F
+#define IDMEASURE_ACCX 0x15
+#define IDMEASURE_ACCY 0x16
+#define IDMEASURE_ACCZ 0x17
+#define IDMEASURE_GYRX 0x4A
+#define IDMEASURE_GYRY 0x4B
+#define IDMEASURE_GYRZ 0x4C
 
 #include <iostream>
 #include <stdio.h>
@@ -35,43 +49,36 @@ extern "C" {
 #include <stdlib.h> 
 #include <string.h>
 #include <complex>
-#include <stdint.h>
+#include "crc16calc.h"
+#include "conversionTypes.h"
 
-typedef struct{
-    char idValue;
-    char *value;
-}PacketData;
+typedef struct {
+  char idFrame;
+  char *payload;
+} PacketFrame;
 
-typedef struct{
-    char idCount;
-    PacketData *packetData;
-}Payload;
+typedef struct {
+  char *byteCount;
+  PacketFrame packFrame;
+  char *crc;
+  bool checked;
+} TraxMsg;
 
-typedef struct{
-    char idFrame;
-    Payload payload;
-}PacketFrame;
+typedef struct {
+  char heading_status;
+  float heading;
+  float pitch;
+  float roll;
+  float accX;
+  float accY;
+  float accZ;
+  float gyrX;
+  float gyrY;
+  float gyrZ;
+} TraxMeasurement;
 
-typedef struct{
-    char *byteCount;
-    PacketFrame packFrame;
-    char *crc;
-}TraxMsg;
-
-
-
-
-
-typedef uint16_t bit_order_16(uint16_t value);
-typedef uint8_t bit_order_8(uint8_t value);
-
-uint16_t straight_16(uint16_t);
-
-uint8_t straight_8(uint8_t);
-
-uint16_t crc16(uint8_t  *message, int nBytes,bit_order_8 , bit_order_16 ,uint16_t , uint16_t );
-
-uint16_t crc16ccitt_xmodem(uint8_t  *, int );
+struct termios newtio, oldtio;
+int canal;
 
 
 TraxMsg kGetModInfo();
@@ -80,17 +87,12 @@ TraxMsg kSetDataComponents();
 
 
 void sendToDevice(TraxMsg);
-void rcvResponse(char);
+void rcvResponse();
+TraxMsg mngPacket(unsigned char*);
 
-
-float hexa2float(unsigned char * );
-double hexa2double(unsigned char * );
-int hexa2int(unsigned char * );
-short hexa2short(char[2]);
-char *shortToHexa(short);
+TraxMeasurement unpackPayload(char *);
 
 
 
-struct termios newtio, oldtio;
-int canal;
+
 
