@@ -153,19 +153,6 @@ PositionOrientation/fast:
 .PHONY : PositionOrientation/fast
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation
-
-# Build rule for target.
-ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation
-.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation
-
-# fast build rule for target.
-ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation.dir/build
-.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -205,19 +192,6 @@ ROSBUILD_genmsg_py/fast:
 .PHONY : ROSBUILD_genmsg_py/fast
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation
-
-# Build rule for target.
-ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation
-.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation
-
-# fast build rule for target.
-ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation.dir/build
-.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -255,19 +229,6 @@ ROSBUILD_gensrv_py: cmake_check_build_system
 ROSBUILD_gensrv_py/fast:
 	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
 .PHONY : ROSBUILD_gensrv_py/fast
-
-#=============================================================================
-# Target rules for targets named ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation
-
-# Build rule for target.
-ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation
-.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation
-
-# fast build rule for target.
-ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation.dir/build
-.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation/fast
 
 #=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
@@ -540,6 +501,30 @@ src/RosNodePositionOrientation.cpp.s:
 	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.s
 .PHONY : src/RosNodePositionOrientation.cpp.s
 
+src/TraxAHRSModuleDriver.o: src/TraxAHRSModuleDriver.cpp.o
+.PHONY : src/TraxAHRSModuleDriver.o
+
+# target to build an object file
+src/TraxAHRSModuleDriver.cpp.o:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o
+.PHONY : src/TraxAHRSModuleDriver.cpp.o
+
+src/TraxAHRSModuleDriver.i: src/TraxAHRSModuleDriver.cpp.i
+.PHONY : src/TraxAHRSModuleDriver.i
+
+# target to preprocess a source file
+src/TraxAHRSModuleDriver.cpp.i:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.i
+.PHONY : src/TraxAHRSModuleDriver.cpp.i
+
+src/TraxAHRSModuleDriver.s: src/TraxAHRSModuleDriver.cpp.s
+.PHONY : src/TraxAHRSModuleDriver.s
+
+# target to generate assembly for a file
+src/TraxAHRSModuleDriver.cpp.s:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.s
+.PHONY : src/TraxAHRSModuleDriver.cpp.s
+
 src/XSensMTi700Driver.o: src/XSensMTi700Driver.cpp.o
 .PHONY : src/XSensMTi700Driver.o
 
@@ -563,6 +548,54 @@ src/XSensMTi700Driver.s: src/XSensMTi700Driver.cpp.s
 src/XSensMTi700Driver.cpp.s:
 	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.s
 .PHONY : src/XSensMTi700Driver.cpp.s
+
+src/conversionTypes.o: src/conversionTypes.cpp.o
+.PHONY : src/conversionTypes.o
+
+# target to build an object file
+src/conversionTypes.cpp.o:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/conversionTypes.cpp.o
+.PHONY : src/conversionTypes.cpp.o
+
+src/conversionTypes.i: src/conversionTypes.cpp.i
+.PHONY : src/conversionTypes.i
+
+# target to preprocess a source file
+src/conversionTypes.cpp.i:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/conversionTypes.cpp.i
+.PHONY : src/conversionTypes.cpp.i
+
+src/conversionTypes.s: src/conversionTypes.cpp.s
+.PHONY : src/conversionTypes.s
+
+# target to generate assembly for a file
+src/conversionTypes.cpp.s:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/conversionTypes.cpp.s
+.PHONY : src/conversionTypes.cpp.s
+
+src/crc16calc.o: src/crc16calc.cpp.o
+.PHONY : src/crc16calc.o
+
+# target to build an object file
+src/crc16calc.cpp.o:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o
+.PHONY : src/crc16calc.cpp.o
+
+src/crc16calc.i: src/crc16calc.cpp.i
+.PHONY : src/crc16calc.i
+
+# target to preprocess a source file
+src/crc16calc.cpp.i:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.i
+.PHONY : src/crc16calc.cpp.i
+
+src/crc16calc.s: src/crc16calc.cpp.s
+.PHONY : src/crc16calc.s
+
+# target to generate assembly for a file
+src/crc16calc.cpp.s:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.s
+.PHONY : src/crc16calc.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -595,15 +628,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... PositionOrientation"
-	@echo "... ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_genmsg_py"
-	@echo "... ROSBUILD_genmsg_roseus_CITIUS_Control_PositionOrientation"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... ROSBUILD_gensrv_py"
-	@echo "... ROSBUILD_gensrv_roseus_CITIUS_Control_PositionOrientation"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... doxygen"
@@ -632,9 +662,18 @@ help:
 	@echo "... src/RosNodePositionOrientation.o"
 	@echo "... src/RosNodePositionOrientation.i"
 	@echo "... src/RosNodePositionOrientation.s"
+	@echo "... src/TraxAHRSModuleDriver.o"
+	@echo "... src/TraxAHRSModuleDriver.i"
+	@echo "... src/TraxAHRSModuleDriver.s"
 	@echo "... src/XSensMTi700Driver.o"
 	@echo "... src/XSensMTi700Driver.i"
 	@echo "... src/XSensMTi700Driver.s"
+	@echo "... src/conversionTypes.o"
+	@echo "... src/conversionTypes.i"
+	@echo "... src/conversionTypes.s"
+	@echo "... src/crc16calc.o"
+	@echo "... src/crc16calc.i"
+	@echo "... src/crc16calc.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

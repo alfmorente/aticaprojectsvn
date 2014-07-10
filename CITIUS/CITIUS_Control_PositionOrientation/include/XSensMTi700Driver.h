@@ -82,7 +82,7 @@ typedef struct {
     unsigned char bid;
     unsigned char mid;
     unsigned char len;
-    unsigned char *data;
+    std::vector<unsigned char> data;
     unsigned char cs;
 } XsensMsg;
 
@@ -91,7 +91,7 @@ typedef struct {
   unsigned char idGroup;
   unsigned char idSignal;
   unsigned char len;
-  unsigned char *data;
+  std::vector<unsigned char> data;
 } dataPacketMT2;
 
 class XSensMTi700Driver {
@@ -115,12 +115,13 @@ private:
   XsensMsg goToMeasurement();
   XsensMsg setOutPutConfiguration();
   
-  float hexa2float(unsigned char *);
-  double hexa2double(unsigned char *);
-  int hexa2int(unsigned char *);
+  float hexa2float(std::vector<unsigned char>);
+  double hexa2double(std::vector<unsigned char>);
+  int hexa2int(std::vector<unsigned char>);
   
   // Rutina de recepcion de datos (thread)
   void packetMng(dataPacketMT2);
+  bool frameMng(std::vector<unsigned char>);
   
 public:
   
@@ -135,6 +136,5 @@ public:
   
   // Retorno de estructura de datos
   GPSINSInfo getInfo();
-  bool frameMng(std::vector<unsigned char>);
 };
 

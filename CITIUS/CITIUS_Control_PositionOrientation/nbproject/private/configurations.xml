@@ -108,8 +108,11 @@
         <df name="CITIUS_Control_PositionOrientation">
         </df>
         <in>RosNose_PositionOrientation.h</in>
+        <in>TraxAHRSModuleDriver.h</in>
         <in>XSensMTi700Driver.h</in>
         <in>constant.h</in>
+        <in>conversionTypes.h</in>
+        <in>crc16calc.h</in>
       </df>
       <df name="lib">
       </df>
@@ -134,7 +137,10 @@
           </df>
         </df>
         <in>RosNodePositionOrientation.cpp</in>
+        <in>TraxAHRSModuleDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
+        <in>conversionTypes.cpp</in>
+        <in>crc16calc.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">

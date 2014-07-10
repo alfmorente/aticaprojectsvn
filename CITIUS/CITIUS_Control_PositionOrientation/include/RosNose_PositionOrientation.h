@@ -25,6 +25,7 @@ extern "C" {
 #include "CITIUS_Control_PositionOrientation/msg_posOriInfo.h"
 #include "constant.h"
 #include "XSensMTi700Driver.h"
+#include "TraxAHRSModuleDriver.h"
 
 class RosNode_PositionOrientation{
 private:
@@ -36,6 +37,12 @@ private:
     ros::ServiceServer servNodeStatus;
     // Driver de GPS/INS (XSens MTi-G 700)
     XSensMTi700Driver *gpsinsDriver;
+    // Driver de Magnetometro (PNI TRAX AHRS Module)
+    TraxAHRSModuleDriver *magnetometerDriver;
+    // Flags de actividad
+    bool magnOK;
+    bool gpsinsOK;
+    
 public:
     // Constructor
     RosNode_PositionOrientation();
@@ -51,8 +58,15 @@ public:
     short getPONodeStatus();
     void setPONodeStatus(short);
     XSensMTi700Driver *getXSensManager();
+    TraxAHRSModuleDriver *getMagnetometerManager();
+    bool getGpsStatus();
+    bool getMagnStatus();
+    void setGpsStatus(bool);
+    void setMagnStatus(bool);
     // Publicador de la informacion
     void publishInformation();
+    // Configuracion de dispositivos
+    void configureDevices();
 };
 
 

@@ -8,6 +8,9 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/PositionOrientation.dir/src/main.cpp.o"
   "CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o"
   "CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o"
+  "CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o"
+  "CMakeFiles/PositionOrientation.dir/src/conversionTypes.cpp.o"
+  "CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o"
   "bin/PositionOrientation.pdb"
   "bin/PositionOrientation"
 )
