@@ -61,7 +61,10 @@ int main(int argc, char** argv) {
         sendToDevice(kSetDataComponents());
         
         sendToDevice(kGetData());
-        rcvResponse();
+        sendToDevice(kGetData());
+        sendToDevice(kGetData());
+
+        
         
         close(canal);
     }
@@ -101,7 +104,13 @@ void sendToDevice(TraxMsg traxMsg) {
     }
     printf("\n");
     
-    write(canal, msg2send, len); 
+    if(write(canal, msg2send, len)==len){
+        if(traxMsg.packFrame.idFrame == IDFRAME_KGETDATA) rcvResponse();
+    }else {
+        printf("Problemas en la escritura\n");
+    }
+    
+    free(msg2send);
             
 }
 
@@ -110,38 +119,36 @@ void rcvResponse() {
     // Contador de bytes leidos
     int index = 0;
     // Buffer de recepcion
-    unsigned char* recievedFrame;
+    //unsigned char* recievedFrame;
+    vector< char> recievedFrame;
     //unsigned char byte;
     TraxMsg msgRcv;
+    
+    unsigned char byte;
 
-    recievedFrame = (unsigned char *) malloc(2);
     // Tamaño de la trama
     while (index < 2) {
-        if (read(canal, &recievedFrame[index], 1) > 0) {
+        if (read(canal, &byte, 1) > 0) {
+            recievedFrame.push_back(byte);
             index++;
         }
     }
 
-    short tam = hexa2short((char *) recievedFrame);
+    short tam = hexa2short(recievedFrame);
 
-    recievedFrame = (unsigned char *) malloc(tam);
-    
-    recievedFrame[0] = shortToHexa(tam)[0];
-    recievedFrame[1] = shortToHexa(tam)[1];
+    recievedFrame.clear();
+
+    recievedFrame.push_back(shortToHexa(tam)[0]);
+    recievedFrame.push_back(shortToHexa(tam)[1]);
 
     // Resto de la trama
     while (index < tam) {
-        if (read(canal, &recievedFrame[index], 1) > 0) {
+        if (read(canal, &byte, 1) > 0) {
+            recievedFrame.push_back(byte);
             index++;
         }
     }
     
-    printf("Recibida: ");
-    for(int i = 0; i < tam ; i++){
-        printf("%02X ",recievedFrame[i]);
-    }
-    printf("\n");
-
     TraxMsg pkg = mngPacket(recievedFrame);
     
     if(pkg.checked){
@@ -154,7 +161,7 @@ void rcvResponse() {
     
 }
 
-TraxMsg mngPacket(unsigned char *bufferPacket){
+TraxMsg mngPacket(vector<char> bufferPacket){
     TraxMsg packet;
     
     packet.checked = false;
@@ -162,27 +169,22 @@ TraxMsg mngPacket(unsigned char *bufferPacket){
     // Desempaqueta del paquete
     
     // Tamaño
-    packet.byteCount = (char *) malloc(2);
-    packet.byteCount[0] = bufferPacket[0];
-    packet.byteCount[1] = bufferPacket[1];
+    packet.byteCount.push_back(bufferPacket[0]);
+    packet.byteCount.push_back(bufferPacket[1]);
     short tam = hexa2short(packet.byteCount);
 
     // Frame ID
     packet.packFrame.idFrame = bufferPacket[2];
 
     // Payload
-    packet.packFrame.payload = (char *) malloc(tam - 5);
-
     for (int i = 0; i < (tam - 5); i++) {
-        packet.packFrame.payload[i] = bufferPacket[i + 3];
+        packet.packFrame.payload.push_back(bufferPacket[i + 3]);
     }
 
-
     // CRC16
-    packet.crc = (char *) malloc(2);
-    packet.crc[0] = bufferPacket[tam-2];
-    packet.crc[1] = bufferPacket[tam-1];
-    
+    packet.crc.push_back(bufferPacket[tam-2]);
+    packet.crc.push_back(bufferPacket[tam-1]);
+
     char *auxBuff = (char *) malloc(tam-2);
     for(int i=0;i < tam -2; i++){
         auxBuff[i] = bufferPacket[i];
@@ -193,6 +195,7 @@ TraxMsg mngPacket(unsigned char *bufferPacket){
     }else{
         printf("\n\n%d <> %d \n\n",crc16ccitt_xmodem(((uint8_t *)auxBuff),tam-2),hexa2short(packet.crc));
     }
+    free(auxBuff);
     
     return packet;
    
@@ -223,56 +226,55 @@ TraxMsg kSetDataComponents(){
     
     retTraxMsg.byteCount = shortToHexa(10);
     retTraxMsg.packFrame.idFrame = IDFRAME_KSETDATACOMPONENTS;
-
-    retTraxMsg.packFrame.payload = (char *) malloc(5);
     
     // Se solicita heading, roll, pitch, heading status
-    retTraxMsg.packFrame.payload[0] = 0x0A; // 10 medidas
-    retTraxMsg.packFrame.payload[1] = IDMEASURE_HEADING; // heading
-    retTraxMsg.packFrame.payload[2] = IDMEASURE_PITCH; // pitch
-    retTraxMsg.packFrame.payload[3] = IDMEASURE_ROLL; // roll
-    retTraxMsg.packFrame.payload[4] = IDMEASURE_HEADING_STATUS; // heading status
-    retTraxMsg.packFrame.payload[5] = IDMEASURE_ACCX; // accX
-    retTraxMsg.packFrame.payload[6] = IDMEASURE_ACCY; // accY
-    retTraxMsg.packFrame.payload[7] = IDMEASURE_ACCZ; // accZ
-    retTraxMsg.packFrame.payload[8] = IDMEASURE_GYRX; // gyrX
-    retTraxMsg.packFrame.payload[9] = IDMEASURE_GYRY; // gyrY
-    retTraxMsg.packFrame.payload[10] = IDMEASURE_GYRZ; // gyrZ
-    
+    retTraxMsg.packFrame.payload.push_back(0x0A);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_PITCH);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ROLL);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING_STATUS);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCX);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCY);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCZ);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRX);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRY);
+    retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRZ);
+        
     return retTraxMsg;
 }
 
-TraxMeasurement unpackPayload( char* payload){
+TraxMeasurement unpackPayload( std::vector<char> payload){
     int tam = payload[0];
     int numData = 0;
     int index = 1;
-    char *bufFloat = (char *)malloc(4);
+   // char *bufFloat = (char *)malloc(4);
+    vector<char> bufFloat;
     
     TraxMeasurement measureDev;
     
     while(numData < tam){
         switch(payload[index]){
             case IDMEASURE_HEADING:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.heading = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_PITCH:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.pitch = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_ROLL:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.roll = hexa2float(bufFloat);
                 index+=5;
                 break;
@@ -281,50 +283,50 @@ TraxMeasurement unpackPayload( char* payload){
                 index+=2;
                 break;
             case IDMEASURE_ACCX:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.accX = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_ACCY:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.accY = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_ACCZ:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.accZ = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_GYRX:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.gyrX = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_GYRY:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.gyrY = hexa2float(bufFloat);
                 index+=5;
                 break;
             case IDMEASURE_GYRZ:
-                bufFloat[0] = payload[index+1];
-                bufFloat[1] = payload[index+2];
-                bufFloat[2] = payload[index+3];
-                bufFloat[3] = payload[index+4];
+                bufFloat.push_back(payload[index+1]);
+                bufFloat.push_back(payload[index+2]);
+                bufFloat.push_back(payload[index+3]);
+                bufFloat.push_back(payload[index+4]);
                 measureDev.gyrZ = hexa2float(bufFloat);
                 index+=5;
                 break;

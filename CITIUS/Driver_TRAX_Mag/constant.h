@@ -51,16 +51,17 @@ extern "C" {
 #include <complex>
 #include "crc16calc.h"
 #include "conversionTypes.h"
+#include <vector>
 
 typedef struct {
   char idFrame;
-  char *payload;
+  std::vector<char> payload;
 } PacketFrame;
 
 typedef struct {
-  char *byteCount;
+  std::vector<char> byteCount;
   PacketFrame packFrame;
-  char *crc;
+  std::vector<char> crc;
   bool checked;
 } TraxMsg;
 
@@ -88,9 +89,8 @@ TraxMsg kSetDataComponents();
 
 void sendToDevice(TraxMsg);
 void rcvResponse();
-TraxMsg mngPacket(unsigned char*);
-
-TraxMeasurement unpackPayload(char *);
+TraxMsg mngPacket(std::vector< char>);
+TraxMeasurement unpackPayload(std::vector<char>);
 
 
 

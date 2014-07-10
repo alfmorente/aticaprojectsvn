@@ -3,7 +3,7 @@
 
 using namespace std;
 
-float hexa2float( char * buffer){
+float hexa2float( vector<char> buffer){
     union
     {
         float value;
@@ -19,22 +19,22 @@ float hexa2float( char * buffer){
     return floatUnion.value;
 }
 
-int hexa2int(unsigned char * buffer){
+int hexa2int(std::vector<unsigned char> buffer){
     union
     {
         int value;
         unsigned char buffer[4];
 
-    }floatUnion;
+    }intUnion;
 
-    floatUnion.buffer[0] = buffer[3];
-    floatUnion.buffer[1] = buffer[2];
-    floatUnion.buffer[2] = buffer[1];
-    floatUnion.buffer[3] = buffer[0];
+    intUnion.buffer[0] = buffer[3];
+    intUnion.buffer[1] = buffer[2];
+    intUnion.buffer[2] = buffer[1];
+    intUnion.buffer[3] = buffer[0];
 
-    return floatUnion.value;
+    return intUnion.value;
 }
-short hexa2short(char buffer[2]){
+short hexa2short(vector<char> buffer){
     union
     {
         short value;
@@ -47,30 +47,33 @@ short hexa2short(char buffer[2]){
 
     return shortUnion.value;
 }
-double hexa2double(unsigned char * buffer){
+
+double hexa2double(std::vector<unsigned char> buffer){
     union{
         double value;
         unsigned char buffer[8];
-    }floatUnion;
+    }doubleUnion;
 
-    floatUnion.buffer[0] = buffer[7];
-    floatUnion.buffer[1] = buffer[6];
-    floatUnion.buffer[2] = buffer[5];
-    floatUnion.buffer[3] = buffer[4];
-    floatUnion.buffer[4] = buffer[3];
-    floatUnion.buffer[5] = buffer[2];
-    floatUnion.buffer[6] = buffer[1];
-    floatUnion.buffer[7] = buffer[0];
+    doubleUnion.buffer[0] = buffer[7];
+    doubleUnion.buffer[1] = buffer[6];
+    doubleUnion.buffer[2] = buffer[5];
+    doubleUnion.buffer[3] = buffer[4];
+    doubleUnion.buffer[4] = buffer[3];
+    doubleUnion.buffer[5] = buffer[2];
+    doubleUnion.buffer[6] = buffer[1];
+    doubleUnion.buffer[7] = buffer[0];
 
-    return floatUnion.value;
+    return doubleUnion.value;
 }
-char *shortToHexa(short s){
+
+vector<char> shortToHexa(short s){
     char *buf = (char *) malloc(2);
+    vector<char> out;
     memcpy(buf,&s,2);
-    char aux = buf[1];
-    buf[1] = buf[0];
-    buf[0] = aux;
-    return buf;
+    out.push_back(buf[1]);
+    out.push_back(buf[0]);
+    free(buf);
+    return out;
 
 }
 

@@ -23,11 +23,11 @@ extern "C" {
 
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
 
-
-float hexa2float( char * );
-double hexa2double(unsigned char * );
-int hexa2int(unsigned char * );
-short hexa2short(char[2]);
-char *shortToHexa(short);
+float hexa2float( std::vector<char> );
+double hexa2double(std::vector<unsigned char> );
+int hexa2int(std::vector<unsigned char> );
+short hexa2short(std::vector<char> );
+std::vector<char> shortToHexa(short);
 
