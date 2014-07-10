@@ -21,6 +21,14 @@ RosNode_PositionOrientation::RosNode_PositionOrientation(){
 }
 
 /*******************************************************************************
+ * DESTRUCTOR DE LA CLASE
+ ******************************************************************************/
+
+RosNode_PositionOrientation::~RosNode_PositionOrientation(){
+    delete gpsinsDriver;
+}
+
+/*******************************************************************************
  * INICIALIZADOR DE ARTEFACTOS ROS
  ******************************************************************************/
 

@@ -2,6 +2,8 @@
 
 #include "XSensMTi700Driver.h"
 
+using namespace std;
+
 /*******************************************************************************
  * CONSTRUCTOR DE LA CLASE
  ******************************************************************************/
@@ -29,6 +31,14 @@ XSensMTi700Driver::XSensMTi700Driver() {
 }
 
 /*******************************************************************************
+    * DESTRUCTOR DE LA CLASE
+ ******************************************************************************/
+
+XSensMTi700Driver::~XSensMTi700Driver() {
+    
+}
+
+/*******************************************************************************
  * CONEXIÓN DEL DISPOSITIVO
  ******************************************************************************/
 
@@ -37,7 +47,7 @@ bool XSensMTi700Driver::connectToDevice() {
     char * serial_name = (char *) "/dev/ttyUSB0";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
-
+    
     if (canal < 0) {
 
         return false;
@@ -92,11 +102,18 @@ void XSensMTi700Driver::disconnectDevice() {
 void XSensMTi700Driver::configureDevice(){
     
     // Modo configuracion
-    sendToDevice(goToConfig());
+    XsensMsg xMsg = goToConfig();
+    sendToDevice(xMsg);
+    
     // Configuracion de dispositivo
-    sendToDevice(setOutPutConfiguration());
+    xMsg = setOutPutConfiguration();
+    sendToDevice(xMsg);
+    
+    
     // Modo stream de medidas
-    sendToDevice(goToMeasurement());
+    //xMsg = goToMeasurement();
+    //sendToDevice(xMsg);
+    
 }
 
 /*******************************************************************************
@@ -105,8 +122,7 @@ void XSensMTi700Driver::configureDevice(){
 
 bool XSensMTi700Driver::getData() {
     int index = 0;
-    unsigned char * header = (unsigned char *) malloc(3);
-    unsigned char * frame;
+    vector<unsigned char> frame;
     unsigned char byte;
     unsigned char len;
     bool dataFound = false;
@@ -114,30 +130,25 @@ bool XSensMTi700Driver::getData() {
     while(!dataFound){
         // HEADER (PRE + BID + MID)
         if(read(canal,&byte,1)>0){
-            header[index++] = byte;
+            frame.push_back(byte);
+            index++;
         }
 
         if(index == 3){
             
             // LEN
             if(read(canal,&len,1)>0){
-                frame = (unsigned char *) malloc(len);
-                frame[0] = header[0];
-                frame[1] = header[1];
-                frame[2] = header[2];
-                frame[3] = len;
-                index++;
+                frame.push_back(len);
 
                 // DATA + CS
                 while (index < len + 5) {
                     if (read(canal, &byte, 1) > 0) {
-                        frame[index++] = byte;
+                        frame.push_back(byte);
                     }
                 }
 
                 index = 0;
-                if (frameMng(frame, len + 5)){
-                    
+                if (frameMng(frame)){
                     dataFound = true;
                 }else{
                     return false;
@@ -233,10 +244,10 @@ unsigned char XSensMTi700Driver::calcChecksum(XsensMsg msg) {
     return 0x00 - cs;
 }
 
-bool XSensMTi700Driver::isCheckSumOK(unsigned char *frame, unsigned char len) {
+bool XSensMTi700Driver::isCheckSumOK(vector<unsigned char> frame) {
     unsigned char cs = 0;
 
-    for(int i = 1; i < len; i++){
+    for(unsigned int i = 1; i < frame.size(); i++){
         cs+=frame[i];
     }
 
@@ -265,18 +276,21 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
 }
 
 void XSensMTi700Driver::waitForAck(unsigned char _mid) {
+   
     int index = 0;
-    unsigned char * header = (unsigned char *) malloc(3);
-    unsigned char * frame;
+    
+    vector<unsigned char> frame2;
+    
     unsigned char byte;
     unsigned char len;
+    
     bool ackFound = false;
     
     while (!ackFound){
         
         // HEADER (PRE + BID + MID)
         if(read(canal,&byte,1)>0){
-            header[index] = byte;
+            frame2.push_back(byte);
             index++;
         }
 
@@ -284,23 +298,18 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
             
             // LEN
             if(read(canal,&len,1)>0){
-                frame = (unsigned char *) malloc(len);
-                frame[0] = header[0];
-                frame[1] = header[1];
-                frame[2] = header[2];
+
+                frame2.push_back(len);
                 
-                frame[3] = len;
-                index++;
                 // DATA + CS
                 while (index < len + 5) {
                     if (read(canal, &byte, 1) > 0) {
-                        frame[index] = byte;
+                        frame2.push_back(byte);
                         index++;
                     }
                 }
 
-                index = 0;
-                if (isCheckSumOK(frame, len + 5) && (_mid + 1 == frame[2])) {
+                if (isCheckSumOK(frame2) && (_mid + 1 == frame2[2])) {
                     ackFound = true;
                 }
             }
@@ -410,6 +419,8 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     //printf("   Yaw: %3.8lf º\n", hexa2double(auxBuf));
                     posOriInfo.yaw = hexa2float(auxBuf);
                     
+                    free(auxBuf);
+                    
                     break;
                 default:
                     printf("   UNKNOWN :: Orientation %d bytes\n", dataPacket.len);
@@ -441,15 +452,15 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     //printf("   Acc X: %f m/s2\n", hexa2float(auxBuf));
                     posOriInfo.accX = hexa2float(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(4);
                     for(int i = 4; i < 8; i++) auxBuf[i-4]=dataPacket.data[i];
                     //printf("   Acc Y: %f m/s2\n", hexa2float(auxBuf));
                     posOriInfo.accY = hexa2float(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(4);
                     for(int i = 8; i < 12; i++) auxBuf[i-8]=dataPacket.data[i];
                     //printf("   Acc Z: %f m/s2", hexa2float(auxBuf));
                     posOriInfo.accZ = hexa2float(auxBuf);
+                    
+                    free(auxBuf);
                     
                     break;
                 case 0x30: // Free acceleration
@@ -472,6 +483,7 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
                     //printf("   Altitude: %f m\n", hexa2float(auxBuf));
                     posOriInfo.altitude = hexa2float(auxBuf);
+                    free(auxBuf);
                     
                     break;
                 case 0x20: // Altitude Ellipsoid
@@ -480,6 +492,7 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     for(int i = 0; i < 4; i++) auxBuf[i]=dataPacket.data[i];
                     //printf("   Altitude: %f m\n", hexa2float(auxBuf));
                     posOriInfo.altitude = hexa2float(auxBuf);
+                    free(auxBuf);
                     
                     break;
                 case 0x30: // Position ECEF
@@ -492,10 +505,10 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     //printf("   Latitude: %2.10lf ºC N\n", hexa2double(auxBuf));
                     posOriInfo.latitude = hexa2double(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(8);
                     for(int i = 8; i < 16; i++) auxBuf[i-8]=dataPacket.data[i];
                     //printf("   Longitude: %2.10lf ºC W\n", hexa2double(auxBuf));
                     posOriInfo.longitude = hexa2double(auxBuf);
+                    free(auxBuf);
                     
                     break;
                 default:
@@ -515,15 +528,14 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                     //printf("   Acc X: %f m/s2\n", hexa2float(auxBuf));
                     posOriInfo.rateX = hexa2float(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(4);
                     for(int i = 4; i < 8; i++) auxBuf[i-4]=dataPacket.data[i];
                     //printf("   Acc Y: %f m/s2\n", hexa2float(auxBuf));
                     posOriInfo.rateY = hexa2float(auxBuf);
                     
-                    auxBuf = (unsigned char *)malloc(4);
                     for(int i = 8; i < 12; i++) auxBuf[i-8]=dataPacket.data[i];
                     //printf("   Acc Z: %f m/s2", hexa2float(auxBuf));
                     posOriInfo.rateZ = hexa2float(auxBuf);
+                    free(auxBuf);
                     
                     break;
                 case 0x30: // Delta Q
@@ -594,15 +606,14 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
                 //printf("   Vel X: %f m/s\n", hexa2float(auxBuf));
                 posOriInfo.velX = hexa2float(auxBuf);
                 
-                auxBuf = (unsigned char *) malloc(4);
                 for (int i = 4; i < 8; i++) auxBuf[i - 4] = dataPacket.data[i];
                 //printf("   Vel Y: %f m/s\n", hexa2float(auxBuf));
                 posOriInfo.velY = hexa2float(auxBuf);
                 
-                auxBuf = (unsigned char *) malloc(4);
                 for (int i = 8; i < 12; i++) auxBuf[i - 8] = dataPacket.data[i];
                 //printf("   Vel Z: %f m/s", hexa2float(auxBuf));
                 posOriInfo.velZ = hexa2float(auxBuf);
+                free(auxBuf);
                 
             }else
                 printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len);     
@@ -701,14 +712,14 @@ double XSensMTi700Driver::hexa2double(unsigned char * buffer){
 
 GPSINSInfo XSensMTi700Driver::getInfo(){ return posOriInfo; }
 
-bool XSensMTi700Driver::frameMng(unsigned char* frame, unsigned char len) {
+bool XSensMTi700Driver::frameMng(vector<unsigned char> frame) {
     if (frame[0] == COMMAND_PRE) {
         if (frame[1] == COMMAND_BID) {
             if (frame[2] == COMMAND_MID_MTDATA2) {
-                if (isCheckSumOK(frame, len)) {
+                if (isCheckSumOK(frame)) {
                     
-                    short index = 4;
-                    while (index < len - 1) {
+                    unsigned int index = 4;
+                    while (index < frame.size() - 1) {
                         dataPacketMT2 pMT2;
                         pMT2.idGroup = frame[index++];
                         pMT2.idSignal = frame[index++];

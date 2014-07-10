@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
         }
 
         if (nodePosOri->getPONodeStatus() == NODESTATUS_OK) {
-            printf("cnsocvs\n");
+            
             nodePosOri->getXSensManager()->configureDevice();
             ROS_INFO("[Control] Position / Orientation - Configuracion de GPS/INS establecida");
             ROS_INFO("[Control] Position / Orientation - Nodo listo para operar");
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
             ros::spinOnce();
 
             // Requerimiento y publicacion de informacion de dispositivo GPS/INS
-            nodePosOri->publishInformation();
+            //nodePosOri->publishInformation();
 
         }
 
@@ -65,6 +65,9 @@ int main(int argc, char** argv) {
     }
 
     ROS_INFO("[Control] Position / Orientation - Nodo finalizado");
+    
+    nodePosOri->~RosNode_PositionOrientation();
+    
     return 0;
 }
 

@@ -30,6 +30,7 @@ extern "C" {
 #include <string.h>
 #include <complex>
 #include <pthread.h>
+#include <vector>
 
 #define COMMAND_PRE 0xFA
 #define COMMAND_BID 0xFF
@@ -45,6 +46,8 @@ extern "C" {
 #define COMMAND_LEN_0 0x00
 
 #define FREC_REQ_DATA 0x19
+
+
 
 // Informacion de GPS/INS
 typedef struct{
@@ -106,7 +109,7 @@ private:
   void waitForAck(unsigned char);
   
   unsigned char calcChecksum(XsensMsg);
-  bool isCheckSumOK(unsigned char*, unsigned char);
+  bool isCheckSumOK(std::vector<unsigned char>);
   
   XsensMsg goToConfig();
   XsensMsg goToMeasurement();
@@ -122,6 +125,7 @@ private:
 public:
   
   XSensMTi700Driver();
+  ~XSensMTi700Driver();
   
   // Operaciones a alto nivel
   bool connectToDevice();
@@ -131,6 +135,6 @@ public:
   
   // Retorno de estructura de datos
   GPSINSInfo getInfo();
-  bool frameMng(unsigned char*, unsigned char);
+  bool frameMng(std::vector<unsigned char>);
 };
 

@@ -39,6 +39,8 @@ private:
 public:
     // Constructor
     RosNode_PositionOrientation();
+    // Destructor
+    ~RosNode_PositionOrientation();
 
     // Inicializador de artefactos ROS
     void initROS();
