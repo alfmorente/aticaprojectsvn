@@ -43,7 +43,6 @@ bool TraxAHRSModuleDriver::connectToDevice() {
 
     if (canal < 0) {
 
-        perror(serial_name);
         return false;
 
     } else {
@@ -205,6 +204,7 @@ void TraxAHRSModuleDriver::rcvResponse() {
         if (read(canal, &byte, 1) > 0) {
             recievedFrame.push_back(byte);
             index++;
+        }else{
         }
     }
 
@@ -227,10 +227,6 @@ void TraxAHRSModuleDriver::rcvResponse() {
     
     if(pkg.checked){
         oriInfo = unpackPayload(pkg.packFrame.payload);
-        printf("HEADING STATUS: %d\n",oriInfo.heading_status);
-        printf("ORIENTACION ROLL: %f PITCH %f HEADING %f\n",oriInfo.roll,oriInfo.pitch, oriInfo.heading);
-        printf("ACC ACCX: %f ACCY %f ACCZ %f\n",oriInfo.accX,oriInfo.accY, oriInfo.accZ);
-        printf("GYR GYRX: %f GYRY %f GYRZ %f\n",oriInfo.gyrX,oriInfo.gyrY, oriInfo.gyrZ);
     }
     
 }
@@ -379,4 +375,9 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload( std::vector<char> payload){
  ******************************************************************************/
 
 TraxMeasurement TraxAHRSModuleDriver::getInfo(){ return oriInfo; }
+
+bool TraxAHRSModuleDriver::getData(){
+    sendToDevice(kGetData());
+    return true;
+}
 

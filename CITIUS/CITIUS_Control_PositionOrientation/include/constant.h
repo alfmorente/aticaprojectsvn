@@ -12,8 +12,7 @@
 extern "C" {
 #endif
 
-
-
+#include <ctime>
 
 #ifdef	__cplusplus
 }

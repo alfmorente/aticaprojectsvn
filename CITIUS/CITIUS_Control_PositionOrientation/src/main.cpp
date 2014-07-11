@@ -75,21 +75,58 @@ int main(int argc, char** argv) {
         }
 
         if (nodePosOri->getPONodeStatus() == NODESTATUS_OK) {
-            
+
             nodePosOri->configureDevices();
             ROS_INFO("[Control] Position / Orientation - Nodo activado y listo para operar");
-            
-        }
-
-        //Bucle principal
-        while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
-
-            ros::spinOnce();
-            
-            // Requerimiento y publicacion de informacion de dispositivo GPS/INS
-            nodePosOri->publishInformation();
 
         }
+
+        // Bucle principal Funcionamiento completo (GPS/INS + Mag)
+        if (nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
+ 
+            while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
+
+                ros::spinOnce();
+
+                // Requerimiento y publicacion de informacion de dispositivo GPS/INS
+                nodePosOri->publishInformation();
+
+            }
+
+
+        }            
+        
+        // Bucle principal Funcionamiento parcial solo GPS/INS
+        else if (nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus()) {
+
+            while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
+
+                ros::spinOnce();
+
+                // Requerimiento y publicacion de informacion de dispositivo GPS/INS
+                nodePosOri->publishInformation();
+
+            }
+        }            
+        
+        // Bucle principal Funcionamiento parcial solo Mag
+        else if (!nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
+            clock_t t0 = clock();
+            clock_t t1;
+            while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
+
+                ros::spinOnce();
+                
+                t1 = clock();
+                if((float(t1 - t0) / CLOCKS_PER_SEC)>=0.04){
+                    // Requerimiento y publicacion de informacion de dispositivo GPS/INS
+                    nodePosOri->publishInformation();
+                    t0 = clock();
+                
+                }                
+            }
+        }
+        
 
         // Desconectar dispositivo GPS/INS
         nodePosOri->getXSensManager()->disconnectDevice();
