@@ -118,7 +118,7 @@ void XSensMTi700Driver::configureDevice(){
  ******************************************************************************/
 
 bool XSensMTi700Driver::getData() {
-    int index = 0;
+
     vector<unsigned char> frame;
     unsigned char byte;
     unsigned int len;
@@ -128,10 +128,10 @@ bool XSensMTi700Driver::getData() {
         // HEADER (PRE + BID + MID)
         if(read(canal,&byte,1)>0){
             frame.push_back(byte);
-            index++;
+            printf("%02X ",byte);
         }
 
-        if(index == 3){
+        if(frame.size() == 3){
             
             // LEN
             if(read(canal,&len,1)>0){
@@ -143,13 +143,10 @@ bool XSensMTi700Driver::getData() {
                         frame.push_back(byte);
                     }
                 }
-
-                index = 0;
                 
                 if (frameMng(frame)){
                     dataFound = true;
                 }else{
-                    printf("Aqui se jodio el asunto\n");
                     return false;
                 } 
             }
@@ -269,10 +266,12 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
         }
     }
     msg2send[msg.len + 4] = msg.cs;
-    if(write(canal, msg2send, msg.len + 5)==5){
+
+    if(write(canal, msg2send, msg.len + 5)==(msg.len + 5)){
         waitForAck(msg.mid);
     }else{
-    
+        printf("Error en escritura");
+        exit(-1);
     }
     free(msg2send);   
 
@@ -312,6 +311,7 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
 
                 if (isCheckSumOK(frame2) && (_mid + 1 == frame2[2])) {
                     ackFound = true;
+                    printf("Encontrado ACK %02X\n",_mid+1);
                 }else{
                     index = 0;
                     frame2.clear();

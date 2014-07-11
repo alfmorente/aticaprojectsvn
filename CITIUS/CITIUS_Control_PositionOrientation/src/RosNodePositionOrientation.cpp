@@ -119,7 +119,6 @@ void RosNode_PositionOrientation::setMagnStatus(bool status) { magnOK = status;
 void RosNode_PositionOrientation::publishInformation() {
     
     if (gpsinsOK && !magnOK) {
-        printf("Solo gps\n");
         if (gpsinsDriver->getData()) {
             // Conversion a mensaje ROS y publicacion
             
