@@ -81,9 +81,13 @@ bool XSensMTi700Driver::connectToDevice() {
 
         tcflush(canal, TCIFLUSH);
         tcsetattr(canal, TCSANOW, &newtio);
+        
+        // Cambio de modo configuracion para no sobrecargar el buffer
+        usleep(100);
+        sendToDevice(goToConfig());
+        
     }
-    // Estado de configuracion, se dejan de recibir datos de inicializacion previa
-    sendToDevice(goToConfig());
+
     return true;
 }
 
@@ -100,10 +104,7 @@ void XSensMTi700Driver::disconnectDevice() {
  * CONFIGURACION DE DISPOSITIVO DE LA CLASE
  ******************************************************************************/
 
-void XSensMTi700Driver::configureDevice(){
-    
-    // Modo configuracion
-    sendToDevice(goToConfig());
+void XSensMTi700Driver::configureDevice(){    
     
     // Configuracion de dispositivo
     sendToDevice(setOutPutConfiguration());
@@ -118,37 +119,45 @@ void XSensMTi700Driver::configureDevice(){
  ******************************************************************************/
 
 bool XSensMTi700Driver::getData() {
-
-    vector<unsigned char> frame;
-    unsigned char byte;
-    unsigned int len;
+    /*printf("Vamos a ver que pasa aqui:\n");
+    char byte;
+    while(true){
+        if(read(this->canal,&byte,1)>0)
+            printf("%02X ",byte);
+    }*/
+    
+    vector<unsigned char> frame2;
+    
+    unsigned char byte, len;
+    
     bool dataFound = false;
     
-    while(!dataFound){
+    while (!dataFound){
+        
         // HEADER (PRE + BID + MID)
         if(read(canal,&byte,1)>0){
-            frame.push_back(byte);
-            printf("%02X ",byte);
+            frame2.push_back(byte);
         }
-
-        if(frame.size() == 3){
+        
+        if(frame2.size() == 3){
             
             // LEN
             if(read(canal,&len,1)>0){
-                frame.push_back(len);
 
+                frame2.push_back(len);
                 // DATA + CS
-                while (frame.size() < len + 5) {
+                while (frame2.size() < len + 5) {
                     if (read(canal, &byte, 1) > 0) {
-                        frame.push_back(byte);
+                        frame2.push_back(byte);
                     }
                 }
-                
-                if (frameMng(frame)){
+
+                if (frameMng(frame2)) {
                     dataFound = true;
                 }else{
+                    frame2.clear();
                     return false;
-                } 
+                }
             }
         }
     }
@@ -267,7 +276,7 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
     }
     msg2send[msg.len + 4] = msg.cs;
 
-    if(write(canal, msg2send, msg.len + 5)==(msg.len + 5)){
+    if(write(canal, msg2send, msg.len + 5)>0){
         waitForAck(msg.mid);
     }else{
         printf("Error en escritura");
@@ -279,7 +288,6 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
 
 void XSensMTi700Driver::waitForAck(unsigned char _mid) {
     
-    int index = 0;
         
     vector<unsigned char> frame2;
     
@@ -292,10 +300,9 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
         // HEADER (PRE + BID + MID)
         if(read(canal,&byte,1)>0){
             frame2.push_back(byte);
-            index++;
         }
         
-        if(index == 3){
+        if(frame2.size() == 3){
             
             // LEN
             if(read(canal,&len,1)>0){
@@ -305,15 +312,12 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
                 while (frame2.size() < len + 5) {
                     if (read(canal, &byte, 1) > 0) {
                         frame2.push_back(byte);
-                        index++;
                     }
                 }
 
                 if (isCheckSumOK(frame2) && (_mid + 1 == frame2[2])) {
                     ackFound = true;
-                    printf("Encontrado ACK %02X\n",_mid+1);
                 }else{
-                    index = 0;
                     frame2.clear();
                 }
             }
