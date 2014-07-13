@@ -1,0 +1,15 @@
+<package>
+  <description brief="TEST_MAGNETOMETER">
+
+     TEST_MAGNETOMETER
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/TEST_MAGNETOMETER</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
