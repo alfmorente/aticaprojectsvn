@@ -147,6 +147,11 @@
       </df>
       <df name="srv_gen">
         <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_PositionOrientation">
+              <in>srv_nodeStatus.h</in>
+            </df>
+          </df>
         </df>
         <df name="lisp">
         </df>
