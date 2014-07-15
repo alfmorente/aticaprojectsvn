@@ -1,0 +1,15 @@
+<package>
+  <description brief="CITIUS_Control_Manager">
+
+     CITIUS_Control_Manager
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/CITIUS_Control_Manager</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

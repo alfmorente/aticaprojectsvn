@@ -1,0 +1,8 @@
+Scanning dependencies of target ROSBUILD_genmanifest_roseus_CITIUS_Control_Manager
+[100%] Generating /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/manifest.l
+set ARCHDIR to Linux
+use the location of executables to set EUSDIR
+set EUSDIR to /opt/ros/groovy/share/euslisp/jskeus/eus
+[36m;; mkdir /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager
+[0m[36m;; writing to /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/manifest.l
+[0m[100%] Built target ROSBUILD_genmanifest_roseus_CITIUS_Control_Manager
