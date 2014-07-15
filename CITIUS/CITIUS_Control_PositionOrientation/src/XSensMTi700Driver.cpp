@@ -193,7 +193,7 @@ XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
     xsMsg.pre = COMMAND_PRE;
     xsMsg.bid = COMMAND_BID;
     xsMsg.mid = COMMAND_MID_SETOUTPUTCONFIGURATION;
-    xsMsg.len = 0x18;
+    xsMsg.len = 0x1C;
     // Velocidad angular Rate turn
     xsMsg.data.push_back(0x80);
     xsMsg.data.push_back(0x20);
@@ -221,6 +221,11 @@ XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
     xsMsg.data.push_back(FREC_REQ_DATA);
     // Velocity
     xsMsg.data.push_back(0xD0);
+    xsMsg.data.push_back(0x10);
+    xsMsg.data.push_back(0x00);
+    xsMsg.data.push_back(FREC_REQ_DATA);
+    // Status
+    xsMsg.data.push_back(0xE0);
     xsMsg.data.push_back(0x10);
     xsMsg.data.push_back(0x00);
     xsMsg.data.push_back(FREC_REQ_DATA);
@@ -588,25 +593,30 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
             break;
             
         case 0xE0: // Status
-            /*printf("Got status packet\n");
+            printf("Got status packet\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Status Byte
                     printf("   Status Byte %d bytes\n", dataPacket.len);
+                    if((dataPacket.data[0] & 0x04) == 0x04){
+                        posOriInfo.positionStatus = 1;
+                    }else{
+                        posOriInfo.positionStatus = 0;
+                    }
                     break;
                 case 0x20: // Status Word
-                    unsigned char * buf;
+                    /*unsigned char * buf;
                     buf = (unsigned char *) malloc(4);
                     for(int i = 0 ; i < 4; i ++) buf[i] = dataPacket.data[i];
                     printf("   Status: %d\n",hexa2int(buf));
                     printf("   Status Word %d bytes\n", dataPacket.len);
-                    break;
+                    break;*/
                 case 0x40: // RSSI
                     printf("   RSSI %d bytes\n", dataPacket.len);
                     break;
                 default:
                     printf("   UNKNOWN :: Status in %d bytes\n", dataPacket.len);
                     break;
-            }*/
+            }
             //printf("\n");
             break;
             

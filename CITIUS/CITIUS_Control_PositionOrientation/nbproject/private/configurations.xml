@@ -122,7 +122,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_PositionOrientation">
-              <in>msg_posOriInfo.h</in>
             </df>
           </df>
         </df>
@@ -149,7 +148,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_PositionOrientation">
-              <in>srv_nodeStatus.h</in>
             </df>
           </df>
         </df>

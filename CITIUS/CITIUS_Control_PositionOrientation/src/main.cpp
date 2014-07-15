@@ -118,7 +118,7 @@ int main(int argc, char** argv) {
                 ros::spinOnce();
                 
                 t1 = clock();
-                if((float(t1 - t0) / CLOCKS_PER_SEC)>=0.04){
+                if((float(t1 - t0) / CLOCKS_PER_SEC)>=0.1){
                     // Requerimiento y publicacion de informacion de dispositivo GPS/INS
                     nodePosOri->publishInformation();
                     t0 = clock();

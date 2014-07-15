@@ -45,7 +45,7 @@ extern "C" {
 #define COMMAND_MID_MTDATA2 0x36
 #define COMMAND_LEN_0 0x00
 
-#define FREC_REQ_DATA 0x19
+#define FREC_REQ_DATA 0x0A
 
 
 
