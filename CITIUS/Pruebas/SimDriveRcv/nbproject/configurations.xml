@@ -4,7 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>../../../SimDriveRcv/SimuladorPayloadConduccion.h</itemPath>
+      <itemPath>SimuladorPayloadConduccion.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,7 +13,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>../../../SimDriveRcv/mainServer.cpp</itemPath>
+      <itemPath>mainServer.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -37,15 +37,9 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="../../../SimDriveRcv/SimuladorPayloadConduccion.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
+      <item path="SimuladorPayloadConduccion.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="../../../SimDriveRcv/mainServer.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
+      <item path="mainServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -68,15 +62,9 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../../SimDriveRcv/SimuladorPayloadConduccion.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
+      <item path="SimuladorPayloadConduccion.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="../../../SimDriveRcv/mainServer.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
+      <item path="mainServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
