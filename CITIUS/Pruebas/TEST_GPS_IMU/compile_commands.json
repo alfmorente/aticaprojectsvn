@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/include -I/opt/ros/groovy/include    -DROS_PACKAGE_NAME='\"TEST_GPS_IMU\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/example.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/main.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/main.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/include -I/opt/ros/groovy/include    -DROS_PACKAGE_NAME='\"TEST_GPS_IMU\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/example.dir/src/XSensMTi700Driver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/XSensMTi700Driver.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/XSensMTi700Driver.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/gtest",
+  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TEST_GPS_IMU\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
+  "file": "/usr/src/gtest/src/gtest-all.cc"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/gtest",
+  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TEST_GPS_IMU\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
+  "file": "/usr/src/gtest/src/gtest_main.cc"
+}
+]
