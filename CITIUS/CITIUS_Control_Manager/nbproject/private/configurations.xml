@@ -2,6 +2,8 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="bin">
+      </df>
       <df name="catkin">
         <df name="catkin_generated">
           <df name="version">
@@ -22,6 +24,10 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
+          <df name="CMakeFiles">
+            <df name="cmTryCompileExec.dir">
+            </df>
+          </df>
         </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
@@ -30,6 +36,10 @@
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
         <df name="doxygen.dir">
+        </df>
+        <df name="manager.dir">
+          <df name="src">
+          </df>
         </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
@@ -45,6 +55,8 @@
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
         </df>
+        <df name="ROSBUILD_gensrv_py.dir">
+        </df>
         <df name="ROSBUILD_gensrv_roseus_CITIUS_Control_Manager.dir">
         </df>
         <df name="rosbuild_precompile.dir">
@@ -56,6 +68,8 @@
         <df name="rospack_genmsg_libexe.dir">
         </df>
         <df name="rospack_gensrv.dir">
+        </df>
+        <df name="rospack_gensrv_all.dir">
         </df>
         <df name="run_tests.dir">
         </df>
@@ -93,10 +107,29 @@
       <df name="include">
         <df name="CITIUS_Control_Manager">
         </df>
+        <in>Manager.h</in>
       </df>
       <df name="lib">
       </df>
       <df name="src">
+        <df name="CITIUS_Control_Manager">
+        </df>
+        <in>Manager.cpp</in>
+        <in>main.cpp</in>
+      </df>
+      <df name="srv">
+      </df>
+      <df name="srv_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Manager">
+              <in>srv_nodeStatus.h</in>
+              <in>srv_vehicleStatus.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
       </df>
       <df name="test_results">
       </df>
