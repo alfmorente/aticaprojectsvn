@@ -108,11 +108,14 @@
         <df name="CITIUS_Control_Manager">
         </df>
         <in>Manager.h</in>
+        <in>constant.h</in>
       </df>
       <df name="lib">
       </df>
       <df name="src">
         <df name="CITIUS_Control_Manager">
+          <df name="srv">
+          </df>
         </df>
         <in>Manager.cpp</in>
         <in>main.cpp</in>

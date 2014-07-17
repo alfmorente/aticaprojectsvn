@@ -11,6 +11,7 @@
 #include "ros/ros.h"
 #include "CITIUS_Control_Manager/srv_nodeStatus.h"
 #include "CITIUS_Control_Manager/srv_vehicleStatus.h"
+#include "constant.h"
 
 class Manager {
 public:
@@ -24,10 +25,8 @@ private:
     ros::ServiceClient fcNodeStatus;
     ros::ServiceClient rcNodeStatus;
     ros::ServiceClient drNodeStatus;
-    ros::ServiceServer serverNodeStatus;
     ros::ServiceServer serverVehicleStatus;
     
-    bool fcv_serv_nodeStatus(CITIUS_Control_Manager::srv_nodeStatus::Request &rq, CITIUS_Control_Manager::srv_nodeStatus::Response &rsp);
     bool fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::Request &rq, CITIUS_Control_Manager::srv_vehicleStatus::Response &rsp);
 
 };

@@ -21,6 +21,7 @@ CMakeFiles/manager.dir/src/Manager.cpp.o
  /opt/ros/groovy/include/ros/message.h
  /opt/ros/groovy/include/ros/message_event.h
  /opt/ros/groovy/include/ros/message_forward.h
+ /opt/ros/groovy/include/ros/message_operations.h
  /opt/ros/groovy/include/ros/message_traits.h
  /opt/ros/groovy/include/ros/names.h
  /opt/ros/groovy/include/ros/node_handle.h
@@ -57,6 +58,9 @@ CMakeFiles/manager.dir/src/Manager.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Manager.h
+ include/constant.h
+ srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
+ srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h
 CMakeFiles/manager.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
@@ -77,6 +81,7 @@ CMakeFiles/manager.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/message.h
  /opt/ros/groovy/include/ros/message_event.h
  /opt/ros/groovy/include/ros/message_forward.h
+ /opt/ros/groovy/include/ros/message_operations.h
  /opt/ros/groovy/include/ros/message_traits.h
  /opt/ros/groovy/include/ros/names.h
  /opt/ros/groovy/include/ros/node_handle.h
@@ -113,3 +118,6 @@ CMakeFiles/manager.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Manager.h
+ include/constant.h
+ srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
+ srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h

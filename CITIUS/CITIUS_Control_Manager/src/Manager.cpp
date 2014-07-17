@@ -8,7 +8,8 @@
 #include "Manager.h"
 
 Manager::Manager() {
-    
+    ros::NodeHandle nh;
+    nh.se
 }
 
 Manager::Manager(const Manager& orig) {
@@ -23,15 +24,39 @@ void Manager::initROS(){
     fcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("fcNodeStatus");
     rcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("rcNodeStatus");
     drNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("drNodeStatus");
-    serverNodeStatus = nh.advertiseService("toNodeStatus",&Manager::fcv_serv_nodeStatus,this);
     serverVehicleStatus = nh.advertiseService("vehicleStatus",&Manager::fcv_serv_vehicleStatus,this);
 }
 
-bool Manager::fcv_serv_nodeStatus(CITIUS_Control_Manager::srv_nodeStatus::Request &rq, CITIUS_Control_Manager::srv_nodeStatus::Response &rsp){
-    return true;
-}
-
 bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::Request &rq, CITIUS_Control_Manager::srv_vehicleStatus::Response &rsp){
-    return true;
+    
+    // Variable de devolucion
+    bool dev = true;
+    
+    // Manejador ROS
+    ros::NodeHandle nh;
+    
+    // Lectura del estado actual
+    int currentStatus;
+    nh.getParam("vehicleStatus",currentStatus);
+    
+    // Maquina de estados
+    switch(rq.status){
+        case OPERATION_MODE_INICIANDO:
+            dev = false;
+            rsp.confirmation = false;
+            break;
+        case OPERATION_MODE_LOCAL:
+            break;
+        case OPERATION_MODE_CONDUCCION:
+            break;
+        case OPERATION_MODE_OBSERVACION:
+            break;
+        case OPERATION_MODE_APAGANDO:
+            break;
+        default:
+            break;
+    }
+    
+    return dev;
 }
 
