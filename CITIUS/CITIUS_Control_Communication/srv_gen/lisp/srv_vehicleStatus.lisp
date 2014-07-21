@@ -11,6 +11,11 @@
     :reader status
     :initarg :status
     :type cl:fixnum
+    :initform 0)
+   (posSwitcher
+    :reader posSwitcher
+    :initarg :posSwitcher
+    :type cl:fixnum
     :initform 0))
 )
 
@@ -26,13 +31,20 @@
 (cl:defmethod status-val ((m <srv_vehicleStatus-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader CITIUS_Control_Communication-srv:status-val is deprecated.  Use CITIUS_Control_Communication-srv:status instead.")
   (status m))
+
+(cl:ensure-generic-function 'posSwitcher-val :lambda-list '(m))
+(cl:defmethod posSwitcher-val ((m <srv_vehicleStatus-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader CITIUS_Control_Communication-srv:posSwitcher-val is deprecated.  Use CITIUS_Control_Communication-srv:posSwitcher instead.")
+  (posSwitcher m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <srv_vehicleStatus-request>) ostream)
   "Serializes a message object of type '<srv_vehicleStatus-request>"
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'status)) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'posSwitcher)) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <srv_vehicleStatus-request>) istream)
   "Deserializes a message object of type '<srv_vehicleStatus-request>"
     (cl:setf (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'status)) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 0) (cl:slot-value msg 'posSwitcher)) (cl:read-byte istream))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<srv_vehicleStatus-request>)))
@@ -43,24 +55,26 @@
   "CITIUS_Control_Communication/srv_vehicleStatusRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<srv_vehicleStatus-request>)))
   "Returns md5sum for a message object of type '<srv_vehicleStatus-request>"
-  "2bec2362253a5964940299039dd0e122")
+  "1f3623f9c7abdd5ed10d69c51d0221ac")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'srv_vehicleStatus-request)))
   "Returns md5sum for a message object of type 'srv_vehicleStatus-request"
-  "2bec2362253a5964940299039dd0e122")
+  "1f3623f9c7abdd5ed10d69c51d0221ac")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<srv_vehicleStatus-request>)))
   "Returns full string definition for message of type '<srv_vehicleStatus-request>"
-  (cl:format cl:nil "uint8 status~%~%~%"))
+  (cl:format cl:nil "uint8 status~%uint8 posSwitcher~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'srv_vehicleStatus-request)))
   "Returns full string definition for message of type 'srv_vehicleStatus-request"
-  (cl:format cl:nil "uint8 status~%~%~%"))
+  (cl:format cl:nil "uint8 status~%uint8 posSwitcher~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <srv_vehicleStatus-request>))
   (cl:+ 0
+     1
      1
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <srv_vehicleStatus-request>))
   "Converts a ROS message object to a list"
   (cl:list 'srv_vehicleStatus-request
     (cl:cons ':status (status msg))
+    (cl:cons ':posSwitcher (posSwitcher msg))
 ))
 ;//! \htmlinclude srv_vehicleStatus-response.msg.html
 
@@ -101,10 +115,10 @@
   "CITIUS_Control_Communication/srv_vehicleStatusResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<srv_vehicleStatus-response>)))
   "Returns md5sum for a message object of type '<srv_vehicleStatus-response>"
-  "2bec2362253a5964940299039dd0e122")
+  "1f3623f9c7abdd5ed10d69c51d0221ac")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'srv_vehicleStatus-response)))
   "Returns md5sum for a message object of type 'srv_vehicleStatus-response"
-  "2bec2362253a5964940299039dd0e122")
+  "1f3623f9c7abdd5ed10d69c51d0221ac")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<srv_vehicleStatus-response>)))
   "Returns full string definition for message of type '<srv_vehicleStatus-response>"
   (cl:format cl:nil "bool confirmation~%~%~%"))

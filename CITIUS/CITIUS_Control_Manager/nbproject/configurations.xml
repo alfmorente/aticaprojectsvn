@@ -53,6 +53,8 @@
           <ccTool>
             <incDir>
               <pElem>include</pElem>
+              <pElem>msg_gen/cpp/include</pElem>
+              <pElem>srv_gen/cpp/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="CITIUS_Control_Manager"</Elem>
@@ -107,6 +109,7 @@
         <ccTool>
           <incDir>
             <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
             <pElem>srv_gen/cpp/include</pElem>
             <pElem>.</pElem>
           </incDir>
@@ -115,6 +118,7 @@
       <folder path="src">
         <ccTool>
           <incDir>
+            <pElem>srv_gen/cpp/include</pElem>
             <pElem>/usr/src/gtest/include</pElem>
             <pElem>/usr/src/gtest</pElem>
             <pElem>gtest</pElem>

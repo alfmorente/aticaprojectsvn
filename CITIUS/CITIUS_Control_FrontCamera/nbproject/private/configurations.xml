@@ -24,10 +24,6 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
-          <df name="CMakeFiles">
-            <df name="cmTryCompileExec.dir">
-            </df>
-          </df>
         </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
@@ -112,7 +108,6 @@
       <df name="lib">
       </df>
       <df name="msg">
-        <in>msg_ctrlFrontCamera.msg</in>
       </df>
       <df name="msg_gen">
         <df name="cpp">

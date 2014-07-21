@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Electric/srv"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
   "msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h"
+  "msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h"
   "msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h"
 )
 

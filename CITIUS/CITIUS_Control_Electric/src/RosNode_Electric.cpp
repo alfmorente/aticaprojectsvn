@@ -5,8 +5,8 @@
  ******************************************************************************/
 
 RosNode_Electric::RosNode_Electric() {
-    this->setEMNodeStatus(NODESTATUS_INIT);
-    this->dElectric = new ElectricConnectionManager();
+    emNodeStatus = NODESTATUS_INIT;
+    dElectric = new ElectricConnectionManager();
 }
 
 /*******************************************************************************
@@ -15,9 +15,31 @@ RosNode_Electric::RosNode_Electric() {
 
 void RosNode_Electric::initROS() {
     ros::NodeHandle nh;
-    this->clientVehicleStatus = nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
-    this->pubElectricInfo = nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInfo",1000);
-    this->pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command",1000);
+    clientVehicleStatus = nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
+    pubElectricInfo = nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInfo",1000);
+    pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command",1000);
+    pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher",1000);
+        
+    // Se solicita la activacion del resto de nodos del vehiculo
+    ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehiculo");
+    CITIUS_Control_Electric::srv_vehicleStatus service;
+    
+    service.request.status = OPERATION_MODE_INICIANDO;
+    // Solicitar a vehiculo posicion conmutador local/teleoperado
+    // TODO
+    service.request.posSwitcher = SWITCHER_LOCAL;
+    
+    while(!clientVehicleStatus.call(service)){
+        ros::spinOnce();
+    }
+    if(service.response.confirmation) {
+        ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
+        emNodeStatus = NODESTATUS_OK;
+    } else {
+        ROS_INFO("[Control] Electric - El vehiculo no se ha podido iniciar");
+        emNodeStatus = NODESTATUS_OFF;
+    }
+    
 }
 
 
@@ -27,12 +49,7 @@ void RosNode_Electric::initROS() {
 
 // Get del estado del nodo
 short RosNode_Electric::getEMNodeStatus(){
-    return this->emNodeStatus;
-}
-
-// Set del estado del nodo
-void RosNode_Electric::setEMNodeStatus(short newEMNodeStatus){
-    this->emNodeStatus = newEMNodeStatus;
+    return emNodeStatus;
 }
 
 // Obtener el publicador de informacion del vehiculo
@@ -67,23 +84,28 @@ void RosNode_Electric::manageMessage(FrameDriving frame){
             srvVS.request.status = OPERATION_MODE_APAGANDO;
             while(!this->getClientVehicleStatus().call(srvVS));
             if(srvVS.response.confirmation){
-                // Envio de confirmacion de apagado
-                this->getDriverMng()->setParam(TURN_OFF,1);
-                // Desconexion del vehiculo
-                this->getDriverMng()->disconnectVehicle();
+                
                 // Cambio de estado de nodo
-                this->setEMNodeStatus(NODESTATUS_OFF);
+                emNodeStatus = NODESTATUS_OFF;
+                // Envio de confirmacion de apagado
+                dElectric->setParam(TURN_OFF,1);
+                // Desconexion del vehiculo
+                dElectric->disconnectVehicle();
                 // Cambio de estado vehiculo
                 ros::NodeHandle nh;
                 nh.setParam("vehicleStatus",OPERATION_MODE_APAGANDO);
                 
             }
             
+        }else if(frame.element == OPERATION_MODE_SWITCH){
+            CITIUS_Control_Electric::msg_switcher vMsg;
+            vMsg.switcher = frame.value;
+            pubSwitcher.publish(vMsg);
         }else{
             CITIUS_Control_Electric::msg_electricInfo vMsg;
             vMsg.id_device = frame.element;
             vMsg.value = frame.value;
-            this->getPubElectricInfo().publish(vMsg);
+            pubElectricInfo.publish(vMsg);
         }
     }else{
         ROS_INFO("[Control] Electric - Trama invalida recibida");

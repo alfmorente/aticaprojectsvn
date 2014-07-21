@@ -27,16 +27,21 @@ struct srv_vehicleStatusRequest_ {
 
   srv_vehicleStatusRequest_()
   : status(0)
+  , posSwitcher(0)
   {
   }
 
   srv_vehicleStatusRequest_(const ContainerAllocator& _alloc)
   : status(0)
+  , posSwitcher(0)
   {
   }
 
   typedef uint8_t _status_type;
   uint8_t status;
+
+  typedef uint8_t _posSwitcher_type;
+  uint8_t posSwitcher;
 
 
   typedef boost::shared_ptr< ::CITIUS_Control_Manager::srv_vehicleStatusRequest_<ContainerAllocator> > Ptr;
@@ -101,12 +106,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_Manager::srv_vehicleStatusRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "284aa12dd9e9e760802ac9f38036ea5e";
+    return "7da38e8e5692318326e08c04ca4b6e67";
   }
 
   static const char* value(const  ::CITIUS_Control_Manager::srv_vehicleStatusRequest_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x284aa12dd9e9e760ULL;
-  static const uint64_t static_value2 = 0x802ac9f38036ea5eULL;
+  static const uint64_t static_value1 = 0x7da38e8e56923183ULL;
+  static const uint64_t static_value2 = 0x26e08c04ca4b6e67ULL;
 };
 
 template<class ContainerAllocator>
@@ -124,6 +129,7 @@ struct Definition< ::CITIUS_Control_Manager::srv_vehicleStatusRequest_<Container
   static const char* value() 
   {
     return "uint8 status\n\
+uint8 posSwitcher\n\
 \n\
 ";
   }
@@ -190,6 +196,7 @@ template<class ContainerAllocator> struct Serializer< ::CITIUS_Control_Manager::
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
     stream.next(m.status);
+    stream.next(m.posSwitcher);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -223,7 +230,7 @@ template<>
 struct MD5Sum<CITIUS_Control_Manager::srv_vehicleStatus> {
   static const char* value() 
   {
-    return "2bec2362253a5964940299039dd0e122";
+    return "1f3623f9c7abdd5ed10d69c51d0221ac";
   }
 
   static const char* value(const CITIUS_Control_Manager::srv_vehicleStatus&) { return value(); } 
@@ -243,7 +250,7 @@ template<class ContainerAllocator>
 struct MD5Sum<CITIUS_Control_Manager::srv_vehicleStatusRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "2bec2362253a5964940299039dd0e122";
+    return "1f3623f9c7abdd5ed10d69c51d0221ac";
   }
 
   static const char* value(const CITIUS_Control_Manager::srv_vehicleStatusRequest_<ContainerAllocator> &) { return value(); } 
@@ -263,7 +270,7 @@ template<class ContainerAllocator>
 struct MD5Sum<CITIUS_Control_Manager::srv_vehicleStatusResponse_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "2bec2362253a5964940299039dd0e122";
+    return "1f3623f9c7abdd5ed10d69c51d0221ac";
   }
 
   static const char* value(const CITIUS_Control_Manager::srv_vehicleStatusResponse_<ContainerAllocator> &) { return value(); } 

@@ -17,3 +17,39 @@ make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Contro
 make: *** [cmTryCompileExec/fast] Error 2
 
 
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3579783808/fast"
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp»
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3579783808.dir/build.make CMakeFiles/cmTryCompileExec3579783808.dir/build
+make[2]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3579783808.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3579783808.dir/CheckSymbolExists.c.o   -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec3579783808
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3579783808.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3579783808.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3579783808 -rdynamic 
+CMakeFiles/cmTryCompileExec3579783808.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: ld devolvió el estado de salida 1
+make[2]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp»
+make[2]: *** [cmTryCompileExec3579783808] Error 1
+make[1]: *** [cmTryCompileExec3579783808/fast] Error 2
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp»
+
+File /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

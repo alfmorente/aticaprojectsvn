@@ -59,6 +59,7 @@ CMakeFiles/manager.dir/src/Manager.cpp.o
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Manager.h
  include/constant.h
+ msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h
 CMakeFiles/manager.dir/src/main.cpp.o
@@ -119,5 +120,6 @@ CMakeFiles/manager.dir/src/main.cpp.o
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Manager.h
  include/constant.h
+ msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h

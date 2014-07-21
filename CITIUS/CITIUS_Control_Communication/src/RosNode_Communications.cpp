@@ -31,27 +31,78 @@ void RosNode_Communications::initROS() {
  *                     INICIALIZACION DE ARTEFACTOS JAUS                        *
  *******************************************************************************
  ******************************************************************************/
+
 void RosNode_Communications::initJAUS() {
+    
     // Inicializacion de JAUS
-    this->configData = new FileLoader("nodeManager.conf");
-    this->handler = new JausHandler();
+    configData = new FileLoader("nodeManager.conf");
+    handler = new JausHandler();
+    
     try {
-        this->configData = new FileLoader("nodeManager.conf");
-        this->handler = new JausHandler();
-        this->nm = new NodeManager(this->configData, this->handler);
+        
+        configData = new FileLoader("nodeManager.conf");
+        handler = new JausHandler();
+        nm = new NodeManager(this->configData, this->handler);
+        
     }catch(...){
+        
         ROS_INFO("[Control] Communications - No se ha podido inicializar JAUS");
+        
     }
     
-    // Primitive Driver
-    this->primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
-    this->missionSpoolerComponent = ojCmptCreate((char *) "Mission Spooler", JAUS_MISSION_SPOOLER, 1);
-    this->primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
-    this->visualSensorComponent = ojCmptCreate((char *) "Visual Sensor", JAUS_VISUAL_SENSOR, 1);
-    this->platformSensorComponent = ojCmptCreate((char *) "Platform Sensor", JAUS_PLATFORM_SENSOR, 1);
-    this->globalWaypointDriverComponent = ojCmptCreate((char *)"Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER,1);
-    this->velocityStateSensorComponent = ojCmptCreate((char *)"Velocity State Sensor",JAUS_VELOCITY_STATE_SENSOR,1);
-    this->globalPoseSensorComponent = ojCmptCreate((char *)"Global Pose Sensor",JAUS_GLOBAL_POSE_SENSOR,1);
+    /*
+     * Creacion de componentes
+     * 
+     */
+    
+    //Primitive Driver
+    primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
+    if (primitiveDriverComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente PRIMITIVE DRIVER");
+        exit(0);
+    }
+    
+    // Mission Spooler
+    missionSpoolerComponent = ojCmptCreate((char *) "Mission Spooler", JAUS_MISSION_SPOOLER, 1);
+    if (missionSpoolerComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente MISSION SPOOLER");
+        exit(0);
+    }
+    
+    // Visual Sensor
+    visualSensorComponent = ojCmptCreate((char *) "Visual Sensor", JAUS_VISUAL_SENSOR, 1);
+    if (visualSensorComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente VISUAL SENSOR");
+        exit(0);
+    }
+    
+    // Platform Sensor
+    platformSensorComponent = ojCmptCreate((char *) "Platform Sensor", JAUS_PLATFORM_SENSOR, 1);
+    if (platformSensorComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente PLATFORM SENSOR");
+        exit(0);
+    }
+    
+    // Global Waypoint Driver
+    globalWaypointDriverComponent = ojCmptCreate((char *)"Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER,1);
+    if (globalWaypointDriverComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente GLOBAL WAYPOINT DRIVER");
+        exit(0);
+    }
+    
+    // Velocity State Sensor
+    velocityStateSensorComponent = ojCmptCreate((char *)"Velocity State Sensor",JAUS_VELOCITY_STATE_SENSOR,1);
+    if (velocityStateSensorComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente VELOCITY STATE SENSOR");
+        exit(0);
+    }
+    
+    // Global Pose Sensor
+    globalPoseSensorComponent = ojCmptCreate((char *)"Global Pose Sensor",JAUS_GLOBAL_POSE_SENSOR,1);
+    if (globalPoseSensorComponent == NULL) {
+        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente GLOBAL POSE SENSOR");
+        exit(0);
+    }
 }
 
 /*******************************************************************************

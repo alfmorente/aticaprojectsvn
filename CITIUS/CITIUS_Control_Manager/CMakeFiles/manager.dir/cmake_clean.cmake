@@ -1,6 +1,9 @@
 FILE(REMOVE_RECURSE
+  "msg_gen"
   "srv_gen"
+  "msg_gen"
   "srv_gen"
+  "src/CITIUS_Control_Manager/msg"
   "src/CITIUS_Control_Manager/srv"
   "CMakeFiles/manager.dir/src/main.cpp.o"
   "CMakeFiles/manager.dir/src/Manager.cpp.o"

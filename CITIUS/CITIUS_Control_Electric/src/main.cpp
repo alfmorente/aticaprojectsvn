@@ -19,18 +19,25 @@ using namespace std;
 int main(int argc, char** argv) {
     
     // Iniciacion del middleware (ROS) para el nodo Driving
-    ros::init(argc,argv,"[Control] ROS Node - Electric");
+    ros::init(argc, argv, "Control_ROS_Node_Electric");
     
     RosNode_Electric *nodeElectric = new RosNode_Electric();
     
-    if(nodeElectric->getDriverMng()->connectVehicle()){
+    // Intentos de reconexion
+    short numOfAttemps = 0;
+    ROS_INFO("[Control] Electric - Conectando con subsistema de gestion de energia");
+    while(!nodeElectric->getDriverMng()->connectVehicle() && numOfAttemps < MAX_ATTEMPS){
+        numOfAttemps++;
+    }
+    
+    if(numOfAttemps < MAX_ATTEMPS){
      // Inicio de artefactos ROS
         nodeElectric->initROS();
 
         // Espera a permiso para comenzar a operar ROSNODE_OK
-        ROS_INFO("[Control] Electric - Esperando activacion de nodo");
-        nodeElectric->setEMNodeStatus(NODESTATUS_OK);
-        ROS_INFO("[Control] Electric - Nodo listo para operar");
+        if(nodeElectric->getEMNodeStatus() != NODESTATUS_OFF){
+                ROS_INFO("[Control] Electric - Nodo listo para operar");
+        }
         
         // Temporizador de requerimiento de informacion
         clock_t initTime, finalTime;
@@ -60,7 +67,7 @@ int main(int argc, char** argv) {
             }
         }
     } else {
-        ROS_INFO("[Control] Electric - No se puede conectar al vehículo");
+        ROS_INFO("[Control] Electric - No se puede conectar al vehiculo. Maximo numero de reintentos realizados.");
     }
     ROS_INFO("[Control] Electric - Nodo finalizado");
     return 0;

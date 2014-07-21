@@ -17,6 +17,7 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "include"
   "/opt/ros/groovy/include"
+  "msg_gen/cpp/include"
   "srv_gen/cpp/include"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

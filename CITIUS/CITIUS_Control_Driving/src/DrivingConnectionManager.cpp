@@ -19,7 +19,7 @@ bool DrivingConnectionManager::connectVehicle() {
     // Creacion y apertura del socket
     this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
     if (this->socketDescriptor < 0) {
-        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conducción");
+        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
         return false;
     } else {
         struct hostent *he;

@@ -24,10 +24,6 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
-          <df name="CMakeFiles">
-            <df name="cmTryCompileExec.dir">
-            </df>
-          </df>
         </df>
         <df name="communications.dir">
           <df name="src">
@@ -40,6 +36,8 @@
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
         <df name="doxygen.dir">
+        </df>
+        <df name="Progress">
         </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
@@ -196,7 +194,7 @@
                 </df>
               </df>
               <df name="experimental">
-                <in>aditionalGPSINSInfo4Message.h</in>
+                <in>additionalGPSINSInfo4Message.h</in>
                 <in>anemometerInfo5Message.h</in>
                 <in>heartbeatChannelState16Message.h</in>
                 <in>heartbeatPositionInfo17Message.h</in>
@@ -483,7 +481,7 @@
                 </df>
               </df>
               <df name="experimental">
-                <in>aditionalGPSINSInfo4Message.c</in>
+                <in>additionalGPSINSInfo4Message.c</in>
                 <in>anemometerInfo5Message.c</in>
                 <in>heartbeatChannelState16Message.c</in>
                 <in>heartbeatPositionInfo17Message.c</in>
@@ -682,7 +680,6 @@
             <in>jausState.c</in>
             <in>jausSubsystem.c</in>
           </df>
-          <in>Makefile</in>
         </df>
         <df name="libopenJaus">
           <df name="Build">

@@ -10,6 +10,12 @@
 XSensMTi700Driver.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/XSensMTi700Driver.h
 
+/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/main.cpp
+cstdlib
+-
+XSensMTi700Driver.h
+/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/XSensMTi700Driver.h
+
 include/XSensMTi700Driver.h
 iostream
 -

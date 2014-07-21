@@ -49,6 +49,8 @@
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir">
         </df>
+        <df name="ROSBUILD_genmsg_py.dir">
+        </df>
         <df name="ROSBUILD_genmsg_roseus_CITIUS_Control_Manager.dir">
         </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
@@ -64,6 +66,8 @@
         <df name="rosbuild_premsgsrvgen.dir">
         </df>
         <df name="rospack_genmsg.dir">
+        </df>
+        <df name="rospack_genmsg_all.dir">
         </df>
         <df name="rospack_genmsg_libexe.dir">
         </df>
@@ -112,8 +116,23 @@
       </df>
       <df name="lib">
       </df>
+      <df name="msg">
+      </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Manager">
+              <in>msg_switcher.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
       <df name="src">
         <df name="CITIUS_Control_Manager">
+          <df name="msg">
+          </df>
           <df name="srv">
           </df>
         </df>

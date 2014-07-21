@@ -17,3 +17,144 @@ make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Contro
 make: *** [cmTryCompileExec/fast] Error 2
 
 
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2010747144/fast"
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2010747144.dir/build.make CMakeFiles/cmTryCompileExec2010747144.dir/build
+make[2]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2010747144.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2010747144.dir/CheckSymbolExists.c.o   -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec2010747144
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2010747144.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2010747144.dir/CheckSymbolExists.c.o  -o cmTryCompileExec2010747144 -rdynamic 
+CMakeFiles/cmTryCompileExec2010747144.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: ld devolvió el estado de salida 1
+make[2]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[2]: *** [cmTryCompileExec2010747144] Error 1
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[1]: *** [cmTryCompileExec2010747144/fast] Error 2
+
+File /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1042472467/fast"
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1042472467.dir/build.make CMakeFiles/cmTryCompileExec1042472467.dir/build
+make[2]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1042472467.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1042472467.dir/CheckSymbolExists.c.o   -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec1042472467
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1042472467.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec1042472467.dir/CheckSymbolExists.c.o  -o cmTryCompileExec1042472467 -rdynamic 
+CMakeFiles/cmTryCompileExec1042472467.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: ld devolvió el estado de salida 1
+make[2]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[2]: *** [cmTryCompileExec1042472467] Error 1
+make[1]: *** [cmTryCompileExec1042472467/fast] Error 2
+
+File /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3737078060/fast"
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3737078060.dir/build.make CMakeFiles/cmTryCompileExec3737078060.dir/build
+make[2]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3737078060.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3737078060.dir/CheckSymbolExists.c.o   -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+gcc: error: /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c: No existe el archivo o el directorio
+gcc: error fatal: no hay ficheros de entrada
+compilación terminada.
+make[2]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[2]: *** [CMakeFiles/cmTryCompileExec3737078060.dir/CheckSymbolExists.c.o] Error 4
+make[1]: *** [cmTryCompileExec3737078060/fast] Error 2
+
+File /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3317394087/fast"
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3317394087.dir/build.make CMakeFiles/cmTryCompileExec3317394087.dir/build
+make[2]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3317394087.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3317394087.dir/CheckSymbolExists.c.o   -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec3317394087
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3317394087.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3317394087.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3317394087 -rdynamic 
+CMakeFiles/cmTryCompileExec3317394087.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: ld devolvió el estado de salida 1
+make[2]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp»
+make[2]: *** [cmTryCompileExec3317394087] Error 1
+make[1]: *** [cmTryCompileExec3317394087/fast] Error 2
+
+File /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

@@ -16,31 +16,49 @@ ElectricConnectionManager::ElectricConnectionManager() {
 // Conexión con dispositivo
 bool ElectricConnectionManager::connectVehicle(){
     // Creacion y apertura del socket
-    this->setSocketDescriptor(socket(AF_INET, SOCK_STREAM, 0));
-    if (this->getSocketDescriptor() < 0) {
-        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conducción");
+    this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+    if (this->socketDescriptor < 0) {
+        ROS_INFO("[Control] Electric - Imposible crear socket para comunicacion con Payload de Conduccion");
         return false;
-    }else{
-        // Establecimiento de modo no bloqueante en operaciones de L/E
-        if ( fcntl(this->getSocketDescriptor(), F_SETFL, O_NONBLOCK) < 0 ){
-            ROS_INFO("[Control] Electric - Imposible establecer socket como no bloqueante en operaciones de L/E");
-            return false;
+    } else {
+        struct hostent *he;
+        /* estructura que recibirá información sobre el nodo remoto */
+
+        struct sockaddr_in server;
+        /* información sobre la dirección del servidor */
+
+        if ((he = gethostbyname(IP_PAYLOAD_CONDUCCION_DRIVING)) == NULL) {
+            /* llamada a gethostbyname() */
+            ROS_INFO("[Control] Electric - Imposible obtener el nombre del servidor socket");
+            exit(-1);
+        }
+        
+        if ((this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+            /* llamada a socket() */
+            ROS_INFO("[Control] Electric - Imposible crear socket para comunicacion con Payload de Conduccion");
+            exit(-1);
+        }
+
+        server.sin_family = AF_INET;
+        server.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
+        /* htons() es necesaria nuevamente ;-o */
+        server.sin_addr = *((struct in_addr *) he->h_addr);
+        /*he->h_addr pasa la información de ``*he'' a "h_addr" */
+        bzero(&(server.sin_zero), 8);
+
+        if (connect(this->socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+            /* llamada a connect() */
+            ROS_INFO("[Control] Electric - Imposible conectar con socket socket para comunicacion con Payload de Conduccion");
+            exit(-1);
+
+        }
+        ROS_INFO("[Control] Electric - Socket con Payload de Conduccion creado con exito y conectado");
+        // Test if the socket is in non-blocking mode:
+        // Put the socket in non-blocking mode:
+        if (fcntl(this->socketDescriptor, F_SETFL, fcntl(this->socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
+            ROS_INFO("[Control] Electric - Socket establecido como no bloqueante en operaciones L/E");
         }else{
-            ROS_INFO("[Control] Electric - Socket establecido como no bloqueante en operaciones de L/E");
-            
-            struct sockaddr_in socketAddr;
-            socketAddr.sin_family = AF_INET;
-            socketAddr.sin_addr.s_addr = inet_addr(IP_PAYLOAD_CONDUCCION_DRIVING);
-            socketAddr.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
-            // Conexión
-            if (connect(this->getSocketDescriptor(), (struct sockaddr *) &socketAddr, sizeof (socketAddr)) < 0) {
-                ROS_INFO("[Control] Electric :: Imposible conectar con socket para comunicacion con Payload de Conduccion");
-                shutdown(this->getSocketDescriptor(), 2);
-                close(this->getSocketDescriptor());
-                return false;
-            } else {   
-                ROS_INFO("[Control] Electric :: Conexión con socket para comunicacion con Payload de Conduccion establecida");
-            }
+            ROS_INFO("[Control] Electric - Imposible establecer socket como no bloqueante en operaciones L/E");
         }
     }
     return true;

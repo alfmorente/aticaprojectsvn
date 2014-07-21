@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/DrivingCameraManager.cpp
+DrivingCameraManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/DrivingCameraManager.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp
+RosNode_FrontCamera.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp
 cstdlib
 -

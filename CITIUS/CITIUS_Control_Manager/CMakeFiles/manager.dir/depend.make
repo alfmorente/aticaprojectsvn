@@ -58,6 +58,7 @@ CMakeFiles/manager.dir/src/Manager.cpp.o: /opt/ros/groovy/include/ros/wall_timer
 CMakeFiles/manager.dir/src/Manager.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/manager.dir/src/Manager.cpp.o: include/Manager.h
 CMakeFiles/manager.dir/src/Manager.cpp.o: include/constant.h
+CMakeFiles/manager.dir/src/Manager.cpp.o: msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h
 CMakeFiles/manager.dir/src/Manager.cpp.o: srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
 CMakeFiles/manager.dir/src/Manager.cpp.o: srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h
 
@@ -118,6 +119,7 @@ CMakeFiles/manager.dir/src/main.cpp.o: /opt/ros/groovy/include/ros/wall_timer_op
 CMakeFiles/manager.dir/src/main.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/manager.dir/src/main.cpp.o: include/Manager.h
 CMakeFiles/manager.dir/src/main.cpp.o: include/constant.h
+CMakeFiles/manager.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h
 CMakeFiles/manager.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
 CMakeFiles/manager.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h
 

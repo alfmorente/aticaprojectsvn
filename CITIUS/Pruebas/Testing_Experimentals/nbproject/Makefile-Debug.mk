@@ -70,18 +70,18 @@ LDLIBSOPTIONS=libjaus/lib/libjaus.so libopenJaus/lib/libopenJaus.so -lpthread
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Ilibjaus/include -IlibopenJaus/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	${RM} $@.d
+	$(COMPILE.cc) -g -Ilibjaus/include -IlibopenJaus/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/recieveExp.o: recieveExp.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Ilibjaus/include -IlibopenJaus/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/recieveExp.o recieveExp.cpp
+	${RM} $@.d
+	$(COMPILE.cc) -g -Ilibjaus/include -IlibopenJaus/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/recieveExp.o recieveExp.cpp
 
 ${OBJECTDIR}/sendExp.o: sendExp.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Ilibjaus/include -IlibopenJaus/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sendExp.o sendExp.cpp
+	${RM} $@.d
+	$(COMPILE.cc) -g -Ilibjaus/include -IlibopenJaus/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/sendExp.o sendExp.cpp
 
 # Subprojects
 .build-subprojects:

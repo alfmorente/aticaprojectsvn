@@ -21,12 +21,12 @@
 },
 {
   "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/gtest",
-  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TEST_MAGNETOMETER\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
+  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TEST_MAGNETOMETER\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
   "file": "/usr/src/gtest/src/gtest-all.cc"
 },
 {
   "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/gtest",
-  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TEST_MAGNETOMETER\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
+  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"TEST_MAGNETOMETER\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
   "file": "/usr/src/gtest/src/gtest_main.cc"
 }
 ]

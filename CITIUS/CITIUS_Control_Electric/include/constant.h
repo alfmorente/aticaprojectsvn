@@ -93,6 +93,7 @@ extern "C" {
 #define OBSERVATION_SYSTEM_SUPPLY_24 54
 #define OBSERVATION_SYSTEM_SUPPLY_48 55
 #define SUPPLY_ALARMS 56
+#define OPERATION_MODE_SWITCH 57
 
 
 
@@ -120,8 +121,8 @@ extern "C" {
  *                   SOCKET PAYLOAD DE CONDUCCION
 *******************************************************************************/
 
-#define IP_PAYLOAD_CONDUCCION_DRIVING "localhost"
-#define PORT_PAYLOAD_CONDUCCION_DRIVING 5000
+#define IP_PAYLOAD_CONDUCCION_DRIVING "127.0.0.1"
+#define PORT_PAYLOAD_CONDUCCION_DRIVING 10000
 
 /*******************************************************************************
  * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO
@@ -141,4 +142,17 @@ typedef struct{
     short element;
     short value;
 }FrameDriving;
+
+/*******************************************************************************
+ *           MAXIMO NUMERO DE INTENTOS DE CONEXION
+*******************************************************************************/
+
+#define MAX_ATTEMPS 5
+
+/*******************************************************************************
+ *              POSICION CONMUTADOR LOCAL - TELEOPERADOR
+*******************************************************************************/
+#define SWITCHER_INIT -1
+#define SWITCHER_LOCAL 0
+#define SWITCHER_TELECONTROL 1
 

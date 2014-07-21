@@ -26,6 +26,7 @@ extern "C" {
 #include "constant.h"
 #include "CITIUS_Control_Electric/msg_electricInfo.h"
 #include "CITIUS_Control_Electric/msg_command.h"
+#include "CITIUS_Control_Electric/msg_switcher.h"
 #include "CITIUS_Control_Electric/srv_vehicleStatus.h"
 
 class RosNode_Electric{
@@ -35,7 +36,8 @@ private:
     // Publicador de informacion de camara
     ros::Publisher pubElectricInfo;
     ros::Publisher pubCommand;
-    // Servidor de estado de nodo
+    ros::Publisher pubSwitcher;
+    // Cliente de estado de vehiculo
     ros::ServiceClient clientVehicleStatus;
     // Driver de la cámara
     ElectricConnectionManager *dElectric;
