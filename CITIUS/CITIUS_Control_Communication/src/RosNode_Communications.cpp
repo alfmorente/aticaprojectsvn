@@ -55,53 +55,164 @@ void RosNode_Communications::initJAUS() {
      * 
      */
     
-    //Primitive Driver
-    primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
-    if (primitiveDriverComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente PRIMITIVE DRIVER");
-        exit(0);
-    }
-    
     // Mission Spooler
     missionSpoolerComponent = ojCmptCreate((char *) "Mission Spooler", JAUS_MISSION_SPOOLER, 1);
     if (missionSpoolerComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente MISSION SPOOLER");
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente MISSION SPOOLER");
         exit(0);
+    }else{
+        
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(missionSpoolerComponent, JAUS_MISSION_SPOOLER, JAUS_REPORT_MISSION_STATUS, 0xFF);
+        
+        // Mensajes que recibe
+        ojCmptAddServiceInputMessage(missionSpoolerComponent, JAUS_MISSION_SPOOLER, JAUS_RUN_MISSION, 0xFF);
+    
+        // Funciones asociadas a la maquina de estados
+        // TODO
+        
+        // Funciones de recepcion de mensajes (Callbacks)
+        ojCmptSetMessageCallback(missionSpoolerComponent, JAUS_RUN_MISSION, fcn_receive_run_mission);
+        
+    }
+    
+    // Primitive Driver
+    primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
+    if (primitiveDriverComponent == NULL) {
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente PRIMITIVE DRIVER");
+        exit(0);
+    }else{
+    
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_WRENCH_EFFORT, 0xFF);
+        ojCmptAddServiceOutputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_DISCRETE_DEVICES, 0xFF);
+        ojCmptAddServiceOutputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_UGV_INFO_12, 0xFF);
+        
+        // Mensajes que recibe
+        ojCmptAddServiceInputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_SET_WRENCH_EFFORT, 0xFF);
+        ojCmptAddServiceInputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
+    
+        // Funciones asociadas a la maquina de estados
+        // TODO
+        
+        // Funciones de recepcion de mensajes (Callbacks)
+        ojCmptSetMessageCallback(primitiveDriverComponent, JAUS_SET_WRENCH_EFFORT, fcn_receive_set_wrench_effort);
+        ojCmptSetMessageCallback(primitiveDriverComponent, JAUS_SET_DISCRETE_DEVICES, fcn_receive_set_discrete_devices);
     }
     
     // Visual Sensor
     visualSensorComponent = ojCmptCreate((char *) "Visual Sensor", JAUS_VISUAL_SENSOR, 1);
     if (visualSensorComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente VISUAL SENSOR");
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente VISUAL SENSOR");
         exit(0);
+    }else{
+        
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_CAMERA_POSE, 0xFF);
+        ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_SIGNALING_ELEMENTS_25, 0xFF);
+        ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_POSITIONER_20, 0xFF);
+        ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_DAY_TIME_CAMERA_22, 0xFF);
+        ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_NIGHT_TIME_CAMERA_24, 0xFF);
+        
+        // Mensajes que recibe
+        ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_CAMERA_POSE, 0xFF);
+        ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_SIGNALING_ELEMENTS_18, 0xFF);
+        ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_POSITIONER_19, 0xFF);
+        ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_DAY_TIME_CAMERA_21, 0xFF);
+        ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_NIGHT_TIME_CAMERA_23, 0xFF);
+    
+        // Funciones asociadas a la maquina de estados
+        // TODO
+        
+        // Funciones de recepcion de mensajes (Callbacks)
+        ojCmptSetMessageCallback(visualSensorComponent, JAUS_SET_CAMERA_POSE, fcn_receive_set_camera_pose);
+        ojCmptSetMessageCallback(visualSensorComponent, JAUS_SET_SIGNALING_ELEMENTS_18, fcn_receive_set_signaling_elements);
+        ojCmptSetMessageCallback(visualSensorComponent, JAUS_SET_POSITIONER_19, fcn_receive_set_positioner);
+        ojCmptSetMessageCallback(visualSensorComponent, JAUS_SET_DAY_TIME_CAMERA_21, fcn_receive_set_day_time_camera);
+        ojCmptSetMessageCallback(visualSensorComponent, JAUS_SET_NIGHT_TIME_CAMERA_23, fcn_receive_set_night_time_camera);
+    
     }
     
     // Platform Sensor
     platformSensorComponent = ojCmptCreate((char *) "Platform Sensor", JAUS_PLATFORM_SENSOR, 1);
     if (platformSensorComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente PLATFORM SENSOR");
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente PLATFORM SENSOR");
         exit(0);
+    }else{
+        
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
+    
+        // Funciones asociadas a la maquina de estados
+        // TODO   
+    
     }
     
     // Global Waypoint Driver
     globalWaypointDriverComponent = ojCmptCreate((char *)"Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER,1);
     if (globalWaypointDriverComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente GLOBAL WAYPOINT DRIVER");
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL WAYPOINT DRIVER");
         exit(0);
+    }else{
+        
+        // REVISAR COMPONENTE INNECESARIO PARA UGV
+        // TODO!!!!!!!!!!!!!!!
     }
     
     // Velocity State Sensor
     velocityStateSensorComponent = ojCmptCreate((char *)"Velocity State Sensor",JAUS_VELOCITY_STATE_SENSOR,1);
     if (velocityStateSensorComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente VELOCITY STATE SENSOR");
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente VELOCITY STATE SENSOR");
         exit(0);
+    }else{
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(velocityStateSensorComponent, JAUS_VELOCITY_STATE_SENSOR, JAUS_REPORT_TRAVEL_SPEED, 0xFF);
+        ojCmptAddServiceOutputMessage(velocityStateSensorComponent, JAUS_VELOCITY_STATE_SENSOR, JAUS_REPORT_VELOCITY_STATE, 0xFF);
+        
+        // Mensajes que recibe
+        ojCmptAddServiceInputMessage(velocityStateSensorComponent, JAUS_VELOCITY_STATE_SENSOR, JAUS_SET_TRAVEL_SPEED, 0xFF);
+    
+        // Funciones asociadas a la maquina de estados
+        // TODO
+        
+        // Funciones de recepcion de mensajes (Callbacks)
+        ojCmptSetMessageCallback(velocityStateSensorComponent, JAUS_SET_TRAVEL_SPEED, fcn_receive_set_travel_speed);
+    
     }
     
     // Global Pose Sensor
     globalPoseSensorComponent = ojCmptCreate((char *)"Global Pose Sensor",JAUS_GLOBAL_POSE_SENSOR,1);
     if (globalPoseSensorComponent == NULL) {
-        ROS_INFO("[Contorl] Communication - No se ha podido crear el componente GLOBAL POSE SENSOR");
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL POSE SENSOR");
         exit(0);
+    }else{
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(globalPoseSensorComponent, JAUS_GLOBAL_POSE_SENSOR, JAUS_REPORT_GLOBAL_POSE, 0xFF);
+        ojCmptAddServiceOutputMessage(globalPoseSensorComponent, JAUS_GLOBAL_POSE_SENSOR, JAUS_ADITIONAL_GPSINS_INFO_4, 0xFF);
+        
+    }
+    
+    // HeartBeat Information
+    heartBeatInformationComponent = ojCmptCreate((char *)"HeartBeat Information", JAUS_HEARTBEAT_INFORMATION,1);
+    if (heartBeatInformationComponent == NULL) {
+        ROS_INFO("[Control] Communication - No se ha podido crear el componente HEARTBEAT INFORMATION");
+        exit(0);
+    }else{
+        // Mensajes que envia
+        ojCmptAddServiceOutputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_CHANNEL_STATE_16, 0xFF);
+        ojCmptAddServiceOutputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_POSITION_INFO_17, 0xFF);
+        
+        // Mensajes que recibe
+        ojCmptAddServiceInputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_CHANNEL_STATE_16, 0xFF);
+        ojCmptAddServiceInputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_POSITION_INFO_17, 0xFF);
+    
+        // Funciones asociadas a la maquina de estados
+        // TODO
+        
+        // Funciones de recepcion de mensajes (Callbacks)
+        ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_CHANNEL_STATE_16, fcn_receive_heartbeat_channel_state);
+        ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_POSITION_INFO_17, fcn_receive_heartbeat_position_info);
+    
     }
 }
 
@@ -260,4 +371,64 @@ void RosNode_Communications::informStatus() {
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
+}
+
+/*******************************************************************************
+ *******************************************************************************
+ *                              CALLBACKS JAUS                                 *
+ *******************************************************************************
+ ******************************************************************************/
+
+// Componente Mission Spooler
+
+void fcn_receive_run_mission(OjCmpt cmp, JausMessage msg) {
+
+}
+
+// Componente Primitive Driver
+
+void fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
+
+}
+
+void fcn_receive_set_discrete_devices(OjCmpt cmp, JausMessage msg) {
+
+}
+
+// Componente Visual Sensor
+
+void fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage msg) {
+
+}
+
+void fcn_receive_set_signaling_elements(OjCmpt cmp, JausMessage msg) {
+
+}
+
+void fcn_receive_set_positioner(OjCmpt cmp, JausMessage msg) {
+
+}
+
+void fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
+
+}
+
+void fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
+
+}
+
+// Componente Velocity State Sensor
+
+void fcn_receive_set_travel_speed(OjCmpt cmp, JausMessage msg) {
+
+}
+
+// Componente HeartBeat Information
+
+void fcn_receive_heartbeat_channel_state(OjCmpt cmp, JausMessage msg) {
+
+}
+
+void fcn_receive_heartbeat_position_info(OjCmpt cmp, JausMessage msg) {
+
 }
