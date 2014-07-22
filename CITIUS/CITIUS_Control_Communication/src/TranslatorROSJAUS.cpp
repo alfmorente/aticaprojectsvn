@@ -74,7 +74,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case MOTOR_RPM:{
             // Generacion de mensaje especifico UGV Info
             UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            ugvm->rpmMotor = value;
+            ugvm->motor_rpm = value;
             jausAddressCopy(ugvm->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = ugvInfo12MessageToJausMessage(ugvm);
@@ -83,7 +83,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case MOTOR_TEMPERATURE:{
             // Generacion de mensaje especifico UGV Info
             UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            ugvm->temperaturaMotor = value;
+            ugvm->motor_temperature = value;
             jausAddressCopy(ugvm->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = ugvInfo12MessageToJausMessage(ugvm);
@@ -101,7 +101,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BLINKER_RIGHT:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->intermitenteDerechoActivo = (JausBoolean)value;
+            rsem->blinker_right = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -110,7 +110,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BLINKER_LEFT:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->intermitenteIzquierdoActivo = (JausBoolean) value;
+            rsem->blinker_left = (JausBoolean) value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -119,34 +119,44 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case BLINKER_EMERGENCY:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->intermitenteDerechoActivo = (JausBoolean)value;
-            rsem->intermitenteIzquierdoActivo = (JausBoolean)value;
+            rsem->blinker_right = (JausBoolean)value;
+            rsem->blinker_left = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
             reportSignalingElements25MessageDestroy(rsem);
             break;
         }case DIPSP:{
-            // TODO
-            
+            // Generacion de mensaje especifico Report signlaling elements
+            ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
+            rsem->dipsp = (JausBoolean)value;
+            jausAddressCopy(rsem->destination,jAdd);
+            // Generacion de mensaje JAUS global
+            jMsg = reportSignalingElements25MessageToJausMessage(rsem);
+            reportSignalingElements25MessageDestroy(rsem);
             break;
         }case DIPSS:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->lucesCortasActivas = (JausBoolean)value;
+            rsem->dipss = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
             reportSignalingElements25MessageDestroy(rsem);
             break;
         }case DIPSR:{
-            // TODO
-            
+            // Generacion de mensaje especifico Report signlaling elements
+            ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
+            rsem->dipsr = (JausBoolean)value;
+            jausAddressCopy(rsem->destination,jAdd);
+            // Generacion de mensaje JAUS global
+            jMsg = reportSignalingElements25MessageToJausMessage(rsem);
+            reportSignalingElements25MessageDestroy(rsem);
             break;
         }case KLAXON:{
             // Generacion de mensaje especifico Report signlaling elements
             ReportSignalingElements25Message rsem = reportSignalingElements25MessageCreate();
-            rsem->claxonActivo = (JausBoolean)value;
+            rsem->klaxon = (JausBoolean)value;
             jausAddressCopy(rsem->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = reportSignalingElements25MessageToJausMessage(rsem);
@@ -155,7 +165,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
         }case DRIVE_ALARMS:{
             // Generacion de mensaje especifico UGV Info
             UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            ugvm->alarmas = value;
+            ugvm->alarms = value;
             jausAddressCopy(ugvm->destination,jAdd);
             // Generacion de mensaje JAUS global
             jMsg = ugvInfo12MessageToJausMessage(ugvm);
@@ -190,7 +200,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDe
         case BATTERY_LEVEL:{
             // Generacion de mensaje especifico UGV Info
             UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            ugvm->nivelDeBateria = value;
+            ugvm->battery_level = value;
             jausAddressCopy(ugvm->destination, jAdd);
             // Generacion de mensaje JUAS global
             jMsg = ugvInfo12MessageToJausMessage(ugvm);
@@ -199,7 +209,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDe
         }case BATTERY_VOLTAGE:{
             // Generacion de mensaje especifico UGV Info
             UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            ugvm->tensionBateria = value;
+            ugvm->battery_voltage = value;
             jausAddressCopy(ugvm->destination, jAdd);
             // Generacion de mensaje JUAS global
             jMsg = ugvInfo12MessageToJausMessage(ugvm);
@@ -238,36 +248,6 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(int subDest, int nodDest
     // Generacion de mensaje JUAS global
     jMsg = reportCameraPoseMessageToJausMessage(rcpm);
     reportCameraPoseMessageDestroy(rcpm);
-
-    // Destruccion de la estructura destinatario
-    jausAddressDestroy(jAdd);
-    // Destruccion del mensaje
-    return jMsg;
-}
-
-// Mensajes de informacion de posicion / orientacion
-
-JausMessage TranslatorROSJAUS::getJausMsgFromPosOriInfo(int subDest, int nodDest, double lat, double lon, double alt, double roll, double yaw, double pitch){
-    // Mensaje de devoluvion
-    JausMessage jMsg = NULL;
-    // Creacion de la direccion destinataria
-    JausAddress jAdd = jausAddressCreate();
-    jAdd->subsystem = subDest;
-    jAdd->node = nodDest;
-    jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
-
-    // Generacion de mensaje especifico UGV Info
-    ReportGlobalPoseMessage rgpm = reportGlobalPoseMessageCreate();
-    rgpm->latitudeDegrees = lat;
-    rgpm->longitudeDegrees = lon;
-    rgpm->attitudeRmsRadians = alt;
-    rgpm->rollRadians = roll;
-    rgpm->pitchRadians = pitch;
-    rgpm->yawRadians = yaw;
-    jausAddressCopy(rgpm->destination, jAdd);
-    // Generacion de mensaje JUAS global
-    jMsg = reportGlobalPoseMessageToJausMessage(rgpm);
-    reportGlobalPoseMessageDestroy(rgpm);
 
     // Destruccion de la estructura destinatario
     jausAddressDestroy(jAdd);

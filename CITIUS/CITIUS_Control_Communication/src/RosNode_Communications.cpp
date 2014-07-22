@@ -67,10 +67,7 @@ void RosNode_Communications::initJAUS() {
         
         // Mensajes que recibe
         ojCmptAddServiceInputMessage(missionSpoolerComponent, JAUS_MISSION_SPOOLER, JAUS_RUN_MISSION, 0xFF);
-    
-        // Funciones asociadas a la maquina de estados
-        // TODO
-        
+
         // Funciones de recepcion de mensajes (Callbacks)
         ojCmptSetMessageCallback(missionSpoolerComponent, JAUS_RUN_MISSION, fcn_receive_run_mission);
         
@@ -91,9 +88,6 @@ void RosNode_Communications::initJAUS() {
         // Mensajes que recibe
         ojCmptAddServiceInputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_SET_WRENCH_EFFORT, 0xFF);
         ojCmptAddServiceInputMessage(primitiveDriverComponent, JAUS_PRIMITIVE_DRIVER, JAUS_SET_DISCRETE_DEVICES, 0xFF);
-    
-        // Funciones asociadas a la maquina de estados
-        // TODO
         
         // Funciones de recepcion de mensajes (Callbacks)
         ojCmptSetMessageCallback(primitiveDriverComponent, JAUS_SET_WRENCH_EFFORT, fcn_receive_set_wrench_effort);
@@ -120,9 +114,6 @@ void RosNode_Communications::initJAUS() {
         ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_POSITIONER_19, 0xFF);
         ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_DAY_TIME_CAMERA_21, 0xFF);
         ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_NIGHT_TIME_CAMERA_23, 0xFF);
-    
-        // Funciones asociadas a la maquina de estados
-        // TODO
         
         // Funciones de recepcion de mensajes (Callbacks)
         ojCmptSetMessageCallback(visualSensorComponent, JAUS_SET_CAMERA_POSE, fcn_receive_set_camera_pose);
@@ -142,9 +133,6 @@ void RosNode_Communications::initJAUS() {
         
         // Mensajes que envia
         ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
-    
-        // Funciones asociadas a la maquina de estados
-        // TODO   
     
     }
     
@@ -171,10 +159,7 @@ void RosNode_Communications::initJAUS() {
         
         // Mensajes que recibe
         ojCmptAddServiceInputMessage(velocityStateSensorComponent, JAUS_VELOCITY_STATE_SENSOR, JAUS_SET_TRAVEL_SPEED, 0xFF);
-    
-        // Funciones asociadas a la maquina de estados
-        // TODO
-        
+
         // Funciones de recepcion de mensajes (Callbacks)
         ojCmptSetMessageCallback(velocityStateSensorComponent, JAUS_SET_TRAVEL_SPEED, fcn_receive_set_travel_speed);
     
@@ -205,10 +190,7 @@ void RosNode_Communications::initJAUS() {
         // Mensajes que recibe
         ojCmptAddServiceInputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_CHANNEL_STATE_16, 0xFF);
         ojCmptAddServiceInputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_POSITION_INFO_17, 0xFF);
-    
-        // Funciones asociadas a la maquina de estados
-        // TODO
-        
+
         // Funciones de recepcion de mensajes (Callbacks)
         ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_CHANNEL_STATE_16, fcn_receive_heartbeat_channel_state);
         ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_POSITION_INFO_17, fcn_receive_heartbeat_position_info);
@@ -332,20 +314,82 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
  * CORRESPONDENCIA JAUS: REPORT GLOBAL POSE / REPORT VELOCITY STATE / ADDITIONAL GPS/INS INFO
  */
 void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion de posicionamiento");
+
+    ROS_INFO("[Control] Communications - Recibido mensaje de Position Orientation");
     
-    // Conversor ROS -> JAUS
-    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
-    // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromPosOriInfo(this->subsystemController,this->nodeController,msg.latitude,msg.longitude,msg.altitude,msg.roll,msg.pitch,msg.yaw);
+    JausMessage jMsg = NULL;
+    
+    // Creacion de la direccion destinataria
+    JausAddress jAdd = jausAddressCreate();
+    jAdd->subsystem = subsystemController;
+    jAdd->node = nodeController;
+    jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
+    
+    // MENSAJE REPORT GLOBAL POSE
+    // Formacion del mensaje
+    ReportGlobalPoseMessage rgpm = reportGlobalPoseMessageCreate();
+    rgpm->presenceVector = 0x0077;
+    rgpm->latitudeDegrees = msg.latitude;
+    rgpm->longitudeDegrees = msg.longitude;
+    rgpm->attitudeRmsRadians = msg.altitude;
+    rgpm->rollRadians = msg.roll;
+    rgpm->pitchRadians = msg.pitch;
+    rgpm->yawRadians = msg.yaw;
+    
+    jausAddressCopy(rgpm->destination, jAdd);
+    jMsg = reportGlobalPoseMessageToJausMessage(rgpm);
+    reportGlobalPoseMessageDestroy(rgpm);
+    
     if(jMsg != NULL){
         // Envio via JAUS    
-        ojCmptSendMessage(this->globalPoseSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
-    }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+        ojCmptSendMessage(globalPoseSensorComponent, jMsg);
     }
-    // Destruccion del mensaje
+    
+    // MENSAJE REPORT VELOCITY STATE
+    // Formacion del mensaje
+    ReportVelocityStateMessage rvsm = reportVelocityStateMessageCreate();
+    rvsm->presenceVector = 0x0007;
+    rvsm->velocityXMps = msg.velX;
+    rvsm->velocityYMps = msg.velY;
+    rvsm->velocityZMps = msg.velZ;
+    
+    // Direccion
+    jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
+    
+    jausAddressCopy(rvsm->destination, jAdd);
+    jMsg = reportVelocityStateMessageToJausMessage(rvsm);
+    reportVelocityStateMessageDestroy(rvsm);
+    
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(velocityStateSensorComponent, jMsg);
+    }
+    
+    // MENSAJE ADDITIONAL GPS/INS INFO
+    // Formacion del mensaje
+    AditionalGPSINSInfo4Message agim = aditionalGPSINSInfo4MessageCreate();
+    agim->presenceVector = 0x0007;
+    agim->longitudinal_acc = msg.accX;
+    agim->lateral_acc = msg.accY;
+    agim->vertical_acc = msg.accZ;
+    // Estado IMU y GPS
+    // TODO!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    // Direccion
+    jAdd->component = JAUS_GLOBAL_POSE_SENSOR;;
+    
+    jausAddressCopy(agim->destination, jAdd);
+    jMsg = aditionalGPSINSInfo4MessageToJausMessage(agim);
+    aditionalGPSINSInfo4MessageDestroy(agim);
+    
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(velocityStateSensorComponent, jMsg);
+    }
+    
+    
+    // Destruccion del mensaje y direccion
+    jausAddressDestroy(jAdd);
     jausMessageDestroy(jMsg);
 }
 
@@ -381,54 +425,54 @@ void RosNode_Communications::informStatus() {
 
 // Componente Mission Spooler
 
-void fcn_receive_run_mission(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg) {
 
 }
 
 // Componente Primitive Driver
 
-void fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
 
 }
 
-void fcn_receive_set_discrete_devices(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_discrete_devices(OjCmpt cmp, JausMessage msg) {
 
 }
 
 // Componente Visual Sensor
 
-void fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage msg) {
 
 }
 
-void fcn_receive_set_signaling_elements(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, JausMessage msg) {
 
 }
 
-void fcn_receive_set_positioner(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage msg) {
 
 }
 
-void fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
 
 }
 
-void fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
 
 }
 
 // Componente Velocity State Sensor
 
-void fcn_receive_set_travel_speed(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_set_travel_speed(OjCmpt cmp, JausMessage msg) {
 
 }
 
 // Componente HeartBeat Information
 
-void fcn_receive_heartbeat_channel_state(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_heartbeat_channel_state(OjCmpt cmp, JausMessage msg) {
 
 }
 
-void fcn_receive_heartbeat_position_info(OjCmpt cmp, JausMessage msg) {
+void RosNode_Communications::fcn_receive_heartbeat_position_info(OjCmpt cmp, JausMessage msg) {
 
 }

@@ -97,7 +97,7 @@ typedef struct
 	JausUnsignedShort sequenceNumber;
 
   // PRESENCE VECTOR
-  JausByte presenceVector; 
+  JausShort presenceVector; 
   
 // MESSAGE DATA MEMBERS GO HERE
 	

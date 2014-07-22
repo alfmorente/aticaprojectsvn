@@ -67,7 +67,7 @@ static unsigned int dataSize(AnemometerInfo5Message message);
 
 static void dataInitialize(AnemometerInfo5Message message) {
     
-    message ->presenceVector = newJaussHORT(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
+    message ->presenceVector = newJausShort(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
     message -> anemometer_availability = JAUS_FALSE;
     message -> wind_velocity = newJausDouble(0); // Scaled Short (0,300), Res: 4e-3
