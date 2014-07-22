@@ -330,10 +330,8 @@ void frameMng(unsigned char * frame, unsigned char len){
                         }
                         packetMng(pMT2);
                     }
-                    return true;
                 }else{
                     printf("ERROR. Frame discarted\n");
-                    return false;
                 }
             }
         }
