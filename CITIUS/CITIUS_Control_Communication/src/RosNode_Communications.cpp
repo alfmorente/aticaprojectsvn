@@ -393,27 +393,41 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
     jausMessageDestroy(jMsg);
 }
 
-// Informa a Controller del estado
+/* 
+ * INFORMACION DE MODO DE OPERACION
+ * CORRESPONDENCIA JAUS: REPORT MISSION STATUS
+ */
 
 void RosNode_Communications::informStatus() {
-    ROS_INFO("[Control] Communications - Comunicando modo de operacion al controlador");
     
     // Obtencion del estado
     int status;
     ros::NodeHandle nh;
     nh.getParam("vehicleStatus",status);
-    // Conversor ROS -> JAUS
-    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
-    // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromStatus(this->subsystemController, this->nodeController, status);
+    JausMessage jMsg = NULL;
+    
+    // Creacion de la direccion destinataria
+    JausAddress jAdd = jausAddressCreate();
+    jAdd->subsystem = subsystemController;
+    jAdd->node = nodeController;
+    jAdd->component = JAUS_MISSION_SPOOLER;
+
+    // Generacion de mensaje especifico UGV Info
+    ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
+    rmsm->missionId = status;
+    jausAddressCopy(rmsm->destination, jAdd);
+    
+    // Generacion de mensaje JUAS global
+    jMsg = reportMissionStatusMessageToJausMessage(rmsm);
+    
     if (jMsg != NULL) {
-        // Envio via JAUS    
         ojCmptSendMessage(this->missionSpoolerComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     } else {
         ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
     }
-    // Destruccion del mensaje
+    // Liberacion de memoria
+    reportMissionStatusMessageDestroy(rmsm);
+    jausAddressDestroy(jAdd);
     jausMessageDestroy(jMsg);
 }
 

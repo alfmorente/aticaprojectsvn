@@ -255,27 +255,3 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(int subDest, int nodDest
     return jMsg;
 }
 
-// Mensaje de informacion de modo de operacion
-
-JausMessage TranslatorROSJAUS::getJausMsgFromStatus(int subDest, int nodDest, int status){
-    // Mensaje de devoluvion
-    JausMessage jMsg = NULL;
-    // Creacion de la direccion destinataria
-    JausAddress jAdd = jausAddressCreate();
-    jAdd->subsystem = subDest;
-    jAdd->node = nodDest;
-    jAdd->component = JAUS_MISSION_SPOOLER;
-
-    // Generacion de mensaje especifico UGV Info
-    ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
-    rmsm->missionId = status;
-    jausAddressCopy(rmsm->destination, jAdd);
-    // Generacion de mensaje JUAS global
-    jMsg = reportMissionStatusMessageToJausMessage(rmsm);
-    reportMissionStatusMessageDestroy(rmsm);
-
-    // Destruccion de la estructura destinatario
-    jausAddressDestroy(jAdd);
-    // Destruccion del mensaje
-    return jMsg;
-}

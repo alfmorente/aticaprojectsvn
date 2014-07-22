@@ -50,8 +50,6 @@ public:
   JausMessage getJausMsgFromElectricInfo(int subDest, int nodDest, short id_device, short value);
   JausMessage getJausMsgFromCameraInfo(int subDest, int nodDest, short id_camera, short pan, short tilt);
   
-  JausMessage getJausMsgFromPosOriInfo(int subDest, int nodDest, double lat, double lon, double alt, float roll, float yaw, float pitch, float velX, float velY, float velZ, float accX, float accY, float accZ, float gyrX, float gyrY, float gyrZ);
-  JausMessage getJausMsgFromStatus(int subDest, int nodDest, int status);
 private:
   
 };

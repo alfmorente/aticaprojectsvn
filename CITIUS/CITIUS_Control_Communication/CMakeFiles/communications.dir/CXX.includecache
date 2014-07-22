@@ -10,6 +10,16 @@
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
+TranslatorROSJAUS.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.h
+constant.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/constant.h
+message/experimental/ugvInfo12Message.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/message/experimental/ugvInfo12Message.h
+message/experimental/reportSignalingElements25Message.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/message/experimental/reportSignalingElements25Message.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
 cstdlib
 -
