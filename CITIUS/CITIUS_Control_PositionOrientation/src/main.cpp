@@ -143,7 +143,4 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void Manager::fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher msg){
-
-}
 
