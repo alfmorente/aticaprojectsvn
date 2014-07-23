@@ -95,12 +95,19 @@ void ProtPelcoD::commandZOOM(int typeZOOM)
         command2=PELCO_ZOOM_IN;
 
     }
-    else //typeZOOM==CAMERA_ZOOM_OUT
+    else if(typeZOOM==CAMERA_ZOOM_OUT)
     {
 	printf("ZOOM OUT\n");
         command2=PELCO_ZOOM_OUT;
     
     }        
+    else //typeZOOM==CAMERA_ZOOM_STOP
+    {
+	printf("ZOOM STOP\n");
+        command1=PELCO_ZERO;        
+        command2=PELCO_ZERO;
+    
+    }     
     data1=PELCO_ZERO;
     data2=PELCO_ZERO;         
     sendCommand(command1,command2,data1,data2);
@@ -212,7 +219,7 @@ bool ProtPelcoD::sendCommand(char command1,char command2,char data1,char data2)
 
 char ProtPelcoD::calcChecksum(char command[])
 {
-    char checksum;
+    char checksum=0;
     for(int i=1;i<6;i++)
         checksum+=command[i];
     checksum=checksum%256;

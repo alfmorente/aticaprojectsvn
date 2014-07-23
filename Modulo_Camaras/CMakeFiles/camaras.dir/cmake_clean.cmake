@@ -6,6 +6,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/camaras.dir/src/PortSerial.cpp.o"
   "CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o"
   "CMakeFiles/camaras.dir/src/Files.cpp.o"
+  "CMakeFiles/camaras.dir/src/interaction.cpp.o"
   "bin/camaras.pdb"
   "bin/camaras"
 )

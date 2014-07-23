@@ -298,7 +298,7 @@ void NodeROSCommunication::fcn_sub_mode(const Common_files::msg_modePtr& msg)
         destino->component = JAUS_SUBSYSTEM_COMMANDER;
         mensajeJAUS tipoMensajeJAUS;
              
-        ROS_INFO("ENVIO ESTADO MODO");
+
         //Files::writeDataInLOG("ENVIO ESTADO MODO");
         tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
@@ -308,18 +308,23 @@ void NodeROSCommunication::fcn_sub_mode(const Common_files::msg_modePtr& msg)
 	    
         switch (msg->status){
             case MODE_FINISH:
+                ROS_INFO("ENVIO ESTADO MODO FINISH %d",tipoMensajeJAUS.missionStatus->missionId);
                 tipoMensajeJAUS.missionStatus->status=JAUS_FINISHED;
                 break;
             case MODE_START:
+                ROS_INFO("ENVIO ESTADO MODO START %d",tipoMensajeJAUS.missionStatus->missionId);
                 tipoMensajeJAUS.missionStatus->status=JAUS_SPOOLING;
                 break;
             case MODE_EXIT:
+                ROS_INFO("ENVIO ESTADO MODO EXIT %d",tipoMensajeJAUS.missionStatus->missionId);
                 tipoMensajeJAUS.missionStatus->status=JAUS_ABORTED; 
                 break;
             case MODE_STOP:
+                ROS_INFO("ENVIO ESTADO MODO STOP %d",tipoMensajeJAUS.missionStatus->missionId);
                 tipoMensajeJAUS.missionStatus->status=JAUS_PAUSED;
                 break;
             case MODE_RUN:
+                ROS_INFO("ENVIO ESTADO MODO RUN %d",tipoMensajeJAUS.missionStatus->missionId);
                 tipoMensajeJAUS.missionStatus->status=JAUS_SPOOLING;
                 break;
             default:

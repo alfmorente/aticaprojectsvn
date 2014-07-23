@@ -14,8 +14,6 @@ CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o
  include/Modulo_Camaras/PortSerial.h
  include/Modulo_Camaras/ProtPelcoD.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o
- /home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include/Common_files/msg_ctrl_camera.h
- /home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include/Common_files/msg_error.h
  /home/atica/catkin_ws/src/Modulo_Camaras/src/camaras.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
  /opt/ros/groovy/include/XmlRpcValue.h
@@ -72,7 +70,13 @@ CMakeFiles/camaras.dir/src/camaras.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Modulo_Camaras/../../../Common_files/include/Common_files/constant.h
+ include/Modulo_Camaras/../../../Common_files/msg_gen/cpp/include/Common_files/msg_ctrl_camera.h
+ include/Modulo_Camaras/../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
  include/Modulo_Camaras/Files.h
  include/Modulo_Camaras/PortSerial.h
  include/Modulo_Camaras/ProtPelcoD.h
  include/Modulo_Camaras/camaras.h
+ include/Modulo_Camaras/interaction.h
+CMakeFiles/camaras.dir/src/interaction.cpp.o
+ /home/atica/catkin_ws/src/Modulo_Camaras/src/../../Common_files/include/Common_files/constant.h
+ /home/atica/catkin_ws/src/Modulo_Camaras/src/interaction.cpp

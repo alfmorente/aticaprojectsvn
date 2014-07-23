@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
@@ -65,8 +62,6 @@ msg_gen/cpp/include/Modulo_Camaras/msg_errores.h: /opt/ros/groovy/share/rosgraph
 msg_gen/cpp/include/Modulo_Camaras/msg_errores.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_Camaras/msg_errores.h: /opt/ros/groovy/share/roscpp/package.xml
 msg_gen/cpp/include/Modulo_Camaras/msg_errores.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
-msg_gen/cpp/include/Modulo_Camaras/msg_errores.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-msg_gen/cpp/include/Modulo_Camaras/msg_errores.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Camaras/msg_errores.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Camaras/msg/msg_errores.msg
@@ -88,8 +83,6 @@ msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h: /opt/ros/groovy/share/rosgraph
 msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h: /opt/ros/groovy/share/roscpp/package.xml
 msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h: /home/atica/catkin_ws/src/Common_files/manifest.xml
-msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/Modulo_Camaras/msg_camaras.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/Modulo_Camaras/msg/msg_camaras.msg

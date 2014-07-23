@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
@@ -70,8 +67,6 @@ src/Modulo_Camaras/msg/_msg_errores.py: /opt/ros/groovy/share/rosgraph_msgs/pack
 src/Modulo_Camaras/msg/_msg_errores.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_Camaras/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp/package.xml
 src/Modulo_Camaras/msg/_msg_errores.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
-src/Modulo_Camaras/msg/_msg_errores.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-src/Modulo_Camaras/msg/_msg_errores.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Camaras/msg/_msg_errores.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Camaras/msg/msg_errores.msg
@@ -93,8 +88,6 @@ src/Modulo_Camaras/msg/_msg_camaras.py: /opt/ros/groovy/share/rosgraph_msgs/pack
 src/Modulo_Camaras/msg/_msg_camaras.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_Camaras/msg/_msg_camaras.py: /opt/ros/groovy/share/roscpp/package.xml
 src/Modulo_Camaras/msg/_msg_camaras.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
-src/Modulo_Camaras/msg/_msg_camaras.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-src/Modulo_Camaras/msg/_msg_camaras.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Camaras/msg/_msg_camaras.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Camaras/msg/msg_camaras.msg

@@ -1,4 +1,4 @@
-#include "Modulo_Comunicaciones/interaction.h"
+#include "Modulo_Camaras/interaction.h"
 #include "../../Common_files/include/Common_files/constant.h"
 
 using namespace std;
@@ -26,7 +26,7 @@ int getOperationMode(int argc, char **argv){
     return a;
 }
 void printCorrectSyntax() {
-    cout << "Invalid option. Syntax: ./gps [mode option]" << endl;
+    cout << "Invalid option. Syntax: ./camaras [mode option]" << endl;
     cout << "Options: " << endl;
     cout << "1: Debug" << endl;
     cout << "2: Release" << endl;

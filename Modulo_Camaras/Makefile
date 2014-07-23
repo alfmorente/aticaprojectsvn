@@ -35,9 +35,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
@@ -49,8 +46,8 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -547,6 +544,30 @@ src/camaras.cpp.s:
 	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/camaras.cpp.s
 .PHONY : src/camaras.cpp.s
 
+src/interaction.o: src/interaction.cpp.o
+.PHONY : src/interaction.o
+
+# target to build an object file
+src/interaction.cpp.o:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/interaction.cpp.o
+.PHONY : src/interaction.cpp.o
+
+src/interaction.i: src/interaction.cpp.i
+.PHONY : src/interaction.i
+
+# target to preprocess a source file
+src/interaction.cpp.i:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/interaction.cpp.i
+.PHONY : src/interaction.cpp.i
+
+src/interaction.s: src/interaction.cpp.s
+.PHONY : src/interaction.s
+
+# target to generate assembly for a file
+src/interaction.cpp.s:
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/interaction.cpp.s
+.PHONY : src/interaction.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -595,6 +616,9 @@ help:
 	@echo "... src/camaras.o"
 	@echo "... src/camaras.i"
 	@echo "... src/camaras.s"
+	@echo "... src/interaction.o"
+	@echo "... src/interaction.i"
+	@echo "... src/interaction.s"
 .PHONY : help
 
 

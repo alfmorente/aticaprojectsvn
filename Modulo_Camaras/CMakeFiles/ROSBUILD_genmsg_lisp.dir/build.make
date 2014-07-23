@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
@@ -69,8 +66,6 @@ msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_errores.lisp: /opt/ros/groovy/share/roscpp/package.xml
 msg_gen/lisp/msg_errores.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
-msg_gen/lisp/msg_errores.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-msg_gen/lisp/msg_errores.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_errores.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_errores.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Camaras/msg/msg_errores.msg
@@ -96,8 +91,6 @@ msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_camaras.lisp: /opt/ros/groovy/share/roscpp/package.xml
 msg_gen/lisp/msg_camaras.lisp: /home/atica/catkin_ws/src/Common_files/manifest.xml
-msg_gen/lisp/msg_camaras.lisp: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-msg_gen/lisp/msg_camaras.lisp: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_camaras.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_camaras.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/Modulo_Camaras/msg/msg_camaras.msg

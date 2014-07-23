@@ -13,8 +13,6 @@ CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: include/Modulo_Camaras/../../../Com
 CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: include/Modulo_Camaras/PortSerial.h
 CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: include/Modulo_Camaras/ProtPelcoD.h
 
-CMakeFiles/camaras.dir/src/camaras.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include/Common_files/msg_ctrl_camera.h
-CMakeFiles/camaras.dir/src/camaras.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include/Common_files/msg_error.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: src/camaras.cpp
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/include/XmlRpcValue.h
@@ -71,8 +69,14 @@ CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/include/ros/wall_timer
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/../../../Common_files/include/Common_files/constant.h
+CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/../../../Common_files/msg_gen/cpp/include/Common_files/msg_ctrl_camera.h
+CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/Files.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/PortSerial.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/ProtPelcoD.h
 CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/camaras.h
+CMakeFiles/camaras.dir/src/camaras.cpp.o: include/Modulo_Camaras/interaction.h
+
+CMakeFiles/camaras.dir/src/interaction.cpp.o: src/../../Common_files/include/Common_files/constant.h
+CMakeFiles/camaras.dir/src/interaction.cpp.o: src/interaction.cpp
 

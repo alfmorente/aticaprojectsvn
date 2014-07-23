@@ -6,13 +6,13 @@
 
 
 #Nombre del puerto serie
-port_name: /dev/ttyS0 
+port_name: /dev/tty0 
 
 #Velocidad del puerto serie 
 port_velocity: B9600
 
 #ID de la camara
-id_camera: 5
+id_camera: 1
 
 #Velocidad del PAN
 vel_pan: 20 

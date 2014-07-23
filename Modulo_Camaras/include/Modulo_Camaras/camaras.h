@@ -18,8 +18,8 @@ extern "C" {
 
 #endif	/* GPS_H */
 
-#include <Common_files/msg_error.h>
-#include <Common_files/msg_ctrl_camera.h>
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_ctrl_camera.h"
 #include "../../../Common_files/include/Common_files/constant.h"
 #include <Modulo_Camaras/ProtPelcoD.h>
 

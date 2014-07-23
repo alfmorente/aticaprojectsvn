@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Camaras
 
@@ -65,8 +62,6 @@ CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/pa
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/camaras.dir/src/camaras.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/camaras.dir/src/camaras.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/camaras.dir/src/camaras.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/camaras.dir/src/camaras.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/camaras.dir/src/camaras.cpp.o -c /home/atica/catkin_ws/src/Modulo_Camaras/src/camaras.cpp
@@ -104,8 +99,6 @@ CMakeFiles/camaras.dir/src/PortSerial.cpp.o: /opt/ros/groovy/share/rosgraph_msgs
 CMakeFiles/camaras.dir/src/PortSerial.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/camaras.dir/src/PortSerial.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/camaras.dir/src/PortSerial.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/camaras.dir/src/PortSerial.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/camaras.dir/src/PortSerial.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/camaras.dir/src/PortSerial.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/camaras.dir/src/PortSerial.cpp.o -c /home/atica/catkin_ws/src/Modulo_Camaras/src/PortSerial.cpp
@@ -143,8 +136,6 @@ CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: /opt/ros/groovy/share/rosgraph_msgs
 CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o -c /home/atica/catkin_ws/src/Modulo_Camaras/src/ProtPelcoD.cpp
@@ -182,8 +173,6 @@ CMakeFiles/camaras.dir/src/Files.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/pack
 CMakeFiles/camaras.dir/src/Files.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/camaras.dir/src/Files.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/camaras.dir/src/Files.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/camaras.dir/src/Files.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/camaras.dir/src/Files.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/camaras.dir/src/Files.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/camaras.dir/src/Files.cpp.o -c /home/atica/catkin_ws/src/Modulo_Camaras/src/Files.cpp
@@ -205,12 +194,50 @@ CMakeFiles/camaras.dir/src/Files.cpp.o.provides: CMakeFiles/camaras.dir/src/File
 
 CMakeFiles/camaras.dir/src/Files.cpp.o.provides.build: CMakeFiles/camaras.dir/src/Files.cpp.o
 
+CMakeFiles/camaras.dir/src/interaction.cpp.o: CMakeFiles/camaras.dir/flags.make
+CMakeFiles/camaras.dir/src/interaction.cpp.o: src/interaction.cpp
+CMakeFiles/camaras.dir/src/interaction.cpp.o: manifest.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/camaras.dir/src/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Camaras/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/camaras.dir/src/interaction.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/camaras.dir/src/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_Camaras/src/interaction.cpp
+
+CMakeFiles/camaras.dir/src/interaction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/camaras.dir/src/interaction.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Camaras/src/interaction.cpp > CMakeFiles/camaras.dir/src/interaction.cpp.i
+
+CMakeFiles/camaras.dir/src/interaction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/camaras.dir/src/interaction.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Camaras/src/interaction.cpp -o CMakeFiles/camaras.dir/src/interaction.cpp.s
+
+CMakeFiles/camaras.dir/src/interaction.cpp.o.requires:
+.PHONY : CMakeFiles/camaras.dir/src/interaction.cpp.o.requires
+
+CMakeFiles/camaras.dir/src/interaction.cpp.o.provides: CMakeFiles/camaras.dir/src/interaction.cpp.o.requires
+	$(MAKE) -f CMakeFiles/camaras.dir/build.make CMakeFiles/camaras.dir/src/interaction.cpp.o.provides.build
+.PHONY : CMakeFiles/camaras.dir/src/interaction.cpp.o.provides
+
+CMakeFiles/camaras.dir/src/interaction.cpp.o.provides.build: CMakeFiles/camaras.dir/src/interaction.cpp.o
+
 # Object files for target camaras
 camaras_OBJECTS = \
 "CMakeFiles/camaras.dir/src/camaras.cpp.o" \
 "CMakeFiles/camaras.dir/src/PortSerial.cpp.o" \
 "CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o" \
-"CMakeFiles/camaras.dir/src/Files.cpp.o"
+"CMakeFiles/camaras.dir/src/Files.cpp.o" \
+"CMakeFiles/camaras.dir/src/interaction.cpp.o"
 
 # External object files for target camaras
 camaras_EXTERNAL_OBJECTS =
@@ -219,6 +246,7 @@ bin/camaras: CMakeFiles/camaras.dir/src/camaras.cpp.o
 bin/camaras: CMakeFiles/camaras.dir/src/PortSerial.cpp.o
 bin/camaras: CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o
 bin/camaras: CMakeFiles/camaras.dir/src/Files.cpp.o
+bin/camaras: CMakeFiles/camaras.dir/src/interaction.cpp.o
 bin/camaras: CMakeFiles/camaras.dir/build.make
 bin/camaras: CMakeFiles/camaras.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/camaras"
@@ -232,6 +260,7 @@ CMakeFiles/camaras.dir/requires: CMakeFiles/camaras.dir/src/camaras.cpp.o.requir
 CMakeFiles/camaras.dir/requires: CMakeFiles/camaras.dir/src/PortSerial.cpp.o.requires
 CMakeFiles/camaras.dir/requires: CMakeFiles/camaras.dir/src/ProtPelcoD.cpp.o.requires
 CMakeFiles/camaras.dir/requires: CMakeFiles/camaras.dir/src/Files.cpp.o.requires
+CMakeFiles/camaras.dir/requires: CMakeFiles/camaras.dir/src/interaction.cpp.o.requires
 .PHONY : CMakeFiles/camaras.dir/requires
 
 CMakeFiles/camaras.dir/clean:

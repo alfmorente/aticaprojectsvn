@@ -1,2 +1,0 @@
-7759.638445:	CommunicationError de comunicacion con la UCR
-7881.49351:	CommunicationError de comunicacion con la UCR

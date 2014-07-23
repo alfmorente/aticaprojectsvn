@@ -1,11 +1,17 @@
 #include <Modulo_Camaras/camaras.h>
 #include <Modulo_Camaras/Files.h>
+#include <Modulo_Camaras/interaction.h>
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
-
+    // Indica el modo de Operacion del modulo
+    int operationMode=getOperationMode(argc, argv);
+    if (operationMode == 0) {
+         return 1;
+    }
+    
     // Inicio de ROS
     ros::init(argc, argv, "Camaras");
 
@@ -134,6 +140,10 @@ void fcn_sub_ctrl_camera(Common_files::msg_ctrl_camera msg)
     else if(msg.id_control==CAMERA_TILT)
         camara->commandTILT(msg.value);
     else if(msg.id_control==CAMERA_ZOOM)
-        camara->commandZOOM(msg.value);    
+    {
+        camara->commandZOOM(msg.value);   
+        sleep(1);
+        camara->commandZOOM(CAMERA_ZOOM_STOP);
+    }
 }
 

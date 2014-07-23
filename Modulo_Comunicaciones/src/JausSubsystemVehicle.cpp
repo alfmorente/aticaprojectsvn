@@ -599,19 +599,33 @@ void JausSubsystemVehicle::establishedCommunication()
     //Envio a la UCR el modo actual tras iniciarse la comunicacion
     if(nodeROS->requestMode(&modeActual))
     {
-            ROS_INFO("ENVIO ESTADO MODO");
+
             //Files::writeDataInLOG("ENVIO ESTADO MODO");
             tipoMensajeJAUS.missionStatus=reportMissionStatusMessageCreate();
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
             tipoMensajeJAUS.missionStatus->type=JAUS_MISSION;
-            tipoMensajeJAUS.missionStatus->missionId=modeActual;
-	    tipoMensajeJAUS.missionStatus->status=MODE_START;	
+            
+            //Si modo es distinto de neutro indico que el modo actual está en progreso
+            if(modeActual!=MODE_NEUTRAL)
+            {
+                    tipoMensajeJAUS.missionStatus->missionId=modeActual;
+                    tipoMensajeJAUS.missionStatus->status=JAUS_SPOOLING;
+            }
+            //En caso contrario estando en modo neutro, lo indico como modo manual abortado
+            else
+            {
+                    tipoMensajeJAUS.missionStatus->missionId=MODE_MANUAL;
+                    tipoMensajeJAUS.missionStatus->status=JAUS_ABORTED;                
+                
+            }
             tipoMensajeJAUS.missionStatus->properties.ackNak=JAUS_ACK_NAK_REQUIRED;
             jausAddressCopy(tipoMensajeJAUS.missionStatus->destination, destino);
             msg_JAUS = reportMissionStatusMessageToJausMessage(tipoMensajeJAUS.missionStatus);
-            reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus); 
             subsystemJAUS->sendJAUSMessage(msg_JAUS,NO_ACK);
+            ROS_INFO("ENVIO ESTADO MODO %d %d",tipoMensajeJAUS.missionStatus->missionId,tipoMensajeJAUS.missionStatus->status);  
+            reportMissionStatusMessageDestroy(tipoMensajeJAUS.missionStatus); 
             jausMessageDestroy(msg_JAUS);
+            
     }
 
     //Envia fin de error de comunicación 
