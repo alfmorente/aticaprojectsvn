@@ -191,26 +191,34 @@ void CANCommunication::DoWork() {
         
       
            i = ReceiveMessage(&msgRx);
+
                       
         if (i==0) {   
             
             if (this->id == "Conduccion"){
                 
-                //printf("receivetest: 0x%08x   ", msgRx.Msg.ID); 
-      
+             //   printf("receivetest: 0x%08x   ", msgRx.Msg.ID); 
+             //   for (i = 0; i < msgRx.Msg.LEN; i++)
+             //           printf("%02x ", msgRx.Msg.DATA[i]);
+                
                 if (!(msgRx.Msg.MSGTYPE & MSGTYPE_RTR)) {
+                      //printf("receivetest: 0x%08x   ", msgRx.Msg.ID); 
+                      //for (i = 0; i < msgRx.Msg.LEN; i++)
+                      //  printf("%02x ", msgRx.Msg.DATA[i]);
+                      // printf("\n");
                      switch (msgRx.Msg.ID) {
                         case 0x005:
                         case 0x00E:
                         case 0x080:
+                        case 0x71F:
                                 //cout << "Cancomunitacion ID = " << hex << msgRx.Msg.ID << "\n";
-                                pthread_mutex_lock (&ConduccionQueue_mutex);                  
+                                //pthread_mutex_lock (&ConduccionQueue_mutex);                  
                                 ConduccionQueue.push (msgRx);
-                                pthread_mutex_unlock (&ConduccionQueue_mutex);
+                                //pthread_mutex_unlock (&ConduccionQueue_mutex);
                                 this->CommunicationTimer.Reset(); // Se resetea cada vez que se reciba 1 mensaje   
-                    
-                    //for (v = 0; v < msgRx.Msg.LEN; v++)
-                    //            printf("%02x ", msgRx.Msg.DATA[v]);
+                
+                    //for (int v = 0; v < msgRx.Msg.LEN; v++)
+                      //          printf("%02x ", msgRx.Msg.DATA[v]);
                     //printf("\n");
                                 break;
                                                        
@@ -218,7 +226,7 @@ void CANCommunication::DoWork() {
                             cout << "\n CAN COMUNICATION - Error en lectura en el CAN de Ática\n";
                      }
                 }
-            }
+            }/*
             else if (this->id == "Camion"){
                 if (!(msgRx.Msg.MSGTYPE & MSGTYPE_RTR)) {
                      switch (msgRx.Msg.ID) {
@@ -252,7 +260,7 @@ void CANCommunication::DoWork() {
                             cout << "\n CAN COMUNICATION - Error en lectura en el CAN del Camión \n";
                      }
                 }
-            }
+            }*/
             else 
                 cout << "\n Error en lectura en hilo de conducción\n";
         }

@@ -18,11 +18,11 @@
         // BYTE 2
         #define MAN 0x00                             // En binario (0000 0000)
         #define AUTO 0x01                               // En binario (0000 0001)
-        #define MARCHA_H_ 0x10                          // En binario (0001 0000)
-        #define MARCHA_N_ 0x20                          // En binario (0010 0000)
-        #define MARCHA_R_ 0x40                          // En binario (0100 0000)
-        #define MARCHA_N1_ 0x80                         // En binario (1000 0000)
-        #define MARCHA_L_ 0x90                          // En binario (1001 0000)
+        #define MARCHA_H_ 0x08                          // En binario (0000 1000)
+        #define MARCHA_N_ 0x10                          // En binario (0001 0000)
+        #define MARCHA_R_ 0x20                          // En binario (0010 0000)
+        #define MARCHA_N1_ 0x40                         // En binario (0100 0000)
+        #define MARCHA_L_ 0x80                          // En binario (1000 0000)
 
         // BYTE 7
         #define CONF_PARADA_EMERGENCIA 0x01             // En binario (0000 0001)
@@ -47,6 +47,8 @@ public:
     void m_teleop_CAN_AUTOMATA();               // Escritura en el CAN cuando le llega un mensaje msg_com_teleop
     void m_engine_brake_CAN_AUTOMATA();         // Escritura en el CAN cuando le llega un mensaje msg_fcn_aux
     void m_emergency_stop_CAN_AUTOMATA();       // Escritura en el CAN cuando le llega un mensaje msg_emergency_stop
+    void envio_trama_reinicio_CAN_AUTOMATA ();
+    void inicializacion_valores_tx();
     
     void m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg);
     void m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg);
@@ -57,6 +59,8 @@ public:
     //Timer time1;
     
     bool CONDUCCION_ACTIVE; // Flag de estado
+    bool flag_active_backup;
+
     
     // Atributos para el mensaje SET (00A)
     short valor_arranque_parada;

@@ -13,7 +13,7 @@
 
 ConduccionThread::ConduccionThread(CANCommunication * canCOND) {
     CONDUCCION_ACTIVE = true;
-    paradaEmergencia = false;
+    inicializacion_valores_tx();
     CANCONDUCCION = canCOND;
 }
 
@@ -35,9 +35,9 @@ void ConduccionThread::DoWork(){
 
         //for (int i=0;i<QueueSize; i++) {        
         
-            pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
+            //pthread_mutex_lock (&CANCONDUCCION->ConduccionQueue_mutex);
             MsgAux=CANCONDUCCION->ConduccionQueue.front();
-            pthread_mutex_unlock (&CANCONDUCCION->ConduccionQueue_mutex);
+            //pthread_mutex_unlock (&CANCONDUCCION->ConduccionQueue_mutex);
             //cout << "Desencolado mensaje con ID = " << hex << MsgAux.Msg.ID << "\n";
             switch (MsgAux.Msg.ID){
                     
@@ -56,6 +56,7 @@ void ConduccionThread::DoWork(){
                     break;
                     
                 case 0x80:
+                case 0x71F:
                     //cout << "\n TRAMA DE SINCRONISMO \n";
                     
                     CANCONDUCCION->ConduccionQueue.pop();
@@ -89,11 +90,13 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
          
     int sentido_giro;
     
+    
     // BYTE 0 - Arranque/Parada - Freno estacionamiento
     if ((StatusMsg.Msg.DATA[0] & ARRANQUE_PARADA) == ARRANQUE_PARADA) 
         arranque_parada = 1;
     else
         arranque_parada = 0;
+    
     
     if ((StatusMsg.Msg.DATA[0] & FRENO_ESTACIONAMIENTO) == FRENO_ESTACIONAMIENTO) 
         freno_estacionamiento = 1;
@@ -101,7 +104,7 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
         freno_estacionamiento = 0;
     
     // BYTE 1 - Posicion conmutador M/A
-    if ((StatusMsg.Msg.DATA[1] & MAN) == MAN) 
+        if ((StatusMsg.Msg.DATA[1] & MAN) == MAN) 
         conmutador_m_a = 0;
     if ((StatusMsg.Msg.DATA[1] & AUTO) == AUTO) 
         conmutador_m_a = 1;
@@ -169,15 +172,18 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
         parada_emergencia_obstaculo = 1;
     else        
         parada_emergencia_obstaculo = 0;
+    
     if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_REMOTA) == PARADA_EMERGENCIA_REMOTA)
         parada_emergencia_remota = 1;    
     else         
         parada_emergencia_remota = 0;
+    
     if ((StatusMsg.Msg.DATA[7] & PARADA_EMERGENCIA_LOCAL) == PARADA_EMERGENCIA_LOCAL)
         parada_emergencia_local = 1;
     else        
         parada_emergencia_local = 0;
-      
+   //cout << "tipo parada: " << (int)StatusMsg.Msg.DATA[7] << "\n";
+    flag_active_backup = true;
 }
 
 // Tratamiento del mensaje 00E (vehículo --> autómata --> CAN
@@ -242,19 +248,19 @@ void ConduccionThread::m_teleop_CAN_AUTOMATA(){
        
     switch (valor_marcha) {
         case 0: // Marcha H-
-            cambio_marcha_tx = 0;
-            break;
-        case 1: // Marcha N-
             cambio_marcha_tx = 1;
             break;
-        case 2: // MArcha R-
+        case 1: // Marcha N-
             cambio_marcha_tx = 2;
             break;
-        case 3: // Marcha N-
+        case 2: // MArcha R-
             cambio_marcha_tx = 4;
             break;
-        case 4: // Marcha L-
+        case 3: // Marcha N-
             cambio_marcha_tx = 8;
+            break;
+        case 4: // Marcha L-
+            cambio_marcha_tx = 16;
             break;
         default:
             break;
@@ -477,6 +483,45 @@ void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
     
 }
 
-void temporizador() {
+
+void ConduccionThread::envio_trama_reinicio_CAN_AUTOMATA(){
     
+    TPCANMsg msgEx;
+    msgEx.ID = 0x00A;
+    msgEx.LEN = 8;
+    msgEx.MSGTYPE = 0;
+   
+    msgEx.DATA[0] = 0;         
+    msgEx.DATA[1] = 0;
+    msgEx.DATA[2] = 0;
+    msgEx.DATA[3] = 0;
+    msgEx.DATA[4] = 0;
+    msgEx.DATA[5] = 0;
+    msgEx.DATA[6] = 0;
+    msgEx.DATA[7] = 0;         
+    
+        
+    CANCONDUCCION->SendMessage(&msgEx);
+    cout << "Reiniciado" << endl;
+}
+
+void ConduccionThread::inicializacion_valores_tx() {
+    paradaEmergencia = false;
+    flag_active_backup = false;
+    
+    valor_arranque_parada = 0;
+    valor_freno_estacionamiento = 0;
+    acelerador_tx = 0;
+    velocidad_tx = 0;
+    freno_servicio_tx = 0;
+    valor_marcha = 0;
+    cambio_marcha_tx = 0;
+    sentido_direccion_tx = 0;
+    direccion_tx = 0;
+    valor_direccion = 0;
+    valor_luces = 0;
+    valor_luces_IR = 0;
+    valor_diferencial = 0;
+    valor_laser = 0;
+    valor_parada_emergencia = 0;
 }
