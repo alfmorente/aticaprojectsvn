@@ -29,7 +29,7 @@ c578542d6c3238034f057e5e849f3ca5 msg_gen/lisp/msg_error.lisp
 e6baac5eb56b8083de6c8e9ade47f426 msg_gen/lisp/msg_mode.lisp
 d1c27f4c6a68e99543770c2dbf2c7b20 msg_gen/lisp/msg_module_enable.lisp
 f3b80a76ceb79c7eccdff819669ecdaa msg_gen/lisp/msg_prueba.lisp
-eeb74fe0410cac3bf081b77d3f201f21 src/Modulo_Gest_Sistema/msg/__init__.py
+c3544530ad0666bd4d0a3768fe31ba11 src/Modulo_Gest_Sistema/msg/__init__.py
 44345adaf66d7035f46893988e113e5f src/Modulo_Gest_Sistema/msg/_msg_available_mode.py
 555f8f43cb2abc1ab01c182281539f17 src/Modulo_Gest_Sistema/msg/_msg_error.py
 17115faa82ccb88218b979849e84cb4e src/Modulo_Gest_Sistema/msg/_msg_mode.py

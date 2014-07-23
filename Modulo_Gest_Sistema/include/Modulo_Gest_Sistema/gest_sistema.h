@@ -33,15 +33,16 @@ extern "C" {
 #define LEADER 0
 #define FOLLOWER 1
 
+
 // Mensajes
-#include "Common_files/msg_error.h"
-#include "Common_files/msg_module_enable.h"
-#include "Common_files/msg_mode.h"
-#include "Common_files/msg_available.h"
-#include "Common_files/msg_emergency_stop.h"
-#include "Common_files/msg_switch.h"
-#include "Common_files/msg_fcn_aux.h"
-#include "Common_files/srv_data.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_module_enable.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_mode.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_available.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_emergency_stop.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_switch.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_fcn_aux.h"
+#include "../../../Common_files/srv_gen/cpp/include/Common_files/srv_data.h"
 
 
 

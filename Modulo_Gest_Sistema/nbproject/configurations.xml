@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="Modules"
+                   displayName="Modules"
+                   projectFiles="true"
+                   root="/usr/share/cmake-2.8/Modules">
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
+    </logicalFolder>
     <df root="." name="0">
       <df name="CMakeFiles">
         <df name="CompilerIdC">
@@ -45,6 +54,30 @@
           <executablePath></executablePath>
         </makeTool>
       </makefileType>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+          <preprocessorList>
+            <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
       <item path="CMakeFiles/CompilerIdC/CMakeCCompilerId.c"
             ex="false"
             tool="0"
@@ -63,15 +96,24 @@
         <ccTool>
           <incDir>
             <pElem>include</pElem>
-            <pElem>../Common_files/msg_gen/cpp/include</pElem>
-            <pElem>../Common_files/srv_gen/cpp/include</pElem>
             <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
             <pElem>.</pElem>
           </incDir>
           <preprocessorList>
             <Elem>ROS_PACKAGE_NAME="Modulo_Gest_Sistema"</Elem>
           </preprocessorList>
+        </ccTool>
+      </folder>
+      <folder path="Modules">
+        <cTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
         </ccTool>
       </folder>
       <item path="src/gest_sistema.cpp" ex="false" tool="1" flavor2="4">

@@ -109,28 +109,8 @@
       </df>
       <df name="msg">
       </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="Modulo_Gest_Sistema">
-              <in>msg_available_mode.h</in>
-              <in>msg_error.h</in>
-              <in>msg_errores.h</in>
-              <in>msg_habilitacion_modulo.h</in>
-              <in>msg_mode.h</in>
-              <in>msg_modo.h</in>
-              <in>msg_module_enable.h</in>
-              <in>msg_prueba.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
-      </df>
       <df name="src">
         <df name="Modulo_Gest_Sistema">
-          <df name="msg">
-          </df>
         </df>
         <in>gest_sistema.cpp</in>
         <in>interaction.cpp</in>

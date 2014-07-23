@@ -19,7 +19,7 @@ int main(int argc, char **argv)
   // Manejador ROS
   ros::NodeHandle n;
   ROS_INFO("Operation mode: %d",operationMode);
-  ros::Rate loop_rate(40);
+  ros::Rate loop_rate(1);
   switch (operationMode) 
   {
         case OPERATION_MODE_DEBUG:
@@ -202,11 +202,14 @@ void fcn_sub_available(const Common_files::msg_availablePtr& msg)
 
 void fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr& msg)
 {    
+    ROS_INFO("FUNCION AUXILIAR %d %d %d",msg->type_msg,msg->function,msg->value);
     Common_files::msg_fcn_auxPtr msg_ack(new Common_files::msg_fcn_aux); 
-    msg_ack=msg;
-    msg_ack->type_msg=INFO;
+    msg_ack->type_msg=INFO;  
+    msg_ack->function=msg->function;
+    msg_ack->value=msg->value;
     if(msg->type_msg==SET)
     {
+        
         switch(msg->function)
         {
             case ENGINE:
@@ -353,6 +356,7 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg)
 
 void fcn_sub_switch(const Common_files::msg_switchPtr& msg)
 {
+    ROS_INFO("RECIBO SWITCH %d",msg->value);
     Common_files::msg_modePtr mode_aux(new Common_files::msg_mode);
     if(msg->value==MANUAL && actualMode!=MODE_MANUAL)
     {
