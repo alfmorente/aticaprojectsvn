@@ -28,8 +28,8 @@ int main(int argc, char** argv) {
         clock_t initTime, finalTime;
         initTime = clock();
 
-        // Estructura receptora
-        //FrameDriving frameRcv;
+        // Conteo de 5 hz -> 5 * 1hz (Vehiculo 5Hz, Senalizacion 1Hz))
+        short hzCount = 0;
 
         //Bucle principal
         while (ros::ok() && nodeDriving->getVMNodeStatus() != NODESTATUS_OFF) {
@@ -49,15 +49,29 @@ int main(int argc, char** argv) {
                     memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
                     memcpy(&fdr.element, &bufData[2], sizeof (fdr.element));
                     memcpy(&fdr.value, &bufData[4], sizeof (fdr.value));
-                    nodeDriving->manageMessage(fdr);
-                    ROS_INFO("Recibido mensaje -> INS: %d ELM: %d VAL: %d\n", fdr.instruction, fdr.element, fdr.value);
+                    nodeDriving->manageAlarmsMessage(fdr);
                 }
 
                 // Comprobación del temporizador y requerimiento de info
                 finalTime = clock() - initTime;
-                if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
-                    // Requerimiento de informacion de dispositivo
-                    nodeDriving->getDriverMng()->reqVehicleInfo();
+                if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_5HZ) {
+                    
+                    hzCount++;
+                    DrivingInfo info;
+                    if(hzCount==5){
+                        
+                        hzCount = 0;
+                        // Informacion completa: dispositivos y senalizacion
+                        info = nodeDriving->getDriverMng()->reqFullVehicleInfo();
+                   
+                    }else{
+                        
+                        // Informacion basica: dispositivos
+                        info = nodeDriving->getDriverMng()->reqBasicVehicleInfo();
+                    
+                    }
+                    nodeDriving->publishDrivingInfo(info);
+                    
                     // Clear del timer
                     initTime = clock();
                 }

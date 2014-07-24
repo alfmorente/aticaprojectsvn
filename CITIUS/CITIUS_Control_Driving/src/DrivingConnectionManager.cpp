@@ -77,7 +77,10 @@ bool DrivingConnectionManager::disconnectVehicle() {
 
 // Mandar comando de control
 
-void DrivingConnectionManager::setParam(short idParam, float value) {
+bool DrivingConnectionManager::setParam(short idParam, float value) {
+    // Valor de devolucion
+    bool ret = false;
+    
     // Estructura de envio
     FrameDriving fd;
     fd.instruction = SET;
@@ -91,42 +94,116 @@ void DrivingConnectionManager::setParam(short idParam, float value) {
     memcpy(&bufData[4], &fd.value, sizeof (fd.value));
     send(this->socketDescriptor, bufData, sizeof(bufData), 0);
     usleep(100);
+    // Variables de control de la recepcion
+    bool received = false;
+    bool timeout = false;
+    while (!received && !timeout) {
+        if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
+            // Estructura de recepcion
+            FrameDriving fdr;
+            // Rellenado del buffer
+            memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
+            memcpy(&fdr.element, &bufData[2], sizeof (fdr.element));
+            memcpy(&fdr.value, &bufData[4], sizeof (fdr.value));
+            if (fdr.instruction == ACK || fdr.element == idParam) {
+                received = true;
+                ret = true;
+            } else {
+                // Comprobacion y tratamiento de alarmas
+                // TODO
+            }
+        }
+    }
+    return ret;
 }
 
 // Solicitar informacion mediante comando
-void DrivingConnectionManager::getParam(short idParam){
+short DrivingConnectionManager::getParam(short idParam){
+    
+    // Valor de devolucion
+    short dev = -500;
     // Estructura de envio
     FrameDriving fd;
     fd.instruction = GET;
     fd.element = idParam;
     fd.value = 0;
-    // Buffer de envio
+    // Buffer de envio/recepcion
     char bufData[6];
     // Rellenado del buffer
     memcpy(&bufData[0], &fd.instruction, sizeof (fd.instruction));
     memcpy(&bufData[2], &fd.element, sizeof (fd.element));
     memcpy(&bufData[4], &fd.value, sizeof (fd.value));
-    send(this->socketDescriptor, bufData, sizeof(bufData), 0);
+    send(socketDescriptor, bufData, sizeof (bufData), 0);
     usleep(100);
+    // Variables de control de la recepcion
+    bool received = false;
+    bool timeout = false;
+    while (!received && !timeout) {
+        if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
+            // Estructura de recepcion
+            FrameDriving fdr;
+            // Rellenado del buffer
+            memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
+            memcpy(&fdr.element, &bufData[2], sizeof (fdr.element));
+            memcpy(&fdr.value, &bufData[4], sizeof (fdr.value));
+            if (fdr.instruction == INFO || fdr.element == idParam) {
+                received = true;
+                dev = fdr.value;
+            } else {
+                // Comprobacion y tratamiento de alarmas
+                // TODO
+            }
+        }
+    }
+    return dev;
+
+    
+}
+
+// Solicitar informacion basica de vehiculo
+DrivingInfo DrivingConnectionManager::reqBasicVehicleInfo(){
+    DrivingInfo ret;
+    
+    ret.thottle = getParam(THROTTLE);
+    ret.brake = getParam(BRAKE);
+    if(getParam(HANDBRAKE)==0) ret.parkingBrake = false; else ret.parkingBrake = true;
+    ret.steering = getParam(STEERING);
+    ret.gear = getParam(GEAR);
+    ret.speed = getParam(CRUISING_SPEED);
+    ret.motorRPM = getParam(MOTOR_RPM);
+    ret.motorTemperature = getParam(MOTOR_TEMPERATURE);
+    ret.lights = false;
+    
+    return ret;
+    
 }
 
 // Solicitar informacion completa de vehiculo
-void DrivingConnectionManager::reqVehicleInfo(){
-    this->getParam(THROTTLE);
-    this->getParam(BRAKE);
-    this->getParam(HANDBRAKE);
-    this->getParam(STEERING);
-    this->getParam(GEAR);
-    this->getParam(DIPSP);
-    this->getParam(DIPSR);
-    this->getParam(DIPSS);
-    this->getParam(KLAXON);
-    this->getParam(BLINKER_RIGHT);
-    this->getParam(BLINKER_LEFT);
-    this->getParam(BLINKER_EMERGENCY);
-    this->getParam(MOTOR_RPM);
-    this->getParam(MOTOR_TEMPERATURE);
-    this->getParam(CRUISING_SPEED);
+DrivingInfo DrivingConnectionManager::reqFullVehicleInfo(){
+    
+    DrivingInfo ret;
+    
+    ret.thottle = getParam(THROTTLE);
+    ret.brake = getParam(BRAKE);
+    if(getParam(HANDBRAKE) == 0) ret.parkingBrake = false; else ret.parkingBrake = true;
+    ret.steering = getParam(STEERING);
+    ret.gear = getParam(GEAR);
+    ret.speed = getParam(CRUISING_SPEED);
+    ret.motorRPM = getParam(MOTOR_RPM);
+    ret.motorTemperature = getParam(MOTOR_TEMPERATURE);
+    ret.lights = true;
+    if(getParam(DIPSP) == 0) ret.dipsp = false; else ret.dipsp = true;
+    if(getParam(DIPSR) == 0) ret.dipsr = false; else ret.dipsr = true;
+    if(getParam(DIPSS) == 0) ret.dipss = false; else ret.dipss = true;
+    if(getParam(KLAXON) == 0) ret.klaxon = false; else ret.klaxon = true;
+    if(getParam(BLINKER_RIGHT) == 0) ret.blinkerRight = false; else ret.blinkerRight = true;
+    if(getParam(BLINKER_LEFT) == 0) ret.blinkerLeft = false; else ret.blinkerLeft = true;
+    if(getParam(BLINKER_EMERGENCY) == 1){
+        ret.blinkerLeft = true; 
+        ret.blinkerRight = true;
+    }
+
+    return ret;
     
 }
 

@@ -22,22 +22,87 @@ struct msg_vehicleInfo_ {
   typedef msg_vehicleInfo_<ContainerAllocator> Type;
 
   msg_vehicleInfo_()
-  : id_device(0)
-  , value(0)
+  : steering(0)
+  , thottle(0)
+  , brake(0)
+  , parkingBrake(false)
+  , gear(0)
+  , speed(0)
+  , motorRPM(0)
+  , motorTemperature(0)
+  , lights(false)
+  , blinkerLeft(false)
+  , blinkerRight(false)
+  , dipss(false)
+  , dipsr(false)
+  , dipsp(false)
+  , klaxon(false)
   {
   }
 
   msg_vehicleInfo_(const ContainerAllocator& _alloc)
-  : id_device(0)
-  , value(0)
+  : steering(0)
+  , thottle(0)
+  , brake(0)
+  , parkingBrake(false)
+  , gear(0)
+  , speed(0)
+  , motorRPM(0)
+  , motorTemperature(0)
+  , lights(false)
+  , blinkerLeft(false)
+  , blinkerRight(false)
+  , dipss(false)
+  , dipsr(false)
+  , dipsp(false)
+  , klaxon(false)
   {
   }
 
-  typedef uint16_t _id_device_type;
-  uint16_t id_device;
+  typedef int16_t _steering_type;
+  int16_t steering;
 
-  typedef int16_t _value_type;
-  int16_t value;
+  typedef int16_t _thottle_type;
+  int16_t thottle;
+
+  typedef int16_t _brake_type;
+  int16_t brake;
+
+  typedef uint8_t _parkingBrake_type;
+  uint8_t parkingBrake;
+
+  typedef uint8_t _gear_type;
+  uint8_t gear;
+
+  typedef uint16_t _speed_type;
+  uint16_t speed;
+
+  typedef int16_t _motorRPM_type;
+  int16_t motorRPM;
+
+  typedef int16_t _motorTemperature_type;
+  int16_t motorTemperature;
+
+  typedef uint8_t _lights_type;
+  uint8_t lights;
+
+  typedef uint8_t _blinkerLeft_type;
+  uint8_t blinkerLeft;
+
+  typedef uint8_t _blinkerRight_type;
+  uint8_t blinkerRight;
+
+  typedef uint8_t _dipss_type;
+  uint8_t dipss;
+
+  typedef uint8_t _dipsr_type;
+  uint8_t dipsr;
+
+  typedef uint8_t _dipsp_type;
+  uint8_t dipsp;
+
+  typedef uint8_t _klaxon_type;
+  uint8_t klaxon;
 
 
   typedef boost::shared_ptr< ::CITIUS_Control_Driving::msg_vehicleInfo_<ContainerAllocator> > Ptr;
@@ -68,12 +133,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_Driving::msg_vehicleInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "99cf754747b52aeb199e99a3aa80459e";
+    return "f5ad468e30e0eec9c9f9d0323c8e4eca";
   }
 
   static const char* value(const  ::CITIUS_Control_Driving::msg_vehicleInfo_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x99cf754747b52aebULL;
-  static const uint64_t static_value2 = 0x199e99a3aa80459eULL;
+  static const uint64_t static_value1 = 0xf5ad468e30e0eec9ULL;
+  static const uint64_t static_value2 = 0xc9f9d0323c8e4ecaULL;
 };
 
 template<class ContainerAllocator>
@@ -90,8 +155,21 @@ template<class ContainerAllocator>
 struct Definition< ::CITIUS_Control_Driving::msg_vehicleInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "uint16 id_device\n\
-int16 value\n\
+    return "int16 steering\n\
+int16 thottle\n\
+int16 brake\n\
+bool parkingBrake\n\
+uint8 gear\n\
+uint16 speed\n\
+int16 motorRPM\n\
+int16 motorTemperature\n\
+bool lights\n\
+bool blinkerLeft\n\
+bool blinkerRight\n\
+bool dipss\n\
+bool dipsr\n\
+bool dipsp\n\
+bool klaxon\n\
 ";
   }
 
@@ -111,8 +189,21 @@ template<class ContainerAllocator> struct Serializer< ::CITIUS_Control_Driving::
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
-    stream.next(m.id_device);
-    stream.next(m.value);
+    stream.next(m.steering);
+    stream.next(m.thottle);
+    stream.next(m.brake);
+    stream.next(m.parkingBrake);
+    stream.next(m.gear);
+    stream.next(m.speed);
+    stream.next(m.motorRPM);
+    stream.next(m.motorTemperature);
+    stream.next(m.lights);
+    stream.next(m.blinkerLeft);
+    stream.next(m.blinkerRight);
+    stream.next(m.dipss);
+    stream.next(m.dipsr);
+    stream.next(m.dipsp);
+    stream.next(m.klaxon);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -130,10 +221,36 @@ struct Printer< ::CITIUS_Control_Driving::msg_vehicleInfo_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::CITIUS_Control_Driving::msg_vehicleInfo_<ContainerAllocator> & v) 
   {
-    s << indent << "id_device: ";
-    Printer<uint16_t>::stream(s, indent + "  ", v.id_device);
-    s << indent << "value: ";
-    Printer<int16_t>::stream(s, indent + "  ", v.value);
+    s << indent << "steering: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.steering);
+    s << indent << "thottle: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.thottle);
+    s << indent << "brake: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.brake);
+    s << indent << "parkingBrake: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.parkingBrake);
+    s << indent << "gear: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.gear);
+    s << indent << "speed: ";
+    Printer<uint16_t>::stream(s, indent + "  ", v.speed);
+    s << indent << "motorRPM: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.motorRPM);
+    s << indent << "motorTemperature: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.motorTemperature);
+    s << indent << "lights: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.lights);
+    s << indent << "blinkerLeft: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.blinkerLeft);
+    s << indent << "blinkerRight: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.blinkerRight);
+    s << indent << "dipss: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.dipss);
+    s << indent << "dipsr: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.dipsr);
+    s << indent << "dipsp: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.dipsp);
+    s << indent << "klaxon: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.klaxon);
   }
 };
 

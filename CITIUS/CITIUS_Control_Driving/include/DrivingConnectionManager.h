@@ -32,6 +32,24 @@ extern "C" {
 #include <fcntl.h>
 #include <arpa/inet.h>
 
+typedef struct {
+    short steering;
+    short thottle;
+    short brake;
+    bool parkingBrake;
+    unsigned short gear;
+    unsigned short speed;
+    short motorRPM;
+    short motorTemperature;
+    bool lights;
+    bool blinkerLeft;
+    bool blinkerRight;
+    bool dipss;
+    bool dipsr;
+    bool dipsp;
+    bool klaxon;
+}DrivingInfo;
+
 class DrivingConnectionManager{
 private:
     // Socket
@@ -41,9 +59,10 @@ public:
     DrivingConnectionManager();
     // Gestion del vehiculo
     bool connectVehicle();
-    void setParam(short idParam, float value);
-    void getParam(short idParam);
-    void reqVehicleInfo();
+    bool setParam(short idParam, float value);
+    short getParam(short idParam);
+    DrivingInfo reqBasicVehicleInfo();
+    DrivingInfo reqFullVehicleInfo();
     bool disconnectVehicle();
     // Getter y setter necesarios
     int getSocketDescriptor();

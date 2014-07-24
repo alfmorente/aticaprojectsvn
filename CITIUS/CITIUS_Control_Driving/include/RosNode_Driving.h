@@ -56,7 +56,9 @@ public:
     // Criba de comandos fuera de rango
     bool checkCommand(CITIUS_Control_Driving::msg_command msg);
     // Gestion de mensajes recibidos
-    void manageMessage(FrameDriving frame);
+    void manageAlarmsMessage(FrameDriving frame);
+    // Publicacion de informacion de vehiculo
+    void publishDrivingInfo(DrivingInfo);
     
 };
 

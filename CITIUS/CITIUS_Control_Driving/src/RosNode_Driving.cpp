@@ -5,8 +5,8 @@
  ******************************************************************************/
 
 RosNode_Driving::RosNode_Driving() {
-    this->setVMNodeStatus(NODESTATUS_INIT);
-    this->dVehicle = new DrivingConnectionManager();
+    setVMNodeStatus(NODESTATUS_INIT);
+    dVehicle = new DrivingConnectionManager();
 }
 
 /*******************************************************************************
@@ -15,9 +15,9 @@ RosNode_Driving::RosNode_Driving() {
 
 void RosNode_Driving::initROS() {
     ros::NodeHandle nh;
-    this->pubVehicleInfo = nh.advertise<CITIUS_Control_Driving::msg_vehicleInfo>("vehicleInfo",1000);
-    this->subsCommand = nh.subscribe("command",1000,&RosNode_Driving::fcn_sub_command,this);
-    this->servNodeStatus = nh.advertiseService("vmNodeStatus",&RosNode_Driving::fcv_serv_nodeStatus,this);
+    pubVehicleInfo = nh.advertise<CITIUS_Control_Driving::msg_vehicleInfo>("vehicleInfo",1000);
+    subsCommand = nh.subscribe("command",1000,&RosNode_Driving::fcn_sub_command,this);
+    servNodeStatus = nh.advertiseService("vmNodeStatus",&RosNode_Driving::fcv_serv_nodeStatus,this);
 }
 
 /*******************************************************************************
@@ -27,10 +27,14 @@ void RosNode_Driving::initROS() {
 // Control de la camara
 
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
-    if (this->vmNodeStatus == NODESTATUS_OK) {
+    if (vmNodeStatus == NODESTATUS_OK) {
         ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
         if (checkCommand(msg)) {
-            this->getDriverMng()->setParam(msg.id_device, msg.value);
+            if(this->getDriverMng()->setParam(msg.id_device, msg.value)){
+                ROS_INFO("[Control] Driving - Comando enviado correctamente.");
+            }else{
+                ROS_INFO("[Control] Driving - No se encontro el ACK");
+            }
         } else {
             ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
         }
@@ -43,11 +47,11 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
 // Gestion del estado del nodo
 bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp){
     if(rq.status == NODESTATUS_OK){
-        this->setVMNodeStatus(NODESTATUS_OK);
+        setVMNodeStatus(NODESTATUS_OK);
         rsp.confirmation = true;
     }else if(rq.status == NODESTATUS_OFF){
-        this->getDriverMng()->disconnectVehicle();
-        this->setVMNodeStatus(NODESTATUS_OFF);
+        getDriverMng()->disconnectVehicle();
+        setVMNodeStatus(NODESTATUS_OFF);
         rsp.confirmation = true;
     }else{
         rsp.confirmation = false;
@@ -61,22 +65,22 @@ bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus
 
 // Get del estado del nodo
 short RosNode_Driving::getVMNodeStatus(){
-    return this->vmNodeStatus;
+    return vmNodeStatus;
 }
 
 // Set del estado del nodo
 void RosNode_Driving::setVMNodeStatus(short newVMNodeStatus){
-    this->vmNodeStatus = newVMNodeStatus;
+    vmNodeStatus = newVMNodeStatus;
 }
 
 // Obtener el publicador de informacion del vehiculo
 ros::Publisher RosNode_Driving::getPubVehicleInfo(){
-    return this->pubVehicleInfo;
+    return pubVehicleInfo;
 }
 
 // Obtener el driver 
 DrivingConnectionManager *RosNode_Driving::getDriverMng(){
-    return this->dVehicle;
+    return dVehicle;
 }
 
 /*******************************************************************************
@@ -160,24 +164,49 @@ bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg){
 /*******************************************************************************
  * GESTION DE MENSAJES RECIBIDOS DEL VEHICULO
  ******************************************************************************/
-void RosNode_Driving::manageMessage(FrameDriving frame){
+void RosNode_Driving::manageAlarmsMessage(FrameDriving frame){
     // Se comprueba que es de tipo INFO
     if(frame.instruction == INFO){
         // Tratamiento alarmas / demas elementos
         if(frame.element == DRIVE_ALARMS){
             // TODO: Tratamientos de alarmas del modulo
+            ROS_INFO("[Control] Driving - Alarma recibida");
             
         }else if(frame.element == STEERING_ALARMS){
             // TODO: Tratamiento de alarmas de direccion
+            ROS_INFO("[Control] Driving - Alarma de direccion recibida");
             
         }else{
-            CITIUS_Control_Driving::msg_vehicleInfo vMsg;
-            vMsg.id_device = frame.element;
-            vMsg.value = frame.value;
-            this->getPubVehicleInfo().publish(vMsg);
+            ROS_INFO("[Control] Driving - Recibida trama como alarma. Elemento: %d",frame.element);
         }
     }else{
         ROS_INFO("[Control] Driving - Trama invalida recibida");
     }
     
+}
+
+/*******************************************************************************
+ * PUBLICACION DE INFORMACION DEL VEHICULO
+ ******************************************************************************/
+void RosNode_Driving::publishDrivingInfo(DrivingInfo info){
+    CITIUS_Control_Driving::msg_vehicleInfo msg;
+    
+    msg.steering = info.steering;
+    msg.thottle = info.thottle;
+    msg.brake = info.brake;
+    msg.parkingBrake = info.parkingBrake;
+    msg.gear = info.gear;
+    msg.speed = info.speed;
+    msg.motorRPM = info.motorRPM;
+    msg.motorTemperature = info.motorTemperature;
+    msg.lights = info.lights;
+    msg.blinkerLeft = info.blinkerLeft;
+    msg.blinkerRight = info.blinkerRight;
+    msg.dipss = info.dipss;
+    msg.dipsr = info.dipsr;
+    msg.dipsp = info.dipsp;
+    msg.klaxon = info.klaxon;
+    
+    pubVehicleInfo.publish(msg);
+
 }

@@ -1,2 +1,15 @@
-uint16 id_device
-int16 value
+int16 steering
+int16 thottle
+int16 brake
+bool parkingBrake
+uint8 gear
+uint16 speed
+int16 motorRPM
+int16 motorTemperature
+bool lights
+bool blinkerLeft
+bool blinkerRight
+bool dipss
+bool dipsr
+bool dipsp
+bool klaxon

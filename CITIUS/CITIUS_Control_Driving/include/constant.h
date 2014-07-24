@@ -30,6 +30,7 @@ extern "C" {
 #define SET 0
 #define GET 1
 #define INFO 2
+#define ACK 3
 
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
