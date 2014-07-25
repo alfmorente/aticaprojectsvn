@@ -29,7 +29,6 @@ extern "C" {
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <fcntl.h>
 #include <arpa/inet.h>
 #include <sstream>
 
@@ -56,3 +55,7 @@ typedef struct{
 
 bool sentSetToDevice(short order, float value);
 LensPosition getPosition();
+
+float extractZoom(char[]);
+float extractTilt(char[]);
+float extractPan(char[]);

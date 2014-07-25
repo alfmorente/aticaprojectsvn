@@ -46,15 +46,15 @@ int main(int argc, char** argv) {
             return -1;
 
         }else{
-            printf("Conectado a la camara AXIS:\n");
+             /*printf("Conectado a la camara AXIS:\n");
             
-            printf("Solicitando ZOOM 100 ... ");
-            if(sentSetToDevice(ORDER_ZOOM, 100)){
+            printf("Solicitando ZOOM 5000 ... \n");
+            if(sentSetToDevice(ORDER_ZOOM, 5000)){
                 printf("OK\n");
             }else{
                 printf("ERROR\n");
             }
-            
+           
             
             printf("Solicitando TILT 50 ... ");
             if(sentSetToDevice(ORDER_TILT, 50)){
@@ -72,8 +72,9 @@ int main(int argc, char** argv) {
             }
             
             printf("Solicitando posicion...\n");
+            */
+            LensPosition lp = getPosition();
             
-            LensPosition lp;getPosition();
             if(lp.state){
                 printf("Zoom: %f\n",lp.zoom);
                 printf("Pan: %f\n",lp.pan);
@@ -96,7 +97,7 @@ int main(int argc, char** argv) {
 bool sentSetToDevice(short order, float value){
     
     stringstream stream;
-    stream << "SET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << IP_CAMERA << PTZ_ROUTE;
+    stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << IP_CAMERA << PTZ_ROUTE;
     switch(order){
         case ORDER_ZOOM:
             stream << "zoom=";
@@ -129,7 +130,13 @@ bool sentSetToDevice(short order, float value){
     }
     
     // Lectura y obtencion del ack
-    //int nBytesRead = recv(socketDescriptor,respuesta,256,0);
+    char respuesta[256];
+    
+    int nBytesRead = 0;
+    while(nBytesRead == 0){
+        nBytesRead = recv(socketDescriptor,respuesta,256,0);
+    }
+    printf("Respuesta: %s\n",respuesta);
     
     return true;
 }
@@ -152,12 +159,72 @@ LensPosition getPosition(){
         printf("Error en la escritura\n");
         pos.state = false;
     }
-        
+
     // Lectura y obtencion de los datos
-    //int nBytesRead = recv(socketDescriptor,respuesta,256,0);
-            
-    pos.pan = 0;
-    pos.tilt = 0;
-    pos.zoom = 0;
+    char respuesta[256];
+    int nBytesRead = recv(socketDescriptor,respuesta,256,0);
+    
+    if(nBytesRead > 0 ) {
+        
+        pos.state = true;
+        pos.pan = extractPan(respuesta);
+        pos.tilt = extractTilt(respuesta);
+        pos.zoom = extractZoom(respuesta);
+    
+    }else{
+        
+        pos.state = false;
+        pos.pan = 0;
+        pos.tilt = 0;
+        pos.zoom = 0;
+    
+    }
+    
     return pos;
+}
+
+/*******************************************************************************
+                EXTRACCION DE VALORES DE LA RESPUESTA DE LA CAMARA                          
+*******************************************************************************/
+
+float extractZoom(char cadena[256]){
+    string resp = cadena;
+    int index=resp.find("zoom=");
+    string value;
+    for(int i = index+5; i < resp.size(); i++){
+        if(resp.at(i)=='\r'){
+            i = resp.size();
+        }else{
+            value.push_back(resp.at(i));
+        }
+    }
+    return (float)atof(value.c_str());
+}
+
+float extractTilt(char cadena[256]){
+    string resp = cadena;
+    int index=resp.find("tilt=");
+    string value;
+    for(int i = index+5; i < resp.size(); i++){
+        if(resp.at(i)=='\r'){
+            i = resp.size();
+        }else{
+            value.push_back(resp.at(i));
+        }
+    }
+    return (float)atof(value.c_str());
+}
+
+float extractPan(char cadena[256]){
+    string resp = cadena;
+    int index=resp.find("pan=");
+    string value;
+    for(int i = index+4; i < resp.size(); i++){
+        if(resp.at(i)=='\r'){
+            i = resp.size();
+        }else{
+            value.push_back(resp.at(i));
+        }
+    }
+    return (float)atof(value.c_str());
 }
