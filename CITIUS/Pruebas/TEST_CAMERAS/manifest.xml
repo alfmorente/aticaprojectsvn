@@ -1,0 +1,15 @@
+<package>
+  <description brief="TEST_CAMERAS">
+
+     TEST_CAMERAS
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/TEST_CAMERAS</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
