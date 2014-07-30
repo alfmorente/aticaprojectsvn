@@ -45,6 +45,8 @@ extern "C" {
 #define ORDER_TILT 2
 
 int socketDescriptor;
+struct hostent *he;
+struct sockaddr_in server;
 
 typedef struct{
     bool state;
