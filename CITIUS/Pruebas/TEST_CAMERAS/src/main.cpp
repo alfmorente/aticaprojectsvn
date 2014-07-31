@@ -44,9 +44,9 @@ int main(int argc, char** argv) {
                 if(status == ST_DISCONNECTED){
                     status = auxStatus;
                 }else if(status == ST_FRONT_CAM){
-                    driverFrontCam->getPosition();
+                    system("firefox http://192.168.24.120/jpg/image.jpg");
                 }else if(status == ST_REAR_CAM){
-                    driverRearCam->getPosition();
+                    system("firefox http://192.168.24.120/jpg/image.jpg");
                 }else{
                     cout << "Opcion invalida" << endl;
                 }
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
                 break;
             case 3:
                 if(status == ST_DISCONNECTED){
-                    status = auxStatus;
+                    status = ST_EXIT;
                 }else if(status == ST_FRONT_CAM){
                     int value = cinValue();
                     driverFrontCam->sentSetToDevice(ORDER_TILT,value);
@@ -80,12 +80,21 @@ int main(int argc, char** argv) {
             case 4:
                 if(status == ST_FRONT_CAM){
                     int value = cinValue();
-                    driverFrontCam->sentSetToDevice(ORDER_ZOOM,value);
+                    if(driverFrontCam->sentSetToDevice(ORDER_ZOOM,value)){
+                    
+                    }
                 }else if(status == ST_REAR_CAM){
                     int value = cinValue();
                     driverRearCam->sentSetToDevice(ORDER_ZOOM,value);
                 }else{
                     cout << "Opcion invalida" << endl;
+                }
+                break;
+            case 5:
+                if(status == ST_FRONT_CAM){
+                    status = ST_DISCONNECTED;
+                }else if(status == ST_REAR_CAM){
+                    status = ST_DISCONNECTED;
                 }
                 break;
             default:
@@ -112,6 +121,7 @@ void printMenu(int status){
             cout << "2. Control de PAN" << endl;
             cout << "3. Control de TILT" << endl;
             cout << "4. Control de ZOOM" << endl;
+            cout << "5. Volver" << endl;
             
             break;
             
@@ -121,6 +131,8 @@ void printMenu(int status){
             cout << "2. Control de PAN" << endl;
             cout << "3. Control de TILT" << endl;
             cout << "4. Control de ZOOM" << endl;
+            cout << "5. Volver" << endl;
+            
             
             break;
             
@@ -153,5 +165,5 @@ int cinValue(){
             ret= aux;
         }
     }
-    return ret;
+    return ret*(5000/100);
 }

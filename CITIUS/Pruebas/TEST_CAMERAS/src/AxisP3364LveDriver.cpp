@@ -67,18 +67,15 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
             }
 
             if (stream.str().size() == 0) {
-                printf("Error generando el comando\n");
                 return false;
             }
 
             stream << value << "\nConnection: keep-alive\r\n";
 
-            printf("Comando generado: %s", stream.str().c_str());
 
             int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
 
             if (nBytesSent < 0) {
-                printf("Error en la escritura\n");
                 return false;
             }
 
@@ -89,8 +86,20 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
             while (nBytesRead == 0) {
                 nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
             }
-            respuesta[nBytesRead] = '\0';
-            printf("Respuesta: \n %s\n", respuesta);
+            
+            LensPosition lenspos = getPosition();
+            
+            if(lenspos.state){
+                
+                printf("PAN: %f\n",lenspos.pan);
+                printf("TILT: %f\n",lenspos.tilt);
+                printf("ZOOM: %f\n",lenspos.zoom);
+                
+            }else{
+                printf("No se ha podido obtener la posicion\n");
+            }
+            
+            
 
             return true;
 
@@ -128,7 +137,7 @@ LensPosition AxisP3364LveDriver::getPosition() {
 
                 stringstream stream;
                 stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << IP_CAMERA << PTZ_ROUTE << "query=position\r\n";
-                printf("Comando generado: %s", stream.str().c_str());
+                //printf("Comando generado: %s", stream.str().c_str());
 
                 int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
 
@@ -141,8 +150,6 @@ LensPosition AxisP3364LveDriver::getPosition() {
                 char respuesta[256];
                 int nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
                 respuesta[nBytesRead] = '\0';
-
-                printf("\n\n %s \n\n", respuesta);
 
                 if (nBytesRead > 0) {
 

@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/src/AxisP3364LveDriver.cpp
+/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/src/main.cpp
+cstdlib
+-
+iostream
+-
 AxisP3364LveDriver.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/src/AxisP3364LveDriver.h
 
