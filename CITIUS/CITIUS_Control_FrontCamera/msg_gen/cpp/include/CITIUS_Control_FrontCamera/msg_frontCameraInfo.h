@@ -22,16 +22,21 @@ struct msg_frontCameraInfo_ {
   typedef msg_frontCameraInfo_<ContainerAllocator> Type;
 
   msg_frontCameraInfo_()
-  : pan(0.0)
+  : zoom(0.0)
+  , pan(0.0)
   , tilt(0.0)
   {
   }
 
   msg_frontCameraInfo_(const ContainerAllocator& _alloc)
-  : pan(0.0)
+  : zoom(0.0)
+  , pan(0.0)
   , tilt(0.0)
   {
   }
+
+  typedef float _zoom_type;
+  float zoom;
 
   typedef float _pan_type;
   float pan;
@@ -68,12 +73,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_FrontCamera::msg_frontCameraInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "938e11f380abc0513a5b7367d0f157bf";
+    return "e2a7f63b6b1b1f31c8378177bc0e68a9";
   }
 
   static const char* value(const  ::CITIUS_Control_FrontCamera::msg_frontCameraInfo_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x938e11f380abc051ULL;
-  static const uint64_t static_value2 = 0x3a5b7367d0f157bfULL;
+  static const uint64_t static_value1 = 0xe2a7f63b6b1b1f31ULL;
+  static const uint64_t static_value2 = 0xc8378177bc0e68a9ULL;
 };
 
 template<class ContainerAllocator>
@@ -90,7 +95,8 @@ template<class ContainerAllocator>
 struct Definition< ::CITIUS_Control_FrontCamera::msg_frontCameraInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "float32 pan\n\
+    return "float32 zoom\n\
+float32 pan\n\
 float32 tilt\n\
 ";
   }
@@ -111,6 +117,7 @@ template<class ContainerAllocator> struct Serializer< ::CITIUS_Control_FrontCame
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
+    stream.next(m.zoom);
     stream.next(m.pan);
     stream.next(m.tilt);
   }
@@ -130,6 +137,8 @@ struct Printer< ::CITIUS_Control_FrontCamera::msg_frontCameraInfo_<ContainerAllo
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::CITIUS_Control_FrontCamera::msg_frontCameraInfo_<ContainerAllocator> & v) 
   {
+    s << indent << "zoom: ";
+    Printer<float>::stream(s, indent + "  ", v.zoom);
     s << indent << "pan: ";
     Printer<float>::stream(s, indent + "  ", v.pan);
     s << indent << "tilt: ";

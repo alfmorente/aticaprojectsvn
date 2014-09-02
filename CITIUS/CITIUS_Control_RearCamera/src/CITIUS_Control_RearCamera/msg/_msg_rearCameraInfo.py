@@ -6,14 +6,15 @@ import struct
 
 
 class msg_rearCameraInfo(genpy.Message):
-  _md5sum = "938e11f380abc0513a5b7367d0f157bf"
+  _md5sum = "e2a7f63b6b1b1f31c8378177bc0e68a9"
   _type = "CITIUS_Control_RearCamera/msg_rearCameraInfo"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float32 pan
+  _full_text = """float32 zoom
+float32 pan
 float32 tilt
 """
-  __slots__ = ['pan','tilt']
-  _slot_types = ['float32','float32']
+  __slots__ = ['zoom','pan','tilt']
+  _slot_types = ['float32','float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +24,7 @@ float32 tilt
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       pan,tilt
+       zoom,pan,tilt
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -32,11 +33,14 @@ float32 tilt
     if args or kwds:
       super(msg_rearCameraInfo, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
+      if self.zoom is None:
+        self.zoom = 0.
       if self.pan is None:
         self.pan = 0.
       if self.tilt is None:
         self.tilt = 0.
     else:
+      self.zoom = 0.
       self.pan = 0.
       self.tilt = 0.
 
@@ -53,7 +57,7 @@ float32 tilt
     """
     try:
       _x = self
-      buff.write(_struct_2f.pack(_x.pan, _x.tilt))
+      buff.write(_struct_3f.pack(_x.zoom, _x.pan, _x.tilt))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -66,8 +70,8 @@ float32 tilt
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.pan, _x.tilt,) = _struct_2f.unpack(str[start:end])
+      end += 12
+      (_x.zoom, _x.pan, _x.tilt,) = _struct_3f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -81,7 +85,7 @@ float32 tilt
     """
     try:
       _x = self
-      buff.write(_struct_2f.pack(_x.pan, _x.tilt))
+      buff.write(_struct_3f.pack(_x.zoom, _x.pan, _x.tilt))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -95,11 +99,11 @@ float32 tilt
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.pan, _x.tilt,) = _struct_2f.unpack(str[start:end])
+      end += 12
+      (_x.zoom, _x.pan, _x.tilt,) = _struct_3f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2f = struct.Struct("<2f")
+_struct_3f = struct.Struct("<3f")

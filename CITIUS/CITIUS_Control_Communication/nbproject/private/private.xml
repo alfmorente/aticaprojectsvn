@@ -11,8 +11,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="CITIUS"/>
         <group>
-            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/include/RosNode_Communications.h</file>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeLists.txt</file>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp</file>
         </group>
     </open-files>

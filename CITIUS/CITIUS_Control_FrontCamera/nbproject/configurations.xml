@@ -3,7 +3,7 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
       <df name="src">
-        <in>DrivingCameraManager.cpp</in>
+        <in>AxisP3364LveDriver.cpp</in>
         <in>RosNode_FrontCamera.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -54,9 +54,6 @@
           <ccTool>
             <incDir>
               <pElem>include</pElem>
-              <pElem>.</pElem>
-              <pElem>msg_gen/cpp/include</pElem>
-              <pElem>srv_gen/cpp/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="CITIUS_Control_FrontCamera"</Elem>
@@ -120,6 +117,9 @@
       <folder path="src">
         <ccTool>
           <incDir>
+            <pElem>.</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
             <pElem>/usr/src/gtest/include</pElem>
             <pElem>/usr/src/gtest</pElem>
             <pElem>gtest</pElem>
@@ -136,9 +136,7 @@
           </undefinedList>
         </ccTool>
       </folder>
-      <item path="src/DrivingCameraManager.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
+      <item path="src/AxisP3364LveDriver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/RosNode_FrontCamera.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>

@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/DrivingCameraManager.cpp
-DrivingCameraManager.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/DrivingCameraManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp
+AxisP3364LveDriver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.h
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp
 RosNode_FrontCamera.h
@@ -634,27 +634,43 @@ ros/forwards.h
 
 /opt/ros/groovy/include/rosconsole/macros_generated.h
 
-include/DrivingCameraManager.h
-ros/ros.h
-include/ros/ros.h
+include/AxisP3364LveDriver.h
+cstdlib
+-
 string.h
 -
 stdio.h
 -
 stdlib.h
 -
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+netdb.h
+-
+arpa/inet.h
+-
+sstream
+-
 
 include/RosNode_FrontCamera.h
 time.h
 -
-DrivingCameraManager.h
-include/DrivingCameraManager.h
+AxisP3364LveDriver.h
+include/AxisP3364LveDriver.h
 constant.h
 include/constant.h
 CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h
 include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h
 CITIUS_Control_FrontCamera/msg_frontCameraInfo.h
 include/CITIUS_Control_FrontCamera/msg_frontCameraInfo.h
+CITIUS_Control_FrontCamera/srv_nodeStatus.h
+include/CITIUS_Control_FrontCamera/srv_nodeStatus.h
+ros/ros.h
+include/ros/ros.h
 
 include/constant.h
 
@@ -701,4 +717,28 @@ ros/macros.h
 msg_gen/cpp/include/CITIUS_Control_FrontCamera/ros/macros.h
 ros/assert.h
 msg_gen/cpp/include/CITIUS_Control_FrontCamera/ros/assert.h
+
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/srv_nodeStatus.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/serialization.h
+ros/builtin_message_traits.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/builtin_message_traits.h
+ros/message_operations.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/message_operations.h
+ros/time.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/time.h
+ros/macros.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/macros.h
+ros/assert.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/assert.h
+ros/service_traits.h
+srv_gen/cpp/include/CITIUS_Control_FrontCamera/ros/service_traits.h
 

@@ -15,12 +15,12 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    ros::init(argc,argv, "[Control] ROS Node - Front Camera");
+    ros::init(argc,argv, "RosNode_Control_FrontCam");
     
     RosNode_FrontCamera *fc = new RosNode_FrontCamera();
 
     // Conexión
-    if (fc->getDriverMng()->connect()) {
+    if (fc->getDriverMng()->checkConnection()) {
         // Inicio de artefactos ROS
         fc->initROS();
 
@@ -37,21 +37,31 @@ int main(int argc, char** argv) {
 
         //Bucle principal
         while (ros::ok() && fc->getFcNodeStatus() != NODESTATUS_OFF) {
+            
             // Recepcion de mensaje
             ros::spinOnce();
             // Comprobación del temporizador y requerimiento de info
             finalTime = clock() - initTime;
+            
             if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
-                // Requerimiento de informacion de dispositivo
-                float pan = fc->getDriverMng()->getParam(IDPARAM_PAN);
-                float tilt = fc->getDriverMng()->getParam(IDPARAM_TILT);
-                // Montaje del mensaje y publicacion
-                CITIUS_Control_FrontCamera::msg_frontCameraInfo fcMsg;
-                fcMsg.pan = pan;
-                fcMsg.tilt = tilt;
-                fc->getPubFrontCameraInfo().publish(fcMsg);
+                
                 // Clear del timer
                 initTime = clock();
+                                
+                // Envio de parametros (activo para no perder informacion)
+                fc->getDriverMng()->sentSetToDevice(ORDER_PAN,fc->getDriverMng()->getPan());
+                fc->getDriverMng()->sentSetToDevice(ORDER_TILT,fc->getDriverMng()->getTilt());
+                fc->getDriverMng()->sentSetToDevice(ORDER_ZOOM,fc->getDriverMng()->getZoom());
+                
+                // Requerimiento de informacion de dispositivo
+                LensPosition lensPos = fc->getDriverMng()->getPosition();
+                if(lensPos.state){
+                    CITIUS_Control_FrontCamera::msg_frontCameraInfo fcMsg;
+                    fcMsg.pan = lensPos.pan / 50; // * (100/5000) Conversion de formato camara
+                    fcMsg.tilt = lensPos.tilt / 50; // * (100/5000) Conversion de formato camara
+                    fcMsg.zoom = lensPos.zoom / 50; // * (100/5000) Conversion de formato camara
+                    fc->getPubFrontCameraInfo().publish(fcMsg);
+                }
             }
         }
     } else {

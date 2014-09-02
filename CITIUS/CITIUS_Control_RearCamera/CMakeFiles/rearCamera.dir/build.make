@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera
 
@@ -121,54 +118,54 @@ CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o.provides: CMakeFiles/rear
 
 CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o.provides.build: CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o
 
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: CMakeFiles/rearCamera.dir/flags.make
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: src/DrivingCameraManager.cpp
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: manifest.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: CMakeFiles/rearCamera.dir/flags.make
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: src/AxisP3364LveDriver.cpp
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: manifest.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.cpp
 
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.cpp > CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.i
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.cpp > CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.i
 
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.cpp -o CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.s
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.cpp -o CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.s
 
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.requires:
-.PHONY : CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.requires
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.requires:
+.PHONY : CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.requires
 
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.provides: CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.provides.build
-.PHONY : CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.provides
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.provides: CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.requires
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.provides.build
+.PHONY : CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.provides
 
-CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.provides.build: CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o
+CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.provides.build: CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o
 
 # Object files for target rearCamera
 rearCamera_OBJECTS = \
 "CMakeFiles/rearCamera.dir/src/main.cpp.o" \
 "CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o" \
-"CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o"
+"CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o"
 
 # External object files for target rearCamera
 rearCamera_EXTERNAL_OBJECTS =
 
 bin/rearCamera: CMakeFiles/rearCamera.dir/src/main.cpp.o
 bin/rearCamera: CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o
-bin/rearCamera: CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o
+bin/rearCamera: CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o
 bin/rearCamera: CMakeFiles/rearCamera.dir/build.make
 bin/rearCamera: CMakeFiles/rearCamera.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/rearCamera"
@@ -180,7 +177,7 @@ CMakeFiles/rearCamera.dir/build: bin/rearCamera
 
 CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/main.cpp.o.requires
 CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o.requires
-CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o.requires
+CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.requires
 .PHONY : CMakeFiles/rearCamera.dir/requires
 
 CMakeFiles/rearCamera.dir/clean:

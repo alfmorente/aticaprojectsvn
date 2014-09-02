@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.cpp
-DrivingCameraManager.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/DrivingCameraManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.cpp
+AxisP3364LveDriver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.h
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.cpp
 RosNode_RearCamera.h
@@ -17,8 +17,8 @@ RosNode_RearCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/main.cpp
 cstdlib
 -
-RosNode_FrontCamera.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_FrontCamera.h
+RosNode_RearCamera.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.h
 
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
@@ -634,21 +634,33 @@ ros/forwards.h
 
 /opt/ros/groovy/include/rosconsole/macros_generated.h
 
-include/DrivingCameraManager.h
-ros/ros.h
-include/ros/ros.h
+include/AxisP3364LveDriver.h
+cstdlib
+-
 string.h
 -
 stdio.h
 -
 stdlib.h
 -
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+netdb.h
+-
+arpa/inet.h
+-
+sstream
+-
 
 include/RosNode_RearCamera.h
 time.h
 -
-DrivingCameraManager.h
-include/DrivingCameraManager.h
+AxisP3364LveDriver.h
+include/AxisP3364LveDriver.h
 constant.h
 include/constant.h
 CITIUS_Control_RearCamera/msg_ctrlRearCamera.h
@@ -657,6 +669,8 @@ CITIUS_Control_RearCamera/msg_rearCameraInfo.h
 include/CITIUS_Control_RearCamera/msg_rearCameraInfo.h
 CITIUS_Control_RearCamera/srv_nodeStatus.h
 include/CITIUS_Control_RearCamera/srv_nodeStatus.h
+ros/ros.h
+include/ros/ros.h
 
 include/constant.h
 

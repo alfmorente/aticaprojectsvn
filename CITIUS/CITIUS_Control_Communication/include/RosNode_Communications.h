@@ -20,6 +20,7 @@ extern "C" {
 
 
 #include "ros/ros.h"
+// Mensajes y servicios subsitema de control
 #include "CITIUS_Control_Communication/msg_command.h"
 #include "CITIUS_Control_Communication/msg_ctrlFrontCamera.h"
 #include "CITIUS_Control_Communication/msg_ctrlRearCamera.h"
@@ -29,6 +30,12 @@ extern "C" {
 #include "CITIUS_Control_Communication/msg_frontCameraInfo.h"
 #include "CITIUS_Control_Communication/msg_rearCameraInfo.h"
 #include "CITIUS_Control_Communication/srv_vehicleStatus.h"
+// Mensajes y servicios subsistema de payload de observacion
+#include "CITIUS_Control_Communication/msg_tvinfo.h"
+#include "CITIUS_Control_Communication/msg_echoesFound.h"
+#include "CITIUS_Control_Communication/msg_irinfo.h"
+#include "CITIUS_Control_Communication/msg_panTiltPosition.h"
+
 #include "constant.h"
 #include "TranslatorROSJAUS.h"
 
@@ -51,11 +58,18 @@ public:
     ros::Publisher getPublisherCommand();
     
     // Callbacks ROS
+    // Subsistema de control
     void fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg);
     void fnc_subs_rearCameraInfo(CITIUS_Control_Communication::msg_rearCameraInfo msg);
     void fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg);
     void fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg);
     void fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg);
+    // Subsistema de Payload de observacion
+    void fcn_subs_irCameraInfo(CITIUS_Control_Communication::msg_irinfo msg);
+    void fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg);
+    void fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg);
+    void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
+    
     // Generacion de mensaje de estado para Controller
     void informStatus();
 private:
@@ -69,6 +83,7 @@ private:
     int nodeController;
     
     // Artefactos ROS
+    // Subsistema de control
     ros::Subscriber subsFrontCameraInfo;
     ros::Subscriber subsRearCameraInfo;
     ros::Subscriber subsVehicleInfo;
@@ -78,6 +93,11 @@ private:
     ros::Publisher pubCtrlRearCamera;
     ros::Publisher pubCommand;
     ros::ServiceClient clientStatus;
+    // Subsistema de Payload de observacion
+    ros::Subscriber subsIRCameraInfo;
+    ros::Subscriber subsTelemeterInfo;
+    ros::Subscriber subsTVCameraInfo;
+    ros::Subscriber subsPositionerInfo;
     
     // Componentes JAUS
     OjCmpt missionSpoolerComponent;

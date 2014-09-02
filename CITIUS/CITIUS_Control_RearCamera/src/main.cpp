@@ -15,18 +15,18 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    ros::init(argc,argv, "[Control] ROS Node - Rear Camera");
+    ros::init(argc,argv, "RosNode_Control_RearCam");
     
-    RosNode_RearCamera *fc = new RosNode_RearCamera();
+    RosNode_RearCamera *rc = new RosNode_RearCamera();
 
     // Conexión
-    if (fc->getDriverMng()->connect()) {
+    if (rc->getDriverMng()->checkConnection()) {
         // Inicio de artefactos ROS
-        fc->initROS();
+        rc->initROS();
 
         // Espera a permiso para comenzar a operar ROSNODE_OK
         ROS_INFO("[Control] RearCamera - Esperando activacion de nodo");
-        while (fc->getFcNodeStatus() != NODESTATUS_OK) {
+        while (rc->getRcNodeStatus() != NODESTATUS_OK) {
             ros::spinOnce();
         }
         ROS_INFO("[Control] RearCamera - Nodo listo para operar");
@@ -36,22 +36,32 @@ int main(int argc, char** argv) {
         initTime = clock();
 
         //Bucle principal
-        while (ros::ok() && fc->getFcNodeStatus() != NODESTATUS_OFF) {
+        while (ros::ok() && rc->getRcNodeStatus() != NODESTATUS_OFF) {
+            
             // Recepcion de mensaje
             ros::spinOnce();
             // Comprobación del temporizador y requerimiento de info
             finalTime = clock() - initTime;
+            
             if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
-                // Requerimiento de informacion de dispositivo
-                float pan = fc->getDriverMng()->getParam(IDPARAM_PAN);
-                float tilt = fc->getDriverMng()->getParam(IDPARAM_TILT);
-                // Montaje del mensaje y publicacion
-                CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
-                rcMsg.pan = pan;
-                rcMsg.tilt = tilt;
-                fc->getPubRearCameraInfo().publish(rcMsg);
+                
                 // Clear del timer
                 initTime = clock();
+                                
+                // Envio de parametros (activo para no perder informacion)
+                rc->getDriverMng()->sentSetToDevice(ORDER_PAN,rc->getDriverMng()->getPan());
+                rc->getDriverMng()->sentSetToDevice(ORDER_TILT,rc->getDriverMng()->getTilt());
+                rc->getDriverMng()->sentSetToDevice(ORDER_ZOOM,rc->getDriverMng()->getZoom());
+                
+                // Requerimiento de informacion de dispositivo
+                LensPosition lensPos = rc->getDriverMng()->getPosition();
+                if(lensPos.state){
+                    CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
+                    rcMsg.pan = lensPos.pan / 50; // * (100/5000) Conversion de formato camara
+                    rcMsg.tilt = lensPos.tilt / 50; // * (100/5000) Conversion de formato camara
+                    rcMsg.zoom = lensPos.zoom / 50; // * (100/5000) Conversion de formato camara
+                    rc->getPubRearCameraInfo().publish(rcMsg);
+                }
             }
         }
     } else {

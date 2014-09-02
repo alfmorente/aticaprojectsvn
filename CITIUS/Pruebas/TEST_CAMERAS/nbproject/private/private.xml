@@ -9,11 +9,6 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/include/AxisP3364LveDriver.h</file>
-            <file>file:/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/src/AxisP3364LveDriver.cpp</file>
-            <file>file:/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/src/main.cpp</file>
-            <file>file:/home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_CAMERAS/CMakeLists.txt</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

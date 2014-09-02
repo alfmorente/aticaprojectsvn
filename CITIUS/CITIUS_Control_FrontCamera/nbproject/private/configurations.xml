@@ -101,7 +101,7 @@
       <df name="include">
         <df name="CITIUS_Control_FrontCamera">
         </df>
-        <in>DrivingCameraManager.h</in>
+        <in>AxisP3364LveDriver.h</in>
         <in>RosNode_FrontCamera.h</in>
         <in>constant.h</in>
       </df>
@@ -128,7 +128,7 @@
           <df name="srv">
           </df>
         </df>
-        <in>DrivingCameraManager.cpp</in>
+        <in>AxisP3364LveDriver.cpp</in>
         <in>RosNode_FrontCamera.cpp</in>
         <in>main.cpp</in>
       </df>

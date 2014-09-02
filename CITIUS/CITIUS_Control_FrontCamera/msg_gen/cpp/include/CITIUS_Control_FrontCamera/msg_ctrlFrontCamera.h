@@ -22,16 +22,36 @@ struct msg_ctrlFrontCamera_ {
   typedef msg_ctrlFrontCamera_<ContainerAllocator> Type;
 
   msg_ctrlFrontCamera_()
-  : pan(0.0)
+  : isZoom(false)
+  , isPan(false)
+  , isTilt(false)
+  , zoom(0.0)
+  , pan(0.0)
   , tilt(0.0)
   {
   }
 
   msg_ctrlFrontCamera_(const ContainerAllocator& _alloc)
-  : pan(0.0)
+  : isZoom(false)
+  , isPan(false)
+  , isTilt(false)
+  , zoom(0.0)
+  , pan(0.0)
   , tilt(0.0)
   {
   }
+
+  typedef uint8_t _isZoom_type;
+  uint8_t isZoom;
+
+  typedef uint8_t _isPan_type;
+  uint8_t isPan;
+
+  typedef uint8_t _isTilt_type;
+  uint8_t isTilt;
+
+  typedef float _zoom_type;
+  float zoom;
 
   typedef float _pan_type;
   float pan;
@@ -68,12 +88,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_FrontCamera::msg_ctrlFrontCamera_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "938e11f380abc0513a5b7367d0f157bf";
+    return "ff23505ed4df1f3d3844a0151a537e6b";
   }
 
   static const char* value(const  ::CITIUS_Control_FrontCamera::msg_ctrlFrontCamera_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x938e11f380abc051ULL;
-  static const uint64_t static_value2 = 0x3a5b7367d0f157bfULL;
+  static const uint64_t static_value1 = 0xff23505ed4df1f3dULL;
+  static const uint64_t static_value2 = 0x3844a0151a537e6bULL;
 };
 
 template<class ContainerAllocator>
@@ -90,7 +110,11 @@ template<class ContainerAllocator>
 struct Definition< ::CITIUS_Control_FrontCamera::msg_ctrlFrontCamera_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "float32 pan\n\
+    return "bool isZoom\n\
+bool isPan\n\
+bool isTilt\n\
+float32 zoom\n\
+float32 pan\n\
 float32 tilt\n\
 ";
   }
@@ -111,6 +135,10 @@ template<class ContainerAllocator> struct Serializer< ::CITIUS_Control_FrontCame
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
+    stream.next(m.isZoom);
+    stream.next(m.isPan);
+    stream.next(m.isTilt);
+    stream.next(m.zoom);
     stream.next(m.pan);
     stream.next(m.tilt);
   }
@@ -130,6 +158,14 @@ struct Printer< ::CITIUS_Control_FrontCamera::msg_ctrlFrontCamera_<ContainerAllo
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::CITIUS_Control_FrontCamera::msg_ctrlFrontCamera_<ContainerAllocator> & v) 
   {
+    s << indent << "isZoom: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.isZoom);
+    s << indent << "isPan: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.isPan);
+    s << indent << "isTilt: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.isTilt);
+    s << indent << "zoom: ";
+    Printer<float>::stream(s, indent + "  ", v.zoom);
     s << indent << "pan: ";
     Printer<float>::stream(s, indent + "  ", v.pan);
     s << indent << "tilt: ";

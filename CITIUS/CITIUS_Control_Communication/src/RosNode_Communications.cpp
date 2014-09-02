@@ -22,6 +22,10 @@ void RosNode_Communications::initROS() {
     this->subsFrontCameraInfo = nh.subscribe("frontCameraInfo", 1000, &RosNode_Communications::fnc_subs_frontCameraInfo, this);
     this->subsRearCameraInfo = nh.subscribe("rearCameraInfo", 1000, &RosNode_Communications::fnc_subs_rearCameraInfo, this);
     this->subsPosOriInfo = nh.subscribe("posOriInfo", 1000, &RosNode_Communications::fnc_subs_posOriInfo, this);
+    this->subsIRCameraInfo = nh.subscribe("IRInformation", 1000, &RosNode_Communications::fcn_subs_irCameraInfo, this);
+    this->subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_positionerInfo, this);
+    this->subsTVCameraInfo = nh.subscribe("TVInformation", 1000, &RosNode_Communications::fcn_subs_tvCameraInfo, this);
+    this->subsPositionerInfo = nh.subscribe("PanTiltPosition", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
     // Inicializacion de servidores
     this->clientStatus = nh.serviceClient<CITIUS_Control_Communication::srv_vehicleStatus>("nodeStateDriving");
 }
@@ -144,7 +148,7 @@ void RosNode_Communications::initJAUS() {
     }else{
         
         // REVISAR COMPONENTE INNECESARIO PARA UGV
-        // TODO!!!!!!!!!!!!!!!
+        // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     // Velocity State Sensor
@@ -217,7 +221,7 @@ ros::Publisher RosNode_Communications::getPublisherCommand() {
 
 /*******************************************************************************
  *******************************************************************************
- *                               CALLBACKS                                     *
+ *                               CALLBACKS ROS                                 *
  *******************************************************************************
  ******************************************************************************/
 
@@ -231,7 +235,7 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
     // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromCameraInfo(this->subsystemController,this->nodeController,FRONT_CAMERA_ID,msg.pan,msg.tilt);
+    JausMessage jMsg = translator->getJausMsgFromCameraInfo(this->subsystemController,this->nodeController,FRONT_CAMERA_ID,msg.pan,msg.tilt,msg.zoom);
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
@@ -253,7 +257,7 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
     // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromCameraInfo(this->subsystemController,this->nodeController,REAR_CAMERA_ID,msg.pan,msg.tilt);
+    JausMessage jMsg = translator->getJausMsgFromCameraInfo(this->subsystemController,this->nodeController,REAR_CAMERA_ID,msg.pan,msg.tilt,msg.zoom);
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
@@ -394,6 +398,94 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
 }
 
 /* 
+ * INFORMACION CAMARA IR
+ * CORRESPONDENCIA JAUS: REPORT NIGHT-TIME CAMERA
+ */
+void RosNode_Communications::fcn_subs_irCameraInfo(CITIUS_Control_Communication::msg_irinfo msg) {
+    ROS_INFO("[Control] Communications - Recibida informacion camara IR");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromIRCameraInfo(this->subsystemController,this->nodeController,msg.currentDZoom,msg.currentPolarity);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->visualSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de camara IR");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
+}
+
+/* 
+ * INFORMACION TELEMETRO
+ * CORRESPONDENCIA JAUS: TELEMETER INFO
+ */
+void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg) {
+    ROS_INFO("[Control] Communications - Recibida informacion telemetro");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromTelemeterInfo(this->subsystemController,this->nodeController, msg.echoesFound);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->platformSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de telemetro");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
+}
+
+/* 
+ * INFORMACION CAMARA TV
+ * CORRESPONDENCIA JAUS: REPORT DAY-TIME CAMERA INFO
+ */
+void RosNode_Communications::fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg) {
+    ROS_INFO("[Control] Communications - Recibida informacion camara diurna (TV)");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromTVCamera(this->subsystemController,this->nodeController, msg.currentZoom, msg.currentFocus, msg.autofocusMode);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->visualSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS camara diurna (TV)");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
+}
+
+/* 
+ * INFORMACION POSITIONER
+ * CORRESPONDENCIA JAUS: REPORT POSITIONER
+ */
+void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg) {
+    ROS_INFO("[Control] Communications - Recibida informacion posicionador");
+    
+    // Conversor ROS -> JAUS
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    // Creacion del mensaje a enviar
+    JausMessage jMsg = translator->getJausMsgFromPositioner(this->subsystemController,this->nodeController, msg.panPosition, msg.tiltPosition);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->visualSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de posicionador");
+    }
+    // Destruccion del mensaje
+    jausMessageDestroy(jMsg);
+}
+
+/* 
  * INFORMACION DE MODO DE OPERACION
  * CORRESPONDENCIA JAUS: REPORT MISSION STATUS
  */
@@ -440,27 +532,208 @@ void RosNode_Communications::informStatus() {
 // Componente Mission Spooler
 
 void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg) {
+    RunMissionMessage rMission = runMissionMessageFromJausMessage(msg);
+    CITIUS_Control_Communication::srv_vehicleStatus vehicleStatus;
+    
+    // Desde comunicaciones no se puede cambiar a otro modo que no sea conduccion
+    // u observacion
+    
+    short tempStatus = rMission->missionId;
+    
+    switch(tempStatus){
+        
+        case 5: // Conduccion (Valor de ICD)
+            vehicleStatus.request.status = OPERATION_MODE_CONDUCCION;
+            this->clientStatus.call(vehicleStatus);
+            this->informStatus();
+            break;
+            
+        case 6: // Observacion (Valor de ICD)
+            vehicleStatus.request.status = OPERATION_MODE_OBSERVACION;
+            this->clientStatus.call(vehicleStatus);
+            this->informStatus();
+            break;
+            
+        default:
+            break;
+    }
 
+    // Liberacion de memoria
+    runMissionMessageDestroy(rMission);
 }
 
 // Componente Primitive Driver
 
 void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
-
+    SetWrenchEffortMessage sWrenchEffort = setWrenchEffortMessageFromJausMessage(msg);
+    CITIUS_Control_Communication::msg_command command;
+    
+    // Comprobacion de direccion
+    if((sWrenchEffort->presenceVector & PRESENCE_VECTOR_STEER) == PRESENCE_VECTOR_STEER){
+        command.id_device = STEERING;
+        command.value = sWrenchEffort->propulsiveRotationalEffortZPercent;
+        pubCommand.publish(command);
+    }
+    
+    // Comprobacion de acelerador
+    if((sWrenchEffort->presenceVector & PRESENCE_VECTOR_THROTTLE) == PRESENCE_VECTOR_THROTTLE){
+        command.id_device = THROTTLE;
+        command.value = sWrenchEffort->propulsiveLinearEffortXPercent;
+        pubCommand.publish(command);
+    }
+    
+    // Comprobacion de freno de servicio
+    if((sWrenchEffort->presenceVector & PRESENCE_VECTOR_BRAKE) == PRESENCE_VECTOR_BRAKE){
+        command.id_device = BRAKE;
+        command.value = sWrenchEffort->resistiveLinearEffortXPercent;
+        pubCommand.publish(command);
+    }
+    
+    // Liberacion de memoria
+    setWrenchEffortMessageDestroy(sWrenchEffort);
 }
 
 void RosNode_Communications::fcn_receive_set_discrete_devices(OjCmpt cmp, JausMessage msg) {
+    SetDiscreteDevicesMessage sDiscreteDevice = setDiscreteDevicesMessageFromJausMessage(msg);
+    CITIUS_Control_Communication::msg_command command;
+    
+    // Comprobacion de freno de estacionamiento
+    if((sDiscreteDevice->presenceVector & PRESENCE_VECTOR_PARKING_BRAKE)==PRESENCE_VECTOR_PARKING_BRAKE){
+        command.id_device = HANDBRAKE;
+        command.value = sDiscreteDevice->parkingBrake;
+        pubCommand.publish(command);
+    }
+    
+    // Comprobacion de marcha
+    if((sDiscreteDevice->presenceVector & PRESENCE_VECTOR_GEAR)==PRESENCE_VECTOR_GEAR){
+        command.id_device = GEAR;
+        command.value = sDiscreteDevice->gear;
+        pubCommand.publish(command);
+    }
+
+    // Comprobacion arranque/parada de motor
+    // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    // Liberacion de memoria
+    setDiscreteDevicesMessageDestroy(sDiscreteDevice);
 
 }
 
 // Componente Visual Sensor
 
 void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage msg) {
-
+    SetCameraPoseMessage sCameraPose = setCameraPoseMessageFromJausMessage(msg);
+    // Camara delantera
+    if(sCameraPose->cameraID == FRONT_CAMERA_ID){
+        
+        CITIUS_Control_Communication::msg_ctrlFrontCamera fcCommand;
+        fcCommand.isPan = false;
+        fcCommand.isTilt = false;
+        fcCommand.isZoom = false;
+        
+        // Comprobacion de pan
+        if((sCameraPose->presenceVector & PRESENCE_VECTOR_PAN)==PRESENCE_VECTOR_PAN){
+            fcCommand.isPan = true;
+            fcCommand.pan = sCameraPose->zAngularPositionOrRatePercent;
+        }
+        
+        // Comprobacion de tilt
+        if((sCameraPose->presenceVector & PRESENCE_VECTOR_TILT)==PRESENCE_VECTOR_TILT){
+            fcCommand.isTilt = true;
+            fcCommand.tilt = sCameraPose->yAngularPositionOrRatePercent;
+        }
+        
+        // Comprobacion de zoom
+        if((sCameraPose->presenceVector & PRESENCE_VECTOR_ZOOM)==PRESENCE_VECTOR_ZOOM){
+            fcCommand.isZoom = true;
+            fcCommand.zoom = sCameraPose->zLinearPositionOrRatePercent;
+        }
+        
+        this->pubCtrlFrontCamera.publish(fcCommand);
+        
+    }
+    // Camara trasera
+    else if(sCameraPose->cameraID == REAR_CAMERA_ID){
+    
+        CITIUS_Control_Communication::msg_ctrlRearCamera rcCommand;
+        rcCommand.isPan = false;
+        rcCommand.isTilt = false;
+        rcCommand.isZoom = false;
+        
+        // Comprobacion de pan
+        if((sCameraPose->presenceVector & PRESENCE_VECTOR_PAN)==PRESENCE_VECTOR_PAN){
+            rcCommand.isPan = true;
+            rcCommand.pan = sCameraPose->zAngularPositionOrRatePercent;
+        }
+        
+        // Comprobacion de tilt
+        if((sCameraPose->presenceVector & PRESENCE_VECTOR_TILT)==PRESENCE_VECTOR_TILT){
+            rcCommand.isTilt = true;
+            rcCommand.tilt = sCameraPose->yAngularPositionOrRatePercent;
+        }
+        
+        // Comprobacion de zoom
+        if((sCameraPose->presenceVector & PRESENCE_VECTOR_ZOOM)==PRESENCE_VECTOR_ZOOM){
+            rcCommand.isZoom = true;
+            rcCommand.zoom = sCameraPose->zLinearPositionOrRatePercent;
+        }
+        
+        this->pubCtrlRearCamera.publish(rcCommand);
+        
+    }
+    
+    // Liberacion de memoria
+    setCameraPoseMessageDestroy(sCameraPose);
 }
 
 void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, JausMessage msg) {
-
+    SetSignalingElements18Message sSignaling = setSignalingElements18MessageFromJausMessage(msg);
+    CITIUS_Control_Communication::msg_command command;
+    
+    // Comprobacion de luces de posicion
+    if((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSP) == PRESENCE_VECTOR_DIPSP){
+        command.id_device = DIPSP;
+        command.value = sSignaling->dipsp;
+        this->pubCommand.publish(command);
+    }
+    
+    // Comprobacion de luces cortas
+    if((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSS) == PRESENCE_VECTOR_DIPSS){
+        command.id_device = DIPSS;
+        command.value = sSignaling->dipss;
+        this->pubCommand.publish(command);
+    }
+    
+    // Comprobacion de luces largas
+    if((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSR) == PRESENCE_VECTOR_DIPSR){
+        command.id_device = DIPSR;
+        command.value = sSignaling->dipsr;
+        this->pubCommand.publish(command);
+    }
+    
+    // Comprobacion de intermitente derecha
+    if((sSignaling->presenceVector & PRESENCE_VECTOR_BLINKER_RIGHT) == PRESENCE_VECTOR_BLINKER_RIGHT){
+        command.id_device = BLINKER_RIGHT;
+        command.value = sSignaling->blinker_right;
+        this->pubCommand.publish(command);
+    }
+    
+    // Comprobacion de intermitente izquierda
+    if((sSignaling->presenceVector & PRESENCE_VECTOR_BLINKER_LEFT) == PRESENCE_VECTOR_BLINKER_LEFT){
+        command.id_device = BLINKER_LEFT;
+        command.value = sSignaling->blinker_left;
+        this->pubCommand.publish(command);
+    }
+    
+    // Comprobacion de claxon
+    if((sSignaling->presenceVector & PRESENCE_VECTOR_KLAXON) == PRESENCE_VECTOR_KLAXON){
+        command.id_device = KLAXON;
+        command.value = sSignaling->klaxon;
+        this->pubCommand.publish(command);
+    }
+    
+    // Liberacion de memoria
+    setSignalingElements18MessageDestroy(sSignaling);
 }
 
 void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage msg) {
@@ -478,7 +751,16 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
 // Componente Velocity State Sensor
 
 void RosNode_Communications::fcn_receive_set_travel_speed(OjCmpt cmp, JausMessage msg) {
-
+    SetTravelSpeedMessage sTravelSpeed = setTravelSpeedMessageFromJausMessage(msg);
+    CITIUS_Control_Communication::msg_command command;
+    
+    // No hay comprobacion de presence vector. Un solo parametro
+    command.id_device = CRUISING_SPEED;
+    command.value = sTravelSpeed->speedMps;
+    this->pubCommand.publish(command);
+    
+    // Liberacion de memoria
+    setTravelSpeedMessageDestroy(sTravelSpeed);
 }
 
 // Componente HeartBeat Information

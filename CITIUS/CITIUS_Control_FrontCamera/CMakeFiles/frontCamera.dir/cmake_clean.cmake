@@ -7,7 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_FrontCamera/srv"
   "CMakeFiles/frontCamera.dir/src/main.cpp.o"
   "CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o"
-  "CMakeFiles/frontCamera.dir/src/DrivingCameraManager.cpp.o"
+  "CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o"
   "bin/frontCamera.pdb"
   "bin/frontCamera"
 )

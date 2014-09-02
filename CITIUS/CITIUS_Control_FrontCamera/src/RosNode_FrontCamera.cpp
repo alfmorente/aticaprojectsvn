@@ -6,7 +6,7 @@
 
 RosNode_FrontCamera::RosNode_FrontCamera() {
     this->setFcNodeStatus(NODESTATUS_INIT);
-    this->dFrontCamera = new DrivingCameraManager();
+    this->dFrontCamera = new AxisP3364LveDriver();
 }
 
 /*******************************************************************************
@@ -20,14 +20,11 @@ void RosNode_FrontCamera::initROS() {
     this->servNodeStatus = nh.advertiseService("fcNodeStatus",&RosNode_FrontCamera::fcv_serv_nodeStatus,this);
 }
 
-/*******************************************************************************
- * GETTER AND SETTER NECESARIOS
- ******************************************************************************/
-
 // Control de la camara
 void RosNode_FrontCamera::fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg){
-    this->getDriverMng()->setParam(IDPARAM_PAN,msg.pan);
-    this->getDriverMng()->setParam(IDPARAM_TILT,msg.tilt);
+    if(msg.isZoom) dFrontCamera->setZoom(msg.zoom);
+    if(msg.isPan) dFrontCamera->setPan(msg.pan);
+    if(msg.isZoom) dFrontCamera->setTilt(msg.tilt);
 }
     
 // Gestion del estado del nodo
@@ -36,7 +33,6 @@ bool RosNode_FrontCamera::fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_no
         this->setFcNodeStatus(NODESTATUS_OK);
         rsp.confirmation = true;
     }else if(rq.status == NODESTATUS_OFF){
-        this->getDriverMng()->disconnect();
         this->setFcNodeStatus(NODESTATUS_OFF);
         rsp.confirmation = true;
     }else{
@@ -65,6 +61,6 @@ ros::Publisher RosNode_FrontCamera::getPubFrontCameraInfo(){
 }
 
 // Obtener el driver 
-DrivingCameraManager *RosNode_FrontCamera::getDriverMng(){
+AxisP3364LveDriver *RosNode_FrontCamera::getDriverMng(){
     return this->dFrontCamera;
 }

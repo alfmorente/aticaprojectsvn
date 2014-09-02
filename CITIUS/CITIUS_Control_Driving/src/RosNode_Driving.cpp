@@ -188,7 +188,9 @@ void RosNode_Driving::manageAlarmsMessage(FrameDriving frame){
 /*******************************************************************************
  * PUBLICACION DE INFORMACION DEL VEHICULO
  ******************************************************************************/
+
 void RosNode_Driving::publishDrivingInfo(DrivingInfo info){
+    
     CITIUS_Control_Driving::msg_vehicleInfo msg;
     
     msg.steering = info.steering;

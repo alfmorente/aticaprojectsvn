@@ -37,6 +37,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
@@ -786,10 +788,14 @@
               <in>msg_command.h</in>
               <in>msg_ctrlFrontCamera.h</in>
               <in>msg_ctrlRearCamera.h</in>
+              <in>msg_echoesFound.h</in>
               <in>msg_electricInfo.h</in>
               <in>msg_frontCameraInfo.h</in>
+              <in>msg_irinfo.h</in>
+              <in>msg_panTiltPosition.h</in>
               <in>msg_posOriInfo.h</in>
               <in>msg_rearCameraInfo.h</in>
+              <in>msg_tvinfo.h</in>
               <in>msg_vehicleInfo.h</in>
             </df>
           </df>

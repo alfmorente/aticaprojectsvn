@@ -39,9 +39,3 @@ extern "C" {
 #define FREC_2HZ 0.5
 #define FREC_1HZ 1
 
-/*******************************************************************************
- * PARAMETROS DEL DISPOSITIVO
- ******************************************************************************/
-
-#define IDPARAM_PAN 0
-#define IDPARAM_TILT 1

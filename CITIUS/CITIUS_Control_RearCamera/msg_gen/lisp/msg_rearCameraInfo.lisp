@@ -7,7 +7,12 @@
 ;//! \htmlinclude msg_rearCameraInfo.msg.html
 
 (cl:defclass <msg_rearCameraInfo> (roslisp-msg-protocol:ros-message)
-  ((pan
+  ((zoom
+    :reader zoom
+    :initarg :zoom
+    :type cl:float
+    :initform 0.0)
+   (pan
     :reader pan
     :initarg :pan
     :type cl:float
@@ -27,6 +32,11 @@
   (cl:unless (cl:typep m 'msg_rearCameraInfo)
     (roslisp-msg-protocol:msg-deprecation-warning "using old message class name CITIUS_Control_RearCamera-msg:<msg_rearCameraInfo> is deprecated: use CITIUS_Control_RearCamera-msg:msg_rearCameraInfo instead.")))
 
+(cl:ensure-generic-function 'zoom-val :lambda-list '(m))
+(cl:defmethod zoom-val ((m <msg_rearCameraInfo>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader CITIUS_Control_RearCamera-msg:zoom-val is deprecated.  Use CITIUS_Control_RearCamera-msg:zoom instead.")
+  (zoom m))
+
 (cl:ensure-generic-function 'pan-val :lambda-list '(m))
 (cl:defmethod pan-val ((m <msg_rearCameraInfo>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader CITIUS_Control_RearCamera-msg:pan-val is deprecated.  Use CITIUS_Control_RearCamera-msg:pan instead.")
@@ -38,6 +48,11 @@
   (tilt m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <msg_rearCameraInfo>) ostream)
   "Serializes a message object of type '<msg_rearCameraInfo>"
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'zoom))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'pan))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
@@ -51,6 +66,12 @@
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <msg_rearCameraInfo>) istream)
   "Deserializes a message object of type '<msg_rearCameraInfo>"
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'zoom) (roslisp-utils:decode-single-float-bits bits)))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -73,24 +94,26 @@
   "CITIUS_Control_RearCamera/msg_rearCameraInfo")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<msg_rearCameraInfo>)))
   "Returns md5sum for a message object of type '<msg_rearCameraInfo>"
-  "938e11f380abc0513a5b7367d0f157bf")
+  "e2a7f63b6b1b1f31c8378177bc0e68a9")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'msg_rearCameraInfo)))
   "Returns md5sum for a message object of type 'msg_rearCameraInfo"
-  "938e11f380abc0513a5b7367d0f157bf")
+  "e2a7f63b6b1b1f31c8378177bc0e68a9")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<msg_rearCameraInfo>)))
   "Returns full string definition for message of type '<msg_rearCameraInfo>"
-  (cl:format cl:nil "float32 pan~%float32 tilt~%~%"))
+  (cl:format cl:nil "float32 zoom~%float32 pan~%float32 tilt~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'msg_rearCameraInfo)))
   "Returns full string definition for message of type 'msg_rearCameraInfo"
-  (cl:format cl:nil "float32 pan~%float32 tilt~%~%"))
+  (cl:format cl:nil "float32 zoom~%float32 pan~%float32 tilt~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <msg_rearCameraInfo>))
   (cl:+ 0
+     4
      4
      4
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <msg_rearCameraInfo>))
   "Converts a ROS message object to a list"
   (cl:list 'msg_rearCameraInfo
+    (cl:cons ':zoom (zoom msg))
     (cl:cons ':pan (pan msg))
     (cl:cons ':tilt (tilt msg))
 ))

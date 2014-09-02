@@ -35,9 +35,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera
 
@@ -477,29 +474,29 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-src/DrivingCameraManager.o: src/DrivingCameraManager.cpp.o
-.PHONY : src/DrivingCameraManager.o
+src/AxisP3364LveDriver.o: src/AxisP3364LveDriver.cpp.o
+.PHONY : src/AxisP3364LveDriver.o
 
 # target to build an object file
-src/DrivingCameraManager.cpp.o:
-	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.o
-.PHONY : src/DrivingCameraManager.cpp.o
+src/AxisP3364LveDriver.cpp.o:
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o
+.PHONY : src/AxisP3364LveDriver.cpp.o
 
-src/DrivingCameraManager.i: src/DrivingCameraManager.cpp.i
-.PHONY : src/DrivingCameraManager.i
+src/AxisP3364LveDriver.i: src/AxisP3364LveDriver.cpp.i
+.PHONY : src/AxisP3364LveDriver.i
 
 # target to preprocess a source file
-src/DrivingCameraManager.cpp.i:
-	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.i
-.PHONY : src/DrivingCameraManager.cpp.i
+src/AxisP3364LveDriver.cpp.i:
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.i
+.PHONY : src/AxisP3364LveDriver.cpp.i
 
-src/DrivingCameraManager.s: src/DrivingCameraManager.cpp.s
-.PHONY : src/DrivingCameraManager.s
+src/AxisP3364LveDriver.s: src/AxisP3364LveDriver.cpp.s
+.PHONY : src/AxisP3364LveDriver.s
 
 # target to generate assembly for a file
-src/DrivingCameraManager.cpp.s:
-	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/DrivingCameraManager.cpp.s
-.PHONY : src/DrivingCameraManager.cpp.s
+src/AxisP3364LveDriver.cpp.s:
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.s
+.PHONY : src/AxisP3364LveDriver.cpp.s
 
 src/RosNode_RearCamera.o: src/RosNode_RearCamera.cpp.o
 .PHONY : src/RosNode_RearCamera.o
@@ -587,9 +584,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... src/DrivingCameraManager.o"
-	@echo "... src/DrivingCameraManager.i"
-	@echo "... src/DrivingCameraManager.s"
+	@echo "... src/AxisP3364LveDriver.o"
+	@echo "... src/AxisP3364LveDriver.i"
+	@echo "... src/AxisP3364LveDriver.s"
 	@echo "... src/RosNode_RearCamera.o"
 	@echo "... src/RosNode_RearCamera.i"
 	@echo "... src/RosNode_RearCamera.s"

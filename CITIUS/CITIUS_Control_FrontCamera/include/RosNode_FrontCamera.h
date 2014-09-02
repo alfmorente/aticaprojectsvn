@@ -22,11 +22,12 @@ extern "C" {
 #endif	/* ROSNODE_FRONTCAMERA_H */
 
 #include <time.h>
-#include "DrivingCameraManager.h"
+#include "AxisP3364LveDriver.h"
 #include "constant.h"
 #include "CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h"
 #include "CITIUS_Control_FrontCamera/msg_frontCameraInfo.h"
 #include "CITIUS_Control_FrontCamera/srv_nodeStatus.h"
+#include "ros/ros.h"
 
 class RosNode_FrontCamera{
 private:
@@ -39,7 +40,7 @@ private:
     // Servidor de estado de nodo
     ros::ServiceServer servNodeStatus;
     // Driver de la cámara
-    DrivingCameraManager *dFrontCamera;
+     AxisP3364LveDriver *dFrontCamera;
 public:
     // Constructor
     RosNode_FrontCamera();
@@ -52,7 +53,7 @@ public:
     ros::Publisher getPubFrontCameraInfo();
     short getFcNodeStatus();
     void setFcNodeStatus(short newFcNodeStatus);
-    DrivingCameraManager *getDriverMng();
+    AxisP3364LveDriver *getDriverMng();
     
 };
 
