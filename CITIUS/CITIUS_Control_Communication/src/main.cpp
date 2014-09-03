@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
             initTime = clock();
             
             // Requerimiento de informacion de dispositivo
-            nodeComm->informStatus();
+            nodeComm->informStatus(nodeComm->getSubsystemController(), nodeComm->getNodeController(), nodeComm->getComponentMIssionSpooler());
             
         }
     }

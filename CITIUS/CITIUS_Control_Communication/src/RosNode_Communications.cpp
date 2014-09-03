@@ -493,7 +493,7 @@ void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communicatio
  * CORRESPONDENCIA JAUS: REPORT MISSION STATUS
  */
 
-void RosNode_Communications::informStatus() {
+void RosNode_Communications::informStatus(int subsystem, int node, OjCmpt component) {
     
     // Obtencion del estado
     int status;
@@ -503,8 +503,8 @@ void RosNode_Communications::informStatus() {
     
     // Creacion de la direccion destinataria
     JausAddress jAdd = jausAddressCreate();
-    jAdd->subsystem = subsystemController;
-    jAdd->node = nodeController;
+    jAdd->subsystem = subsystem;
+    jAdd->node = node;
     jAdd->component = JAUS_MISSION_SPOOLER;
 
     // Generacion de mensaje especifico UGV Info
@@ -516,7 +516,7 @@ void RosNode_Communications::informStatus() {
     jMsg = reportMissionStatusMessageToJausMessage(rmsm);
     
     if (jMsg != NULL) {
-        ojCmptSendMessage(missionSpoolerComponent, jMsg);
+        ojCmptSendMessage(component, jMsg);
     } else {
         ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
     }

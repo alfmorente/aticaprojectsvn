@@ -71,7 +71,7 @@ public:
     void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
     
     // Generacion de mensaje de estado para Controller
-    void informStatus();
+    void informStatus(int subsystem, int node, OjCmpt cmpt);
 private:
     // Manejador de JAUS 
     FileLoader *configData;
