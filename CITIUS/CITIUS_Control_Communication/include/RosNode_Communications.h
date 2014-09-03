@@ -53,9 +53,9 @@ public:
     void initJAUS();
     
     // Get de publicadores ROS
-    ros::Publisher getPublisherFrontCamera();
-    ros::Publisher getPublisherRearCamera();
-    ros::Publisher getPublisherCommand();
+    static ros::Publisher getPublisherFrontCamera();
+    static ros::Publisher getPublisherRearCamera();
+    static ros::Publisher getPublisherCommand();
     
     // Callbacks ROS
     // Subsistema de control
@@ -84,20 +84,20 @@ private:
     
     // Artefactos ROS
     // Subsistema de control
-    ros::Subscriber subsFrontCameraInfo;
-    ros::Subscriber subsRearCameraInfo;
-    ros::Subscriber subsVehicleInfo;
-    ros::Subscriber subsElectricInfo;
-    ros::Subscriber subsPosOriInfo;
-    ros::Publisher pubCtrlFrontCamera;
-    ros::Publisher pubCtrlRearCamera;
-    ros::Publisher pubCommand;
-    ros::ServiceClient clientStatus;
+    static ros::Subscriber subsFrontCameraInfo;
+    static ros::Subscriber subsRearCameraInfo;
+    static ros::Subscriber subsVehicleInfo;
+    static ros::Subscriber subsElectricInfo;
+    static ros::Subscriber subsPosOriInfo;
+    static ros::Publisher pubCtrlFrontCamera;
+    static ros::Publisher pubCtrlRearCamera;
+    static ros::Publisher pubCommand;
+    static ros::ServiceClient clientStatus;
     // Subsistema de Payload de observacion
-    ros::Subscriber subsIRCameraInfo;
-    ros::Subscriber subsTelemeterInfo;
-    ros::Subscriber subsTVCameraInfo;
-    ros::Subscriber subsPositionerInfo;
+    static ros::Subscriber subsIRCameraInfo;
+    static ros::Subscriber subsTelemeterInfo;
+    static ros::Subscriber subsTVCameraInfo;
+    static ros::Subscriber subsPositionerInfo;
     
     // Componentes JAUS
     OjCmpt missionSpoolerComponent;

@@ -17,16 +17,19 @@ void RosNode_Communications::initROS() {
     this->pubCtrlFrontCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlFrontCamera>("ctrlFrontCamera", 1000);
     this->pubCtrlRearCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlRearCamera>("ctrlRearCamera", 1000);
     // Inicializacion de suscriptores
+    //          Subsistema de control
     this->subsElectricInfo = nh.subscribe("electricInfo", 1000, &RosNode_Communications::fnc_subs_electricInfo, this);
     this->subsVehicleInfo = nh.subscribe("vehicleInfo", 1000, &RosNode_Communications::fnc_subs_vehicleInfo, this);
     this->subsFrontCameraInfo = nh.subscribe("frontCameraInfo", 1000, &RosNode_Communications::fnc_subs_frontCameraInfo, this);
     this->subsRearCameraInfo = nh.subscribe("rearCameraInfo", 1000, &RosNode_Communications::fnc_subs_rearCameraInfo, this);
     this->subsPosOriInfo = nh.subscribe("posOriInfo", 1000, &RosNode_Communications::fnc_subs_posOriInfo, this);
+    //          Subsistema de payload de observacion
     this->subsIRCameraInfo = nh.subscribe("IRInformation", 1000, &RosNode_Communications::fcn_subs_irCameraInfo, this);
     this->subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_positionerInfo, this);
     this->subsTVCameraInfo = nh.subscribe("TVInformation", 1000, &RosNode_Communications::fcn_subs_tvCameraInfo, this);
     this->subsPositionerInfo = nh.subscribe("PanTiltPosition", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
     // Inicializacion de servidores
+    //          Subsistema de control
     this->clientStatus = nh.serviceClient<CITIUS_Control_Communication::srv_vehicleStatus>("nodeStateDriving");
 }
 
@@ -208,15 +211,15 @@ void RosNode_Communications::initJAUS() {
  *******************************************************************************
  ******************************************************************************/
 ros::Publisher RosNode_Communications::getPublisherFrontCamera() {
-    return this->pubCtrlFrontCamera;
+    return pubCtrlFrontCamera;
 }
 
 ros::Publisher RosNode_Communications::getPublisherRearCamera() {
-    return this->pubCtrlRearCamera;
+    return pubCtrlRearCamera;
 }
 
 ros::Publisher RosNode_Communications::getPublisherCommand() {
-    return this->pubCommand;
+    return pubCommand;
 }
 
 /*******************************************************************************
@@ -429,7 +432,7 @@ void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
     // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromTelemeterInfo(this->subsystemController,this->nodeController, msg.echoesFound);
+    JausMessage jMsg = translator->getJausMsgFromTelemeterInfo(this->subsystemController,this->nodeController, msg.echoesFound.c_array());
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->platformSensorComponent, jMsg);
@@ -513,7 +516,7 @@ void RosNode_Communications::informStatus() {
     jMsg = reportMissionStatusMessageToJausMessage(rmsm);
     
     if (jMsg != NULL) {
-        ojCmptSendMessage(this->missionSpoolerComponent, jMsg);
+        ojCmptSendMessage(missionSpoolerComponent, jMsg);
     } else {
         ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
     }
@@ -544,14 +547,14 @@ void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg
         
         case 5: // Conduccion (Valor de ICD)
             vehicleStatus.request.status = OPERATION_MODE_CONDUCCION;
-            this->clientStatus.call(vehicleStatus);
-            this->informStatus();
+            clientStatus.call(vehicleStatus);
+            informStatus();
             break;
             
         case 6: // Observacion (Valor de ICD)
             vehicleStatus.request.status = OPERATION_MODE_OBSERVACION;
-            this->clientStatus.call(vehicleStatus);
-            this->informStatus();
+            clientStatus.call(vehicleStatus);
+            informStatus();
             break;
             
         default:
@@ -572,6 +575,7 @@ void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessa
     if((sWrenchEffort->presenceVector & PRESENCE_VECTOR_STEER) == PRESENCE_VECTOR_STEER){
         command.id_device = STEERING;
         command.value = sWrenchEffort->propulsiveRotationalEffortZPercent;
+        //pubCommand.publish(command);
         pubCommand.publish(command);
     }
     
@@ -649,7 +653,7 @@ void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage
             fcCommand.zoom = sCameraPose->zLinearPositionOrRatePercent;
         }
         
-        this->pubCtrlFrontCamera.publish(fcCommand);
+        pubCtrlFrontCamera.publish(fcCommand);
         
     }
     // Camara trasera
@@ -678,7 +682,7 @@ void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage
             rcCommand.zoom = sCameraPose->zLinearPositionOrRatePercent;
         }
         
-        this->pubCtrlRearCamera.publish(rcCommand);
+        pubCtrlRearCamera.publish(rcCommand);
         
     }
     
@@ -694,42 +698,42 @@ void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, Jaus
     if((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSP) == PRESENCE_VECTOR_DIPSP){
         command.id_device = DIPSP;
         command.value = sSignaling->dipsp;
-        this->pubCommand.publish(command);
+        pubCommand.publish(command);
     }
     
     // Comprobacion de luces cortas
     if((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSS) == PRESENCE_VECTOR_DIPSS){
         command.id_device = DIPSS;
         command.value = sSignaling->dipss;
-        this->pubCommand.publish(command);
+        pubCommand.publish(command);
     }
     
     // Comprobacion de luces largas
     if((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSR) == PRESENCE_VECTOR_DIPSR){
         command.id_device = DIPSR;
         command.value = sSignaling->dipsr;
-        this->pubCommand.publish(command);
+        pubCommand.publish(command);
     }
     
     // Comprobacion de intermitente derecha
     if((sSignaling->presenceVector & PRESENCE_VECTOR_BLINKER_RIGHT) == PRESENCE_VECTOR_BLINKER_RIGHT){
         command.id_device = BLINKER_RIGHT;
         command.value = sSignaling->blinker_right;
-        this->pubCommand.publish(command);
+        pubCommand.publish(command);
     }
     
     // Comprobacion de intermitente izquierda
     if((sSignaling->presenceVector & PRESENCE_VECTOR_BLINKER_LEFT) == PRESENCE_VECTOR_BLINKER_LEFT){
         command.id_device = BLINKER_LEFT;
         command.value = sSignaling->blinker_left;
-        this->pubCommand.publish(command);
+        pubCommand.publish(command);
     }
     
     // Comprobacion de claxon
     if((sSignaling->presenceVector & PRESENCE_VECTOR_KLAXON) == PRESENCE_VECTOR_KLAXON){
         command.id_device = KLAXON;
         command.value = sSignaling->klaxon;
-        this->pubCommand.publish(command);
+        pubCommand.publish(command);
     }
     
     // Liberacion de memoria
@@ -745,7 +749,7 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
 }
 
 void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
-
+    SetNightTimeCamera23Message setNightCam = setNightTimeCamera23MessageFromJausMessage(msg);
 }
 
 // Componente Velocity State Sensor
@@ -757,7 +761,7 @@ void RosNode_Communications::fcn_receive_set_travel_speed(OjCmpt cmp, JausMessag
     // No hay comprobacion de presence vector. Un solo parametro
     command.id_device = CRUISING_SPEED;
     command.value = sTravelSpeed->speedMps;
-    this->pubCommand.publish(command);
+    pubCommand.publish(command);
     
     // Liberacion de memoria
     setTravelSpeedMessageDestroy(sTravelSpeed);

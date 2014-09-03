@@ -355,7 +355,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(int subDest, int nodDe
 
 // Mensaje de informacion de telemetro
 
-JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodDest, short* ecs){
+JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodDest, short *ecs){
     // Mensaje de devoluvion
     JausMessage jMsg = NULL;
     

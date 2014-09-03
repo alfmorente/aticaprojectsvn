@@ -12,9 +12,6 @@
 extern "C" {
 #endif
 
-
-
-
 #ifdef	__cplusplus
 }
 #endif
@@ -26,13 +23,13 @@ extern "C" {
 #include "openJaus.h"
 
 // Set/Report Wrench Effort
-#define PRESENCE_VECTOR_THROTTLE 0X0001
-#define PRESENCE_VECTOR_STEER 0X0010
-#define PRESENCE_VECTOR_BRAKE 0X0040
+#define PRESENCE_VECTOR_THROTTLE 0x0001
+#define PRESENCE_VECTOR_STEER 0x0010
+#define PRESENCE_VECTOR_BRAKE 0x0040
 
 // Set/Report Discrete devices
-#define PRESENCE_VECTOR_GEAR 0X04
-#define PRESENCE_VECTOR_PARKING_BRAKE 0X02
+#define PRESENCE_VECTOR_GEAR 0x04
+#define PRESENCE_VECTOR_PARKING_BRAKE 0x02
 
 // Report Camera Pose
 #define PRESENCE_VECTOR_CURRENT_PAN 0x0040
@@ -71,7 +68,7 @@ public:
   JausMessage getJausMsgFromElectricInfo(int subDest, int nodDest, short id_device, short value);
   JausMessage getJausMsgFromCameraInfo(int subDest, int nodDest, short id_camera, short pan, short tilt, short zoom);
   JausMessage getJausMsgFromIRCameraInfo(int subDest, int nodDest, short zoom, short polarity);
-  JausMessage getJausMsgFromTelemeterInfo(int subDest, int nodDest, short* ecs);
+  JausMessage getJausMsgFromTelemeterInfo(int subDest, int nodDest, short *ecs);
   JausMessage getJausMsgFromTVCamera(int subDest, int nodDest, short zoom, short focus, bool autofocus);
   JausMessage getJausMsgFromPositioner(int subDest, int nodDest, short pan, short tilt);
 private:

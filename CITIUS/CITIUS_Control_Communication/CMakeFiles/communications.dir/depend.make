@@ -1071,10 +1071,14 @@ CMakeFiles/communications.dir/src/main.cpp.o: lib/libopenJaus/include/utils/time
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_command.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h
+CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h
+CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_irinfo.h
+CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_panTiltPosition.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_posOriInfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h
+CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_tvinfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
 
