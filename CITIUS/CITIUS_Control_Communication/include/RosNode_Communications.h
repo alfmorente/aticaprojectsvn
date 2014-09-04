@@ -35,6 +35,8 @@ extern "C" {
 #include "CITIUS_Control_Communication/msg_echoesFound.h"
 #include "CITIUS_Control_Communication/msg_irinfo.h"
 #include "CITIUS_Control_Communication/msg_panTiltPosition.h"
+#include "CITIUS_Control_Communication/srv_dzoom.h"
+#include "CITIUS_Control_Communication/srv_polarity.h"
 
 #include "constant.h"
 #include "TranslatorROSJAUS.h"
@@ -46,6 +48,10 @@ extern "C" {
 
 class RosNode_Communications {
 public:
+    
+    // Patron Singleton
+    static RosNode_Communications *getInstance();
+    
     RosNode_Communications();
     
     // Inicializacion de artefactos ROS/JAUS
@@ -71,8 +77,15 @@ public:
     void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
     
     // Generacion de mensaje de estado para Controller
-    void informStatus(int subsystem, int node, OjCmpt cmpt);
+    void informStatus();
+
+    
 private:
+    
+    // Patron Singleton
+    static RosNode_Communications *instance;
+    static bool instanceCreated;
+    
     // Manejador de JAUS 
     FileLoader *configData;
     JausHandler *handler;
@@ -84,20 +97,22 @@ private:
     
     // Artefactos ROS
     // Subsistema de control
-    static ros::Subscriber subsFrontCameraInfo;
-    static ros::Subscriber subsRearCameraInfo;
-    static ros::Subscriber subsVehicleInfo;
-    static ros::Subscriber subsElectricInfo;
-    static ros::Subscriber subsPosOriInfo;
-    static ros::Publisher pubCtrlFrontCamera;
-    static ros::Publisher pubCtrlRearCamera;
-    static ros::Publisher pubCommand;
-    static ros::ServiceClient clientStatus;
+    ros::Subscriber subsFrontCameraInfo;
+    ros::Subscriber subsRearCameraInfo;
+    ros::Subscriber subsVehicleInfo;
+    ros::Subscriber subsElectricInfo;
+    ros::Subscriber subsPosOriInfo;
+    ros::Publisher pubCtrlFrontCamera;
+    ros::Publisher pubCtrlRearCamera;
+    ros::Publisher pubCommand;
+    ros::ServiceClient clientStatus;
     // Subsistema de Payload de observacion
-    static ros::Subscriber subsIRCameraInfo;
-    static ros::Subscriber subsTelemeterInfo;
-    static ros::Subscriber subsTVCameraInfo;
-    static ros::Subscriber subsPositionerInfo;
+    ros::Subscriber subsIRCameraInfo;
+    ros::Subscriber subsTelemeterInfo;
+    ros::Subscriber subsTVCameraInfo;
+    ros::Subscriber subsPositionerInfo;
+    ros::ServiceClient clientIRCameraZoom;
+    ros::ServiceClient clientIRCameraPolarity;
     
     // Componentes JAUS
     OjCmpt missionSpoolerComponent;

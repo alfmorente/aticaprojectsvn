@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     // Iniciacion del middleware (ROS) para el nodo Communications
     ros::init(argc, argv, "Control_ROS_Node_Communications");
 
-    RosNode_Communications *nodeComm = new RosNode_Communications();
+    RosNode_Communications *nodeComm = RosNode_Communications::getInstance();
 
     nodeComm->initROS();
     nodeComm->initJAUS();
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
             initTime = clock();
             
             // Requerimiento de informacion de dispositivo
-            nodeComm->informStatus(nodeComm->getSubsystemController(), nodeComm->getNodeController(), nodeComm->getComponentMIssionSpooler());
+            nodeComm->informStatus();
             
         }
     }
