@@ -45,7 +45,51 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication
 # Include the progress variables for this target.
 include CMakeFiles/ROSBUILD_gensrv_cpp.dir/progress.make
 
+CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
+
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: srv/srv_dzoom.srv
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: manifest.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_dzoom.srv
+
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: srv/srv_polarity.srv
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: manifest.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_polarity.srv
 
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: srv/srv_vehicleStatus.srv
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
@@ -64,11 +108,13 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/g
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_vehicleStatus.srv
 
 ROSBUILD_gensrv_cpp: CMakeFiles/ROSBUILD_gensrv_cpp
+ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
 ROSBUILD_gensrv_cpp: CMakeFiles/ROSBUILD_gensrv_cpp.dir/build.make
 .PHONY : ROSBUILD_gensrv_cpp

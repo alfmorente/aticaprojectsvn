@@ -7,6 +7,8 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/srv"
   "CMakeFiles/ROSBUILD_gensrv_py"
   "src/CITIUS_Control_Communication/srv/__init__.py"
+  "src/CITIUS_Control_Communication/srv/_srv_dzoom.py"
+  "src/CITIUS_Control_Communication/srv/_srv_polarity.py"
   "src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py"
 )
 

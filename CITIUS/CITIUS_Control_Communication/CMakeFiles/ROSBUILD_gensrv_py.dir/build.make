@@ -47,10 +47,52 @@ include CMakeFiles/ROSBUILD_gensrv_py.dir/progress.make
 
 CMakeFiles/ROSBUILD_gensrv_py: src/CITIUS_Control_Communication/srv/__init__.py
 
+src/CITIUS_Control_Communication/srv/__init__.py: src/CITIUS_Control_Communication/srv/_srv_dzoom.py
+src/CITIUS_Control_Communication/srv/__init__.py: src/CITIUS_Control_Communication/srv/_srv_polarity.py
 src/CITIUS_Control_Communication/srv/__init__.py: src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/srv/__init__.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --initpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_vehicleStatus.srv
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --initpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_dzoom.srv /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_polarity.srv /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_vehicleStatus.srv
+
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: srv/srv_dzoom.srv
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: manifest.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/rostime/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/genmsg/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/genpy/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/CITIUS_Control_Communication/srv/_srv_dzoom.py: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/srv/_srv_dzoom.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_dzoom.srv
+
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: srv/srv_polarity.srv
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: manifest.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/rostime/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/genmsg/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/genpy/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/CITIUS_Control_Communication/srv/_srv_polarity.py: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/srv/_srv_polarity.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_polarity.srv
 
 src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py: srv/srv_vehicleStatus.srv
 src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py
@@ -68,12 +110,14 @@ src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py: /opt/ros/groovy/shar
 src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/gensrv_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_vehicleStatus.srv
 
 ROSBUILD_gensrv_py: CMakeFiles/ROSBUILD_gensrv_py
 ROSBUILD_gensrv_py: src/CITIUS_Control_Communication/srv/__init__.py
+ROSBUILD_gensrv_py: src/CITIUS_Control_Communication/srv/_srv_dzoom.py
+ROSBUILD_gensrv_py: src/CITIUS_Control_Communication/srv/_srv_polarity.py
 ROSBUILD_gensrv_py: src/CITIUS_Control_Communication/srv/_srv_vehicleStatus.py
 ROSBUILD_gensrv_py: CMakeFiles/ROSBUILD_gensrv_py.dir/build.make
 .PHONY : ROSBUILD_gensrv_py
