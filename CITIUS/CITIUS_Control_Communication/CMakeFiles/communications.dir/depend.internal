@@ -533,11 +533,17 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_command.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h
+ msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h
+ msg_gen/cpp/include/CITIUS_Control_Communication/msg_irinfo.h
+ msg_gen/cpp/include/CITIUS_Control_Communication/msg_panTiltPosition.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_posOriInfo.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h
+ msg_gen/cpp/include/CITIUS_Control_Communication/msg_tvinfo.h
  msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp

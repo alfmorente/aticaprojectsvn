@@ -773,7 +773,43 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
 
 void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
     SetNightTimeCamera23Message setNightCam = setNightTimeCamera23MessageFromJausMessage(msg);
-    //setNightCam.
+    
+    if(jausByteIsBitSet(setNightCam->presenceVector,JAUS_23_PV_ZOOM_BIT)){
+        CITIUS_Control_Communication::srv_dzoom serviceZoom;
+        serviceZoom.request.newZoom = setNightCam->zoom;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientIRCameraZoom.call(serviceZoom)){
+                numOfAttemps = 10;
+                if(serviceZoom.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Zoom a IR Camera");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Zoom a IR Camera");
+        }
+    }
+    
+    if(jausByteIsBitSet(setNightCam->presenceVector,JAUS_23_PV_POLARITY_BIT)){
+        CITIUS_Control_Communication::srv_polarity servicePolarity;
+        servicePolarity.request.newPolarity = setNightCam->polarity;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientIRCameraPolarity.call(servicePolarity)){
+                numOfAttemps = 10;
+                if(servicePolarity.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Polarity a IR Camera");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Polarity a IR Camera");
+        }
+    }
+    
 }
 
 // Componente Velocity State Sensor

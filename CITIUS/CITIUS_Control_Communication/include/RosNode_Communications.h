@@ -30,6 +30,7 @@ extern "C" {
 #include "CITIUS_Control_Communication/msg_frontCameraInfo.h"
 #include "CITIUS_Control_Communication/msg_rearCameraInfo.h"
 #include "CITIUS_Control_Communication/srv_vehicleStatus.h"
+
 // Mensajes y servicios subsistema de payload de observacion
 #include "CITIUS_Control_Communication/msg_tvinfo.h"
 #include "CITIUS_Control_Communication/msg_echoesFound.h"

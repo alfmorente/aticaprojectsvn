@@ -785,8 +785,34 @@
       </df>
       <df name="msg">
       </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Communication">
+              <in>msg_command.h</in>
+              <in>msg_ctrlFrontCamera.h</in>
+              <in>msg_ctrlRearCamera.h</in>
+              <in>msg_echoesFound.h</in>
+              <in>msg_electricInfo.h</in>
+              <in>msg_frontCameraInfo.h</in>
+              <in>msg_irinfo.h</in>
+              <in>msg_panTiltPosition.h</in>
+              <in>msg_posOriInfo.h</in>
+              <in>msg_rearCameraInfo.h</in>
+              <in>msg_tvinfo.h</in>
+              <in>msg_vehicleInfo.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
+      </df>
       <df name="src">
         <df name="CITIUS_Control_Communication">
+          <df name="msg">
+          </df>
+          <df name="srv">
+          </df>
         </df>
         <in>JausHandler.cpp</in>
         <in>RosNode_Communications.cpp</in>
@@ -794,6 +820,19 @@
         <in>main.cpp</in>
       </df>
       <df name="srv">
+      </df>
+      <df name="srv_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Communication">
+              <in>srv_dzoom.h</in>
+              <in>srv_polarity.h</in>
+              <in>srv_vehicleStatus.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
       </df>
       <df name="test_results">
       </df>

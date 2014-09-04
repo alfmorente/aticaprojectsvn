@@ -532,11 +532,17 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libopenJaus/
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_command.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_irinfo.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_panTiltPosition.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_posOriInfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_tvinfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
 
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: src/TranslatorROSJAUS.cpp

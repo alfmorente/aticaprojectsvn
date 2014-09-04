@@ -6,9 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
-cstdlib
--
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
 
@@ -667,6 +665,10 @@ CITIUS_Control_Communication/msg_irinfo.h
 include/CITIUS_Control_Communication/msg_irinfo.h
 CITIUS_Control_Communication/msg_panTiltPosition.h
 include/CITIUS_Control_Communication/msg_panTiltPosition.h
+CITIUS_Control_Communication/srv_dzoom.h
+include/CITIUS_Control_Communication/srv_dzoom.h
+CITIUS_Control_Communication/srv_polarity.h
+include/CITIUS_Control_Communication/srv_polarity.h
 constant.h
 include/constant.h
 TranslatorROSJAUS.h
@@ -2455,6 +2457,54 @@ ros/macros.h
 msg_gen/cpp/include/CITIUS_Control_Communication/ros/macros.h
 ros/assert.h
 msg_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
+
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/serialization.h
+ros/builtin_message_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/builtin_message_traits.h
+ros/message_operations.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/message_operations.h
+ros/time.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/time.h
+ros/macros.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/macros.h
+ros/assert.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
+ros/service_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/service_traits.h
+
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/serialization.h
+ros/builtin_message_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/builtin_message_traits.h
+ros/message_operations.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/message_operations.h
+ros/time.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/time.h
+ros/macros.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/macros.h
+ros/assert.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
+ros/service_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/service_traits.h
 
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
 string
