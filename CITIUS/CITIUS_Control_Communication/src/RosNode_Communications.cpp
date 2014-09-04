@@ -768,7 +768,11 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
 }
 
 void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
-
+    SetDayTimeCamera21Message setDayCam = setDayTimeCamera21MessageFromJausMessage(msg);
+    
+    if(){
+    
+    }
 }
 
 void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
