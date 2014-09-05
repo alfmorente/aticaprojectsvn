@@ -37,6 +37,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_Communication.dir">
@@ -831,6 +833,7 @@
               <in>srv_panAbsolutePosition.h</in>
               <in>srv_panRate.h</in>
               <in>srv_polarity.h</in>
+              <in>srv_shoot.h</in>
               <in>srv_tiltAbsolutePosition.h</in>
               <in>srv_tiltRate.h</in>
               <in>srv_vehicleStatus.h</in>

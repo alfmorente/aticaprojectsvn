@@ -12,6 +12,7 @@ SET(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_panAbsolutePosition.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_panAbsolutePosition.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_panRate.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_panRate.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_polarity.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_polarity.lisp"
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_shoot.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_shoot.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_tiltAbsolutePosition.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_tiltAbsolutePosition.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_tiltRate.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_tiltRate.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/_package_srv_vehicleStatus.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv_gen/lisp/srv_vehicleStatus.lisp"

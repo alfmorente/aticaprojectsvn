@@ -10,6 +10,12 @@
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
+cstdlib
+-
+RosNode_Communications.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
+
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
 -
@@ -685,6 +691,8 @@ CITIUS_Control_Communication/srv_tiltAbsolutePosition.h
 include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h
 CITIUS_Control_Communication/srv_tiltRate.h
 include/CITIUS_Control_Communication/srv_tiltRate.h
+CITIUS_Control_Communication/srv_shoot.h
+include/CITIUS_Control_Communication/srv_shoot.h
 constant.h
 include/constant.h
 TranslatorROSJAUS.h
@@ -2595,6 +2603,30 @@ ros/service_traits.h
 srv_gen/cpp/include/CITIUS_Control_Communication/ros/service_traits.h
 
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/serialization.h
+ros/builtin_message_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/builtin_message_traits.h
+ros/message_operations.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/message_operations.h
+ros/time.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/time.h
+ros/macros.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/macros.h
+ros/assert.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
+ros/service_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/service_traits.h
+
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h
 string
 -
 vector

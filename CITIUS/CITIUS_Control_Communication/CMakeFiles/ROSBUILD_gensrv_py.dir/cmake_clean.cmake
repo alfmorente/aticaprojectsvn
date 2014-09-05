@@ -11,6 +11,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/srv/_srv_zoomDirect.py"
   "src/CITIUS_Control_Communication/srv/_srv_dzoom.py"
   "src/CITIUS_Control_Communication/srv/_srv_panAbsolutePosition.py"
+  "src/CITIUS_Control_Communication/srv/_srv_shoot.py"
   "src/CITIUS_Control_Communication/srv/_srv_focusDirect.py"
   "src/CITIUS_Control_Communication/srv/_srv_tiltRate.py"
   "src/CITIUS_Control_Communication/srv/_srv_autofocusMode.py"

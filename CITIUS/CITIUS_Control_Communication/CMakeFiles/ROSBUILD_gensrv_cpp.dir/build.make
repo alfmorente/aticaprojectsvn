@@ -49,6 +49,7 @@ CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
+CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h
 CMakeFiles/ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h
@@ -141,6 +142,27 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h: /opt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_panAbsolutePosition.srv
 
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: srv/srv_shoot.srv
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: manifest.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_shoot.srv
+
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: srv/srv_focusDirect.srv
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -158,7 +180,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: /opt/ros/gro
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_focusDirect.srv
 
@@ -179,7 +201,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h: /opt/ros/groovy
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_tiltRate.srv
 
@@ -200,7 +222,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h: /opt/ros/g
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_autofocusMode.srv
 
@@ -221,7 +243,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_polarity.srv
 
@@ -242,7 +264,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h: /opt/ros/groovy/
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_panRate.srv
 
@@ -263,7 +285,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/g
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_vehicleStatus.srv
 
@@ -284,7 +306,7 @@ srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h: /op
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/gensrv_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_tiltAbsolutePosition.srv
 
@@ -293,6 +315,7 @@ ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCo
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
+ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h
 ROSBUILD_gensrv_cpp: srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h

@@ -12,6 +12,8 @@
     (:file "_package_srv_dzoom" :depends-on ("_package"))
     (:file "srv_panAbsolutePosition" :depends-on ("_package_srv_panAbsolutePosition"))
     (:file "_package_srv_panAbsolutePosition" :depends-on ("_package"))
+    (:file "srv_shoot" :depends-on ("_package_srv_shoot"))
+    (:file "_package_srv_shoot" :depends-on ("_package"))
     (:file "srv_focusDirect" :depends-on ("_package_srv_focusDirect"))
     (:file "_package_srv_focusDirect" :depends-on ("_package"))
     (:file "srv_tiltRate" :depends-on ("_package_srv_tiltRate"))

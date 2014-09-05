@@ -548,6 +548,7 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
@@ -1101,6 +1102,7 @@ CMakeFiles/communications.dir/src/main.cpp.o
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_shoot.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h

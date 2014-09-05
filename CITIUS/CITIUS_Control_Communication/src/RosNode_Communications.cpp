@@ -62,6 +62,7 @@ void RosNode_Communications::initROS() {
     this->clientPosPanRate = nh.serviceClient<CITIUS_Control_Communication::srv_panRate>("setPanRate");
     this->clientPosTiltAbs = nh.serviceClient<CITIUS_Control_Communication::srv_tiltAbsolutePosition>("setTiltPosition");
     this->clientPosTiltRate = nh.serviceClient<CITIUS_Control_Communication::srv_tiltRate>("setTiltRate");
+    this->clientShootTel = nh.serviceClient<CITIUS_Control_Communication::srv_shoot>("LRFShoot");
 }
 
 /*******************************************************************************
@@ -171,7 +172,13 @@ void RosNode_Communications::initJAUS() {
         
         // Mensajes que envia
         ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
-    
+        
+        // Mensajes que recibe
+        ojCmptAddServiceInputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
+        
+        // Funciones de recepcion de mensajes (Callbacks)
+        ojCmptSetMessageCallback(platformSensorComponent, JAUS_TELEMETER_INFO_10, fcn_receive_telemeter_info);
+        
     }
     
     // Global Waypoint Driver
@@ -963,6 +970,30 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
         }
     }
     
+}
+
+// Componente Platform Sensor
+
+void RosNode_Communications::fcn_receive_telemeter_info(OjCmpt cmp, JausMessage msg){
+    TelemeterInfo10Message telemeterMsg = telemeterInfo10MessageFromJausMessage(msg);
+    CITIUS_Control_Communication::srv_shoot serviceTelemeter;
+    
+    if(jausByteIsBitSet(telemeterMsg->presenceVector,JAUS_10_PV_SHOOT_BIT)){
+        CITIUS_Control_Communication::srv_shoot serviceShootTelemeter;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientShootTel.call(serviceShootTelemeter)){
+                numOfAttemps = 10;
+                if(serviceTelemeter.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Shoot del telemetro");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Shoot del telemetro");
+        }
+    }
 }
 
 // Componente Velocity State Sensor

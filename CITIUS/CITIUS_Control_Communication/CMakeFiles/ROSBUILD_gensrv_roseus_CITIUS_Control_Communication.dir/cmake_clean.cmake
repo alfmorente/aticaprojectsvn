@@ -14,6 +14,8 @@ FILE(REMOVE_RECURSE
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_panAbsolutePosition.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_shoot.l"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_focusDirect.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_tiltRate.l"

@@ -46,6 +46,7 @@ extern "C" {
 #include "CITIUS_Control_Communication/srv_panRate.h"
 #include "CITIUS_Control_Communication/srv_tiltAbsolutePosition.h"
 #include "CITIUS_Control_Communication/srv_tiltRate.h"
+#include "CITIUS_Control_Communication/srv_shoot.h"
 
 #include "constant.h"
 #include "TranslatorROSJAUS.h"
@@ -130,6 +131,7 @@ private:
     ros::ServiceClient clientPosPanRate;
     ros::ServiceClient clientPosTiltAbs;
     ros::ServiceClient clientPosTiltRate;
+    ros::ServiceClient clientShootTel;
     
     // Componentes JAUS
     OjCmpt missionSpoolerComponent;
@@ -153,6 +155,8 @@ private:
     static void fcn_receive_set_positioner(OjCmpt,JausMessage);
     static void fcn_receive_set_day_time_camera(OjCmpt,JausMessage);
     static void fcn_receive_set_night_time_camera(OjCmpt,JausMessage);
+    // Componente Platform sensor
+    static void fcn_receive_telemeter_info(OjCmpt, JausMessage);
     // Componente Velocity State Sensor
     static void fcn_receive_set_travel_speed(OjCmpt,JausMessage);
     // Componente HeartBeat Information
