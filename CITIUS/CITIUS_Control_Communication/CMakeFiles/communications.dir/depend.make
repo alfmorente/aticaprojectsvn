@@ -541,9 +541,13 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/incl
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_tvinfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCommand.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
 
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: src/TranslatorROSJAUS.cpp
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: include/TranslatorROSJAUS.h
@@ -1086,5 +1090,11 @@ CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_rearCameraInfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_tvinfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h
+CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h
+CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
+CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
+CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
 CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
+CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCommand.h
+CMakeFiles/communications.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
 

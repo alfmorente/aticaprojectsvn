@@ -6,7 +6,11 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/msg"
   "src/CITIUS_Control_Communication/srv"
   "CMakeFiles/ROSBUILD_gensrv_cpp"
+  "srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCommand.h"
+  "srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h"
   "srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h"
+  "srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h"
+  "srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h"
   "srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h"
   "srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h"
 )

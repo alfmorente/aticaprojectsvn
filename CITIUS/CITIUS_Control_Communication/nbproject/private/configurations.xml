@@ -825,9 +825,13 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Communication">
+              <in>srv_autofocusMode.h</in>
               <in>srv_dzoom.h</in>
+              <in>srv_focusDirect.h</in>
               <in>srv_polarity.h</in>
               <in>srv_vehicleStatus.h</in>
+              <in>srv_zoomCommand.h</in>
+              <in>srv_zoomDirect.h</in>
             </df>
           </df>
         </df>

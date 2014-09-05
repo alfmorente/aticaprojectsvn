@@ -132,6 +132,8 @@
       <folder path="src">
         <ccTool>
           <incDir>
+            <pElem>srv_gen/cpp/include/CITIUS_Control_Communication</pElem>
+            <pElem>msg_gen/cpp/include/CITIUS_Control_Communication</pElem>
             <pElem>msg_gen/cpp/include</pElem>
             <pElem>srv_gen/cpp/include</pElem>
             <pElem>include/CITIUS_Control_Communication</pElem>
@@ -165,7 +167,9 @@
         <cTool>
         </cTool>
       </item>
-      <item path="src/JausHandler.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/JausHandler.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="src/RosNode_Communications.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -173,7 +177,9 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
     </conf>
   </confs>

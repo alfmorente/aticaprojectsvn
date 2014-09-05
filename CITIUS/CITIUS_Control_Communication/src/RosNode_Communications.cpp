@@ -54,6 +54,11 @@ void RosNode_Communications::initROS() {
     //          Subsistema de payload de observacion
     this->clientIRCameraPolarity = nh.serviceClient<CITIUS_Control_Communication::srv_polarity>("IRPolarity");
     this->clientIRCameraZoom = nh.serviceClient<CITIUS_Control_Communication::srv_dzoom>("IRDZoom");
+    this->clientTVCameraDirectZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomDirect>("TVZoomDirect");
+    this->clientTVCameraContZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomCommand>("TVZoomCommand");
+    this->clientTVCameraFocus = nh.serviceClient<CITIUS_Control_Communication::srv_focusDirect>("TVFocusDirect");
+    this->clientTVCameraAutofocus = nh.serviceClient<CITIUS_Control_Communication::srv_autofocusMode>("TVAutofocusMode");
+    
 }
 
 /*******************************************************************************
@@ -770,8 +775,76 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
 void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
     SetDayTimeCamera21Message setDayCam = setDayTimeCamera21MessageFromJausMessage(msg);
     
-    if(){
+    if(jausByteIsBitSet(setDayCam->presenceVector,JAUS_21_PV_DIRECT_ZOOM_BIT)){
+        CITIUS_Control_Communication::srv_zoomDirect serviceDirectZoom;    
+        serviceDirectZoom.request.zoomDirect = setDayCam->direct_zoom;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientTVCameraDirectZoom.call(serviceDirectZoom)){
+                numOfAttemps = 10;
+                if(serviceDirectZoom.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Direct Zoom a TV Camera");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Direct Zoom a TV Camera");
+        }
+    }
     
+    if(jausByteIsBitSet(setDayCam->presenceVector,JAUS_21_PV_CONTINUOUS_ZOOM_BIT)){
+        CITIUS_Control_Communication::srv_zoomCommand serviceContZoom;
+        serviceContZoom.request.zoomCommand = setDayCam->continuous_zoom;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientTVCameraContZoom.call(serviceContZoom)){
+                numOfAttemps = 10;
+                if(serviceContZoom.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Cont. Zoom a TV Camera");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Cont. Zoom a TV Camera");
+        }
+    }
+    
+    if(jausByteIsBitSet(setDayCam->presenceVector,JAUS_21_PV_FOCUS_BIT)){
+        CITIUS_Control_Communication::srv_focusDirect serviceDirectFocus;
+        serviceDirectFocus.request.focusDirect = setDayCam->focus;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientTVCameraFocus.call(serviceDirectFocus)){
+                numOfAttemps = 10;
+                if(serviceDirectFocus.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Focus a TV Camera");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Focus a TV Camera");
+        }
+    }
+    
+    if(jausByteIsBitSet(setDayCam->presenceVector,JAUS_21_PV_AUTOFOCUS_BIT)){
+        CITIUS_Control_Communication::srv_autofocusMode serviceAutofocus;
+        serviceAutofocus.request.autofocus = setDayCam->autofocus;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientTVCameraAutofocus.call(serviceAutofocus)){
+                numOfAttemps = 10;
+                if(serviceAutofocus.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de AutoFocus a TV Camera");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de AutoFocus a TV Camera");
+        }
     }
 }
 
