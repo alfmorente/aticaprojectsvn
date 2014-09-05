@@ -828,7 +828,11 @@
               <in>srv_autofocusMode.h</in>
               <in>srv_dzoom.h</in>
               <in>srv_focusDirect.h</in>
+              <in>srv_panAbsolutePosition.h</in>
+              <in>srv_panRate.h</in>
               <in>srv_polarity.h</in>
+              <in>srv_tiltAbsolutePosition.h</in>
+              <in>srv_tiltRate.h</in>
               <in>srv_vehicleStatus.h</in>
               <in>srv_zoomCommand.h</in>
               <in>srv_zoomDirect.h</in>

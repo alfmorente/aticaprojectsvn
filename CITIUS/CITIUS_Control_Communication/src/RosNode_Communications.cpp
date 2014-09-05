@@ -58,7 +58,10 @@ void RosNode_Communications::initROS() {
     this->clientTVCameraContZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomCommand>("TVZoomCommand");
     this->clientTVCameraFocus = nh.serviceClient<CITIUS_Control_Communication::srv_focusDirect>("TVFocusDirect");
     this->clientTVCameraAutofocus = nh.serviceClient<CITIUS_Control_Communication::srv_autofocusMode>("TVAutofocusMode");
-    
+    this->clientPosPanAbs = nh.serviceClient<CITIUS_Control_Communication::srv_panAbsolutePosition>("setPanPosition");
+    this->clientPosPanRate = nh.serviceClient<CITIUS_Control_Communication::srv_panRate>("setPanRate");
+    this->clientPosTiltAbs = nh.serviceClient<CITIUS_Control_Communication::srv_tiltAbsolutePosition>("setTiltPosition");
+    this->clientPosTiltRate = nh.serviceClient<CITIUS_Control_Communication::srv_tiltRate>("setTiltRate");
 }
 
 /*******************************************************************************
@@ -769,7 +772,80 @@ void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, Jaus
 }
 
 void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage msg) {
-
+    SetPositioner19Message setPositioner = setPositioner19MessageFromJausMessage(msg);
+    
+    if(jausByteIsBitSet(setPositioner->presenceVector, JAUS_19_PV_PAN_BIT)){
+        CITIUS_Control_Communication::srv_panAbsolutePosition serviceAbsPan;
+        serviceAbsPan.request.panPosition = setPositioner->pan;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientPosPanAbs.call(serviceAbsPan)){
+                numOfAttemps = 10;
+                if(serviceAbsPan.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Pan absoluto a Positioner");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Pan absoluto a Positioner");
+        }
+    }
+    
+    if(jausByteIsBitSet(setPositioner->presenceVector, JAUS_19_PV_SPIN_VELOCITY_BIT)){
+        CITIUS_Control_Communication::srv_panRate servicePanRate;
+        servicePanRate.request.panRate = setPositioner->spin_velocity;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientPosPanRate.call(servicePanRate)){
+                numOfAttemps = 10;
+                if(servicePanRate.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Vel. Pan absoluto a Positioner");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Vel. Pan a Positioner");
+        }
+    }
+    
+    if(jausByteIsBitSet(setPositioner->presenceVector, JAUS_19_PV_TILT_BIT)){
+        CITIUS_Control_Communication::srv_tiltAbsolutePosition serviceAbsTilt;
+        serviceAbsTilt.request.tiltPosition = setPositioner->tilt;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientPosTiltAbs.call(serviceAbsTilt)){
+                numOfAttemps = 10;
+                if(serviceAbsTilt.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Tilt absoluto a Positioner");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Tilt absoluto a Positioner");
+        }
+    }
+    
+    if(jausByteIsBitSet(setPositioner->presenceVector, JAUS_19_PV_ELEVATION_VELOCITY_BIT)){
+        CITIUS_Control_Communication::srv_tiltRate serviceTiltRate;
+        serviceTiltRate.request.tiltRate = setPositioner->elevation_velocity;
+        short numOfAttemps = 0;
+        while(numOfAttemps < 5){
+            if(instance->clientPosTiltRate.call(serviceTiltRate)){
+                numOfAttemps = 10;
+                if(serviceTiltRate.response.ret == false)
+                    ROS_INFO("[Control] Communications - Error en el Req. de Tilt Rate a Positioner");
+            }else{
+                numOfAttemps++;
+            }
+        }
+        if(numOfAttemps == 5){
+            ROS_INFO("[Control] Communications - Error en el Req. de Tilt Rate a Positioner");
+        }
+    }
+    
 }
 
 void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {

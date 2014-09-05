@@ -42,6 +42,10 @@ extern "C" {
 #include "CITIUS_Control_Communication/srv_zoomCommand.h"
 #include "CITIUS_Control_Communication/srv_focusDirect.h"
 #include "CITIUS_Control_Communication/srv_autofocusMode.h"
+#include "CITIUS_Control_Communication/srv_panAbsolutePosition.h"
+#include "CITIUS_Control_Communication/srv_panRate.h"
+#include "CITIUS_Control_Communication/srv_tiltAbsolutePosition.h"
+#include "CITIUS_Control_Communication/srv_tiltRate.h"
 
 #include "constant.h"
 #include "TranslatorROSJAUS.h"
@@ -122,6 +126,10 @@ private:
     ros::ServiceClient clientTVCameraContZoom;
     ros::ServiceClient clientTVCameraFocus;
     ros::ServiceClient clientTVCameraAutofocus;
+    ros::ServiceClient clientPosPanAbs;
+    ros::ServiceClient clientPosPanRate;
+    ros::ServiceClient clientPosTiltAbs;
+    ros::ServiceClient clientPosTiltRate;
     
     // Componentes JAUS
     OjCmpt missionSpoolerComponent;

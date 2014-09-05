@@ -54,18 +54,30 @@ CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_zoomDirect.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_dzoom.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_dzoom.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_panAbsolutePosition.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_panAbsolutePosition.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_focusDirect.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_focusDirect.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_tiltRate.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_tiltRate.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_autofocusMode.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_autofocusMode.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_polarity.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_polarity.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_panRate.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_panRate.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_vehicleStatus.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_vehicleStatus.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_tiltAbsolutePosition.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_tiltAbsolutePosition.lisp
 
 srv_gen/lisp/srv_zoomCommand.lisp: srv/srv_zoomCommand.srv
 srv_gen/lisp/srv_zoomCommand.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -139,6 +151,30 @@ srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_dzoom.lisp
 
 srv_gen/lisp/_package_srv_dzoom.lisp: srv_gen/lisp/srv_dzoom.lisp
 
+srv_gen/lisp/srv_panAbsolutePosition.lisp: srv/srv_panAbsolutePosition.srv
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/lisp/srv_panAbsolutePosition.lisp: manifest.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/lisp/srv_panAbsolutePosition.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_panAbsolutePosition.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_panAbsolutePosition.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_panAbsolutePosition.srv
+
+srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_panAbsolutePosition.lisp
+
+srv_gen/lisp/_package_srv_panAbsolutePosition.lisp: srv_gen/lisp/srv_panAbsolutePosition.lisp
+
 srv_gen/lisp/srv_focusDirect.lisp: srv/srv_focusDirect.srv
 srv_gen/lisp/srv_focusDirect.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
 srv_gen/lisp/srv_focusDirect.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
@@ -155,13 +191,37 @@ srv_gen/lisp/srv_focusDirect.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 srv_gen/lisp/srv_focusDirect.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/lisp/srv_focusDirect.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/lisp/srv_focusDirect.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_focusDirect.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_focusDirect.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_focusDirect.srv
 
 srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_focusDirect.lisp
 
 srv_gen/lisp/_package_srv_focusDirect.lisp: srv_gen/lisp/srv_focusDirect.lisp
+
+srv_gen/lisp/srv_tiltRate.lisp: srv/srv_tiltRate.srv
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/lisp/srv_tiltRate.lisp: manifest.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/lisp/srv_tiltRate.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_tiltRate.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_tiltRate.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_tiltRate.srv
+
+srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_tiltRate.lisp
+
+srv_gen/lisp/_package_srv_tiltRate.lisp: srv_gen/lisp/srv_tiltRate.lisp
 
 srv_gen/lisp/srv_autofocusMode.lisp: srv/srv_autofocusMode.srv
 srv_gen/lisp/srv_autofocusMode.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -179,7 +239,7 @@ srv_gen/lisp/srv_autofocusMode.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 srv_gen/lisp/srv_autofocusMode.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/lisp/srv_autofocusMode.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/lisp/srv_autofocusMode.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_autofocusMode.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_autofocusMode.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_autofocusMode.srv
 
@@ -203,13 +263,37 @@ srv_gen/lisp/srv_polarity.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 srv_gen/lisp/srv_polarity.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/lisp/srv_polarity.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/lisp/srv_polarity.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_polarity.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_polarity.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_polarity.srv
 
 srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_polarity.lisp
 
 srv_gen/lisp/_package_srv_polarity.lisp: srv_gen/lisp/srv_polarity.lisp
+
+srv_gen/lisp/srv_panRate.lisp: srv/srv_panRate.srv
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/lisp/srv_panRate.lisp: manifest.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/lisp/srv_panRate.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_panRate.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_panRate.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_panRate.srv
+
+srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_panRate.lisp
+
+srv_gen/lisp/_package_srv_panRate.lisp: srv_gen/lisp/srv_panRate.lisp
 
 srv_gen/lisp/srv_vehicleStatus.lisp: srv/srv_vehicleStatus.srv
 srv_gen/lisp/srv_vehicleStatus.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -227,13 +311,37 @@ srv_gen/lisp/srv_vehicleStatus.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 srv_gen/lisp/srv_vehicleStatus.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 srv_gen/lisp/srv_vehicleStatus.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 srv_gen/lisp/srv_vehicleStatus.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_vehicleStatus.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_vehicleStatus.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_vehicleStatus.srv
 
 srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_vehicleStatus.lisp
 
 srv_gen/lisp/_package_srv_vehicleStatus.lisp: srv_gen/lisp/srv_vehicleStatus.lisp
+
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: srv/srv_tiltAbsolutePosition.srv
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: manifest.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/rostime/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/genmsg/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/genpy/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+srv_gen/lisp/srv_tiltAbsolutePosition.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating srv_gen/lisp/srv_tiltAbsolutePosition.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_tiltAbsolutePosition.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/srv/srv_tiltAbsolutePosition.srv
+
+srv_gen/lisp/_package.lisp: srv_gen/lisp/srv_tiltAbsolutePosition.lisp
+
+srv_gen/lisp/_package_srv_tiltAbsolutePosition.lisp: srv_gen/lisp/srv_tiltAbsolutePosition.lisp
 
 ROSBUILD_gensrv_lisp: CMakeFiles/ROSBUILD_gensrv_lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_zoomCommand.lisp
@@ -245,18 +353,30 @@ ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_zoomDirect.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_dzoom.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_dzoom.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_panAbsolutePosition.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_panAbsolutePosition.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_focusDirect.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_focusDirect.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_tiltRate.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_tiltRate.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_autofocusMode.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_autofocusMode.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_polarity.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_polarity.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_panRate.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_panRate.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_vehicleStatus.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_vehicleStatus.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/srv_tiltAbsolutePosition.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package.lisp
+ROSBUILD_gensrv_lisp: srv_gen/lisp/_package_srv_tiltAbsolutePosition.lisp
 ROSBUILD_gensrv_lisp: CMakeFiles/ROSBUILD_gensrv_lisp.dir/build.make
 .PHONY : ROSBUILD_gensrv_lisp
 

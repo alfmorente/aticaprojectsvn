@@ -545,7 +545,11 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCommand.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
@@ -1094,7 +1098,11 @@ CMakeFiles/communications.dir/src/main.cpp.o
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltAbsolutePosition.h
+ srv_gen/cpp/include/CITIUS_Control_Communication/srv_tiltRate.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCommand.h
  srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
