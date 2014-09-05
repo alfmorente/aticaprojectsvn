@@ -10,6 +10,12 @@
 Manager.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.h
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/main.cpp
+cstdlib
+-
+Manager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.h
+
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
 -

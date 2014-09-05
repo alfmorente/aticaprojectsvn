@@ -45,9 +45,56 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager
 # Include the progress variables for this target.
 include CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Manager.dir/progress.make
 
-CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Manager:
+CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l
+CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l
+
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: srv/srv_nodeStatus.srv
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: manifest.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/cpp_common/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/rostime/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/roscpp_traits/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/roscpp_serialization/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/genmsg/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/genpy/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/message_runtime/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/rosconsole/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/std_msgs/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/xmlrpcpp/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l, /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv"
+	/opt/ros/groovy/share/geneus/scripts/gensrv_eus /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_nodeStatus.srv
+
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l
+
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: srv/srv_vehicleStatus.srv
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: manifest.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/cpp_common/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/rostime/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/roscpp_traits/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/roscpp_serialization/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/genmsg/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/genpy/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/message_runtime/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/rosconsole/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/std_msgs/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/xmlrpcpp/package.xml
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l, /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv"
+	/opt/ros/groovy/share/geneus/scripts/gensrv_eus /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/srv/srv_vehicleStatus.srv
+
+/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l
 
 ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Manager
+ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_nodeStatus.l
+ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv
+ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv/srv_vehicleStatus.l
+ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: /home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/srv
 ROSBUILD_gensrv_roseus_CITIUS_Control_Manager: CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Manager.dir/build.make
 .PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Manager
 

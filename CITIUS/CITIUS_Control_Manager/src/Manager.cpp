@@ -39,6 +39,10 @@ void Manager::initROS(){
     fcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("fcNodeStatus");
     rcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("rcNodeStatus");
     drNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("vmNodeStatus");
+    irNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStateIRCamera");
+    lrfNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStateLRF");
+    tvNosdeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStateTVCamera");
+    ptNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStatePanTilt");
     
     serverVehicleStatus = nh.advertiseService("vehicleStatus",&Manager::fcv_serv_vehicleStatus,this);
     
@@ -108,6 +112,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
             numOfAttemps = 0;
             
             // Activacion FrontCamera
+            
             while(!fcNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
                 
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo FrontCamera...");
@@ -168,6 +173,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
             numOfAttemps = 0;
             
             // Activacion Driving
+            
             while(!drNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
                 
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo Driving...");
@@ -193,6 +199,126 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
                 ROS_INFO("[Control] Manager - Nodo Driving no pudo arrancar. Cumplido numero maximo de reintentos");
             
             }
+            
+            numOfAttemps = 0;
+            
+            // Activacion IR Camera
+            
+            while(!irNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
+                
+                ROS_INFO("[Control] Manager - Reintentando conexion con nodo IR Camera...");
+                numOfAttemps++;
+                
+            }
+            if (numOfAttemps < MAX_ATTEMPS) {
+                
+                if (!service.response.confirmation) {
+                    
+                    // Position/Orientation no ha sido activado
+                    ROS_INFO("[Control] Manager - Nodo IR Camera no pudo arrancar");
+                    
+                } else {
+                    
+                    ROS_INFO("[Control] Manager - Nodo IR Camera arrancado correctamente");
+                    irCameraOK = true;
+                    
+                }
+                
+            }else{
+                
+                ROS_INFO("[Control] Manager - Nodo IR Camera no pudo arrancar. Cumplido numero maximo de reintentos");
+            
+            }
+            
+            numOfAttemps = 0;
+            
+            // Activacion LRF (Telemetro)
+            
+            while(!lrfNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
+                
+                ROS_INFO("[Control] Manager - Reintentando conexion con nodo LRF...");
+                numOfAttemps++;
+                
+            }
+            if (numOfAttemps < MAX_ATTEMPS) {
+                
+                if (!service.response.confirmation) {
+                    
+                    // Position/Orientation no ha sido activado
+                    ROS_INFO("[Control] Manager - Nodo LRF no pudo arrancar");
+                    
+                } else {
+                    
+                    ROS_INFO("[Control] Manager - Nodo LRF arrancado correctamente");
+                    lrfOK = true;
+                    
+                }
+                
+            }else{
+                
+                ROS_INFO("[Control] Manager - Nodo LRF no pudo arrancar. Cumplido numero maximo de reintentos");
+            
+            }
+            
+            numOfAttemps = 0;
+            
+            // Activacion TV Camera
+            
+            while(!tvNosdeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
+                
+                ROS_INFO("[Control] Manager - Reintentando conexion con nodo Camera TV...");
+                numOfAttemps++;
+                
+            }
+            if (numOfAttemps < MAX_ATTEMPS) {
+                
+                if (!service.response.confirmation) {
+                    
+                    // Position/Orientation no ha sido activado
+                    ROS_INFO("[Control] Manager - Nodo Camera TV no pudo arrancar");
+                    
+                } else {
+                    
+                    ROS_INFO("[Control] Manager - Nodo Camera TV arrancado correctamente");
+                    tvCameraOK = true;
+                    
+                }
+                
+            }else{
+                
+                ROS_INFO("[Control] Manager - Nodo Camera TV no pudo arrancar. Cumplido numero maximo de reintentos");
+            
+            }
+            
+            numOfAttemps = 0;
+            
+            // Activacion Positioner
+            
+            while(!ptNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
+                
+                ROS_INFO("[Control] Manager - Reintentando conexion con nodo Positioner...");
+                numOfAttemps++;
+                
+            }
+            if (numOfAttemps < MAX_ATTEMPS) {
+                
+                if (!service.response.confirmation) {
+                    
+                    // Position/Orientation no ha sido activado
+                    ROS_INFO("[Control] Manager - Nodo Positioner no pudo arrancar");
+                    
+                } else {
+                    
+                    ROS_INFO("[Control] Manager - Nodo Positioner arrancado correctamente");
+                    positionerOK = true;
+                    
+                }
+                
+            }else{
+                
+                ROS_INFO("[Control] Manager - Nodo Positioner no pudo arrancar. Cumplido numero maximo de reintentos");
+            
+            }
 
             
             // Comprobacion de errores
@@ -204,7 +330,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
                 rsp.confirmation = false;
                 
             } else {
-                if(!positionOrientationOK || !frontCameraOK || !rearCameraOK){
+                if(!positionOrientationOK || !frontCameraOK || !rearCameraOK || !irCameraOK || !lrfOK || !tvCameraOK || !positionerOK){
                     
                     ROS_INFO("[Control] Manager - Algun dispositivo fallo pero se continua con la ejecucion");              
                 
