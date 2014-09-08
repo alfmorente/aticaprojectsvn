@@ -17,6 +17,10 @@ Manager::Manager() {
     frontCameraOK = false;
     rearCameraOK = false;
     drivingOK = false;
+    irCameraOK = false;
+    lrfOK = false;
+    tvCameraOK = false;
+    positionerOK = false;
     currentSwitcher = SWITCHER_INIT;
     
 }
@@ -35,6 +39,7 @@ Manager::~Manager() {
 void Manager::initROS(){
     
     ros::NodeHandle nh;
+    
     poNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("poNodeStatus");
     fcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("fcNodeStatus");
     rcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("rcNodeStatus");
@@ -441,6 +446,50 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
                     ROS_INFO("[Control] Manager - Nodo RearCamera no se pudo apagar");
                 } else {
                     ROS_INFO("[Control] Manager - Nodo RearCamera apagado correctamente");
+                }
+            }
+
+            // Camara IR
+            if (irCameraOK) {
+                while (!irNodeStatus.call(service));
+                if (!service.response.confirmation) {
+                    // Position/Orientation no ha sido apagado
+                    ROS_INFO("[Control] Manager - Nodo IRCamera no se pudo apagar");
+                } else {
+                    ROS_INFO("[Control] Manager - Nodo IRCamera apagado correctamente");
+                }
+            }
+
+            // LRF
+            if (lrfOK) {
+                while (!lrfNodeStatus.call(service));
+                if (!service.response.confirmation) {
+                    // Position/Orientation no ha sido apagado
+                    ROS_INFO("[Control] Manager - Nodo LRF no se pudo apagar");
+                } else {
+                    ROS_INFO("[Control] Manager - Nodo LRF apagado correctamente");
+                }
+            }
+
+            // Camara TV
+            if (tvCameraOK) {
+                while (!tvNosdeStatus.call(service));
+                if (!service.response.confirmation) {
+                    // Position/Orientation no ha sido apagado
+                    ROS_INFO("[Control] Manager - Nodo TVCamera no se pudo apagar");
+                } else {
+                    ROS_INFO("[Control] Manager - Nodo TVCamera apagado correctamente");
+                }
+            }
+
+            // Positioner
+            if (positionerOK) {
+                while (!ptNodeStatus.call(service));
+                if (!service.response.confirmation) {
+                    // Position/Orientation no ha sido apagado
+                    ROS_INFO("[Control] Manager - Nodo Positioner no se pudo apagar");
+                } else {
+                    ROS_INFO("[Control] Manager - Nodo Positioner apagado correctamente");
                 }
             }
             
