@@ -1,0 +1,15 @@
+<package>
+  <description brief="SimCommRcv">
+
+     SimCommRcv
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/SimCommRcv</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
