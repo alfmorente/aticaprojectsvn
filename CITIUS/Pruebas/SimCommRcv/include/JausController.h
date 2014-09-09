@@ -25,6 +25,7 @@ extern "C" {
 #include "jaus.h"
 #include "openJaus.h"
 #include "JausHandler.h"
+#include <iostream>
 
 class JausController {
 public:
@@ -68,20 +69,25 @@ private:
     
     // Callbacks JAUS
     // Componente Mission Spooler
-    static void fcn_receive_run_mission(OjCmpt, JausMessage);
+    static void fcn_receive_report_mission_status(OjCmpt, JausMessage);
     // Componente Primitive Driver
-    static void fcn_receive_set_wrench_effort(OjCmpt,JausMessage);
-    static void fcn_receive_set_discrete_devices(OjCmpt,JausMessage);
+    static void fcn_receive_report_wrench_effort(OjCmpt,JausMessage);
+    static void fcn_receive_report_discrete_devices(OjCmpt,JausMessage);
+    static void fcn_receive_ugv_info(OjCmpt,JausMessage);
     // Componente Visual Sensor
-    static void fcn_receive_set_camera_pose(OjCmpt,JausMessage);
-    static void fcn_receive_set_signaling_elements(OjCmpt,JausMessage);
-    static void fcn_receive_set_positioner(OjCmpt,JausMessage);
-    static void fcn_receive_set_day_time_camera(OjCmpt,JausMessage);
-    static void fcn_receive_set_night_time_camera(OjCmpt,JausMessage);
+    static void fcn_receive_report_camera_pose(OjCmpt,JausMessage);
+    static void fcn_receive_report_signaling_elements(OjCmpt,JausMessage);
+    static void fcn_receive_report_positioner(OjCmpt,JausMessage);
+    static void fcn_receive_report_day_time_camera(OjCmpt,JausMessage);
+    static void fcn_receive_report_night_time_camera(OjCmpt,JausMessage);
     // Componente Platform sensor
     static void fcn_receive_telemeter_info(OjCmpt, JausMessage);
     // Componente Velocity State Sensor
-    static void fcn_receive_set_travel_speed(OjCmpt,JausMessage);
+    static void fcn_receive_report_travel_speed(OjCmpt,JausMessage);
+    static void fcn_receive_report_velocity_state(OjCmpt,JausMessage);
+    // Componente Global Pose Sensor
+    static void fcn_receive_report_global_pose(OjCmpt,JausMessage);
+    static void fcn_receive_additional_gpsins_info(OjCmpt,JausMessage);
     // Componente HeartBeat Information
     static void fcn_receive_heartbeat_channel_state(OjCmpt,JausMessage);
     static void fcn_receive_heartbeat_position_info(OjCmpt,JausMessage);
