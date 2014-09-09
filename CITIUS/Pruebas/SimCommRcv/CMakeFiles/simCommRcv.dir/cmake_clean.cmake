@@ -1,5 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/simCommRcv.dir/src/main.cpp.o"
+  "CMakeFiles/simCommRcv.dir/src/JausController.cpp.o"
+  "CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o"
   "bin/simCommRcv.pdb"
   "bin/simCommRcv"
 )

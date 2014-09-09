@@ -99,6 +99,8 @@
       <df name="include">
         <df name="SimCommRcv">
         </df>
+        <in>JausController.h</in>
+        <in>JausHandler.h</in>
       </df>
       <df name="lib">
         <df name="libjaus">
@@ -772,6 +774,8 @@
         </df>
       </df>
       <df name="src">
+        <in>JausController.cpp</in>
+        <in>JausHandler.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="test_results">

@@ -85,14 +85,90 @@ CMakeFiles/simCommRcv.dir/src/main.cpp.o.provides: CMakeFiles/simCommRcv.dir/src
 
 CMakeFiles/simCommRcv.dir/src/main.cpp.o.provides.build: CMakeFiles/simCommRcv.dir/src/main.cpp.o
 
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: CMakeFiles/simCommRcv.dir/flags.make
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: src/JausController.cpp
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: manifest.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/simCommRcv.dir/src/JausController.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/simCommRcv.dir/src/JausController.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.cpp
+
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simCommRcv.dir/src/JausController.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.cpp > CMakeFiles/simCommRcv.dir/src/JausController.cpp.i
+
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simCommRcv.dir/src/JausController.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.cpp -o CMakeFiles/simCommRcv.dir/src/JausController.cpp.s
+
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.requires:
+.PHONY : CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.requires
+
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.provides: CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.requires
+	$(MAKE) -f CMakeFiles/simCommRcv.dir/build.make CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.provides.build
+.PHONY : CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.provides
+
+CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.provides.build: CMakeFiles/simCommRcv.dir/src/JausController.cpp.o
+
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: CMakeFiles/simCommRcv.dir/flags.make
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: src/JausHandler.cpp
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: manifest.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.cpp
+
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.cpp > CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.i
+
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.cpp -o CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.s
+
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.requires:
+.PHONY : CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.requires
+
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.provides: CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.requires
+	$(MAKE) -f CMakeFiles/simCommRcv.dir/build.make CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.provides.build
+.PHONY : CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.provides
+
+CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.provides.build: CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o
+
 # Object files for target simCommRcv
 simCommRcv_OBJECTS = \
-"CMakeFiles/simCommRcv.dir/src/main.cpp.o"
+"CMakeFiles/simCommRcv.dir/src/main.cpp.o" \
+"CMakeFiles/simCommRcv.dir/src/JausController.cpp.o" \
+"CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o"
 
 # External object files for target simCommRcv
 simCommRcv_EXTERNAL_OBJECTS =
 
 bin/simCommRcv: CMakeFiles/simCommRcv.dir/src/main.cpp.o
+bin/simCommRcv: CMakeFiles/simCommRcv.dir/src/JausController.cpp.o
+bin/simCommRcv: CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o
 bin/simCommRcv: CMakeFiles/simCommRcv.dir/build.make
 bin/simCommRcv: CMakeFiles/simCommRcv.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/simCommRcv"
@@ -103,6 +179,8 @@ CMakeFiles/simCommRcv.dir/build: bin/simCommRcv
 .PHONY : CMakeFiles/simCommRcv.dir/build
 
 CMakeFiles/simCommRcv.dir/requires: CMakeFiles/simCommRcv.dir/src/main.cpp.o.requires
+CMakeFiles/simCommRcv.dir/requires: CMakeFiles/simCommRcv.dir/src/JausController.cpp.o.requires
+CMakeFiles/simCommRcv.dir/requires: CMakeFiles/simCommRcv.dir/src/JausHandler.cpp.o.requires
 .PHONY : CMakeFiles/simCommRcv.dir/requires
 
 CMakeFiles/simCommRcv.dir/clean:
