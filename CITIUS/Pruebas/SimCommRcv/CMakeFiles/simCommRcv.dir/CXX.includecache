@@ -27,6 +27,8 @@ openJaus.h
 include/openJaus.h
 JausHandler.h
 include/JausHandler.h
+iostream
+-
 
 include/JausHandler.h
 stdlib.h

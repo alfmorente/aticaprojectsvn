@@ -84,7 +84,6 @@ private:
     static void fcn_receive_telemeter_info(OjCmpt, JausMessage);
     // Componente Velocity State Sensor
     static void fcn_receive_report_travel_speed(OjCmpt,JausMessage);
-    static void fcn_receive_report_velocity_state(OjCmpt,JausMessage);
     // Componente Global Pose Sensor
     static void fcn_receive_report_global_pose(OjCmpt,JausMessage);
     static void fcn_receive_additional_gpsins_info(OjCmpt,JausMessage);
