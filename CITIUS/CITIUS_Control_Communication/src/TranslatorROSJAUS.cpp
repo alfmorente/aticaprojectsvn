@@ -100,15 +100,14 @@ JausMessage TranslatorROSJAUS::getJausMsgFromVehicleInfo(int subDest, int nodDes
             ugvInfo12MessageDestroy(ugvm);
             break;
         }case CRUISING_SPEED:{
-            // Generacion de mensaje especifico Report velocity state
-            ReportVelocityStateMessage rvsm = reportVelocityStateMessageCreate();
+            // Generacion de mensaje especifico Report travel speed state
+            ReportTravelSpeedMessage rvsm = reportTravelSpeedMessageCreate();
             // Presence vector
-            rvsm->presenceVector = PRESENCE_VECTOR_CURRENT_CRUISING_SPEED;
-            rvsm->velocityRmsMps = value;
+            rvsm->speedMps = value;
             jausAddressCopy(rvsm->destination,jAdd);
             // Generacion de mensaje JAUS global
-            jMsg = reportVelocityStateMessageToJausMessage(rvsm);
-            reportVelocityStateMessageDestroy(rvsm);
+            jMsg = reportTravelSpeedMessageToJausMessage(rvsm);
+            reportTravelSpeedMessageDestroy(rvsm);
             break;
         }case BLINKER_RIGHT:{
             // Generacion de mensaje especifico Report signlaling elements
