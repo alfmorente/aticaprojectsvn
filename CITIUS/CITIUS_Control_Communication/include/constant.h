@@ -150,9 +150,9 @@ typedef struct{
 /*******************************************************************************
  *                        SUBSISTEMAS JAUS
 *******************************************************************************/
-#define JAUS_SUBSYSTEM_MYC 
-#define JAUS_SUBSYSTEM_UGV
-#define JAUS_SUBSYSTEM_USV
+#define JAUS_SUBSYSTEM_MYC 1
+#define JAUS_SUBSYSTEM_USV 2
+#define JAUS_SUBSYSTEM_UGV 3
 
 /*******************************************************************************
  *                           NODOS JAUS
@@ -168,6 +168,3 @@ typedef struct{
  ******************************************************************************/
 #define FRONT_CAMERA_ID 1
 #define REAR_CAMERA_ID 2
-
-
-
