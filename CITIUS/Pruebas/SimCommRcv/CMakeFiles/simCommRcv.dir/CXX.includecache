@@ -10,16 +10,6 @@
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.h
 
-/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.cpp
-JausHandler.h
-/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.h
-
-/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/main.cpp
-JausController.h
-/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.h
-cstdlib
--
-
 include/JausController.h
 jaus.h
 include/jaus.h
