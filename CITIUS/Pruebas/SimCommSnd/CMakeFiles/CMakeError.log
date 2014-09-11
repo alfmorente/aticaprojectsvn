@@ -1,0 +1,53 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3353036122/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3353036122.dir/build.make CMakeFiles/cmTryCompileExec3353036122.dir/build
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3353036122.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3353036122.dir/CheckSymbolExists.c.o   -c /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec3353036122
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3353036122.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3353036122.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3353036122 -rdynamic 
+CMakeFiles/cmTryCompileExec3353036122.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xa): undefined reference to `pthread_create'
+collect2: ld devolvió el estado de salida 1
+make[1]: *** [cmTryCompileExec3353036122] Error 1
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp»
+make: *** [cmTryCompileExec3353036122/fast] Error 2
+
+File /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec793464157/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec793464157.dir/build.make CMakeFiles/cmTryCompileExec793464157.dir/build
+make[1]: se ingresa al directorio «/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp»
+/usr/bin/cmake -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec793464157.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec793464157.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec793464157
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec793464157.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec793464157.dir/CheckFunctionExists.c.o  -o cmTryCompileExec793464157 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: ld devolvió el estado de salida 1
+make[1]: se sale del directorio «/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/CMakeFiles/CMakeTmp»
+make[1]: *** [cmTryCompileExec793464157] Error 1
+make: *** [cmTryCompileExec793464157/fast] Error 2
+
+
