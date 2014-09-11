@@ -72,6 +72,7 @@ void JausController::initJAUS() {
         
     }
     
+    
     // Primitive Driver
     primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
     if (primitiveDriverComponent == NULL) {
@@ -201,6 +202,16 @@ void JausController::initJAUS() {
         ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_POSITION_INFO_17, fcn_receive_heartbeat_position_info);
     
     }
+    
+    // Run de componentes
+    ojCmptRun(missionSpoolerComponent);
+    ojCmptRun(primitiveDriverComponent);
+    ojCmptRun(visualSensorComponent);
+    ojCmptRun(platformSensorComponent);
+    ojCmptRun(globalWaypointDriverComponent);
+    ojCmptRun(velocityStateSensorComponent);
+    ojCmptRun(globalPoseSensorComponent);
+    ojCmptRun(heartBeatInformationComponent);
 }
 
 /*******************************************************************************
