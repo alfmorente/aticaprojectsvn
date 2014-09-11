@@ -39,17 +39,23 @@
         </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
+        <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_FrontCamera.dir">
+        </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir">
         </df>
         <df name="ROSBUILD_genmsg_py.dir">
         </df>
+        <df name="ROSBUILD_genmsg_roseus_CITIUS_Control_FrontCamera.dir">
+        </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
         </df>
         <df name="ROSBUILD_gensrv_py.dir">
+        </df>
+        <df name="ROSBUILD_gensrv_roseus_CITIUS_Control_FrontCamera.dir">
         </df>
         <df name="rosbuild_precompile.dir">
         </df>

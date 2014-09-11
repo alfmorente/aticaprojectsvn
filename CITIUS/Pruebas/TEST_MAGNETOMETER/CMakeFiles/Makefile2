@@ -53,6 +53,41 @@ CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER
 CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER
 
 #=============================================================================
+# Target rules for target CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir
+
+# All Build rule for target.
+CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/all:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/depend
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  1
+	@echo "Built target ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER"
+.PHONY : CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/all
+
+# Include target in all.
+all: CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 0
+.PHONY : CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/rule
+
+# Convenience name for target.
+ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER: CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/rule
+.PHONY : ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER
+
+# clean rule for target.
+CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/clean:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/clean
+.PHONY : CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/ROSBUILD_genmsg_cpp.dir
 
 # All Build rule for target.
@@ -112,6 +147,37 @@ CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir
+
+# All Build rule for target.
+CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/all:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/depend
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 
+	@echo "Built target ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER"
+.PHONY : CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 0
+.PHONY : CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/rule
+
+# Convenience name for target.
+ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER: CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/rule
+.PHONY : ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER
+
+# clean rule for target.
+CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/clean:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/clean
+.PHONY : CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -177,13 +243,44 @@ clean: CMakeFiles/ROSBUILD_gensrv_lisp.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir
+
+# All Build rule for target.
+CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/all:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/depend
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 
+	@echo "Built target ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER"
+.PHONY : CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 0
+.PHONY : CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/rule
+
+# Convenience name for target.
+ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER: CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/rule
+.PHONY : ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER
+
+# clean rule for target.
+CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/clean:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/clean
+.PHONY : CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/TEST_MAGNETOMETER.dir
 
 # All Build rule for target.
 CMakeFiles/TEST_MAGNETOMETER.dir/all: CMakeFiles/rosbuild_precompile.dir/all
 	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/depend
 	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  1 2 3 4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  2 3 4 5
 	@echo "Built target TEST_MAGNETOMETER"
 .PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/all
 
@@ -280,7 +377,7 @@ clean: CMakeFiles/clean_test_results.dir/clean
 CMakeFiles/doxygen.dir/all:
 	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/depend
 	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  5
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  6
 	@echo "Built target doxygen"
 .PHONY : CMakeFiles/doxygen.dir/all
 
@@ -403,6 +500,7 @@ clean: CMakeFiles/rosbuild_premsgsrvgen.dir/clean
 # All Build rule for target.
 CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_cpp.dir/all
 CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_lisp.dir/all
+CMakeFiles/rospack_genmsg.dir/all: CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/all
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/depend
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 
@@ -464,8 +562,9 @@ clean: CMakeFiles/rospack_genmsg_libexe.dir/clean
 # Target rules for target CMakeFiles/rospack_gensrv.dir
 
 # All Build rule for target.
-CMakeFiles/rospack_gensrv.dir/all: CMakeFiles/ROSBUILD_gensrv_cpp.dir/all
 CMakeFiles/rospack_gensrv.dir/all: CMakeFiles/ROSBUILD_gensrv_lisp.dir/all
+CMakeFiles/rospack_gensrv.dir/all: CMakeFiles/ROSBUILD_gensrv_cpp.dir/all
+CMakeFiles/rospack_gensrv.dir/all: CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/all
 	$(MAKE) -f CMakeFiles/rospack_gensrv.dir/build.make CMakeFiles/rospack_gensrv.dir/depend
 	$(MAKE) -f CMakeFiles/rospack_gensrv.dir/build.make CMakeFiles/rospack_gensrv.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles 
@@ -701,7 +800,7 @@ gtest/preinstall:
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  6
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  7
 	@echo "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
@@ -732,7 +831,7 @@ clean: gtest/CMakeFiles/gtest.dir/clean
 gtest/CMakeFiles/gtest_main.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles  8
 	@echo "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 

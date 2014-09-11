@@ -65,6 +65,9 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/opt/ros/groovy/share/gencpp/cmake/gencpp-extras.cmake"
   "/opt/ros/groovy/share/gencpp/cmake/gencppConfig-version.cmake"
   "/opt/ros/groovy/share/gencpp/cmake/gencppConfig.cmake"
+  "/opt/ros/groovy/share/geneus/cmake/geneusConfig-version.cmake"
+  "/opt/ros/groovy/share/geneus/cmake/geneusConfig.cmake"
+  "/opt/ros/groovy/share/geneus/cmake/roseus.cmake"
   "/opt/ros/groovy/share/genlisp/cmake/genlisp-extras.cmake"
   "/opt/ros/groovy/share/genlisp/cmake/genlispConfig-version.cmake"
   "/opt/ros/groovy/share/genlisp/cmake/genlispConfig.cmake"
@@ -134,10 +137,13 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_lisp.dir/DependInfo.cmake"
+  "CMakeFiles/ROSBUILD_genmsg_roseus_TEST_MAGNETOMETER.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_gensrv_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_gensrv_lisp.dir/DependInfo.cmake"
+  "CMakeFiles/ROSBUILD_gensrv_roseus_TEST_MAGNETOMETER.dir/DependInfo.cmake"
   "CMakeFiles/TEST_MAGNETOMETER.dir/DependInfo.cmake"
   "CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake"
   "CMakeFiles/clean_test_results.dir/DependInfo.cmake"

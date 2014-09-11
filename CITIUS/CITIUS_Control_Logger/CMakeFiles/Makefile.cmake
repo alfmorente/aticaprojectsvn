@@ -65,6 +65,9 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/opt/ros/groovy/share/gencpp/cmake/gencpp-extras.cmake"
   "/opt/ros/groovy/share/gencpp/cmake/gencppConfig-version.cmake"
   "/opt/ros/groovy/share/gencpp/cmake/gencppConfig.cmake"
+  "/opt/ros/groovy/share/geneus/cmake/geneusConfig-version.cmake"
+  "/opt/ros/groovy/share/geneus/cmake/geneusConfig.cmake"
+  "/opt/ros/groovy/share/geneus/cmake/roseus.cmake"
   "/opt/ros/groovy/share/genlisp/cmake/genlisp-extras.cmake"
   "/opt/ros/groovy/share/genlisp/cmake/genlispConfig-version.cmake"
   "/opt/ros/groovy/share/genlisp/cmake/genlispConfig.cmake"
@@ -93,7 +96,6 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-2.8/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake"
-  "/usr/share/cmake-2.8/Modules/CMakeConfigurableFile.in"
   "/usr/share/cmake-2.8/Modules/CMakeExpandImportedTargets.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeGenericSystem.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeParseArguments.cmake"
@@ -135,10 +137,13 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Logger.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_lisp.dir/DependInfo.cmake"
+  "CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Logger.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_gensrv_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_gensrv_lisp.dir/DependInfo.cmake"
+  "CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Logger.dir/DependInfo.cmake"
   "CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake"
   "CMakeFiles/clean_test_results.dir/DependInfo.cmake"
   "CMakeFiles/doxygen.dir/DependInfo.cmake"
