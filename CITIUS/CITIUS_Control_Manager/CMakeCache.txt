@@ -41,19 +41,19 @@ CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=Debug
+CMAKE_BUILD_TYPE:STRING=
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler.
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
 
 //Flags used by the compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
 
 //Flags used by the compiler during debug builds.
-CMAKE_CXX_FLAGS_DEBUG:STRING=-g3 -gdwarf-2
+CMAKE_CXX_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the compiler during release minsize builds.
 CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -73,7 +73,7 @@ CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc
 CMAKE_C_FLAGS:STRING=
 
 //Flags used by the compiler during debug builds.
-CMAKE_C_FLAGS_DEBUG:STRING=-g3 -gdwarf-2
+CMAKE_C_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the compiler during release minsize builds.
 CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -102,7 +102,7 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Enable/Disable output of compile commands during generation.
-CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
+CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
@@ -157,10 +157,6 @@ CMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=
 
 //Flags used by the linker during Release with Debug Info builds.
 CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
-
-//If set, runtime paths are not added when installing shared libraries,
-// but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
 
 //If set, runtime paths are not added when using shared libraries.
 CMAKE_SKIP_RPATH:BOOL=NO
@@ -264,9 +260,6 @@ catkin_DIR:PATH=/opt/ros/groovy/share/catkin/cmake
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/groovy/share/gencpp/cmake
 
-//The directory containing a CMake configuration file for geneus.
-geneus_DIR:PATH=/opt/ros/groovy/share/geneus/cmake
-
 //The directory containing a CMake configuration file for genlisp.
 genlisp_DIR:PATH=/opt/ros/groovy/share/genlisp/cmake
 
@@ -339,7 +332,7 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=2
 //Minor version of cmake used to create the current loaded cache
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=8
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=9
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=7
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -394,13 +387,11 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
 //Name of generator.
 CMAKE_GENERATOR:INTERNAL=Unix Makefiles
-//Have symbol pthread_create
-CMAKE_HAVE_LIBC_CREATE:INTERNAL=
 //Have library pthreads
 CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
 //Have library pthread
 CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
-//Have include pthread.h
+//Have include CMAKE_HAVE_PTHREAD_H
 CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Start directory with the top level CMakeLists.txt file for this
 // project
@@ -443,8 +434,6 @@ CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH
-CMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SKIP_RPATH
 CMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
@@ -481,11 +470,10 @@ PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
 _rosbuild_EXPORTS:INTERNAL=
-_rosbuild_cached_flag_time:INTERNAL=1409730273.9
-_roslang_LANGS:INTERNAL=roseus;roslisp
+_rosbuild_cached_flag_time:INTERNAL=1410988260.04
+_roslang_LANGS:INTERNAL=roslisp
 _rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml
 _rospack_msgsrv_gen_invoke_result:INTERNAL=
-roseus_CMAKE:INTERNAL=
 roslib_path:INTERNAL=/opt/ros/groovy/share/roslib
 roslisp_CMAKE:INTERNAL=/opt/ros/groovy/share/roslisp/rosbuild/roslisp.cmake
 
