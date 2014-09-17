@@ -37,7 +37,7 @@ TraxAHRSModuleDriver::~TraxAHRSModuleDriver() {
 
 bool TraxAHRSModuleDriver::connectToDevice() {
     
-    char * serial_name = (char *) "/dev/ttyUSB0";
+    char * serial_name = (char *) "/dev/ttyUSB1";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
 

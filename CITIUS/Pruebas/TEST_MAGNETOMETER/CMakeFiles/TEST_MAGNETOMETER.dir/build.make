@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER
 
@@ -66,15 +63,15 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o: /opt/ros/groovy/share/xmlrpcpp/
 CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.i
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.s
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o.requires
@@ -102,15 +99,15 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o: /opt/ros/groovy
 CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.i
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.s
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o.requires:
 .PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o.requires
@@ -138,15 +135,15 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/shar
 CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.requires:
 .PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.requires
@@ -174,15 +171,15 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: /opt/ros/groovy/share/xmlr
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.i
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.s
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o.requires:
 .PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o.requires
