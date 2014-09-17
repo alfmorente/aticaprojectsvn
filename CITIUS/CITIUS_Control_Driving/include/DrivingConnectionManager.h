@@ -12,7 +12,6 @@
 extern "C" {
 #endif
 
-// Esto es una modificacion
 
 
 #ifdef	__cplusplus
