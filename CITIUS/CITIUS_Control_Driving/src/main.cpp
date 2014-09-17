@@ -56,6 +56,9 @@ int main(int argc, char** argv) {
                 finalTime = clock() - initTime;
                 if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_5HZ) {
                     
+                    // Clear del timer
+                    initTime = clock();
+                    
                     hzCount++;
                     DrivingInfo info;
                     if(hzCount==5){
@@ -72,8 +75,6 @@ int main(int argc, char** argv) {
                     }
                     nodeDriving->publishDrivingInfo(info);
                     
-                    // Clear del timer
-                    initTime = clock();
                 }
             }
 

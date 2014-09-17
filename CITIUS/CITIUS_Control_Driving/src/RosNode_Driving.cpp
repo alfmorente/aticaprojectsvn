@@ -27,21 +27,27 @@ void RosNode_Driving::initROS() {
 // Control de la camara
 
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
-    if (vmNodeStatus == NODESTATUS_OK) {
-        ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
-        if (checkCommand(msg)) {
-            if(this->getDriverMng()->setParam(msg.id_device, msg.value)){
-                ROS_INFO("[Control] Driving - Comando enviado correctamente.");
-            }else{
-                ROS_INFO("[Control] Driving - No se encontro el ACK");
+    ros::NodeHandle nh;
+    int currentVehicleStatus = OPERATION_MODE_INICIANDO;
+    nh.getParam("vehicleStatus", currentVehicleStatus);
+    if (currentVehicleStatus != OPERATION_MODE_CONDUCCION) {
+        if (vmNodeStatus == NODESTATUS_OK) {
+            ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
+            if (checkCommand(msg)) {
+                if (this->getDriverMng()->setParam(msg.id_device, msg.value)) {
+                    ROS_INFO("[Control] Driving - Comando enviado correctamente.");
+                } else {
+                    ROS_INFO("[Control] Driving - No se encontro el ACK");
+                }
+            } else {
+                ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
             }
         } else {
-            ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
+            ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d", this->vmNodeStatus);
         }
     }else{
-        ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d",this->vmNodeStatus);
+        ROS_INFO("[Control Driving - Descartado comando - Vehiculo fuera del modo CONDUCCION]");
     }
-
 }
     
 // Gestion del estado del nodo
