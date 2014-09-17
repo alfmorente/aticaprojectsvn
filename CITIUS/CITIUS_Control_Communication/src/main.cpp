@@ -47,6 +47,8 @@ int main(int argc, char** argv) {
             
         }
     }
+    
+    nodeComm->endJAUS();
 
     ROS_INFO("[Control] Communications - Nodo finalizado");
     

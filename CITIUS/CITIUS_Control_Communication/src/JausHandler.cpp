@@ -65,7 +65,7 @@ void JausHandler::handleEvent(NodeManagerEvent *e) {
         case NodeManagerEvent::ErrorEvent:
             ErrorEvent *errorEvent;
             errorEvent = (ErrorEvent *) e;
-            printf("%s\n", errorEvent->toString().c_str());
+            //printf("%s\n", errorEvent->toString().c_str());
             delete e;
             break;
         default:

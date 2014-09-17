@@ -64,7 +64,12 @@ extern "C" {
 class TranslatorROSJAUS{
 public:
   TranslatorROSJAUS();
-  JausMessage getJausMsgFromVehicleInfo(int subDest, int nodDest, short id_device, short value);
+  JausMessage getJausMsgFromWrenchEffortInfo(int subDest, int nodDest, short steer, short throttle, short brake);
+  JausMessage getJausMsgFromDiscreteDeviceInfo(int subDest, int nodDest, bool parkingbrake, short gear);
+  JausMessage getJausMsgFromTravelSpeedInfo(int subDest, int nodDest, short speed);
+  JausMessage getJausMsgFromUGVInfo(int subDest, int nodDest, short motorRPM, short motorTemperature);
+  JausMessage getJausMsgFromSignalingInfo(int subDest, int nodDest, bool blinker_left, bool blinker_right, bool dipsp, bool dipss, bool dipsr, bool klaxon);
+  
   JausMessage getJausMsgFromElectricInfo(int subDest, int nodDest, short id_device, short value);
   JausMessage getJausMsgFromCameraInfo(int subDest, int nodDest, short id_camera, short pan, short tilt, short zoom);
   JausMessage getJausMsgFromIRCameraInfo(int subDest, int nodDest, short zoom, short polarity);

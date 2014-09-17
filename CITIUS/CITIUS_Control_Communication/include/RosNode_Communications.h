@@ -68,6 +68,9 @@ public:
     void initROS();
     void initJAUS();
     
+    // Finalizacion de artefactos JAUS
+    void endJAUS();
+    
     // Get de publicadores ROS
     static ros::Publisher getPublisherFrontCamera();
     static ros::Publisher getPublisherRearCamera();

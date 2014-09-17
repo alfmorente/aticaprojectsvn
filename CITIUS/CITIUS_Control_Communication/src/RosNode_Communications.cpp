@@ -21,7 +21,8 @@ RosNode_Communications *RosNode_Communications::getInstance(){
 
 
 RosNode_Communications::RosNode_Communications() {
-
+    subsystemController = 3; // UGV
+    nodeController = 1; // Control
 }
 
 /*******************************************************************************
@@ -255,6 +256,22 @@ void RosNode_Communications::initJAUS() {
 
 /*******************************************************************************
  *******************************************************************************
+ *                     FINALIZACION DE ARTEFACTOS JAU S                        *
+ *******************************************************************************
+ ******************************************************************************/
+void RosNode_Communications::endJAUS(){
+    ojCmptDestroy(missionSpoolerComponent);
+    ojCmptDestroy(primitiveDriverComponent);
+    ojCmptDestroy(visualSensorComponent);
+    ojCmptDestroy(platformSensorComponent);
+    ojCmptDestroy(globalWaypointDriverComponent);
+    ojCmptDestroy(velocityStateSensorComponent);
+    ojCmptDestroy(globalPoseSensorComponent);
+    ojCmptDestroy(heartBeatInformationComponent);
+}
+
+/*******************************************************************************
+ *******************************************************************************
  *                     GETTER AND SETTER DE ATRIBUTOS                          *
  *******************************************************************************
  ******************************************************************************/
@@ -329,8 +346,9 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
-    // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromVehicleInfo(this->subsystemController,this->nodeController,msg.id_device,msg.value);
+    
+    // Creacion del mensaje a enviar (Report Wrench Effort)
+    JausMessage jMsg = translator->getJausMsgFromWrenchEffortInfo(this->subsystemController,this->nodeController,msg.steering,msg.thottle,msg.brake);
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
@@ -338,6 +356,49 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     }else{
         ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
     }
+    
+    // Creacion del mensaje a enviar (Report Discrete Device)
+    jMsg = translator->getJausMsgFromDiscreteDeviceInfo(this->subsystemController,this->nodeController,msg.parkingBrake,msg.gear);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+    }
+    
+    // Creacion del mensaje a enviar (Report Travel Speed)
+    jMsg = translator->getJausMsgFromTravelSpeedInfo(this->subsystemController,this->nodeController,msg.speed);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->velocityStateSensorComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+    }
+    
+    // Creacion del mensaje a enviar (UGV Info)
+    jMsg = translator->getJausMsgFromUGVInfo(this->subsystemController,this->nodeController,msg.motorRPM,msg.motorTemperature);
+    if(jMsg != NULL){
+        // Envio via JAUS    
+        ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
+        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+    }else{
+        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+    }
+    
+    if(msg.lights) {
+        // Creacion del mensaje a enviar (Report Signaling Elements)
+        jMsg = translator->getJausMsgFromSignalingInfo(this->subsystemController, this->nodeController, msg.blinkerLeft, msg.blinkerRight, msg.dipsp, msg.dipss, msg.dipsr, msg.klaxon);
+        if (jMsg != NULL) {
+            // Envio via JAUS    
+            ojCmptSendMessage(this->visualSensorComponent, jMsg);
+            ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        } else {
+            ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+        }
+    }
+    
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
 }
@@ -379,6 +440,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
+    jAdd->instance = 2;
     
     // MENSAJE REPORT GLOBAL POSE
     // Formacion del mensaje
@@ -410,6 +472,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
     
     // Direccion
     jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
+    jAdd->instance = 2;
     
     jausAddressCopy(rvsm->destination, jAdd);
     jMsg = reportVelocityStateMessageToJausMessage(rvsm);
@@ -431,7 +494,8 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
     // TODO!!!!!!!!!!!!!!!!!!!!!!!!
     
     // Direccion
-    jAdd->component = JAUS_GLOBAL_POSE_SENSOR;;
+    jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
+    jAdd->instance = 2;
     
     jausAddressCopy(agim->destination, jAdd);
     jMsg = aditionalGPSINSInfo4MessageToJausMessage(agim);
