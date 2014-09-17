@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric
 
@@ -66,15 +63,15 @@ CMakeFiles/electric.dir/src/main.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.x
 CMakeFiles/electric.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/electric.dir/src/main.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp
 
 CMakeFiles/electric.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/electric.dir/src/main.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp > CMakeFiles/electric.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp > CMakeFiles/electric.dir/src/main.cpp.i
 
 CMakeFiles/electric.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/electric.dir/src/main.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp -o CMakeFiles/electric.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp -o CMakeFiles/electric.dir/src/main.cpp.s
 
 CMakeFiles/electric.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/electric.dir/src/main.cpp.o.requires
@@ -102,15 +99,15 @@ CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: /opt/ros/groovy/sha
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp
 
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp > CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp > CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.i
 
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp -o CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp -o CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.s
 
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o.requires:
 .PHONY : CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o.requires
@@ -138,15 +135,15 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/share/xmlrpc
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp
 
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/electric.dir/src/RosNode_Electric.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp > CMakeFiles/electric.dir/src/RosNode_Electric.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp > CMakeFiles/electric.dir/src/RosNode_Electric.cpp.i
 
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/electric.dir/src/RosNode_Electric.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp -o CMakeFiles/electric.dir/src/RosNode_Electric.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp -o CMakeFiles/electric.dir/src/RosNode_Electric.cpp.s
 
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o.requires:
 .PHONY : CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o.requires
