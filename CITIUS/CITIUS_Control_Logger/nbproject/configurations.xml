@@ -2,7 +2,23 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="CMakeFiles">
+        <df name="CompilerIdC">
+          <in>CMakeCCompilerId.c</in>
+        </df>
+        <df name="CompilerIdCXX">
+          <in>CMakeCXXCompilerId.cpp</in>
+        </df>
+      </df>
     </df>
+    <logicalFolder name="Modules"
+                   displayName="Modules"
+                   projectFiles="true"
+                   root="/usr/share/cmake-2.8/Modules">
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
+    </logicalFolder>
     <logicalFolder name="src"
                    displayName="src"
                    projectFiles="true"
@@ -46,27 +62,29 @@
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
-          <ccTool>
-            <incDir>
-              <pElem>include</pElem>
-              <pElem>/usr/src/gtest/include</pElem>
-              <pElem>/usr/src/gtest</pElem>
-              <pElem>gtest</pElem>
-            </incDir>
-            <preprocessorList>
-              <Elem>GTEST_CREATE_SHARED_LIBRARY=1</Elem>
-              <Elem>GTEST_HAS_PTHREAD=1</Elem>
-              <Elem>ROS_PACKAGE_NAME='\"CITIUS_Control_Logger\"'</Elem>
-              <Elem>__PIC__=2</Elem>
-              <Elem>__pic__=2</Elem>
-            </preprocessorList>
-            <undefinedList>
-              <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            </undefinedList>
-          </ccTool>
         </makeTool>
       </makefileType>
-      <item path="/usr/src/gtest/src/gtest-all.cc" ex="false" tool="1" flavor2="0">
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool>
+          <preprocessorList>
+            <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
+          </preprocessorList>
+        </cTool>
+      </item>
+      <item path="/usr/src/gtest/src/gtest-all.cc" ex="false" tool="1" flavor2="4">
         <ccTool>
           <preprocessorList>
             <Elem>gtest_EXPORTS</Elem>
@@ -74,46 +92,83 @@
         </ccTool>
       </item>
       <item path="/usr/src/gtest/src/gtest-death-test.cc"
-            ex="false"
+            ex="true"
             tool="3"
             flavor2="0">
       </item>
       <item path="/usr/src/gtest/src/gtest-filepath.cc"
-            ex="false"
+            ex="true"
             tool="3"
             flavor2="0">
       </item>
-      <item path="/usr/src/gtest/src/gtest-internal-inl.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="/usr/src/gtest/src/gtest-port.cc" ex="false" tool="3" flavor2="0">
+      <item path="/usr/src/gtest/src/gtest-port.cc" ex="true" tool="3" flavor2="0">
       </item>
       <item path="/usr/src/gtest/src/gtest-printers.cc"
-            ex="false"
+            ex="true"
             tool="3"
             flavor2="0">
       </item>
       <item path="/usr/src/gtest/src/gtest-test-part.cc"
-            ex="false"
+            ex="true"
             tool="3"
             flavor2="0">
       </item>
       <item path="/usr/src/gtest/src/gtest-typed-test.cc"
-            ex="false"
+            ex="true"
             tool="3"
             flavor2="0">
       </item>
-      <item path="/usr/src/gtest/src/gtest.cc" ex="false" tool="3" flavor2="0">
+      <item path="/usr/src/gtest/src/gtest.cc" ex="true" tool="3" flavor2="0">
       </item>
-      <item path="/usr/src/gtest/src/gtest_main.cc" ex="false" tool="1" flavor2="0">
+      <item path="/usr/src/gtest/src/gtest_main.cc" ex="false" tool="1" flavor2="4">
         <ccTool>
           <preprocessorList>
             <Elem>gtest_main_EXPORTS</Elem>
           </preprocessorList>
         </ccTool>
       </item>
+      <item path="CMakeFiles/CompilerIdC/CMakeCCompilerId.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <folder path="Modules">
+        <cTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>CMakeFiles/CMakeTmp</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="src">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/usr/src/gtest/include</pElem>
+            <pElem>/usr/src/gtest</pElem>
+            <pElem>gtest</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>GTEST_CREATE_SHARED_LIBRARY=1</Elem>
+            <Elem>GTEST_HAS_PTHREAD=1</Elem>
+            <Elem>ROS_PACKAGE_NAME='\"CITIUS_Control_Logger\"'</Elem>
+            <Elem>__PIC__=2</Elem>
+            <Elem>__pic__=2</Elem>
+          </preprocessorList>
+          <undefinedList>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+          </undefinedList>
+        </ccTool>
+      </folder>
     </conf>
   </confs>
 </configurationDescriptor>
