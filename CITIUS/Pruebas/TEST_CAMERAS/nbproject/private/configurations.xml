@@ -24,6 +24,10 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
+          <df name="CMakeFiles">
+            <df name="cmTryCompileExec.dir">
+            </df>
+          </df>
         </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
