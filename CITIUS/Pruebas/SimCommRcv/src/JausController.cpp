@@ -1,4 +1,4 @@
-
+//JausController
 #include "JausController.h"
 
 // Declaracion para patron Singleton
@@ -23,7 +23,8 @@ JausController *JausController::getInstance(){
 
 
 JausController::JausController() {
-
+    subsystemController = 3; // UGV
+    nodeController = 1; // Control
 }
 
 /*******************************************************************************
@@ -35,7 +36,7 @@ JausController::JausController() {
 void JausController::initJAUS() {
     
     // Inicializacion de JAUS
-    configData = new FileLoader("nodeManager.conf");
+    /*configData = new FileLoader("nodeManager.conf");
     handler = new JausHandler();
     
     try {
@@ -48,7 +49,7 @@ void JausController::initJAUS() {
         
         cout << "Modulo JAUS iniciado" << endl;
                 
-    }
+    }*/
     
     /*
      * Creacion de componentes
@@ -211,6 +212,23 @@ void JausController::initJAUS() {
     ojCmptRun(velocityStateSensorComponent);
     ojCmptRun(globalPoseSensorComponent);
     ojCmptRun(heartBeatInformationComponent);
+}
+
+/*******************************************************************************
+ *******************************************************************************
+ *                           FINALIZACION JAUS                                 *
+ *******************************************************************************
+ ******************************************************************************/
+
+void JausController::endJAUS(){
+    ojCmptDestroy(missionSpoolerComponent);
+    ojCmptDestroy(primitiveDriverComponent);
+    ojCmptDestroy(visualSensorComponent);
+    ojCmptDestroy(platformSensorComponent);
+    ojCmptDestroy(globalWaypointDriverComponent);
+    ojCmptDestroy(velocityStateSensorComponent);
+    ojCmptDestroy(globalPoseSensorComponent);
+    ojCmptDestroy(heartBeatInformationComponent);
 }
 
 /*******************************************************************************
@@ -396,7 +414,6 @@ void JausController::fcn_receive_report_positioner(OjCmpt comp, JausMessage msg)
 void JausController::fcn_receive_report_day_time_camera(OjCmpt comp, JausMessage msg) {
 
     cout << "Recibido mensaje REPORT DAY-TIME CAMERA - EXP #22" << endl;
-       
     ReportDayTimeCamera22Message rDayTimeCam = reportDayTimeCamera22MessageFromJausMessage(msg);
     // Zoom
     if(jausByteIsBitSet(rDayTimeCam->presenceVector,JAUS_22_PV_ZOOM_BIT)){
@@ -460,7 +477,7 @@ void JausController::fcn_receive_report_travel_speed(OjCmpt comp, JausMessage ms
     cout << "Recibido mensaje REPORT TRAVEL SPEED" << endl;
        
     ReportTravelSpeedMessage rTravelSpd = reportTravelSpeedMessageFromJausMessage(msg);
-    cout << "    Velocidad de crucero: " << rTravelSpd->speedMps;
+    cout << "    Velocidad de crucero: " << rTravelSpd->speedMps << endl;
     reportTravelSpeedMessageDestroy(rTravelSpd);
     cout << " ---- " << endl;
 }

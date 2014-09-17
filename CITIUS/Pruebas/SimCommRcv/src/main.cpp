@@ -19,6 +19,12 @@ int main(int argc, char** argv) {
     JausController *nodeComm = JausController::getInstance();
 
     nodeComm->initJAUS();
+    
+    while(true){
+        usleep(1000);
+    }
+    
+    nodeComm->endJAUS();
 
     return 0;
 }

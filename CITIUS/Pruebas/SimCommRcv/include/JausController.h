@@ -37,6 +37,9 @@ public:
     
     // Inicializacion de artefactos ROS/JAUS
     void initJAUS();
+    
+    // Finalizacion de artefactor JAUS
+    void endJAUS();
 
     // Generacion de mensaje de estado para Controller
     void informStatus();
