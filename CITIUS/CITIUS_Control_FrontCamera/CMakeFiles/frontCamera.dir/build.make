@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera
 
@@ -66,15 +63,15 @@ CMakeFiles/frontCamera.dir/src/main.cpp.o: /opt/ros/groovy/share/xmlrpcpp/packag
 CMakeFiles/frontCamera.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/frontCamera.dir/src/main.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp
 
 CMakeFiles/frontCamera.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/frontCamera.dir/src/main.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp > CMakeFiles/frontCamera.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp > CMakeFiles/frontCamera.dir/src/main.cpp.i
 
 CMakeFiles/frontCamera.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/frontCamera.dir/src/main.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp -o CMakeFiles/frontCamera.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp -o CMakeFiles/frontCamera.dir/src/main.cpp.s
 
 CMakeFiles/frontCamera.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/frontCamera.dir/src/main.cpp.o.requires
@@ -102,15 +99,15 @@ CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o: /opt/ros/groovy/share/
 CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp
 
 CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp > CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp > CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.i
 
 CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp -o CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp -o CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.s
 
 CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o.requires:
 .PHONY : CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o.requires
@@ -138,15 +135,15 @@ CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/x
 CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp
 
 CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp > CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp > CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.i
 
 CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp -o CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp -o CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.s
 
 CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o.requires:
 .PHONY : CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o.requires
