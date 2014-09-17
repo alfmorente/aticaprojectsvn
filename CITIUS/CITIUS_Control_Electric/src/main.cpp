@@ -60,10 +60,13 @@ int main(int argc, char** argv) {
             // Comprobación del temporizador y requerimiento de info
             finalTime = clock() - initTime;
             if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
-                // Requerimiento de informacion de dispositivo
-                nodeElectric->getDriverMng()->reqElectricInfo();
+                
                 // Clear del timer
                 initTime = clock();
+                
+                // Requerimiento de informacion de dispositivo
+                nodeElectric->getDriverMng()->reqElectricInfo();
+                
             }
         }
     } else {
