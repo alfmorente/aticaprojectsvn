@@ -146,7 +146,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
             }
             
             numOfAttemps = 0;
-            
+            /*
             // Activacion RearCamera
             
             while(!rcNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
@@ -176,7 +176,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
             }
             
             numOfAttemps = 0;
-            
+            */
             // Activacion Driving
             
             while(!drNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
@@ -437,7 +437,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
                     ROS_INFO("[Control] Manager - Nodo FrontCamera apagado correctamente");
                 }
             }
-
+            /*
             // Apagado RearCamera
             if (rearCameraOK) {
                 while (!rcNodeStatus.call(service));
@@ -448,7 +448,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
                     ROS_INFO("[Control] Manager - Nodo RearCamera apagado correctamente");
                 }
             }
-
+            */
             // Camara IR
             if (irCameraOK) {
                 while (!irNodeStatus.call(service));
