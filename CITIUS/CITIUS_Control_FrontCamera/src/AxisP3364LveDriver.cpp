@@ -23,127 +23,115 @@ AxisP3364LveDriver::~AxisP3364LveDriver() {
  ******************************************************************************/
 
 bool AxisP3364LveDriver::checkConnection() {
-    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (socketDescriptor < 0) {
-
-        return false;
-
-    } else {
-
-        if ((he = gethostbyname(IP_CAMERA)) == NULL) {
-            return false;
-        }
-
-        if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-            return false;
-        }
-
-        server.sin_family = AF_INET;
-        server.sin_port = htons(PORT_CAMERA);
-        server.sin_addr = *((struct in_addr *) he->h_addr);
-
-        bzero(&(server.sin_zero), 8);
-
-        if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-
-            return false;
-
-        } else {
-
-            return true;
-
-        }
-
+    if ((he = gethostbyname(IP_CAMERA)) == NULL) {
         return false;
     }
+
+    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    printf("Socket d: %d\n",socketDescriptor);
+    server.sin_family = AF_INET;
+    server.sin_port = htons(PORT_CAMERA);
+    server.sin_addr = *((struct in_addr *) he->h_addr);
+
+    bzero(&(server.sin_zero), 8);
+
+    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    close(socketDescriptor);
+    usleep(500);
+    return true;
+
 }
-    
+
 /*******************************************************************************
                         ENVIAR COMANDO DE CONTROL
  ******************************************************************************/
 
-bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
-    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+bool AxisP3364LveDriver::sentSetToDevice(short order, float value) {
 
-    if (socketDescriptor < 0) {
-
-        return false;
-
-    } else {
-
-        if ((he = gethostbyname(IP_CAMERA)) == NULL) {
-            return false;
-        }
-
-        if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-            return false;
-        }
-
-        server.sin_family = AF_INET;
-        server.sin_port = htons(PORT_CAMERA);
-        server.sin_addr = *((struct in_addr *) he->h_addr);
-
-        bzero(&(server.sin_zero), 8);
-
-        if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-
-            return false;
-
-        } else {
-
-            stringstream stream;
-            stream << "GET http://" /*<< AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" */ << IP_CAMERA << PTZ_ROUTE;
-            switch (order) {
-                case ORDER_ZOOM:
-                    stream << "zoom=";
-                    break;
-                case ORDER_TILT:
-                    stream << "tilt=";
-                    break;
-                case ORDER_PAN:
-                    stream << "pan=";
-                    break;
-                default:
-                    stream.str().clear();
-                    break;
-            }
-
-            if (stream.str().size() == 0) {
-                return false;
-            }
-
-            stream << value << "\nConnection: keep-alive\r\n";
-
-
-            int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
-
-            if (nBytesSent < 0) {
-                return false;
-            }
-
-            // Lectura y obtencion del ack
-            char respuesta[256];
-
-            int nBytesRead = 0;
-            while (nBytesRead == 0) {
-                nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
-            }
-            
-            LensPosition lenspos = getPosition();
-            
-            if(lenspos.state){
-                return true;
-            }else{
-                return false;
-            }
-            
-            return true;
-
-        }
-
+    if ((he = gethostbyname(IP_CAMERA)) == NULL) {
         return false;
     }
+
+    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    
+    server.sin_family = AF_INET;
+    server.sin_port = htons(PORT_CAMERA);
+    server.sin_addr = *((struct in_addr *) he->h_addr);
+
+    bzero(&(server.sin_zero), 8);
+
+    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+
+    }
+    stringstream stream;
+    stream << "GET http://" /*<< AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" */ << IP_CAMERA << PTZ_ROUTE;
+    switch (order) {
+        case ORDER_ZOOM:
+            stream << "zoom=";
+            break;
+        case ORDER_TILT:
+            stream << "tilt=";
+            break;
+        case ORDER_PAN:
+            stream << "pan=";
+            break;
+        default:
+            stream.str().clear();
+            break;
+    }
+
+    if (stream.str().size() == 0) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+
+    stream << value << "\nConnection: keep-alive\r\n";
+
+
+    int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
+
+    if (nBytesSent < 0) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+
+    // Lectura y obtencion del ack
+    char respuesta[256];
+
+    int nBytesRead = 0;
+    while (nBytesRead == 0) {
+        nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
+    }
+    close(socketDescriptor);
+    usleep(500);
+    LensPosition lenspos = getPosition();
+    
+    if (lenspos.state) {
+        close(socketDescriptor);
+        usleep(500);
+        return true;
+    }
+    close(socketDescriptor);
+    usleep(500);
+    return false;
 
 }
 
@@ -171,7 +159,7 @@ LensPosition AxisP3364LveDriver::getPosition() {
             bzero(&(server.sin_zero), 8);
 
             if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) != -1) {
-
+                //printf("Socket d: %d\n",socketDescriptor);
                 stringstream stream;
                 stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << IP_CAMERA << PTZ_ROUTE << "query=position\r\n";
                 //printf("Comando generado: %s", stream.str().c_str());
@@ -200,9 +188,9 @@ LensPosition AxisP3364LveDriver::getPosition() {
             }
             
         }
-        
     }
-    
+    close(socketDescriptor);
+    usleep(500);
     return pos;
 }
 
