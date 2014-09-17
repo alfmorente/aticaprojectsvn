@@ -1,12 +1,9 @@
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_RearCamera.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_genmsg_cpp.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_genmsg_lisp.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_genmsg_py.dir
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_RearCamera.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_gensrv_cpp.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_gensrv_lisp.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_gensrv_py.dir
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_RearCamera.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/_catkin_empty_exported_target.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/clean_test_results.dir
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles/doxygen.dir
