@@ -44,7 +44,7 @@ XSensMTi700Driver::~XSensMTi700Driver() {
 
 bool XSensMTi700Driver::connectToDevice() {
     
-    char * serial_name = (char *) "/dev/ttyUSB3";
+    char * serial_name = (char *) "/dev/ttyUSB0";
 
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
     
