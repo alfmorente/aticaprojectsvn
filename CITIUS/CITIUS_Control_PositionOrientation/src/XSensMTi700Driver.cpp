@@ -593,10 +593,10 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
             break;
             
         case 0xE0: // Status
-            printf("Got status packet\n");
+            //printf("Got status packet\n");
             switch (dataPacket.idSignal & 0xF0) {
                 case 0x10: // Status Byte
-                    printf("   Status Byte %d bytes\n", dataPacket.len);
+                    //printf("   Status Byte %d bytes\n", dataPacket.len);
                     if((dataPacket.data[0] & 0x04) == 0x04){
                         posOriInfo.positionStatus = 1;
                     }else{
