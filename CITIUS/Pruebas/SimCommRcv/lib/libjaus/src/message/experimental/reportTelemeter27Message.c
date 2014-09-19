@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: telemeterInfo10Message.c
+// File Name: reportTelemeter27Message.c
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo (galluzzo AT gmail DOT com)
 //
@@ -39,25 +39,25 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the functionality of a TelemeterInfo10Message
+// Description: This file defines the functionality of a ReportTelemeter27Message
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "jaus.h"
 
-static const int commandCode = JAUS_TELEMETER_INFO_10;
-static const int maxDataSizeBytes = 12;
+static const int commandCode = JAUS_REPORT_TELEMETER_27;
+static const int maxDataSizeBytes = 20;
 
-static JausBoolean headerFromBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static JausBoolean headerToBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int headerToString(TelemeterInfo10Message message, char **buf);
+static JausBoolean headerFromBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static JausBoolean headerToBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int headerToString(ReportTelemeter27Message message, char **buf);
 
-static JausBoolean dataFromBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int dataToBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static void dataInitialize(TelemeterInfo10Message message);
-static void dataDestroy(TelemeterInfo10Message message);
-static unsigned int dataSize(TelemeterInfo10Message message);
+static JausBoolean dataFromBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int dataToBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static void dataInitialize(ReportTelemeter27Message message);
+static void dataDestroy(ReportTelemeter27Message message);
+static unsigned int dataSize(ReportTelemeter27Message message);
 
 // ************************************************************************************************************** //
 //                                    USER CONFIGURED FUNCTIONS
@@ -65,10 +65,8 @@ static unsigned int dataSize(TelemeterInfo10Message message);
 
 // Initializes the message-specific fields
 
-static void dataInitialize(TelemeterInfo10Message message) {
-    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
+static void dataInitialize(ReportTelemeter27Message message) {
 
-    message -> shoot = JAUS_FALSE;
     for(int ind=0;ind<5;ind++){
         message -> echoes[ind] = newJausDouble(0);
     }
@@ -78,42 +76,25 @@ static void dataInitialize(TelemeterInfo10Message message) {
 
 // Destructs the message-specific fields
 
-static void dataDestroy(TelemeterInfo10Message message) {
+static void dataDestroy(ReportTelemeter27Message message) {
     // Free message fields
 }
 
 // Return boolean of success
 
-static JausBoolean dataFromBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean dataFromBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
     JausShort tempShort = 0; //Variable temporal para desempaquetar	
-    JausByte tempByte = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
-        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
-
-        //Se suma tamaño del Presence Vector
-        index += JAUS_BYTE_SIZE_BYTES;
-        
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
-            tempByte = 0;
-            //Se desempaqueta el Byte completo que guarda los distintos booleanos.
-            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            message->shoot = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
-        }
 
         //Desempaquetar el campo.
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
-            for (int ind = 0; ind < 5; ind++) {
-                if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                    return JAUS_FALSE;
-                //Se suma tamaño del parámetro
-                index += JAUS_SHORT_SIZE_BYTES;
-                message->echoes[ind] = jausShortToDouble(tempShort, -32768, 32768);
-            }
+        for (int ind = 0; ind < 5; ind++) {
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->echoes[ind] = jausShortToDouble(tempShort, -32768, 32768);
         }
 
         return JAUS_TRUE;
@@ -124,42 +105,25 @@ static JausBoolean dataFromBuffer(TelemeterInfo10Message message, unsigned char 
 
 // Returns number of bytes put into the buffer
 
-static int dataToBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static int dataToBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar	
-    JausByte tempByte = 0; //Variable temporal para desempaquetar
+    JausShort tempShort = 0; //Variable temporal para empaquetar	
 
     if (bufferSizeBytes >= dataSize(message)) {
-        //Se empaqueta el Presence Vector
-        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
 
-        //Se suma tamaño del presence Vector
-        index += JAUS_BYTE_SIZE_BYTES;
-        
-        tempByte = 0;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
-            if (message->shoot) jausByteSetBit(&tempByte, 0);
-            //pack
-            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
+        for (int ind = 0; ind < 5; ind++) {
+            tempShort = jausShortFromDouble(message->echoes[ind], -32768, 32768);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
         }
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
-            for (int ind = 0; ind < 5; ind++) {
-                tempShort = jausShortFromDouble(message->echoes[ind], -32768, 32768);
-                if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                    return JAUS_FALSE;
-                index += JAUS_SHORT_SIZE_BYTES;
-            }
-        }
-        
     }
 
     return index;
 }
 
-static int dataToString(TelemeterInfo10Message message, char **buf) {
+static int dataToString(ReportTelemeter27Message message, char **buf) {
     //message already verified 
 
     //Setup temporary string buffer
@@ -188,23 +152,14 @@ static int dataToString(TelemeterInfo10Message message, char **buf) {
 
 // Returns number of bytes put into the buffer
 
-static unsigned int dataSize(TelemeterInfo10Message message) {
+static unsigned int dataSize(ReportTelemeter27Message message) {
     int index = 0;
 
-    //Se suma tamaño del presence Vector
-    index += JAUS_BYTE_SIZE_BYTES;
-    
-    if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-
-    if (jausByteIsBitSet(message->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
+    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_SHORT_SIZE_BYTES;
+    index += JAUS_SHORT_SIZE_BYTES;
 
     return index;
 }
@@ -213,10 +168,10 @@ static unsigned int dataSize(TelemeterInfo10Message message) {
 //                                    NON-USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
-TelemeterInfo10Message telemeterInfo10MessageCreate(void) {
-    TelemeterInfo10Message message;
+ReportTelemeter27Message reportTelemeter27MessageCreate(void) {
+    ReportTelemeter27Message message;
 
-    message = (TelemeterInfo10Message) malloc(sizeof (TelemeterInfo10MessageStruct));
+    message = (ReportTelemeter27Message) malloc(sizeof (ReportTelemeter27MessageStruct));
     if (message == NULL) {
         return NULL;
     }
@@ -241,14 +196,14 @@ TelemeterInfo10Message telemeterInfo10MessageCreate(void) {
     return message;
 }
 
-void telemeterInfo10MessageDestroy(TelemeterInfo10Message message) {
+void reportTelemeter27MessageDestroy(ReportTelemeter27Message message) {
     dataDestroy(message);
     jausAddressDestroy(message->source);
     jausAddressDestroy(message->destination);
     free(message);
 }
 
-JausBoolean telemeterInfo10MessageFromBuffer(TelemeterInfo10Message message, unsigned char* buffer, unsigned int bufferSizeBytes) {
+JausBoolean reportTelemeter27MessageFromBuffer(ReportTelemeter27Message message, unsigned char* buffer, unsigned int bufferSizeBytes) {
     int index = 0;
 
     if (headerFromBuffer(message, buffer + index, bufferSizeBytes - index)) {
@@ -263,26 +218,26 @@ JausBoolean telemeterInfo10MessageFromBuffer(TelemeterInfo10Message message, uns
     }
 }
 
-JausBoolean telemeterInfo10MessageToBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
-    if (bufferSizeBytes < telemeterInfo10MessageSize(message)) {
+JausBoolean reportTelemeter27MessageToBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+    if (bufferSizeBytes < reportTelemeter27MessageSize(message)) {
         return JAUS_FALSE; //improper size	
     } else {
         message->dataSize = dataToBuffer(message, buffer + JAUS_HEADER_SIZE_BYTES, bufferSizeBytes - JAUS_HEADER_SIZE_BYTES);
         if (headerToBuffer(message, buffer, bufferSizeBytes)) {
             return JAUS_TRUE;
         } else {
-            return JAUS_FALSE; // headerToTelemeterInfo10Buffer failed
+            return JAUS_FALSE; // headerToReportTelemeter27Buffer failed
         }
     }
 }
 
-TelemeterInfo10Message telemeterInfo10MessageFromJausMessage(JausMessage jausMessage) {
-    TelemeterInfo10Message message;
+ReportTelemeter27Message reportTelemeter27MessageFromJausMessage(JausMessage jausMessage) {
+    ReportTelemeter27Message message;
 
     if (jausMessage->commandCode != commandCode) {
         return NULL; // Wrong message type
     } else {
-        message = (TelemeterInfo10Message) malloc(sizeof (TelemeterInfo10MessageStruct));
+        message = (ReportTelemeter27Message) malloc(sizeof (ReportTelemeter27MessageStruct));
         if (message == NULL) {
             return NULL;
         }
@@ -311,7 +266,7 @@ TelemeterInfo10Message telemeterInfo10MessageFromJausMessage(JausMessage jausMes
     }
 }
 
-JausMessage telemeterInfo10MessageToJausMessage(TelemeterInfo10Message message) {
+JausMessage reportTelemeter27MessageToJausMessage(ReportTelemeter27Message message) {
     JausMessage jausMessage;
     //int size;
 
@@ -341,11 +296,11 @@ JausMessage telemeterInfo10MessageToJausMessage(TelemeterInfo10Message message) 
     return jausMessage;
 }
 
-unsigned int telemeterInfo10MessageSize(TelemeterInfo10Message message) {
+unsigned int reportTelemeter27MessageSize(ReportTelemeter27Message message) {
     return (unsigned int) (dataSize(message) + JAUS_HEADER_SIZE_BYTES);
 }
 
-char* telemeterInfo10MessageToString(TelemeterInfo10Message message) {
+char* reportTelemeter27MessageToString(ReportTelemeter27Message message) {
     if (message) {
         char* buf1 = NULL;
         char* buf2 = NULL;
@@ -368,7 +323,7 @@ char* telemeterInfo10MessageToString(TelemeterInfo10Message message) {
 
         return buf;
     } else {
-        char* buf = "Invalid TelemeterInfo10 Message";
+        char* buf = "Invalid ReportTelemeter27 Message";
         char* msg = (char*) malloc(strlen(buf) + 1);
         strcpy(msg, buf);
         return msg;
@@ -376,7 +331,7 @@ char* telemeterInfo10MessageToString(TelemeterInfo10Message message) {
 }
 //********************* PRIVATE HEADER FUNCTIONS **********************//
 
-static JausBoolean headerFromBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean headerFromBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     if (bufferSizeBytes < JAUS_HEADER_SIZE_BYTES) {
         return JAUS_FALSE;
     } else {
@@ -410,7 +365,7 @@ static JausBoolean headerFromBuffer(TelemeterInfo10Message message, unsigned cha
     }
 }
 
-static JausBoolean headerToBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean headerToBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     JausUnsignedShort *propertiesPtr = (JausUnsignedShort*) & message->properties;
 
     if (bufferSizeBytes < JAUS_HEADER_SIZE_BYTES) {
@@ -442,7 +397,7 @@ static JausBoolean headerToBuffer(TelemeterInfo10Message message, unsigned char 
     }
 }
 
-static int headerToString(TelemeterInfo10Message message, char **buf) {
+static int headerToString(ReportTelemeter27Message message, char **buf) {
     //message existance already verified 
 
     //Setup temporary string buffer

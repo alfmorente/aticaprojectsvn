@@ -204,11 +204,12 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/experimental/reportDayTimeCamera22Message.c \
 		./src/message/experimental/setNightTimeCamera23Message.c \
 		./src/message/experimental/reportNightTimeCamera24Message.c \
-		./src/message/experimental/telemeterInfo10Message.c \
 		./src/message/experimental/setScientificsOperations11Message.c \
 		./src/message/experimental/reportScientificOperations13Message.c \
 		./src/message/experimental/heartbeatChannelState16Message.c \
-		./src/message/experimental/heartbeatPositionInfo17Message.c
+		./src/message/experimental/heartbeatPositionInfo17Message.c \
+		./src/message/experimental/setTelemeter26Message.c \
+		./src/message/experimental/reportTelemeter27Message.c
 	
 	
 OBJECTS =	./Build/jausComponent.o \
@@ -415,11 +416,13 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportDayTimeCamera22Message.o \
 		./Build/setNightTimeCamera23Message.o \
 		./Build/reportNightTimeCamera24Message.o \
-		./Build/telemeterInfo10Message.o \
 		./Build/setScientificsOperations11Message.o \
 		./Build/reportScientificOperations13Message.o \
 		./Build/heartbeatChannelState16Message.o \
-		./Build/heartbeatPositionInfo17Message.o 
+		./Build/heartbeatPositionInfo17Message.o \
+		./Build/setTelemeter26Message.o \
+		./Build/reportTelemeter27Message.o 
+	
 	
 	
 default : all
@@ -1045,10 +1048,7 @@ $(TARGET) : $(OBJECTS)
 	
 ./Build/reportNightTimeCamera24Message.o: ./src/message/experimental/reportNightTimeCamera24Message.c
 	gcc $(CCFLAGS) -o ./Build/reportNightTimeCamera24Message.o ./src/message/experimental/reportNightTimeCamera24Message.c
-	
-./Build/telemeterInfo10Message.o: ./src/message/experimental/telemeterInfo10Message.c
-	gcc $(CCFLAGS) -o ./Build/telemeterInfo10Message.o ./src/message/experimental/telemeterInfo10Message.c
-	
+
 ./Build/setScientificsOperations11Message.o: ./src/message/experimental/setScientificsOperations11Message.c
 	gcc $(CCFLAGS) -o ./Build/setScientificsOperations11Message.o ./src/message/experimental/setScientificsOperations11Message.c
 	
@@ -1060,5 +1060,11 @@ $(TARGET) : $(OBJECTS)
 	
 ./Build/heartbeatPositionInfo17Message.o: ./src/message/experimental/heartbeatPositionInfo17Message.c
 	gcc $(CCFLAGS) -o ./Build/heartbeatPositionInfo17Message.o ./src/message/experimental/heartbeatPositionInfo17Message.c
+	
+./Build/setTelemeter26Message.o: ./src/message/experimental/setTelemeter26Message.c
+	gcc $(CCFLAGS) -o ./Build/setTelemeter26Message.o ./src/message/experimental/setTelemeter26Message.c
+	
+./Build/reportTelemeter27Message.o: ./src/message/experimental/reportTelemeter27Message.c
+	gcc $(CCFLAGS) -o ./Build/reportTelemeter27Message.o ./src/message/experimental/reportTelemeter27Message.c
 	
 	

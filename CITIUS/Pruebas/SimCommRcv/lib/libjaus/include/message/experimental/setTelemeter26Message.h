@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: telemeterInfo10Message.h
+// File Name: setTelemeter26Message.h
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo 
 //
@@ -39,17 +39,13 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the attributes of a TelemeterInfo10Message
+// Description: This file defines the attributes of a SetTelemeter26Message
 
-#ifndef TELEMETER_INFO_10_MESSAGE_H
-#define TELEMETER_INFO_10_MESSAGE_H
+#ifndef SET_TELEMETER_26_MESSAGE_H
+#define SET_TELEMETER_26_MESSAGE_H
 
 #include "jaus.h"
 
-#ifndef   JAUS_10_PV 
-#define  JAUS_10_PV_SHOOT_BIT    		0
-#define  JAUS_10_PV_ECHOES_BIT                  1
-#endif
 
 typedef struct
 {
@@ -89,29 +85,27 @@ typedef struct
 	
 	JausUnsignedShort sequenceNumber;
 
- // PRESENCE VECTOR
-  JausByte presenceVector; 	
+ // PRESENCE VECTOR N/A
   
   // MESSAGE DATA MEMBERS GO HERE
 	
   JausBoolean shoot; 
-  JausDouble echoes[5];      	// Scaled Short (-32768,32768)x5, Res: 1
 
 
-}TelemeterInfo10MessageStruct;
+}SetTelemeter26MessageStruct;
 
-typedef TelemeterInfo10MessageStruct* TelemeterInfo10Message;
+typedef SetTelemeter26MessageStruct* SetTelemeter26Message;
 
-JAUS_EXPORT TelemeterInfo10Message telemeterInfo10MessageCreate(void);
-JAUS_EXPORT void telemeterInfo10MessageDestroy(TelemeterInfo10Message);
+JAUS_EXPORT SetTelemeter26Message setTelemeter26MessageCreate(void);
+JAUS_EXPORT void setTelemeter26MessageDestroy(SetTelemeter26Message);
 
-JAUS_EXPORT JausBoolean telemeterInfo10MessageFromBuffer(TelemeterInfo10Message message, unsigned char* buffer, unsigned int bufferSizeBytes);
-JAUS_EXPORT JausBoolean telemeterInfo10MessageToBuffer(TelemeterInfo10Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean setTelemeter26MessageFromBuffer(SetTelemeter26Message message, unsigned char* buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean setTelemeter26MessageToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
 
-JAUS_EXPORT TelemeterInfo10Message telemeterInfo10MessageFromJausMessage(JausMessage jausMessage);
-JAUS_EXPORT JausMessage telemeterInfo10MessageToJausMessage(TelemeterInfo10Message message);
+JAUS_EXPORT SetTelemeter26Message setTelemeter26MessageFromJausMessage(JausMessage jausMessage);
+JAUS_EXPORT JausMessage setTelemeter26MessageToJausMessage(SetTelemeter26Message message);
 
-JAUS_EXPORT unsigned int telemeterInfo10MessageSize(TelemeterInfo10Message message);
+JAUS_EXPORT unsigned int setTelemeter26MessageSize(SetTelemeter26Message message);
 
-JAUS_EXPORT char* telemeterInfo10MessageToString(TelemeterInfo10Message message);
-#endif // TELEMETER_INFO_10_MESSAGE_H
+JAUS_EXPORT char* setTelemeter26MessageToString(SetTelemeter26Message message);
+#endif // SET_TELEMETER_26_MESSAGE_H

@@ -10,6 +10,16 @@
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.h
 
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.cpp
+JausHandler.h
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausHandler.h
+
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/main.cpp
+JausController.h
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommRcv/src/JausController.h
+cstdlib
+-
+
 include/JausController.h
 jaus.h
 include/jaus.h
@@ -366,6 +376,10 @@ lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
 jaus.h
 lib/libjaus/include/message/experimental/jaus.h
 
+lib/libjaus/include/message/experimental/reportTelemeter27Message.h
+jaus.h
+lib/libjaus/include/message/experimental/jaus.h
+
 lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
 jaus.h
 lib/libjaus/include/message/experimental/jaus.h
@@ -402,15 +416,15 @@ lib/libjaus/include/message/experimental/setSignalingElements18Message.h
 jaus.h
 lib/libjaus/include/message/experimental/jaus.h
 
+lib/libjaus/include/message/experimental/setTelemeter26Message.h
+jaus.h
+lib/libjaus/include/message/experimental/jaus.h
+
 lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 jaus.h
 lib/libjaus/include/message/experimental/jaus.h
 
 lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-jaus.h
-lib/libjaus/include/message/experimental/jaus.h
-
-lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 jaus.h
 lib/libjaus/include/message/experimental/jaus.h
 
@@ -985,8 +999,6 @@ experimental/setNightTimeCamera23Message.h
 lib/libjaus/include/message/experimental/setNightTimeCamera23Message.h
 experimental/reportNightTimeCamera24Message.h
 lib/libjaus/include/message/experimental/reportNightTimeCamera24Message.h
-experimental/telemeterInfo10Message.h
-lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 experimental/setScientificsOperations11Message.h
 lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
 experimental/reportScientificOperations13Message.h
@@ -995,6 +1007,10 @@ experimental/heartbeatChannelState16Message.h
 lib/libjaus/include/message/experimental/heartbeatChannelState16Message.h
 experimental/heartbeatPositionInfo17Message.h
 lib/libjaus/include/message/experimental/heartbeatPositionInfo17Message.h
+experimental/setTelemeter26Message.h
+lib/libjaus/include/message/experimental/setTelemeter26Message.h
+experimental/reportTelemeter27Message.h
+lib/libjaus/include/message/experimental/reportTelemeter27Message.h
 
 lib/libjaus/include/message/query/communications/queryDataLinkStatusMessage.h
 jaus.h

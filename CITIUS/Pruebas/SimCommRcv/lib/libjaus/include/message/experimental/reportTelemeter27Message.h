@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportUSVRemoteControl2Message.h
+// File Name: reportTelemeter27Message.h
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo 
 //
@@ -39,24 +39,12 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the attributes of a ReportUSVRemoteControl2Message
+// Description: This file defines the attributes of a TelemeterInfo10Message
 
-#ifndef REPORT_USV_REMOTE_CONTROL_2_MESSAGE_H
-#define REPORT_USV_REMOTE_CONTROL_2_MESSAGE_H
+#ifndef REPORT_TELEMETER_27_MESSAGE_H
+#define REPORT_TELEMETER_27_MESSAGE_H
 
 #include "jaus.h"
-
-#ifndef   JAUS_2_PV 
-#define  JAUS_2_PV_APPLIED_DIRECTION_BIT                	0
-#define  JAUS_2_PV_REQUESTED_RPM_BIT                            1
-#define  JAUS_2_PV_REQUESTED_RUDDER_ANGLE_BIT                   2
-#define  JAUS_2_PV_APPLIED_RPM_M1_BIT                           3
-#define  JAUS_2_PV_APPLIED_RPM_M2_BIT                           4
-#define  JAUS_2_PV_APPLIED_RUDDER_ANGLE_BIT    			5
-#define  JAUS_2_PV_VELOCITY_LIMITATIONS_BIT                         6
-#define  JAUS_2_PV_DIRECTION_LIMITATIONS_BIT                        7
-#define  JAUS_2_PV_MODE_SWITCHING_STATUS_BIT                        8
-#endif
 
 typedef struct
 {
@@ -95,36 +83,30 @@ typedef struct
 	JausUnsignedInteger dataFlag;
 	
 	JausUnsignedShort sequenceNumber;
-        
-        // PRESENCE VECTOR
-  JausShort presenceVector; 
 
-	// MESSAGE DATA MEMBERS GO HERE
-  JausDouble applied_direction;                                 // Scaled Short (-PI,PI), Res: 9e-5
-  JausDouble requested_rpm;					// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble requested_rudder_angle;				// Scaled Short (-90,90), Res: 0.003
-  JausDouble applied_rpm_m1;					// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble applied_rpm_m2;					// Scaled Short (-5000,5000), Res: 0.15
-  JausDouble applied_rudder_angle;				// Scaled Short (-90,90), Res: 0.003
-  JausBoolean velocity_limitations;                                // Scaled Byte (1,n)=>(0,255) Enumerado
-  JausBoolean direction_limitations;				// Scaled Byte (1,n)=>(0,255) Enumerado
-  JausByte mode_switching_status;				// Scaled Byte (1,7)=>(0,255) Enumerado
+ // PRESENCE VECTOR N/A
   
+  // MESSAGE DATA MEMBERS GO HERE
+	
+  JausDouble echoes[5];      	// Scaled Short (-32768,32768)x5, Res: 1
 
-}ReportUSVRemoteControl2MessageStruct;
 
-typedef ReportUSVRemoteControl2MessageStruct* ReportUSVRemoteControl2Message;
+}ReportTelemeter27MessageStruct;
 
-JAUS_EXPORT ReportUSVRemoteControl2Message reportUSVRemoteControl2MessageCreate(void);
-JAUS_EXPORT void reportUSVRemoteControl2MessageDestroy(ReportUSVRemoteControl2Message);
+typedef ReportTelemeter27MessageStruct* ReportTelemeter27Message;
 
-JAUS_EXPORT JausBoolean reportUSVRemoteControl2MessageFromBuffer(ReportUSVRemoteControl2Message message, unsigned char* buffer, unsigned int bufferSizeBytes);
-JAUS_EXPORT JausBoolean reportUSVRemoteControl2MessageToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT ReportTelemeter27Message reportTelemeter27MessageCreate(void);
+JAUS_EXPORT void reportTelemeter27MessageDestroy(ReportTelemeter27Message);
 
-JAUS_EXPORT ReportUSVRemoteControl2Message reportUSVRemoteControl2MessageFromJausMessage(JausMessage jausMessage);
-JAUS_EXPORT JausMessage reportUSVRemoteControl2MessageToJausMessage(ReportUSVRemoteControl2Message message);
+JAUS_EXPORT JausBoolean reportTelemeter27MessageFromBuffer(ReportTelemeter27Message message, unsigned char* buffer, unsigned int bufferSizeBytes);
+JAUS_EXPORT JausBoolean reportTelemeter27MessageToBuffer(ReportTelemeter27Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
 
-JAUS_EXPORT unsigned int reportUSVRemoteControl2MessageSize(ReportUSVRemoteControl2Message message);
+JAUS_EXPORT ReportTelemeter27Message reportTelemeter27MessageFromJausMessage(JausMessage jausMessage);
+JAUS_EXPORT JausMessage reportTelemeter27MessageToJausMessage(ReportTelemeter27Message message);
 
-JAUS_EXPORT char* reportUSVRemoteControl2MessageToString(ReportUSVRemoteControl2Message message);
-#endif // REPORT_USV_REMOTE_CONTROL_2_MESSAGE_H
+JAUS_EXPORT unsigned int reportTelemeter27MessageSize(ReportTelemeter27Message message);
+
+JAUS_EXPORT char* reportTelemeter27MessageToString(ReportTelemeter27Message message);
+#endif // REPORT_TELEMETER_27_MESSAGE_H
+
+
