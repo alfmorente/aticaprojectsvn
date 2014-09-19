@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportUSVRemoteControl2Message.c
+// File Name: setTelemeter26Message.c
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo (galluzzo AT gmail DOT com)
 //
@@ -39,25 +39,25 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the functionality of a ReportUSVRemoteControl2Message
+// Description: This file defines the functionality of a SetTelemeter26Message
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "jaus.h"
 
-static const int commandCode = JAUS_REPORT_USV_REMOTE_CONTROL_2;
-static const int maxDataSizeBytes = 13;
+static const int commandCode = JAUS_SET_TELEMETER_26;
+static const int maxDataSizeBytes = 1;
 
-static JausBoolean headerFromBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static JausBoolean headerToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int headerToString(ReportUSVRemoteControl2Message message, char **buf);
+static JausBoolean headerFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static JausBoolean headerToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int headerToString(SetTelemeter26Message message, char **buf);
 
-static JausBoolean dataFromBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int dataToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static void dataInitialize(ReportUSVRemoteControl2Message message);
-static void dataDestroy(ReportUSVRemoteControl2Message message);
-static unsigned int dataSize(ReportUSVRemoteControl2Message message);
+static JausBoolean dataFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int dataToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static void dataInitialize(SetTelemeter26Message message);
+static void dataDestroy(SetTelemeter26Message message);
+static unsigned int dataSize(SetTelemeter26Message message);
 
 // ************************************************************************************************************** //
 //                                    USER CONFIGURED FUNCTIONS
@@ -65,109 +65,34 @@ static unsigned int dataSize(ReportUSVRemoteControl2Message message);
 
 // Initializes the message-specific fields
 
-static void dataInitialize(ReportUSVRemoteControl2Message message) {
-    // Set initial values of message fields
-    
-    message ->presenceVector = newJausShort(JAUS_SHORT_PRESENCE_VECTOR_ALL_ON);
-    
-    message -> applied_direction = newJausDouble(0); // Scaled Short (-PI,PI), Res: 9e-6
-    message -> requested_rpm = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
-    message -> requested_rudder_angle = newJausDouble(0); // Scaled Short (-90,90), Res: 0.003
-    message -> applied_rpm_m1 = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
-    message -> applied_rpm_m2 = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
-    message -> applied_rudder_angle = newJausDouble(0); // Scaled Short (-90,90), Res: 0.003
-    message -> velocity_limitations = JAUS_FALSE; // Scaled Byte (1,n)=>(0,255) Enumerado
-    message -> direction_limitations = JAUS_FALSE; // Scaled Byte (1,n)=>(0,255) Enumerado
-    message -> mode_switching_status = newJausByte(0); // Scaled Byte (1,7) Enumerado
+static void dataInitialize(SetTelemeter26Message message) {
 
+    message -> shoot = JAUS_FALSE;
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
 
 // Destructs the message-specific fields
 
-static void dataDestroy(ReportUSVRemoteControl2Message message) {
+static void dataDestroy(SetTelemeter26Message message) {
     // Free message fields
 }
 
 // Return boolean of success
 
-static JausBoolean dataFromBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean dataFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar
     JausByte tempByte = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-        
-        if (!jausShortFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
+
+        tempByte = 0;
+        //Se desempaqueta el Byte completo que guarda los distintos booleanos.
+        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-
-        //Se suma tamaño del Presence Vector
-        index += JAUS_SHORT_SIZE_BYTES;
-
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_DIRECTION_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->applied_direction = jausShortToDouble(tempShort, -JAUS_PI, JAUS_PI);
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RPM_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->requested_rpm = jausShortToDouble(tempShort, -5000, 5000);
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RUDDER_ANGLE_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->requested_rudder_angle = jausShortToDouble(tempShort, -90, 90);
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M1_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->applied_rpm_m1 = jausShortToDouble(tempShort, -5000, 5000);
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M2_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->applied_rpm_m2 = jausShortToDouble(tempShort, -5000, 5000);
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RUDDER_ANGLE_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->applied_rudder_angle = jausShortToDouble(tempShort, -90, 90);
-        }
-        if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)
-                || jausByteIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
-            tempByte = 0;
-            //Se desempaqueta el Byte completo que guarda los distintos booleanos.
-            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            message->velocity_limitations = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
-            message->direction_limitations = jausByteIsBitSet(tempByte, 1) ? JAUS_TRUE : JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
-            if (!jausByteFromBuffer(&message->mode_switching_status, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
+        message->shoot = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+        index += JAUS_BYTE_SIZE_BYTES;
         return JAUS_TRUE;
+        
     } else {
         return JAUS_FALSE;
     }
@@ -175,83 +100,24 @@ static JausBoolean dataFromBuffer(ReportUSVRemoteControl2Message message, unsign
 
 // Returns number of bytes put into the buffer
 
-static int dataToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static int dataToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar
-    JausByte tempByte = 0;
+    JausByte tempByte = 0; //Variable temporal para empaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-        
-         //Se empaqueta el Presence Vector
-        if (!jausShortToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
 
-        //Se suma tamaño del presence Vector
-        index += JAUS_SHORT_SIZE_BYTES;
+        tempByte = 0;
+        if (message->shoot) jausByteSetBit(&tempByte, 0);
+        //pack
+        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
+        index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_DIRECTION_BIT)) {
-            tempShort = jausShortFromDouble(message->applied_direction, -JAUS_PI, JAUS_PI);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RPM_BIT)) {
-            tempShort = jausShortFromDouble(message->requested_rpm, -5000, 5000);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RUDDER_ANGLE_BIT)) {
-            tempShort = jausShortFromDouble(message->requested_rudder_angle, -90, 90);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M1_BIT)) {
-            tempShort = jausShortFromDouble(message->applied_rpm_m1, -5000, 5000);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M2_BIT)) {
-            tempShort = jausShortFromDouble(message->applied_rpm_m2, -5000, 5000);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RUDDER_ANGLE_BIT)) {
-            tempShort = jausShortFromDouble(message->applied_rudder_angle, -90, 90);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)
-                || jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
-            tempByte = 0;
-            if(message->velocity_limitations) tempByte |= 0x01;
-            if(message->direction_limitations) tempByte |= 0x02;
-            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
-            if (!jausByteToBuffer(message->mode_switching_status, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        
     }
 
     return index;
 }
 
-static int dataToString(ReportUSVRemoteControl2Message message, char **buf) {
+static int dataToString(SetTelemeter26Message message, char **buf) {
     //message already verified 
 
     //Setup temporary string buffer
@@ -280,44 +146,9 @@ static int dataToString(ReportUSVRemoteControl2Message message, char **buf) {
 
 // Returns number of bytes put into the buffer
 
-static unsigned int dataSize(ReportUSVRemoteControl2Message message) {
+static unsigned int dataSize(SetTelemeter26Message message) {
     int index = 0;
-
-    // PresenceVector
-    index += JAUS_UNSIGNED_SHORT_SIZE_BYTES;
-
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_DIRECTION_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RPM_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_REQUESTED_RUDDER_ANGLE_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M1_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RPM_M2_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_APPLIED_RUDDER_ANGLE_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-    
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT) || 
-            jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }    
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-
+    index += JAUS_BYTE_SIZE_BYTES;
     return index;
 }
 
@@ -325,10 +156,10 @@ static unsigned int dataSize(ReportUSVRemoteControl2Message message) {
 //                                    NON-USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
-ReportUSVRemoteControl2Message reportUSVRemoteControl2MessageCreate(void) {
-    ReportUSVRemoteControl2Message message;
+SetTelemeter26Message setTelemeter26MessageCreate(void) {
+    SetTelemeter26Message message;
 
-    message = (ReportUSVRemoteControl2Message) malloc(sizeof (ReportUSVRemoteControl2MessageStruct));
+    message = (SetTelemeter26Message) malloc(sizeof (SetTelemeter26MessageStruct));
     if (message == NULL) {
         return NULL;
     }
@@ -353,14 +184,14 @@ ReportUSVRemoteControl2Message reportUSVRemoteControl2MessageCreate(void) {
     return message;
 }
 
-void reportUSVRemoteControl2MessageDestroy(ReportUSVRemoteControl2Message message) {
+void setTelemeter26MessageDestroy(SetTelemeter26Message message) {
     dataDestroy(message);
     jausAddressDestroy(message->source);
     jausAddressDestroy(message->destination);
     free(message);
 }
 
-JausBoolean reportUSVRemoteControl2MessageFromBuffer(ReportUSVRemoteControl2Message message, unsigned char* buffer, unsigned int bufferSizeBytes) {
+JausBoolean setTelemeter26MessageFromBuffer(SetTelemeter26Message message, unsigned char* buffer, unsigned int bufferSizeBytes) {
     int index = 0;
 
     if (headerFromBuffer(message, buffer + index, bufferSizeBytes - index)) {
@@ -375,26 +206,26 @@ JausBoolean reportUSVRemoteControl2MessageFromBuffer(ReportUSVRemoteControl2Mess
     }
 }
 
-JausBoolean reportUSVRemoteControl2MessageToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
-    if (bufferSizeBytes < reportUSVRemoteControl2MessageSize(message)) {
+JausBoolean setTelemeter26MessageToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+    if (bufferSizeBytes < setTelemeter26MessageSize(message)) {
         return JAUS_FALSE; //improper size	
     } else {
         message->dataSize = dataToBuffer(message, buffer + JAUS_HEADER_SIZE_BYTES, bufferSizeBytes - JAUS_HEADER_SIZE_BYTES);
         if (headerToBuffer(message, buffer, bufferSizeBytes)) {
             return JAUS_TRUE;
         } else {
-            return JAUS_FALSE; // headerToReportUSVRemoteControl2Buffer failed
+            return JAUS_FALSE; // headerToSetTelemeter26Buffer failed
         }
     }
 }
 
-ReportUSVRemoteControl2Message reportUSVRemoteControl2MessageFromJausMessage(JausMessage jausMessage) {
-    ReportUSVRemoteControl2Message message;
+SetTelemeter26Message setTelemeter26MessageFromJausMessage(JausMessage jausMessage) {
+    SetTelemeter26Message message;
 
     if (jausMessage->commandCode != commandCode) {
         return NULL; // Wrong message type
     } else {
-        message = (ReportUSVRemoteControl2Message) malloc(sizeof (ReportUSVRemoteControl2MessageStruct));
+        message = (SetTelemeter26Message) malloc(sizeof (SetTelemeter26MessageStruct));
         if (message == NULL) {
             return NULL;
         }
@@ -423,7 +254,7 @@ ReportUSVRemoteControl2Message reportUSVRemoteControl2MessageFromJausMessage(Jau
     }
 }
 
-JausMessage reportUSVRemoteControl2MessageToJausMessage(ReportUSVRemoteControl2Message message) {
+JausMessage setTelemeter26MessageToJausMessage(SetTelemeter26Message message) {
     JausMessage jausMessage;
     //int size;
 
@@ -453,11 +284,11 @@ JausMessage reportUSVRemoteControl2MessageToJausMessage(ReportUSVRemoteControl2M
     return jausMessage;
 }
 
-unsigned int reportUSVRemoteControl2MessageSize(ReportUSVRemoteControl2Message message) {
+unsigned int setTelemeter26MessageSize(SetTelemeter26Message message) {
     return (unsigned int) (dataSize(message) + JAUS_HEADER_SIZE_BYTES);
 }
 
-char* reportUSVRemoteControl2MessageToString(ReportUSVRemoteControl2Message message) {
+char* setTelemeter26MessageToString(SetTelemeter26Message message) {
     if (message) {
         char* buf1 = NULL;
         char* buf2 = NULL;
@@ -480,7 +311,7 @@ char* reportUSVRemoteControl2MessageToString(ReportUSVRemoteControl2Message mess
 
         return buf;
     } else {
-        char* buf = "Invalid ReportUSVRemoteControl2 Message";
+        char* buf = "Invalid SetTelemeter26 Message";
         char* msg = (char*) malloc(strlen(buf) + 1);
         strcpy(msg, buf);
         return msg;
@@ -488,7 +319,7 @@ char* reportUSVRemoteControl2MessageToString(ReportUSVRemoteControl2Message mess
 }
 //********************* PRIVATE HEADER FUNCTIONS **********************//
 
-static JausBoolean headerFromBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean headerFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     if (bufferSizeBytes < JAUS_HEADER_SIZE_BYTES) {
         return JAUS_FALSE;
     } else {
@@ -522,7 +353,7 @@ static JausBoolean headerFromBuffer(ReportUSVRemoteControl2Message message, unsi
     }
 }
 
-static JausBoolean headerToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean headerToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     JausUnsignedShort *propertiesPtr = (JausUnsignedShort*) & message->properties;
 
     if (bufferSizeBytes < JAUS_HEADER_SIZE_BYTES) {
@@ -554,7 +385,7 @@ static JausBoolean headerToBuffer(ReportUSVRemoteControl2Message message, unsign
     }
 }
 
-static int headerToString(ReportUSVRemoteControl2Message message, char **buf) {
+static int headerToString(SetTelemeter26Message message, char **buf) {
     //message existance already verified 
 
     //Setup temporary string buffer
@@ -664,3 +495,4 @@ static int headerToString(ReportUSVRemoteControl2Message message, char **buf) {
 
 
 }
+
