@@ -106,8 +106,8 @@ typedef struct
   JausDouble applied_rpm_m1;					// Scaled Short (-5000,5000), Res: 0.15
   JausDouble applied_rpm_m2;					// Scaled Short (-5000,5000), Res: 0.15
   JausDouble applied_rudder_angle;				// Scaled Short (-90,90), Res: 0.003
-  JausByte velocity_limitations;                                // Scaled Byte (1,n)=>(0,255) Enumerado
-  JausByte direction_limitations;				// Scaled Byte (1,n)=>(0,255) Enumerado
+  JausBoolean velocity_limitations;                                // Scaled Byte (1,n)=>(0,255) Enumerado
+  JausBoolean direction_limitations;				// Scaled Byte (1,n)=>(0,255) Enumerado
   JausByte mode_switching_status;				// Scaled Byte (1,7)=>(0,255) Enumerado
   
 
