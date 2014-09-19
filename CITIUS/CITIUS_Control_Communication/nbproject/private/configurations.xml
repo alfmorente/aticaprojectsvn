@@ -221,7 +221,6 @@
                 <in>setTelemeter26Message.h</in>
                 <in>setUSVObservationsConfig7Message.h</in>
                 <in>setUSVRemote1Message.h</in>
-                <in>telemeterInfo10Message.h</in>
                 <in>ugvInfo12Message.h</in>
                 <in>usvInfo3Message.h</in>
               </df>
@@ -497,7 +496,7 @@
                 <in>reportPositioner20Message.c</in>
                 <in>reportScientificOperations13Message.c</in>
                 <in>reportSignalingElements25Message.c</in>
-                <in>reportTelemeter27Message.cpp</in>
+                <in>reportTelemeter27Message.c</in>
                 <in>reportUSVObservationsConfig8Message.c</in>
                 <in>reportUSVRemoteControl2Message.c</in>
                 <in>scpmInfo6Message.c</in>
@@ -507,10 +506,9 @@
                 <in>setPositioner19Message.c</in>
                 <in>setScientificsOperations11Message.c</in>
                 <in>setSignalingElements18Message.c</in>
-                <in>setTelemeter26Message.cpp</in>
+                <in>setTelemeter26Message.c</in>
                 <in>setUSVObservationsConfig7Message.c</in>
                 <in>setUSVRemote1Message.c</in>
-                <in>telemeterInfo10Message.c</in>
                 <in>ugvInfo12Message.c</in>
                 <in>usvInfo3Message.c</in>
               </df>

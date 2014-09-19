@@ -4,20 +4,12 @@
     <df root="." name="0">
       <df name="lib">
         <df name="libjaus">
-          <df name="include">
-            <df name="message">
-              <df name="experimental">
-                <in>reportTelemeter27Message.h</in>
-                <in>setTelemeter26Message.h</in>
-              </df>
-            </df>
-          </df>
           <df name="src">
             <df name="message">
               <df name="experimental">
                 <in>reportSignalingElements25Message.c</in>
-                <in>reportTelemeter27Message.cpp</in>
-                <in>setTelemeter26Message.cpp</in>
+                <in>reportTelemeter27Message.c</in>
+                <in>setTelemeter26Message.c</in>
                 <in>ugvInfo12Message.c</in>
               </df>
             </df>
@@ -163,16 +155,6 @@
           </undefinedList>
         </ccTool>
       </folder>
-      <item path="lib/libjaus/include/message/experimental/reportTelemeter27Message.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="lib/libjaus/include/message/experimental/setTelemeter26Message.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
       <item path="lib/libjaus/src/message/experimental/reportSignalingElements25Message.c"
             ex="false"
             tool="0"
@@ -180,14 +162,14 @@
         <cTool>
         </cTool>
       </item>
-      <item path="lib/libjaus/src/message/experimental/reportTelemeter27Message.cpp"
+      <item path="lib/libjaus/src/message/experimental/reportTelemeter27Message.c"
             ex="false"
-            tool="1"
+            tool="0"
             flavor2="0">
       </item>
-      <item path="lib/libjaus/src/message/experimental/setTelemeter26Message.cpp"
+      <item path="lib/libjaus/src/message/experimental/setTelemeter26Message.c"
             ex="false"
-            tool="1"
+            tool="0"
             flavor2="0">
       </item>
       <item path="lib/libjaus/src/message/experimental/ugvInfo12Message.c"

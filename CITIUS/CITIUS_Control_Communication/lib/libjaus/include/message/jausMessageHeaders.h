@@ -229,7 +229,6 @@
 #include "experimental/reportDayTimeCamera22Message.h" 
 #include "experimental/setNightTimeCamera23Message.h" 
 #include "experimental/reportNightTimeCamera24Message.h" 
-#include "experimental/telemeterInfo10Message.h" 
 #include "experimental/setScientificsOperations11Message.h" 
 #include "experimental/reportScientificOperations13Message.h" 
 #include "experimental/heartbeatChannelState16Message.h" 

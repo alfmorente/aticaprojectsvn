@@ -81,6 +81,7 @@ CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/reportPositioner20Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/reportTelemeter27Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -90,9 +91,9 @@ CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setPositioner19Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setTelemeter26Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h
@@ -374,6 +375,7 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/incl
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/reportPositioner20Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/reportTelemeter27Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -383,9 +385,9 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/incl
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/setPositioner19Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/setTelemeter26Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h
@@ -635,6 +637,7 @@ CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/m
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/reportPositioner20Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/reportTelemeter27Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -644,9 +647,9 @@ CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/m
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/setPositioner19Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/setTelemeter26Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h
@@ -928,6 +931,7 @@ CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experi
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/reportPositioner20Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/reportTelemeter27Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -937,9 +941,9 @@ CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experi
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setPositioner19Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setTelemeter26Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h

@@ -204,7 +204,6 @@ SOURCES =	./src/jausComponent.c \
 		./src/message/experimental/reportDayTimeCamera22Message.c \
 		./src/message/experimental/setNightTimeCamera23Message.c \
 		./src/message/experimental/reportNightTimeCamera24Message.c \
-		./src/message/experimental/telemeterInfo10Message.c \
 		./src/message/experimental/setScientificsOperations11Message.c \
 		./src/message/experimental/reportScientificOperations13Message.c \
 		./src/message/experimental/heartbeatChannelState16Message.c \
@@ -417,7 +416,6 @@ OBJECTS =	./Build/jausComponent.o \
 		./Build/reportDayTimeCamera22Message.o \
 		./Build/setNightTimeCamera23Message.o \
 		./Build/reportNightTimeCamera24Message.o \
-		./Build/telemeterInfo10Message.o \
 		./Build/setScientificsOperations11Message.o \
 		./Build/reportScientificOperations13Message.o \
 		./Build/heartbeatChannelState16Message.o \
@@ -1050,10 +1048,7 @@ $(TARGET) : $(OBJECTS)
 	
 ./Build/reportNightTimeCamera24Message.o: ./src/message/experimental/reportNightTimeCamera24Message.c
 	gcc $(CCFLAGS) -o ./Build/reportNightTimeCamera24Message.o ./src/message/experimental/reportNightTimeCamera24Message.c
-	
-./Build/telemeterInfo10Message.o: ./src/message/experimental/telemeterInfo10Message.c
-	gcc $(CCFLAGS) -o ./Build/telemeterInfo10Message.o ./src/message/experimental/telemeterInfo10Message.c
-	
+
 ./Build/setScientificsOperations11Message.o: ./src/message/experimental/setScientificsOperations11Message.c
 	gcc $(CCFLAGS) -o ./Build/setScientificsOperations11Message.o ./src/message/experimental/setScientificsOperations11Message.c
 	
