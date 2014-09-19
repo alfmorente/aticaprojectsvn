@@ -276,6 +276,10 @@
 #define JAUS_REPORT_NIGHT_TIME_CAMERA_24        0xE024
 #define JAUS_REPORT_SIGNALING_ELEMENTS_25       0xE025
 
+#define JAUS_SET_TELEMETER_26                   0xE026
+#define JAUS_REPORT_TELEMETER_26                0xE027
+
+
 
 // Define JausMessage data structure
 struct JausMessageStruct

@@ -234,5 +234,7 @@
 #include "experimental/reportScientificOperations13Message.h" 
 #include "experimental/heartbeatChannelState16Message.h" 
 #include "experimental/heartbeatPositionInfo17Message.h" 
+#include "experimental/setTelemeter26Message.h" 
+#include "experimental/reportTelemeter27Message.h" 
 
 #endif //JAUS_MESSAGE_HEADERS_H
