@@ -129,10 +129,10 @@ void JausController::initJAUS() {
     }else{
 
         // Mensajes que recibe
-        ojCmptAddServiceInputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
+        ojCmptAddServiceInputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_REPORT_TELEMETER_27, 0xFF);
         
         // Funciones de recepcion de mensajes (Callbacks)
-        ojCmptSetMessageCallback(platformSensorComponent, JAUS_TELEMETER_INFO_10, fcn_receive_telemeter_info);
+        ojCmptSetMessageCallback(platformSensorComponent, JAUS_REPORT_TELEMETER_27, fcn_receive_report_telemeter);
         
     }
     
@@ -455,18 +455,16 @@ void JausController::fcn_receive_report_night_time_camera(OjCmpt comp, JausMessa
 
 // Componente Platform sensor
 
-void JausController::fcn_receive_telemeter_info(OjCmpt comp, JausMessage msg) {
-    
+void JausController::fcn_receive_report_telemeter(OjCmpt comp, JausMessage msg) {
+
     cout << "Recibido mensaje TELEMETER INFO - EXP #10" << endl;
-       
-    TelemeterInfo10Message rTelemeter = telemeterInfo10MessageFromJausMessage(msg);
+
+    ReportTelemeter27Message rTelemeter = reportTelemeter27MessageFromJausMessage(msg);
     // Ecos
-    if(jausByteIsBitSet(rTelemeter->presenceVector,JAUS_10_PV_ECHOES_BIT)){
-        for(int i=0;i<5;i++){
-            cout << "Eco " << i << ": " << rTelemeter->echoes[i] << endl;
-        }
+    for (int i = 0; i < 5; i++) {
+        cout << "Eco " << i << ": " << rTelemeter->echoes[i] << endl;
     }
-    telemeterInfo10MessageDestroy(rTelemeter);
+    reportTelemeter27MessageDestroy(rTelemeter);
     cout << " ---- " << endl;
 }
 

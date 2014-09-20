@@ -84,7 +84,7 @@ private:
     static void fcn_receive_report_day_time_camera(OjCmpt,JausMessage);
     static void fcn_receive_report_night_time_camera(OjCmpt,JausMessage);
     // Componente Platform sensor
-    static void fcn_receive_telemeter_info(OjCmpt, JausMessage);
+    static void fcn_receive_report_telemeter(OjCmpt, JausMessage);
     // Componente Velocity State Sensor
     static void fcn_receive_report_travel_speed(OjCmpt,JausMessage);
     // Componente Global Pose Sensor
