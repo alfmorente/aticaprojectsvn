@@ -172,13 +172,13 @@ void RosNode_Communications::initJAUS() {
     }else{
         
         // Mensajes que envia
-        ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
+        ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_REPORT_TELEMETER_27, 0xFF);
         
         // Mensajes que recibe
-        ojCmptAddServiceInputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
+        ojCmptAddServiceInputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_SET_TELEMETER_26, 0xFF);
         
         // Funciones de recepcion de mensajes (Callbacks)
-        ojCmptSetMessageCallback(platformSensorComponent, JAUS_TELEMETER_INFO_10, fcn_receive_telemeter_info);
+        ojCmptSetMessageCallback(platformSensorComponent, JAUS_SET_TELEMETER_26, fcn_receive_set_telemeter);
         
     }
     
@@ -1048,23 +1048,22 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
 
 // Componente Platform Sensor
 
-void RosNode_Communications::fcn_receive_telemeter_info(OjCmpt cmp, JausMessage msg){
-    TelemeterInfo10Message telemeterMsg = telemeterInfo10MessageFromJausMessage(msg);
-    CITIUS_Control_Communication::srv_shoot serviceTelemeter;
-    
-    if(jausByteIsBitSet(telemeterMsg->presenceVector,JAUS_10_PV_SHOOT_BIT)){
-        CITIUS_Control_Communication::srv_shoot serviceShootTelemeter;
+void RosNode_Communications::fcn_receive_set_telemeter(OjCmpt cmp, JausMessage msg){
+    SetTelemeter26Message setTelemeterMsg = setTelemeter26MessageFromJausMessage(msg);
+
+    if (setTelemeterMsg->shoot) {
+        CITIUS_Control_Communication::srv_shoot serviceTelemeter;
         short numOfAttemps = 0;
-        while(numOfAttemps < 5){
-            if(instance->clientShootTel.call(serviceShootTelemeter)){
+        while (numOfAttemps < 5) {
+            if (instance->clientShootTel.call(serviceTelemeter)) {
                 numOfAttemps = 10;
-                if(serviceTelemeter.response.ret == false)
+                if (serviceTelemeter.response.ret == false)
                     ROS_INFO("[Control] Communications - Error en el Shoot del telemetro");
-            }else{
+            } else {
                 numOfAttemps++;
             }
         }
-        if(numOfAttemps == 5){
+        if (numOfAttemps == 5) {
             ROS_INFO("[Control] Communications - Error en el Shoot del telemetro");
         }
     }

@@ -302,7 +302,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodD
     jAdd->instance = 2;
     
     // Mensaje especifico
-    TelemeterInfo10Message tim = telemeterInfo10MessageCreate();
+    ReportTelemeter27Message tim = reportTelemeter27MessageCreate();
     for(int i = 0; i < 5; i++){
         tim->echoes[i] = ecs[i];
     }
@@ -310,8 +310,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodD
     jausAddressCopy(tim->destination, jAdd);
     
     // Generacion de mensaje JUAS global
-    jMsg = telemeterInfo10MessageToJausMessage(tim);
-    telemeterInfo10MessageDestroy(tim);
+    jMsg = reportTelemeter27MessageToJausMessage(tim);
+    reportTelemeter27MessageDestroy(tim);
     // Destruccion de la estructura destinatario
     jausAddressDestroy(jAdd);
     return jMsg;
