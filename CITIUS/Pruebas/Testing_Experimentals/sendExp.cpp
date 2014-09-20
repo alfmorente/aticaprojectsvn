@@ -58,8 +58,8 @@ void send_msg_exp2(OjCmpt comp, JausAddress jAdd){
     msgExp->applied_rpm_m1 = -3200;
     msgExp->applied_rpm_m2 = -1900;
     msgExp->applied_rudder_angle = -50;
-    msgExp->velocity_limitations = 50;
-    msgExp->direction_limitations = 20;
+    msgExp->velocity_limitations = JAUS_TRUE;
+    msgExp->direction_limitations = JAUS_TRUE;
     msgExp->mode_switching_status = 6;
     //Copio la dirección al mensaje
     jausAddressCopy(msgExp->destination, jAdd);
@@ -121,14 +121,14 @@ void send_msg_exp2_pv(OjCmpt comp, JausAddress jAdd){
     
     // Septimo parametro
     msgExp->presenceVector = 0x0040;
-    msgExp->velocity_limitations = 50;
+    msgExp->velocity_limitations = JAUS_TRUE;
     // Envio el mensaje JAUS
     jMsg = reportUSVRemoteControl2MessageToJausMessage(msgExp);
     ojCmptSendMessage(comp, jMsg);
     
     // Octavo parametro
     msgExp->presenceVector = 0x0080;
-    msgExp->direction_limitations = 20;
+    msgExp->direction_limitations = JAUS_FALSE;
     // Envio el mensaje JAUS
     jMsg = reportUSVRemoteControl2MessageToJausMessage(msgExp);
     ojCmptSendMessage(comp, jMsg);
@@ -603,49 +603,6 @@ void send_msg_exp8_pv(OjCmpt comp, JausAddress jAdd){
     reportUSVObservationsConfig8MessageDestroy(msgExp);
 }
 
-/*******************************************************************************
- EXP 10. TELEMETER INFO
- ******************************************************************************/ 
-void send_msg_exp10(OjCmpt comp, JausAddress jAdd){
-    //Mensaje JAUS a enviar
-    TelemeterInfo10Message msgExp = telemeterInfo10MessageCreate();
-    msgExp->shoot = JAUS_TRUE;
-    for(int ind=0;ind<5;ind++) msgExp->echoes[ind]=ind*20;
-    
-    //Copio la dirección al mensaje
-    jausAddressCopy(msgExp->destination, jAdd);
-    // Envio el mensaje JAUS
-    JausMessage jMsg = telemeterInfo10MessageToJausMessage(msgExp);
-    ojCmptSendMessage(comp, jMsg);
-    // Liberación de memoria
-    jausMessageDestroy(jMsg);
-    telemeterInfo10MessageDestroy(msgExp);
-}
-
-void send_msg_exp10_pv(OjCmpt comp, JausAddress jAdd){
-    //Mensaje JAUS a enviar
-    TelemeterInfo10Message msgExp = telemeterInfo10MessageCreate();
-    
-    // Primer parametro
-    msgExp->presenceVector = 0x01;
-    msgExp->shoot = JAUS_TRUE;
-    //Copio la dirección al mensaje
-    jausAddressCopy(msgExp->destination, jAdd);
-    // Envio el mensaje JAUS
-    JausMessage jMsg = telemeterInfo10MessageToJausMessage(msgExp);    
-    ojCmptSendMessage(comp, jMsg);
-    
-    // Segundo parametro
-    msgExp->presenceVector = 0x02;
-    for(int ind=0;ind<5;ind++) msgExp->echoes[ind]=ind*20;
-    // Envio el mensaje JAUS
-    jMsg = telemeterInfo10MessageToJausMessage(msgExp);    
-    ojCmptSendMessage(comp, jMsg);
-    
-    // Liberación de memoria
-    jausMessageDestroy(jMsg);
-    telemeterInfo10MessageDestroy(msgExp);
-}
 
 /*******************************************************************************
  EXP 11. SET SCIENTIFICS OPERATIONS
@@ -1546,4 +1503,40 @@ void send_msg_exp25_pv(OjCmpt comp, JausAddress jAdd){
     // Liberación de memoria
     jausMessageDestroy(jMsg);
     reportSignalingElements25MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 26. SET TELEMETER
+ ******************************************************************************/ 
+void send_msg_exp26(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    SetTelemeter26Message msgExp = setTelemeter26MessageCreate();
+    msgExp->shoot = JAUS_TRUE;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = setTelemeter26MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    setTelemeter26MessageDestroy(msgExp);
+}
+
+/*******************************************************************************
+ EXP 27. REPORT TELEMETER
+ ******************************************************************************/ 
+void send_msg_exp27(OjCmpt comp, JausAddress jAdd){
+    //Mensaje JAUS a enviar
+    ReportTelemeter27Message msgExp = reportTelemeter27MessageCreate();
+    for(int ind=0;ind<5;ind++) msgExp->echoes[ind]=ind*10;
+    
+    //Copio la dirección al mensaje
+    jausAddressCopy(msgExp->destination, jAdd);
+    // Envio el mensaje JAUS
+    JausMessage jMsg = reportTelemeter27MessageToJausMessage(msgExp);
+    ojCmptSendMessage(comp, jMsg);
+    // Liberación de memoria
+    jausMessageDestroy(jMsg);
+    reportTelemeter27MessageDestroy(msgExp);
 }

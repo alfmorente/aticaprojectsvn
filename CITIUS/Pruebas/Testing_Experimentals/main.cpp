@@ -60,7 +60,8 @@ int main(int argc, char** argv) {
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SCPM_INFO_6, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_USV_OBSERVATIONS_CONFIG_7, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8, 0xFF);
-    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_TELEMETER_INFO_10, 0xFF);
+    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_TELEMETER_26, 0xFF);
+    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_TELEMETER_27, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_SCIENTIFICS_OPERATIONS_11, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_UGV_INFO_12, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_SCIENTIFIC_OPERATIONS_13, 0xFF);
@@ -85,7 +86,8 @@ int main(int argc, char** argv) {
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SCPM_INFO_6, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_USV_OBSERVATIONS_CONFIG_7, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8, 0xFF);
-    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_TELEMETER_INFO_10, 0xFF);
+    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_TELEMETER_26, 0xFF);
+    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_TELEMETER_27, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_SCIENTIFICS_OPERATIONS_11, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_UGV_INFO_12, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_SCIENTIFIC_OPERATIONS_13, 0xFF);
@@ -120,7 +122,8 @@ int main(int argc, char** argv) {
     ojCmptSetMessageCallback(clientCmpt, JAUS_SCPM_INFO_6, fcn_receive_exp6);
     ojCmptSetMessageCallback(clientCmpt, JAUS_SET_USV_OBSERVATIONS_CONFIG_7, fcn_receive_exp7);
     ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8, fcn_receive_exp8);
-    ojCmptSetMessageCallback(clientCmpt, JAUS_TELEMETER_INFO_10, fcn_receive_exp10);
+    ojCmptSetMessageCallback(clientCmpt, JAUS_SET_TELEMETER_26, fcn_receive_exp26);
+    ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_TELEMETER_27, fcn_receive_exp27);
     ojCmptSetMessageCallback(clientCmpt, JAUS_SET_SCIENTIFICS_OPERATIONS_11, fcn_receive_exp11);
     ojCmptSetMessageCallback(clientCmpt, JAUS_UGV_INFO_12, fcn_receive_exp12);
     ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_SCIENTIFIC_OPERATIONS_13, fcn_receive_exp13);
@@ -228,13 +231,7 @@ void fcn_state_ready(OjCmpt comp) {
  ******************************************************************************/ 
     send_msg_exp8(comp, destino);
     send_msg_exp8_pv(comp, destino);
-    
-/*******************************************************************************
- EXP 10. TELEMETER INFO
- ******************************************************************************/ 
-    send_msg_exp10(comp, destino);
-    send_msg_exp10_pv(comp, destino);
-    
+        
 /*******************************************************************************
  EXP 11. SET SCIENTIFICS OPERATIONS
  ******************************************************************************/ 
@@ -326,6 +323,16 @@ void fcn_state_ready(OjCmpt comp) {
     
     // Liberacion de memoria
     jausAddressDestroy(destino);
+    
+/*******************************************************************************
+ EXP 26. SET TELEMETER
+ ******************************************************************************/ 
+    send_msg_exp26(comp, destino);
+    
+/*******************************************************************************
+ EXP 26. REPORT TELEMETER
+ ******************************************************************************/ 
+    send_msg_exp27(comp, destino);
 }
 
 //Función para componente en Standby

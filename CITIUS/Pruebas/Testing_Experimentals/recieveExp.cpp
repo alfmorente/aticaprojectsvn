@@ -42,10 +42,12 @@ void fcn_receive_exp2(OjCmpt comp, JausMessage msg){
         printf("Recibido parámetro: ANGULO DE TIMON ACTIVO con valor: %f\n",msgExp->applied_rudder_angle);
     }
     if(jausShortIsBitSet(msgExp->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)){
-        printf("Recibido parámetro: LIMITACIONES DE VELOCIDAD con valor: %d\n",msgExp->velocity_limitations);
+        if(msgExp->velocity_limitations) printf("Recibido parámetro: LIMITACIONES DE VELOCIDAD ON");
+        else printf("Recibido parámetro: LIMITACIONES DE VELOCIDAD OFF");
     }
     if(jausShortIsBitSet(msgExp->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)){
-        printf("Recibido parámetro: LIMITACIONES DE RUMBO con valor: %d\n",msgExp->direction_limitations);
+        if(msgExp->direction_limitations) printf("Recibido parámetro: LIMITACIONES DE RUMBO ON");
+        else printf("Recibido parámetro: LIMITACIONES DE RUMBO OFF");
     }
     if(jausShortIsBitSet(msgExp->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)){
         printf("Recibido parámetro: ESTADO DEL CAMBIO DE MODO con valor: %d\n",msgExp->mode_switching_status);
@@ -227,24 +229,6 @@ void fcn_receive_exp8(OjCmpt comp, JausMessage msg) {
     if (jausByteIsBitSet(msgExp->presenceVector, JAUS_8_PV_TRACKING_FUNCTION_BIT)) {
         if (msgExp->active_tracking_function) printf("Recibido parámetro: FUNCION TRACKING ACTUAL ON\n");
         else printf("Recibido parámetro: FUNCION TRACKING ACTUAL OFF\n");
-    }
-    printf("\n");
-}
-
-/*******************************************************************************
- EXP 10. TELEMETER INFO
- ******************************************************************************/ 
-void fcn_receive_exp10(OjCmpt comp, JausMessage msg){
-    printf("*****************************\n");
-    printf("Recibido mensaje: TELEMETER INFO(EXP #10)\n");
-    TelemeterInfo10Message msgExp = telemeterInfo10MessageFromJausMessage(msg);
-    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_10_PV_SHOOT_BIT)) {
-        if (msgExp->shoot) printf("Recibido parámetro: DISPARO ON\n");
-        else printf("Recibido parámetro: DISPARO OFF\n");
-    }
-    if (jausByteIsBitSet(msgExp->presenceVector, JAUS_10_PV_ECHOES_BIT)) {
-        printf("Recibido parámetro: ECOS:\n");
-        for(int ind=0;ind<5;ind++) printf("E%d: %f\n",ind+1,msgExp->echoes[ind]);
     }
     printf("\n");
 }
@@ -607,5 +591,31 @@ void fcn_receive_exp25(OjCmpt comp, JausMessage msg){
         if(msgExp->klaxon) printf("Recibido parámetro: CLAXON ACTUAL ON\n");
         else printf("Recibido parámetro: CLAXON ACTUAL OFF\n");
     }
+    printf("\n");
+}
+
+/*******************************************************************************
+ EXP 26. SET TELEMETER
+ ******************************************************************************/ 
+void fcn_receive_exp26(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: SET TELEMETER(EXP #26)\n");
+    SetTelemeter26Message msgExp = setTelemeter26MessageFromJausMessage(msg);
+    if (msgExp->shoot) printf("Recibido parámetro: DISPARO ON\n");
+    else printf("Recibido parámetro: DISPARO OFF\n");
+    setTelemeter26MessageDestroy(msgExp);
+    printf("\n");
+}
+
+/*******************************************************************************
+ EXP 27. REPORT TELEMETER
+ ******************************************************************************/ 
+void fcn_receive_exp27(OjCmpt comp, JausMessage msg){
+    printf("*****************************\n");
+    printf("Recibido mensaje: REPORT TELEMETER(EXP #27)\n");
+    ReportTelemeter27Message msgExp = reportTelemeter27MessageFromJausMessage(msg);
+    printf("Recibido parámetro: ECOS:\n");
+    for(int ind=0;ind<5;ind++) printf("ECO #%d: %f\n",ind+1,msgExp->echoes[ind]);
+    reportTelemeter27MessageDestroy(msgExp);
     printf("\n");
 }
