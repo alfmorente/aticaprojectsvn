@@ -60,8 +60,6 @@ int main(int argc, char** argv) {
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SCPM_INFO_6, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_USV_OBSERVATIONS_CONFIG_7, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8, 0xFF);
-    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_TELEMETER_26, 0xFF);
-    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_TELEMETER_27, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_SCIENTIFICS_OPERATIONS_11, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_UGV_INFO_12, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_SCIENTIFIC_OPERATIONS_13, 0xFF);
@@ -77,6 +75,9 @@ int main(int argc, char** argv) {
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_NIGHT_TIME_CAMERA_23, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_NIGHT_TIME_CAMERA_24, 0xFF);
     ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_SIGNALING_ELEMENTS_25, 0xFF);
+    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_TELEMETER_26, 0xFF);
+    ojCmptAddServiceOutputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_TELEMETER_27, 0xFF);
+    
     // Mensajes que recibe    
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_USV_REMOTE_1, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_USV_REMOTE_CONTROL_2, 0xFF);
@@ -86,8 +87,6 @@ int main(int argc, char** argv) {
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SCPM_INFO_6, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_USV_OBSERVATIONS_CONFIG_7, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8, 0xFF);
-    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_TELEMETER_26, 0xFF);
-    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_TELEMETER_27, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_SCIENTIFICS_OPERATIONS_11, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_UGV_INFO_12, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_SCIENTIFIC_OPERATIONS_13, 0xFF);
@@ -103,6 +102,8 @@ int main(int argc, char** argv) {
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_NIGHT_TIME_CAMERA_23, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_NIGHT_TIME_CAMERA_24, 0xFF);
     ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_SIGNALING_ELEMENTS_25, 0xFF);
+    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_SET_TELEMETER_26, 0xFF);
+    ojCmptAddServiceInputMessage(clientCmpt, JAUS_PRIMITIVE_DRIVER, JAUS_REPORT_TELEMETER_27, 0xFF);
     
     cout << "(Client) Component: Services added" << endl;
 
@@ -122,8 +123,6 @@ int main(int argc, char** argv) {
     ojCmptSetMessageCallback(clientCmpt, JAUS_SCPM_INFO_6, fcn_receive_exp6);
     ojCmptSetMessageCallback(clientCmpt, JAUS_SET_USV_OBSERVATIONS_CONFIG_7, fcn_receive_exp7);
     ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8, fcn_receive_exp8);
-    ojCmptSetMessageCallback(clientCmpt, JAUS_SET_TELEMETER_26, fcn_receive_exp26);
-    ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_TELEMETER_27, fcn_receive_exp27);
     ojCmptSetMessageCallback(clientCmpt, JAUS_SET_SCIENTIFICS_OPERATIONS_11, fcn_receive_exp11);
     ojCmptSetMessageCallback(clientCmpt, JAUS_UGV_INFO_12, fcn_receive_exp12);
     ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_SCIENTIFIC_OPERATIONS_13, fcn_receive_exp13);
@@ -139,6 +138,8 @@ int main(int argc, char** argv) {
     ojCmptSetMessageCallback(clientCmpt, JAUS_SET_NIGHT_TIME_CAMERA_23, fcn_receive_exp23);
     ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_NIGHT_TIME_CAMERA_24, fcn_receive_exp24);
     ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_SIGNALING_ELEMENTS_25, fcn_receive_exp25);
+    ojCmptSetMessageCallback(clientCmpt, JAUS_SET_TELEMETER_26, fcn_receive_exp26);
+    ojCmptSetMessageCallback(clientCmpt, JAUS_REPORT_TELEMETER_27, fcn_receive_exp27);
     //ojCmptSetMessageProcessorCallback(clientCmpt,fcn_receive_any); 
     //cout << "(Client) Component Global Pose: Configurated" << endl;
     
@@ -174,7 +175,7 @@ void fcn_state_ready(OjCmpt comp) {
         state = JAUS_READY_STATE;
     
 /*******************************************************************************
- EXP 1. MONTAJE DIRECCION
+  MONTAJE DIRECCION
  ******************************************************************************/ 
     //Se crea la direccion destino del Mensaje a enviar
     JausAddress destino;
@@ -321,9 +322,6 @@ void fcn_state_ready(OjCmpt comp) {
     send_msg_exp25(comp, destino);
     send_msg_exp25_pv(comp, destino);
     
-    // Liberacion de memoria
-    jausAddressDestroy(destino);
-    
 /*******************************************************************************
  EXP 26. SET TELEMETER
  ******************************************************************************/ 
@@ -333,6 +331,10 @@ void fcn_state_ready(OjCmpt comp) {
  EXP 26. REPORT TELEMETER
  ******************************************************************************/ 
     send_msg_exp27(comp, destino);
+    
+    // Liberacion de memoria
+    jausAddressDestroy(destino);
+
 }
 
 //Función para componente en Standby
