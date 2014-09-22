@@ -82,7 +82,28 @@ static void dataInitialize(SetListOfWaypoints14Message message) {
 // Destructs the message-specific fields
 
 static void dataDestroy(SetListOfWaypoints14Message message) {
-    // Free message fields
+    // Liberado de memoria
+    
+    if(message -> waypoints_ids_list != NULL){
+        free(message -> waypoints_ids_list);
+        message -> waypoints_ids_list = NULL;
+    }
+    
+    if(message -> latitudes_list != NULL){
+        free(message -> latitudes_list);
+        message -> latitudes_list = NULL;
+    }
+    
+    if(message -> longitudes_list != NULL){
+        free(message -> longitudes_list);
+        message -> longitudes_list = NULL;
+    }
+    
+    if(message -> velocities_list != NULL){
+        free(message -> velocities_list);
+        message -> velocities_list = NULL;
+    }
+    
 }
 
 // Return boolean of success
