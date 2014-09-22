@@ -69,7 +69,7 @@ static void dataInitialize(ReportDayTimeCamera22Message message) {
     
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
     
-    message -> active_zoom = newJausByte(0); // Enum (0,2) 
+    message -> active_zoom = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
     message -> active_focus = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
     message -> active_autofocus = JAUS_FALSE;
 
@@ -99,12 +99,15 @@ static JausBoolean dataFromBuffer(ReportDayTimeCamera22Message message, unsigned
         index += JAUS_BYTE_SIZE_BYTES;
 
         if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
-            if (!jausByteFromBuffer(&message->active_zoom, buffer + index, bufferSizeBytes - index))
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_zoom = jausShortToDouble(tempShort, 0, 100);
+            
         }
         
+        tempShort = 0;
         if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_FOCUS_BIT)) {
             if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
@@ -144,9 +147,10 @@ static int dataToBuffer(ReportDayTimeCamera22Message message, unsigned char *buf
         index += JAUS_BYTE_SIZE_BYTES;
 
         if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
-            if (!jausByteToBuffer(message->active_zoom, buffer + index, bufferSizeBytes - index))
+            tempShort = jausShortFromDouble(message->active_zoom, 0, 100);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
+            index += JAUS_SHORT_SIZE_BYTES;
         }
 
         if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_FOCUS_BIT)) {
@@ -204,7 +208,7 @@ static unsigned int dataSize(ReportDayTimeCamera22Message message) {
     index += JAUS_BYTE_SIZE_BYTES;
 
     if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
+        index += JAUS_SHORT_SIZE_BYTES;
     }
 
     if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_FOCUS_BIT)) {

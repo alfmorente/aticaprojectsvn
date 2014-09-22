@@ -37,8 +37,6 @@
         </df>
         <df name="doxygen.dir">
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_Communication.dir">
@@ -499,6 +497,7 @@
                 <in>reportScientificOperations13Message.c</in>
                 <in>reportSignalingElements25Message.c</in>
                 <in>reportTelemeter27Message.c</in>
+                <in>reportTelemeter27Message.cpp</in>
                 <in>reportUSVObservationsConfig8Message.c</in>
                 <in>reportUSVRemoteControl2Message.c</in>
                 <in>scpmInfo6Message.c</in>
@@ -509,6 +508,7 @@
                 <in>setScientificsOperations11Message.c</in>
                 <in>setSignalingElements18Message.c</in>
                 <in>setTelemeter26Message.c</in>
+                <in>setTelemeter26Message.cpp</in>
                 <in>setUSVObservationsConfig7Message.c</in>
                 <in>setUSVRemote1Message.c</in>
                 <in>ugvInfo12Message.c</in>
