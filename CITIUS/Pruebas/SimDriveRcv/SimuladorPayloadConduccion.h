@@ -37,6 +37,7 @@ extern "C" {
 
 typedef struct{
     short instruction;
+    short id_instruccion;
     short element;
     short value;
 }FrameDriving;
