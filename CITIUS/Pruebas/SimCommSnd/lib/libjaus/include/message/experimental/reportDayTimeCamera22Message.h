@@ -94,7 +94,7 @@ typedef struct
     // PRESENCE VECTOR
     JausByte presenceVector;
     
-  JausByte active_zoom;				// Enum (0,2) 
+  JausDouble active_zoom;				// Scaled Short (0,100), Res:0.001 
   JausDouble active_focus;				// Scaled Short (0,100), Res:0.001 
   JausBoolean active_autofocus;	
 	

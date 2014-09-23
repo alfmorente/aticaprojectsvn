@@ -93,7 +93,6 @@ CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message
 CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
 CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/simCommSend.dir/src/JausController.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h
@@ -329,7 +328,6 @@ CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/ex
 CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
 CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h
@@ -566,7 +564,6 @@ CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimen
 CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setSignalingElements18Message.h
 CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
 CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/ugvInfo12Message.h
 CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/experimental/usvInfo3Message.h
 CMakeFiles/simCommSend.dir/src/main.cpp.o: lib/libjaus/include/message/inform/communications/reportDataLinkStatusMessage.h

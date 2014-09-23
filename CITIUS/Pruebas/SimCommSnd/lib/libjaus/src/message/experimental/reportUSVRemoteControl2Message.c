@@ -76,8 +76,8 @@ static void dataInitialize(ReportUSVRemoteControl2Message message) {
     message -> applied_rpm_m1 = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
     message -> applied_rpm_m2 = newJausDouble(0); // Scaled Short (-5000,5000), Res: 0.15
     message -> applied_rudder_angle = newJausDouble(0); // Scaled Short (-90,90), Res: 0.003
-    message -> velocity_limitations = newJausByte(0); // Scaled Byte (1,n)=>(0,255) Enumerado
-    message -> direction_limitations = newJausByte(0); // Scaled Byte (1,n)=>(0,255) Enumerado
+    message -> velocity_limitations = JAUS_FALSE; // Scaled Byte (1,n)=>(0,255) Enumerado
+    message -> direction_limitations = JAUS_FALSE; // Scaled Byte (1,n)=>(0,255) Enumerado
     message -> mode_switching_status = newJausByte(0); // Scaled Byte (1,7) Enumerado
 
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
@@ -93,7 +93,8 @@ static void dataDestroy(ReportUSVRemoteControl2Message message) {
 
 static JausBoolean dataFromBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar	
+    JausShort tempShort = 0; //Variable temporal para desempaquetar
+    JausByte tempByte = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
         
@@ -150,16 +151,14 @@ static JausBoolean dataFromBuffer(ReportUSVRemoteControl2Message message, unsign
             index += JAUS_SHORT_SIZE_BYTES;
             message->applied_rudder_angle = jausShortToDouble(tempShort, -90, 90);
         }
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)) {
-            if (!jausByteFromBuffer(&message->velocity_limitations, buffer + index, bufferSizeBytes - index))
+        if (jausByteIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)
+                || jausByteIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
+            tempByte = 0;
+            //Se desempaqueta el Byte completo que guarda los distintos booleanos.
+            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
-            if (!jausByteFromBuffer(&message->direction_limitations, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
+            message->velocity_limitations = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
+            message->direction_limitations = jausByteIsBitSet(tempByte, 1) ? JAUS_TRUE : JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
         if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
@@ -178,7 +177,8 @@ static JausBoolean dataFromBuffer(ReportUSVRemoteControl2Message message, unsign
 
 static int dataToBuffer(ReportUSVRemoteControl2Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar	
+    JausShort tempShort = 0; //Variable temporal para desempaquetar
+    JausByte tempByte = 0;
 
     if (bufferSizeBytes >= dataSize(message)) {
         
@@ -231,18 +231,15 @@ static int dataToBuffer(ReportUSVRemoteControl2Message message, unsigned char *b
             index += JAUS_SHORT_SIZE_BYTES;
         }
 
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)) {
-            if (!jausByteToBuffer(message->velocity_limitations, buffer + index, bufferSizeBytes - index))
+        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)
+                || jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
+            tempByte = 0;
+            if(message->velocity_limitations) tempByte |= 0x01;
+            if(message->direction_limitations) tempByte |= 0x02;
+            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_BYTE_SIZE_BYTES;
         }
-        
-        if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
-            if (!jausByteToBuffer(message->direction_limitations, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
-        
         if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
             if (!jausByteToBuffer(message->mode_switching_status, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
@@ -313,14 +310,10 @@ static unsigned int dataSize(ReportUSVRemoteControl2Message message) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
     
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT)) {
+    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_VELOCITY_LIMITATIONS_BIT) || 
+            jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
-    }
-    
-    if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_DIRECTION_LIMITATIONS_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-    
+    }    
     if (jausShortIsBitSet(message->presenceVector, JAUS_2_PV_MODE_SWITCHING_STATUS_BIT)) {
         index += JAUS_BYTE_SIZE_BYTES;
     }

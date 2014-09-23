@@ -31,7 +31,7 @@
  *   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ****************************************************************************/
-// File Name: reportDayTimeCamera22Message.c
+// File Name: setTelemeter26Message.c
 //
 // Written By: Danny Kent (jaus AT dannykent DOT com), Tom Galluzzo (galluzzo AT gmail DOT com)
 //
@@ -39,25 +39,25 @@
 //
 // Date: 09/08/09
 //
-// Description: This file defines the functionality of a ReportDayTimeCamera22Message
+// Description: This file defines the functionality of a SetTelemeter26Message
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "jaus.h"
 
-static const int commandCode = JAUS_REPORT_DAY_TIME_CAMERA_22;
-static const int maxDataSizeBytes = 4;
+static const int commandCode = JAUS_SET_TELEMETER_26;
+static const int maxDataSizeBytes = 1;
 
-static JausBoolean headerFromBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static JausBoolean headerToBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int headerToString(ReportDayTimeCamera22Message message, char **buf);
+static JausBoolean headerFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static JausBoolean headerToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int headerToString(SetTelemeter26Message message, char **buf);
 
-static JausBoolean dataFromBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static int dataToBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
-static void dataInitialize(ReportDayTimeCamera22Message message);
-static void dataDestroy(ReportDayTimeCamera22Message message);
-static unsigned int dataSize(ReportDayTimeCamera22Message message);
+static JausBoolean dataFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static int dataToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes);
+static void dataInitialize(SetTelemeter26Message message);
+static void dataDestroy(SetTelemeter26Message message);
+static unsigned int dataSize(SetTelemeter26Message message);
 
 // ************************************************************************************************************** //
 //                                    USER CONFIGURED FUNCTIONS
@@ -65,66 +65,34 @@ static unsigned int dataSize(ReportDayTimeCamera22Message message);
 
 // Initializes the message-specific fields
 
-static void dataInitialize(ReportDayTimeCamera22Message message) {
-    
-    message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
-    
-    message -> active_zoom = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
-    message -> active_focus = newJausDouble(0); // Scaled Short (0,100), Res:0.001 
-    message -> active_autofocus = JAUS_FALSE;
+static void dataInitialize(SetTelemeter26Message message) {
 
+    message -> shoot = JAUS_FALSE;
     message -> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
 
 // Destructs the message-specific fields
 
-static void dataDestroy(ReportDayTimeCamera22Message message) {
+static void dataDestroy(SetTelemeter26Message message) {
     // Free message fields
 }
 
 // Return boolean of success
 
-static JausBoolean dataFromBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean dataFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar	
     JausByte tempByte = 0; //Variable temporal para desempaquetar
 
     if (bufferSizeBytes == message->dataSize) {
-        
-        //Desempaquetar Presence Vector.Se saca del buffer el Presence Vector
-        if (!jausByteFromBuffer(&message->presenceVector, buffer + index, bufferSizeBytes - index))
+
+        tempByte = 0;
+        //Se desempaqueta el Byte completo que guarda los distintos booleanos.
+        if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
             return JAUS_FALSE;
-
-        //Se suma tamaño del Presence Vector
+        message->shoot = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
         index += JAUS_BYTE_SIZE_BYTES;
-
-        if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->active_zoom = jausShortToDouble(tempShort, 0, 100);
-            
-        }
-        
-        tempShort = 0;
-        if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_FOCUS_BIT)) {
-            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            //Se suma tamaño del parámetro
-            index += JAUS_SHORT_SIZE_BYTES;
-            message->active_focus = jausShortToDouble(tempShort, 0, 100);
-        }
-
-        if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_AUTOFOCUS_BIT)) {
-            tempByte = 0;
-            //Se desempaqueta el Byte completo que guarda los distintos booleanos.
-            if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            message->active_autofocus = jausByteIsBitSet(tempByte, 0) ? JAUS_TRUE : JAUS_FALSE;
-        }
-        
         return JAUS_TRUE;
+        
     } else {
         return JAUS_FALSE;
     }
@@ -132,48 +100,24 @@ static JausBoolean dataFromBuffer(ReportDayTimeCamera22Message message, unsigned
 
 // Returns number of bytes put into the buffer
 
-static int dataToBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static int dataToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     int index = 0;
-    JausShort tempShort = 0; //Variable temporal para desempaquetar	
-    JausByte tempByte = 0; //Variable temporal para desempaquetar
+    JausByte tempByte = 0; //Variable temporal para empaquetar
 
     if (bufferSizeBytes >= dataSize(message)) {
-        
-        //Se empaqueta el Presence Vector
-        if (!jausByteToBuffer(message->presenceVector, buffer + index, bufferSizeBytes - index))
-            return JAUS_FALSE;
 
-        //Se suma tamaño del presence Vector
+        tempByte = 0;
+        if (message->shoot) jausByteSetBit(&tempByte, 0);
+        //pack
+        if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
         index += JAUS_BYTE_SIZE_BYTES;
 
-        if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
-            tempShort = jausShortFromDouble(message->active_zoom, 0, 100);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-
-        if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_FOCUS_BIT)) {
-            tempShort = jausShortFromDouble(message->active_focus, 0, 100);
-            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
-                return JAUS_FALSE;
-            index += JAUS_SHORT_SIZE_BYTES;
-        }
-
-        if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_AUTOFOCUS_BIT)) {
-            tempByte = 0;
-
-            if (message->active_autofocus) jausByteSetBit(&tempByte, 0);
-            //pack
-            if (!jausByteToBuffer(tempByte, buffer + index, bufferSizeBytes - index)) return JAUS_FALSE;
-            index += JAUS_BYTE_SIZE_BYTES;
-        }
     }
 
     return index;
 }
 
-static int dataToString(ReportDayTimeCamera22Message message, char **buf) {
+static int dataToString(SetTelemeter26Message message, char **buf) {
     //message already verified 
 
     //Setup temporary string buffer
@@ -202,23 +146,9 @@ static int dataToString(ReportDayTimeCamera22Message message, char **buf) {
 
 // Returns number of bytes put into the buffer
 
-static unsigned int dataSize(ReportDayTimeCamera22Message message) {
+static unsigned int dataSize(SetTelemeter26Message message) {
     int index = 0;
-    
     index += JAUS_BYTE_SIZE_BYTES;
-
-    if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_ZOOM_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_FOCUS_BIT)) {
-        index += JAUS_SHORT_SIZE_BYTES;
-    }
-
-    if (jausByteIsBitSet(message->presenceVector, JAUS_22_PV_AUTOFOCUS_BIT)) {
-        index += JAUS_BYTE_SIZE_BYTES;
-    }
-
     return index;
 }
 
@@ -226,10 +156,10 @@ static unsigned int dataSize(ReportDayTimeCamera22Message message) {
 //                                    NON-USER CONFIGURED FUNCTIONS
 // ************************************************************************************************************** //
 
-ReportDayTimeCamera22Message reportDayTimeCamera22MessageCreate(void) {
-    ReportDayTimeCamera22Message message;
+SetTelemeter26Message setTelemeter26MessageCreate(void) {
+    SetTelemeter26Message message;
 
-    message = (ReportDayTimeCamera22Message) malloc(sizeof (ReportDayTimeCamera22MessageStruct));
+    message = (SetTelemeter26Message) malloc(sizeof (SetTelemeter26MessageStruct));
     if (message == NULL) {
         return NULL;
     }
@@ -254,14 +184,14 @@ ReportDayTimeCamera22Message reportDayTimeCamera22MessageCreate(void) {
     return message;
 }
 
-void reportDayTimeCamera22MessageDestroy(ReportDayTimeCamera22Message message) {
+void setTelemeter26MessageDestroy(SetTelemeter26Message message) {
     dataDestroy(message);
     jausAddressDestroy(message->source);
     jausAddressDestroy(message->destination);
     free(message);
 }
 
-JausBoolean reportDayTimeCamera22MessageFromBuffer(ReportDayTimeCamera22Message message, unsigned char* buffer, unsigned int bufferSizeBytes) {
+JausBoolean setTelemeter26MessageFromBuffer(SetTelemeter26Message message, unsigned char* buffer, unsigned int bufferSizeBytes) {
     int index = 0;
 
     if (headerFromBuffer(message, buffer + index, bufferSizeBytes - index)) {
@@ -276,26 +206,26 @@ JausBoolean reportDayTimeCamera22MessageFromBuffer(ReportDayTimeCamera22Message 
     }
 }
 
-JausBoolean reportDayTimeCamera22MessageToBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
-    if (bufferSizeBytes < reportDayTimeCamera22MessageSize(message)) {
+JausBoolean setTelemeter26MessageToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+    if (bufferSizeBytes < setTelemeter26MessageSize(message)) {
         return JAUS_FALSE; //improper size	
     } else {
         message->dataSize = dataToBuffer(message, buffer + JAUS_HEADER_SIZE_BYTES, bufferSizeBytes - JAUS_HEADER_SIZE_BYTES);
         if (headerToBuffer(message, buffer, bufferSizeBytes)) {
             return JAUS_TRUE;
         } else {
-            return JAUS_FALSE; // headerToReportDayTimeCamera22Buffer failed
+            return JAUS_FALSE; // headerToSetTelemeter26Buffer failed
         }
     }
 }
 
-ReportDayTimeCamera22Message reportDayTimeCamera22MessageFromJausMessage(JausMessage jausMessage) {
-    ReportDayTimeCamera22Message message;
+SetTelemeter26Message setTelemeter26MessageFromJausMessage(JausMessage jausMessage) {
+    SetTelemeter26Message message;
 
     if (jausMessage->commandCode != commandCode) {
         return NULL; // Wrong message type
     } else {
-        message = (ReportDayTimeCamera22Message) malloc(sizeof (ReportDayTimeCamera22MessageStruct));
+        message = (SetTelemeter26Message) malloc(sizeof (SetTelemeter26MessageStruct));
         if (message == NULL) {
             return NULL;
         }
@@ -324,7 +254,7 @@ ReportDayTimeCamera22Message reportDayTimeCamera22MessageFromJausMessage(JausMes
     }
 }
 
-JausMessage reportDayTimeCamera22MessageToJausMessage(ReportDayTimeCamera22Message message) {
+JausMessage setTelemeter26MessageToJausMessage(SetTelemeter26Message message) {
     JausMessage jausMessage;
     //int size;
 
@@ -354,11 +284,11 @@ JausMessage reportDayTimeCamera22MessageToJausMessage(ReportDayTimeCamera22Messa
     return jausMessage;
 }
 
-unsigned int reportDayTimeCamera22MessageSize(ReportDayTimeCamera22Message message) {
+unsigned int setTelemeter26MessageSize(SetTelemeter26Message message) {
     return (unsigned int) (dataSize(message) + JAUS_HEADER_SIZE_BYTES);
 }
 
-char* reportDayTimeCamera22MessageToString(ReportDayTimeCamera22Message message) {
+char* setTelemeter26MessageToString(SetTelemeter26Message message) {
     if (message) {
         char* buf1 = NULL;
         char* buf2 = NULL;
@@ -381,7 +311,7 @@ char* reportDayTimeCamera22MessageToString(ReportDayTimeCamera22Message message)
 
         return buf;
     } else {
-        char* buf = "Invalid ReportDayTimeCamera22 Message";
+        char* buf = "Invalid SetTelemeter26 Message";
         char* msg = (char*) malloc(strlen(buf) + 1);
         strcpy(msg, buf);
         return msg;
@@ -389,7 +319,7 @@ char* reportDayTimeCamera22MessageToString(ReportDayTimeCamera22Message message)
 }
 //********************* PRIVATE HEADER FUNCTIONS **********************//
 
-static JausBoolean headerFromBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean headerFromBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     if (bufferSizeBytes < JAUS_HEADER_SIZE_BYTES) {
         return JAUS_FALSE;
     } else {
@@ -423,7 +353,7 @@ static JausBoolean headerFromBuffer(ReportDayTimeCamera22Message message, unsign
     }
 }
 
-static JausBoolean headerToBuffer(ReportDayTimeCamera22Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
+static JausBoolean headerToBuffer(SetTelemeter26Message message, unsigned char *buffer, unsigned int bufferSizeBytes) {
     JausUnsignedShort *propertiesPtr = (JausUnsignedShort*) & message->properties;
 
     if (bufferSizeBytes < JAUS_HEADER_SIZE_BYTES) {
@@ -455,7 +385,7 @@ static JausBoolean headerToBuffer(ReportDayTimeCamera22Message message, unsigned
     }
 }
 
-static int headerToString(ReportDayTimeCamera22Message message, char **buf) {
+static int headerToString(SetTelemeter26Message message, char **buf) {
     //message existance already verified 
 
     //Setup temporary string buffer
@@ -565,3 +495,4 @@ static int headerToString(ReportDayTimeCamera22Message message, char **buf) {
 
 
 }
+

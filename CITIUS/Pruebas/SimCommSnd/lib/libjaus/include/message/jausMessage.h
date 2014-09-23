@@ -259,7 +259,6 @@
 #define JAUS_SET_USV_OBSERVATIONS_CONFIG_7      0xE007
 #define JAUS_REPORT_USV_OBSERVATIONS_CONFIG_8   0xE008
 
-#define JAUS_TELEMETER_INFO_10                  0xE010
 #define JAUS_SET_SCIENTIFICS_OPERATIONS_11      0xE011
 #define JAUS_UGV_INFO_12                        0xE012
 #define JAUS_REPORT_SCIENTIFIC_OPERATIONS_13    0xE013
@@ -275,6 +274,10 @@
 #define JAUS_SET_NIGHT_TIME_CAMERA_23           0xE023
 #define JAUS_REPORT_NIGHT_TIME_CAMERA_24        0xE024
 #define JAUS_REPORT_SIGNALING_ELEMENTS_25       0xE025
+
+#define JAUS_SET_TELEMETER_26                   0xE026
+#define JAUS_REPORT_TELEMETER_27              0xE027
+
 
 
 // Define JausMessage data structure

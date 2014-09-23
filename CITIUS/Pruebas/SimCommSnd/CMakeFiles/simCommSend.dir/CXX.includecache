@@ -10,6 +10,10 @@
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/JausController.h
 
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/JausHandler.cpp
+JausHandler.h
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/JausHandler.h
+
 /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/main.cpp
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/JausController.h
@@ -415,10 +419,6 @@ jaus.h
 lib/libjaus/include/message/experimental/jaus.h
 
 lib/libjaus/include/message/experimental/setUSVRemote1Message.h
-jaus.h
-lib/libjaus/include/message/experimental/jaus.h
-
-lib/libjaus/include/message/experimental/telemeterInfo10Message.h
 jaus.h
 lib/libjaus/include/message/experimental/jaus.h
 
