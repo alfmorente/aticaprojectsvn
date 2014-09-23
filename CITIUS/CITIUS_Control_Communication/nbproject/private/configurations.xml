@@ -37,6 +37,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_Communication.dir">
@@ -789,32 +791,8 @@
       </df>
       <df name="msg">
       </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Communication">
-              <in>msg_command.h</in>
-              <in>msg_ctrlFrontCamera.h</in>
-              <in>msg_ctrlRearCamera.h</in>
-              <in>msg_echoesFound.h</in>
-              <in>msg_electricInfo.h</in>
-              <in>msg_frontCameraInfo.h</in>
-              <in>msg_irinfo.h</in>
-              <in>msg_panTiltPosition.h</in>
-              <in>msg_posOriInfo.h</in>
-              <in>msg_rearCameraInfo.h</in>
-              <in>msg_tvinfo.h</in>
-              <in>msg_vehicleInfo.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
-      </df>
       <df name="src">
         <df name="CITIUS_Control_Communication">
-          <df name="msg">
-          </df>
           <df name="srv">
           </df>
         </df>
@@ -826,24 +804,6 @@
       <df name="srv">
       </df>
       <df name="srv_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Communication">
-              <in>srv_autofocusMode.h</in>
-              <in>srv_dzoom.h</in>
-              <in>srv_focusDirect.h</in>
-              <in>srv_panAbsolutePosition.h</in>
-              <in>srv_panRate.h</in>
-              <in>srv_polarity.h</in>
-              <in>srv_shoot.h</in>
-              <in>srv_tiltAbsolutePosition.h</in>
-              <in>srv_tiltRate.h</in>
-              <in>srv_vehicleStatus.h</in>
-              <in>srv_zoomCommand.h</in>
-              <in>srv_zoomDirect.h</in>
-            </df>
-          </df>
-        </df>
         <df name="lisp">
         </df>
       </df>

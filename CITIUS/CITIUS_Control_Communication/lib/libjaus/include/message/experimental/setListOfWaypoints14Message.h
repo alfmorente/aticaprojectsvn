@@ -104,6 +104,7 @@ typedef struct
 typedef SetListOfWaypoints14MessageStruct* SetListOfWaypoints14Message;
 
 JAUS_EXPORT SetListOfWaypoints14Message setListOfWaypoints14MessageCreate(void);
+JAUS_EXPORT SetListOfWaypoints14Message setListOfWaypoints14MessageCreateFromNofWps(JausByte);
 JAUS_EXPORT void setListOfWaypoints14MessageDestroy(SetListOfWaypoints14Message);
 
 JAUS_EXPORT JausBoolean setListOfWaypoints14MessageFromBuffer(SetListOfWaypoints14Message message, unsigned char* buffer, unsigned int bufferSizeBytes);

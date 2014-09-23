@@ -306,6 +306,41 @@ SetListOfWaypoints14Message setListOfWaypoints14MessageCreate(void) {
     return message;
 }
 
+SetListOfWaypoints14Message setListOfWaypoints14MessageCreateFromNofWps(JausByte numOfWps){
+    SetListOfWaypoints14Message message;
+
+    message = (SetListOfWaypoints14Message) malloc(sizeof (SetListOfWaypoints14MessageStruct));
+    if (message == NULL) {
+        return NULL;
+    }
+
+    // Initialize Values
+    message->properties.priority = JAUS_DEFAULT_PRIORITY;
+    message->properties.ackNak = JAUS_ACK_NAK_NOT_REQUIRED;
+    message->properties.scFlag = JAUS_NOT_SERVICE_CONNECTION_MESSAGE;
+    message->properties.expFlag = JAUS_NOT_EXPERIMENTAL_MESSAGE;
+    message->properties.version = JAUS_VERSION_3_3;
+    message->properties.reserved = 0;
+    message->commandCode = commandCode;
+    message->destination = jausAddressCreate();
+    message->source = jausAddressCreate();
+    message->dataFlag = JAUS_SINGLE_DATA_PACKET;
+    message->dataSize = maxDataSizeBytes;
+    message->sequenceNumber = 0;
+    
+    
+    
+    dataInitialize(message);
+    message->dataSize = dataSize(message);
+    
+    message -> waypoints_ids_list = (unsigned char *) malloc(numOfWps * JAUS_BYTE_SIZE_BYTES);
+    message -> latitudes_list = (JausDouble *) malloc(numOfWps * JAUS_DOUBLE_SIZE_BYTES);
+    message -> longitudes_list = (JausDouble *) malloc(numOfWps * JAUS_DOUBLE_SIZE_BYTES);
+    message -> velocities_list = (JausDouble *) malloc(numOfWps * JAUS_DOUBLE_SIZE_BYTES);
+    
+    return message;
+}
+
 void setListOfWaypoints14MessageDestroy(SetListOfWaypoints14Message message) {
     dataDestroy(message);
     jausAddressDestroy(message->source);
