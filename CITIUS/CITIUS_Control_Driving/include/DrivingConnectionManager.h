@@ -21,6 +21,7 @@ extern "C" {
 #endif	/* DrivingConnectionManager */
 
 #include "ros/ros.h"
+#include "QueueMng.hpp"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,7 +31,7 @@ extern "C" {
 #include <netdb.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
-#include "QueueMng.hpp"
+
 
 typedef struct {
     short steering;
@@ -54,10 +55,10 @@ class DrivingConnectionManager{
 private:
     // Socket
     int socketDescriptor;
-    // Manejador de la cola de mensajes (Integridad)
-    QueueMng messageQueue;
     // Contador para la cola de mensajes (Integridad)
     int countMsg;
+    // Manejador de la cola de mensajes (Integridad)
+    QueueMng messageQueue;
     
 public:
     // Constructor
@@ -71,6 +72,7 @@ public:
     bool disconnectVehicle();
     // Getter y setter necesarios
     int getSocketDescriptor();
+    bool isCriticalInstruction(short element);
 
 };
 

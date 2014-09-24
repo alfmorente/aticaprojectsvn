@@ -540,6 +540,30 @@ src/DrivingConnectionManager.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
 .PHONY : src/DrivingConnectionManager.cpp.s
 
+src/QueueMng.o: src/QueueMng.cpp.o
+.PHONY : src/QueueMng.o
+
+# target to build an object file
+src/QueueMng.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.o
+.PHONY : src/QueueMng.cpp.o
+
+src/QueueMng.i: src/QueueMng.cpp.i
+.PHONY : src/QueueMng.i
+
+# target to preprocess a source file
+src/QueueMng.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.i
+.PHONY : src/QueueMng.cpp.i
+
+src/QueueMng.s: src/QueueMng.cpp.s
+.PHONY : src/QueueMng.s
+
+# target to generate assembly for a file
+src/QueueMng.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.s
+.PHONY : src/QueueMng.cpp.s
+
 src/RosNode_Driving.o: src/RosNode_Driving.cpp.o
 .PHONY : src/RosNode_Driving.o
 
@@ -563,6 +587,30 @@ src/RosNode_Driving.s: src/RosNode_Driving.cpp.s
 src/RosNode_Driving.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/RosNode_Driving.cpp.s
 .PHONY : src/RosNode_Driving.cpp.s
+
+src/Thread.o: src/Thread.cpp.o
+.PHONY : src/Thread.o
+
+# target to build an object file
+src/Thread.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.o
+.PHONY : src/Thread.cpp.o
+
+src/Thread.i: src/Thread.cpp.i
+.PHONY : src/Thread.i
+
+# target to preprocess a source file
+src/Thread.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.i
+.PHONY : src/Thread.cpp.i
+
+src/Thread.s: src/Thread.cpp.s
+.PHONY : src/Thread.s
+
+# target to generate assembly for a file
+src/Thread.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.s
+.PHONY : src/Thread.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -632,9 +680,15 @@ help:
 	@echo "... src/DrivingConnectionManager.o"
 	@echo "... src/DrivingConnectionManager.i"
 	@echo "... src/DrivingConnectionManager.s"
+	@echo "... src/QueueMng.o"
+	@echo "... src/QueueMng.i"
+	@echo "... src/QueueMng.s"
 	@echo "... src/RosNode_Driving.o"
 	@echo "... src/RosNode_Driving.i"
 	@echo "... src/RosNode_Driving.s"
+	@echo "... src/Thread.o"
+	@echo "... src/Thread.i"
+	@echo "... src/Thread.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

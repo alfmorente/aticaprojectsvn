@@ -8,14 +8,10 @@
 #ifndef QUEUEMNG_HPP
 #define	QUEUEMNG_HPP
 
-
-
 #include "Thread.hpp"
+#include "constant.h"
 #include <queue>
 #include <cstdlib>
-#include "constant.h"
-
-
 
 class QueueMng : public Thread {
     
@@ -23,7 +19,6 @@ public:
     QueueMng();
     virtual ~QueueMng();
     virtual void DoWork();
-    void setMode(bool);
     
     // Atributo cola de datos
     queue<FrameDriving> queueMsgdata;

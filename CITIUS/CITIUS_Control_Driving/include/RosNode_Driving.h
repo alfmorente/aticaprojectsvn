@@ -23,7 +23,7 @@ extern "C" {
 
 #include <time.h>
 #include "DrivingConnectionManager.h"
-#include "constant.h"
+//#include "constant.h"
 #include "CITIUS_Control_Driving/msg_command.h"
 #include "CITIUS_Control_Driving/msg_vehicleInfo.h"
 #include "CITIUS_Control_Driving/srv_nodeStatus.h"

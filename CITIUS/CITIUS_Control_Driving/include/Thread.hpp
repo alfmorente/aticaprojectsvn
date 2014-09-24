@@ -39,7 +39,6 @@ public:
 
     void Terminate() throw (ThreadException);
 
-    bool IsActive();
 };
 
 #endif

@@ -57,6 +57,13 @@ CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/DrivingConnectionManager.h
+ include/QueueMng.hpp
+ include/Thread.hpp
+ include/constant.h
+CMakeFiles/driving.dir/src/QueueMng.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/QueueMng.cpp
+ include/QueueMng.hpp
+ include/Thread.hpp
  include/constant.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp
@@ -115,11 +122,16 @@ CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/DrivingConnectionManager.h
+ include/QueueMng.hpp
  include/RosNode_Driving.h
+ include/Thread.hpp
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
  msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h
  srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h
+CMakeFiles/driving.dir/src/Thread.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp
+ include/Thread.hpp
 CMakeFiles/driving.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
@@ -177,7 +189,9 @@ CMakeFiles/driving.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/DrivingConnectionManager.h
+ include/QueueMng.hpp
  include/RosNode_Driving.h
+ include/Thread.hpp
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
  msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h

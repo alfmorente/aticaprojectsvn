@@ -1,5 +1,6 @@
 #include "DrivingConnectionManager.h"
-#include "constant.h"
+
+
 
 /*******************************************************************************
  * CONSTRUCTOR DE LA CLASE
@@ -83,13 +84,19 @@ void DrivingConnectionManager::setParam(short idParam, float value) {
     // Estructura de envio
     FrameDriving fd;
     fd.instruction = SET;
-    fd.id_instruccion = countMsg;
     fd.element = idParam;
     fd.value = value;
-    
-    // Incremento de contador de mensajes
-    countMsg++;
-    
+
+    if (isCriticalInstruction(idParam)) {
+        // Contador de mensajes criticos
+        fd.id_instruccion = countMsg;
+        countMsg++;
+        // Envio a la cola de mensajes a la espera de ACK
+        messageQueue.queueMsgdata.push(fd);
+    }else{
+        fd.id_instruccion = 0;
+    }
+        
     // Buffer de envio
     char bufData[8];
     
@@ -101,10 +108,7 @@ void DrivingConnectionManager::setParam(short idParam, float value) {
     
     // Envio via socket
     send(socketDescriptor, bufData, sizeof(bufData), 0);
-    usleep(100);
-    
-    // Envio a la cola de mensajes a la espera de ACK
-    messageQueue.queueMsgdata.push(fd);
+    usleep(100);    
 
 }
 
@@ -205,4 +209,27 @@ DrivingInfo DrivingConnectionManager::reqFullVehicleInfo(){
 // Get del descriptor de socket
 int DrivingConnectionManager::getSocketDescriptor(){
     return socketDescriptor;
+}
+
+/*******************************************************************************
+ * METODOS PROPIOS
+ *******************************************************************************/
+
+bool DrivingConnectionManager::isCriticalInstruction(short element) {
+    if (element == RESET
+            || element == GEAR
+            || element == MT_GEAR
+            || element == THROTTLE
+            || element == MT_THROTTLE
+            || element == CRUISING_SPEED
+            || element == HANDBRAKE
+            || element == MT_HANDBRAKE
+            || element == BRAKE
+            || element == MT_BRAKE
+            || element == STEERING
+            || element == MT_STEERING) {
+        return true;
+    } else {
+        return false;
+    }
 }

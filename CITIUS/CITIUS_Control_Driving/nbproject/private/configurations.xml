@@ -24,10 +24,6 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
-          <df name="CMakeFiles">
-            <df name="cmTryCompileExec.dir">
-            </df>
-          </df>
         </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
@@ -149,6 +145,7 @@
         <in>DrivingConnectionManager.cpp</in>
         <in>QueueMng.cpp</in>
         <in>RosNode_Driving.cpp</in>
+        <in>Thread.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">

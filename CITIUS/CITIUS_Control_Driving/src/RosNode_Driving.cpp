@@ -34,16 +34,13 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
         if (vmNodeStatus == NODESTATUS_OK) {
             ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
             if (checkCommand(msg)) {
-                if (this->getDriverMng()->setParam(msg.id_device, msg.value)) {
-                    ROS_INFO("[Control] Driving - Comando enviado correctamente.");
-                } else {
-                    ROS_INFO("[Control] Driving - No se encontro el ACK");
-                }
+                this->
+                dVehicle->setParam(msg.id_device, msg.value);
             } else {
                 ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
             }
         } else {
-            ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d", this->vmNodeStatus);
+            ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d", vmNodeStatus);
         }
     }else{
         ROS_INFO("[Control Driving - Descartado comando - Vehiculo fuera del modo CONDUCCION]");

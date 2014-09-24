@@ -8,6 +8,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/driving.dir/src/main.cpp.o"
   "CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
   "CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o"
+  "CMakeFiles/driving.dir/src/QueueMng.cpp.o"
+  "CMakeFiles/driving.dir/src/Thread.cpp.o"
   "bin/driving.pdb"
   "bin/driving"
 )

@@ -5,14 +5,14 @@
  * Created on 24 de septiembre de 2014
  */
 
-#include "Modulo_GPS/QueueMng.hpp"
+#include "QueueMng.hpp"
 #include <queue>
 #include <iostream>
 
 using namespace std;
 
 QueueMng::QueueMng(){
-    this->mode_active=true;
+
 }
 
 QueueMng::~QueueMng() {
@@ -27,10 +27,10 @@ FrameDriving *QueueMng::informResponse(bool ack, short id_instruction){
     
     if(ack){ // ACK
         
-        if(id_instruction == queueMsgdata.front().id_instruction){ // Primer elemento y requerido coinciden
+        if(id_instruction == queueMsgdata.front().id_instruccion){ // Primer elemento y requerido coinciden
             queueMsgdata.pop();
-        }else if(id_instruction > queueMsgdata.front().id_instruction){ // Confirmacion de varios elementos
-            while(id_instruction >= queueMsgdata.front().id_instruction){
+        }else if(id_instruction > queueMsgdata.front().id_instruccion){ // Confirmacion de varios elementos
+            while(id_instruction >= queueMsgdata.front().id_instruccion){
                 queueMsgdata.pop();
             }
         }
@@ -41,4 +41,5 @@ FrameDriving *QueueMng::informResponse(bool ack, short id_instruction){
     
         
     }
+    return NULL;
 }
