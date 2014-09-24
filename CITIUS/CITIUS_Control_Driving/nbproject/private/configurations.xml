@@ -41,8 +41,6 @@
           <df name="src">
           </df>
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving.dir">
@@ -114,9 +112,7 @@
         <df name="CITIUS_Control_Driving">
         </df>
         <in>DrivingConnectionManager.h</in>
-        <in>QueueMng.hpp</in>
         <in>RosNode_Driving.h</in>
-        <in>Thread.hpp</in>
         <in>constant.h</in>
       </df>
       <df name="lib">
@@ -125,14 +121,6 @@
       </df>
       <df name="msg_gen">
         <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Driving">
-              <in>msg_command.h</in>
-              <in>msg_vehicleInfo.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
         </df>
       </df>
       <df name="src">
@@ -143,9 +131,7 @@
           </df>
         </df>
         <in>DrivingConnectionManager.cpp</in>
-        <in>QueueMng.cpp</in>
         <in>RosNode_Driving.cpp</in>
-        <in>Thread.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">
@@ -154,7 +140,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Driving">
-              <in>srv_nodeStatus.h</in>
             </df>
           </df>
         </df>

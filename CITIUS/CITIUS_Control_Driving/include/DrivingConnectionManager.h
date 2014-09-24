@@ -19,9 +19,9 @@ extern "C" {
 #endif
 
 #endif	/* DrivingConnectionManager */
-
+#include <vector>
 #include "ros/ros.h"
-#include "QueueMng.hpp"
+#include "constant.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,47 +32,49 @@ extern "C" {
 #include <fcntl.h>
 #include <arpa/inet.h>
 
-
-typedef struct {
-    short steering;
-    short thottle;
-    short brake;
-    bool parkingBrake;
-    unsigned short gear;
-    unsigned short speed;
-    short motorRPM;
-    short motorTemperature;
-    bool lights;
-    bool blinkerLeft;
-    bool blinkerRight;
-    bool dipss;
-    bool dipsr;
-    bool dipsp;
-    bool klaxon;
-}DrivingInfo;
+using namespace std;
 
 class DrivingConnectionManager{
 private:
+    
     // Socket
     int socketDescriptor;
+    
     // Contador para la cola de mensajes (Integridad)
-    int countMsg;
+    short countMsg;
+    
     // Manejador de la cola de mensajes (Integridad)
-    QueueMng messageQueue;
+    vector<FrameDriving> messageQueue;
+    
+    // Informacion actualizable del vehiculo
+    DrivingInfo vehicleInfo;
     
 public:
     // Constructor
     DrivingConnectionManager();
+    
     // Gestion del vehiculo
     bool connectVehicle();
-    void setParam(short idParam, float value);
-    short getParam(short idParam);
-    DrivingInfo reqBasicVehicleInfo();
-    DrivingInfo reqFullVehicleInfo();
     bool disconnectVehicle();
+    
+    // Mensajeria con vehiculo
+    void sendToVehicle(FrameDriving frame);
+    void reqVehicleInfo(bool full);
+    bool checkForVehicleMessages();
+    
     // Getter y setter necesarios
     int getSocketDescriptor();
+    short getCountCriticalMessages();
+    void setCountCriticalMessages(short cont);
+    DrivingInfo getVehicleInfo(bool full);
+    void setVehicleInfo(short id_device, short value);
+    
+    // Metodos auxiliares
     bool isCriticalInstruction(short element);
-
+    
+    // Tratamiento de la cola de mensajes criticos
+    void addToQueue(FrameDriving frame);
+    RtxStruct informResponse(bool,short);
+    
 };
 

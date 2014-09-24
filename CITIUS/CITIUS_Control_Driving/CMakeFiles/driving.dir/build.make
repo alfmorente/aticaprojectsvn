@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving
 
@@ -157,85 +154,11 @@ CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o.provides: CMakeFiles/driving.di
 
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o.provides.build: CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o
 
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: src/QueueMng.cpp
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: manifest.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/QueueMng.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/QueueMng.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/QueueMng.cpp
-
-CMakeFiles/driving.dir/src/QueueMng.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/QueueMng.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/QueueMng.cpp > CMakeFiles/driving.dir/src/QueueMng.cpp.i
-
-CMakeFiles/driving.dir/src/QueueMng.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/QueueMng.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/QueueMng.cpp -o CMakeFiles/driving.dir/src/QueueMng.cpp.s
-
-CMakeFiles/driving.dir/src/QueueMng.cpp.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/QueueMng.cpp.o.requires
-
-CMakeFiles/driving.dir/src/QueueMng.cpp.o.provides: CMakeFiles/driving.dir/src/QueueMng.cpp.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/QueueMng.cpp.o.provides
-
-CMakeFiles/driving.dir/src/QueueMng.cpp.o.provides.build: CMakeFiles/driving.dir/src/QueueMng.cpp.o
-
-CMakeFiles/driving.dir/src/Thread.cpp.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/Thread.cpp.o: src/Thread.cpp
-CMakeFiles/driving.dir/src/Thread.cpp.o: manifest.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/Thread.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/Thread.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/Thread.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp
-
-CMakeFiles/driving.dir/src/Thread.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/Thread.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp > CMakeFiles/driving.dir/src/Thread.cpp.i
-
-CMakeFiles/driving.dir/src/Thread.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/Thread.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp -o CMakeFiles/driving.dir/src/Thread.cpp.s
-
-CMakeFiles/driving.dir/src/Thread.cpp.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/Thread.cpp.o.requires
-
-CMakeFiles/driving.dir/src/Thread.cpp.o.provides: CMakeFiles/driving.dir/src/Thread.cpp.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/Thread.cpp.o.provides
-
-CMakeFiles/driving.dir/src/Thread.cpp.o.provides.build: CMakeFiles/driving.dir/src/Thread.cpp.o
-
 # Object files for target driving
 driving_OBJECTS = \
 "CMakeFiles/driving.dir/src/main.cpp.o" \
 "CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o" \
-"CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o" \
-"CMakeFiles/driving.dir/src/QueueMng.cpp.o" \
-"CMakeFiles/driving.dir/src/Thread.cpp.o"
+"CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o"
 
 # External object files for target driving
 driving_EXTERNAL_OBJECTS =
@@ -243,8 +166,6 @@ driving_EXTERNAL_OBJECTS =
 bin/driving: CMakeFiles/driving.dir/src/main.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o
-bin/driving: CMakeFiles/driving.dir/src/QueueMng.cpp.o
-bin/driving: CMakeFiles/driving.dir/src/Thread.cpp.o
 bin/driving: CMakeFiles/driving.dir/build.make
 bin/driving: CMakeFiles/driving.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/driving"
@@ -257,8 +178,6 @@ CMakeFiles/driving.dir/build: bin/driving
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/main.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/QueueMng.cpp.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/Thread.cpp.o.requires
 .PHONY : CMakeFiles/driving.dir/requires
 
 CMakeFiles/driving.dir/clean:

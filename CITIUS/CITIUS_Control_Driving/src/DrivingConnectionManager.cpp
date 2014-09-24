@@ -9,6 +9,21 @@
 DrivingConnectionManager::DrivingConnectionManager() {
     socketDescriptor = -1;
     countMsg = 1;
+    vehicleInfo.lights = false;
+    vehicleInfo.blinkerLeft = false;
+    vehicleInfo.blinkerRight = false;
+    vehicleInfo.dipsp = false;
+    vehicleInfo.dipsr = false;
+    vehicleInfo.dipss = false;
+    vehicleInfo.klaxon = false;
+    vehicleInfo.brake = 0;
+    vehicleInfo.thottle = 0;
+    vehicleInfo.steering = 0;
+    vehicleInfo.parkingBrake = false;
+    vehicleInfo.gear = 0;
+    vehicleInfo.speed = 0;
+    vehicleInfo.motorTemperature = 0;
+    vehicleInfo.motorRPM = 0;
 }
 
 /*******************************************************************************
@@ -77,129 +92,130 @@ bool DrivingConnectionManager::disconnectVehicle() {
     return true;
 }
 
-// Mandar comando de control
-
-void DrivingConnectionManager::setParam(short idParam, float value) {
-   
-    // Estructura de envio
-    FrameDriving fd;
-    fd.instruction = SET;
-    fd.element = idParam;
-    fd.value = value;
-
-    if (isCriticalInstruction(idParam)) {
-        // Contador de mensajes criticos
-        fd.id_instruccion = countMsg;
-        countMsg++;
-        // Envio a la cola de mensajes a la espera de ACK
-        messageQueue.queueMsgdata.push(fd);
-    }else{
-        fd.id_instruccion = 0;
-    }
-        
+// Mandar comando a vehiculo
+void DrivingConnectionManager::sendToVehicle(FrameDriving frame){
+    
     // Buffer de envio
     char bufData[8];
     
     // Rellenado del buffer
-    memcpy(&bufData[0], &fd.instruction, sizeof (fd.instruction));
-    memcpy(&bufData[2], &fd.id_instruccion, sizeof (fd.id_instruccion));
-    memcpy(&bufData[4], &fd.element, sizeof (fd.element));
-    memcpy(&bufData[6], &fd.value, sizeof (fd.value));
+    memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
+    memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
+    memcpy(&bufData[4], &frame.element, sizeof (frame.element));
+    memcpy(&bufData[6], &frame.value, sizeof (frame.value));
     
     // Envio via socket
     send(socketDescriptor, bufData, sizeof(bufData), 0);
-    usleep(100);    
-
-}
-
-// Solicitar informacion mediante comando
-short DrivingConnectionManager::getParam(short idParam){
-    
-    // Valor de devolucion
-    short dev = -500;
-    // Estructura de envio
-    FrameDriving fd;
-    fd.instruction = GET;
-    fd.element = idParam;
-    fd.value = 0;
-    // Buffer de envio/recepcion
-    char bufData[6];
-    // Rellenado del buffer
-    memcpy(&bufData[0], &fd.instruction, sizeof (fd.instruction));
-    memcpy(&bufData[2], &fd.element, sizeof (fd.element));
-    memcpy(&bufData[4], &fd.value, sizeof (fd.value));
-    send(socketDescriptor, bufData, sizeof (bufData), 0);
-    usleep(100);
-    // Variables de control de la recepcion
-    bool received = false;
-    bool timeout = false;
-    while (!received && !timeout) {
-        if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
-            // Estructura de recepcion
-            FrameDriving fdr;
-            // Rellenado del buffer
-            memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
-            memcpy(&fdr.element, &bufData[2], sizeof (fdr.element));
-            memcpy(&fdr.value, &bufData[4], sizeof (fdr.value));
-            if (fdr.instruction == INFO || fdr.element == idParam) {
-                received = true;
-                dev = fdr.value;
-            } else {
-                // Comprobacion y tratamiento de alarmas
-                // TODO
-            }
-        }
-    }
-    return dev;
-
-    
+    usleep(100);  
 }
 
 // Solicitar informacion basica de vehiculo
-DrivingInfo DrivingConnectionManager::reqBasicVehicleInfo(){
-    DrivingInfo ret;
-    
-    ret.thottle = getParam(THROTTLE);
-    ret.brake = getParam(BRAKE);
-    if(getParam(HANDBRAKE)==0) ret.parkingBrake = false; else ret.parkingBrake = true;
-    ret.steering = getParam(STEERING);
-    ret.gear = getParam(GEAR);
-    ret.speed = getParam(CRUISING_SPEED);
-    ret.motorRPM = getParam(MOTOR_RPM);
-    ret.motorTemperature = getParam(MOTOR_TEMPERATURE);
-    ret.lights = false;
-    
-    return ret;
-    
-}
 
-// Solicitar informacion completa de vehiculo
-DrivingInfo DrivingConnectionManager::reqFullVehicleInfo(){
-    
-    DrivingInfo ret;
-    
-    ret.thottle = getParam(THROTTLE);
-    ret.brake = getParam(BRAKE);
-    if(getParam(HANDBRAKE) == 0) ret.parkingBrake = false; else ret.parkingBrake = true;
-    ret.steering = getParam(STEERING);
-    ret.gear = getParam(GEAR);
-    ret.speed = getParam(CRUISING_SPEED);
-    ret.motorRPM = getParam(MOTOR_RPM);
-    ret.motorTemperature = getParam(MOTOR_TEMPERATURE);
-    ret.lights = true;
-    if(getParam(DIPSP) == 0) ret.dipsp = false; else ret.dipsp = true;
-    if(getParam(DIPSR) == 0) ret.dipsr = false; else ret.dipsr = true;
-    if(getParam(DIPSS) == 0) ret.dipss = false; else ret.dipss = true;
-    if(getParam(KLAXON) == 0) ret.klaxon = false; else ret.klaxon = true;
-    if(getParam(BLINKER_RIGHT) == 0) ret.blinkerRight = false; else ret.blinkerRight = true;
-    if(getParam(BLINKER_LEFT) == 0) ret.blinkerLeft = false; else ret.blinkerLeft = true;
-    if(getParam(BLINKER_EMERGENCY) == 1){
-        ret.blinkerLeft = true; 
-        ret.blinkerRight = true;
+void DrivingConnectionManager::reqVehicleInfo(bool full) {
+
+    FrameDriving frame;
+
+    // Comun 
+    frame.instruction = GET;
+    frame.id_instruccion = -1;
+    frame.value = -1;
+
+    // Acelerador
+    frame.element = THROTTLE;
+    sendToVehicle(frame);
+    // Freno 
+    frame.element = BRAKE;
+    sendToVehicle(frame);
+    // Freno de mano
+    frame.element = HANDBRAKE;
+    sendToVehicle(frame);
+    // Direccion
+    frame.element = STEERING;
+    sendToVehicle(frame);
+    // Marcha
+    frame.element = GEAR;
+    sendToVehicle(frame);
+    // Velocidad de crucero
+    frame.element = CRUISING_SPEED;
+    sendToVehicle(frame);
+    // Temperatura de motor
+    frame.element = MOTOR_TEMPERATURE;
+    sendToVehicle(frame);
+    // rpm de motor
+    frame.element = MOTOR_RPM;
+    sendToVehicle(frame);
+
+    // Completa la peticion con elementos de señalizacion
+
+    if (full) {
+        // Luces de posicion
+        frame.element = DIPSP;
+        sendToVehicle(frame);
+        // Luces cortas
+        frame.element = DIPSS;
+        sendToVehicle(frame);
+        // Luces largas
+        frame.element = DIPSR;
+        sendToVehicle(frame);
+        // Intermitente derecha
+        frame.element = BLINKER_RIGHT;
+        sendToVehicle(frame);
+        // Intermitente izquierda
+        frame.element = BLINKER_LEFT;
+        sendToVehicle(frame);
+        // Claxon
+        frame.element = KLAXON;
+        sendToVehicle(frame);
+
     }
 
-    return ret;
+}
+
+bool DrivingConnectionManager::checkForVehicleMessages() {
     
+    char bufData[8];
+    
+    if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
+        // Estructura de recepcion
+        FrameDriving fdr;
+        
+        // Rellenado del buffer
+        memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
+        memcpy(&fdr.id_instruccion, &bufData[2], sizeof (fdr.id_instruccion));
+        memcpy(&fdr.element, &bufData[4], sizeof (fdr.element));
+        memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
+
+        if (fdr.instruction == ACK) {
+            
+            informResponse(true, fdr.id_instruccion);
+            
+        } else if (fdr.instruction == NACK) {
+            
+            RtxStruct rtxList = informResponse(false, fdr.id_instruccion);
+            
+            for(int i = 0; i < rtxList.numOfMsgs; i++){
+                sendToVehicle((FrameDriving)rtxList.msgs.at(i));
+            }
+            
+        } else if (fdr.instruction == INFO) {
+            
+            if(fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS || fdr.element == SUPPLY_ALARMS){
+            
+            }else{ // INFO corriente
+                
+                setVehicleInfo(fdr.element,fdr.value);
+                
+            }
+            // TODO ALARMAS
+            
+            // TODO INFO's
+            
+        }
+        
+        return true;
+    }else{
+        return false;
+    }
 }
 
 /*******************************************************************************
@@ -210,6 +226,76 @@ DrivingInfo DrivingConnectionManager::reqFullVehicleInfo(){
 int DrivingConnectionManager::getSocketDescriptor(){
     return socketDescriptor;
 }
+
+// Get de la ultima informacion recibida del vehiculo
+DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
+    DrivingInfo ret = vehicleInfo;
+    
+    if(full)
+        ret.lights = true;
+    else
+        ret.lights = false;
+    
+    return ret;
+}
+
+void DrivingConnectionManager::setVehicleInfo(short id_device, short value){
+    switch(id_device){
+        case THROTTLE:
+            vehicleInfo.thottle = value;
+            break;
+        case BRAKE:
+            vehicleInfo.brake = value;
+            break;
+        case HANDBRAKE:
+            vehicleInfo.parkingBrake = (bool) value;
+            break;
+        case STEERING:
+            vehicleInfo.steering = value;
+            break;
+        case GEAR:
+            vehicleInfo.gear = value;
+            break;
+        case MOTOR_RPM:
+            vehicleInfo.motorRPM = value;
+            break;
+        case CRUISING_SPEED:
+            vehicleInfo.speed = value;
+            break;
+        case MOTOR_TEMPERATURE:
+            vehicleInfo.motorTemperature = value;
+            break;
+        case BLINKER_LEFT:
+            vehicleInfo.blinkerLeft = (bool) value;
+            break;
+        case BLINKER_RIGHT:
+            vehicleInfo.blinkerRight = (bool) value;
+            break;
+        case KLAXON:
+            vehicleInfo.klaxon = (bool) value;
+            break;
+        case DIPSP:
+            vehicleInfo.dipsp = (bool) value;
+            break;
+        case DIPSS:
+            vehicleInfo.dipss = (bool) value;
+            break;
+        case DIPSR:
+            vehicleInfo.dipsr = (bool) value;
+            break;
+        default: 
+            break;
+    }
+}
+
+short DrivingConnectionManager::getCountCriticalMessages(){
+    return countMsg;
+}
+
+void DrivingConnectionManager::setCountCriticalMessages(short cont) {
+    countMsg = cont;
+}
+
 
 /*******************************************************************************
  * METODOS PROPIOS
@@ -232,4 +318,52 @@ bool DrivingConnectionManager::isCriticalInstruction(short element) {
     } else {
         return false;
     }
+}
+
+/*******************************************************************************
+ * MANEJO DE LA COLA DE MENSAJES
+ *******************************************************************************/
+
+void DrivingConnectionManager::addToQueue(FrameDriving frame){
+    messageQueue.push_back(frame);
+}
+
+RtxStruct DrivingConnectionManager::informResponse(bool ack, short id_instruction){
+    
+    RtxStruct ret;
+    ret.numOfMsgs = 0;
+    
+    // Se situa el iterador al principio de la cola
+    vector<FrameDriving>::iterator it = messageQueue.begin();
+    
+    if(ack){ // ACK
+        
+        if(id_instruction == (*it).id_instruccion){ // Primer elemento y requerido coinciden
+            
+            // Se elimina el primer elemento
+            messageQueue.erase(it);
+            
+        }else if(id_instruction > (*it).id_instruccion){ // Confirmacion de varios elementos
+            
+            while(id_instruction >= (*it).id_instruccion){
+                
+                messageQueue.erase(it);
+                
+            }
+        }
+                
+    } else { // NACK
+           
+        while(it != messageQueue.end()){
+            
+            // Se incluyen en la respuesta todos los  mensajes no confirmados
+            // para retransmitir
+            ret.numOfMsgs++;
+            ret.msgs.push_back((*it));
+            it++;
+            
+        }
+        
+    }
+    return ret;
 }

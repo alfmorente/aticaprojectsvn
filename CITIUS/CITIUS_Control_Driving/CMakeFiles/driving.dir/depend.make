@@ -56,14 +56,7 @@ CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/inclu
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/DrivingConnectionManager.h
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/QueueMng.hpp
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/Thread.hpp
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/constant.h
-
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: src/QueueMng.cpp
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: include/QueueMng.hpp
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: include/Thread.hpp
-CMakeFiles/driving.dir/src/QueueMng.cpp.o: include/constant.h
 
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: src/RosNode_Driving.cpp
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
@@ -121,16 +114,11 @@ CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: /opt/ros/groovy/include/ros/wa
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/DrivingConnectionManager.h
-CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/QueueMng.hpp
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/RosNode_Driving.h
-CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/Thread.hpp
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/constant.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h
-
-CMakeFiles/driving.dir/src/Thread.cpp.o: src/Thread.cpp
-CMakeFiles/driving.dir/src/Thread.cpp.o: include/Thread.hpp
 
 CMakeFiles/driving.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
@@ -188,9 +176,7 @@ CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/include/ros/wall_timer.h
 CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/driving.dir/src/main.cpp.o: include/DrivingConnectionManager.h
-CMakeFiles/driving.dir/src/main.cpp.o: include/QueueMng.hpp
 CMakeFiles/driving.dir/src/main.cpp.o: include/RosNode_Driving.h
-CMakeFiles/driving.dir/src/main.cpp.o: include/Thread.hpp
 CMakeFiles/driving.dir/src/main.cpp.o: include/constant.h
 CMakeFiles/driving.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
 CMakeFiles/driving.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h

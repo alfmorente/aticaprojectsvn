@@ -34,8 +34,27 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
         if (vmNodeStatus == NODESTATUS_OK) {
             ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
             if (checkCommand(msg)) {
-                this->
-                dVehicle->setParam(msg.id_device, msg.value);
+                // Envio de comando a vehiculo
+                FrameDriving command;
+                command.instruction = SET;
+                command.element = msg.id_device;
+                command.value = msg.value;
+                if(dVehicle->isCriticalInstruction(msg.id_device)){
+                    short cont = dVehicle->getCountCriticalMessages();
+                    // Valor de ID_INSTRUCCION
+                    command.id_instruccion = cont;
+                    // Introduccion en la cola de mensajes criticos
+                    dVehicle->addToQueue(command);
+                    // Incremento del contador
+                    dVehicle->setCountCriticalMessages(cont+1);
+                }else{
+                    command.id_instruccion = -1;
+                }
+                
+                
+                dVehicle->sendToVehicle(command);
+                
+                
             } else {
                 ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
             }

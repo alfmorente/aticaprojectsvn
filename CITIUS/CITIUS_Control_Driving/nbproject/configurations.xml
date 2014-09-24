@@ -12,9 +12,7 @@
       </df>
       <df name="src">
         <in>DrivingConnectionManager.cpp</in>
-        <in>QueueMng.cpp</in>
         <in>RosNode_Driving.cpp</in>
-        <in>Thread.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -211,13 +209,9 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="src/QueueMng.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/RosNode_Driving.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
-      </item>
-      <item path="src/Thread.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>

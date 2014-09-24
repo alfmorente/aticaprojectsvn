@@ -36,21 +36,12 @@ int main(int argc, char** argv) {
             if (nodeDriving->getDriverMng()->getSocketDescriptor() == -1) {
                 ROS_INFO("Se ha perdido comunicacion con servidor");
             } else {
-                // Recepcion de mensaje
+                
+                // Comprobacion de recepcion de mensaje ROS
                 ros::spinOnce();
-                // ROS_INFO("Operando...");
-                // Lectura via socket (NO BLOQUEANTE)
-                // Buffer de envio
-                char bufData[6];
-                if (recv(nodeDriving->getDriverMng()->getSocketDescriptor(), bufData, sizeof (bufData), 0) > 0) {
-                    // Estructura de recepcion
-                    FrameDriving fdr;
-                    // Rellenado del buffer
-                    memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
-                    memcpy(&fdr.element, &bufData[2], sizeof (fdr.element));
-                    memcpy(&fdr.value, &bufData[4], sizeof (fdr.value));
-                    nodeDriving->manageAlarmsMessage(fdr);
-                }
+                
+                // Comprobacion de recpcion de mensajes de vehiculo
+                nodeDriving->getDriverMng()->checkForVehicleMessages();
 
                 // Comprobación del temporizador y requerimiento de info
                 finalTime = clock() - initTime;
@@ -65,12 +56,18 @@ int main(int argc, char** argv) {
                         
                         hzCount = 0;
                         // Informacion completa: dispositivos y senalizacion
-                        info = nodeDriving->getDriverMng()->reqFullVehicleInfo();
+                        // Requiere al vehiculo (GET)
+                        nodeDriving->getDriverMng()->reqVehicleInfo(true);
+                        // Obtiene informacion existente para publicar
+                        info = nodeDriving->getDriverMng()->getVehicleInfo(true);
                    
                     }else{
                         
                         // Informacion basica: dispositivos
-                        info = nodeDriving->getDriverMng()->reqBasicVehicleInfo();
+                        // Requiere al vehiculo (GET)
+                        nodeDriving->getDriverMng()->reqVehicleInfo(false);
+                        // Obtiene informacion existente para publicar
+                        info = nodeDriving->getDriverMng()->getVehicleInfo(false);
                     
                     }
                     nodeDriving->publishDrivingInfo(info);

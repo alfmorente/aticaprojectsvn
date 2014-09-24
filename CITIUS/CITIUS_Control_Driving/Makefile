@@ -35,9 +35,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving
 
@@ -140,19 +137,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving
-
-# Build rule for target.
-ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving
-.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving
-
-# fast build rule for target.
-ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving.dir/build
-.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -192,19 +176,6 @@ ROSBUILD_genmsg_py/fast:
 .PHONY : ROSBUILD_genmsg_py/fast
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmsg_roseus_CITIUS_Control_Driving
-
-# Build rule for target.
-ROSBUILD_genmsg_roseus_CITIUS_Control_Driving: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_roseus_CITIUS_Control_Driving
-.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_Driving
-
-# fast build rule for target.
-ROSBUILD_genmsg_roseus_CITIUS_Control_Driving/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Driving.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Driving.dir/build
-.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_Driving/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -242,19 +213,6 @@ ROSBUILD_gensrv_py: cmake_check_build_system
 ROSBUILD_gensrv_py/fast:
 	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
 .PHONY : ROSBUILD_gensrv_py/fast
-
-#=============================================================================
-# Target rules for targets named ROSBUILD_gensrv_roseus_CITIUS_Control_Driving
-
-# Build rule for target.
-ROSBUILD_gensrv_roseus_CITIUS_Control_Driving: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_roseus_CITIUS_Control_Driving
-.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Driving
-
-# fast build rule for target.
-ROSBUILD_gensrv_roseus_CITIUS_Control_Driving/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Driving.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Driving.dir/build
-.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Driving/fast
 
 #=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
@@ -540,30 +498,6 @@ src/DrivingConnectionManager.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
 .PHONY : src/DrivingConnectionManager.cpp.s
 
-src/QueueMng.o: src/QueueMng.cpp.o
-.PHONY : src/QueueMng.o
-
-# target to build an object file
-src/QueueMng.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.o
-.PHONY : src/QueueMng.cpp.o
-
-src/QueueMng.i: src/QueueMng.cpp.i
-.PHONY : src/QueueMng.i
-
-# target to preprocess a source file
-src/QueueMng.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.i
-.PHONY : src/QueueMng.cpp.i
-
-src/QueueMng.s: src/QueueMng.cpp.s
-.PHONY : src/QueueMng.s
-
-# target to generate assembly for a file
-src/QueueMng.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/QueueMng.cpp.s
-.PHONY : src/QueueMng.cpp.s
-
 src/RosNode_Driving.o: src/RosNode_Driving.cpp.o
 .PHONY : src/RosNode_Driving.o
 
@@ -587,30 +521,6 @@ src/RosNode_Driving.s: src/RosNode_Driving.cpp.s
 src/RosNode_Driving.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/RosNode_Driving.cpp.s
 .PHONY : src/RosNode_Driving.cpp.s
-
-src/Thread.o: src/Thread.cpp.o
-.PHONY : src/Thread.o
-
-# target to build an object file
-src/Thread.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.o
-.PHONY : src/Thread.cpp.o
-
-src/Thread.i: src/Thread.cpp.i
-.PHONY : src/Thread.i
-
-# target to preprocess a source file
-src/Thread.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.i
-.PHONY : src/Thread.cpp.i
-
-src/Thread.s: src/Thread.cpp.s
-.PHONY : src/Thread.s
-
-# target to generate assembly for a file
-src/Thread.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/Thread.cpp.s
-.PHONY : src/Thread.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -642,15 +552,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... ROSBUILD_genmanifest_roseus_CITIUS_Control_Driving"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_genmsg_py"
-	@echo "... ROSBUILD_genmsg_roseus_CITIUS_Control_Driving"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... ROSBUILD_gensrv_py"
-	@echo "... ROSBUILD_gensrv_roseus_CITIUS_Control_Driving"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... doxygen"
@@ -680,15 +587,9 @@ help:
 	@echo "... src/DrivingConnectionManager.o"
 	@echo "... src/DrivingConnectionManager.i"
 	@echo "... src/DrivingConnectionManager.s"
-	@echo "... src/QueueMng.o"
-	@echo "... src/QueueMng.i"
-	@echo "... src/QueueMng.s"
 	@echo "... src/RosNode_Driving.o"
 	@echo "... src/RosNode_Driving.i"
 	@echo "... src/RosNode_Driving.s"
-	@echo "... src/Thread.o"
-	@echo "... src/Thread.i"
-	@echo "... src/Thread.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

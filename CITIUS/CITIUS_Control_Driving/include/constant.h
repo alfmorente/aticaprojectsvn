@@ -21,6 +21,7 @@ extern "C" {
 
 #endif	/* CONSTANT_H */
 
+using namespace std;
 
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
@@ -144,4 +145,35 @@ typedef struct{
     short element;
     short value;
 }FrameDriving;
+
+/*******************************************************************************
+ *           ESTRUCTURA DE INFORMACION DE VEHICULO
+*******************************************************************************/
+
+typedef struct {
+    short steering;
+    short thottle;
+    short brake;
+    bool parkingBrake;
+    unsigned short gear;
+    unsigned short speed;
+    short motorRPM;
+    short motorTemperature;
+    bool lights;
+    bool blinkerLeft;
+    bool blinkerRight;
+    bool dipss;
+    bool dipsr;
+    bool dipsp;
+    bool klaxon;
+}DrivingInfo;
+
+/*******************************************************************************
+ *           ESTRUCTURA DE MANEJO DE NACK's
+*******************************************************************************/
+
+typedef struct{
+    int numOfMsgs;
+    vector<FrameDriving> msgs;
+}RtxStruct;
 
