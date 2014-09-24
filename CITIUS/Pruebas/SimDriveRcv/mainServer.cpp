@@ -20,16 +20,55 @@
 
 #define MAXDATASIZE 100   
 
+typedef struct {
+    short steering;
+    short thottle;
+    short brake;
+    bool parkingBrake;
+    unsigned short gear;
+    unsigned short speed;
+    short motorRPM;
+    short motorTemperature;
+    bool lights;
+    bool blinkerLeft;
+    bool blinkerRight;
+    bool dipss;
+    bool dipsr;
+    bool dipsp;
+    bool klaxon;
+}DrivingInfo;
+
 /*******************************************************************************
     *               PROTOTIPOS DE FUNCIONES SECUNDARIAS
 *******************************************************************************/
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount);
+void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, DrivingInfo *vehicleInfo);
 
 bool isCriticalInstruction(short element);
 
+short getDeviceValue(short element, DrivingInfo vehicleInfo);
+
+void setDeviceValue(DrivingInfo *vehicleInfo, short element, short value);
+
 
 int main(int argc, char *argv[]) {
+    
+    DrivingInfo vehicleInfo;
+    vehicleInfo.lights = false;
+    vehicleInfo.blinkerLeft = false;
+    vehicleInfo.blinkerRight = false;
+    vehicleInfo.dipsp = false;
+    vehicleInfo.dipsr = false;
+    vehicleInfo.dipss = false;
+    vehicleInfo.klaxon = false;
+    vehicleInfo.brake = 0;
+    vehicleInfo.thottle = 0;
+    vehicleInfo.steering = 0;
+    vehicleInfo.parkingBrake = false;
+    vehicleInfo.gear = 0;
+    vehicleInfo.speed = 0;
+    vehicleInfo.motorTemperature = 0;
+    vehicleInfo.motorRPM = 0;
 
     int fd, fd2, currentMsgCount = 0; /* los ficheros descriptores */
 
@@ -101,32 +140,13 @@ int main(int argc, char *argv[]) {
             printf("Recibido comando INS: %d ELM: %d VAL: %d\n", fdr.instruction, fdr.element, fdr.value);
             
             // Gestiona las peticiones
-            requestDispatcher(fdr, fd2, &currentMsgCount);
+            requestDispatcher(fdr, fd2, &currentMsgCount, &vehicleInfo);
             
-            // Estructura de envio de mensaje de devolucion
-            FrameDriving fdr2;
-            if (fdr.instruction == SET) {
-                
-                fdr2.instruction = ACK;
-            } else if (fdr.instruction == GET) {
-                fdr2.instruction = INFO;
-            }
-            
-            fdr2.element = fdr.element;
-            fdr2.value = fdr.value;
-            
-            // Rellenado del buffer
-            memcpy(&bufData[0], &fdr2.instruction, sizeof (fdr2.instruction));
-            memcpy(&bufData[2], &fdr2.id_instruction, sizeof (fdr2.id_instruction));
-            memcpy(&bufData[4], &fdr2.element, sizeof (fdr2.element));
-            memcpy(&bufData[6], &fdr2.value, sizeof (fdr2.value));
-            send(fd2, bufData, sizeof(bufData), 0);
-            usleep(100); 
         }
     }
 }
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount){
+void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, DrivingInfo *vehicleInfo){
     if(frame.instruction == SET){
         if(isCriticalInstruction(frame.element)){
             // Despacha peticion y devuelve ACK (con ID_INSTRUCCION)
@@ -176,13 +196,14 @@ void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsg
             send(socketDescriptor, buff, sizeof (buff), 0);
             usleep(100); 
         }
+        setDeviceValue(vehicleInfo, frame.element, frame.value);
     }else if(frame.instruction == GET) {
         // Despacha peticion y devuelve INFO  (sin ID_INSTRUCCION)
         FrameDriving ret;
         ret.instruction = INFO;
         ret.id_instruction = 0;
         ret.element = frame.element;
-        ret.value = frame.value;
+        ret.value = getDeviceValue(frame.element,*vehicleInfo);
         //Buffer de envio 
         char buff[8];
         memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
@@ -212,5 +233,103 @@ bool isCriticalInstruction(short element){
     }else{
         return false;
     }
-                
+
+}
+
+short getDeviceValue(short element, DrivingInfo vehicleInfo) {
+    switch (element) {
+        case THROTTLE:
+            return vehicleInfo.thottle;
+            break;
+        case BRAKE:
+            return vehicleInfo.brake;
+            break;
+        case HANDBRAKE:
+            return vehicleInfo.parkingBrake;
+            break;
+        case STEERING:
+            return vehicleInfo.steering;
+            break;
+        case GEAR:
+            return vehicleInfo.gear;
+            break;
+        case MOTOR_RPM:
+            return vehicleInfo.motorRPM;
+            break;
+        case CRUISING_SPEED:
+            return vehicleInfo.speed;
+            break;
+        case MOTOR_TEMPERATURE:
+            return vehicleInfo.motorTemperature;
+            break;
+        case BLINKER_LEFT:
+            return vehicleInfo.blinkerLeft;
+            break;
+        case BLINKER_RIGHT:
+            return vehicleInfo.blinkerRight;
+            break;
+        case KLAXON:
+            return vehicleInfo.klaxon;
+            break;
+        case DIPSP:
+            return vehicleInfo.dipsp;
+            break;
+        case DIPSS:
+            return vehicleInfo.dipss;
+            break;
+        case DIPSR:
+            return vehicleInfo.dipsr;
+            break;
+        default:
+            break;
+    }
+}
+
+void setDeviceValue(DrivingInfo *vehicleInfo, short element, short value){
+    switch (element) {
+        case THROTTLE:
+            (*vehicleInfo).thottle = value;
+            break;
+        case BRAKE:
+            (*vehicleInfo).brake = value;
+            break;
+        case HANDBRAKE:
+            (*vehicleInfo).parkingBrake = (bool) value;
+            break;
+        case STEERING:
+            (*vehicleInfo).steering = value;
+            break;
+        case GEAR:
+            (*vehicleInfo).gear = value;
+            break;
+        case MOTOR_RPM:
+            (*vehicleInfo).motorRPM = value;
+            break;
+        case CRUISING_SPEED:
+            (*vehicleInfo).speed = value;
+            break;
+        case MOTOR_TEMPERATURE:
+            (*vehicleInfo).motorTemperature = value;
+            break;
+        case BLINKER_LEFT:
+            (*vehicleInfo).blinkerLeft = (bool) value;
+            break;
+        case BLINKER_RIGHT:
+            (*vehicleInfo).blinkerRight = (bool) value;
+            break;
+        case KLAXON:
+            (*vehicleInfo).klaxon = (bool) value;
+            break;
+        case DIPSP:
+            (*vehicleInfo).dipsp = (bool) value;
+            break;
+        case DIPSS:
+            (*vehicleInfo).dipss = (bool) value;
+            break;
+        case DIPSR:
+            (*vehicleInfo).dipsr = (bool) value;
+            break;
+        default:
+            break;
+    }
 }
