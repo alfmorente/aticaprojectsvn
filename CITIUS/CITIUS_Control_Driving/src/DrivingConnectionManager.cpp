@@ -6,7 +6,8 @@
  ******************************************************************************/
 
 DrivingConnectionManager::DrivingConnectionManager() {
-    this->socketDescriptor = -1;
+    socketDescriptor = -1;
+    countMsg = 1;
 }
 
 /*******************************************************************************
@@ -17,8 +18,8 @@ DrivingConnectionManager::DrivingConnectionManager() {
 
 bool DrivingConnectionManager::connectVehicle() {
     // Creacion y apertura del socket
-    this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
-    if (this->socketDescriptor < 0) {
+    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketDescriptor < 0) {
         ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
         return false;
     } else {
@@ -34,7 +35,7 @@ bool DrivingConnectionManager::connectVehicle() {
             exit(-1);
         }
         
-        if ((this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
             /* llamada a socket() */
             ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conducción");
             exit(-1);
@@ -47,7 +48,7 @@ bool DrivingConnectionManager::connectVehicle() {
         /*he->h_addr pasa la información de ``*he'' a "h_addr" */
         bzero(&(server.sin_zero), 8);
 
-        if (connect(this->socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+        if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
             /* llamada a connect() */
             ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicacion con Payload de Conducción");
             exit(-1);
@@ -56,7 +57,7 @@ bool DrivingConnectionManager::connectVehicle() {
         ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con exito y conectado");
         // Test if the socket is in non-blocking mode:
         // Put the socket in non-blocking mode:
-        if (fcntl(this->socketDescriptor, F_SETFL, fcntl(this->socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
+        if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
             ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones L/E");
         }else{
             ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones L/E");
@@ -69,52 +70,42 @@ bool DrivingConnectionManager::connectVehicle() {
 
 bool DrivingConnectionManager::disconnectVehicle() {
     // Cierre del socket
-    shutdown(this->socketDescriptor, 2);
-    close(this->socketDescriptor);
+    shutdown(socketDescriptor, 2);
+    close(socketDescriptor);
     ROS_INFO("[Control] Driving - Socket cerrado correctamente");
     return true;
 }
 
 // Mandar comando de control
 
-bool DrivingConnectionManager::setParam(short idParam, float value) {
-    // Valor de devolucion
-    bool ret = false;
-    
+void DrivingConnectionManager::setParam(short idParam, float value) {
+   
     // Estructura de envio
     FrameDriving fd;
     fd.instruction = SET;
+    fd.id_instruccion = countMsg;
     fd.element = idParam;
     fd.value = value;
+    
+    // Incremento de contador de mensajes
+    countMsg++;
+    
     // Buffer de envio
-    char bufData[6];
+    char bufData[8];
+    
     // Rellenado del buffer
     memcpy(&bufData[0], &fd.instruction, sizeof (fd.instruction));
-    memcpy(&bufData[2], &fd.element, sizeof (fd.element));
-    memcpy(&bufData[4], &fd.value, sizeof (fd.value));
-    send(this->socketDescriptor, bufData, sizeof(bufData), 0);
+    memcpy(&bufData[2], &fd.id_instruccion, sizeof (fd.id_instruccion));
+    memcpy(&bufData[4], &fd.element, sizeof (fd.element));
+    memcpy(&bufData[6], &fd.value, sizeof (fd.value));
+    
+    // Envio via socket
+    send(socketDescriptor, bufData, sizeof(bufData), 0);
     usleep(100);
-    // Variables de control de la recepcion
-    bool received = false;
-    bool timeout = false;
-    while (!received && !timeout) {
-        if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
-            // Estructura de recepcion
-            FrameDriving fdr;
-            // Rellenado del buffer
-            memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
-            memcpy(&fdr.element, &bufData[2], sizeof (fdr.element));
-            memcpy(&fdr.value, &bufData[4], sizeof (fdr.value));
-            if (fdr.instruction == ACK || fdr.element == idParam) {
-                received = true;
-                ret = true;
-            } else {
-                // Comprobacion y tratamiento de alarmas
-                // TODO
-            }
-        }
-    }
-    return ret;
+    
+    // Envio a la cola de mensajes a la espera de ACK
+    messageQueue.queueMsgdata.push(fd);
+
 }
 
 // Solicitar informacion mediante comando
@@ -213,5 +204,5 @@ DrivingInfo DrivingConnectionManager::reqFullVehicleInfo(){
 
 // Get del descriptor de socket
 int DrivingConnectionManager::getSocketDescriptor(){
-    return this->socketDescriptor;
+    return socketDescriptor;
 }

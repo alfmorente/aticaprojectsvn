@@ -30,6 +30,7 @@ extern "C" {
 #include <netdb.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
+#include "QueueMng.hpp"
 
 typedef struct {
     short steering;
@@ -53,12 +54,17 @@ class DrivingConnectionManager{
 private:
     // Socket
     int socketDescriptor;
+    // Manejador de la cola de mensajes (Integridad)
+    QueueMng messageQueue;
+    // Contador para la cola de mensajes (Integridad)
+    int countMsg;
+    
 public:
     // Constructor
     DrivingConnectionManager();
     // Gestion del vehiculo
     bool connectVehicle();
-    bool setParam(short idParam, float value);
+    void setParam(short idParam, float value);
     short getParam(short idParam);
     DrivingInfo reqBasicVehicleInfo();
     DrivingInfo reqFullVehicleInfo();

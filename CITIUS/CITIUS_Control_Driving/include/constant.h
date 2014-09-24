@@ -31,6 +31,7 @@ extern "C" {
 #define GET 1
 #define INFO 2
 #define ACK 3
+#define NACK 4
 
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
@@ -93,7 +94,8 @@ extern "C" {
 #define OBSERVATION_SYSTEM_SUPPLY_12 53
 #define OBSERVATION_SYSTEM_SUPPLY_24 54
 #define OBSERVATION_SYSTEM_SUPPLY_48 55
-#define SUPPLY_ALARMS 56
+#define SUPPLY_ALARMS 56.
+#define OPERATION_MODE_SWITCH 57
 
 
 
@@ -138,6 +140,7 @@ extern "C" {
 
 typedef struct{
     short instruction;
+    short id_instruccion;
     short element;
     short value;
 }FrameDriving;
