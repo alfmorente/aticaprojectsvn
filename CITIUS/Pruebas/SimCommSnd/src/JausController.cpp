@@ -263,6 +263,7 @@ void JausController::sendWrenchEffortMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_PRIMITIVE_DRIVER;
+    jAdd->instance = 1;
     
     SetWrenchEffortMessage spfMsg = setWrenchEffortMessageCreate();
     
@@ -305,6 +306,7 @@ void JausController::sendDiscreteDeviceMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_PRIMITIVE_DRIVER;
+    jAdd->instance = 1;
     
     SetDiscreteDevicesMessage spfMsg = setDiscreteDevicesMessageCreate();
     
@@ -342,6 +344,7 @@ void JausController::sendTravelSpeedMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
+    jAdd->instance = 1;
     
     SetTravelSpeedMessage spfMsg = setTravelSpeedMessageCreate();
     
@@ -373,6 +376,7 @@ void JausController::sendCameraPoseMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_VISUAL_SENSOR;
+    jAdd->instance = 1;
     
     SetCameraPoseMessage spfMsg = setCameraPoseMessageCreate();
     
@@ -415,6 +419,7 @@ void JausController::sendPauseMissionMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_MISSION_SPOOLER;
+    jAdd->instance = 1;
     
     PauseMissionMessage spfMsg = pauseMissionMessageCreate();
     
@@ -447,6 +452,7 @@ void JausController::sendResumeMissionMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_MISSION_SPOOLER;
+    jAdd->instance = 1;
     
     ResumeMissionMessage spfMsg = resumeMissionMessageCreate();
     
@@ -479,6 +485,7 @@ void JausController::sendTelemeterInfoMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_PLATFORM_SENSOR;
+    jAdd->instance = 1;
     
     SetTelemeter26Message spfMsg = setTelemeter26MessageCreate();
     
@@ -508,6 +515,7 @@ void JausController::sendPositionerMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_VISUAL_SENSOR;
+    jAdd->instance = 1;
     
     SetPositioner19Message spfMsg = setPositioner19MessageCreate();
     
@@ -556,6 +564,7 @@ void JausController::sendTVCameraMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_VISUAL_SENSOR;
+    jAdd->instance = 1;
     
     SetDayTimeCamera21Message spfMsg = setDayTimeCamera21MessageCreate();
     
@@ -604,6 +613,7 @@ void JausController::sendIRCameraMessage(){
     jAdd->subsystem = subsystemController;
     jAdd->node = nodeController;
     jAdd->component = JAUS_VISUAL_SENSOR;
+    jAdd->instance = 1;
     
     SetNightTimeCamera23Message spfMsg = setNightTimeCamera23MessageCreate();
 
