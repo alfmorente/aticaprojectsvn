@@ -22,22 +22,37 @@ struct msg_electricInfo_ {
   typedef msg_electricInfo_<ContainerAllocator> Type;
 
   msg_electricInfo_()
-  : id_device(0)
-  , value(0)
+  : battery_level(0)
+  , battery_voltage(0)
+  , battery_current(0)
+  , battery_temperature(0)
+  , supply_alarms(0)
   {
   }
 
   msg_electricInfo_(const ContainerAllocator& _alloc)
-  : id_device(0)
-  , value(0)
+  : battery_level(0)
+  , battery_voltage(0)
+  , battery_current(0)
+  , battery_temperature(0)
+  , supply_alarms(0)
   {
   }
 
-  typedef uint16_t _id_device_type;
-  uint16_t id_device;
+  typedef int16_t _battery_level_type;
+  int16_t battery_level;
 
-  typedef int16_t _value_type;
-  int16_t value;
+  typedef int16_t _battery_voltage_type;
+  int16_t battery_voltage;
+
+  typedef int16_t _battery_current_type;
+  int16_t battery_current;
+
+  typedef int16_t _battery_temperature_type;
+  int16_t battery_temperature;
+
+  typedef uint8_t _supply_alarms_type;
+  uint8_t supply_alarms;
 
 
   typedef boost::shared_ptr< ::CITIUS_Control_Communication::msg_electricInfo_<ContainerAllocator> > Ptr;
@@ -68,12 +83,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_Communication::msg_electricInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "99cf754747b52aeb199e99a3aa80459e";
+    return "d42ed0969069aa6805076160fc2ef03d";
   }
 
   static const char* value(const  ::CITIUS_Control_Communication::msg_electricInfo_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x99cf754747b52aebULL;
-  static const uint64_t static_value2 = 0x199e99a3aa80459eULL;
+  static const uint64_t static_value1 = 0xd42ed0969069aa68ULL;
+  static const uint64_t static_value2 = 0x05076160fc2ef03dULL;
 };
 
 template<class ContainerAllocator>
@@ -90,8 +105,11 @@ template<class ContainerAllocator>
 struct Definition< ::CITIUS_Control_Communication::msg_electricInfo_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "uint16 id_device\n\
-int16 value\n\
+    return "int16 battery_level\n\
+int16 battery_voltage\n\
+int16 battery_current\n\
+int16 battery_temperature\n\
+uint8 supply_alarms\n\
 ";
   }
 
@@ -111,8 +129,11 @@ template<class ContainerAllocator> struct Serializer< ::CITIUS_Control_Communica
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
-    stream.next(m.id_device);
-    stream.next(m.value);
+    stream.next(m.battery_level);
+    stream.next(m.battery_voltage);
+    stream.next(m.battery_current);
+    stream.next(m.battery_temperature);
+    stream.next(m.supply_alarms);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -130,10 +151,16 @@ struct Printer< ::CITIUS_Control_Communication::msg_electricInfo_<ContainerAlloc
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::CITIUS_Control_Communication::msg_electricInfo_<ContainerAllocator> & v) 
   {
-    s << indent << "id_device: ";
-    Printer<uint16_t>::stream(s, indent + "  ", v.id_device);
-    s << indent << "value: ";
-    Printer<int16_t>::stream(s, indent + "  ", v.value);
+    s << indent << "battery_level: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.battery_level);
+    s << indent << "battery_voltage: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.battery_voltage);
+    s << indent << "battery_current: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.battery_current);
+    s << indent << "battery_temperature: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.battery_temperature);
+    s << indent << "supply_alarms: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.supply_alarms);
   }
 };
 
