@@ -413,7 +413,7 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
     // Creacion del mensaje a enviar
-    JausMessage jMsg = translator->getJausMsgFromElectricInfo(this->subsystemController,this->nodeController,msg.id_device,msg.value);
+    JausMessage jMsg = translator->getJausMsgFromElectricInfo(this->subsystemController,this->nodeController,msg.battery_level,msg.battery_voltage, msg.battery_current, msg.battery_temperature, msg.supply_alarms);
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->primitiveDriverComponent, jMsg);

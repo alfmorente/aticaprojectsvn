@@ -70,7 +70,7 @@ public:
   JausMessage getJausMsgFromUGVInfo(int subDest, int nodDest, short motorRPM, short motorTemperature);
   JausMessage getJausMsgFromSignalingInfo(int subDest, int nodDest, bool blinker_left, bool blinker_right, bool dipsp, bool dipss, bool dipsr, bool klaxon);
   
-  JausMessage getJausMsgFromElectricInfo(int subDest, int nodDest, short id_device, short value);
+  JausMessage getJausMsgFromElectricInfo(int subDest, int nodDest, short bat_level, short bat_voltage, short bat_current, short bat_temp, short alarms);
   JausMessage getJausMsgFromCameraInfo(int subDest, int nodDest, short id_camera, short pan, short tilt, short zoom);
   JausMessage getJausMsgFromIRCameraInfo(int subDest, int nodDest, short zoom, short polarity);
   JausMessage getJausMsgFromTelemeterInfo(int subDest, int nodDest, short *ecs);

@@ -145,7 +145,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(int subDest, int nodD
 
 // Mensajes de informacion electrica
 
-JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDest, short id_device, short value) {
+JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDest, short bat_level, short bat_voltage, short bat_current, short bat_temp, short alarms) {
 
     // Mensaje de devoluvion
     JausMessage jMsg = NULL;
@@ -155,68 +155,21 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDe
     jAdd->node = nodDest;
     jAdd->component = JAUS_PRIMITIVE_DRIVER;
     jAdd->instance = 2;
-
-    // Traduccion
-    switch (id_device) {
-        case BATTERY_LEVEL:{
-            // Generacion de mensaje especifico UGV Info
-            UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            // Presence vector
-            ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_LEVEL;
-            ugvm->battery_level = value;
-            jausAddressCopy(ugvm->destination, jAdd);
-            // Generacion de mensaje JUAS global
-            jMsg = ugvInfo12MessageToJausMessage(ugvm);
-            ugvInfo12MessageDestroy(ugvm);
-            break;
-        }case BATTERY_VOLTAGE:{
-            // Generacion de mensaje especifico UGV Info
-            UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            // Presence vector
-            ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_VOLTAGE;
-            ugvm->battery_voltage = value;
-            jausAddressCopy(ugvm->destination, jAdd);
-            // Generacion de mensaje JUAS global
-            jMsg = ugvInfo12MessageToJausMessage(ugvm);
-            ugvInfo12MessageDestroy(ugvm);
-            break;
-        }case BATTERY_CURRENT:{
-            // Generacion de mensjae especifico UGV Info
-            UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            // Presence vector
-            ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_CURRENT;
-            ugvm->battery_current = value;
-            jausAddressCopy(ugvm->destination,jAdd);
-            // Generacion de mensaje JUAS global
-            jMsg = ugvInfo12MessageToJausMessage(ugvm);
-            ugvInfo12MessageDestroy(ugvm);
-        }case BATTERY_TEMPERATURE:{
-            // Generacion de mensjae especifico UGV Info
-            UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            // Presence vector
-            ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_TEMPERATURE;
-            ugvm->battery_temperature = value;
-            jausAddressCopy(ugvm->destination,jAdd);
-            // Generacion de mensaje JUAS global
-            jMsg = ugvInfo12MessageToJausMessage(ugvm);
-            ugvInfo12MessageDestroy(ugvm);
-        }case SUPPLY_ALARMS:{
-            // Diferenciar entre estas alarmas y las del vehiculo
-            // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
-            // Generacion de mensjae especifico UGV Info
-            UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-            // Presence vector
-            ugvm->presenceVector = PRESENCE_VECTOR_ALARMS;
-            ugvm->alarms = value;
-            jausAddressCopy(ugvm->destination,jAdd);
-            // Generacion de mensaje JUAS global
-            jMsg = ugvInfo12MessageToJausMessage(ugvm);
-            ugvInfo12MessageDestroy(ugvm);
-        }default:{
-            break;
-        }
-    };
+    
+    UGVInfo12Message ugvm = ugvInfo12MessageCreate();
+    ugvm->presenceVector = 0x00 |
+            PRESENCE_VECTOR_BATTERY_LEVEL |
+            PRESENCE_VECTOR_BATTERY_VOLTAGE |
+            PRESENCE_VECTOR_BATTERY_CURRENT |
+            PRESENCE_VECTOR_BATTERY_TEMPERATURE |
+            PRESENCE_VECTOR_ALARMS;
+    ugvm->battery_level = bat_level;
+    ugvm->battery_voltage = bat_voltage;
+    ugvm->battery_current = bat_current;
+    ugvm->battery_temperature = bat_temp;
+    ugvm->alarms = alarms;
+    jMsg = ugvInfo12MessageToJausMessage(ugvm);
+    ugvInfo12MessageDestroy(ugvm);
 
     // Destruccion de la estructura destinatario
     jausAddressDestroy(jAdd);
