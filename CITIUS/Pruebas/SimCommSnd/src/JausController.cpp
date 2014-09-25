@@ -105,7 +105,7 @@ void JausController::initJAUS() {
     }else{
         
         // Mensajes que envia
-        ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_TELEMETER_INFO_10, 0xFF);
+        ojCmptAddServiceOutputMessage(platformSensorComponent, JAUS_PLATFORM_SENSOR, JAUS_SET_TELEMETER_26, 0xFF);
         
     }
     
@@ -480,24 +480,23 @@ void JausController::sendTelemeterInfoMessage(){
     jAdd->node = nodeController;
     jAdd->component = JAUS_PLATFORM_SENSOR;
     
-    TelemeterInfo10Message spfMsg = telemeterInfo10MessageCreate();
+    SetTelemeter26Message spfMsg = setTelemeter26MessageCreate();
     
     // Campo shoot
-    spfMsg->presenceVector = JAUS_10_PV_SHOOT_BIT;
     spfMsg->shoot = JAUS_TRUE;
     
     jausAddressCopy(spfMsg->destination,jAdd);
-    jMsg = telemeterInfo10MessageToJausMessage(spfMsg);
+    jMsg = setTelemeter26MessageToJausMessage(spfMsg);
     if (jMsg != NULL) {
         ojCmptSendMessage(instance->platformSensorComponent, jMsg);
     } else {
         cout << "No se ha podido generar mensaje JAUS" << endl;
     }
     // Liberacion de memoria
-    telemeterInfo10MessageDestroy(spfMsg);
+    setTelemeter26MessageDestroy(spfMsg);
     jausAddressDestroy(jAdd);
     jausMessageDestroy(jMsg);
-    cout << "Enviado mensaje TELEMETER INFO" << endl;
+    cout << "Enviado mensaje SET TELEMETER" << endl;
 }       
 
 // Set Positioner
