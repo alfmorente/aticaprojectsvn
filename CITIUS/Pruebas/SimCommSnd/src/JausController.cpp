@@ -180,7 +180,6 @@ void JausController::endJAUS(){
     ojCmptDestroy(velocityStateSensorComponent);
     ojCmptDestroy(globalPoseSensorComponent);
     ojCmptDestroy(heartBeatInformationComponent);
-    ojCmptDestroy(missionSpoolerComponent);
 }
 
 void JausController::sendMessage(int identifier){
