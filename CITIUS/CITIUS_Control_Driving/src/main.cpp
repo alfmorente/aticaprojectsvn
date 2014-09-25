@@ -19,10 +19,11 @@ int main(int argc, char** argv) {
 
         // Espera a permiso para comenzar a operar ROSNODE_OK
         ROS_INFO("[Control] Driving - Esperando activacion de nodo");
-        while (nodeDriving->getVMNodeStatus() != NODESTATUS_OK) {
+        while (nodeDriving->getVMNodeStatus() == NODESTATUS_INIT) {
             ros::spinOnce();
         }
-        ROS_INFO("[Control] Driving - Nodo listo para operar");
+        if(nodeDriving->getVMNodeStatus() == NODESTATUS_OK)
+                ROS_INFO("[Control] Driving - Nodo listo para operar");
 
         // Temporizador de requerimiento de informacion
         clock_t initTime, finalTime;

@@ -16,6 +16,8 @@
         <in>main.cpp</in>
       </df>
     </df>
+    <df root="." name="1">
+    </df>
     <logicalFolder name="Modules"
                    displayName="Modules"
                    projectFiles="true"
@@ -47,9 +49,17 @@
       <itemPath>CMakeLists.txt</itemPath>
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>CMakeLists.txt</itemPath>
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
+    <Elem>.</Elem>
     <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>

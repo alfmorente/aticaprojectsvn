@@ -53,7 +53,7 @@ bool DrivingConnectionManager::connectVehicle() {
         
         if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
             /* llamada a socket() */
-            ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conducción");
+            ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
             exit(-1);
         }
 
@@ -66,7 +66,7 @@ bool DrivingConnectionManager::connectVehicle() {
 
         if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
             /* llamada a connect() */
-            ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicacion con Payload de Conducción");
+            ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicacion con Payload de Conduccion");
             exit(-1);
 
         }
@@ -187,9 +187,13 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
 
         if (fdr.instruction == ACK) {
             
-            informResponse(true, fdr.id_instruccion);
+            printf("Recibido ACK\n");
+            if(isCriticalInstruction(fdr.element))
+                informResponse(true, fdr.id_instruccion);
             
         } else if (fdr.instruction == NACK) {
+            
+            printf("Recibido NACK\n");
             
             RtxStruct rtxList = informResponse(false, fdr.id_instruccion);
             
@@ -198,7 +202,7 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
             }
             
         } else if (fdr.instruction == INFO) {
-            
+                        
             if(fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS || fdr.element == SUPPLY_ALARMS){
             
             }else{ // INFO corriente

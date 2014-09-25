@@ -13,6 +13,15 @@
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeLists.txt</file>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/QueueMng.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeLists.txt</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Thread.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include/QueueMng.hpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include/constant.h</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include/Thread.hpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include/DrivingConnectionManager.h</file>
+        </group>
     </open-files>
 </project-private>

@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
     vehicleInfo.motorTemperature = 0;
     vehicleInfo.motorRPM = 0;
 
-    int fd, fd2, currentMsgCount = 0; /* los ficheros descriptores */
+    int fd, fd2, currentMsgCount = 1; /* los ficheros descriptores */
 
     struct sockaddr_in server;
     /* para la información de la dirección del servidor */
@@ -137,7 +137,12 @@ int main(int argc, char *argv[]) {
             memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
             memcpy(&fdr.element, &bufData[4], sizeof (fdr.element));
             memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-            printf("Recibido comando INS: %d ELM: %d VAL: %d\n", fdr.instruction, fdr.element, fdr.value);
+            //printf("Recibido comando INS: %d ELM: %d VAL: %d\n", fdr.instruction, fdr.element, fdr.value);
+            if(fdr.instruction == SET){
+                if(isCriticalInstruction(fdr.element)){
+                    printf("Cuanta sim: %d - Cuenta mensaje: %d\n",currentMsgCount,fdr.id_instruction);
+                }
+            }
             
             // Gestiona las peticiones
             requestDispatcher(fdr, fd2, &currentMsgCount, &vehicleInfo);
@@ -164,7 +169,7 @@ void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsg
                 memcpy(&buff[6], &ret.value, sizeof (ret.value));
                 send(socketDescriptor, buff, sizeof (buff), 0);
                 usleep(100); 
-                *currentMsgCount++;
+                (*currentMsgCount)= (*currentMsgCount)+1;
             }else{                                      // Orden ERROR --> NACK
                 FrameDriving ret;
                 ret.instruction = NACK;
