@@ -6,14 +6,17 @@ import struct
 
 
 class msg_electricInfo(genpy.Message):
-  _md5sum = "99cf754747b52aeb199e99a3aa80459e"
+  _md5sum = "d42ed0969069aa6805076160fc2ef03d"
   _type = "CITIUS_Control_Electric/msg_electricInfo"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """uint16 id_device
-int16 value
+  _full_text = """int16 battery_level
+int16 battery_voltage
+int16 battery_current
+int16 battery_temperature
+uint8 supply_alarms
 """
-  __slots__ = ['id_device','value']
-  _slot_types = ['uint16','int16']
+  __slots__ = ['battery_level','battery_voltage','battery_current','battery_temperature','supply_alarms']
+  _slot_types = ['int16','int16','int16','int16','uint8']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +26,7 @@ int16 value
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       id_device,value
+       battery_level,battery_voltage,battery_current,battery_temperature,supply_alarms
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -32,13 +35,22 @@ int16 value
     if args or kwds:
       super(msg_electricInfo, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.id_device is None:
-        self.id_device = 0
-      if self.value is None:
-        self.value = 0
+      if self.battery_level is None:
+        self.battery_level = 0
+      if self.battery_voltage is None:
+        self.battery_voltage = 0
+      if self.battery_current is None:
+        self.battery_current = 0
+      if self.battery_temperature is None:
+        self.battery_temperature = 0
+      if self.supply_alarms is None:
+        self.supply_alarms = 0
     else:
-      self.id_device = 0
-      self.value = 0
+      self.battery_level = 0
+      self.battery_voltage = 0
+      self.battery_current = 0
+      self.battery_temperature = 0
+      self.supply_alarms = 0
 
   def _get_types(self):
     """
@@ -53,7 +65,7 @@ int16 value
     """
     try:
       _x = self
-      buff.write(_struct_Hh.pack(_x.id_device, _x.value))
+      buff.write(_struct_4hB.pack(_x.battery_level, _x.battery_voltage, _x.battery_current, _x.battery_temperature, _x.supply_alarms))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -66,8 +78,8 @@ int16 value
       end = 0
       _x = self
       start = end
-      end += 4
-      (_x.id_device, _x.value,) = _struct_Hh.unpack(str[start:end])
+      end += 9
+      (_x.battery_level, _x.battery_voltage, _x.battery_current, _x.battery_temperature, _x.supply_alarms,) = _struct_4hB.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -81,7 +93,7 @@ int16 value
     """
     try:
       _x = self
-      buff.write(_struct_Hh.pack(_x.id_device, _x.value))
+      buff.write(_struct_4hB.pack(_x.battery_level, _x.battery_voltage, _x.battery_current, _x.battery_temperature, _x.supply_alarms))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -95,11 +107,11 @@ int16 value
       end = 0
       _x = self
       start = end
-      end += 4
-      (_x.id_device, _x.value,) = _struct_Hh.unpack(str[start:end])
+      end += 9
+      (_x.battery_level, _x.battery_voltage, _x.battery_current, _x.battery_temperature, _x.supply_alarms,) = _struct_4hB.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_Hh = struct.Struct("<Hh")
+_struct_4hB = struct.Struct("<4hB")

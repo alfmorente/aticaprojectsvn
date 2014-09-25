@@ -23,7 +23,6 @@ extern "C" {
 
 #include <time.h>
 #include "ElectricConnectionManager.h"
-#include "constant.h"
 #include "CITIUS_Control_Electric/msg_electricInfo.h"
 #include "CITIUS_Control_Electric/msg_command.h"
 #include "CITIUS_Control_Electric/msg_switcher.h"
@@ -44,16 +43,19 @@ private:
 public:
     // Constructor
     RosNode_Electric();
+    
     // Inicializador de artefactos ROS
     void initROS();
+    
     // Getter and Setter necesarios
     ros::Publisher getPubElectricInfo();
     ros::ServiceClient getClientVehicleStatus();
     short getEMNodeStatus();
     void setEMNodeStatus(short newEMNodeStatus);
     ElectricConnectionManager *getDriverMng();
-    // Gestion de mensajes recibidos
-    void manageMessage(FrameDriving frame);
+    
+    // Publicar informacion de vehiculo
+    void publishElectricInfo(ElectricInfo info);
     
 };
 
