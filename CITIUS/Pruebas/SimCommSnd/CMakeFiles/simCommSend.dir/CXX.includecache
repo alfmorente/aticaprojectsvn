@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/JausController.cpp
+/home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/main.cpp
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/SimCommSnd/src/JausController.h
+cstdlib
+-
+iostream
+-
 
 include/JausController.h
 jaus.h
