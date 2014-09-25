@@ -6,19 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.cpp
-ElectricConnectionManager.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.h
-constant.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/constant.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp
-RosNode_Electric.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp
-cstdlib
--
 RosNode_Electric.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.h
 
@@ -637,8 +625,12 @@ ros/forwards.h
 /opt/ros/groovy/include/rosconsole/macros_generated.h
 
 include/ElectricConnectionManager.h
+vector
+-
 ros/ros.h
 include/ros/ros.h
+constant.h
+include/constant.h
 string.h
 -
 stdio.h
@@ -663,8 +655,6 @@ time.h
 -
 ElectricConnectionManager.h
 include/ElectricConnectionManager.h
-constant.h
-include/constant.h
 CITIUS_Control_Electric/msg_electricInfo.h
 include/CITIUS_Control_Electric/msg_electricInfo.h
 CITIUS_Control_Electric/msg_command.h

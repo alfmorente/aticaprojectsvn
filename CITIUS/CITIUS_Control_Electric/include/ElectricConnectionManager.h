@@ -21,7 +21,9 @@ extern "C" {
 
 #endif	/* ElectricConnectionManager */
 
+#include <vector>
 #include "ros/ros.h"
+#include "constant.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,22 +34,59 @@ extern "C" {
 #include <fcntl.h>
 #include <arpa/inet.h>
 
+using namespace std;
+
 class ElectricConnectionManager{
 private:
+    
     // Socket
     int socketDescriptor;
+    
+    // Contador para la cola de mensajes (Integridad)
+    short countMsg;
+    
+    // Manejador de la cola de mensajes (Integridad)
+    vector<FrameDriving> messageQueue;
+    
+    // Informacion actualizable del vehiculo
+    ElectricInfo electricInfo;
+    
+    // Solicitud de apagado del vehiculo
+    bool turnOff;
+    
+    // Posicion del conmutador local/teleoperado
+    SwitcherStruct swPosition;
+    
 public:
     // Constructor
     ElectricConnectionManager();
+    
     // Gestion del vehiculo
     bool connectVehicle();
-    void setParam(short idParam, float value);
-    void getParam(short idParam);
-    void reqElectricInfo();
     bool disconnectVehicle();
+    
+    // Mensajeria con vehiculo
+    void sendToVehicle(FrameDriving);
+    void reqVehicleInfo();
+    bool checkForVehicleMessages();
+    void reqElectricInfo();
+    
     // Getter y setter necesarios
-    void setSocketDescriptor(int newSocketDescriptor);
     int getSocketDescriptor();
+    short getCountCriticalMessages();
+    void setCountCriticalMessages(short);
+    ElectricInfo getVehicleInfo();
+    void setVehicleInfo(short, short);
+    bool getTurnOffFlag();
+    SwitcherStruct getSwitcherStruct();
+    void setSwitcherStruct(bool);
+    
+    // Metodos auxiliares
+    bool isCriticalInstruction(short element);
+    
+    // Tratamiento de la cola de mensajes criticos
+    void addToQueue(FrameDriving frame);
+    RtxStruct informResponse(bool,short);
 
 };
 

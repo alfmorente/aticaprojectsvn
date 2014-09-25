@@ -1,2 +1,5 @@
-uint16 id_device
-int16 value
+int16 battery_level
+int16 battery_voltage
+int16 battery_current
+int16 battery_temperature
+uint8 supply_alarms

@@ -21,6 +21,7 @@ extern "C" {
 
 #endif	/* CONSTANT_H */
 
+using namespace std;
 
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
@@ -30,6 +31,8 @@ extern "C" {
 #define SET 0
 #define GET 1
 #define INFO 2
+#define ACK 3
+#define NACK 4
 
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
@@ -139,6 +142,7 @@ extern "C" {
 
 typedef struct{
     short instruction;
+    short id_instruction;
     short element;
     short value;
 }FrameDriving;
@@ -156,3 +160,32 @@ typedef struct{
 #define SWITCHER_LOCAL 0
 #define SWITCHER_TELECONTROL 1
 
+/*******************************************************************************
+ *           ESTRUCTURA DE INFORMACION ELECTRICA DE VEHICULO
+*******************************************************************************/
+
+typedef struct {
+    short battery_level;
+    short battery_voltage;
+    short battery_current;
+    short battery_temperature;
+    short supply_alarms;
+}ElectricInfo;
+
+/*******************************************************************************
+ *           ESTRUCTURA DE MANEJO DE NACK's
+*******************************************************************************/
+
+typedef struct{
+    int numOfMsgs;
+    vector<FrameDriving> msgs;
+}RtxStruct;
+
+/*******************************************************************************
+ *           ESTRUCTURA DE POSICION DEL CONMUTADOR LOCAL/TELEOPERADO
+*******************************************************************************/
+
+typedef struct{
+    bool flag;
+    short position;
+}SwitcherStruct;

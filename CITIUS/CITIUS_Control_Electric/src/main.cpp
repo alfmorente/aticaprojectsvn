@@ -42,32 +42,82 @@ int main(int argc, char** argv) {
         // Temporizador de requerimiento de informacion
         clock_t initTime, finalTime;
         initTime = clock();
-        
-        // Estructura receptora
-        FrameDriving frameRcv;
 
         //Bucle principal
         while (ros::ok() && nodeElectric->getEMNodeStatus() != NODESTATUS_OFF) {
-            // Recepcion de mensaje
+            
+            // Recepcion de mensaje ROS
             ros::spinOnce();
+            
+            // Comprobacion de recpcion de mensajes de vehiculo
+            nodeElectric->getDriverMng()->checkForVehicleMessages();
 
-            // Lectura via socket (NO BLOQUEANTE)
-            if (read(nodeElectric->getDriverMng()->getSocketDescriptor(), &frameRcv, sizeof(frameRcv)) >= 0) {
-                ROS_INFO("[Control] Electric - Recibida trama via socket");
-                nodeElectric->manageMessage(frameRcv);
+            // Comprobacion de señalizacion de apagado
+            if (nodeElectric->getDriverMng()->getTurnOffFlag()) {
+                
+                // Solicitud de cambio a vehicleStatus -> APAGANDO
+                CITIUS_Control_Electric::srv_vehicleStatus srvTurnOff;
+                srvTurnOff.request.status = OPERATION_MODE_APAGANDO;
+                while(!nodeElectric->getClientVehicleStatus().call(srvTurnOff)){
+                    ros::spinOnce();
+                }
+                
+                if(srvTurnOff.response.confirmation){
+                    
+                    // Cambio delmodo de operacion
+                    ros::NodeHandle nh;
+                    nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
+
+                    // Enviar confirmacion de apagado
+                    FrameDriving frame;
+                    frame.instruction = SET;
+                    frame.id_instruction = -1;
+                    frame.element = TURN_OFF;
+                    frame.value = 1;
+                    nodeElectric->getDriverMng()->sendToVehicle(frame);
+
+                    // Desconexion del socket con vehiculo
+                    nodeElectric->getDriverMng()->disconnectVehicle();
+
+                    // Cambiar el estado del nodo para finalizar
+                    nodeElectric->setEMNodeStatus(NODESTATUS_OFF);
+                
+                }else{
+                    ROS_INFO("[Control] Electric - Sin confirmacion para apagar el vehiculo");
+                }
+
+            } else {
+
+                // Comprobacion de cambio en posicion conmutador local/teleop
+                if (nodeElectric->getDriverMng()->getSwitcherStruct().flag) {
+                    
+                    // Envio de mensaje msg_switcher
+                    CITIUS_Control_Electric::msg_switcher msg;
+                    msg.switcher = nodeElectric->getDriverMng()->getSwitcherStruct().position;
+                    nodeElectric->getPubElectricInfo().publish(msg);
+                    
+                    // Clear del indicador de cambio
+                    nodeElectric->getDriverMng()->setSwitcherStruct(false);
+                    
+                }
+
+                // Comprobación del temporizador y requerimiento de info
+                finalTime = clock() - initTime;
+                if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
+
+                    // Clear del timer
+                    initTime = clock();
+
+                    // Requerimiento de informacion de dispositivo
+                    ElectricInfo info = nodeElectric->getDriverMng()->getVehicleInfo();
+
+                    // Publicacion de la informacion
+                    nodeElectric->publishElectricInfo(info);
+
+                }
+
             }
             
-            // Comprobación del temporizador y requerimiento de info
-            finalTime = clock() - initTime;
-            if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
-                
-                // Clear del timer
-                initTime = clock();
-                
-                // Requerimiento de informacion de dispositivo
-                nodeElectric->getDriverMng()->reqElectricInfo();
-                
-            }
         }
     } else {
         ROS_INFO("[Control] Electric - No se puede conectar al vehiculo. Maximo numero de reintentos realizados.");
