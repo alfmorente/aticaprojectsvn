@@ -16,7 +16,7 @@
 #include "constant.h"
 
 #define PORT 10000 /* El puerto que será abierto */
-#define BACKLOG 2 /* El número de conexiones permitidas */
+#define BACKLOG 1 /* El número de conexiones permitidas */
 
 #define MAXDATASIZE 100   
 
@@ -138,11 +138,15 @@ int main(int argc, char *argv[]) {
             memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
             memcpy(&fdr.element, &bufData[4], sizeof (fdr.element));
             memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-            printf("Recibido comando INS: %d ID: %d ELM: %d VAL: %d\n", fdr.instruction, fdr.id_instruction, fdr.element, fdr.value);
             if(fdr.instruction == SET){
+                printf("SET: %d = %d\n", fdr.element, fdr.value);
                 if(isCriticalInstruction(fdr.element)){
                     printf("Cuanta sim: %d - Cuenta mensaje: %d\n",currentMsgCount,fdr.id_instruction);
                 }
+            }else if(fdr.instruction == GET){
+                printf("GET: %d\n", fdr.element);
+            }else{
+                printf("Comando desconocido\n");
             }
             
             // Gestiona las peticiones

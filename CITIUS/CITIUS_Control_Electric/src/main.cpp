@@ -87,6 +87,7 @@ int main(int argc, char** argv) {
                 }
 
             } else {
+                
 
                 // Comprobacion de cambio en posicion conmutador local/teleop
                 if (nodeElectric->getDriverMng()->getSwitcherStruct().flag) {
@@ -108,7 +109,9 @@ int main(int argc, char** argv) {
                     // Clear del timer
                     initTime = clock();
 
-                    // Requerimiento de informacion de dispositivo
+                    // Requerimiento de informacion de sistema energetico
+                    nodeElectric->getDriverMng()->reqElectricInfo();
+                    // Obtiene informacion existente
                     ElectricInfo info = nodeElectric->getDriverMng()->getVehicleInfo();
 
                     // Publicacion de la informacion

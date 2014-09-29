@@ -67,7 +67,6 @@ public:
     
     // Mensajeria con vehiculo
     void sendToVehicle(FrameDriving);
-    void reqVehicleInfo();
     bool checkForVehicleMessages();
     void reqElectricInfo();
     
