@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: atica
  *
- * Created on 19 de junio de 2014, 10:05
+ * Created on 26 de junio de 2014, 10:05
  */
 
 #include <stdio.h>          
@@ -15,61 +15,40 @@
 #include <unistd.h>
 #include "constant.h"
 
-#define PORT 10000 /* El puerto que será abierto */
+#define PORT 20000 /* El puerto que será abierto */
 #define BACKLOG 2 /* El número de conexiones permitidas */
 
 #define MAXDATASIZE 100   
 
 typedef struct {
-    short steering;
-    short thottle;
-    short brake;
-    bool parkingBrake;
-    unsigned short gear;
-    unsigned short speed;
-    short motorRPM;
-    short motorTemperature;
-    bool lights;
-    bool blinkerLeft;
-    bool blinkerRight;
-    bool dipss;
-    bool dipsr;
-    bool dipsp;
-    bool klaxon;
-}DrivingInfo;
+    short battery_level;
+    short battery_voltage;
+    short battery_current;
+    short battery_temperature;
+    short supply_alarms;
+}ElectricInfo;
 
 /*******************************************************************************
     *               PROTOTIPOS DE FUNCIONES SECUNDARIAS
 *******************************************************************************/
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, DrivingInfo *vehicleInfo);
+void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, ElectricInfo *electricInfo);
 
 bool isCriticalInstruction(short element);
 
-short getDeviceValue(short element, DrivingInfo vehicleInfo);
+short getDeviceValue(short element, ElectricInfo electricInfo);
 
-void setDeviceValue(DrivingInfo *vehicleInfo, short element, short value);
-
+void setDeviceValue(ElectricInfo *electricInfo, short element, short value);
 
 int main(int argc, char *argv[]) {
     
-    DrivingInfo vehicleInfo;
-    vehicleInfo.lights = false;
-    vehicleInfo.blinkerLeft = false;
-    vehicleInfo.blinkerRight = false;
-    vehicleInfo.dipsp = false;
-    vehicleInfo.dipsr = false;
-    vehicleInfo.dipss = false;
-    vehicleInfo.klaxon = false;
-    vehicleInfo.brake = 0;
-    vehicleInfo.thottle = 0;
-    vehicleInfo.steering = 0;
-    vehicleInfo.parkingBrake = false;
-    vehicleInfo.gear = 0;
-    vehicleInfo.speed = 0;
-    vehicleInfo.motorTemperature = 0;
-    vehicleInfo.motorRPM = 0;
-
+    ElectricInfo electricInfo;
+    electricInfo.battery_level = 0;
+    electricInfo.battery_voltage = 0;
+    electricInfo.battery_current = 0;
+    electricInfo.battery_temperature = 0;
+    electricInfo.supply_alarms = 0x00;
+    
     int fd, fd2, currentMsgCount = 1; /* los ficheros descriptores */
 
     struct sockaddr_in server;
@@ -111,7 +90,8 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
     sin_size = sizeof (struct sockaddr_in);
-    printf("Esperando conexion de RosNode_Driving\n");
+    printf("Esperando conexion de RosNode_Electric\n");
+    
     /* A continuación la llamada a accept() */
     if ((fd2 = accept(fd, (struct sockaddr *) &client, &sin_size)) == -1) {
         printf("Error en accept()\n");
@@ -123,12 +103,11 @@ int main(int argc, char *argv[]) {
 
 
     while (1) {
-        
         // Buffer de envio
         char bufData[8];
-        if ((recv(fd2, bufData, MAXDATASIZE, 0)) == -1) {
+        if ((recv(fd2, bufData, MAXDATASIZE, 0)) <= 0) {
             /* llamada a recv() */
-            printf("Error en recv() \n");
+            printf("No se recibe na \n");
             exit(-1);
         } else {
             // Estructura de recepcion
@@ -146,13 +125,13 @@ int main(int argc, char *argv[]) {
             }
             
             // Gestiona las peticiones
-            requestDispatcher(fdr, fd2, &currentMsgCount, &vehicleInfo);
+            requestDispatcher(fdr, fd2, &currentMsgCount, &electricInfo);
             
         }
     }
 }
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, DrivingInfo *vehicleInfo){
+void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, ElectricInfo *electricInfo){
     if(frame.instruction == SET){
         if(isCriticalInstruction(frame.element)){
             // Despacha peticion y devuelve ACK (con ID_INSTRUCCION)
@@ -202,14 +181,14 @@ void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsg
             send(socketDescriptor, buff, sizeof (buff), 0);
             usleep(100); 
         }
-        setDeviceValue(vehicleInfo, frame.element, frame.value);
+        setDeviceValue(electricInfo, frame.element, frame.value);
     }else if(frame.instruction == GET) {
         // Despacha peticion y devuelve INFO  (sin ID_INSTRUCCION)
         FrameDriving ret;
         ret.instruction = INFO;
         ret.id_instruction = 0;
         ret.element = frame.element;
-        ret.value = getDeviceValue(frame.element,*vehicleInfo);
+        ret.value = getDeviceValue(frame.element,*electricInfo);
         //Buffer de envio 
         char buff[8];
         memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
@@ -242,98 +221,44 @@ bool isCriticalInstruction(short element){
 
 }
 
-short getDeviceValue(short element, DrivingInfo vehicleInfo) {
+short getDeviceValue(short element, ElectricInfo electricInfo) {
     switch (element) {
-        case THROTTLE:
-            return vehicleInfo.thottle;
+        case BATTERY_LEVEL:
+            return electricInfo.battery_level;
             break;
-        case BRAKE:
-            return vehicleInfo.brake;
+        case BATTERY_VOLTAGE:
+            return electricInfo.battery_voltage;
             break;
-        case HANDBRAKE:
-            return vehicleInfo.parkingBrake;
+        case BATTERY_CURRENT:
+            return electricInfo.battery_current;
             break;
-        case STEERING:
-            return vehicleInfo.steering;
+        case BATTERY_TEMPERATURE:
+            return electricInfo.battery_temperature;
             break;
-        case GEAR:
-            return vehicleInfo.gear;
-            break;
-        case MOTOR_RPM:
-            return vehicleInfo.motorRPM;
-            break;
-        case CRUISING_SPEED:
-            return vehicleInfo.speed;
-            break;
-        case MOTOR_TEMPERATURE:
-            return vehicleInfo.motorTemperature;
-            break;
-        case BLINKER_LEFT:
-            return vehicleInfo.blinkerLeft;
-            break;
-        case BLINKER_RIGHT:
-            return vehicleInfo.blinkerRight;
-            break;
-        case KLAXON:
-            return vehicleInfo.klaxon;
-            break;
-        case DIPSP:
-            return vehicleInfo.dipsp;
-            break;
-        case DIPSS:
-            return vehicleInfo.dipss;
-            break;
-        case DIPSR:
-            return vehicleInfo.dipsr;
+        case SUPPLY_ALARMS:
+            return electricInfo.supply_alarms;
             break;
         default:
             break;
     }
 }
 
-void setDeviceValue(DrivingInfo *vehicleInfo, short element, short value){
+void setDeviceValue(ElectricInfo *electricInfo, short element, short value){
     switch (element) {
-        case THROTTLE:
-            (*vehicleInfo).thottle = value;
+        case BATTERY_LEVEL:
+            (*electricInfo).battery_level = value;
             break;
-        case BRAKE:
-            (*vehicleInfo).brake = value;
+        case BATTERY_VOLTAGE:
+            (*electricInfo).battery_voltage = value;
             break;
-        case HANDBRAKE:
-            (*vehicleInfo).parkingBrake = (bool) value;
+        case BATTERY_CURRENT:
+            (*electricInfo).battery_current = (bool) value;
             break;
-        case STEERING:
-            (*vehicleInfo).steering = value;
+        case BATTERY_TEMPERATURE:
+            (*electricInfo).battery_temperature = value;
             break;
-        case GEAR:
-            (*vehicleInfo).gear = value;
-            break;
-        case MOTOR_RPM:
-            (*vehicleInfo).motorRPM = value;
-            break;
-        case CRUISING_SPEED:
-            (*vehicleInfo).speed = value;
-            break;
-        case MOTOR_TEMPERATURE:
-            (*vehicleInfo).motorTemperature = value;
-            break;
-        case BLINKER_LEFT:
-            (*vehicleInfo).blinkerLeft = (bool) value;
-            break;
-        case BLINKER_RIGHT:
-            (*vehicleInfo).blinkerRight = (bool) value;
-            break;
-        case KLAXON:
-            (*vehicleInfo).klaxon = (bool) value;
-            break;
-        case DIPSP:
-            (*vehicleInfo).dipsp = (bool) value;
-            break;
-        case DIPSS:
-            (*vehicleInfo).dipss = (bool) value;
-            break;
-        case DIPSR:
-            (*vehicleInfo).dipsr = (bool) value;
+        case SUPPLY_ALARMS:
+            (*electricInfo).supply_alarms = value;
             break;
         default:
             break;
