@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
         //Bucle principal
         while (ros::ok() && nodeDriving->getVMNodeStatus() != NODESTATUS_OFF) {
             if (nodeDriving->getDriverMng()->getSocketDescriptor() == -1) {
-                ROS_INFO("Se ha perdido comunicacion con servidor");
+                ROS_INFO("[Control] Driving - Se ha perdido comunicacion con servidor");
             } else {
                 
                 // Comprobacion de recepcion de mensaje ROS
