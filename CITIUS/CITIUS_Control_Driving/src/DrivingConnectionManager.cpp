@@ -211,9 +211,7 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
                 
             }
             // TODO ALARMAS
-            
-            // TODO INFO's
-            
+                        
         }
         
         return true;
