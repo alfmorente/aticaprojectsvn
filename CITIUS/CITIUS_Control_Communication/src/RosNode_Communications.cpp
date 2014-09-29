@@ -622,7 +622,16 @@ void RosNode_Communications::informStatus() {
 
     // Generacion de mensaje especifico UGV Info
     ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
-    rmsm->missionId = status;
+    if(status == OPERATION_MODE_LOCAL){
+        rmsm->missionId = 1;
+    }else if(status == OPERATION_MODE_CONDUCCION){
+        rmsm->missionId = 5;
+    }else if(status == OPERATION_MODE_OBSERVACION){
+        rmsm->missionId = 6;
+    }else{
+        rmsm->missionId = 99;
+    }
+    
     jausAddressCopy(rmsm->destination, jAdd);
     
     // Generacion de mensaje JUAS global
