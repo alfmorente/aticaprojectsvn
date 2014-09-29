@@ -347,12 +347,12 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
                 
                 if (rq.posSwitcher == SWITCHER_LOCAL) {
                     
-                    ROS_INFO("Modo de operacion LOCAL activado");
+                    ROS_INFO("[Control] Manager - Modo de operacion LOCAL activado");
                     nh.setParam("vehicleStatus", OPERATION_MODE_LOCAL);
                     
                 } else if (rq.posSwitcher == SWITCHER_TELECONTROL) {
                     
-                    ROS_INFO("Modo de operacion CONDUCCION activado");
+                    ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
                     nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
                 }
                 

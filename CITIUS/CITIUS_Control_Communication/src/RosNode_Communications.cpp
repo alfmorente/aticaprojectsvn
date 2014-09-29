@@ -86,7 +86,7 @@ void RosNode_Communications::initJAUS() {
         
     }catch(...){
         
-        ROS_INFO("[Control] Communications - No se ha podido inicializar JAUS");
+        //ROS_INFO("[Control] Communications - No se ha podido inicializar JAUS");
         
     }
     
@@ -98,7 +98,7 @@ void RosNode_Communications::initJAUS() {
     // Mission Spooler
     missionSpoolerComponent = ojCmptCreate((char *) "Mission Spooler", JAUS_MISSION_SPOOLER, 1);
     if (missionSpoolerComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente MISSION SPOOLER");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente MISSION SPOOLER");
         exit(0);
     }else{
         
@@ -116,7 +116,7 @@ void RosNode_Communications::initJAUS() {
     // Primitive Driver
     primitiveDriverComponent = ojCmptCreate((char *) "Primitive Driver", JAUS_PRIMITIVE_DRIVER, 1);
     if (primitiveDriverComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente PRIMITIVE DRIVER");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente PRIMITIVE DRIVER");
         exit(0);
     }else{
     
@@ -137,7 +137,7 @@ void RosNode_Communications::initJAUS() {
     // Visual Sensor
     visualSensorComponent = ojCmptCreate((char *) "Visual Sensor", JAUS_VISUAL_SENSOR, 1);
     if (visualSensorComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente VISUAL SENSOR");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente VISUAL SENSOR");
         exit(0);
     }else{
         
@@ -167,7 +167,7 @@ void RosNode_Communications::initJAUS() {
     // Platform Sensor
     platformSensorComponent = ojCmptCreate((char *) "Platform Sensor", JAUS_PLATFORM_SENSOR, 1);
     if (platformSensorComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente PLATFORM SENSOR");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente PLATFORM SENSOR");
         exit(0);
     }else{
         
@@ -185,7 +185,7 @@ void RosNode_Communications::initJAUS() {
     // Global Waypoint Driver
     globalWaypointDriverComponent = ojCmptCreate((char *)"Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER,1);
     if (globalWaypointDriverComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL WAYPOINT DRIVER");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL WAYPOINT DRIVER");
         exit(0);
     }else{
         
@@ -196,7 +196,7 @@ void RosNode_Communications::initJAUS() {
     // Velocity State Sensor
     velocityStateSensorComponent = ojCmptCreate((char *)"Velocity State Sensor",JAUS_VELOCITY_STATE_SENSOR,1);
     if (velocityStateSensorComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente VELOCITY STATE SENSOR");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente VELOCITY STATE SENSOR");
         exit(0);
     }else{
         // Mensajes que envia
@@ -214,7 +214,7 @@ void RosNode_Communications::initJAUS() {
     // Global Pose Sensor
     globalPoseSensorComponent = ojCmptCreate((char *)"Global Pose Sensor",JAUS_GLOBAL_POSE_SENSOR,1);
     if (globalPoseSensorComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL POSE SENSOR");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL POSE SENSOR");
         exit(0);
     }else{
         // Mensajes que envia
@@ -226,7 +226,7 @@ void RosNode_Communications::initJAUS() {
     // HeartBeat Information
     heartBeatInformationComponent = ojCmptCreate((char *)"HeartBeat Information", JAUS_HEARTBEAT_INFORMATION,1);
     if (heartBeatInformationComponent == NULL) {
-        ROS_INFO("[Control] Communication - No se ha podido crear el componente HEARTBEAT INFORMATION");
+        //ROS_INFO("[Control] Communication - No se ha podido crear el componente HEARTBEAT INFORMATION");
         exit(0);
     }else{
         // Mensajes que envia
@@ -298,7 +298,7 @@ ros::Publisher RosNode_Communications::getPublisherCommand() {
  * CORRESPONDENCIA JAUS: REPORT CAMERA POSE
  */
 void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion de camara delantera");
+    //ROS_INFO("[Control] Communications - Recibida informacion de camara delantera");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -307,9 +307,9 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de camara delantera");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de camara delantera");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -320,7 +320,7 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
  * CORRESPONDENCIA JAUS: REPORT CAMERA POSE
  */
 void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communication::msg_rearCameraInfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion de camara trasera");
+    //ROS_INFO("[Control] Communications - Recibida informacion de camara trasera");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -329,9 +329,9 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de camara trasera");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de camara trasera");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -342,7 +342,7 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
  * CORRESPONDENCIA JAUS: REPORT DISCRETE DEVICE / REPORT WRENCH EFFORT / REPORT SIGNALING ELEMENTS
  */
 void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion de vehiculo");
+    //ROS_INFO("[Control] Communications - Recibida informacion de vehiculo");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -352,9 +352,9 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
     }
     
     // Creacion del mensaje a enviar (Report Discrete Device)
@@ -362,9 +362,9 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
     }
     
     // Creacion del mensaje a enviar (Report Travel Speed)
@@ -372,9 +372,9 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->velocityStateSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
     }
     
     // Creacion del mensaje a enviar (UGV Info)
@@ -382,9 +382,9 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
     }
     
     if(msg.lights) {
@@ -393,9 +393,9 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
         if (jMsg != NULL) {
             // Envio via JAUS    
             ojCmptSendMessage(this->visualSensorComponent, jMsg);
-            ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+            //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
         } else {
-            ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
+            //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de vehiculo");
         }
     }
     
@@ -408,7 +408,7 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
  * CORRESPONDENCIA JAUS: UGV INFO
  */
 void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion electrica");
+    //ROS_INFO("[Control] Communications - Recibida informacion electrica");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -417,9 +417,9 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+        //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -431,7 +431,7 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
  */
 void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg) {
 
-    ROS_INFO("[Control] Communications - Recibido mensaje de Position Orientation");
+    //ROS_INFO("[Control] Communications - Recibido mensaje de Position Orientation");
     
     JausMessage jMsg = NULL;
     
@@ -517,7 +517,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
  * CORRESPONDENCIA JAUS: REPORT NIGHT-TIME CAMERA
  */
 void RosNode_Communications::fcn_subs_irCameraInfo(CITIUS_Control_Communication::msg_irinfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion camara IR");
+    //ROS_INFO("[Control] Communications - Recibida informacion camara IR");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -526,9 +526,9 @@ void RosNode_Communications::fcn_subs_irCameraInfo(CITIUS_Control_Communication:
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de camara IR");
+        //ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de camara IR");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -539,7 +539,7 @@ void RosNode_Communications::fcn_subs_irCameraInfo(CITIUS_Control_Communication:
  * CORRESPONDENCIA JAUS: TELEMETER INFO
  */
 void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion telemetro");
+    //ROS_INFO("[Control] Communications - Recibida informacion telemetro");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -548,9 +548,9 @@ void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->platformSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de telemetro");
+        //ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de telemetro");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -561,7 +561,7 @@ void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication
  * CORRESPONDENCIA JAUS: REPORT DAY-TIME CAMERA INFO
  */
 void RosNode_Communications::fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion camara diurna (TV)");
+    //ROS_INFO("[Control] Communications - Recibida informacion camara diurna (TV)");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -570,9 +570,9 @@ void RosNode_Communications::fcn_subs_tvCameraInfo(CITIUS_Control_Communication:
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS camara diurna (TV)");
+        //ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS camara diurna (TV)");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -583,7 +583,7 @@ void RosNode_Communications::fcn_subs_tvCameraInfo(CITIUS_Control_Communication:
  * CORRESPONDENCIA JAUS: REPORT POSITIONER
  */
 void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg) {
-    ROS_INFO("[Control] Communications - Recibida informacion posicionador");
+    //ROS_INFO("[Control] Communications - Recibida informacion posicionador");
     
     // Conversor ROS -> JAUS
     TranslatorROSJAUS *translator = new TranslatorROSJAUS();
@@ -592,9 +592,9 @@ void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communicatio
     if(jMsg != NULL){
         // Envio via JAUS    
         ojCmptSendMessage(this->visualSensorComponent, jMsg);
-        ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
+        //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
     }else{
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion de posicionador");
+        //ROS_INFO("[Control] Communications - No se ha podido generar mensaje JAUS con informacion de posicionador");
     }
     // Destruccion del mensaje
     jausMessageDestroy(jMsg);
@@ -618,6 +618,7 @@ void RosNode_Communications::informStatus() {
     jAdd->subsystem = instance->subsystemController;
     jAdd->node = instance->nodeController;
     jAdd->component = JAUS_MISSION_SPOOLER;
+    jAdd->instance = 2;
 
     // Generacion de mensaje especifico UGV Info
     ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
@@ -630,7 +631,7 @@ void RosNode_Communications::informStatus() {
     if (jMsg != NULL) {
         ojCmptSendMessage(instance->missionSpoolerComponent, jMsg);
     } else {
-        ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+        ////ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
     }
     // Liberacion de memoria
     reportMissionStatusMessageDestroy(rmsm);
@@ -682,7 +683,7 @@ void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg
 void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
     SetWrenchEffortMessage sWrenchEffort = setWrenchEffortMessageFromJausMessage(msg);
     CITIUS_Control_Communication::msg_command command;
-    
+    printf("Recibido Report wrench effort\n");
     // Comprobacion de direccion
     if((sWrenchEffort->presenceVector & PRESENCE_VECTOR_STEER) == PRESENCE_VECTOR_STEER){
         command.id_device = STEERING;
@@ -869,7 +870,7 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Pan absoluto a Positioner");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Pan absoluto a Positioner");
         }
     }
     
@@ -887,7 +888,7 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Vel. Pan a Positioner");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Vel. Pan a Positioner");
         }
     }
     
@@ -905,7 +906,7 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Tilt absoluto a Positioner");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Tilt absoluto a Positioner");
         }
     }
     
@@ -923,7 +924,7 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Tilt Rate a Positioner");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Tilt Rate a Positioner");
         }
     }
     
@@ -946,7 +947,7 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Direct Zoom a TV Camera");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Direct Zoom a TV Camera");
         }
     }
     
@@ -964,7 +965,7 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Cont. Zoom a TV Camera");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Cont. Zoom a TV Camera");
         }
     }
     
@@ -982,7 +983,7 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Focus a TV Camera");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Focus a TV Camera");
         }
     }
     
@@ -1000,7 +1001,7 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de AutoFocus a TV Camera");
+            //ROS_INFO("[Control] Communications - Error en el Req. de AutoFocus a TV Camera");
         }
     }
 }
@@ -1022,7 +1023,7 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Zoom a IR Camera");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Zoom a IR Camera");
         }
     }
     
@@ -1040,7 +1041,7 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
             }
         }
         if(numOfAttemps == 5){
-            ROS_INFO("[Control] Communications - Error en el Req. de Polarity a IR Camera");
+            //ROS_INFO("[Control] Communications - Error en el Req. de Polarity a IR Camera");
         }
     }
     
@@ -1064,7 +1065,7 @@ void RosNode_Communications::fcn_receive_set_telemeter(OjCmpt cmp, JausMessage m
             }
         }
         if (numOfAttemps == 5) {
-            ROS_INFO("[Control] Communications - Error en el Shoot del telemetro");
+            //ROS_INFO("[Control] Communications - Error en el Shoot del telemetro");
         }
     }
 }
