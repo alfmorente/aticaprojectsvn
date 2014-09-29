@@ -134,6 +134,7 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
     char bufData[8];
     
     if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
+        printf("A ver, aqui algo se ha recibido\n");
         // Estructura de recepcion
         FrameDriving fdr;
         
@@ -176,9 +177,9 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
             }            
             
         }
-        
         return true;
     }else{
+        printf("No se ha recibido nada.\n");
         return false;
     }
 }

@@ -41,8 +41,6 @@
           <df name="src">
           </df>
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_Manager.dir">
