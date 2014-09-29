@@ -31,10 +31,11 @@ void RosNode_Electric::initROS() {
     // Solicitar a vehiculo posicion conmutador local/teleoperado
     // TODO
     service.request.posSwitcher = SWITCHER_LOCAL; // comentar
-    
+
     while(!clientVehicleStatus.call(service)){
         ros::spinOnce();
     }
+    
     if(service.response.confirmation) {
         ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
         emNodeStatus = NODESTATUS_OK;
