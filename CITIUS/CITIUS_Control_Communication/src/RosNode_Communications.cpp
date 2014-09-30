@@ -629,8 +629,9 @@ void RosNode_Communications::informStatus() {
     }else if(status == OPERATION_MODE_OBSERVACION){
         rmsm->missionId = 6;
     }else{
-        rmsm->missionId = 99;
+        rmsm->missionId = 0;
     }
+    rmsm->status = 0;
     
     jausAddressCopy(rmsm->destination, jAdd);
     
@@ -692,7 +693,7 @@ void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg
 void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
     SetWrenchEffortMessage sWrenchEffort = setWrenchEffortMessageFromJausMessage(msg);
     CITIUS_Control_Communication::msg_command command;
-    printf("Recibido Report wrench effort\n");
+
     // Comprobacion de direccion
     if((sWrenchEffort->presenceVector & PRESENCE_VECTOR_STEER) == PRESENCE_VECTOR_STEER){
         command.id_device = STEERING;
