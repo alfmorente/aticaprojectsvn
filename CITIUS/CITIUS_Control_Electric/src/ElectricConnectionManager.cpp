@@ -96,7 +96,7 @@ void ElectricConnectionManager::sendToVehicle(FrameDriving frame){
     
     // Envio via socket
     send(socketDescriptor, bufData, sizeof(bufData), 0);
-    usleep(100);  
+    usleep(1000);  
 }
 
 // Solicitar informacion basica de vehiculo
