@@ -225,6 +225,9 @@ short ElectricConnectionManager::getCountCriticalMessages(){
 
 void ElectricConnectionManager::setCountCriticalMessages(short cont) {
     countMsg = cont;
+    // Contador: 1 .. 1024
+    if(countMsg == 1025)
+        countMsg = 1;
 }
 
 bool ElectricConnectionManager::getTurnOffFlag(){
