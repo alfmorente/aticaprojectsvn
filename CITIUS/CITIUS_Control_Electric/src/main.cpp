@@ -101,6 +101,9 @@ int main(int argc, char** argv) {
                     nodeElectric->getDriverMng()->setSwitcherStruct(false);
                     
                 }
+                
+                // Tratamiento de alarmas 
+                // TODO
 
                 // Comprobación del temporizador y requerimiento de info
                 finalTime = clock() - initTime;

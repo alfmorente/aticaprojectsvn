@@ -15,6 +15,7 @@ ElectricConnectionManager::ElectricConnectionManager() {
     turnOff = false;
     swPosition.flag = false;
     swPosition.position = -1;
+    supplyAlarms = 0x0000;
 }
 
 /*******************************************************************************
@@ -171,7 +172,7 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
                 swPosition.flag = true;
                 swPosition.position = fdr.value;
             
-            }else{ // INFO corriente
+            }else{ // INFO corriente o alarmas
                 setVehicleInfo(fdr.element,fdr.value);
             }            
             
@@ -212,7 +213,7 @@ void ElectricConnectionManager::setVehicleInfo(short id_device, short value){
             electricInfo.battery_temperature = value;
             break;
         case SUPPLY_ALARMS:
-            electricInfo.supply_alarms = value;
+            supplyAlarms = value;
             break;
         default: 
             break;
@@ -243,12 +244,21 @@ void ElectricConnectionManager::setSwitcherStruct(bool flag){
     swPosition.position = -1;
 }
 
+short ElectricConnectionManager::getSupplyAlarms() {
+    return supplyAlarms;
+}
+
+
 /*******************************************************************************
  * METODOS PROPIOS
  *******************************************************************************/
 
 bool ElectricConnectionManager::isCriticalInstruction(short element) {
-    return false;
+    if (element == SUPPLY_TURN_ON) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /*******************************************************************************
