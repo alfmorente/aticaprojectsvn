@@ -24,6 +24,8 @@ DrivingConnectionManager::DrivingConnectionManager() {
     vehicleInfo.speed = 0;
     vehicleInfo.motorTemperature = 0;
     vehicleInfo.motorRPM = 0;
+    driveAlarms = 0x0000;
+    steeringAlarms = 0x0000;
 }
 
 /*******************************************************************************
@@ -203,8 +205,10 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
             
         } else if (fdr.instruction == INFO) {
                         
-            if(fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS || fdr.element == SUPPLY_ALARMS){
+            if(fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS){
             
+                setAlarmsInfo(fdr.element, fdr.value);
+                
             }else{ // INFO corriente
                 
                 setVehicleInfo(fdr.element,fdr.value);
@@ -225,11 +229,13 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
  ******************************************************************************/
 
 // Get del descriptor de socket
+
 int DrivingConnectionManager::getSocketDescriptor(){
     return socketDescriptor;
 }
 
 // Get de la ultima informacion recibida del vehiculo
+
 DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
     DrivingInfo ret = vehicleInfo;
     
@@ -240,6 +246,8 @@ DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
     
     return ret;
 }
+
+// Informacion de vehiculo
 
 void DrivingConnectionManager::setVehicleInfo(short id_device, short value){
     switch(id_device){
@@ -290,6 +298,8 @@ void DrivingConnectionManager::setVehicleInfo(short id_device, short value){
     }
 }
 
+// Contador de mensajes criticos
+
 short DrivingConnectionManager::getCountCriticalMessages(){
     return countMsg;
 }
@@ -299,6 +309,23 @@ void DrivingConnectionManager::setCountCriticalMessages(short cont) {
     // Contador: 1 .. 1024
     if(countMsg == 1025)
         countMsg = 1;
+}
+
+// Alarmas
+
+short DrivingConnectionManager::getDriveAlarms(){
+    return driveAlarms;
+}
+
+short DrivingConnectionManager::getSteeringAlarms(){
+    return steeringAlarms;
+}
+
+void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
+    if(element == DRIVE_ALARMS)
+        driveAlarms = value;
+    else if(element == STEERING_ALARMS)
+        steeringAlarms = value;
 }
 
 
