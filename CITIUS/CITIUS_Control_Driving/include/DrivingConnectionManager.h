@@ -49,6 +49,11 @@ private:
     // Informacion actualizable del vehiculo
     DrivingInfo vehicleInfo;
     
+    // Alarmas de conduccion
+    short driveAlarms;
+    // Alarmas de direccion
+    short steeringAlarms;
+    
 public:
     // Constructor
     DrivingConnectionManager();
@@ -68,6 +73,8 @@ public:
     void setCountCriticalMessages(short cont);
     DrivingInfo getVehicleInfo(bool full);
     void setVehicleInfo(short id_device, short value);
+    short getDriveAlarms();
+    short getSteeringAlarms();
     
     // Metodos auxiliares
     bool isCriticalInstruction(short element);
@@ -75,6 +82,9 @@ public:
     // Tratamiento de la cola de mensajes criticos
     void addToQueue(FrameDriving frame);
     RtxStruct informResponse(bool,short);
+    
+    // Tratamiento de atributos de alarmas
+    void setAlarmsInfo(short element, short value);
     
 };
 

@@ -43,6 +43,9 @@ int main(int argc, char** argv) {
                 
                 // Comprobacion de recpcion de mensajes de vehiculo
                 nodeDriving->getDriverMng()->checkForVehicleMessages();
+                
+                // Comprobacion de alarmas
+                // TODO
 
                 // Comprobación del temporizador y requerimiento de info
                 finalTime = clock() - initTime;
