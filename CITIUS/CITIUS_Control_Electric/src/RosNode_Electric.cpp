@@ -1,3 +1,5 @@
+#include <deque>
+
 #include "RosNode_Electric.h"
 
 /*******************************************************************************
@@ -25,6 +27,16 @@ void RosNode_Electric::initROS() {
         
     // Se solicita la activacion del resto de nodos del vehiculo
     ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehiculo");
+    
+    // Set up del suministro electrico
+    FrameDriving frame;
+    frame.instruction = SET;
+    frame.id_instruction = dElectric->getCountCriticalMessages();
+    dElectric->setCountCriticalMessages(dElectric->getCountCriticalMessages()+1);
+    frame.element = SUPPLY_TURN_ON;
+    frame.value = 1;
+    dElectric->sendToVehicle(frame);
+        
     CITIUS_Control_Electric::srv_vehicleStatus service;
     
     service.request.status = OPERATION_MODE_INICIANDO;

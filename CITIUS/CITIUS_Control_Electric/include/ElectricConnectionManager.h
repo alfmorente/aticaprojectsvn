@@ -57,6 +57,9 @@ private:
     // Posicion del conmutador local/teleoperado
     SwitcherStruct swPosition;
     
+    // Alarmas del subsistema electrico
+    short supplyAlarms;
+    
 public:
     // Constructor
     ElectricConnectionManager();
@@ -79,6 +82,7 @@ public:
     bool getTurnOffFlag();
     SwitcherStruct getSwitcherStruct();
     void setSwitcherStruct(bool);
+    short getSupplyAlarms();
     
     // Metodos auxiliares
     bool isCriticalInstruction(short element);
