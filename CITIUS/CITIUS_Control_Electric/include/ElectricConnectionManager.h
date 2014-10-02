@@ -72,6 +72,7 @@ public:
     void sendToVehicle(FrameDriving);
     bool checkForVehicleMessages();
     void reqElectricInfo();
+    void setTurnOff();
     
     // Getter y setter necesarios
     int getSocketDescriptor();
@@ -92,4 +93,3 @@ public:
     RtxStruct informResponse(bool,short);
 
 };
-

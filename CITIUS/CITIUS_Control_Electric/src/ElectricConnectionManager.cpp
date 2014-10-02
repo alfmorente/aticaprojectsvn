@@ -129,6 +129,18 @@ void ElectricConnectionManager::reqElectricInfo() {
     
 }
 
+// Apagado del vehiculo
+
+void ElectricConnectionManager::setTurnOff() {
+    FrameDriving frame;
+    frame.instruction = SET;
+    frame.id_instruction = -1;
+    frame.element = TURN_OFF;
+    frame.value = 1;
+    sendToVehicle(frame);
+}
+
+// Comprobacion de informacion enviada desde vehiculo
 
 bool ElectricConnectionManager::checkForVehicleMessages() {
     
@@ -145,7 +157,7 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
         memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
 
         if (fdr.instruction == ACK) {
-            
+
             informResponse(true, fdr.id_instruction);
             
         } else if (fdr.instruction == NACK) {

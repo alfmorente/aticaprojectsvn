@@ -68,63 +68,59 @@ int main(int argc, char** argv) {
                     ros::NodeHandle nh;
                     nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
 
-                    // Enviar confirmacion de apagado
-                    FrameDriving frame;
-                    frame.instruction = SET;
-                    frame.id_instruction = -1;
-                    frame.element = TURN_OFF;
-                    frame.value = 1;
-                    nodeElectric->getDriverMng()->sendToVehicle(frame);
+                    // Enviar confirmacion de apagado                    
+                    nodeElectric->getDriverMng()->setTurnOff();
 
                     // Desconexion del socket con vehiculo
                     nodeElectric->getDriverMng()->disconnectVehicle();
 
                     // Cambiar el estado del nodo para finalizar
                     nodeElectric->setEMNodeStatus(NODESTATUS_OFF);
-                
-                }else{
+
+                } else {
                     ROS_INFO("[Control] Electric - Sin confirmacion para apagar el vehiculo");
                 }
 
-            } else {
-                
+            }
 
-                // Comprobacion de cambio en posicion conmutador local/teleop
-                if (nodeElectric->getDriverMng()->getSwitcherStruct().flag) {
-                    
-                    // Envio de mensaje msg_switcher
-                    CITIUS_Control_Electric::msg_switcher msg;
-                    msg.switcher = nodeElectric->getDriverMng()->getSwitcherStruct().position;
-                    nodeElectric->getPubElectricInfo().publish(msg);
-                    
-                    // Clear del indicador de cambio
-                    nodeElectric->getDriverMng()->setSwitcherStruct(false);
-                    
+            // Comprobacion de cambio en posicion conmutador local/teleop
+            if (nodeElectric->getDriverMng()->getSwitcherStruct().flag) {
+
+                // Envio de mensaje msg_switcher
+                nodeElectric->publishSwitcherInfo(nodeElectric->getDriverMng()->getSwitcherStruct().position);
+
+                // Activacion / Desactivacion de actuadores
+                if(nodeElectric->getDriverMng()->getSwitcherStruct().position == 1){
+                    nodeElectric->publishSetupCommands(true);
+                }else{
+                    nodeElectric->publishSetupCommands(false);
                 }
-                
-                // Tratamiento de alarmas 
-                // TODO
 
-                // Comprobación del temporizador y requerimiento de info
-                finalTime = clock() - initTime;
-                if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
-
-                    // Clear del timer
-                    initTime = clock();
-
-                    // Requerimiento de informacion de sistema energetico
-                    nodeElectric->getDriverMng()->reqElectricInfo();
-                    // Obtiene informacion existente
-                    ElectricInfo info = nodeElectric->getDriverMng()->getVehicleInfo();
-
-                    // Publicacion de la informacion
-                    nodeElectric->publishElectricInfo(info);
-
-                }
+                // Clear del indicador de cambio
+                nodeElectric->getDriverMng()->setSwitcherStruct(false);
 
             }
-            
+
+            // Tratamiento de alarmas 
+            // TODO
+
+            // Comprobación del temporizador y requerimiento de info
+            finalTime = clock() - initTime;
+            if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
+
+                // Clear del timer
+                initTime = clock();
+
+                // Requerimiento de informacion de sistema energetico
+                nodeElectric->getDriverMng()->reqElectricInfo();
+
+                // Publicacion de la informacion existente
+                nodeElectric->publishElectricInfo(nodeElectric->getDriverMng()->getVehicleInfo());
+
+            }
+
         }
+        
     } else {
         ROS_INFO("[Control] Electric - No se puede conectar al vehiculo. Maximo numero de reintentos realizados.");
     }

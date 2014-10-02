@@ -35,7 +35,11 @@ void RosNode_Electric::initROS() {
     dElectric->setCountCriticalMessages(dElectric->getCountCriticalMessages()+1);
     frame.element = SUPPLY_TURN_ON;
     frame.value = 1;
+    // Cola de comandos criticos
+    dElectric->addToQueue(frame);
+    // Envio a vehiculo
     dElectric->sendToVehicle(frame);
+    usleep(1000);
         
     CITIUS_Control_Electric::srv_vehicleStatus service;
     
@@ -103,4 +107,59 @@ void RosNode_Electric::publishElectricInfo(ElectricInfo info){
 
     pubElectricInfo.publish(msg);
     
+}
+
+/*******************************************************************************
+ * PUBLICACION POSICION CONMUTADOR LOCAL/TELEOPERADO
+ ******************************************************************************/
+
+void RosNode_Electric::publishSwitcherInfo(short position){
+    
+    CITIUS_Control_Electric::msg_switcher msg;
+    msg.switcher = position;
+    pubElectricInfo.publish(msg);
+    
+}
+
+/*******************************************************************************
+ * PUBLICACION DE COMANDOS ON/OFF DE ACTUADORES
+ ******************************************************************************/
+
+void RosNode_Electric::publishSetupCommands(bool on){
+    
+    CITIUS_Control_Electric::msg_command msg;
+    
+    if(on)
+        msg.value = 1;
+    else
+        msg.value = 0;
+    
+    // Activa/desactiva acelerador
+    msg.id_device = MT_THROTTLE;
+    pubCommand.publish(msg);
+    
+    // Activa/desactiva freno de servicio
+    msg.id_device = MT_BRAKE;
+    pubCommand.publish(msg);
+    
+    // Activa/desactiva freno de estacionamiento
+    msg.id_device = MT_HANDBRAKE;
+    pubCommand.publish(msg);
+    
+    // Activa/desactiva direccion
+    msg.id_device = MT_STEERING;
+    pubCommand.publish(msg);
+    
+    // Activa/desactiva marcha
+    msg.id_device = MT_GEAR;
+    pubCommand.publish(msg);
+    
+    // Activa/desactiva luces
+    msg.id_device = MT_LIGHTS;
+    pubCommand.publish(msg);
+    
+    // Activa/desactiva intermitentes
+    msg.id_device = MT_BLINKERS;
+    pubCommand.publish(msg);
+        
 }
