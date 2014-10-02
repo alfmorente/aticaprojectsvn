@@ -56,6 +56,8 @@ public:
     
     // Publicar informacion de vehiculo
     void publishElectricInfo(ElectricInfo info);
-    
+    // Publicar informacion de conmutador Local/Teleoperado
+    void publishSwitcherInfo(short position);
+    // Publicar consignas ON/OFF de actuadores
+    void publishSetupCommands(bool on);
 };
-
