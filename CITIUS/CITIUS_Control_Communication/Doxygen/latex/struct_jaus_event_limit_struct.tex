@@ -1,0 +1,54 @@
+\hypertarget{struct_jaus_event_limit_struct}{\section{\-Jaus\-Event\-Limit\-Struct \-Struct \-Reference}
+\label{struct_jaus_event_limit_struct}\index{\-Jaus\-Event\-Limit\-Struct@{\-Jaus\-Event\-Limit\-Struct}}
+}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \*
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-U\-N\-D\-E\-F\-I\-N\-E\-D\-\_\-\-T\-Y\-P\-E} =  -\/1, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-B\-Y\-T\-E\-\_\-\-T\-Y\-P\-E} =  0, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-S\-H\-O\-R\-T\-\_\-\-T\-Y\-P\-E} =  1, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-I\-N\-T\-E\-G\-E\-R\-\_\-\-T\-Y\-P\-E} =  2, 
+\*
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-L\-O\-N\-G\-\_\-\-T\-Y\-P\-E} =  3, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-U\-N\-S\-I\-G\-N\-E\-D\-\_\-\-S\-H\-O\-R\-T\-\_\-\-T\-Y\-P\-E} =  4, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-U\-N\-S\-I\-G\-N\-E\-D\-\_\-\-I\-N\-T\-E\-G\-E\-R\-\_\-\-T\-Y\-P\-E} =  5, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-U\-N\-S\-I\-G\-N\-E\-D\-\_\-\-L\-O\-N\-G\-\_\-\-T\-Y\-P\-E} =  6, 
+\*
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-F\-L\-O\-A\-T\-\_\-\-T\-Y\-P\-E} =  7, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-D\-O\-U\-B\-L\-E\-\_\-\-T\-Y\-P\-E} =  8, 
+{\bfseries \-E\-V\-E\-N\-T\-\_\-\-L\-I\-M\-I\-T\-\_\-\-R\-G\-B\-\_\-\-T\-Y\-P\-E} =  9
+ \}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{struct_jaus_event_limit_struct_a5760510ac1488a7830b71d7c0d8240c0}{enum \-Jaus\-Event\-Limit\-Struct\-:: \{ ... \}  {\bfseries data\-Type}}\label{struct_jaus_event_limit_struct_a5760510ac1488a7830b71d7c0d8240c0}
+
+\item 
+\hypertarget{struct_jaus_event_limit_struct_a8ec811f3ef2cbc39c7e58e6dee5a99d6}{\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>JausByte {\bfseries byteValue}\\
+\>JausShort {\bfseries shortValue}\\
+\>JausInteger {\bfseries integerValue}\\
+\>JausLong {\bfseries longValue}\\
+\>JausUnsignedShort {\bfseries unsignedShortValue}\\
+\>JausUnsignedInteger {\bfseries unsignedIntegerValue}\\
+\>JausUnsignedLong {\bfseries unsignedLongValue}\\
+\>JausFloat {\bfseries floatValue}\\
+\>JausDouble {\bfseries doubleValue}\\
+\>struct \{\\
+\>\>JausByte {\bfseries redValue}\\
+\>\>JausByte {\bfseries greenValue}\\
+\>\>JausByte {\bfseries blueValue}\\
+\>\} {\bfseries rgb}\\
+\} {\bfseries value}}\label{struct_jaus_event_limit_struct_a8ec811f3ef2cbc39c7e58e6dee5a99d6}
+\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+lib/libjaus/include/type/jaus\-Event\-Limit.\-h\end{DoxyCompactItemize}

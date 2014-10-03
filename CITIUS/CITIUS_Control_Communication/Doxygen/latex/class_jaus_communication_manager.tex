@@ -1,0 +1,89 @@
+\hypertarget{class_jaus_communication_manager}{\section{\-Jaus\-Communication\-Manager \-Class \-Reference}
+\label{class_jaus_communication_manager}\index{\-Jaus\-Communication\-Manager@{\-Jaus\-Communication\-Manager}}
+}
+\-Inheritance diagram for \-Jaus\-Communication\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.517615cm]{class_jaus_communication_manager}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_jaus_communication_manager_a750537971ebe3316a61cb7dc8239083e}{unsigned long {\bfseries get\-Interface\-Count} (void)}\label{class_jaus_communication_manager_a750537971ebe3316a61cb7dc8239083e}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a02b741aff1e1a6b92716d139876b94a9}{\hyperlink{class_jaus_transport_interface}{\-Jaus\-Transport\-Interface} $\ast$ {\bfseries get\-Jaus\-Interface} (unsigned long index)}\label{class_jaus_communication_manager_a02b741aff1e1a6b92716d139876b94a9}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a412d3227d7552338709b692e0dc70adb}{\hyperlink{class_jaus_transport_interface}{\-Jaus\-Transport\-Interface} $\ast$ {\bfseries get\-Jaus\-Interface} (std\-::string interface\-Name)}\label{class_jaus_communication_manager_a412d3227d7552338709b692e0dc70adb}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a43d462e64c46b9ec6f2441bcc9155983}{bool {\bfseries interface\-Exists} (std\-::string interface\-Name)}\label{class_jaus_communication_manager_a43d462e64c46b9ec6f2441bcc9155983}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a30adfb03e337ea191659f5ba23f1d24e}{void {\bfseries enable} (void)}\label{class_jaus_communication_manager_a30adfb03e337ea191659f5ba23f1d24e}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a9ef92799117b806fbc464f8189b06bc2}{void {\bfseries disable} (void)}\label{class_jaus_communication_manager_a9ef92799117b806fbc464f8189b06bc2}
+
+\item 
+\hypertarget{class_jaus_communication_manager_ad0bb5c0576104da2e7caaee329349089}{bool {\bfseries is\-Enabled} (void)}\label{class_jaus_communication_manager_ad0bb5c0576104da2e7caaee329349089}
+
+\item 
+\hypertarget{class_jaus_communication_manager_aee646253cf73c77c8276be97e91cca41}{\hyperlink{class_system_tree}{\-System\-Tree} $\ast$ {\bfseries get\-System\-Tree} ()}\label{class_jaus_communication_manager_aee646253cf73c77c8276be97e91cca41}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a067ca5a750ae7191e26a451035dc5c38}{virtual bool {\bfseries send\-Jaus\-Message} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)=0}\label{class_jaus_communication_manager_a067ca5a750ae7191e26a451035dc5c38}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a0c355ed5c7fa117cb52bef6f2f7cb474}{virtual bool {\bfseries receive\-Jaus\-Message} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message, \hyperlink{class_jaus_transport_interface}{\-Jaus\-Transport\-Interface} $\ast$jt\-Interface)=0}\label{class_jaus_communication_manager_a0c355ed5c7fa117cb52bef6f2f7cb474}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a2134989cbd0d4da291cc056661885721}{\hyperlink{class_message_router}{\-Message\-Router} $\ast$ {\bfseries get\-Message\-Router} ()}\label{class_jaus_communication_manager_a2134989cbd0d4da291cc056661885721}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a960f2283dbfa11dba4b0cfa05098445f}{virtual bool {\bfseries start\-Interfaces} (void)=0}\label{class_jaus_communication_manager_a960f2283dbfa11dba4b0cfa05098445f}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_jaus_communication_manager_a32b549c9ea61dad55085326fe708a49f}{\hyperlink{class_message_router}{\-Message\-Router} $\ast$ {\bfseries msg\-Router}}\label{class_jaus_communication_manager_a32b549c9ea61dad55085326fe708a49f}
+
+\item 
+\hypertarget{class_jaus_communication_manager_acdfd1fae03e46cfff96053eee54e3cfd}{std\-::vector\*
+$<$ \hyperlink{class_jaus_transport_interface}{\-Jaus\-Transport\-Interface} $\ast$ $>$ {\bfseries interfaces}}\label{class_jaus_communication_manager_acdfd1fae03e46cfff96053eee54e3cfd}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a4f3cd43a306469abc5d29edea954a28e}{\-H\-A\-S\-H\-\_\-\-M\-A\-P$<$ int, \*
+\hyperlink{class_jaus_transport_interface}{\-Jaus\-Transport\-Interface} $\ast$ $>$ {\bfseries interface\-Map}}\label{class_jaus_communication_manager_a4f3cd43a306469abc5d29edea954a28e}
+
+\item 
+\hypertarget{class_jaus_communication_manager_af1071dec74ffcc17444b1f4b3db84828}{pthread\-\_\-mutex\-\_\-t {\bfseries map\-Mutex}}\label{class_jaus_communication_manager_af1071dec74ffcc17444b1f4b3db84828}
+
+\item 
+\hypertarget{class_jaus_communication_manager_afeaec4ef3e4b2a389ba9703e9ce099d5}{\hyperlink{class_file_loader}{\-File\-Loader} $\ast$ {\bfseries config\-Data}}\label{class_jaus_communication_manager_afeaec4ef3e4b2a389ba9703e9ce099d5}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a1376d20d0a6494d0617b21b340e14e98}{\hyperlink{class_system_tree}{\-System\-Tree} $\ast$ {\bfseries system\-Tree}}\label{class_jaus_communication_manager_a1376d20d0a6494d0617b21b340e14e98}
+
+\item 
+\hypertarget{class_jaus_communication_manager_ac9fe5c9ebd44d6b6976a97e50f108ed9}{\hyperlink{class_event_handler}{\-Event\-Handler} $\ast$ {\bfseries event\-Handler}}\label{class_jaus_communication_manager_ac9fe5c9ebd44d6b6976a97e50f108ed9}
+
+\item 
+\hypertarget{class_jaus_communication_manager_ac1b5c732615e8eccb1abdad617cfd392}{\-Jaus\-Byte {\bfseries my\-Subsystem\-Id}}\label{class_jaus_communication_manager_ac1b5c732615e8eccb1abdad617cfd392}
+
+\item 
+\hypertarget{class_jaus_communication_manager_a4b2aa830948dbe354ebb312d1b437e81}{\-Jaus\-Byte {\bfseries my\-Node\-Id}}\label{class_jaus_communication_manager_a4b2aa830948dbe354ebb312d1b437e81}
+
+\item 
+\hypertarget{class_jaus_communication_manager_abeae0ede90718f01359c9b97e2918dbc}{bool {\bfseries enabled}}\label{class_jaus_communication_manager_abeae0ede90718f01359c9b97e2918dbc}
+
+\end{DoxyCompactItemize}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/libopen\-Jaus/include/node\-Manager/\-Jaus\-Communication\-Manager.\-h\item 
+lib/libopen\-Jaus/src/node\-Manager/\-Jaus\-Communication\-Manager.\-cpp\end{DoxyCompactItemize}

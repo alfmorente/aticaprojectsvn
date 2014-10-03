@@ -1,0 +1,183 @@
+\hypertarget{class_node_manager_component}{\section{\-Node\-Manager\-Component \-Class \-Reference}
+\label{class_node_manager_component}\index{\-Node\-Manager\-Component@{\-Node\-Manager\-Component}}
+}
+\-Inheritance diagram for \-Node\-Manager\-Component\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_node_manager_component}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_node_manager_component_a1132ae97087885540a8ce0155d36ca9d}{{\bfseries \-Node\-Manager\-Component} (\hyperlink{class_file_loader}{\-File\-Loader} $\ast$config\-Data, \hyperlink{class_event_handler}{\-Event\-Handler} $\ast$handler, \hyperlink{class_jaus_component_communication_manager}{\-Jaus\-Component\-Communication\-Manager} $\ast$cmpt\-Comms)}\label{class_node_manager_component_a1132ae97087885540a8ce0155d36ca9d}
+
+\item 
+\hypertarget{class_node_manager_component_a916d5c4c2c1ccb5ed618fb2e10ad4fb8}{bool {\bfseries process\-Message} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a916d5c4c2c1ccb5ed618fb2e10ad4fb8}
+
+\item 
+\hypertarget{class_node_manager_component_a0002875c9cefb6c8df55840d7957e8db}{std\-::string {\bfseries to\-String} ()}\label{class_node_manager_component_a0002875c9cefb6c8df55840d7957e8db}
+
+\item 
+\hypertarget{class_node_manager_component_a30c3226f6c29bad3fd8cad48e49045aa}{void {\bfseries handle\-Event} (\hyperlink{class_node_manager_event}{\-Node\-Manager\-Event} $\ast$e)}\label{class_node_manager_component_a30c3226f6c29bad3fd8cad48e49045aa}
+
+\item 
+\hypertarget{class_node_manager_component_a0ca15f4d338f7a00982a0b0808969ab4}{bool {\bfseries start\-Interface} (void)}\label{class_node_manager_component_a0ca15f4d338f7a00982a0b0808969ab4}
+
+\item 
+\hypertarget{class_node_manager_component_ac1d77cb2f85382256954ae7a21adf588}{bool {\bfseries stop\-Interface} (void)}\label{class_node_manager_component_ac1d77cb2f85382256954ae7a21adf588}
+
+\item 
+\hypertarget{class_node_manager_component_a1b0c153f0963c072902f9e2ea637cd2b}{\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} {\bfseries check\-In\-Local\-Component} (int cmpt\-Id)}\label{class_node_manager_component_a1b0c153f0963c072902f9e2ea637cd2b}
+
+\item 
+\hypertarget{class_node_manager_component_a308666330759113934cc0b13b5cb3779}{void {\bfseries check\-Out\-Local\-Component} (int subs\-Id, int node\-Id, int cmpt\-Id, int inst\-Id)}\label{class_node_manager_component_a308666330759113934cc0b13b5cb3779}
+
+\item 
+\hypertarget{class_node_manager_component_a9145b910e95e758172f469e761814b8c}{void {\bfseries check\-Out\-Local\-Component} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address)}\label{class_node_manager_component_a9145b910e95e758172f469e761814b8c}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_node_manager_component_aebc68e9e6dacc47ba38f88842f5135b1}{bool {\bfseries process\-Report\-Identification} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_aebc68e9e6dacc47ba38f88842f5135b1}
+
+\item 
+\hypertarget{class_node_manager_component_ab19d01f7baf845f4fb0e413815478b99}{bool {\bfseries process\-Report\-Configuration} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_ab19d01f7baf845f4fb0e413815478b99}
+
+\item 
+\hypertarget{class_node_manager_component_a52b97615ea8831fa332cb2f71e3f6361}{bool {\bfseries process\-Report\-Services} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a52b97615ea8831fa332cb2f71e3f6361}
+
+\item 
+\hypertarget{class_node_manager_component_a218ea6424c692ab622a9a88dc7939d15}{bool {\bfseries process\-Report\-Heartbeat\-Pulse} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a218ea6424c692ab622a9a88dc7939d15}
+
+\item 
+\hypertarget{class_node_manager_component_a7417eee3de1eb1f230fd9cf11c307633}{bool {\bfseries process\-Create\-Event} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a7417eee3de1eb1f230fd9cf11c307633}
+
+\item 
+\hypertarget{class_node_manager_component_a8570f757815470af396ea628e4bf2684}{bool {\bfseries process\-Cancel\-Event} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a8570f757815470af396ea628e4bf2684}
+
+\item 
+\hypertarget{class_node_manager_component_a1d7b7b18182820d8098be0e2b136c20e}{bool {\bfseries process\-Create\-Service\-Connection} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a1d7b7b18182820d8098be0e2b136c20e}
+
+\item 
+\hypertarget{class_node_manager_component_ab9443469df32a00207f44ea2fa07f531}{bool {\bfseries process\-Activate\-Service\-Connection} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_ab9443469df32a00207f44ea2fa07f531}
+
+\item 
+\hypertarget{class_node_manager_component_a3ed305004e96334fae763288e8a551cc}{bool {\bfseries process\-Suspend\-Service\-Connection} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a3ed305004e96334fae763288e8a551cc}
+
+\item 
+\hypertarget{class_node_manager_component_a898b7b6e91779ea6cbbbf28807718c7d}{bool {\bfseries process\-Terminate\-Service\-Connection} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a898b7b6e91779ea6cbbbf28807718c7d}
+
+\item 
+\hypertarget{class_node_manager_component_a0e5a0329938c340ba983cdf57c12250f}{bool {\bfseries process\-Request\-Component\-Control} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a0e5a0329938c340ba983cdf57c12250f}
+
+\item 
+\hypertarget{class_node_manager_component_a177102f3bf05f35df44d4f084e5f17dc}{bool {\bfseries process\-Query\-Component\-Authority} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a177102f3bf05f35df44d4f084e5f17dc}
+
+\item 
+\hypertarget{class_node_manager_component_abda643955bbb5515d785b2b74fcdbbdc}{bool {\bfseries process\-Query\-Component\-Status} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_abda643955bbb5515d785b2b74fcdbbdc}
+
+\item 
+\hypertarget{class_node_manager_component_a9ae4993d1f083f60d656c70029b86e24}{bool {\bfseries process\-Query\-Heartbeat\-Pulse} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a9ae4993d1f083f60d656c70029b86e24}
+
+\item 
+\hypertarget{class_node_manager_component_a2e81021c39bdab04c104fe00d34db645}{bool {\bfseries process\-Query\-Configuration} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a2e81021c39bdab04c104fe00d34db645}
+
+\item 
+\hypertarget{class_node_manager_component_af6367ecc5cafb13d249ea219dc11b562}{bool {\bfseries process\-Query\-Identification} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_af6367ecc5cafb13d249ea219dc11b562}
+
+\item 
+\hypertarget{class_node_manager_component_a81e48c82426663c1e178970e4f7a5ce5}{bool {\bfseries process\-Query\-Services} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a81e48c82426663c1e178970e4f7a5ce5}
+
+\item 
+\hypertarget{class_node_manager_component_a0b4fff512c09a2bf349692da73effb55}{bool {\bfseries process\-Confirm\-Event} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_a0b4fff512c09a2bf349692da73effb55}
+
+\item 
+\hypertarget{class_node_manager_component_ae2fc73df031051b3561e1a36f09f0806}{bool {\bfseries process\-Event} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_node_manager_component_ae2fc73df031051b3561e1a36f09f0806}
+
+\item 
+\hypertarget{class_node_manager_component_a087200391dfadaf76f079dea874ddc27}{void {\bfseries send\-Node\-Changed\-Events} ()}\label{class_node_manager_component_a087200391dfadaf76f079dea874ddc27}
+
+\item 
+\hypertarget{class_node_manager_component_a92cd7849524c23022674f52a2622ab3a}{void {\bfseries send\-Subsystem\-Changed\-Events} ()}\label{class_node_manager_component_a92cd7849524c23022674f52a2622ab3a}
+
+\item 
+\hypertarget{class_node_manager_component_a11b72da2ebc48d88325ee56b54d00893}{void {\bfseries generate\-Heartbeats} ()}\label{class_node_manager_component_a11b72da2ebc48d88325ee56b54d00893}
+
+\item 
+\hypertarget{class_node_manager_component_abdb4b69b56e4c21e6bd627b351512747}{bool {\bfseries setup\-Jaus\-Services} ()}\label{class_node_manager_component_abdb4b69b56e4c21e6bd627b351512747}
+
+\item 
+\hypertarget{class_node_manager_component_a6bc950c01c2e8859afba41bde4a416a5}{void {\bfseries send\-Node\-Shutdown\-Events} ()}\label{class_node_manager_component_a6bc950c01c2e8859afba41bde4a416a5}
+
+\item 
+\hypertarget{class_node_manager_component_a967d93d4a3922c78710eedc8c46cfaa6}{void {\bfseries send\-Subsystem\-Shutdown\-Events} ()}\label{class_node_manager_component_a967d93d4a3922c78710eedc8c46cfaa6}
+
+\item 
+\hypertarget{class_node_manager_component_a2aa1b898331382708e5a70f2e0d4aafa}{bool {\bfseries send\-Query\-Node\-Identification} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address)}\label{class_node_manager_component_a2aa1b898331382708e5a70f2e0d4aafa}
+
+\item 
+\hypertarget{class_node_manager_component_af6ff6075859bdc47ab5f6faf68d3fdb7}{bool {\bfseries send\-Query\-Subsystem\-Identification} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address)}\label{class_node_manager_component_af6ff6075859bdc47ab5f6faf68d3fdb7}
+
+\item 
+\hypertarget{class_node_manager_component_a5117e381dd6d9c98e551a5bf318adcd5}{bool {\bfseries send\-Query\-Component\-Identification} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address)}\label{class_node_manager_component_a5117e381dd6d9c98e551a5bf318adcd5}
+
+\item 
+\hypertarget{class_node_manager_component_a8e9e183789cd2496c7cad0fc10d3b8a9}{bool {\bfseries send\-Query\-Node\-Configuration} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address, bool create\-Event)}\label{class_node_manager_component_a8e9e183789cd2496c7cad0fc10d3b8a9}
+
+\item 
+\hypertarget{class_node_manager_component_aef0f2a3efbc4362bc166737a20eb90ea}{bool {\bfseries send\-Query\-Subsystem\-Configuration} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address, bool create\-Event)}\label{class_node_manager_component_aef0f2a3efbc4362bc166737a20eb90ea}
+
+\item 
+\hypertarget{class_node_manager_component_a3944581cfb6da2af8a921e7ee195c0bf}{bool {\bfseries send\-Query\-Component\-Services} (\hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} address)}\label{class_node_manager_component_a3944581cfb6da2af8a921e7ee195c0bf}
+
+\item 
+\hypertarget{class_node_manager_component_a46a4078e6dcc77b683ed645a05bd08b5}{void {\bfseries startup\-State} ()}\label{class_node_manager_component_a46a4078e6dcc77b683ed645a05bd08b5}
+
+\item 
+\hypertarget{class_node_manager_component_a04d351f0d24e7b31891277a6dd511cd5}{void {\bfseries intialize\-State} ()}\label{class_node_manager_component_a04d351f0d24e7b31891277a6dd511cd5}
+
+\item 
+\hypertarget{class_node_manager_component_a84f329a73b81cf1c4b0736d06132f310}{void {\bfseries standby\-State} ()}\label{class_node_manager_component_a84f329a73b81cf1c4b0736d06132f310}
+
+\item 
+\hypertarget{class_node_manager_component_ae13a0fa5da4c147255f023591976bc21}{void {\bfseries ready\-State} ()}\label{class_node_manager_component_ae13a0fa5da4c147255f023591976bc21}
+
+\item 
+\hypertarget{class_node_manager_component_a541e8ccacdca40110f083af77d62a2a0}{void {\bfseries emergency\-State} ()}\label{class_node_manager_component_a541e8ccacdca40110f083af77d62a2a0}
+
+\item 
+\hypertarget{class_node_manager_component_a9a4ebe3f3928786e816f07263a7e40d8}{void {\bfseries failure\-State} ()}\label{class_node_manager_component_a9a4ebe3f3928786e816f07263a7e40d8}
+
+\item 
+\hypertarget{class_node_manager_component_aee336065170720426e34bd1c77064040}{void {\bfseries shutdown\-State} ()}\label{class_node_manager_component_aee336065170720426e34bd1c77064040}
+
+\item 
+\hypertarget{class_node_manager_component_a707b7fc5a6813aa55831951481246373}{void {\bfseries all\-State} ()}\label{class_node_manager_component_a707b7fc5a6813aa55831951481246373}
+
+\item 
+\hypertarget{class_node_manager_component_a27f669a724f8c51278cac52b2c9f01e2}{int {\bfseries get\-Next\-Event\-Id} ()}\label{class_node_manager_component_a27f669a724f8c51278cac52b2c9f01e2}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_node_manager_component_a17212f2db18c032a4f6a10cb88f00bcd}{\-H\-A\-S\-H\-\_\-\-M\-A\-P$<$ int, \hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} $>$ {\bfseries node\-Change\-List}}\label{class_node_manager_component_a17212f2db18c032a4f6a10cb88f00bcd}
+
+\item 
+\hypertarget{class_node_manager_component_a00165b61cfb9278d985b17a8c9ca897d}{\-H\-A\-S\-H\-\_\-\-M\-A\-P$<$ int, \hyperlink{struct_jaus_address_struct}{\-Jaus\-Address} $>$ {\bfseries subsystem\-Change\-List}}\label{class_node_manager_component_a00165b61cfb9278d985b17a8c9ca897d}
+
+\item 
+\hypertarget{class_node_manager_component_a3e59c05aefc9920e4bad8b0113da7c1f}{bool {\bfseries event\-Id} \mbox{[}255\mbox{]}}\label{class_node_manager_component_a3e59c05aefc9920e4bad8b0113da7c1f}
+
+\item 
+\hypertarget{class_node_manager_component_a554b28eee83f2150211489879145e3cb}{\hyperlink{class_system_tree}{\-System\-Tree} $\ast$ {\bfseries system\-Tree}}\label{class_node_manager_component_a554b28eee83f2150211489879145e3cb}
+
+\end{DoxyCompactItemize}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/libopen\-Jaus/include/node\-Manager/\-Node\-Manager\-Component.\-h\item 
+lib/libopen\-Jaus/src/node\-Manager/\-Node\-Manager\-Component.\-cpp\end{DoxyCompactItemize}
