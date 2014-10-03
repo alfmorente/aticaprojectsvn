@@ -1,0 +1,204 @@
+\hypertarget{class_file_loader}{\section{\-File\-Loader \-Class \-Reference}
+\label{class_file_loader}\index{\-File\-Loader@{\-File\-Loader}}
+}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_file_loader_a51313b536560d1d89d8350475d2bc749}{\-E\-X\-P\-O\-R\-T \hyperlink{class_file_loader_a51313b536560d1d89d8350475d2bc749}{\-File\-Loader} ()}\label{class_file_loader_a51313b536560d1d89d8350475d2bc749}
+
+\begin{DoxyCompactList}\small\item\em \-Constructs the \-File \-Loader. \end{DoxyCompactList}\item 
+\hypertarget{class_file_loader_a37da87f465229c5aaaa5d979a2789c22}{\-E\-X\-P\-O\-R\-T {\bfseries \-File\-Loader} (string filename)}\label{class_file_loader_a37da87f465229c5aaaa5d979a2789c22}
+
+\item 
+\hypertarget{class_file_loader_a0954776182dd01364bdb216539ce398b}{\-E\-X\-P\-O\-R\-T \hyperlink{class_file_loader_a0954776182dd01364bdb216539ce398b}{$\sim$\-File\-Loader} ()}\label{class_file_loader_a0954776182dd01364bdb216539ce398b}
+
+\begin{DoxyCompactList}\small\item\em \-Deconstructs the \-File \-Loader. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T bool \hyperlink{class_file_loader_a06b5b74d0e3589d9c17c2d6c46f6f155}{load\-\_\-cfg} (string filename)
+\begin{DoxyCompactList}\small\item\em \-Loads the configuration file. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T string \hyperlink{class_file_loader_ab061bced9d5b5a22f72e5855a1cc3c76}{\-Get\-Config\-Data\-String} (string header, string label)
+\begin{DoxyCompactList}\small\item\em \-Reads a string from the config file. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T int \hyperlink{class_file_loader_acceb1dc42a0821124c55ae588cfde1a8}{\-Get\-Config\-Data\-Int} (string header, string label)
+\begin{DoxyCompactList}\small\item\em \-Reads an int from the config file. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T float \hyperlink{class_file_loader_aa56ae634218cbae6edbd700081288d1d}{\-Get\-Config\-Data\-Float} (string header, string label)
+\begin{DoxyCompactList}\small\item\em \-Reads a float from the config file. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T double \hyperlink{class_file_loader_a1b41ea0d9f59e5d7cdffb039cf4ef56e}{\-Get\-Config\-Data\-Double} (string header, string label)
+\begin{DoxyCompactList}\small\item\em \-Reads a double from the config file. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T vector$<$ string $>$ $\ast$ \hyperlink{class_file_loader_a321013c5324a0c41b7687a320f2f4e05}{\-Get\-Config\-Data\-Vector} (string header, string label)
+\begin{DoxyCompactList}\small\item\em \-Reads a vector from the config file. \end{DoxyCompactList}\item 
+\-E\-X\-P\-O\-R\-T bool \hyperlink{class_file_loader_ac01d705d0b720e95053f9a8302b848a0}{\-Get\-Config\-Data\-Bool} (string header, string label)
+\begin{DoxyCompactList}\small\item\em \-Reads a boolean from the config file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_file_loader_ad5228597af90cfd732da5239c483fc51}{int {\bfseries find\-Header} (string hdr)}\label{class_file_loader_ad5228597af90cfd732da5239c483fc51}
+
+\item 
+\hypertarget{class_file_loader_a868cb6026d840acfc0c640c00f5dbe3b}{int {\bfseries find\-Label} (int hdr\-Index, string label)}\label{class_file_loader_a868cb6026d840acfc0c640c00f5dbe3b}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_file_loader_adc6f8d96fd03bc31f20560944ae25200}{vector$<$ \hyperlink{struct_config___file___data__t}{\-Config\-\_\-\-File\-\_\-\-Data\-\_\-t} $>$ {\bfseries config\-File\-Data}}\label{class_file_loader_adc6f8d96fd03bc31f20560944ae25200}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_file_loader_ac01d705d0b720e95053f9a8302b848a0}{\index{\-File\-Loader@{\-File\-Loader}!\-Get\-Config\-Data\-Bool@{\-Get\-Config\-Data\-Bool}}
+\index{\-Get\-Config\-Data\-Bool@{\-Get\-Config\-Data\-Bool}!FileLoader@{\-File\-Loader}}
+\subsubsection[{\-Get\-Config\-Data\-Bool}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-File\-Loader\-::\-Get\-Config\-Data\-Bool} (
+\begin{DoxyParamCaption}
+\item[{string}]{header, }
+\item[{string}]{label}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_ac01d705d0b720e95053f9a8302b848a0}
+
+
+\-Reads a boolean from the config file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em header} & \-The data grouping. \-In the config file, this is enclosed in \char`\"{}\mbox{[}$\,$\mbox{]}\char`\"{} \\
+\hline
+\mbox{\tt in}  & {\em label} & \-The label of the data being searched for. \-In the config file, this ends with \char`\"{}\-:\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if \char`\"{}true\char`\"{} (compared case insensitve) is found, false otherwise 
+\end{DoxyReturn}
+\hypertarget{class_file_loader_a1b41ea0d9f59e5d7cdffb039cf4ef56e}{\index{\-File\-Loader@{\-File\-Loader}!\-Get\-Config\-Data\-Double@{\-Get\-Config\-Data\-Double}}
+\index{\-Get\-Config\-Data\-Double@{\-Get\-Config\-Data\-Double}!FileLoader@{\-File\-Loader}}
+\subsubsection[{\-Get\-Config\-Data\-Double}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-File\-Loader\-::\-Get\-Config\-Data\-Double} (
+\begin{DoxyParamCaption}
+\item[{string}]{header, }
+\item[{string}]{label}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_a1b41ea0d9f59e5d7cdffb039cf4ef56e}
+
+
+\-Reads a double from the config file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em header} & \-The data grouping. \-In the config file, this is enclosed in \char`\"{}\mbox{[}$\,$\mbox{]}\char`\"{} \\
+\hline
+\mbox{\tt in}  & {\em label} & \-The label of the data being searched for. \-In the config file, this ends with \char`\"{}\-:\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The double being searched for, -\/1 if not found, or 0 if a string or char 
+\end{DoxyReturn}
+\hypertarget{class_file_loader_aa56ae634218cbae6edbd700081288d1d}{\index{\-File\-Loader@{\-File\-Loader}!\-Get\-Config\-Data\-Float@{\-Get\-Config\-Data\-Float}}
+\index{\-Get\-Config\-Data\-Float@{\-Get\-Config\-Data\-Float}!FileLoader@{\-File\-Loader}}
+\subsubsection[{\-Get\-Config\-Data\-Float}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf \-File\-Loader\-::\-Get\-Config\-Data\-Float} (
+\begin{DoxyParamCaption}
+\item[{string}]{header, }
+\item[{string}]{label}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_aa56ae634218cbae6edbd700081288d1d}
+
+
+\-Reads a float from the config file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em header} & \-The data grouping. \-In the config file, this is enclosed in \char`\"{}\mbox{[}$\,$\mbox{]}\char`\"{} \\
+\hline
+\mbox{\tt in}  & {\em label} & \-The label of the data being searched for. \-In the config file, this ends with \char`\"{}\-:\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The float being searched for, -\/1 if not found, or 0 if a string or char 
+\end{DoxyReturn}
+\hypertarget{class_file_loader_acceb1dc42a0821124c55ae588cfde1a8}{\index{\-File\-Loader@{\-File\-Loader}!\-Get\-Config\-Data\-Int@{\-Get\-Config\-Data\-Int}}
+\index{\-Get\-Config\-Data\-Int@{\-Get\-Config\-Data\-Int}!FileLoader@{\-File\-Loader}}
+\subsubsection[{\-Get\-Config\-Data\-Int}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-File\-Loader\-::\-Get\-Config\-Data\-Int} (
+\begin{DoxyParamCaption}
+\item[{string}]{header, }
+\item[{string}]{label}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_acceb1dc42a0821124c55ae588cfde1a8}
+
+
+\-Reads an int from the config file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em header} & \-The data grouping. \-In the config file, this is enclosed in \char`\"{}\mbox{[}$\,$\mbox{]}\char`\"{} \\
+\hline
+\mbox{\tt in}  & {\em label} & \-The label of the data being searched for. \-In the config file, this ends with \char`\"{}\-:\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The int being searched for, -\/1 if not found, or 0 if a string or char 
+\end{DoxyReturn}
+\hypertarget{class_file_loader_ab061bced9d5b5a22f72e5855a1cc3c76}{\index{\-File\-Loader@{\-File\-Loader}!\-Get\-Config\-Data\-String@{\-Get\-Config\-Data\-String}}
+\index{\-Get\-Config\-Data\-String@{\-Get\-Config\-Data\-String}!FileLoader@{\-File\-Loader}}
+\subsubsection[{\-Get\-Config\-Data\-String}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-File\-Loader\-::\-Get\-Config\-Data\-String} (
+\begin{DoxyParamCaption}
+\item[{string}]{header, }
+\item[{string}]{label}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_ab061bced9d5b5a22f72e5855a1cc3c76}
+
+
+\-Reads a string from the config file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em header} & \-The data grouping. \-In the config file, this is enclosed in \char`\"{}\mbox{[}$\,$\mbox{]}\char`\"{} \\
+\hline
+\mbox{\tt in}  & {\em label} & \-The label of the data being searched for. \-In the config file, this ends with \char`\"{}\-:\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-The string being searched for or \char`\"{}\char`\"{} if not found 
+\end{DoxyReturn}
+\hypertarget{class_file_loader_a321013c5324a0c41b7687a320f2f4e05}{\index{\-File\-Loader@{\-File\-Loader}!\-Get\-Config\-Data\-Vector@{\-Get\-Config\-Data\-Vector}}
+\index{\-Get\-Config\-Data\-Vector@{\-Get\-Config\-Data\-Vector}!FileLoader@{\-File\-Loader}}
+\subsubsection[{\-Get\-Config\-Data\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ string $>$ $\ast$ {\bf \-File\-Loader\-::\-Get\-Config\-Data\-Vector} (
+\begin{DoxyParamCaption}
+\item[{string}]{header, }
+\item[{string}]{label}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_a321013c5324a0c41b7687a320f2f4e05}
+
+
+\-Reads a vector from the config file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em header} & \-The data grouping. \-In the config file, this is enclosed in \char`\"{}\mbox{[}$\,$\mbox{]}\char`\"{} \\
+\hline
+\mbox{\tt in}  & {\em label} & \-The label of the data being searched for. \-In the config file, this ends with \char`\"{}\-:\char`\"{}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-A pointer to the vector being searched for or \-N\-U\-L\-L if nothing found 
+\end{DoxyReturn}
+\hypertarget{class_file_loader_a06b5b74d0e3589d9c17c2d6c46f6f155}{\index{\-File\-Loader@{\-File\-Loader}!load\-\_\-cfg@{load\-\_\-cfg}}
+\index{load\-\_\-cfg@{load\-\_\-cfg}!FileLoader@{\-File\-Loader}}
+\subsubsection[{load\-\_\-cfg}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-File\-Loader\-::load\-\_\-cfg} (
+\begin{DoxyParamCaption}
+\item[{string}]{filename}
+\end{DoxyParamCaption}
+)}}\label{class_file_loader_a06b5b74d0e3589d9c17c2d6c46f6f155}
+
+
+\-Loads the configuration file. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em filename} & is the name of the configuration file with extension \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+success 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/libopen\-Jaus/include/utils/\-File\-Loader.\-h\item 
+lib/libopen\-Jaus/src/utils/\-File\-Loader.\-cpp\end{DoxyCompactItemize}

@@ -1,0 +1,99 @@
+\hypertarget{class_oj_udp_component_interface}{\section{\-Oj\-Udp\-Component\-Interface \-Class \-Reference}
+\label{class_oj_udp_component_interface}\index{\-Oj\-Udp\-Component\-Interface@{\-Oj\-Udp\-Component\-Interface}}
+}
+\-Inheritance diagram for \-Oj\-Udp\-Component\-Interface\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_oj_udp_component_interface}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_oj_udp_component_interface_a1c42180572259b51f1a03ee2108f4962}{{\bfseries \-Oj\-Udp\-Component\-Interface} (\hyperlink{class_file_loader}{\-File\-Loader} $\ast$config\-Data, \hyperlink{class_event_handler}{\-Event\-Handler} $\ast$handler, \hyperlink{class_jaus_component_communication_manager}{\-Jaus\-Component\-Communication\-Manager} $\ast$comm\-Mngr)}\label{class_oj_udp_component_interface_a1c42180572259b51f1a03ee2108f4962}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a540fbf9996391d87c12596cc18a13767}{unsigned int {\bfseries get\-Port} (void)}\label{class_oj_udp_component_interface_a540fbf9996391d87c12596cc18a13767}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_af7fbdac16fb1eaf533b2cf4052963289}{bool {\bfseries process\-Message} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_oj_udp_component_interface_af7fbdac16fb1eaf533b2cf4052963289}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a2e288fa7b0f170fcff009da55cc7197c}{std\-::string {\bfseries to\-String} ()}\label{class_oj_udp_component_interface_a2e288fa7b0f170fcff009da55cc7197c}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a7659dcd82e65363248de2d4e1555ab73}{bool {\bfseries start\-Interface} (void)}\label{class_oj_udp_component_interface_a7659dcd82e65363248de2d4e1555ab73}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_aae25149e3f7ee2bb5a414201769a47f2}{bool {\bfseries stop\-Interface} (void)}\label{class_oj_udp_component_interface_aae25149e3f7ee2bb5a414201769a47f2}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \*
+{\bfseries \-C\-H\-E\-C\-K\-\_\-\-I\-N} =  0x01, 
+{\bfseries \-R\-E\-P\-O\-R\-T\-\_\-\-A\-D\-D\-R\-E\-S\-S} =  0x02, 
+{\bfseries \-C\-H\-E\-C\-K\-\_\-\-O\-U\-T} =  0x03, 
+{\bfseries \-V\-E\-R\-I\-F\-Y\-\_\-\-A\-D\-D\-R\-E\-S\-S} =  0x04, 
+\*
+{\bfseries \-A\-D\-D\-R\-E\-S\-S\-\_\-\-V\-E\-R\-I\-F\-I\-E\-D} =  0x05, 
+{\bfseries \-G\-E\-T\-\_\-\-C\-O\-M\-P\-O\-N\-E\-N\-T\-\_\-\-A\-D\-D\-R\-E\-S\-S\-\_\-\-L\-I\-S\-T} =  0x06, 
+{\bfseries \-C\-O\-M\-P\-O\-N\-E\-N\-T\-\_\-\-A\-D\-D\-R\-E\-S\-S\-\_\-\-L\-I\-S\-T\-\_\-\-R\-E\-S\-P\-O\-N\-S\-E} =  0x07, 
+{\bfseries \-L\-O\-O\-K\-U\-P\-\_\-\-A\-D\-D\-R\-E\-S\-S} =  0x08, 
+\*
+{\bfseries \-L\-O\-O\-K\-U\-P\-\_\-\-A\-D\-D\-R\-E\-S\-S\-\_\-\-R\-E\-S\-P\-O\-N\-S\-E} =  0x09, 
+{\bfseries \-L\-O\-O\-K\-U\-P\-\_\-\-S\-E\-R\-V\-I\-C\-E\-\_\-\-A\-D\-D\-R\-E\-S\-S} =  0x0\-A, 
+{\bfseries \-L\-O\-O\-K\-U\-P\-\_\-\-S\-E\-R\-V\-I\-C\-E\-\_\-\-A\-D\-D\-R\-E\-S\-S\-\_\-\-R\-E\-S\-P\-O\-N\-S\-E} =  0x0\-B, 
+{\bfseries \-L\-O\-O\-K\-U\-P\-\_\-\-S\-E\-R\-V\-I\-C\-E\-\_\-\-A\-D\-D\-R\-E\-S\-S\-\_\-\-L\-I\-S\-T} =  0x0\-C, 
+\*
+{\bfseries \-L\-O\-O\-K\-U\-P\-\_\-\-S\-E\-R\-V\-I\-C\-E\-\_\-\-A\-D\-D\-R\-E\-S\-S\-\_\-\-L\-I\-S\-T\-\_\-\-R\-E\-S\-P\-O\-N\-S\-E} =  0x0\-D, 
+{\bfseries \-R\-E\-A\-D\-Y\-\_\-\-C\-H\-E\-C\-K} =  0x0\-E, 
+{\bfseries \-R\-E\-P\-O\-R\-T\-\_\-\-R\-E\-A\-D\-Y} =  0x0\-F
+ \}
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_oj_udp_component_interface_a0dad00af6b341669a80d5877c4f7224c}{bool {\bfseries send\-Datagram\-Packet} (\hyperlink{struct_datagram_packet_struct}{\-Datagram\-Packet} dg\-Packet)}\label{class_oj_udp_component_interface_a0dad00af6b341669a80d5877c4f7224c}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_aabb1d9644b5a75747d141aa64db1ba94}{bool {\bfseries open\-Socket} (void)}\label{class_oj_udp_component_interface_aabb1d9644b5a75747d141aa64db1ba94}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a4ea2b94d5ff886be24b593eca354a3a6}{void {\bfseries close\-Socket} (void)}\label{class_oj_udp_component_interface_a4ea2b94d5ff886be24b593eca354a3a6}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a91df0d71698debfc0ebdecccff9a9636}{void {\bfseries run} ()}\label{class_oj_udp_component_interface_a91df0d71698debfc0ebdecccff9a9636}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a71079ab217f5102967f44dc4c4a6fce0}{bool {\bfseries process\-Oj\-Nodemanager\-Interface\-Message} (char $\ast$buffer)}\label{class_oj_udp_component_interface_a71079ab217f5102967f44dc4c4a6fce0}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_oj_udp_component_interface_ae5801b731bbde2322376715b2836ef21}{\hyperlink{class_node_manager_component}{\-Node\-Manager\-Component} $\ast$ {\bfseries node\-Manager}}\label{class_oj_udp_component_interface_ae5801b731bbde2322376715b2836ef21}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a6217081d4a71d58c99af006010d46d65}{\hyperlink{class_system_tree}{\-System\-Tree} $\ast$ {\bfseries system\-Tree}}\label{class_oj_udp_component_interface_a6217081d4a71d58c99af006010d46d65}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_ae844843faa651982a5491808a134ab8d}{\hyperlink{struct_datagram_socket_struct}{\-Datagram\-Socket} {\bfseries socket}}\label{class_oj_udp_component_interface_ae844843faa651982a5491808a134ab8d}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_ae0fefb5274e700f4ea920abdf77efa20}{\hyperlink{struct_inet_address_struct}{\-Inet\-Address} {\bfseries ip\-Address}}\label{class_oj_udp_component_interface_ae0fefb5274e700f4ea920abdf77efa20}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a639b234c2d0b86277423cde4da11a637}{unsigned short {\bfseries port\-Number}}\label{class_oj_udp_component_interface_a639b234c2d0b86277423cde4da11a637}
+
+\item 
+\hypertarget{class_oj_udp_component_interface_a26a010a2faf3ce1a96eb4be730117df3}{\-H\-A\-S\-H\-\_\-\-M\-A\-P$<$ int, unsigned short $>$ {\bfseries port\-Map}}\label{class_oj_udp_component_interface_a26a010a2faf3ce1a96eb4be730117df3}
+
+\end{DoxyCompactItemize}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/libopen\-Jaus/include/node\-Manager/\-Oj\-Udp\-Component\-Interface.\-h\item 
+lib/libopen\-Jaus/src/node\-Manager/\-Oj\-Udp\-Component\-Interface.\-cpp\end{DoxyCompactItemize}

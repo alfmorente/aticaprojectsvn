@@ -75,12 +75,12 @@ void RosNode_Communications::initROS() {
 void RosNode_Communications::initJAUS() {
     
     // Inicializacion de JAUS
-    configData = new FileLoader("nodeManager.conf");
+    configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
     handler = new JausHandler();
     
     try {
         
-        configData = new FileLoader("nodeManager.conf");
+        configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
         handler = new JausHandler();
         nm = new NodeManager(this->configData, this->handler);
         
@@ -270,22 +270,6 @@ void RosNode_Communications::endJAUS(){
     ojCmptDestroy(heartBeatInformationComponent);
 }
 
-/*******************************************************************************
- *******************************************************************************
- *                     GETTER AND SETTER DE ATRIBUTOS                          *
- *******************************************************************************
- ******************************************************************************/
-ros::Publisher RosNode_Communications::getPublisherFrontCamera() {
-    return instance->pubCtrlFrontCamera;
-}
-
-ros::Publisher RosNode_Communications::getPublisherRearCamera() {
-    return instance->pubCtrlRearCamera;
-}
-
-ros::Publisher RosNode_Communications::getPublisherCommand() {
-    return instance->pubCommand;
-}
 
 /*******************************************************************************
  *******************************************************************************
@@ -432,7 +416,6 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
 void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg) {
 
     //ROS_INFO("[Control] Communications - Recibido mensaje de Position Orientation");
-    
     JausMessage jMsg = NULL;
     
     // Creacion de la direccion destinataria

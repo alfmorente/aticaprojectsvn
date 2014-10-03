@@ -1,0 +1,108 @@
+\hypertarget{class_jaus_transport_interface}{\section{\-Jaus\-Transport\-Interface \-Class \-Reference}
+\label{class_jaus_transport_interface}\index{\-Jaus\-Transport\-Interface@{\-Jaus\-Transport\-Interface}}
+}
+\-Inheritance diagram for \-Jaus\-Transport\-Interface\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.500000cm]{class_jaus_transport_interface}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_jaus_transport_interface_ad6fff9fe6cfe7ea0ba18f108d9371ccf}{std\-::string {\bfseries get\-Name} ()}\label{class_jaus_transport_interface_ad6fff9fe6cfe7ea0ba18f108d9371ccf}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a86fc8922b4a705d7c463a5ff533dab4f}{\hyperlink{class_jaus_communication_manager}{\-Jaus\-Communication\-Manager} $\ast$ {\bfseries get\-Communication\-Manager} ()}\label{class_jaus_transport_interface_a86fc8922b4a705d7c463a5ff533dab4f}
+
+\item 
+\hypertarget{class_jaus_transport_interface_aa691b69c77023769011ee63f51d9f43d}{void {\bfseries set\-Communication\-Manager} (\hyperlink{class_jaus_communication_manager}{\-Jaus\-Communication\-Manager} $\ast$comm\-Mngr)}\label{class_jaus_transport_interface_aa691b69c77023769011ee63f51d9f43d}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a9d76b8657d6a61b937bfcca185f24ab0}{bool {\bfseries is\-Running} ()}\label{class_jaus_transport_interface_a9d76b8657d6a61b937bfcca185f24ab0}
+
+\item 
+\hypertarget{class_jaus_transport_interface_ae8347e93d3ab59a7c3a4773fc2a5a6ed}{void {\bfseries stop\-Thread} ()}\label{class_jaus_transport_interface_ae8347e93d3ab59a7c3a4773fc2a5a6ed}
+
+\item 
+\hypertarget{class_jaus_transport_interface_aeb7af744688b76bb47d0f62d9b4fe9af}{\-Jaus\-Transport\-Type {\bfseries get\-Type} (void)}\label{class_jaus_transport_interface_aeb7af744688b76bb47d0f62d9b4fe9af}
+
+\item 
+\hypertarget{class_jaus_transport_interface_ad7727872ed6c5a2026fd79316ec75eb5}{unsigned long {\bfseries queue\-Size} ()}\label{class_jaus_transport_interface_ad7727872ed6c5a2026fd79316ec75eb5}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a0b8a92438e1caeeaf4d5fd0f4c9d9c23}{void {\bfseries queue\-Jaus\-Message} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)}\label{class_jaus_transport_interface_a0b8a92438e1caeeaf4d5fd0f4c9d9c23}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a90c956e0df0a4e8b22bc2edbd4c66977}{virtual bool {\bfseries start\-Interface} (void)=0}\label{class_jaus_transport_interface_a90c956e0df0a4e8b22bc2edbd4c66977}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a24db48dc16801a32fc861ae29cdb8b66}{virtual bool {\bfseries stop\-Interface} (void)=0}\label{class_jaus_transport_interface_a24db48dc16801a32fc861ae29cdb8b66}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a9c4b200e6a46c0a738a094c4f86a482c}{virtual bool {\bfseries process\-Message} (\hyperlink{struct_jaus_message_struct}{\-Jaus\-Message} message)=0}\label{class_jaus_transport_interface_a9c4b200e6a46c0a738a094c4f86a482c}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a704ab6ae56ed1cc278b3eca16d75c3aa}{virtual std\-::string {\bfseries to\-String} ()=0}\label{class_jaus_transport_interface_a704ab6ae56ed1cc278b3eca16d75c3aa}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a153e11084546bd37e9cbc18b1cf9409d}{virtual void {\bfseries run} ()=0}\label{class_jaus_transport_interface_a153e11084546bd37e9cbc18b1cf9409d}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_jaus_transport_interface_a1f5293f045f9544dd978c09df196b939}{void {\bfseries start\-Thread} ()}\label{class_jaus_transport_interface_a1f5293f045f9544dd978c09df196b939}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a4c5844a40471350b0cc2a450f700acd5}{void {\bfseries wake\-Thread} ()}\label{class_jaus_transport_interface_a4c5844a40471350b0cc2a450f700acd5}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_jaus_transport_interface_a97714b448b1f3a3bf95c9be9eef1c9e5}{\hyperlink{class_event_handler}{\-Event\-Handler} $\ast$ {\bfseries event\-Handler}}\label{class_jaus_transport_interface_a97714b448b1f3a3bf95c9be9eef1c9e5}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a9a8297d0a7b74c594c8747ecce532cc0}{std\-::string {\bfseries name}}\label{class_jaus_transport_interface_a9a8297d0a7b74c594c8747ecce532cc0}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a835f2c4b03c989d8bcda2d30faf6025b}{\-Jaus\-Transport\-Type {\bfseries type}}\label{class_jaus_transport_interface_a835f2c4b03c989d8bcda2d30faf6025b}
+
+\item 
+\hypertarget{class_jaus_transport_interface_aa7d213af551e6074c68e43ea4b7d3b7e}{\hyperlink{class_jaus_transport_queue}{\-Jaus\-Transport\-Queue} {\bfseries queue}}\label{class_jaus_transport_interface_aa7d213af551e6074c68e43ea4b7d3b7e}
+
+\item 
+\hypertarget{class_jaus_transport_interface_aa61c00d893538715b53b593c0ab308f4}{bool {\bfseries running}}\label{class_jaus_transport_interface_aa61c00d893538715b53b593c0ab308f4}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a4d94f5af765819a525a4a95c904cadea}{\hyperlink{class_jaus_communication_manager}{\-Jaus\-Communication\-Manager} $\ast$ {\bfseries comm\-Mngr}}\label{class_jaus_transport_interface_a4d94f5af765819a525a4a95c904cadea}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a6083541972e8dc9a445a463adfb5c5e6}{\hyperlink{class_file_loader}{\-File\-Loader} $\ast$ {\bfseries config\-Data}}\label{class_jaus_transport_interface_a6083541972e8dc9a445a463adfb5c5e6}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a601d3936b26ed079be059d5881279b6d}{int {\bfseries p\-Thread\-Id}}\label{class_jaus_transport_interface_a601d3936b26ed079be059d5881279b6d}
+
+\item 
+\hypertarget{class_jaus_transport_interface_ae80a67566391f8652f8e4666f4692053}{pthread\-\_\-t {\bfseries p\-Thread}}\label{class_jaus_transport_interface_ae80a67566391f8652f8e4666f4692053}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a984fe46c34f8bb55aa6f0a71e1abb1b0}{pthread\-\_\-attr\-\_\-t {\bfseries thread\-Attributes}}\label{class_jaus_transport_interface_a984fe46c34f8bb55aa6f0a71e1abb1b0}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a61905e1222b6d9047d01b92d0170a6aa}{pthread\-\_\-cond\-\_\-t {\bfseries thread\-Conditional}}\label{class_jaus_transport_interface_a61905e1222b6d9047d01b92d0170a6aa}
+
+\item 
+\hypertarget{class_jaus_transport_interface_a536d652e34ce8a3bfe633285f2e360c7}{pthread\-\_\-mutex\-\_\-t {\bfseries thread\-Mutex}}\label{class_jaus_transport_interface_a536d652e34ce8a3bfe633285f2e360c7}
+
+\item 
+\hypertarget{class_jaus_transport_interface_adfba19e1f78bf771d05419e71560e35c}{\-Jaus\-Byte {\bfseries my\-Subsystem\-Id}}\label{class_jaus_transport_interface_adfba19e1f78bf771d05419e71560e35c}
+
+\end{DoxyCompactItemize}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+lib/libopen\-Jaus/include/node\-Manager/\-Jaus\-Transport\-Interface.\-h\item 
+lib/libopen\-Jaus/src/node\-Manager/\-Jaus\-Transport\-Interface.\-cpp\end{DoxyCompactItemize}

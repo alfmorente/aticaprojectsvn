@@ -3,10 +3,23 @@
 #include "message/experimental/ugvInfo12Message.h"
 #include "message/experimental/reportSignalingElements25Message.h"
 
+/**
+ * @brief Constructor de la clase TranslatorROSJAUS
+ */
+
 TranslatorROSJAUS::TranslatorROSJAUS() {
 
 }
 
+/**
+ * @brief Obtiene mensaje JAUS - Report Wrench Effort a partir de inforamcion del vehículo
+ * @param subDest       Subsistema de destino
+ * @param nodDest       Nodo de destino
+ * @param steer         Valor de lectura de la dirección
+ * @param throttle      Valor de lectura del acelerador
+ * @param brake         Valor de lectura del freno de servicio
+ * @return              Mensaje JAUS - Report Wrench Effort
+ */
 // Mensaje con informacion para Report Wrench Effort
 
 JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(int subDest, int nodDest, short steer, short throttle, short brake){
