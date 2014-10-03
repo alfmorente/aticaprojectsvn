@@ -1,17 +1,19 @@
-/* 
- * File:   main.cpp
- * Author: Carlos Amores
- *
- * Created on 12 de junio de 2014, 18:15
+
+/** 
+ * @file  main.cpp
+ * @brief Funcion principal del nodo de Comunicaciones del subsistema de control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
-#include <cstdlib>
 #include "RosNode_Communications.h"
 
-using namespace std;
-
-/*
- * 
+/**
+ * Metodo principal del nodo. Inicializa modulos ROS y JAUS y lanza el
+ * intercambio y la recepcion de mensajes
+ * @param argc Numero de argumentos
+ * @param argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */
 int main(int argc, char** argv) {
 
@@ -28,26 +30,30 @@ int main(int argc, char** argv) {
     // Temporizador de envio de estado
     clock_t initTime, finalTime;
     initTime = clock();
+    
+    // Control del modo de operacion del vehiculo
+    int currentStatus = 0;
+    ros::NodeHandle nh;
 
-    while (ros::ok()) {
+    while (ros::ok() && currentStatus!=OPERATION_MODE_APAGANDO) {
         
-        // Recepcion de mensajeria
+        // Recepcion de mensajeria ROS
         ros::spinOnce();
         
         // Temporizador para envio de estado
         finalTime = clock() - initTime;
-        
         if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_10HZ) {
             
             // Clear del timer
             initTime = clock();
-            
             // Requerimiento de informacion de dispositivo
             nodeComm->informStatus();
             
         }
+        
+        nh.getParam("vehicleStatus",currentStatus);
+        
     }
-    
     nodeComm->endJAUS();
 
     ROS_INFO("[Control] Communications - Nodo finalizado");
