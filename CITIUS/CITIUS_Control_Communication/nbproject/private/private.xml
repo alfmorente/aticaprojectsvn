@@ -13,6 +13,7 @@
         <group>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/include/RosNode_Communications.h</file>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp</file>
         </group>
     </open-files>
 </project-private>

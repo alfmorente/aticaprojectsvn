@@ -92,14 +92,6 @@
           </df>
         </df>
       </df>
-      <df name="Doxygen">
-        <df name="html">
-          <df name="search">
-          </df>
-        </df>
-        <df name="latex">
-        </df>
-      </df>
       <df name="gtest">
         <df name="CMakeFiles">
           <df name="gtest.dir">
@@ -825,12 +817,6 @@
           </df>
           <df name="srv">
           </df>
-        </df>
-        <df name="html">
-          <df name="search">
-          </df>
-        </df>
-        <df name="latex">
         </df>
         <in>JausHandler.cpp</in>
         <in>RosNode_Communications.cpp</in>

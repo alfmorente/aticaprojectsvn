@@ -6,23 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
-RosNode_Communications.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
-TranslatorROSJAUS.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.h
-constant.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/constant.h
-message/experimental/ugvInfo12Message.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/message/experimental/ugvInfo12Message.h
-message/experimental/reportSignalingElements25Message.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/message/experimental/reportSignalingElements25Message.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
-cstdlib
--
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
 
@@ -655,6 +639,8 @@ termios.h
 include/RosNode_Communications.h
 ros/ros.h
 include/ros/ros.h
+cstdlib
+-
 CITIUS_Control_Communication/msg_command.h
 include/CITIUS_Control_Communication/msg_command.h
 CITIUS_Control_Communication/msg_ctrlFrontCamera.h
@@ -719,6 +705,12 @@ jaus.h
 include/jaus.h
 openJaus.h
 include/openJaus.h
+constant.h
+include/constant.h
+message/experimental/ugvInfo12Message.h
+include/message/experimental/ugvInfo12Message.h
+message/experimental/reportSignalingElements25Message.h
+include/message/experimental/reportSignalingElements25Message.h
 
 include/constant.h
 
