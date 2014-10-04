@@ -31,7 +31,7 @@ void RosNode_Driving::initROS() {
  * Receptor de mensajes ROS con comandos de actuacion sobre el vehiculo. Lo 
  * transmite el vehiculo y lo encola si el elemento es considerado critico y
  * por tanto debe llevarse a cabo el mecanismo de integridad
- * @param msg Mensaje ROS recibido
+ * @param[in] msg Mensaje ROS recibido
  */
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
     ros::NodeHandle nh;
@@ -72,8 +72,8 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
 /**
  * Rutina del tratamiento de servicios para la modificacion de la maquina de 
  * estados del nodo
- * @param rq Parametros de requerimiento
- * @param rsp Parametros de respuesta
+ * @param[in] rq Parametros de requerimiento
+ * @param[in] rsp Parametros de respuesta
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
  * la peticion de servicio
  */
@@ -103,7 +103,7 @@ short RosNode_Driving::getVMNodeStatus(){
 /**
  * Modificador del atributo "vmNodeStatus" de la clase para realizar una 
  * transicion en la maquina de estados del nodo
- * @param newVMNodeStatus Nuevo estado al que realizar la transicion
+ * @param[in] newVMNodeStatus Nuevo estado al que realizar la transicion
  */
 void RosNode_Driving::setVMNodeStatus(short newVMNodeStatus){
     vmNodeStatus = newVMNodeStatus;
@@ -121,7 +121,7 @@ DrivingConnectionManager *RosNode_Driving::getDriverMng(){
 /**
  * Realiza la criba de comandos recibidos si el valor a imprimir sobre un
  * elemento esta fuera de los limites establecidos para ese elemento
- * @param msg Mensaje ROS a comprobar
+ * @param[in] msg Mensaje ROS a comprobar
  * @return Booleano que indica si el comando es valido (valor dentro de los 
  * limites establecidos para dicho elemento) o no
  */
@@ -202,7 +202,7 @@ bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg){
 /**
  * Publica la informacion del vehiculo que recibe como parametro en el topic 
  * ROS correspondiente
- * @param info Informacion del vehiculo a publicar
+ * @param[in] info Informacion del vehiculo a publicar
  */
 void RosNode_Driving::publishDrivingInfo(DrivingInfo info){
     CITIUS_Control_Driving::msg_vehicleInfo msg;

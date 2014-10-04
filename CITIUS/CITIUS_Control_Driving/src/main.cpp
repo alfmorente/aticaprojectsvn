@@ -11,8 +11,8 @@
 /**
  * Metodo principal del nodo. Inicializa modulos ROS y JAUS y lanza el
  * intercambio y la recepcion de mensajes con el vehiculo
- * @param argc Numero de argumentos
- * @param argv Vector de argumentos
+ * @param[in] argc Numero de argumentos
+ * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */
 int main(int argc, char** argv) {

@@ -3,7 +3,7 @@
  * @file  RosNode_Communication.h
  * @brief Declara el tipo de la clase "RosNode_Communication"
  * - La clase implementa la gestión del nodo de Comunicaciones del 
- * Subsistema de control del UGV.
+ * Subsistema de control del UGV
  * @author: Carlos Amores
  * @date: 2013, 2014
  */
