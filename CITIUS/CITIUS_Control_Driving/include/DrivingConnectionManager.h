@@ -29,55 +29,55 @@
 
 using namespace std;
 
-class DrivingConnectionManager{
+class DrivingConnectionManager {
 private:
-    
-    // Socket
-    int socketDescriptor;
-    // Contador para la cola de mensajes (Integridad)
-    short countMsg;
-    // Manejador de la cola de mensajes (Integridad)
-    vector<FrameDriving> messageQueue;
-    // Informacion actualizable del vehiculo
-    DrivingInfo vehicleInfo;
-    // Alarmas de conduccion
-    short driveAlarms;
-    // Alarmas de direccion
-    short steeringAlarms;
-    // Modificadores privados
-    void setVehicleInfo(short id_device, short value);
-    short getDriveAlarms();
-    short getSteeringAlarms();
-    
-    
+
+  // Socket
+  int socketDescriptor;
+  // Contador para la cola de mensajes (Integridad)
+  short countMsg;
+  // Manejador de la cola de mensajes (Integridad)
+  vector<FrameDriving> messageQueue;
+  // Informacion actualizable del vehiculo
+  DrivingInfo vehicleInfo;
+  // Alarmas de conduccion
+  short driveAlarms;
+  // Alarmas de direccion
+  short steeringAlarms;
+  // Modificadores privados
+  void setVehicleInfo(short id_device, short value);
+  short getDriveAlarms();
+  short getSteeringAlarms();
+
+
 public:
-    // Constructor
-    DrivingConnectionManager();
-    
-    // Gestion del vehiculo
-    bool connectVehicle();
-    bool disconnectVehicle();
-    
-    // Mensajeria con vehiculo
-    void sendToVehicle(FrameDriving frame);
-    void reqVehicleInfo(bool full);
-    bool checkForVehicleMessages();
-    
-    // Getter y setter necesarios
-    DrivingInfo getVehicleInfo(bool full);
-    int getSocketDescriptor();
-    short getCountCriticalMessages();
-    void setCountCriticalMessages(short cont);
-    
-    // Metodos auxiliares
-    bool isCriticalInstruction(short element);
-    
-    // Tratamiento de la cola de mensajes criticos
-    void addToQueue(FrameDriving frame);
-    RtxStruct informResponse(bool,short);
-    
-    // Tratamiento de atributos de alarmas
-    void setAlarmsInfo(short element, short value);
-    
+  // Constructor
+  DrivingConnectionManager();
+
+  // Gestion del vehiculo
+  bool connectVehicle();
+  bool disconnectVehicle();
+
+  // Mensajeria con vehiculo
+  void sendToVehicle(FrameDriving frame);
+  void reqVehicleInfo(bool full);
+  bool checkForVehicleMessages();
+
+  // Getter y setter necesarios
+  DrivingInfo getVehicleInfo(bool full);
+  int getSocketDescriptor();
+  short getCountCriticalMessages();
+  void setCountCriticalMessages(short cont);
+
+  // Metodos auxiliares
+  bool isCriticalInstruction(short element);
+
+  // Tratamiento de la cola de mensajes criticos
+  void addToQueue(FrameDriving frame);
+  RtxStruct informResponse(bool, short);
+
+  // Tratamiento de atributos de alarmas
+  void setAlarmsInfo(short element, short value);
+
 };
 

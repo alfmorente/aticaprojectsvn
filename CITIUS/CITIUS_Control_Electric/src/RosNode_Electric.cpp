@@ -1,20 +1,28 @@
-#include <deque>
+
+/** 
+ * @file  RosNode_Electric.cpp
+ * @brief Implementacion de la clase "RosNode_Electric"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 
 #include "RosNode_Electric.h"
 
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
+ * instancia del driver de conexion con el vehiculo
+ */
 RosNode_Electric::RosNode_Electric() {
     emNodeStatus = NODESTATUS_INIT;
     dElectric = new ElectricConnectionManager();
 }
 
-/*******************************************************************************
- * INICIALIZADOR DE ARTEFACTOS ROS
- ******************************************************************************/
-
+/**
+ * Inicia los artefactos ROS atributos de la clase. Consulta la position del 
+ * conmutador local/teleoperado y solicita la inicializacion de la maquina de
+ * estados de modos de operacion del vehiculo con la señal obtenida
+ */
 void RosNode_Electric::initROS() {
     
     ros::NodeHandle nh;
@@ -42,7 +50,6 @@ void RosNode_Electric::initROS() {
     usleep(1000);
         
     CITIUS_Control_Electric::srv_vehicleStatus service;
-    
     service.request.status = OPERATION_MODE_INICIANDO;
     // Solicitar a vehiculo posicion conmutador local/teleoperado
     // TODO
@@ -51,7 +58,6 @@ void RosNode_Electric::initROS() {
     while(!clientVehicleStatus.call(service)){
         ros::spinOnce();
     }
-    
     if(service.response.confirmation) {
         ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
         emNodeStatus = NODESTATUS_OK;
@@ -62,39 +68,48 @@ void RosNode_Electric::initROS() {
     
 }
 
-
-/*******************************************************************************
- * GETTER AND SETTER NECESARIOS
- ******************************************************************************/
-
-// Get del estado del nodo
+/**
+ * Consultor del atributo "emNodeStatus" de la clase que proporciona el estado
+ * actual de la maquina de estados del nodo
+ * @return Atributo "emNodeStatus" de la clase
+ */
 short RosNode_Electric::getEMNodeStatus(){
     return emNodeStatus;
 }
 
-// Set del estado del nodo
+/**
+ * Modificador del atributo "emNodeStatus" de la clase para realizar una 
+ * transicion en la maquina de estados del nodo
+ * @param[in] newStatus Nuevo estado al que realizar la transicion
+ */
 void RosNode_Electric::setEMNodeStatus(short newStatus){
     emNodeStatus = newStatus;
 }
 
-// Obtener el publicador de informacion del vehiculo
-ros::Publisher RosNode_Electric::getPubElectricInfo(){
-    return pubElectricInfo;
-}
-
-// Obtener el driver 
+/**
+ * Consultor del atributo "dElectric" de la clase que proporciona la instancia 
+ * del driver utilizado en la comunicacion con el vehiculo
+ * @return Atributo "dElectric" de la clase
+ */
 ElectricConnectionManager *RosNode_Electric::getDriverMng(){
     return dElectric;
 }
 
+/**
+ * Consultor del atributo "clientVehicleStatus" de la clase que proporciona el
+ * cliente que realiza peticiones para las transiciones en la maquina de 
+ * estados de los modos de operacion del vehiculo
+ * @return Atributo "clientVehicleStatus"
+ */
 ros::ServiceClient RosNode_Electric::getClientVehicleStatus(){
     return clientVehicleStatus;
 }
 
-/*******************************************************************************
- * PUBLICACION DE INFORMACION DEL VEHICULO
- ******************************************************************************/
-
+/**
+ * Publica la informacion del vehiculo que recibe como parametro en el topic 
+ * ROS correspondiente
+ * @param[in] info Informacion electrica del vehiculo a publicar
+ */
 void RosNode_Electric::publishElectricInfo(ElectricInfo info){
     
     CITIUS_Control_Electric::msg_electricInfo msg;
@@ -109,10 +124,11 @@ void RosNode_Electric::publishElectricInfo(ElectricInfo info){
     
 }
 
-/*******************************************************************************
- * PUBLICACION POSICION CONMUTADOR LOCAL/TELEOPERADO
- ******************************************************************************/
-
+/**
+ * Publica la informacion de un cambio en la posicion del conmutador local /
+ * teleoperado que recibe como parametro en el topic correspondiente
+ * @param position Nueva posicion leida del conmutador local / teleoperado
+ */
 void RosNode_Electric::publishSwitcherInfo(short position){
     
     CITIUS_Control_Electric::msg_switcher msg;
@@ -121,10 +137,11 @@ void RosNode_Electric::publishSwitcherInfo(short position){
     
 }
 
-/*******************************************************************************
- * PUBLICACION DE COMANDOS ON/OFF DE ACTUADORES
- ******************************************************************************/
-
+/**
+ * Publica una serie de comandos de activacion sobre diversos actuadores ante 
+ * una lectura de cambio en el conmutador local / teleoperado
+ * @param on Nueva posicion del conmutador local / teleoperado
+ */
 void RosNode_Electric::publishSetupCommands(bool on){
     
     CITIUS_Control_Electric::msg_command msg;

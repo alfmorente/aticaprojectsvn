@@ -1,9 +1,14 @@
+
+/** 
+ * @file  ElectricConnectionManager.cpp
+ * @brief Implementacion de la clase "ElectricConnectionManager"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 #include "ElectricConnectionManager.h"
 
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/** Constructor de la clase*/
 ElectricConnectionManager::ElectricConnectionManager() {
     socketDescriptor = -1;
     countMsg = 1;
@@ -18,11 +23,11 @@ ElectricConnectionManager::ElectricConnectionManager() {
     supplyAlarms = 0x0000;
 }
 
-/*******************************************************************************
- * MANEJO DEL VEHICULO
- ******************************************************************************/
-
-// Conexión con dispositivo
+/**
+ * Realiza la inicializacion y conexion del socket de comunicacion con el 
+ * vehiculo. 
+ * @return Booleano que indica si la conexion ha sido posible
+ */
 bool ElectricConnectionManager::connectVehicle(){
     // Creacion y apertura del socket
     this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
@@ -73,8 +78,11 @@ bool ElectricConnectionManager::connectVehicle(){
     return true;
 }
 
-// Desconexión con dispositivo
-
+/**
+ * Realiza la desconexion del vehiculo mediante la liberacion del socket de
+ * comunicacion
+ * @return Booleano que indica si la desconexion se ha realizado con exito
+ */
 bool ElectricConnectionManager::disconnectVehicle() {
     // Cierre del socket
     shutdown(this->getSocketDescriptor(), 2);
@@ -83,7 +91,11 @@ bool ElectricConnectionManager::disconnectVehicle() {
     return true;
 }
 
-// Mandar comando a vehiculo
+/**
+ * Envia la informacion de una trama al vehiculo haciendo uso del socket de
+ * comunicacion
+ * @param[in] frame Trama a enviar via socket al vehiculo 
+ */
 void ElectricConnectionManager::sendToVehicle(FrameDriving frame){
     
     // Buffer de envio
@@ -100,8 +112,10 @@ void ElectricConnectionManager::sendToVehicle(FrameDriving frame){
     usleep(1000);  
 }
 
-// Solicitar informacion basica de vehiculo
-
+/**
+ * Envia una serie de tramas de tipo GET solicitando la informacion electrica 
+ * del vehiculo
+ */
 void ElectricConnectionManager::reqElectricInfo() {
 
     FrameDriving frame;
@@ -129,8 +143,10 @@ void ElectricConnectionManager::reqElectricInfo() {
     
 }
 
-// Apagado del vehiculo
-
+/**
+ * Envia mensaje de confirmacion (SET) para indicar el fin de un apagado 
+ * ordenado de los distintos modulos del vehiculo
+ */
 void ElectricConnectionManager::setTurnOff() {
     FrameDriving frame;
     frame.instruction = SET;
@@ -140,8 +156,12 @@ void ElectricConnectionManager::setTurnOff() {
     sendToVehicle(frame);
 }
 
-// Comprobacion de informacion enviada desde vehiculo
-
+/**
+ * Realiza una lectura por el socket de comunicacion con el vehiculo y obtiene 
+ * una trama en caso de que el propio vehiculo la haya enviado. La clasifica 
+ * segun el elemento al que hace referencia y procede a su tratamiento
+ * @return Booleano que indica si se ha llevado a cabo una lectura via socket
+ */
 bool ElectricConnectionManager::checkForVehicleMessages() {
     
     char bufData[8];
@@ -195,21 +215,29 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
     }
 }
 
-
-/*******************************************************************************
- * GETTER Y SETTER NECESARIOS
- ******************************************************************************/
-
-// Get del descriptor de socket
+/**
+ * Consultor del atributo "socketDescriptor" de la clase 
+ * @return Atributo "socketDescriptor" de la clase
+ */
 int ElectricConnectionManager::getSocketDescriptor(){
     return socketDescriptor;
 }
 
-// Get de la ultima informacion recibida del vehiculo
+/**
+ * Consultor del atributo "electricInfo" de la clase que almacena la informacion
+ * de la ultima lectura realizada del vehiculo
+ * @return Atributo "electricInfo" de la clase
+ */
 ElectricInfo ElectricConnectionManager::getVehicleInfo() {
     return electricInfo;
 }
 
+/**
+ * Modificador del atributo "electricInfo" de la clase con la informacion de un
+ * dispositivo electrico concreto
+ * @param[in] id_device Identificador del dispositivo a modificar
+ * @param[in] value Valor de lectura del dispositivo a modificar
+ */
 void ElectricConnectionManager::setVehicleInfo(short id_device, short value){
     switch(id_device){
         case BATTERY_LEVEL:
@@ -232,10 +260,21 @@ void ElectricConnectionManager::setVehicleInfo(short id_device, short value){
     }
 }
 
+/**
+ * Consultor del atributo "countMsg" de la clase utilizado para llevar el 
+ * conteo de los mensajes criticos (mecanismo de integridad)
+ * @return Atributo "countMsg" de la clase
+ */
 short ElectricConnectionManager::getCountCriticalMessages(){
     return countMsg;
 }
 
+/**
+ * Modificador del atributo "countMsg" de la clase utilizado para llevar el
+ * conteo del los mensajes criticos (mecanismo de integridad). Contempla que se
+ * lleve a cabo segun un contador incremental con intervalo 1..1024
+ * @param[in] cont Nuevo valor para el atributo "countMsg"
+ */
 void ElectricConnectionManager::setCountCriticalMessages(short cont) {
     countMsg = cont;
     // Contador: 1 .. 1024
@@ -243,28 +282,52 @@ void ElectricConnectionManager::setCountCriticalMessages(short cont) {
         countMsg = 1;
 }
 
+/**
+ * Consultor del atributo "turnOff" de la clase utilizado para indicar que se 
+ * ha recibido una peticion de apagado ordenado por parte del vehiculo
+ * @return Atributo "turnOff" de la clase
+ */
 bool ElectricConnectionManager::getTurnOffFlag(){
     return turnOff;
 }
 
+/**
+ * Consultor del atributo "swPosition" de la clase utilizado para indicar que 
+ * ha habido un cambio en la posicion del conmutador (switcher) local / 
+ * teleoperado
+ * @return Atributo "swPosition" de la clase
+ */
 SwitcherStruct ElectricConnectionManager::getSwitcherStruct(){
     return swPosition;
 }
 
+/**
+ * Modificador del atributo "swPosition" de la clase que se actualiza cuando se
+ * detecta un cambio de posicion del conmutador (switcher) local / teleoperado
+ * del vehiculo o cuando se ha llevado a cabo el tratamiento tras su deteccion
+ * @param flag Nueva posicion del estado de la estructura de tratamiento
+ */
 void ElectricConnectionManager::setSwitcherStruct(bool flag){
     swPosition.flag = flag;
     swPosition.position = -1;
 }
 
+/**
+ * Consultor del atributo "supplyAlarms" de la clase que indica la ultima
+ * lectura realizada del vector de alarmas del modulo electrico del Payload de
+ * conduccion del vehiculo
+ * @return 
+ */
 short ElectricConnectionManager::getSupplyAlarms() {
     return supplyAlarms;
 }
 
-
-/*******************************************************************************
- * METODOS PROPIOS
- *******************************************************************************/
-
+/**
+ * Consulta si un elemento es critico y por tanto debe ser contemplado para
+ * llevar a cabo el mecanismo de integridad
+ * @param[in] element Elemento de consulta
+ * @return Booleano que indica si el elemento es critico o  no
+ */
 bool ElectricConnectionManager::isCriticalInstruction(short element) {
     if (element == SUPPLY_TURN_ON) {
         return true;
@@ -273,14 +336,30 @@ bool ElectricConnectionManager::isCriticalInstruction(short element) {
     }
 }
 
-/*******************************************************************************
- * MANEJO DE LA COLA DE MENSAJES
- *******************************************************************************/
-
+/**
+ * Una vez que un mensaje es considerado critico, se utiliza este metodo para
+ * encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en caso
+ * de obtener un NACK
+ * @param[in] frame Trama a incluir en la cola de mensajes criticos
+ */
 void ElectricConnectionManager::addToQueue(FrameDriving frame){
     messageQueue.push_back(frame);
 }
 
+/**
+ * Tratamiento de la cola de mensajes tras la recepcion de un mensaje de 
+ * confirmacion (ACK) o negacion (NACK). En el caso de recibir un ACK, se 
+ * desencolan todos los mensajes cuyo campo "id_instruccion" es menor al que
+ * se incluye en la trama del propio ACK. En el caso de recibir un NACK, se 
+ * retransmiten todos los mensajes de la cola cuyo campo "id_instruccion" sea
+ * menor o igual que el que se incluye en la trama del propio ACK y se elimina
+ * el resto
+ * @param[in] ack Indica si se ha recibido un ACK (true) o un NACK (false) 
+ * @param[in] id_instruction Indica el campo "id_instruccion" (cuenta) del mensaje
+ * recibido del vehiculo
+ * @return Estructura con el numero de mensajes a retransmitir (en caso de
+ * haberlos) y una lista de dichos mensajes.
+ */
 RtxStruct ElectricConnectionManager::informResponse(bool ack, short id_instruction){
     
     RtxStruct ret;
@@ -292,29 +371,22 @@ RtxStruct ElectricConnectionManager::informResponse(bool ack, short id_instructi
     if(ack){ // ACK
         
         if(id_instruction == (*it).id_instruction){ // Primer elemento y requerido coinciden
-            
             // Se elimina el primer elemento
             messageQueue.erase(it);
-            
         }else if(id_instruction > (*it).id_instruction){ // Confirmacion de varios elementos
-            
             while(id_instruction >= (*it).id_instruction){
-                
                 messageQueue.erase(it);
-                
             }
         }
                 
     } else { // NACK
            
         while(it != messageQueue.end()){
-            
             // Se incluyen en la respuesta todos los  mensajes no confirmados
             // para retransmitir
             ret.numOfMsgs++;
             ret.msgs.push_back((*it));
             it++;
-            
         }
         
     }
