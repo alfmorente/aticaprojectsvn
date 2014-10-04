@@ -1,18 +1,25 @@
+
+/** 
+ * @file  RosNode_Driving.cpp
+ * @brief Implementacion de la clase "RosNode_Driving"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 #include "RosNode_Driving.h"
 
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Constructor de la clase. Inicia la maquina de estados del nodo y creo la 
+ * instancia del driver de conexion con el vehiculo
+ */
 RosNode_Driving::RosNode_Driving() {
-    setVMNodeStatus(NODESTATUS_INIT);
+    vmNodeStatus = NODESTATUS_INIT;
     dVehicle = new DrivingConnectionManager();
 }
 
-/*******************************************************************************
- * INICIALIZADOR DE ARTEFACTOS ROS
- ******************************************************************************/
-
+/**
+ * Inicia los artefactos ROS atributos de la clase
+ */
 void RosNode_Driving::initROS() {
     ros::NodeHandle nh;
     pubVehicleInfo = nh.advertise<CITIUS_Control_Driving::msg_vehicleInfo>("vehicleInfo",1000);
@@ -20,12 +27,12 @@ void RosNode_Driving::initROS() {
     servNodeStatus = nh.advertiseService("vmNodeStatus",&RosNode_Driving::fcv_serv_nodeStatus,this);
 }
 
-/*******************************************************************************
- * GETTER AND SETTER NECESARIOS
- ******************************************************************************/
-
-// Control de la camara
-
+/**
+ * Receptor de mensajes ROS con comandos de actuacion sobre el vehiculo. Lo 
+ * transmite el vehiculo y lo encola si el elemento es considerado critico y
+ * por tanto debe llevarse a cabo el mecanismo de integridad
+ * @param msg Mensaje ROS recibido
+ */
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
     ros::NodeHandle nh;
     int currentVehicleStatus = OPERATION_MODE_INICIANDO;
@@ -50,11 +57,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
                 }else{
                     command.id_instruccion = -1;
                 }
-                
-                
                 dVehicle->sendToVehicle(command);
-                
-                
             } else {
                 ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
             }
@@ -66,7 +69,14 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
     }
 }
     
-// Gestion del estado del nodo
+/**
+ * Rutina del tratamiento de servicios para la modificacion de la maquina de 
+ * estados del nodo
+ * @param rq Parametros de requerimiento
+ * @param rsp Parametros de respuesta
+ * @return Booleano que indica si se ha realizado el correcto tratamiento de
+ * la peticion de servicio
+ */
 bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp){
     if(rq.status == NODESTATUS_OK){
         setVMNodeStatus(NODESTATUS_OK);
@@ -81,34 +91,40 @@ bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus
     return true;
 }
 
-/*******************************************************************************
- * GETTER AND SETTER NECESARIOS
- ******************************************************************************/
-
-// Get del estado del nodo
+/**
+ * Consultor del atributo "vmNodeStatus" de la clase que proporciona el estado
+ * actual de la maquina de estados del nodo
+ * @return Atributo "vmNodeStatus" de la clase
+ */
 short RosNode_Driving::getVMNodeStatus(){
     return vmNodeStatus;
 }
 
-// Set del estado del nodo
+/**
+ * Modificador del atributo "vmNodeStatus" de la clase para realizar una 
+ * transicion en la maquina de estados del nodo
+ * @param newVMNodeStatus Nuevo estado al que realizar la transicion
+ */
 void RosNode_Driving::setVMNodeStatus(short newVMNodeStatus){
     vmNodeStatus = newVMNodeStatus;
 }
 
-// Obtener el publicador de informacion del vehiculo
-ros::Publisher RosNode_Driving::getPubVehicleInfo(){
-    return pubVehicleInfo;
-}
-
-// Obtener el driver 
+/**
+ * Consultor del atributo "dVehicle" de la clase que proporciona la instancia 
+ * del driver utilizado en la comunicacion con el vehiculo
+ * @return Atributo "dVehicle" de la clase
+ */
 DrivingConnectionManager *RosNode_Driving::getDriverMng(){
     return dVehicle;
 }
 
-/*******************************************************************************
- * CRIBA DE COMANDOS FUERA DE RANGO
- ******************************************************************************/
-
+/**
+ * Realiza la criba de comandos recibidos si el valor a imprimir sobre un
+ * elemento esta fuera de los limites establecidos para ese elemento
+ * @param msg Mensaje ROS a comprobar
+ * @return Booleano que indica si el comando es valido (valor dentro de los 
+ * limites establecidos para dicho elemento) o no
+ */
 bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg){
     bool ret = true;
     short element = msg.id_device;
@@ -183,36 +199,12 @@ bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg){
     return ret;
 }
 
-/*******************************************************************************
- * GESTION DE MENSAJES RECIBIDOS DEL VEHICULO
- ******************************************************************************/
-void RosNode_Driving::manageAlarmsMessage(FrameDriving frame){
-    // Se comprueba que es de tipo INFO
-    if(frame.instruction == INFO){
-        // Tratamiento alarmas / demas elementos
-        if(frame.element == DRIVE_ALARMS){
-            // TODO: Tratamientos de alarmas del modulo
-            ROS_INFO("[Control] Driving - Alarma recibida");
-            
-        }else if(frame.element == STEERING_ALARMS){
-            // TODO: Tratamiento de alarmas de direccion
-            ROS_INFO("[Control] Driving - Alarma de direccion recibida");
-            
-        }else{
-            ROS_INFO("[Control] Driving - Recibida trama como alarma. Elemento: %d",frame.element);
-        }
-    }else{
-        ROS_INFO("[Control] Driving - Trama invalida recibida");
-    }
-    
-}
-
-/*******************************************************************************
- * PUBLICACION DE INFORMACION DEL VEHICULO
- ******************************************************************************/
-
+/**
+ * Publica la informacion del vehiculo que recibe como parametro en el topic 
+ * ROS correspondiente
+ * @param info Informacion del vehiculo a publicar
+ */
 void RosNode_Driving::publishDrivingInfo(DrivingInfo info){
-    
     CITIUS_Control_Driving::msg_vehicleInfo msg;
     
     msg.steering = info.steering;
@@ -230,7 +222,5 @@ void RosNode_Driving::publishDrivingInfo(DrivingInfo info){
     msg.dipsr = info.dipsr;
     msg.dipsp = info.dipsp;
     msg.klaxon = info.klaxon;
-    
     pubVehicleInfo.publish(msg);
-
 }

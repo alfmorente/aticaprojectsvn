@@ -1,25 +1,15 @@
-/* 
- * File:   constant.h
- * Author: Carlos Amores
- *
- * Created on 4 de junio de 2014, 17:27
+
+/** 
+ * @file  constant.h
+ * @brief Declara las constantes necesarias para el manejo de la comunicacion 
+ * entre el nodo Driving del Subsistema de control y el modulo de conduccion
+ * del Subsitema de payload de conduccion
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef CONSTANT_H
 #define	CONSTANT_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* CONSTANT_H */
 
 using namespace std;
 
@@ -176,4 +166,8 @@ typedef struct{
     int numOfMsgs;
     vector<FrameDriving> msgs;
 }RtxStruct;
+
+#endif	/* CONSTANT_H */
+
+
 

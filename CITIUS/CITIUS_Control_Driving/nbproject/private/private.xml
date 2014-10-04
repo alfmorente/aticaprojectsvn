@@ -13,6 +13,8 @@
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeLists.txt</file>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/include/DrivingConnectionManager.h</file>
+        </group>
     </open-files>
 </project-private>

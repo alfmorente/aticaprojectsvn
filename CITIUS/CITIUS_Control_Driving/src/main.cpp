@@ -1,11 +1,20 @@
+
+/** 
+ * @file  main.cpp
+ * @brief Funcion principal del nodo Driving del subsistema de control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 #include "RosNode_Driving.h"
 
-/*******************************************************************************
- *                     METODO MAIN DEL NODO DRIVING                            *
- ******************************************************************************/
-
-// Main del nodo
-
+/**
+ * Metodo principal del nodo. Inicializa modulos ROS y JAUS y lanza el
+ * intercambio y la recepcion de mensajes con el vehiculo
+ * @param argc Numero de argumentos
+ * @param argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
+ */
 int main(int argc, char** argv) {
 
     // Iniciacion del middleware (ROS) para el nodo Driving
