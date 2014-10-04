@@ -1,25 +1,14 @@
-/* 
- * File:   constant.h
- * Author: Carlos Amores
- *
- * Created on 15 de junio de 2014, 16:32
+
+/** 
+ * @file  constant.h
+ * @brief Declara las constantes necesarias para el manejo de la comunicacion 
+ * con la camara de apoyo a la conduccion del subsistema de control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef CONSTANT_H
 #define	CONSTANT_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* CONSTANT_H */
 
 /*******************************************************************************
  * ESTADO DE NODO
@@ -38,4 +27,7 @@ extern "C" {
 #define FREC_5HZ 0.2
 #define FREC_2HZ 0.5
 #define FREC_1HZ 1
+
+#endif	/* CONSTANT_H */
+
 

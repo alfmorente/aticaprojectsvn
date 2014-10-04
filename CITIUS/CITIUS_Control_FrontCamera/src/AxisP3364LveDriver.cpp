@@ -1,27 +1,29 @@
 
+/** 
+ * @file  AxisP3364LveDriver.cpp
+ * @brief Implementacion de la clase "AxisP3364LveDriver"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 #include "AxisP3364LveDriver.h"
 
-/*******************************************************************************
-                               CONSTRUCTOR
- ******************************************************************************/
-
+/** Constructor de la clase*/
 AxisP3364LveDriver::AxisP3364LveDriver() {
     pan = 0;
     tilt = 0;
     zoom = 0;
 }
 
-/*******************************************************************************
-                                DESTRUCTOR
- ******************************************************************************/
+/** Destructor de la clase*/
 AxisP3364LveDriver::~AxisP3364LveDriver() {
 
 }
 
-/*******************************************************************************
-                       CONEXION (COMPROBACION DE DISPONIBILIDAD)
- ******************************************************************************/
-
+/**
+ * Comprueba la disponibilidad de la camara IP en la red 
+ * @return Booleano que indica si la camara esta operativa para ser utilizada
+ */
 bool AxisP3364LveDriver::checkConnection() {
 
     if ((he = gethostbyname(IP_CAMERA)) == NULL) {
@@ -51,10 +53,14 @@ bool AxisP3364LveDriver::checkConnection() {
 
 }
 
-/*******************************************************************************
-                        ENVIAR COMANDO DE CONTROL
- ******************************************************************************/
-
+/**
+ * Utiliza los parametros para el montaje de un comando de control para la
+ * camara y lo transmite. Recibe la respuesta de la camara con el estado actual
+ * de las variables y actualiza el registro del estado
+ * @param[in] order Componente sobre el que transmitir la orden
+ * @param[in] value Nuevo para a transmitir al componente
+ * @return Booleano que indica si la orden se ha ejecutado con exito
+ */
 bool AxisP3364LveDriver::sentSetToDevice(short order, float value) {
 
     if ((he = gethostbyname(IP_CAMERA)) == NULL) {
@@ -104,7 +110,6 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value) {
 
     stream << value << "\nConnection: keep-alive\r\n";
 
-
     int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
 
     if (nBytesSent < 0) {
@@ -132,13 +137,13 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value) {
     close(socketDescriptor);
     usleep(500);
     return false;
-
 }
 
-/*******************************************************************************
-                         LECTURA DE LA POSICION
- ******************************************************************************/
-
+/**
+ * Solicita el valor de las variables sobre las que se puede actuar 
+ * @return Estructura con el valor de las variables leidas en caso de que se 
+ * haya obtenido la informacion con exito
+ */
 LensPosition AxisP3364LveDriver::getPosition() {
 
     LensPosition pos;
@@ -194,10 +199,12 @@ LensPosition AxisP3364LveDriver::getPosition() {
     return pos;
 }
 
-/*******************************************************************************
-                        EXTRACCION DE VALORES EN CADENA
- ******************************************************************************/
-
+/**
+ * Obtiene el valor de Zoom del String que devuelve la camara cuando se realiza
+ * una lectura del estado de sus variables
+ * @param[in] cadena String con la respuesta integra de la camara
+ * @return Valor obtenido tras la busqueda de zoom en la cadena
+ */
 float AxisP3364LveDriver::extractZoom(char cadena[256]) {
     string resp = cadena;
     int index = resp.find("zoom=");
@@ -212,6 +219,12 @@ float AxisP3364LveDriver::extractZoom(char cadena[256]) {
     return (float) atof(value.c_str());
 }
 
+/**
+ * Obtiene el valor de Tilt del String que devuelve la camara cuando se realiza
+ * una lectura del estado de sus variables
+ * @param[in] cadena String con la respuesta integra de la camara
+ * @return Valor obtenido tras la busqueda de tilt en la cadena
+ */
 float AxisP3364LveDriver::extractTilt(char cadena[256]) {
     string resp = cadena;
     int index = resp.find("tilt=");
@@ -226,6 +239,12 @@ float AxisP3364LveDriver::extractTilt(char cadena[256]) {
     return (float) atof(value.c_str());
 }
 
+/**
+ * Obtiene el valor de Pan del String que devuelve la camara cuando se realiza
+ * una lectura del estado de sus variables
+ * @param[in] cadena String con la respuesta integra de la camara
+ * @return Valor obtenido tras la busqueda de pan en la cadena
+ */
 float AxisP3364LveDriver::extractPan(char cadena[256]) {
     string resp = cadena;
     int index = resp.find("pan=");
@@ -240,30 +259,56 @@ float AxisP3364LveDriver::extractPan(char cadena[256]) {
     return (float) atof(value.c_str());
 }
 
-/*******************************************************************************
-                        GETTER Y SETTER NECESARIOS
- ******************************************************************************/
-
+/**
+ * Consultor del atributo "pan" de la clase que registra el valor de Pan 
+ * de la ultima lectura 
+ * @return Atributo "pan" de la clase
+ */
 float AxisP3364LveDriver::getPan(){
     return pan;
 }
 
+/**
+ * Consultor del atributo "tilt" de la clase que registra el valor de Tilt
+ * de la ultima lectura
+ * @return Atributo "tilt" de la clase
+ */
 float AxisP3364LveDriver::getTilt(){
     return tilt;
 }
 
+/**
+ * Consultor del atributo "zoom" de la clase que regustra el valor de Zoom
+ * de la ultima lectura
+ * @return Atributo "zoom" de la clase
+ */
 float AxisP3364LveDriver::getZoom(){
     return zoom;
 }
 
+/**
+ * Modificador del atributo "pan" de clase utilizado tras una lectura del estado
+ * de la camara
+ * @param[in] newPan Nuevo valor del atributo "pan"
+ */
 void AxisP3364LveDriver::setPan(float newPan){
     pan = newPan * 50; // *5000/100 Conversiona  formato camara
 }
 
+/**
+ * Modificador del atributo "tilt" de clase utilizado tras una lectura del 
+ * estado de la camara
+ * @param[in] newPan Nuevo valor del atributo "tilt"
+ */
 void AxisP3364LveDriver::setTilt(float newTilt){
     tilt = newTilt * 50; // *5000/100 Conversiona  formato camara
 }
 
+/**
+ * Modificador del atributo "zoom" de clase utilizado tras una lectura del 
+ * estado de la camara
+ * @param[in] newPan Nuevo valor del atributo "zoom"
+ */
 void AxisP3364LveDriver::setZoom(float newZoom){
     zoom = newZoom * 50; // *5000/100 Conversiona  formato camara
 }

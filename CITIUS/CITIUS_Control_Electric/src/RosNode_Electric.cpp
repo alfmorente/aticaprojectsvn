@@ -6,7 +6,6 @@
  * @date: 2013, 2014
  */
 
-
 #include "RosNode_Electric.h"
 
 /**
