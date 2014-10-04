@@ -9,7 +9,7 @@
 #include "RosNode_Driving.h"
 
 /**
- * Metodo principal del nodo. Inicializa modulos ROS y JAUS y lanza el
+ * Metodo principal del nodo. Inicializa modulos ROS y lanza el
  * intercambio y la recepcion de mensajes con el vehiculo
  * @param[in] argc Numero de argumentos
  * @param[in] argv Vector de argumentos

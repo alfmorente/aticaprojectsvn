@@ -1,23 +1,15 @@
-/* 
- * File:   AxisP3364LveDriver.h
- * Author: atica
- *
- * Created on 30 de julio de 2014, 10:41
+
+/** 
+ * @file  AxisP3364LveDriver.h
+ * @brief Declara el tipo de la clase "AxisP3364LveDriver"
+ * - La clase implementa la comunicacion con el dispositivo AXIS P3364-LVe que 
+ * se utiliza como camara de apoyo a la conduccion.
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef AXISP3364LVEDRIVER_H
 #define	AXISP3364LVEDRIVER_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* AXISP3364LVEDRIVER_H */
 
 #include <cstdlib>
 #include <string.h>
@@ -42,50 +34,51 @@ extern "C" {
 #define ORDER_PAN 1
 #define ORDER_TILT 2
 
-typedef struct{
-    bool state;
-    float zoom;
-    float pan;
-    float tilt;
-}LensPosition;
+typedef struct {
+  bool state;
+  float zoom;
+  float pan;
+  float tilt;
+} LensPosition;
 
 using namespace std;
 
-class AxisP3364LveDriver{
-    
+#endif	/* AXISP3364LVEDRIVER_H */
+
+class AxisP3364LveDriver {
 public:
-    
-    AxisP3364LveDriver();
-    ~AxisP3364LveDriver();
-    
-    // Conexion con la camara (comprobacion de disponibilidad)
-    bool checkConnection();
-    
-    // Envio / Requerimiento de informacion
-    bool sentSetToDevice(short order, float value);
-    LensPosition getPosition();
-    
-    // Getter y setter necesarios
-    float getPan();
-    float getTilt();
-    float getZoom();
-    void setPan(float);
-    void setTilt(float);
-    void setZoom(float);
+
+  AxisP3364LveDriver();
+  ~AxisP3364LveDriver();
+
+  // Conexion con la camara (comprobacion de disponibilidad)
+  bool checkConnection();
+
+  // Envio / Requerimiento de informacion
+  bool sentSetToDevice(short order, float value);
+  LensPosition getPosition();
+
+  // Getter y setter necesarios
+  float getPan();
+  float getTilt();
+  float getZoom();
+  void setPan(float);
+  void setTilt(float);
+  void setZoom(float);
 
 private:
 
-    int socketDescriptor;
-    struct hostent *he;
-    struct sockaddr_in server;
-    
-    // Propiedades de control
-    float pan;
-    float tilt;
-    float zoom;
+  int socketDescriptor;
+  struct hostent *he;
+  struct sockaddr_in server;
 
-    float extractZoom(char[]);
-    float extractTilt(char[]);
-    float extractPan(char[]);
-    
+  // Propiedades de control
+  float pan;
+  float tilt;
+  float zoom;
+
+  float extractZoom(char[]);
+  float extractTilt(char[]);
+  float extractPan(char[]);
+
 };

@@ -1,17 +1,19 @@
-/* 
- * File:   main.cpp
- * Author: Carlos Amores
- *
- * Created on 15 de junio de 2014, 16:54
+
+/** 
+ * @file  main.cpp
+ * @brief Funcion principal del nodo RearCamera del subsistema de control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
-#include <cstdlib>
 #include "RosNode_RearCamera.h"
 
-using namespace std;
-
-/*
- * 
+/**
+ * Metodo principal del nodo. Inicializa modulos ROS y lanza el
+ * intercambio y la recepcion de mensajes con el vehiculo
+ * @param[in] argc Numero de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */
 int main(int argc, char** argv) {
     
