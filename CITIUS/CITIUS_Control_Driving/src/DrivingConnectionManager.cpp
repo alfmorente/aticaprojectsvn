@@ -88,7 +88,7 @@ bool DrivingConnectionManager::connectVehicle() {
 
 /**
  * Realiza la desconexion del vehiculo mediante la liberacion del socket de
- * comunicacion con el vehiculo
+ * comunicacion
  * @return Booleano que indica si la desconexion se ha realizado con exito
  */
 bool DrivingConnectionManager::disconnectVehicle() {

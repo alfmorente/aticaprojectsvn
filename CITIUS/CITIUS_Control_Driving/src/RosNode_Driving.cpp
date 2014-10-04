@@ -9,7 +9,7 @@
 #include "RosNode_Driving.h"
 
 /**
- * Constructor de la clase. Inicia la maquina de estados del nodo y creo la 
+ * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
  * instancia del driver de conexion con el vehiculo
  */
 RosNode_Driving::RosNode_Driving() {
