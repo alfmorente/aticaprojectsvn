@@ -242,7 +242,7 @@ int DrivingConnectionManager::getSocketDescriptor(){
 
 /**
  * Consultor del atributo "vehicleInfo" de la clase
- * @param full Indica si se devuelve el atributo completo (señales de actuadores
+ * @param[in] full Indica si se devuelve el atributo completo (señales de actuadores
  * y señalizacion) o parcial (actuadores unicamente)
  * @return Atributo "vehicleInfo" de la clase
  */
@@ -260,8 +260,8 @@ DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
 /**
  * Modificador del atributo "vehicleInfo" de la clase con la informacion de un
  * dispositivo (actuador o señalizacion) concreto
- * @param id_device Identificador del dispositivo a modificar
- * @param value Valor de lectura del dispositivo a modificar
+ * @param[in] id_device Identificador del dispositivo a modificar
+ * @param[in] value Valor de lectura del dispositivo a modificar
  */
 void DrivingConnectionManager::setVehicleInfo(short id_device, short value){
     switch(id_device){
@@ -325,7 +325,7 @@ short DrivingConnectionManager::getCountCriticalMessages(){
  * Modificador del atributo "countMsg" de la clase utilizado para llevar el
  * conteo del los mensajes criticos (mecanismo de integridad). Contempla que se
  * lleve a cabo segun un contador incremental con intervalo 1..1024
- * @param cont Nuevo valor para el atributo "countMsg"
+ * @param[in] cont Nuevo valor para el atributo "countMsg"
  */
 void DrivingConnectionManager::setCountCriticalMessages(short cont) {
     countMsg = cont;
@@ -354,9 +354,9 @@ short DrivingConnectionManager::getSteeringAlarms(){
 
 /**
  * Modificador de los atributos "driveAlarms" y "steeringAlarms" de la clase
- * @param element Indica si las alarmas leidas corresponden a las de conduccion
+ * @param[in] element Indica si las alarmas leidas corresponden a las de conduccion
  * o las de direccion
- * @param value Nuevo valor del vector de alarmas a modificar en el atributo
+ * @param[in] value Nuevo valor del vector de alarmas a modificar en el atributo
  * correspondiente
  */
 void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
@@ -370,7 +370,7 @@ void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
 /**
  * Consulta si un elemento es critico y por tanto debe ser contemplado para
  * llevar a cabo el mecanismo de integridad
- * @param element Elemento de consulta
+ * @param[in] element Elemento de consulta
  * @return Booleano que indica si el elemento es critico o  no
  */
 bool DrivingConnectionManager::isCriticalInstruction(short element) {
@@ -396,7 +396,7 @@ bool DrivingConnectionManager::isCriticalInstruction(short element) {
  * Una vez que un mensaje es considerado critico, se utiliza este metodo para
  * encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en caso
  * de obtener un NACK
- * @param frame Trama a incluir en la cola de mensajes criticos
+ * @param[in] frame Trama a incluir en la cola de mensajes criticos
  */
 void DrivingConnectionManager::addToQueue(FrameDriving frame){
     messageQueue.push_back(frame);
@@ -410,8 +410,8 @@ void DrivingConnectionManager::addToQueue(FrameDriving frame){
  * retransmiten todos los mensajes de la cola cuyo campo "id_instruccion" sea
  * menor o igual que el que se incluye en la trama del propio ACK y se elimina
  * el resto
- * @param ack Indica si se ha recibido un ACK (true) o un NACK (false) 
- * @param id_instruction Indica el campo "id_instruccion" (cuenta) del mensaje
+ * @param[in] ack Indica si se ha recibido un ACK (true) o un NACK (false) 
+ * @param[in] id_instruction Indica el campo "id_instruccion" (cuenta) del mensaje
  * recibido del vehiculo
  * @return Estructura con el numero de mensajes a retransmitir (en caso de
  * haberlos) y una lista de dichos mensajes.
