@@ -1,24 +1,16 @@
-/* 
- * File:   DrivingConnectionManager.h
- * Author: Carlos Amores
- *
- * Created on 15 de junio de 2014, 16:10
+
+/** 
+ * @file  DrivingConnectionManager.h
+ * @brief Declara el tipo de la clase "DrivingConnectionManager"
+ * - La clase implementa la comunicacion con el modulo de conduccion del 
+ * subsistema payload de conduccion.
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef DRIVINGCONNECTIONMANAGER_H
 #define	DRIVINGCONNECTIONMANAGER_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* DrivingConnectionManager */
 #include <vector>
 #include "ros/ros.h"
 #include "constant.h"
@@ -32,6 +24,9 @@ extern "C" {
 #include <fcntl.h>
 #include <arpa/inet.h>
 
+#endif	/* DrivingConnectionManager */
+
+
 using namespace std;
 
 class DrivingConnectionManager{
@@ -39,20 +34,21 @@ private:
     
     // Socket
     int socketDescriptor;
-    
     // Contador para la cola de mensajes (Integridad)
     short countMsg;
-    
     // Manejador de la cola de mensajes (Integridad)
     vector<FrameDriving> messageQueue;
-    
     // Informacion actualizable del vehiculo
     DrivingInfo vehicleInfo;
-    
     // Alarmas de conduccion
     short driveAlarms;
     // Alarmas de direccion
     short steeringAlarms;
+    // Modificadores privados
+    void setVehicleInfo(short id_device, short value);
+    short getDriveAlarms();
+    short getSteeringAlarms();
+    
     
 public:
     // Constructor
@@ -68,13 +64,10 @@ public:
     bool checkForVehicleMessages();
     
     // Getter y setter necesarios
+    DrivingInfo getVehicleInfo(bool full);
     int getSocketDescriptor();
     short getCountCriticalMessages();
     void setCountCriticalMessages(short cont);
-    DrivingInfo getVehicleInfo(bool full);
-    void setVehicleInfo(short id_device, short value);
-    short getDriveAlarms();
-    short getSteeringAlarms();
     
     // Metodos auxiliares
     bool isCriticalInstruction(short element);

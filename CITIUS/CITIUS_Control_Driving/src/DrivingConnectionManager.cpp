@@ -1,11 +1,14 @@
+
+/** 
+ * @file  DrivingConnectionManager.cpp
+ * @brief Implementacion de la clase "DrivingConnectionManager"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 #include "DrivingConnectionManager.h"
 
-
-
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/** Constructor de la clase*/
 DrivingConnectionManager::DrivingConnectionManager() {
     socketDescriptor = -1;
     countMsg = 1;
@@ -28,12 +31,11 @@ DrivingConnectionManager::DrivingConnectionManager() {
     steeringAlarms = 0x0000;
 }
 
-/*******************************************************************************
- * MANEJO DEL VEHICULO
- ******************************************************************************/
-
-// Conexión con dispositivo
-
+/**
+ * Realiza la inicializacion y conexion del socket de comunicacion con el 
+ * vehiculo
+ * @return Booleano que indica si la conexion ha sido posible
+ */
 bool DrivingConnectionManager::connectVehicle() {
     // Creacion y apertura del socket
     socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
@@ -84,8 +86,11 @@ bool DrivingConnectionManager::connectVehicle() {
     return true;
 }
 
-// Desconexión con dispositivo
-
+/**
+ * Realiza la desconexion del vehiculo mediante la liberacion del socket de
+ * comunicacion con el vehiculo
+ * @return Booleano que indica si la desconexion se ha realizado con exito
+ */
 bool DrivingConnectionManager::disconnectVehicle() {
     // Cierre del socket
     shutdown(socketDescriptor, 2);
@@ -94,7 +99,11 @@ bool DrivingConnectionManager::disconnectVehicle() {
     return true;
 }
 
-// Mandar comando a vehiculo
+/**
+ * Envia la informacion de una trama al vehiculo haciendo uso del socket de
+ * comunicacion
+ * @param[in] frame Trama a enviar via socket al vehiculo 
+ */
 void DrivingConnectionManager::sendToVehicle(FrameDriving frame){
     
     // Buffer de envio
@@ -111,10 +120,13 @@ void DrivingConnectionManager::sendToVehicle(FrameDriving frame){
     usleep(1000);  
 }
 
-// Solicitar informacion basica de vehiculo
-
+/**
+ * Envia una serie de tramas de tipo GET solicitando la informacion del 
+ * vehiculo
+ * @param[in] full Indica si la solicitud a realizar es completa (true - actuadores y
+ * señalizacion) o parcial (false - actuadores unicamente)
+ */
 void DrivingConnectionManager::reqVehicleInfo(bool full) {
-
     FrameDriving frame;
 
     // Comun 
@@ -170,11 +182,15 @@ void DrivingConnectionManager::reqVehicleInfo(bool full) {
         sendToVehicle(frame);
 
     }
-
 }
 
+/**
+ * Realiza una lectura por el socket de comunicacion con el vehiculo y obtiene 
+ * una trama en caso de que el propio vehiculo la haya enviado. La clasifica 
+ * segun el elemento al que hace referencia y procede a su tratamiento
+ * @return Booleano que indica si se ha llevado a cabo una lectura via socket
+ */
 bool DrivingConnectionManager::checkForVehicleMessages() {
-    
     char bufData[8];
     
     if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
@@ -196,9 +212,7 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
         } else if (fdr.instruction == NACK) {
             
             printf("Recibido NACK\n");
-            
             RtxStruct rtxList = informResponse(false, fdr.id_instruccion);
-            
             for(int i = 0; i < rtxList.numOfMsgs; i++){
                 sendToVehicle((FrameDriving)rtxList.msgs.at(i));
             }
@@ -206,36 +220,32 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
         } else if (fdr.instruction == INFO) {
                         
             if(fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS){
-            
                 setAlarmsInfo(fdr.element, fdr.value);
-                
             }else{ // INFO corriente
-                
                 setVehicleInfo(fdr.element,fdr.value);
-                
-            }
-            // TODO ALARMAS
-                        
+            }   
+            
         }
-        
         return true;
     }else{
         return false;
     }
 }
 
-/*******************************************************************************
- * GETTER Y SETTER NECESARIOS
- ******************************************************************************/
-
-// Get del descriptor de socket
-
+/**
+ * Consultor del atributo "socketDescriptor" de la clase 
+ * @return Atributo "socketDescriptor" de la clase
+ */
 int DrivingConnectionManager::getSocketDescriptor(){
     return socketDescriptor;
 }
 
-// Get de la ultima informacion recibida del vehiculo
-
+/**
+ * Consultor del atributo "vehicleInfo" de la clase
+ * @param full Indica si se devuelve el atributo completo (señales de actuadores
+ * y señalizacion) o parcial (actuadores unicamente)
+ * @return Atributo "vehicleInfo" de la clase
+ */
 DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
     DrivingInfo ret = vehicleInfo;
     
@@ -247,8 +257,12 @@ DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
     return ret;
 }
 
-// Informacion de vehiculo
-
+/**
+ * Modificador del atributo "vehicleInfo" de la clase con la informacion de un
+ * dispositivo (actuador o señalizacion) concreto
+ * @param id_device Identificador del dispositivo a modificar
+ * @param value Valor de lectura del dispositivo a modificar
+ */
 void DrivingConnectionManager::setVehicleInfo(short id_device, short value){
     switch(id_device){
         case THROTTLE:
@@ -298,12 +312,21 @@ void DrivingConnectionManager::setVehicleInfo(short id_device, short value){
     }
 }
 
-// Contador de mensajes criticos
-
+/**
+ * Consultor del atributo "countMsg" de la clase utilizado para llevar el 
+ * conteo de los mensajes criticos (mecanismo de integridad)
+ * @return Atributo "countMsg" de la clase
+ */
 short DrivingConnectionManager::getCountCriticalMessages(){
     return countMsg;
 }
 
+/**
+ * Modificador del atributo "countMsg" de la clase utilizado para llevar el
+ * conteo del los mensajes criticos (mecanismo de integridad). Contempla que se
+ * lleve a cabo segun un contador incremental con intervalo 1..1024
+ * @param cont Nuevo valor para el atributo "countMsg"
+ */
 void DrivingConnectionManager::setCountCriticalMessages(short cont) {
     countMsg = cont;
     // Contador: 1 .. 1024
@@ -311,16 +334,31 @@ void DrivingConnectionManager::setCountCriticalMessages(short cont) {
         countMsg = 1;
 }
 
-// Alarmas
-
+/**
+ * Consultor del atributo "driveAlarms" de la clase que se actualiza con la 
+ * lectura de las alarmas de conduccion del vehiculo
+ * @return Atributo "driveAlarms" de la clase
+ */
 short DrivingConnectionManager::getDriveAlarms(){
     return driveAlarms;
 }
 
+/**
+ * Consultor del atributo "steeringAlarms" de la clase que se actualiza con la
+ * lectura de las alarmas de direccion del vehiculo
+ * @return Atributo "steeringAlarms" de la clase
+ */
 short DrivingConnectionManager::getSteeringAlarms(){
     return steeringAlarms;
 }
 
+/**
+ * Modificador de los atributos "driveAlarms" y "steeringAlarms" de la clase
+ * @param element Indica si las alarmas leidas corresponden a las de conduccion
+ * o las de direccion
+ * @param value Nuevo valor del vector de alarmas a modificar en el atributo
+ * correspondiente
+ */
 void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
     if(element == DRIVE_ALARMS)
         driveAlarms = value;
@@ -329,10 +367,12 @@ void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
 }
 
 
-/*******************************************************************************
- * METODOS PROPIOS
- *******************************************************************************/
-
+/**
+ * Consulta si un elemento es critico y por tanto debe ser contemplado para
+ * llevar a cabo el mecanismo de integridad
+ * @param element Elemento de consulta
+ * @return Booleano que indica si el elemento es critico o  no
+ */
 bool DrivingConnectionManager::isCriticalInstruction(short element) {
     if (element == RESET
             || element == GEAR
@@ -352,14 +392,30 @@ bool DrivingConnectionManager::isCriticalInstruction(short element) {
     }
 }
 
-/*******************************************************************************
- * MANEJO DE LA COLA DE MENSAJES
- *******************************************************************************/
-
+/**
+ * Una vez que un mensaje es considerado critico, se utiliza este metodo para
+ * encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en caso
+ * de obtener un NACK
+ * @param frame Trama a incluir en la cola de mensajes criticos
+ */
 void DrivingConnectionManager::addToQueue(FrameDriving frame){
     messageQueue.push_back(frame);
 }
 
+/**
+ * Tratamiento de la cola de mensajes tras la recepcion de un mensaje de 
+ * confirmacion (ACK) o negacion (NACK). En el caso de recibir un ACK, se 
+ * desencolan todos los mensajes cuyo campo "id_instruccion" es menor al que
+ * se incluye en la trama del propio ACK. En el caso de recibir un NACK, se 
+ * retransmiten todos los mensajes de la cola cuyo campo "id_instruccion" sea
+ * menor o igual que el que se incluye en la trama del propio ACK y se elimina
+ * el resto
+ * @param ack Indica si se ha recibido un ACK (true) o un NACK (false) 
+ * @param id_instruction Indica el campo "id_instruccion" (cuenta) del mensaje
+ * recibido del vehiculo
+ * @return Estructura con el numero de mensajes a retransmitir (en caso de
+ * haberlos) y una lista de dichos mensajes.
+ */
 RtxStruct DrivingConnectionManager::informResponse(bool ack, short id_instruction){
     
     RtxStruct ret;
@@ -371,29 +427,22 @@ RtxStruct DrivingConnectionManager::informResponse(bool ack, short id_instructio
     if(ack){ // ACK
         
         if(id_instruction == (*it).id_instruccion){ // Primer elemento y requerido coinciden
-            
             // Se elimina el primer elemento
             messageQueue.erase(it);
-            
         }else if(id_instruction > (*it).id_instruccion){ // Confirmacion de varios elementos
-            
             while(id_instruction >= (*it).id_instruccion){
-                
                 messageQueue.erase(it);
-                
             }
         }
                 
     } else { // NACK
            
         while(it != messageQueue.end()){
-            
             // Se incluyen en la respuesta todos los  mensajes no confirmados
             // para retransmitir
             ret.numOfMsgs++;
             ret.msgs.push_back((*it));
             it++;
-            
         }
         
     }
