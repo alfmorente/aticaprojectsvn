@@ -305,7 +305,7 @@ SwitcherStruct ElectricConnectionManager::getSwitcherStruct(){
  * Modificador del atributo "swPosition" de la clase que se actualiza cuando se
  * detecta un cambio de posicion del conmutador (switcher) local / teleoperado
  * del vehiculo o cuando se ha llevado a cabo el tratamiento tras su deteccion
- * @param flag Nueva posicion del estado de la estructura de tratamiento
+ * @param[in] flag Nueva posicion del estado de la estructura de tratamiento
  */
 void ElectricConnectionManager::setSwitcherStruct(bool flag){
     swPosition.flag = flag;
