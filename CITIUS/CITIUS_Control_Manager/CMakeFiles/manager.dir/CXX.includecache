@@ -10,6 +10,10 @@
 Manager.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.h
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/main.cpp
+Manager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.h
+
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
 -
@@ -635,6 +639,8 @@ CITIUS_Control_Manager/msg_switcher.h
 include/CITIUS_Control_Manager/msg_switcher.h
 constant.h
 include/constant.h
+cstdlib
+-
 
 include/constant.h
 

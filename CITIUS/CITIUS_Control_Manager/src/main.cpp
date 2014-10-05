@@ -1,17 +1,19 @@
-/* 
- * File:   main.cpp
- * Author: atica
- *
- * Created on 17 de julio de 2014, 12:05
+
+/** 
+ * @file  main.cpp
+ * @brief Funcion principal del nodo Manager del subsistema de control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
-#include <cstdlib>
 #include "Manager.h"
 
-using namespace std;
-
-/*
- * 
+/**
+ * Metodo principal del nodo. Inicializa la maquina de estados y la pone en 
+ * marcha gestionando el estado del resto de nodos del vehiculo
+ * @param[in] argc Numero de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */
 int main(int argc, char** argv) {
     

@@ -1,8 +1,12 @@
-/* 
- * File:   Manager.h
- * Author: atica
- *
- * Created on 17 de julio de 2014, 11:47
+
+/** 
+ * @file  Manager.h
+ * @brief Declara el tipo de la clase "Manager"
+ * - La clase implementa la maquina de estados del vehiculo y gestiona las 
+ * peticiones de transicion que puedan producirse. Gestiona la puesta en marcha
+ * y final del estado de los nodos ROS secundarios
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef MANAGER_H
@@ -13,6 +17,11 @@
 #include "CITIUS_Control_Manager/srv_vehicleStatus.h"
 #include "CITIUS_Control_Manager/msg_switcher.h"
 #include "constant.h"
+#include <cstdlib>
+
+using namespace std;
+
+#endif	/* MANAGER_H */
 
 class Manager {
 public:
@@ -62,5 +71,5 @@ private:
     void fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher);
 };
 
-#endif	/* MANAGER_H */
+
 

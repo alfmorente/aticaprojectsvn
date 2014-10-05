@@ -1,25 +1,14 @@
-/* 
- * File:   constant.h
- * Author: Carlos Amores
- *
- * Created on 4 de junio de 2014, 17:27
+
+/** 
+ * @file  constant.h
+ * @brief Declara las constantes necesarias para el manejo de la maquina de
+ * estados (modos de operacion) del subsistema de control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef CONSTANT_H
 #define	CONSTANT_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* CONSTANT_H */
 
 /*******************************************************************************
  *                              ESTADOS DEL NODO
@@ -53,3 +42,6 @@ extern "C" {
 *******************************************************************************/
 
 #define MAX_ATTEMPS 5
+
+#endif	/* CONSTANT_H */
+
