@@ -126,7 +126,7 @@ void RosNode_Electric::publishElectricInfo(ElectricInfo info){
 /**
  * Publica la informacion de un cambio en la posicion del conmutador local /
  * teleoperado que recibe como parametro en el topic correspondiente
- * @param position Nueva posicion leida del conmutador local / teleoperado
+ * @param[in] position Nueva posicion leida del conmutador local / teleoperado
  */
 void RosNode_Electric::publishSwitcherInfo(short position){
     
@@ -139,7 +139,7 @@ void RosNode_Electric::publishSwitcherInfo(short position){
 /**
  * Publica una serie de comandos de activacion sobre diversos actuadores ante 
  * una lectura de cambio en el conmutador local / teleoperado
- * @param on Nueva posicion del conmutador local / teleoperado
+ * @param[in] on Nueva posicion del conmutador local / teleoperado
  */
 void RosNode_Electric::publishSetupCommands(bool on){
     
