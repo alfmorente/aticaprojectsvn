@@ -1,16 +1,16 @@
-/* 
- * File:   Manager.cpp
- * Author: atica
- * 
- * Created on 17 de julio de 2014, 11:47
+
+/** 
+ * @file  Manager.cpp
+ * @brief Implementacion de la clase "Manager"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #include "Manager.h"
 
-/*******************************************************************************
-                        CONSTRUCTOR                                             
- ******************************************************************************/
-
+/**
+ * Constructor de la clase. Inicializa los flags de estados de nodos secundarios
+ */
 Manager::Manager() {
     
     positionOrientationOK = false;
@@ -25,17 +25,15 @@ Manager::Manager() {
     
 }
 
-/*******************************************************************************
-                        DESTRUCTOR                                             
- ******************************************************************************/
-
+/**
+ * Destructor de la clase
+ */
 Manager::~Manager() {
 }
 
-/*******************************************************************************
-                        INICIO ROS                                             
- ******************************************************************************/
-
+/**
+ * Inicializador de artefactos ROS de la clase
+ */
 void Manager::initROS(){
     
     ros::NodeHandle nh;
@@ -55,10 +53,14 @@ void Manager::initROS(){
 
 }
 
-/*******************************************************************************
-             MAQUINA DE ESTADOS - SERVICIO vehicleStatus                                           
- ******************************************************************************/
-
+/**
+ * Rutina del servidor de estados del vehiculo. Recibe las peticiones de 
+ * transicion y las ejecuta/deniega segun la logica establecida
+ * @param[in] rq Parametros de requerimiento
+ * @param[in] rsp Parametros de respuesta
+ * @return Booleano que indica si se ha realizado el correcto tratamiento de
+ * la peticion de servicio
+ */
 bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::Request &rq, CITIUS_Control_Manager::srv_vehicleStatus::Response &rsp){
 
     // Manejador ROS
@@ -85,64 +87,40 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
             service.request.status= NODESTATUS_OK;
             
             // Activacion Position/Orientation
-            
             while(!poNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo Position/Orientation...");
                 numOfAttemps++;
-                
             }
             
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
-                    
                     ROS_INFO("[Control] Manager - Nodo Position/Orientation no pudo arrancar");
-                
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo Position/Orientation arrancado correctamente");
                     positionOrientationOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo Position/Orientation no pudo arrancar. Cumplido numero maximo de reintentos");
-           
             }
             
             numOfAttemps = 0;
             
             // Activacion FrontCamera
-            
             while(!fcNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo FrontCamera...");
                 numOfAttemps++;
-                
             }
-            
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
                     ROS_INFO("[Control] Manager - Nodo FrontCamera no pudo arrancar");
-                    
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo FrontCamera arrancado correctamente");
                     frontCameraOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo FrontCamera no pudo arrancar. Cumplido numero maximo de reintentos");
-            
             }
             
             numOfAttemps = 0;
@@ -180,209 +158,136 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
             // Activacion Driving
             
             while(!drNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo Driving...");
                 numOfAttemps++;
-                
             }
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
                     ROS_INFO("[Control] Manager - Nodo Driving no pudo arrancar");
-                    
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo Driving arrancado correctamente");
                     drivingOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo Driving no pudo arrancar. Cumplido numero maximo de reintentos");
-            
             }
             
             numOfAttemps = 0;
             
             // Activacion IR Camera
-            
             while(!irNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo IR Camera...");
                 numOfAttemps++;
-                
             }
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
                     ROS_INFO("[Control] Manager - Nodo IR Camera no pudo arrancar");
-                    
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo IR Camera arrancado correctamente");
                     irCameraOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo IR Camera no pudo arrancar. Cumplido numero maximo de reintentos");
-            
             }
             
             numOfAttemps = 0;
             
             // Activacion LRF (Telemetro)
-            
             while(!lrfNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo LRF...");
                 numOfAttemps++;
-                
             }
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
                     ROS_INFO("[Control] Manager - Nodo LRF no pudo arrancar");
-                    
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo LRF arrancado correctamente");
                     lrfOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo LRF no pudo arrancar. Cumplido numero maximo de reintentos");
-            
             }
             
             numOfAttemps = 0;
             
             // Activacion TV Camera
-            
             while(!tvNosdeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo Camera TV...");
                 numOfAttemps++;
-                
             }
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
                     ROS_INFO("[Control] Manager - Nodo Camera TV no pudo arrancar");
-                    
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo Camera TV arrancado correctamente");
                     tvCameraOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo Camera TV no pudo arrancar. Cumplido numero maximo de reintentos");
-            
             }
             
             numOfAttemps = 0;
             
             // Activacion Positioner
-            
             while(!ptNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
                 ROS_INFO("[Control] Manager - Reintentando conexion con nodo Positioner...");
                 numOfAttemps++;
-                
             }
             if (numOfAttemps < MAX_ATTEMPS) {
-                
                 if (!service.response.confirmation) {
-                    
                     // Position/Orientation no ha sido activado
                     ROS_INFO("[Control] Manager - Nodo Positioner no pudo arrancar");
-                    
                 } else {
-                    
                     ROS_INFO("[Control] Manager - Nodo Positioner arrancado correctamente");
                     positionerOK = true;
-                    
                 }
-                
             }else{
-                
                 ROS_INFO("[Control] Manager - Nodo Positioner no pudo arrancar. Cumplido numero maximo de reintentos");
-            
             }
 
-            
             // Comprobacion de errores
             // No se ha conectado con Driving. Se finaliza la ejecucion tras informar
             if(!drivingOK){
-                
                 ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehiculo. Finalizado");
                 nh.setParam("vehicleStatus",OPERATION_MODE_APAGANDO);
                 rsp.confirmation = false;
-                
             } else {
                 if(!positionOrientationOK || !frontCameraOK || !rearCameraOK || !irCameraOK || !lrfOK || !tvCameraOK || !positionerOK){
-                    
                     ROS_INFO("[Control] Manager - Algun dispositivo fallo pero se continua con la ejecucion");              
-                
                 }else{
-                    
                     ROS_INFO("[Control] Manager - Todos los nodos arrancaron correctamente");
-               
                 }
-                
                 if (rq.posSwitcher == SWITCHER_LOCAL) {
-                    
                     ROS_INFO("[Control] Manager - Modo de operacion LOCAL activado");
                     nh.setParam("vehicleStatus", OPERATION_MODE_LOCAL);
-                    
                 } else if (rq.posSwitcher == SWITCHER_TELECONTROL) {
-                    
                     ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
                     nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
                 }
-                
                 rsp.confirmation = true;
             }
-            
             break;
             
         case OPERATION_MODE_LOCAL:
             
             // Se atiende siempre a traves del suscriptor al conmutador msg_switcher
-            
             ROS_INFO("[Control] Manager - Peticion de entrada en modo LOCAL denegada");
             rsp.confirmation = false;
-            
             break;
             
         case OPERATION_MODE_CONDUCCION:
             
             // Se atiende siempre que el estado actual sea OBSERVACION
             // La otra transicion a conduccion se recibe mediante un topic en la posicion local/teleoperado
-            
             if(currentStatus == OPERATION_MODE_OBSERVACION){
-                
                 nh.setParam("vehicleStatus",OPERATION_MODE_CONDUCCION);
                 ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
                 rsp.confirmation = true;
-            
             }else{
-                
                 rsp.confirmation = false;
                 ROS_INFO("[Control] Manager - Peticion de entrada en modo CONDUCCION denegada");
             
@@ -393,27 +298,20 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         case OPERATION_MODE_OBSERVACION:
             
             // Se atiende siempre que el estado actual sea CONDUCCION
-            
             if(currentStatus == OPERATION_MODE_CONDUCCION){
-                
                 nh.setParam("vehicleStatus",OPERATION_MODE_OBSERVACION);
                 rsp.confirmation = true;
                 ROS_INFO("[Control] Manager - Modo de operacion OBSERVACION activado");
-                
             }else{
-                
                 rsp.confirmation = false;
                 ROS_INFO("[Control] Manager - Peticion de entrada en modo OBSERVACION denegada");
-            
             } 
-            
             break;
             
         case OPERATION_MODE_APAGANDO:
             
             // Apagado ordenado del sistema. Se mandan a arrancar el resto de los modulos
             // Position/Orientation - FCamera - RCamera - Driving
-            
             service.request.status= NODESTATUS_OFF;
             
             // Apagado Position/Orientation
@@ -516,10 +414,12 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     return true;
 }
 
-/*******************************************************************************
-                        MAQUINA DE ESTADOS - switcher                                             
- ******************************************************************************/
-
+/**
+ * Receptor de mensajes ROS ante cambios en la posicion del conmutador local / 
+ * teleoperado. Cambios en el conmutador acarrean cambio de estado en el modo
+ * de operacion
+ * @param[in] msg Mensaje ROS con la nueva posicion del conmutador
+ */
 void Manager::fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher msg){
         
     // Solo tiene efecto en estado CONDUCCION/LOCAL/OBSERVACION
@@ -529,21 +429,15 @@ void Manager::fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher msg){
     nh.getParam("vehicleStatus", status);
     
     if (status == OPERATION_MODE_CONDUCCION || status == OPERATION_MODE_LOCAL || status == OPERATION_MODE_OBSERVACION) {
-        
         if (msg.switcher == SWITCHER_LOCAL) {
-            
             ROS_INFO("[Control] Manager - Modo de operacion LOCAL activado");
             nh.setParam("vehicleStatus", OPERATION_MODE_LOCAL);
             currentSwitcher = SWITCHER_LOCAL;
-            
         } else if (msg.switcher == SWITCHER_TELECONTROL) {
-            
             ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
             nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
             currentSwitcher = SWITCHER_TELECONTROL;
-            
         }
-        
     }
 
 }
