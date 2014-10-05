@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNodePositionOrientation.cpp
-ros/node_handle.h
--
 RosNose_PositionOrientation.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
 
@@ -29,10 +27,6 @@ crc16calc.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/crc16calc.h
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/main.cpp
-cstdlib
--
-ros/ros.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/ros/ros.h
 RosNose_PositionOrientation.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
 
@@ -657,33 +651,15 @@ CITIUS_Control_PositionOrientation/msg_posOriInfo.h
 include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
 constant.h
 include/constant.h
-=======
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
->>>>>>> .r368
 XSensMTi700Driver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
--
 include/XSensMTi700Driver.h
-iostream
+TraxAHRSModuleDriver.h
+include/TraxAHRSModuleDriver.h
+cstdlib
 -
-stdio.h
--
-termios.h
--
-unistd.h
--
-fcntl.h
--
-stdlib.h
--
-string.h
--
-complex
--
-pthread.h
--
-vector
--
+ros/ros.h
+include/ros/ros.h
+ros/node_handle.h
 -
 
 include/TraxAHRSModuleDriver.h
@@ -733,8 +709,6 @@ vector
 -
 
 include/constant.h
-ctime
--
 
 include/conversionTypes.h
 stdlib.h

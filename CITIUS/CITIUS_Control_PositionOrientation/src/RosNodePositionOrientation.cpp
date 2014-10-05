@@ -1,51 +1,47 @@
-/* 
- * File:   RosNodePositionOrientation.cpp
- * Author: Carlos Amores
- *
- * Created on 4 de julio de 2014, 16:46
- */
 
-#include <ros/node_handle.h>
+/** 
+ * @file  RosNode_PositionOrientation.cpp
+ * @brief Implementacion de la clase "RosNode_PositionOrientation"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
 
 #include "RosNose_PositionOrientation.h"
 
-using namespace std;
-
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
+ * instancia que permite la gestion de los dispositivos
+ */
 RosNode_PositionOrientation::RosNode_PositionOrientation(){
-    setPONodeStatus(NODESTATUS_INIT);
+    poNodeStatus = NODESTATUS_INIT;
     gpsinsDriver = new XSensMTi700Driver();
     magnetometerDriver = new TraxAHRSModuleDriver();
     magnOK = false;
     gpsinsOK = false;
 }
 
-/*******************************************************************************
- * DESTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Destructor de la clase. Libera punteros con referencia a los objetos de las
+ * clases driver de los dispositivos
+ */
 RosNode_PositionOrientation::~RosNode_PositionOrientation(){
     delete gpsinsDriver;
     delete magnetometerDriver;
 }
 
-/*******************************************************************************
- * INICIALIZADOR DE ARTEFACTOS ROS
- ******************************************************************************/
-
+/**
+ * Inicializador de artefactos ROS
+ */
 void RosNode_PositionOrientation::initROS(){
     ros::NodeHandle nh;
     pubPosOriInfo = nh.advertise<CITIUS_Control_PositionOrientation::msg_posOriInfo>("posOriInfo",1000);
     servNodeStatus = nh.advertiseService("poNodeStatus", &RosNode_PositionOrientation::fcn_serv_nodeStatus,this);
 }
 
-/*******************************************************************************
- * CONFIGURACION DE DISPOSITIVOS
- ******************************************************************************/
-
+/**
+ * Solicita la configuracion de los dispositivos en el supuesto de que se hayan
+ * iniciado correctamente
+ */
 void RosNode_PositionOrientation::configureDevices(){
     if(gpsinsOK){
         gpsinsDriver->configureDevice();
@@ -58,64 +54,93 @@ void RosNode_PositionOrientation::configureDevices(){
     }
 }
 
-/*******************************************************************************
- * CALLBACKS NECESARIOS
- ******************************************************************************/
-
+/**
+ * Rutina del servidor de estados del nodo. Recibe las peticiones de transicion
+ * y las ejecuta segun la logica establecida
+ * @param[in] rq Parametros de requerimiento
+ * @param[in] rsp Parametros de respuesta
+ * @return Booleano que indica si se ha realizado el correcto tratamiento de
+ * la peticion de servicio
+ */
 bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &rq, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &rsp) {
+    
     if (rq.status == NODESTATUS_OK) {
-        
         if (poNodeStatus != NODESTATUS_OK) {
             poNodeStatus = NODESTATUS_OK;
             rsp.confirmation = true;
-            
         } else {
-            
             rsp.confirmation = false;
-            
         }
 
     } else if (rq.status == NODESTATUS_OFF) {
-        
         poNodeStatus = NODESTATUS_OFF;
         rsp.confirmation = true;
-        
     } else {
-        
         rsp.confirmation = false;
-        
     }
 
     return true;
 }
 
-/*******************************************************************************
- * GETTER Y SETTER NECESARIOS
- ******************************************************************************/
-
+/**
+ * Consultor del atributo "poNodeStatus" de la clase que almacena el valor 
+ * actual de la maquina de estados del nodo
+ * @return Atributo "poNodeStatus" de la clase
+ */
 short RosNode_PositionOrientation::getPONodeStatus(){ return poNodeStatus; }
 
+/**
+ * Modificador del atributo "poNodeStatus" de la clase para modificar el valor
+ * de la maquina de estados del nodo
+ * @param[in] newPONodeStatus Nuevo valor para el atributo "poNodeStatus"
+ */
 void RosNode_PositionOrientation::setPONodeStatus(short newPONodeStatus){ poNodeStatus = newPONodeStatus; }
 
-ros::Publisher RosNode_PositionOrientation::getPubPosOriInfo(){ return pubPosOriInfo; }
-
+/**
+ * Consultor del atributo "gpsinsDriver" de la clase con referencia al objeto
+ * que gestiona el dispositivo X-Sens MTi-G 700
+ * @return Referencia al objeto de la clase "XSensMTi700Driver"
+ */
 XSensMTi700Driver *RosNode_PositionOrientation::getXSensManager(){ return gpsinsDriver; }
 
+/**
+ * Consultor del atributo "gpsinsDriver" de la clase con referencia al objeto
+ * que gestiona el dispositivo TRAX AHRS Module
+ * @return Referencia al objeto de la clase "TraxAHRSModuleDriver"
+ */
 TraxAHRSModuleDriver *RosNode_PositionOrientation::getMagnetometerManager(){ return magnetometerDriver; }
 
+/**
+ * Consultor del atributo "gpsinsOK" de la clase que indica si el dispositivo
+ * esta disponible durante la ejecucion del nodo
+ * @return Atributo "gpsinsOK" de la clase
+ */
 bool RosNode_PositionOrientation::getGpsStatus() { return gpsinsOK; }
 
+/**
+ * Consultor del atributo "magOK" de la clase que indica si el dispositivo
+ * esta disponible durante la ejecucion del nodo
+ * @return Atributo "magOK" de la clase
+ */
 bool RosNode_PositionOrientation::getMagnStatus() { return magnOK; }
 
+/**
+ * Modificador del atributo "gpsinsOK" de la clase 
+ * @param[in] status Nuevo valor para el atributo "gpsinsOK"
+ */
 void RosNode_PositionOrientation::setGpsStatus(bool status) { gpsinsOK = status; }
 
+/**
+ * Modificador del atributo "magOK" de la clase
+ * @param[in] status Nuevo valor para el atributo "magOK"
+ */
 void RosNode_PositionOrientation::setMagnStatus(bool status) { magnOK = status;
 }
 
-/*******************************************************************************
- * PUBLICADOR DE INFORMACION
- ******************************************************************************/
-
+/**
+ * Obtiene el valor de la ultima lectura de los dispositivos y publica la 
+ * informacion en el topic correspondiente
+ */
 void RosNode_PositionOrientation::publishInformation() {
     
     if (gpsinsOK && !magnOK) {
@@ -124,7 +149,6 @@ void RosNode_PositionOrientation::publishInformation() {
             
             CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
             GPSINSInfo information = gpsinsDriver->getInfo();
-            
             
             msgSnd.positionStatus = information.positionStatus;
             msgSnd.orientationStatus = information.orientationStatus;
@@ -240,8 +264,4 @@ void RosNode_PositionOrientation::publishInformation() {
         }
         
     }
-    // TODO MAGNETOMETRO
-
-
-
 }

@@ -1,17 +1,20 @@
-/* 
- * File:   main.cpp
- * Author: Carlos Amores
- *
- * Created on 4 de julio de 2014, 9:04
+
+/** 
+ * @file  main.cpp
+ * @brief Funcion principal del nodo PositionOrientation del subsistema de 
+ * control
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
-#include <cstdlib>
-#include "ros/ros.h"
 #include "RosNose_PositionOrientation.h"
 
-using namespace std;
-/*
- * 
+/**
+ * Metodo principal del nodo. Inicializa modulos ROS y lanza el
+ * intercambio y la recepcion de mensajes con los dispositivos
+ * @param[in] argc Numero de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */
 int main(int argc, char** argv) {
 

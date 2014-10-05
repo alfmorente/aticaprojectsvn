@@ -1,25 +1,15 @@
-/* 
- * File:   TraxAHRSModuleDriver.h
- * Author: Carlos Amores
- *
- * Created on 10 de julio de 2014, 21:04
+
+/** 
+ * @file  TraxAHRSModuleDriver.h
+ * @brief Declara el tipo de la clase "TraxAHRSModuleDriver"
+ * - La clase implementa la comunicacion con el dispositivo magnetometro TRAX
+ * AHRS Module encargado de obtener la orientacion del vehiculo
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef TRAXAHRSMODULEDRIVER_H
 #define	TRAXAHRSMODULEDRIVER_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* TRAXAHRSMODULEDRIVER_H */
 
 // ID Frame
 #define IDFRAME_KGETMODINFO 0x01
@@ -77,6 +67,12 @@ typedef struct {
   float gyrY;
   float gyrZ;
 } TraxMeasurement;
+
+using namespace std;
+
+#endif	/* TRAXAHRSMODULEDRIVER_H */
+
+
 
 class TraxAHRSModuleDriver {
 private:

@@ -1,13 +1,17 @@
 
+/** 
+ * @file  TraxAHRSModuleDriver.cpp
+ * @brief Implementacion de la clase "TraxAHRSModuleDriver"
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
 
 #include "TraxAHRSModuleDriver.h"
 
-using namespace std;
-
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Constructor la clase. Almacena las estructuras de almacenaje de informacion
+ * que se vaya leyendo del magnetometro
+ */
 TraxAHRSModuleDriver::TraxAHRSModuleDriver() {
     canal = -1;
     // Inicio variable recepcion de datos
@@ -23,18 +27,17 @@ TraxAHRSModuleDriver::TraxAHRSModuleDriver() {
     oriInfo.gyrZ = 0;
 }
 
-/*******************************************************************************
-    * DESTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Destructor de la clase
+ */
 TraxAHRSModuleDriver::~TraxAHRSModuleDriver() {
     
 }
 
-/*******************************************************************************
- * CONEXIÓN DEL DISPOSITIVO
- ******************************************************************************/
-
+/**
+ * Inicia la conexion con el dispositivo
+ * @return Booleano que indica si la conexion se ha realizado con exito
+ */
 bool TraxAHRSModuleDriver::connectToDevice() {
     
     char * serial_name = (char *) "/dev/ttyUSB1";
@@ -42,9 +45,7 @@ bool TraxAHRSModuleDriver::connectToDevice() {
     canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
 
     if (canal < 0) {
-
         return false;
-
     } else {
 
         tcgetattr(canal, &oldtio);
@@ -79,29 +80,24 @@ bool TraxAHRSModuleDriver::connectToDevice() {
     return true;
 }
 
-/*******************************************************************************
- * DESCONEXION DE DISPOSITIVO
- ******************************************************************************/
-
+/**
+ * Cierra la conexion con el dispositivo
+ */
 void TraxAHRSModuleDriver::disconnectDevice() {
-    
     close(canal);
 }
 
-/*******************************************************************************
- * CONFIGURACION DE DISPOSITIVO DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Solicita la configuracion del dispositivo con los parametros establecidos
+ */
 void TraxAHRSModuleDriver::configureDevice(){
-
     sendToDevice(kSetDataComponents());
-    
 }
 
-/*******************************************************************************
- * FORMACION DE MENSAJES A ENVIAR
- ******************************************************************************/
-
+/**
+ * Compone un mensaje de tipo KGetModInfo para transmitir al dispositivo
+ * @return Estructura con informacion para envio de la trama
+ */
 TraxMsg TraxAHRSModuleDriver::kGetModInfo(){
     
     TraxMsg retTraxMsg;
@@ -112,6 +108,10 @@ TraxMsg TraxAHRSModuleDriver::kGetModInfo(){
     return retTraxMsg;
 }
 
+/**
+ * Compone un mensaje de tipo KGetData para transmitir al dispositivo
+ * @return Estructura con informacion para envio de la trama
+ */
 TraxMsg TraxAHRSModuleDriver::kGetData(){
     
     TraxMsg retTraxMsg;
@@ -122,6 +122,10 @@ TraxMsg TraxAHRSModuleDriver::kGetData(){
     return retTraxMsg;
 }
 
+/**
+ * Compone un mensaje de tipo kSetDataComponents para transmitir al dispositivo
+ * @return Estructura con informacion para envio de la trama
+ */
 TraxMsg TraxAHRSModuleDriver::kSetDataComponents(){
     TraxMsg retTraxMsg;
     
@@ -144,10 +148,10 @@ TraxMsg TraxAHRSModuleDriver::kSetDataComponents(){
     return retTraxMsg;
 }
 
-/*******************************************************************************
- * OPERACIONES DE ENVIO DE MENSAJES Y RECEPCION DE ACK
- ******************************************************************************/
-
+/**
+ * Completa el mensaje añadiendo la cola del mensaje y lo envia al dispositivo
+ * @param[in] traxMsg Estructura con informacion de la trama a enviar
+ */
 void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
     short len = hexa2short(traxMsg.byteCount);
     
@@ -183,10 +187,9 @@ void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
     free(msg2send);
 }
 
-/*******************************************************************************
- * RECOPILACION DE DATOS
- ******************************************************************************/
-
+/**
+ * Lectura y desencapsulacion de una trama procedente del dispositivo
+ */
 void TraxAHRSModuleDriver::rcvResponse() {
     
     // Contador de bytes leidos
@@ -231,10 +234,12 @@ void TraxAHRSModuleDriver::rcvResponse() {
     
 }
 
-/*******************************************************************************
- * FUNCIONES DE TRATAMIENTO DE DATOS 
- ******************************************************************************/
-
+/**
+ * Obtiene la informacion de una trama a partir de los datos en crudo que se
+ * obtienen del dispositivo
+ * @param[in] bufferPacket Datos en crudo leidos del dispositivo
+ * @return Estructura con informacion almacenada en tipos obtenida
+ */
 TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket){
     TraxMsg packet;
     
@@ -275,6 +280,13 @@ TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket){
    
 }
 
+/**
+ * Obtiene la informacion de los datos en crudo del fragmento "payload" donde
+ * se almacenan los datos efectivos de la trama
+ * @param[in] payload Datos en crudo del campo "payload" de la trama
+ * @return Estructura con las medidas obtenidas de los datos "payload" de la 
+ * trama
+ */
 TraxMeasurement TraxAHRSModuleDriver::unpackPayload( std::vector<char> payload){
     int tam = payload[0];
     int numData = 0;
@@ -370,12 +382,17 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload( std::vector<char> payload){
     return measureDev;
 }
 
-/*******************************************************************************
- * GET DE DATOS OBTENIDOS
- ******************************************************************************/
-
+/**
+ * Consultor del atributo "oriInfo" de la clase que almacena la informacion de
+ * la ultima lectura de los dispositivos
+ * @return 
+ */
 TraxMeasurement TraxAHRSModuleDriver::getInfo(){ return oriInfo; }
 
+/**
+ * Envio de mensaje KGetData para la solicitud de informacion al dispositivo
+ * @return Booleano que indica cuando la transmision llega a su fin 
+ */
 bool TraxAHRSModuleDriver::getData(){
     sendToDevice(kGetData());
     return true;
