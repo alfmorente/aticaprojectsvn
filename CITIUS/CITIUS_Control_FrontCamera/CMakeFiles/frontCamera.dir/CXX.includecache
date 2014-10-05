@@ -6,11 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp
-AxisP3364LveDriver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp
 RosNode_FrontCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.h
 

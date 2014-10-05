@@ -10,7 +10,7 @@
 
 /**
  * Metodo principal del nodo. Inicializa modulos ROS y lanza el
- * intercambio y la recepcion de mensajes con el vehiculo
+ * intercambio y la recepcion de mensajes con la camara
  * @param[in] argc Numero de argumentos
  * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
