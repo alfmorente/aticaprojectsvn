@@ -1,8 +1,19 @@
 
+/** 
+ * @file  conversionTypes.cpp
+ * @brief Implementacion de coleccion de funciones para conversion de tipos 
+ * utilizada por la clase TraxAHRSModuleDriver
+ * @author: Carlos Amores
+ * @date: 2013, 2014
+ */
+
 #include "conversionTypes.h"
 
-using namespace std;
-
+/**
+ * Funcion de conversion de tipos. Convierte un vector de bytes en un float
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Float resultado de la conversion
+ */
 float hexa2float( vector<char> buffer){
     union
     {
@@ -19,6 +30,11 @@ float hexa2float( vector<char> buffer){
     return floatUnion.value;
 }
 
+/**
+ * Funcion de conversion de tipos. Convierte un vector de bytes en un int
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Int resultado de la conversion
+ */
 int hexa2int(std::vector<unsigned char> buffer){
     union
     {
@@ -34,6 +50,12 @@ int hexa2int(std::vector<unsigned char> buffer){
 
     return intUnion.value;
 }
+
+/**
+ * Funcion de conversion de tipos. Convierte un vector de bytes en un short
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Short resultado de la conversion
+ */
 short hexa2short(vector<char> buffer){
     union
     {
@@ -48,6 +70,11 @@ short hexa2short(vector<char> buffer){
     return shortUnion.value;
 }
 
+/**
+ * Funcion de conversion de tipos. Convierte un vector de bytes en un double
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Double resultado de la conversion
+ */
 double hexa2double(std::vector<unsigned char> buffer){
     union{
         double value;
@@ -66,6 +93,12 @@ double hexa2double(std::vector<unsigned char> buffer){
     return doubleUnion.value;
 }
 
+/**
+ * Funcion de conversion de tipos. Convierte un dato de tipo short a una cadena
+ * de bytes
+ * @param[in] buffer[in] Dato a convertir en bytes
+ * @return Vector de bytes resultado de la conversion
+ */
 vector<char> shortToHexa(short s){
     char *buf = (char *) malloc(2);
     vector<char> out;

@@ -1,25 +1,15 @@
-/* 
- * File:   constant.h
- * Author: Carlos Amores
- *
- * Created on 4 de junio de 2014, 17:27
+
+/** 
+ * @file  constant.h
+ * @brief Declara las constantes necesarias para el manejo de la comunicacion 
+ * con los dispositivos encargados de obtener la posicion y orientacion del
+ * vehiculo
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef CONSTANT_H
 #define	CONSTANT_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-#include <ctime>
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* CONSTANT_H */
-
 
 /*******************************************************************************
  *                              ESTADOS DEL NODO
@@ -40,3 +30,7 @@ extern "C" {
 #define FREC_5HZ 0.2
 #define FREC_2HZ 0.5
 #define FREC_1HZ 1
+
+#endif	/* CONSTANT_H */
+
+

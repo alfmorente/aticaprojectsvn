@@ -1,25 +1,15 @@
-/* 
- * File:   XSensMTi700Driver.h
- * Author: Carlos Amores
- *
- * Created on 4 de julio de 2014, 19:01
+
+/** 
+ * @file  XSensMTi700Driver.h
+ * @brief Declara el tipo de la clase "XSensMTi700Driver"
+ * - La clase implementa la comunicacion con el dispositivo magnetometro X-Sens 
+ * MTi-G 700 encargado de obtener la posicion y orientacion del vehiculo
+ * @author: Carlos Amores
+ * @date: 2013, 2014
  */
 
 #ifndef XSENSMTI700DRIVER_H
 #define	XSENSMTI700DRIVER_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* XSENSMTI700DRIVER_H */
 
 #include <iostream>
 #include <stdio.h>
@@ -46,8 +36,6 @@ extern "C" {
 #define COMMAND_LEN_0 0x00
 
 #define FREC_REQ_DATA 0x0A
-
-
 
 // Informacion de GPS/INS
 typedef struct{
@@ -93,6 +81,12 @@ typedef struct {
   unsigned char len;
   std::vector<unsigned char> data;
 } dataPacketMT2;
+
+using namespace std;
+
+#endif	/* XSENSMTI700DRIVER_H */
+
+
 
 class XSensMTi700Driver {
 private:

@@ -3,7 +3,6 @@
 
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNodePositionOrientation.cpp
- /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
  /opt/ros/groovy/include/XmlRpcValue.h
  /opt/ros/groovy/include/ros/advertise_options.h
@@ -18,41 +17,52 @@ CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o
  /opt/ros/groovy/include/ros/forwards.h
  /opt/ros/groovy/include/ros/init.h
  /opt/ros/groovy/include/ros/macros.h
+ /opt/ros/groovy/include/ros/master.h
  /opt/ros/groovy/include/ros/message.h
  /opt/ros/groovy/include/ros/message_event.h
  /opt/ros/groovy/include/ros/message_forward.h
  /opt/ros/groovy/include/ros/message_operations.h
  /opt/ros/groovy/include/ros/message_traits.h
+ /opt/ros/groovy/include/ros/names.h
  /opt/ros/groovy/include/ros/node_handle.h
+ /opt/ros/groovy/include/ros/param.h
  /opt/ros/groovy/include/ros/parameter_adapter.h
  /opt/ros/groovy/include/ros/platform.h
  /opt/ros/groovy/include/ros/publisher.h
  /opt/ros/groovy/include/ros/rate.h
+ /opt/ros/groovy/include/ros/ros.h
  /opt/ros/groovy/include/ros/roscpp_serialization_macros.h
  /opt/ros/groovy/include/ros/rostime_decl.h
  /opt/ros/groovy/include/ros/serialization.h
  /opt/ros/groovy/include/ros/serialized_message.h
+ /opt/ros/groovy/include/ros/service.h
  /opt/ros/groovy/include/ros/service_callback_helper.h
  /opt/ros/groovy/include/ros/service_client.h
  /opt/ros/groovy/include/ros/service_client_options.h
  /opt/ros/groovy/include/ros/service_server.h
  /opt/ros/groovy/include/ros/service_traits.h
+ /opt/ros/groovy/include/ros/single_subscriber_publisher.h
  /opt/ros/groovy/include/ros/spinner.h
  /opt/ros/groovy/include/ros/static_assert.h
  /opt/ros/groovy/include/ros/subscribe_options.h
  /opt/ros/groovy/include/ros/subscriber.h
  /opt/ros/groovy/include/ros/subscription_callback_helper.h
+ /opt/ros/groovy/include/ros/this_node.h
  /opt/ros/groovy/include/ros/time.h
  /opt/ros/groovy/include/ros/timer.h
  /opt/ros/groovy/include/ros/timer_options.h
+ /opt/ros/groovy/include/ros/topic.h
  /opt/ros/groovy/include/ros/transport_hints.h
  /opt/ros/groovy/include/ros/types.h
  /opt/ros/groovy/include/ros/wall_timer.h
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/RosNose_PositionOrientation.h
+ include/TraxAHRSModuleDriver.h
  include/XSensMTi700Driver.h
  include/constant.h
+ include/conversionTypes.h
+ include/crc16calc.h
  msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
  srv_gen/cpp/include/CITIUS_Control_PositionOrientation/srv_nodeStatus.h
 CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o
@@ -70,7 +80,6 @@ CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/crc16calc.cpp
  include/crc16calc.h
 CMakeFiles/PositionOrientation.dir/src/main.cpp.o
- /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
  /opt/ros/groovy/include/XmlRpcValue.h
@@ -127,7 +136,10 @@ CMakeFiles/PositionOrientation.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/RosNose_PositionOrientation.h
+ include/TraxAHRSModuleDriver.h
  include/XSensMTi700Driver.h
  include/constant.h
+ include/conversionTypes.h
+ include/crc16calc.h
  msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
  srv_gen/cpp/include/CITIUS_Control_PositionOrientation/srv_nodeStatus.h
