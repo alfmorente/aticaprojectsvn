@@ -44,28 +44,28 @@
 #include <vector>
 
 typedef struct {
-  char idFrame;
-  std::vector<char> payload;
+  char idFrame; /// Identificador de la trama
+  std::vector<char> payload; /// Valor del campo payload de la trama en crudo
 } PacketFrame;
 
 typedef struct {
-  std::vector<char> byteCount;
-  PacketFrame packFrame;
-  std::vector<char> crc;
-  bool checked;
+  std::vector<char> byteCount; /// Valor del campo byteCount de la trama en crudo
+  PacketFrame packFrame; /// Trama semidesempaquetada
+  std::vector<char> crc; /// Valor del CRC16 en crudo
+  bool checked; /// Indicador de tratamiento de la trama finalizado
 } TraxMsg;
 
 typedef struct {
-  char heading_status;
-  float heading;
-  float pitch;
-  float roll;
-  float accX;
-  float accY;
-  float accZ;
-  float gyrX;
-  float gyrY;
-  float gyrZ;
+  char heading_status; /// Valor del estado de la orientacion obtenida
+  float heading; /// Valor de la orientacion en yaw (Z)
+  float pitch; /// Valor de la orientacion en pitch (X)
+  float roll; /// Valor de la orientacion en roll (Y)
+  float accX; /// Aceleracion longitudinal componente X
+  float accY; /// Aceleracion longitudinal componente Y
+  float accZ; /// Aceleracion longitudinal componente Z
+  float gyrX; /// Velocidad rotacional componente X
+  float gyrY; /// Velocidad rotacional componente Y
+  float gyrZ; /// Velocidad rotacional componente Z
 } TraxMeasurement;
 
 using namespace std;

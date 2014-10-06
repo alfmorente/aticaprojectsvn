@@ -40,46 +40,46 @@
 // Informacion de GPS/INS
 typedef struct{
   // Estado
-  short positionStatus;
-  short orientationStatus;
+  short positionStatus; /// Valor del estado de la posicion
+  short orientationStatus; /// Valor del estado de la orientacion
   // Posicion
-  double latitude;
-  double longitude;
-  float altitude;
+  double latitude; /// Valor de posicion en latitud
+  double longitude; /// Valor de la posicion en longitud
+  float altitude; /// Valor de la posicion en altitud
   // Orientacion
-  float roll;
-  float pitch;
-  float yaw;
+  float roll; /// Valor de la orientacion en roll (Y)
+  float pitch; /// Valor de la orientacion en pitch (X)
+  float yaw; /// Valor de la orientacion en yaw (Z)
   // Velocidad longitudinal
-  float velX;
-  float velY;
-  float velZ;
+  float velX; /// Valor de la velocidad longitudinal componente X
+  float velY; /// Valor de la velocidad longitudinal componente Y
+  float velZ; /// Valor de la velocidad longitudinal componente Z
   // Acc longitudinal
-  float accX;
-  float accY;
-  float accZ;
+  float accX; /// Valor de la aceleracion longitudinal componente X
+  float accY; /// Valor de la aceleracion longitudinal componente Y
+  float accZ; /// Valor de la aceleracion longitudinal componente Z
   // Acc rotacional
-  float rateX;
-  float rateY;
-  float rateZ;
+  float rateX; /// Valor de la aceleracion rotacional componente X
+  float rateY; /// Valor de la aceleracion rotacional componente Y
+  float rateZ; /// Valor de la aceleracion rotacional componente Z
 } GPSINSInfo;
 
 // Mensaje XSens
 typedef struct {
-    unsigned char pre;
-    unsigned char bid;
-    unsigned char mid;
-    unsigned char len;
-    std::vector<unsigned char> data;
-    unsigned char cs;
+    unsigned char pre; /// Valor en crudo del campo PRE de la trama
+    unsigned char bid; /// Valor en crudo del campo BID de la trama
+    unsigned char mid; /// Valor en crudo del campo MID de la trama
+    unsigned char len; /// Valor en crudo del campo LEN de la trama
+    std::vector<unsigned char> data; /// Datos en crudo de la trama
+    unsigned char cs; /// Valor en crudo del campo CS de la trama
 } XsensMsg;
 
 // Paquete de datos MTData2 (XSens Low level protocol)
 typedef struct {
-  unsigned char idGroup;
-  unsigned char idSignal;
-  unsigned char len;
-  std::vector<unsigned char> data;
+  unsigned char idGroup; /// Valor del identificador del grupo de datos (MTData2)
+  unsigned char idSignal; /// Valor del identificador de la señal (MTData2)
+  unsigned char len; /// Valor del campo longitud (MTData2)
+  std::vector<unsigned char> data; /// Valor de los datos en crudo (MTData2)
 } dataPacketMT2;
 
 using namespace std;
