@@ -35,10 +35,10 @@
 #define ORDER_TILT 2
 
 typedef struct {
-  bool state;
-  float zoom;
-  float pan;
-  float tilt;
+  bool state; /// Valor del estado (actualizado o no) de lectura de variables
+  float zoom; /// Valor de zoom
+  float pan; /// Valor de pan
+  float tilt; /// Valor de tilt
 } LensPosition;
 
 using namespace std;
