@@ -102,14 +102,7 @@
 #define OPERATION_MODE_APAGANDO 4
 
 /*******************************************************************************
- *                   SOCKET PAYLOAD DE CONDUCCION
- *******************************************************************************/
-
-#define IP_PAYLOAD_CONDUCCION_DRIVING "localhost"
-#define PORT_PAYLOAD_CONDUCCION_DRIVING 5000
-
-/*******************************************************************************
- * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO
+ * FRECUENCIA -> PERIODO
  ******************************************************************************/
 
 #define FREC_10HZ 0.1
@@ -188,15 +181,6 @@
 #define FRONT_CAMERA_ID 1
 #define REAR_CAMERA_ID 2
 
-/*******************************************************************************
- *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
- *******************************************************************************/
-
-typedef struct {
-  short instruction;
-  short element;
-  short value;
-} FrameDriving;
 
 #endif	/* CONSTANT_H */
 
