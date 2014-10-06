@@ -89,8 +89,6 @@ using namespace std;
 #define OPERATION_MODE_SWITCH 57
 
 
-
-
 /*******************************************************************************
  *                              ESTADOS DEL NODO
 *******************************************************************************/
@@ -131,10 +129,10 @@ using namespace std;
 *******************************************************************************/
 
 typedef struct{
-    short instruction;
-    short id_instruction;
-    short element;
-    short value;
+    short instruction; /// Tipo de instruccion
+    short id_instruction; /// Identificador para mecanismo de integridad
+    short element; /// Elemento de demanda
+    short value; /// Valor de demanda
 }FrameDriving;
 
 /*******************************************************************************
@@ -155,11 +153,11 @@ typedef struct{
 *******************************************************************************/
 
 typedef struct {
-    short battery_level;
-    short battery_voltage;
-    short battery_current;
-    short battery_temperature;
-    short supply_alarms;
+    short battery_level; /// Valor del nivel de bateria
+    short battery_voltage; /// Valor de voltaje de bateria
+    short battery_current; /// Valor de intensidad de bateria
+    short battery_temperature; /// Valor de temperatura de bateria
+    short supply_alarms; /// Valor del vector de alarmas del subsistema
 }ElectricInfo;
 
 /*******************************************************************************
@@ -167,8 +165,8 @@ typedef struct {
 *******************************************************************************/
 
 typedef struct{
-    int numOfMsgs;
-    vector<FrameDriving> msgs;
+    int numOfMsgs; /// Numero de mensajes a retransmitir
+    vector<FrameDriving> msgs; /// Coleccion de mensajes a retransmitir
 }RtxStruct;
 
 /*******************************************************************************
@@ -176,8 +174,8 @@ typedef struct{
 *******************************************************************************/
 
 typedef struct{
-    bool flag;
-    short position;
+    bool flag; /// Indicador de cambio en posicion del conmutador
+    short position; /// Posicion del conmutador tras el cambio
 }SwitcherStruct;
 
 #endif	/* CONSTANT_H */
