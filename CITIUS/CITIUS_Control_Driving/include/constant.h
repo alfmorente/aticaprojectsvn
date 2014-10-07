@@ -16,7 +16,7 @@ using namespace std;
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
  * IDENTIFICADOR DE INSTRUCCION
-*******************************************************************************/
+ *******************************************************************************/
 
 #define SET 0
 #define GET 1
@@ -27,7 +27,7 @@ using namespace std;
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
  * IDENTIFICADOR DE ELEMENTO
-*******************************************************************************/
+ *******************************************************************************/
 
 #define RESET 0
 #define BLINKER_RIGHT 1
@@ -88,11 +88,9 @@ using namespace std;
 #define SUPPLY_ALARMS 56.
 #define OPERATION_MODE_SWITCH 57
 
-
-
 /*******************************************************************************
  *                              ESTADOS DEL NODO
-*******************************************************************************/
+ *******************************************************************************/
 
 #define NODESTATUS_INIT 0
 #define NODESTATUS_OK 1
@@ -101,7 +99,7 @@ using namespace std;
 
 /*******************************************************************************
  *                          MODOS DE OPERACION DEL VEHICULO
-*******************************************************************************/
+ *******************************************************************************/
 
 #define OPERATION_MODE_LOCAL 0
 #define OPERATION_MODE_INICIANDO 1
@@ -111,7 +109,7 @@ using namespace std;
 
 /*******************************************************************************
  *                   SOCKET PAYLOAD DE CONDUCCION
-*******************************************************************************/
+ *******************************************************************************/
 
 #define IP_PAYLOAD_CONDUCCION_DRIVING "127.0.0.1"
 #define PORT_PAYLOAD_CONDUCCION_DRIVING 10000
@@ -127,45 +125,45 @@ using namespace std;
 
 /*******************************************************************************
  *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
-*******************************************************************************/
+ *******************************************************************************/
 
-typedef struct{
-    short instruction;
-    short id_instruccion;
-    short element;
-    short value;
-}FrameDriving;
+typedef struct {
+  short instruction; /// Tipo de instruccion
+  short id_instruccion; /// Identificador para mecanismo de integridad
+  short element; /// Elemento de demanda
+  short value; /// Valor de demanda
+} FrameDriving;
 
 /*******************************************************************************
  *           ESTRUCTURA DE INFORMACION DE VEHICULO
-*******************************************************************************/
+ *******************************************************************************/
 
 typedef struct {
-    short steering;
-    short thottle;
-    short brake;
-    bool parkingBrake;
-    unsigned short gear;
-    unsigned short speed;
-    short motorRPM;
-    short motorTemperature;
-    bool lights;
-    bool blinkerLeft;
-    bool blinkerRight;
-    bool dipss;
-    bool dipsr;
-    bool dipsp;
-    bool klaxon;
-}DrivingInfo;
+  short steering; /// Valor de direccion
+  short thottle; /// Valor de acelerador
+  short brake; /// Valor de freno de servicio
+  bool parkingBrake; /// Valor de freno de estacionamiento
+  unsigned short gear; /// Valor de marcha
+  unsigned short speed; /// Valor de velocidad de crucero
+  short motorRPM; /// Valor de r.p.m. de motor
+  short motorTemperature; /// Valor de temperatura de motor
+  bool lights; /// Indicador de informacion de luces en la estructura
+  bool blinkerLeft; /// Valor de intermitente izquierdo
+  bool blinkerRight; /// Valor de iontermitente derecho
+  bool dipss; /// Valor de luces cortas
+  bool dipsr; /// Valor de luces largas
+  bool dipsp; /// Valor de luces de posicion
+  bool klaxon; /// Valor de vocina
+} DrivingInfo;
 
 /*******************************************************************************
  *           ESTRUCTURA DE MANEJO DE NACK's
-*******************************************************************************/
+ *******************************************************************************/
 
-typedef struct{
-    int numOfMsgs;
-    vector<FrameDriving> msgs;
-}RtxStruct;
+typedef struct {
+  int numOfMsgs; /// Numero de mensajes a retransmitir
+  vector<FrameDriving> msgs; /// Coleccion de mensajes a retransmitir
+} RtxStruct;
 
 #endif	/* CONSTANT_H */
 
