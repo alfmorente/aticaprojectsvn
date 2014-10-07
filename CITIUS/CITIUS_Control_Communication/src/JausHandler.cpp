@@ -21,25 +21,24 @@ JausHandler::~JausHandler() {
 /** Capturador de eventos generados en NodeManager
  * @param[in] e Evento capturado
  */
-
 void JausHandler::handleEvent(NodeManagerEvent *e) {
 
-    switch (e->getType()) {
-        case NodeManagerEvent::SystemTreeEvent:
-            SystemTreeEvent *treeEvent;
-            treeEvent = (SystemTreeEvent *) e;
-            printf("%s\n", treeEvent->toString().c_str());
-            delete e;
-            break;
+  switch (e->getType()) {
+    case NodeManagerEvent::SystemTreeEvent:
+      SystemTreeEvent *treeEvent;
+      treeEvent = (SystemTreeEvent *) e;
+      printf("%s\n", treeEvent->toString().c_str());
+      delete e;
+      break;
 
-        case NodeManagerEvent::ErrorEvent:
-            ErrorEvent *errorEvent;
-            errorEvent = (ErrorEvent *) e;
-            //printf("%s\n", errorEvent->toString().c_str());
-            delete e;
-            break;
-        default:
-            delete e;
-            break;
-    }
+    case NodeManagerEvent::ErrorEvent:
+      ErrorEvent *errorEvent;
+      errorEvent = (ErrorEvent *) e;
+      //printf("%s\n", errorEvent->toString().c_str());
+      delete e;
+      break;
+    default:
+      delete e;
+      break;
+  }
 }
