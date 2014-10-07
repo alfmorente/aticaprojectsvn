@@ -24,36 +24,35 @@ using namespace std;
 
 #endif	/* ROSNODE_ELECTRIC_H */
 
-
-class RosNode_Electric{
+class RosNode_Electric {
 private:
-    // Estado del nodo
-    short emNodeStatus;
-    // Publicador de informacion de camara
-    ros::Publisher pubElectricInfo;
-    ros::Publisher pubCommand;
-    ros::Publisher pubSwitcher;
-    // Cliente de estado de vehiculo
-    ros::ServiceClient clientVehicleStatus;
-    // Driver de la cámara
-    ElectricConnectionManager *dElectric;
+  // Estado del nodo
+  short emNodeStatus;
+  // Publicador de informacion de camara
+  ros::Publisher pubElectricInfo;
+  ros::Publisher pubCommand;
+  ros::Publisher pubSwitcher;
+  // Cliente de estado de vehiculo
+  ros::ServiceClient clientVehicleStatus;
+  // Driver de la cámara
+  ElectricConnectionManager *dElectric;
 public:
-    // Constructor
-    RosNode_Electric();
-    
-    // Inicializador de artefactos ROS
-    void initROS();
-    
-    // Getter and Setter necesarios
-    ros::ServiceClient getClientVehicleStatus();
-    short getEMNodeStatus();
-    void setEMNodeStatus(short newEMNodeStatus);
-    ElectricConnectionManager *getDriverMng();
-    
-    // Publicar informacion de vehiculo
-    void publishElectricInfo(ElectricInfo info);
-    // Publicar informacion de conmutador Local/Teleoperado
-    void publishSwitcherInfo(short position);
-    // Publicar consignas ON/OFF de actuadores
-    void publishSetupCommands(bool on);
+  // Constructor
+  RosNode_Electric();
+
+  // Inicializador de artefactos ROS
+  void initROS();
+
+  // Getter and Setter necesarios
+  ros::ServiceClient getClientVehicleStatus();
+  short getEMNodeStatus();
+  void setEMNodeStatus(short newEMNodeStatus);
+  ElectricConnectionManager *getDriverMng();
+
+  // Publicar informacion de vehiculo
+  void publishElectricInfo(ElectricInfo info);
+  // Publicar informacion de conmutador Local/Teleoperado
+  void publishSwitcherInfo(short position);
+  // Publicar consignas ON/OFF de actuadores
+  void publishSetupCommands(bool on);
 };

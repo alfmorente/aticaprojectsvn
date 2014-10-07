@@ -16,7 +16,7 @@ using namespace std;
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
  * IDENTIFICADOR DE INSTRUCCION
-*******************************************************************************/
+ *******************************************************************************/
 
 #define SET 0
 #define GET 1
@@ -27,7 +27,7 @@ using namespace std;
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
  * IDENTIFICADOR DE ELEMENTO
-*******************************************************************************/
+ *******************************************************************************/
 
 #define RESET 0
 #define BLINKER_RIGHT 1
@@ -91,7 +91,7 @@ using namespace std;
 
 /*******************************************************************************
  *                              ESTADOS DEL NODO
-*******************************************************************************/
+ *******************************************************************************/
 
 #define NODESTATUS_INIT 0
 #define NODESTATUS_OK 1
@@ -100,7 +100,7 @@ using namespace std;
 
 /*******************************************************************************
  *                          MODOS DE OPERACION DEL VEHICULO
-*******************************************************************************/
+ *******************************************************************************/
 
 #define OPERATION_MODE_LOCAL 0
 #define OPERATION_MODE_INICIANDO 1
@@ -110,7 +110,7 @@ using namespace std;
 
 /*******************************************************************************
  *                   SOCKET PAYLOAD DE CONDUCCION
-*******************************************************************************/
+ *******************************************************************************/
 
 #define IP_PAYLOAD_CONDUCCION_DRIVING "127.0.0.1"
 #define PORT_PAYLOAD_CONDUCCION_DRIVING 20000
@@ -126,57 +126,57 @@ using namespace std;
 
 /*******************************************************************************
  *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
-*******************************************************************************/
+ *******************************************************************************/
 
-typedef struct{
-    short instruction; /// Tipo de instruccion
-    short id_instruction; /// Identificador para mecanismo de integridad
-    short element; /// Elemento de demanda
-    short value; /// Valor de demanda
-}FrameDriving;
+typedef struct {
+  short instruction; /// Tipo de instruccion
+  short id_instruction; /// Identificador para mecanismo de integridad
+  short element; /// Elemento de demanda
+  short value; /// Valor de demanda
+} FrameDriving;
 
 /*******************************************************************************
  *           MAXIMO NUMERO DE INTENTOS DE CONEXION
-*******************************************************************************/
+ *******************************************************************************/
 
 #define MAX_ATTEMPS 5
 
 /*******************************************************************************
  *              POSICION CONMUTADOR LOCAL - TELEOPERADOR
-*******************************************************************************/
+ *******************************************************************************/
 #define SWITCHER_INIT -1
 #define SWITCHER_LOCAL 0
 #define SWITCHER_TELECONTROL 1
 
 /*******************************************************************************
  *           ESTRUCTURA DE INFORMACION ELECTRICA DE VEHICULO
-*******************************************************************************/
+ *******************************************************************************/
 
 typedef struct {
-    short battery_level; /// Valor del nivel de bateria
-    short battery_voltage; /// Valor de voltaje de bateria
-    short battery_current; /// Valor de intensidad de bateria
-    short battery_temperature; /// Valor de temperatura de bateria
-    short supply_alarms; /// Valor del vector de alarmas del subsistema
-}ElectricInfo;
+  short battery_level; /// Valor del nivel de bateria
+  short battery_voltage; /// Valor de voltaje de bateria
+  short battery_current; /// Valor de intensidad de bateria
+  short battery_temperature; /// Valor de temperatura de bateria
+  short supply_alarms; /// Valor del vector de alarmas del subsistema
+} ElectricInfo;
 
 /*******************************************************************************
  *           ESTRUCTURA DE MANEJO DE NACK's
-*******************************************************************************/
+ *******************************************************************************/
 
-typedef struct{
-    int numOfMsgs; /// Numero de mensajes a retransmitir
-    vector<FrameDriving> msgs; /// Coleccion de mensajes a retransmitir
-}RtxStruct;
+typedef struct {
+  int numOfMsgs; /// Numero de mensajes a retransmitir
+  vector<FrameDriving> msgs; /// Coleccion de mensajes a retransmitir
+} RtxStruct;
 
 /*******************************************************************************
  *           ESTRUCTURA DE POSICION DEL CONMUTADOR LOCAL/TELEOPERADO
-*******************************************************************************/
+ *******************************************************************************/
 
-typedef struct{
-    bool flag; /// Indicador de cambio en posicion del conmutador
-    short position; /// Posicion del conmutador tras el cambio
-}SwitcherStruct;
+typedef struct {
+  bool flag; /// Indicador de cambio en posicion del conmutador
+  short position; /// Posicion del conmutador tras el cambio
+} SwitcherStruct;
 
 #endif	/* CONSTANT_H */
 
