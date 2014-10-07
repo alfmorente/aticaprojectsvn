@@ -14,20 +14,20 @@
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Float resultado de la conversion
  */
-float hexa2float( vector<char> buffer){
-    union
-    {
-        float value;
-        unsigned char buffer[4];
+float hexa2float(vector<char> buffer) {
 
-    }floatUnion;
+  union {
+    float value;
+    unsigned char buffer[4];
 
-    floatUnion.buffer[0] = buffer[3];
-    floatUnion.buffer[1] = buffer[2];
-    floatUnion.buffer[2] = buffer[1];
-    floatUnion.buffer[3] = buffer[0];
+  } floatUnion;
 
-    return floatUnion.value;
+  floatUnion.buffer[0] = buffer[3];
+  floatUnion.buffer[1] = buffer[2];
+  floatUnion.buffer[2] = buffer[1];
+  floatUnion.buffer[3] = buffer[0];
+
+  return floatUnion.value;
 }
 
 /**
@@ -35,20 +35,20 @@ float hexa2float( vector<char> buffer){
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Int resultado de la conversion
  */
-int hexa2int(std::vector<unsigned char> buffer){
-    union
-    {
-        int value;
-        unsigned char buffer[4];
+int hexa2int(std::vector<unsigned char> buffer) {
 
-    }intUnion;
+  union {
+    int value;
+    unsigned char buffer[4];
 
-    intUnion.buffer[0] = buffer[3];
-    intUnion.buffer[1] = buffer[2];
-    intUnion.buffer[2] = buffer[1];
-    intUnion.buffer[3] = buffer[0];
+  } intUnion;
 
-    return intUnion.value;
+  intUnion.buffer[0] = buffer[3];
+  intUnion.buffer[1] = buffer[2];
+  intUnion.buffer[2] = buffer[1];
+  intUnion.buffer[3] = buffer[0];
+
+  return intUnion.value;
 }
 
 /**
@@ -56,18 +56,18 @@ int hexa2int(std::vector<unsigned char> buffer){
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Short resultado de la conversion
  */
-short hexa2short(vector<char> buffer){
-    union
-    {
-        short value;
-        unsigned char buffer[2];
+short hexa2short(vector<char> buffer) {
 
-    }shortUnion;
+  union {
+    short value;
+    unsigned char buffer[2];
 
-    shortUnion.buffer[0] = buffer[1];
-    shortUnion.buffer[1] = buffer[0];
+  } shortUnion;
 
-    return shortUnion.value;
+  shortUnion.buffer[0] = buffer[1];
+  shortUnion.buffer[1] = buffer[0];
+
+  return shortUnion.value;
 }
 
 /**
@@ -75,22 +75,23 @@ short hexa2short(vector<char> buffer){
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Double resultado de la conversion
  */
-double hexa2double(std::vector<unsigned char> buffer){
-    union{
-        double value;
-        unsigned char buffer[8];
-    }doubleUnion;
+double hexa2double(std::vector<unsigned char> buffer) {
 
-    doubleUnion.buffer[0] = buffer[7];
-    doubleUnion.buffer[1] = buffer[6];
-    doubleUnion.buffer[2] = buffer[5];
-    doubleUnion.buffer[3] = buffer[4];
-    doubleUnion.buffer[4] = buffer[3];
-    doubleUnion.buffer[5] = buffer[2];
-    doubleUnion.buffer[6] = buffer[1];
-    doubleUnion.buffer[7] = buffer[0];
+  union {
+    double value;
+    unsigned char buffer[8];
+  } doubleUnion;
 
-    return doubleUnion.value;
+  doubleUnion.buffer[0] = buffer[7];
+  doubleUnion.buffer[1] = buffer[6];
+  doubleUnion.buffer[2] = buffer[5];
+  doubleUnion.buffer[3] = buffer[4];
+  doubleUnion.buffer[4] = buffer[3];
+  doubleUnion.buffer[5] = buffer[2];
+  doubleUnion.buffer[6] = buffer[1];
+  doubleUnion.buffer[7] = buffer[0];
+
+  return doubleUnion.value;
 }
 
 /**
@@ -99,14 +100,14 @@ double hexa2double(std::vector<unsigned char> buffer){
  * @param[in] buffer[in] Dato a convertir en bytes
  * @return Vector de bytes resultado de la conversion
  */
-vector<char> shortToHexa(short s){
-    char *buf = (char *) malloc(2);
-    vector<char> out;
-    memcpy(buf,&s,2);
-    out.push_back(buf[1]);
-    out.push_back(buf[0]);
-    free(buf);
-    return out;
+vector<char> shortToHexa(short s) {
+  char *buf = (char *) malloc(2);
+  vector<char> out;
+  memcpy(buf, &s, 2);
+  out.push_back(buf[1]);
+  out.push_back(buf[0]);
+  free(buf);
+  return out;
 
 }
 

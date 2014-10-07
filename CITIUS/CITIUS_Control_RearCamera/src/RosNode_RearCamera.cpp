@@ -13,18 +13,18 @@
  * instancia que permite la gestion de la camara
  */
 RosNode_RearCamera::RosNode_RearCamera() {
-    rcNodeStatus = NODESTATUS_INIT;
-    dRearCamera = new AxisP3364LveDriver();
+  rcNodeStatus = NODESTATUS_INIT;
+  dRearCamera = new AxisP3364LveDriver();
 }
 
 /**
  * Inicializador de artefactos ROS de la clase
  */
 void RosNode_RearCamera::initROS() {
-    ros::NodeHandle nh;
-    pubRearCameraInfo = nh.advertise<CITIUS_Control_RearCamera::msg_rearCameraInfo>("rearCameraInfo",1000);
-    subsCtrlRearCamera = nh.subscribe("ctrlRearCamera",1000,&RosNode_RearCamera::fcn_sub_ctrlRearCamera,this);
-    servNodeStatus = nh.advertiseService("fcNodeStatus",&RosNode_RearCamera::fcv_serv_nodeStatus,this);
+  ros::NodeHandle nh;
+  pubRearCameraInfo = nh.advertise<CITIUS_Control_RearCamera::msg_rearCameraInfo>("rearCameraInfo", 1000);
+  subsCtrlRearCamera = nh.subscribe("ctrlRearCamera", 1000, &RosNode_RearCamera::fcn_sub_ctrlRearCamera, this);
+  servNodeStatus = nh.advertiseService("fcNodeStatus", &RosNode_RearCamera::fcv_serv_nodeStatus, this);
 }
 
 /**
@@ -32,12 +32,12 @@ void RosNode_RearCamera::initROS() {
  * y las transmite hacia la camara
  * @param[in] msg Mensaje ROS con ordenes de actuacion sobre la camara
  */
-void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg){
-    if(msg.isZoom) dRearCamera->setZoom(msg.zoom);
-    if(msg.isPan) dRearCamera->setPan(msg.pan);
-    if(msg.isZoom) dRearCamera->setTilt(msg.tilt);
+void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg) {
+  if (msg.isZoom) dRearCamera->setZoom(msg.zoom);
+  if (msg.isPan) dRearCamera->setPan(msg.pan);
+  if (msg.isZoom) dRearCamera->setTilt(msg.tilt);
 }
-    
+
 /**
  * Rutina del servidor de estados del nodo. Recibe las peticiones de transicion
  * y las ejecuta segun la logica establecida
@@ -46,17 +46,17 @@ void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_c
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
  * la peticion de servicio
  */
-bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp){
-    if(rq.status == NODESTATUS_OK){
-        rcNodeStatus = NODESTATUS_OK;
-        rsp.confirmation = true;
-    }else if(rq.status == NODESTATUS_OFF){
-        rcNodeStatus = NODESTATUS_OFF;
-        rsp.confirmation = true;
-    }else{
-        rsp.confirmation = false;
-    }
-    return true;
+bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp) {
+  if (rq.status == NODESTATUS_OK) {
+    rcNodeStatus = NODESTATUS_OK;
+    rsp.confirmation = true;
+  } else if (rq.status == NODESTATUS_OFF) {
+    rcNodeStatus = NODESTATUS_OFF;
+    rsp.confirmation = true;
+  } else {
+    rsp.confirmation = false;
+  }
+  return true;
 }
 
 /**
@@ -64,16 +64,16 @@ bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_node
  * actual en el que se encuentra la maquina de estados
  * @return Atributo "fcNodeStatus" de la clase
  */
-short RosNode_RearCamera::getRcNodeStatus(){
-    return rcNodeStatus;
+short RosNode_RearCamera::getRcNodeStatus() {
+  return rcNodeStatus;
 }
 
 /**
  * Modificador del atributo "rcNodeStatus" de la clase
  * @param[in] newRcNodeStatus Nuevo valor para el atributo
  */
-void RosNode_RearCamera::setRcNodeStatus(short newRcNodeStatus){
-    rcNodeStatus = newRcNodeStatus;
+void RosNode_RearCamera::setRcNodeStatus(short newRcNodeStatus) {
+  rcNodeStatus = newRcNodeStatus;
 }
 
 /**
@@ -81,8 +81,8 @@ void RosNode_RearCamera::setRcNodeStatus(short newRcNodeStatus){
  * de informacion del estado de la camara
  * @return Atributo "pubRearCameraInfo"
  */
-ros::Publisher RosNode_RearCamera::getPubRearCameraInfo(){
-    return pubRearCameraInfo;
+ros::Publisher RosNode_RearCamera::getPubRearCameraInfo() {
+  return pubRearCameraInfo;
 }
 
 /**
@@ -90,6 +90,6 @@ ros::Publisher RosNode_RearCamera::getPubRearCameraInfo(){
  * instancia de la clase que gestiona la comunicacion con la camara
  * @return Atributo "dRearCamera"
  */
-AxisP3364LveDriver *RosNode_RearCamera::getDriverMng(){
-    return dRearCamera;
+AxisP3364LveDriver *RosNode_RearCamera::getDriverMng() {
+  return dRearCamera;
 }
