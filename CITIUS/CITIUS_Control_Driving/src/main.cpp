@@ -2,16 +2,16 @@
 /** 
  * @file  main.cpp
  * @brief Funcion principal del nodo Driving del subsistema de control
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_Driving.h"
 
 /**
  * Metodo principal del nodo. Inicializa modulos ROS y lanza el
- * intercambio y la recepcion de mensajes con el vehiculo
- * @param[in] argc Numero de argumentos
+ * intercambio de mensajes con el vehículo
+ * @param[in] argc Número de argumentos
  * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */

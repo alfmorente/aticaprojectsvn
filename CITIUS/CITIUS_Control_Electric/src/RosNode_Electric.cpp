@@ -2,15 +2,15 @@
 /** 
  * @file  RosNode_Electric.cpp
  * @brief Implementacion de la clase "RosNode_Electric"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_Electric.h"
 
 /**
  * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
- * instancia del driver de conexion con el vehiculo
+ * instancia del driver de conexión con el vehículo
  */
 RosNode_Electric::RosNode_Electric() {
   emNodeStatus = NODESTATUS_INIT;
@@ -18,9 +18,9 @@ RosNode_Electric::RosNode_Electric() {
 }
 
 /**
- * Inicia los artefactos ROS atributos de la clase. Consulta la position del 
- * conmutador local/teleoperado y solicita la inicializacion de la maquina de
- * estados de modos de operacion del vehiculo con la señal obtenida
+ * Método privado que inicializa los artefactos ROS atributos de la clase. 
+ * Consulta la posición del conmutador local/teleoperado y solicita la inicialización de la maquina de
+ * estados de modos de operacion del vehículo con la señal obtenida
  */
 void RosNode_Electric::initROS() {
 
@@ -32,8 +32,8 @@ void RosNode_Electric::initROS() {
   pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command", 1000);
   pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher", 1000);
 
-  // Se solicita la activacion del resto de nodos del vehiculo
-  ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehiculo");
+  // Se solicita la activacion del resto de nodos del vehículo
+  ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehículo");
 
   // Set up del suministro electrico
   FrameDriving frame;
@@ -44,13 +44,13 @@ void RosNode_Electric::initROS() {
   frame.value = 1;
   // Cola de comandos criticos
   dElectric->addToQueue(frame);
-  // Envio a vehiculo
+  // Envio a vehículo
   dElectric->sendToVehicle(frame);
   usleep(1000);
 
   CITIUS_Control_Electric::srv_vehicleStatus service;
   service.request.status = OPERATION_MODE_INICIANDO;
-  // Solicitar a vehiculo posicion conmutador local/teleoperado
+  // Solicitar a vehículo posicion conmutador local/teleoperado
   // TODO
   service.request.posSwitcher = SWITCHER_LOCAL; // comentar
 
@@ -58,18 +58,18 @@ void RosNode_Electric::initROS() {
     ros::spinOnce();
   }
   if (service.response.confirmation) {
-    ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
+    ROS_INFO("[Control] Electric - Se ha iniciado el vehículo");
     emNodeStatus = NODESTATUS_OK;
   } else {
-    ROS_INFO("[Control] Electric - El vehiculo no se ha podido iniciar");
+    ROS_INFO("[Control] Electric - El vehículo no se ha podido iniciar");
     emNodeStatus = NODESTATUS_OFF;
   }
 
 }
 
 /**
- * Consultor del atributo "emNodeStatus" de la clase que proporciona el estado
- * actual de la maquina de estados del nodo
+ * Método público consultor del atributo "emNodeStatus" de la clase que 
+ * proporciona el estado actual de la máquina de estados del nodo
  * @return Atributo "emNodeStatus" de la clase
  */
 short RosNode_Electric::getEMNodeStatus() {
@@ -77,17 +77,18 @@ short RosNode_Electric::getEMNodeStatus() {
 }
 
 /**
- * Modificador del atributo "emNodeStatus" de la clase para realizar una 
- * transicion en la maquina de estados del nodo
- * @param[in] newStatus Nuevo estado al que realizar la transicion
+ * Método público modificador del atributo "emNodeStatus" de la clase para 
+ * realizar una transición en la máquina de estados del nodo
+ * @param[in] newStatus Nuevo estado al que realizar la transición
  */
 void RosNode_Electric::setEMNodeStatus(short newStatus) {
   emNodeStatus = newStatus;
 }
 
 /**
- * Consultor del atributo "dElectric" de la clase que proporciona la instancia 
- * del driver utilizado en la comunicacion con el vehiculo
+ * Método público consultor del atributo "dElectric" de la clase que 
+ * proporciona la instancia del driver utilizado en la comunicación con el 
+ * vehículo
  * @return Atributo "dElectric" de la clase
  */
 ElectricConnectionManager *RosNode_Electric::getDriverMng() {
@@ -95,19 +96,19 @@ ElectricConnectionManager *RosNode_Electric::getDriverMng() {
 }
 
 /**
- * Consultor del atributo "clientVehicleStatus" de la clase que proporciona el
- * cliente que realiza peticiones para las transiciones en la maquina de 
- * estados de los modos de operacion del vehiculo
- * @return Atributo "clientVehicleStatus"
+ * Método público consultor del atributo "clientVehicleStatus" de la clase que 
+ * proporciona el cliente que realiza peticiones para las transiciones en la 
+ * máquina de estados de los modos de operación del vehículo
+ * @return Atributo "clientVehicleStatus" de la clase
  */
 ros::ServiceClient RosNode_Electric::getClientVehicleStatus() {
   return clientVehicleStatus;
 }
 
 /**
- * Publica la informacion del vehiculo que recibe como parametro en el topic 
- * ROS correspondiente
- * @param[in] info Informacion electrica del vehiculo a publicar
+ * Método público que publica la información del vehículo que recibe como 
+ * parámetro en el topic ROS correspondiente
+ * @param[in] info Información eléctrica del vehículo a publicar
  */
 void RosNode_Electric::publishElectricInfo(ElectricInfo info) {
 
@@ -124,9 +125,10 @@ void RosNode_Electric::publishElectricInfo(ElectricInfo info) {
 }
 
 /**
- * Publica la informacion de un cambio en la posicion del conmutador local /
- * teleoperado que recibe como parametro en el topic correspondiente
- * @param[in] position Nueva posicion leida del conmutador local / teleoperado
+ * Método público que publica la información de un cambio en la posición del 
+ * conmutador local / teleoperado que recibe como parámetro en el topic ROS 
+ * correspondiente
+ * @param[in] position Nueva posición leida del conmutador local / teleoperado
  */
 void RosNode_Electric::publishSwitcherInfo(short position) {
 
@@ -137,9 +139,9 @@ void RosNode_Electric::publishSwitcherInfo(short position) {
 }
 
 /**
- * Publica una serie de comandos de activacion sobre diversos actuadores ante 
- * una lectura de cambio en el conmutador local / teleoperado
- * @param[in] on Nueva posicion del conmutador local / teleoperado
+ * Método público que publica una serie de comandos de activacion sobre diversos 
+ * actuadores ante una lectura de cambio en el conmutador local / teleoperado
+ * @param[in] on Nueva posición del conmutador local / teleoperado
  */
 void RosNode_Electric::publishSetupCommands(bool on) {
 

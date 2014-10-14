@@ -1,16 +1,16 @@
 
 /** 
  * @file  RosNode_Driving.cpp
- * @brief Implementacion de la clase "RosNode_Driving"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "RosNode_Driving"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_Driving.h"
 
 /**
- * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
- * instancia del driver de conexion con el vehiculo
+ * Constructor de la clase. Inicia la máquina de estados del nodo y crea la 
+ * instancia del driver de conexión con el vehículo
  */
 RosNode_Driving::RosNode_Driving() {
   vmNodeStatus = NODESTATUS_INIT;
@@ -18,7 +18,7 @@ RosNode_Driving::RosNode_Driving() {
 }
 
 /**
- * Inicia los artefactos ROS atributos de la clase
+ * Método privado que inicia los artefactos ROS atributos de la clase
  */
 void RosNode_Driving::initROS() {
   ros::NodeHandle nh;
@@ -28,9 +28,10 @@ void RosNode_Driving::initROS() {
 }
 
 /**
- * Receptor de mensajes ROS con comandos de actuacion sobre el vehiculo. Lo 
- * transmite el vehiculo y lo encola si el elemento es considerado critico y
- * por tanto debe llevarse a cabo el mecanismo de integridad
+ * Método privado consumidor del topic para la recepción de mensajes ROS con 
+ * comandos de actuacion sobre el vehículo. Lo transmite el vehículo y lo encola 
+ * si el elemento es considerado crítico y por tanto debe llevarse a cabo el 
+ * mecanismo de integridad
  * @param[in] msg Mensaje ROS recibido
  */
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
@@ -41,7 +42,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
     if (vmNodeStatus == NODESTATUS_OK) {
       ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
       if (checkCommand(msg)) {
-        // Envio de comando a vehiculo
+        // Envio de comando a vehículo
         FrameDriving command;
         command.instruction = SET;
         command.element = msg.id_device;
@@ -50,7 +51,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
           short cont = dVehicle->getCountCriticalMessages();
           // Valor de ID_INSTRUCCION
           command.id_instruccion = cont;
-          // Introduccion en la cola de mensajes criticos
+          // Introduccion en la cola de mensajes críticos
           dVehicle->addToQueue(command);
           // Incremento del contador
           dVehicle->setCountCriticalMessages(cont + 1);
@@ -70,12 +71,12 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
 }
 
 /**
- * Rutina del tratamiento de servicios para la modificacion de la maquina de 
- * estados del nodo
- * @param[in] rq Parametros de requerimiento
- * @param[in] rsp Parametros de respuesta
+ * Método privado encargado del tratamiento de servicios para la modificación de
+ * la máquina de estados del nodo
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
- * la peticion de servicio
+ * la petición  de servicio
  */
 bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp) {
   if (rq.status == NODESTATUS_OK) {
@@ -92,8 +93,8 @@ bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus
 }
 
 /**
- * Consultor del atributo "vmNodeStatus" de la clase que proporciona el estado
- * actual de la maquina de estados del nodo
+ * Método público consultor del atributo "vmNodeStatus" de la clase que 
+ * proporciona el estado actual de la máquina de estados del nodo
  * @return Atributo "vmNodeStatus" de la clase
  */
 short RosNode_Driving::getVMNodeStatus() {
@@ -101,17 +102,17 @@ short RosNode_Driving::getVMNodeStatus() {
 }
 
 /**
- * Modificador del atributo "vmNodeStatus" de la clase para realizar una 
- * transicion en la maquina de estados del nodo
- * @param[in] newVMNodeStatus Nuevo estado al que realizar la transicion
+ * Método público modificador del atributo "vmNodeStatus" de la clase para 
+ * realizar una transición en la máquina de estados del nodo
+ * @param[in] newVMNodeStatus Nuevo estado al que realizar la transición 
  */
 void RosNode_Driving::setVMNodeStatus(short newVMNodeStatus) {
   vmNodeStatus = newVMNodeStatus;
 }
 
 /**
- * Consultor del atributo "dVehicle" de la clase que proporciona la instancia 
- * del driver utilizado en la comunicacion con el vehiculo
+ * Método público consultor del atributo "dVehicle" de la clase que proporciona 
+ * la instancia  del driver utilizado en la comunicación con el vehículo
  * @return Atributo "dVehicle" de la clase
  */
 DrivingConnectionManager *RosNode_Driving::getDriverMng() {
@@ -119,11 +120,12 @@ DrivingConnectionManager *RosNode_Driving::getDriverMng() {
 }
 
 /**
- * Realiza la criba de comandos recibidos si el valor a imprimir sobre un
- * elemento esta fuera de los limites establecidos para ese elemento
+ * Método privado que realiza la criba de comandos recibidos si el valor a 
+ * imprimir sobre un elemento esta fuera de los límites establecidos para ese 
+ * elemento
  * @param[in] msg Mensaje ROS a comprobar
- * @return Booleano que indica si el comando es valido (valor dentro de los 
- * limites establecidos para dicho elemento) o no
+ * @return Booleano que indica si el comando es válido (valor dentro de los 
+ * límites establecidos para dicho elemento) o no
  */
 bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg) {
   bool ret = true;
@@ -200,9 +202,9 @@ bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg) {
 }
 
 /**
- * Publica la informacion del vehiculo que recibe como parametro en el topic 
- * ROS correspondiente
- * @param[in] info Informacion del vehiculo a publicar
+ * Método público que publica la información del vehículo que recibe como 
+ * parámetro en el topic ROS correspondiente
+ * @param[in] info Información del vehículo a publicar
  */
 void RosNode_Driving::publishDrivingInfo(DrivingInfo info) {
   CITIUS_Control_Driving::msg_vehicleInfo msg;

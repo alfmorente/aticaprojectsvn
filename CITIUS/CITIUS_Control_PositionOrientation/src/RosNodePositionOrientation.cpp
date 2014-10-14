@@ -1,16 +1,16 @@
 
 /** 
  * @file  RosNode_PositionOrientation.cpp
- * @brief Implementacion de la clase "RosNode_PositionOrientation"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "RosNode_PositionOrientation"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNose_PositionOrientation.h"
 
 /**
- * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
- * instancia que permite la gestion de los dispositivos
+ * Constructor de la clase. Inicia la máquina de estados del nodo y crea la 
+ * instancia que permite la gestión de los dispositivos
  */
 RosNode_PositionOrientation::RosNode_PositionOrientation() {
   poNodeStatus = NODESTATUS_INIT;
@@ -30,7 +30,7 @@ RosNode_PositionOrientation::~RosNode_PositionOrientation() {
 }
 
 /**
- * Inicializador de artefactos ROS
+ * Método público inicializador de artefactos ROS de la clase
  */
 void RosNode_PositionOrientation::initROS() {
   ros::NodeHandle nh;
@@ -39,8 +39,8 @@ void RosNode_PositionOrientation::initROS() {
 }
 
 /**
- * Solicita la configuracion de los dispositivos en el supuesto de que se hayan
- * iniciado correctamente
+ * Método público que solicita la configuración de los dispositivos en el 
+ * supuesto de que se hayan iniciado correctamente
  */
 void RosNode_PositionOrientation::configureDevices() {
   if (gpsinsOK) {
@@ -55,12 +55,12 @@ void RosNode_PositionOrientation::configureDevices() {
 }
 
 /**
- * Rutina del servidor de estados del nodo. Recibe las peticiones de transicion
- * y las ejecuta segun la logica establecida
- * @param[in] rq Parametros de requerimiento
- * @param[in] rsp Parametros de respuesta
+ * Método privado que recepciona las peticionesde cambios de estado del nodo. 
+ * Recibe las peticiones de transición y las ejecuta segun la lógica establecida
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
- * la peticion de servicio
+ * la petición de servicio
  */
 bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &rq, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &rsp) {
 
@@ -83,8 +83,8 @@ bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOri
 }
 
 /**
- * Consultor del atributo "poNodeStatus" de la clase que almacena el valor 
- * actual de la maquina de estados del nodo
+ * Método público consultor del atributo "poNodeStatus" de la clase que almacena 
+ * el valor actual de la máquina de estados del nodo
  * @return Atributo "poNodeStatus" de la clase
  */
 short RosNode_PositionOrientation::getPONodeStatus() {
@@ -92,8 +92,8 @@ short RosNode_PositionOrientation::getPONodeStatus() {
 }
 
 /**
- * Modificador del atributo "poNodeStatus" de la clase para modificar el valor
- * de la maquina de estados del nodo
+ * Método público modificador del atributo "poNodeStatus" de la clase para 
+ * modificar el valor de la máquina de estados del nodo
  * @param[in] newPONodeStatus Nuevo valor para el atributo "poNodeStatus"
  */
 void RosNode_PositionOrientation::setPONodeStatus(short newPONodeStatus) {
@@ -101,8 +101,8 @@ void RosNode_PositionOrientation::setPONodeStatus(short newPONodeStatus) {
 }
 
 /**
- * Consultor del atributo "gpsinsDriver" de la clase con referencia al objeto
- * que gestiona el dispositivo X-Sens MTi-G 700
+ * Método público consultor del atributo "gpsinsDriver" de la clase con 
+ * referencia al objeto que gestiona el dispositivo X-Sens MTi-G 700
  * @return Referencia al objeto de la clase "XSensMTi700Driver"
  */
 XSensMTi700Driver *RosNode_PositionOrientation::getXSensManager() {
@@ -110,8 +110,8 @@ XSensMTi700Driver *RosNode_PositionOrientation::getXSensManager() {
 }
 
 /**
- * Consultor del atributo "gpsinsDriver" de la clase con referencia al objeto
- * que gestiona el dispositivo TRAX AHRS Module
+ * Método público consultor del atributo "gpsinsDriver" de la clase con 
+ * referencia al objeto que gestiona el dispositivo TRAX AHRS Module
  * @return Referencia al objeto de la clase "TraxAHRSModuleDriver"
  */
 TraxAHRSModuleDriver *RosNode_PositionOrientation::getMagnetometerManager() {
@@ -119,8 +119,8 @@ TraxAHRSModuleDriver *RosNode_PositionOrientation::getMagnetometerManager() {
 }
 
 /**
- * Consultor del atributo "gpsinsOK" de la clase que indica si el dispositivo
- * esta disponible durante la ejecucion del nodo
+ * Método público consultor del atributo "gpsinsOK" de la clase que indica si
+ *  el dispositivo está disponible durante la ejecución del nodo
  * @return Atributo "gpsinsOK" de la clase
  */
 bool RosNode_PositionOrientation::getGpsStatus() {
@@ -128,16 +128,16 @@ bool RosNode_PositionOrientation::getGpsStatus() {
 }
 
 /**
- * Consultor del atributo "magOK" de la clase que indica si el dispositivo
- * esta disponible durante la ejecucion del nodo
- * @return Atributo "magOK" de la clase
+ * Método público consultor del atributo "magnOK" de la clase que indica si
+ *  el dispositivo está disponible durante la ejecución del nodo
+ * @return Atributo "magnOK" de la clase
  */
 bool RosNode_PositionOrientation::getMagnStatus() {
   return magnOK;
 }
 
 /**
- * Modificador del atributo "gpsinsOK" de la clase 
+ * Método público modificador del atributo "gpsinsOK" de la clase 
  * @param[in] status Nuevo valor para el atributo "gpsinsOK"
  */
 void RosNode_PositionOrientation::setGpsStatus(bool status) {
@@ -145,7 +145,7 @@ void RosNode_PositionOrientation::setGpsStatus(bool status) {
 }
 
 /**
- * Modificador del atributo "magOK" de la clase
+ * Método público modificador del atributo "magOK" de la clase
  * @param[in] status Nuevo valor para el atributo "magOK"
  */
 void RosNode_PositionOrientation::setMagnStatus(bool status) {
@@ -153,8 +153,8 @@ void RosNode_PositionOrientation::setMagnStatus(bool status) {
 }
 
 /**
- * Obtiene el valor de la ultima lectura de los dispositivos y publica la 
- * informacion en el topic correspondiente
+ * Método público que obtiene el valor de la ultima lectura de los dispositivos 
+ * y publica la información en el topic correspondiente
  */
 void RosNode_PositionOrientation::publishInformation() {
 

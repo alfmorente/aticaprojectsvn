@@ -68,6 +68,7 @@ CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o
 CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.cpp
  include/TraxAHRSModuleDriver.h
+ include/constant.h
  include/conversionTypes.h
  include/crc16calc.h
 CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o

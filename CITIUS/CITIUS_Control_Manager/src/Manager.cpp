@@ -1,9 +1,9 @@
 
 /** 
  * @file  Manager.cpp
- * @brief Implementacion de la clase "Manager"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "Manager"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "Manager.h"
@@ -32,7 +32,7 @@ Manager::~Manager() {
 }
 
 /**
- * Inicializador de artefactos ROS de la clase
+ * Método público inicializador de artefactos ROS de la clase
  */
 void Manager::initROS() {
 
@@ -54,12 +54,12 @@ void Manager::initROS() {
 }
 
 /**
- * Rutina del servidor de estados del vehiculo. Recibe las peticiones de 
- * transicion y las ejecuta/deniega segun la logica establecida
- * @param[in] rq Parametros de requerimiento
- * @param[in] rsp Parametros de respuesta
+ * Método privado que implementa el servidor de estados del vehículo. Recibe 
+ * las peticiones de transición y las ejecuta/deniega segun la lógica establecida
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
- * la peticion de servicio
+ * la petición de servicio
  */
 bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::Request &rq, CITIUS_Control_Manager::srv_vehicleStatus::Response &rsp) {
 
@@ -252,7 +252,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       // Comprobacion de errores
       // No se ha conectado con Driving. Se finaliza la ejecucion tras informar
       if (!drivingOK) {
-        ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehiculo. Finalizado");
+        ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehículo. Finalizado");
         nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
         rsp.confirmation = false;
       } else {
@@ -282,7 +282,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     case OPERATION_MODE_CONDUCCION:
 
       // Se atiende siempre que el estado actual sea OBSERVACION
-      // La otra transicion a conduccion se recibe mediante un topic en la posicion local/teleoperado
+      // La otra transición a conduccion se recibe mediante un topic en la posicion local/teleoperado
       if (currentStatus == OPERATION_MODE_OBSERVACION) {
         nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
         ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
@@ -415,10 +415,10 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
 }
 
 /**
- * Receptor de mensajes ROS ante cambios en la posicion del conmutador local / 
- * teleoperado. Cambios en el conmutador acarrean cambio de estado en el modo
- * de operacion
- * @param[in] msg Mensaje ROS con la nueva posicion del conmutador
+ * Método privado receptor de mensajes ROS ante cambios en la posición del 
+ * conmutador local / teleoperado. Cambios en el conmutador acarrean cambio de 
+ * estado en el modo de operación
+ * @param[in] msg Mensaje ROS con la nueva posición del conmutador
  */
 void Manager::fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher msg) {
 

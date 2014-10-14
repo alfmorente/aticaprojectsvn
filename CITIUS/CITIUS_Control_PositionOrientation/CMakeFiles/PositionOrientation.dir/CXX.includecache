@@ -14,10 +14,6 @@ RosNose_PositionOrientation.h
 TraxAHRSModuleDriver.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.h
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
-XSensMTi700Driver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/conversionTypes.cpp
 conversionTypes.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/conversionTypes.h
@@ -685,6 +681,8 @@ conversionTypes.h
 include/conversionTypes.h
 vector
 -
+constant.h
+include/constant.h
 
 include/XSensMTi700Driver.h
 iostream
@@ -707,6 +705,8 @@ pthread.h
 -
 vector
 -
+constant.h
+include/constant.h
 
 include/constant.h
 

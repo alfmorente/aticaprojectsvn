@@ -1,15 +1,15 @@
 
 /** 
  * @file  XSensMTi700Driver.cpp
- * @brief Implementacion de la clase "XSensMTi700Driver"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "XSensMTi700Driver"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "XSensMTi700Driver.h"
 
 /**
- * Constructor la clase. Almacena las estructuras de almacenaje de informacion
+ * Constructor la clase. Inicializa las estructuras de almacenaje de información
  * que se vaya leyendo del GPS+IMU
  */
 XSensMTi700Driver::XSensMTi700Driver() {
@@ -42,8 +42,8 @@ XSensMTi700Driver::~XSensMTi700Driver() {
 }
 
 /**
- * Inicia la conexion con el dispositivo
- * @return Booleano que indica si la conexion se ha realizado con exito
+ * Método público que inicia la conexión con el dispositivo
+ * @return Booleano que indica si la conexión se ha realizado con éxito
  */
 bool XSensMTi700Driver::connectToDevice() {
 
@@ -95,14 +95,15 @@ bool XSensMTi700Driver::connectToDevice() {
 }
 
 /**
- * Cierra la conexion con el dispositivo
+ * Método público que cierra la conexión con el dispositivo
  */
 void XSensMTi700Driver::disconnectDevice() {
   close(canal);
 }
 
 /**
- * Solicita la configuracion del dispositivo con los parametros establecidos
+ * Método público que solicita la configuración del dispositivo con los 
+ * parámetros establecidos
  */
 void XSensMTi700Driver::configureDevice() {
 
@@ -115,8 +116,9 @@ void XSensMTi700Driver::configureDevice() {
 }
 
 /**
- * Realiza una lectura del canal hasta obtener una trama completa de datos
- * @return Booleano que indica si la lectura se ha realizado con exito
+ * Método público que realiza una lectura del canal hasta obtener una trama 
+ * completa de datos
+ * @return Booleano que indica si la lectura se ha realizado con éxito
  */
 bool XSensMTi700Driver::getData() {
 
@@ -157,7 +159,8 @@ bool XSensMTi700Driver::getData() {
 }
 
 /**
- * Formacion de estructura con trama de tipo GoToConfig
+ * Método privado encargado de la formacion de estructura con trama de tipo 
+ * GoToConfig
  * @return Estructura con campos de la trama correspondiente
  */
 XsensMsg XSensMTi700Driver::goToConfig() {
@@ -171,7 +174,8 @@ XsensMsg XSensMTi700Driver::goToConfig() {
 }
 
 /**
- * Formacion de estructura con trama de tipo GoToMeasurement
+ * Método privado encargado de la formacion de estructura con trama de tipo 
+ * GoToMeasurement
  * @return Estructura con campos de la trama correspondiente
  */
 XsensMsg XSensMTi700Driver::goToMeasurement() {
@@ -185,7 +189,8 @@ XsensMsg XSensMTi700Driver::goToMeasurement() {
 }
 
 /**
- * Formacion de estructura con trama de tipo SetOutPutConfiguration
+ * Método privado encargado de la formacion de estructura con trama de tipo 
+ * SetOutPutConfiguration
  * @return Estructura con campos de la trama correspondiente
  */
 XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
@@ -236,8 +241,8 @@ XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
 }
 
 /**
- * Calcula el checksum con el que cerrar el mensaje a partir del resto de datos
- * que se incluyen en los demas campos de la trama
+ * Método privado que calcula el checksum con el que cerrar el mensaje a partir 
+ * del resto de datos que se incluyen en los demás campos de la trama
  * @param[in] msg Estructura con el resto de los campos de la trama
  * @return Valor del checksum calculado
  */
@@ -257,8 +262,8 @@ unsigned char XSensMTi700Driver::calcChecksum(XsensMsg msg) {
 }
 
 /**
- * Identifica el checksum de los datos en crudo de una trama obtenida y 
- * verifica que es correcto (validacion de la trama)
+ * Método privado que valida el checksum de los datos en crudo de una trama 
+ * obtenida
  * @param[in] frame Datos en crudo de la trama leida completa
  * @return Booleano que indica si el checksum de la trama recibida es correcto
  * o no
@@ -274,9 +279,9 @@ bool XSensMTi700Driver::isCheckSumOK(vector<unsigned char> frame) {
 }
 
 /**
- * Transformacion de Estructura con informacion de una trama a datos en crudo
- * y envio via serie
- * @param[in] msg Estructura con informacion de los campos del mensaje
+ * Método privado encargado de la transformacion de Estructura con información 
+ * de una trama a datos en crudo y envío vía serie
+ * @param[in] msg Estructura con información de los campos del mensaje
  */
 void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
   unsigned char *msg2send = (unsigned char *) malloc(msg.len + 5);
@@ -302,7 +307,8 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
 }
 
 /**
- * Permanece a la escucha por puerto serie hasta recepcion de trama con ACK
+ * Método privadoque permanece a la escucha por puerto serie hasta recepción de 
+ * trama con ACK
  * @param[in] _mid Identificador de la trama del que se espera obtener un ACK
  */
 void XSensMTi700Driver::waitForAck(unsigned char _mid) {
@@ -344,10 +350,10 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
 }
 
 /**
- * Desencapsula los distintos campos de cabecera de una trama obtenida y 
- * ordena la gestion de los datos contenidos en la misma
+ * Método privado que desencapsula los distintos campos de cabecera de una trama 
+ * obtenida y ordena la gestión de los datos contenidos en la misma
  * @param[in] frame Datos en crudo de una trama completa
- * @return Booleano que indica si la desencapsulacion se ha realizado con exito
+ * @return Booleano que indica si la desencapsulación se ha realizado con éxito
  */
 bool XSensMTi700Driver::frameMng(vector<unsigned char> frame) {
   if (frame[0] == COMMAND_PRE) {
@@ -378,9 +384,10 @@ bool XSensMTi700Driver::frameMng(vector<unsigned char> frame) {
 }
 
 /**
- * Realiza una clasificacion de los datos obtenidos de una trama y actualiza 
- * los contenedores de informacion de la clase con la ultima lectura
- * @param[in] dataPacket Estructura con informacion desencapsulada de una trama
+ * Método privado que realiza una clasificación de los datos obtenidos de una 
+ * trama y actualiza los contenedores de información de la clase con la última 
+ * lectura
+ * @param[in] dataPacket Estructura con información desencapsulada de una trama
  * de datos
  */
 void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
@@ -679,7 +686,8 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
 }
 
 /**
- * Funcion de conversion de tipos. Convierte un vector de bytes en un float
+ * Funcion privada de conversión de tipos. Convierte un vector de bytes en un 
+ * float
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Float resultado de la conversion
  */
@@ -700,7 +708,8 @@ float XSensMTi700Driver::hexa2float(vector<unsigned char> buffer) {
 }
 
 /**
- * Funcion de conversion de tipos. Convierte un vector de bytes en un int
+ * Funcion privada de conversión de tipos. Convierte un vector de bytes en un 
+ * int
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Int resultado de la conversion
  */
@@ -721,7 +730,8 @@ int XSensMTi700Driver::hexa2int(vector<unsigned char> buffer) {
 }
 
 /**
- * Funcion de conversion de tipos. Convierte un vector de bytes en un double
+ * Funcion privada de conversión de tipos. Convierte un vector de bytes en un 
+ * double
  * @param[in] buffer[in] Datos en crudo a convertir
  * @return Double resultado de la conversion
  */
@@ -745,8 +755,8 @@ double XSensMTi700Driver::hexa2double(vector<unsigned char> buffer) {
 }
 
 /**
- * Consultor del atributo "posOriInfo" con informacion de la ultima lectura
- * realizada de los dispositivos
+ * Método público consultor del atributo "posOriInfo" con información de la 
+ * última lectura realizada de los dispositivos
  * @return Atributo "posOriInfo" de la clase
  */
 GPSINSInfo XSensMTi700Driver::getInfo() {

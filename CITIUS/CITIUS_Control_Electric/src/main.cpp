@@ -2,9 +2,10 @@
 /** 
  * @file  main.cpp
  * @brief Funcion principal del nodo Driving del subsistema de control
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
+
 
 #include "RosNode_Electric.h"
 

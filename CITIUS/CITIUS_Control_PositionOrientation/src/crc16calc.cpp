@@ -1,7 +1,7 @@
 
 /** 
  * @file  crc16calc.h
- * @brief Declara una coleccion de funciones para la obtencion del campo CRC16 
+ * @brief Declara una colección de funciones para la obtención del campo CRC16 
  * a partir de los datos en crudo de una trama
  * @date: 2013, 2014
  */
@@ -9,7 +9,7 @@
 #include "crc16calc.h"
 
 /**
- * Funcion auxiliar sin efecto necesaria para la implementacion de otras
+ * Función auxiliar sin efecto necesaria para la implementacion de otras
  * @param[in] value Valor de entrada 
  * @return Valor de salida
  */
@@ -18,7 +18,7 @@ uint16_t straight_16(uint16_t value) {
 }
 
 /**
- * Funcion auxiliar sin efecto necesaria para la implementacion de otras
+ * Función auxiliar sin efecto necesaria para la implementacion de otras
  * @param[in] value Valor de entrada 
  * @return Valor de salida
  */
@@ -27,7 +27,7 @@ uint8_t straight_8(uint8_t value) {
 }
 
 /**
- * Calcula el CRC16 en base al mensaje integro
+ * Función que calcula el CRC16 en base al mensaje íntegro
  * @param[in] message Mensaje del que calcula el CRC16
  * @param[in] nBytes Longitud del mensaje en bytes
  * @param[in] data_order Sin importancia
@@ -51,7 +51,7 @@ uint16_t crc16(uint8_t *message, int nBytes, bit_order_8 data_order, bit_order_1
 }
 
 /**
- * Calcula el CRC16 (CCITT Xmodem) en base al mensaje integro
+ * Función que calcula el CRC16 (CCITT Xmodem) en base al mensaje íntegro
  * @param[in] message Mensaje del que calcula el CRC16
  * @param[in] nBytes Longitud del mensaje en bytes
  * @return Valor del CRC16 calculado

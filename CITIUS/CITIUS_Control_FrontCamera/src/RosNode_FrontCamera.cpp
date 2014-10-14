@@ -1,16 +1,16 @@
 
 /** 
  * @file  RosNode_FrontCamera.cpp
- * @brief Implementacion de la clase "RosNode_FrontCamera"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "RosNode_FrontCamera"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_FrontCamera.h"
 
 /**
  * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
- * instancia que permite la gestion de la camara
+ * instancia que permite la gestion de la cámara
  */
 RosNode_FrontCamera::RosNode_FrontCamera() {
   fcNodeStatus = NODESTATUS_INIT;
@@ -18,7 +18,7 @@ RosNode_FrontCamera::RosNode_FrontCamera() {
 }
 
 /**
- * Inicializador de artefactos ROS de la clase
+ * Método público inicializador de artefactos ROS de la clase
  */
 void RosNode_FrontCamera::initROS() {
   ros::NodeHandle nh;
@@ -28,9 +28,9 @@ void RosNode_FrontCamera::initROS() {
 }
 
 /**
- * Receptor de mensajes ROS para el control de la camara. Recibe las ordenes
- * y las transmite hacia la camara
- * @param[in] msg Mensaje ROS con ordenes de actuacion sobre la camara
+ * Método privado receptor de mensajes ROS para el control de la cámara. Recibe 
+ * las órdenes y las transmite hacia la cámara
+ * @param[in] msg Mensaje ROS con órdenes de actuacion sobre la cámara
  */
 void RosNode_FrontCamera::fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg) {
   if (msg.isZoom) dFrontCamera->setZoom(msg.zoom);
@@ -39,12 +39,12 @@ void RosNode_FrontCamera::fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::ms
 }
 
 /**
- * Rutina del servidor de estados del nodo. Recibe las peticiones de transicion
- * y las ejecuta segun la logica establecida
- * @param[in] rq Parametros de requerimiento
- * @param[in] rsp Parametros de respuesta
+ * Método privado que recepciona las peticionesde cambios de estado del nodo. 
+ * Recibe las peticiones de transición y las ejecuta segun la lógica establecida
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
- * la peticion de servicio
+ * la petición de servicio
  */
 bool RosNode_FrontCamera::fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_nodeStatus::Request &rq, CITIUS_Control_FrontCamera::srv_nodeStatus::Response &rsp) {
   if (rq.status == NODESTATUS_OK) {
@@ -60,8 +60,8 @@ bool RosNode_FrontCamera::fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_no
 }
 
 /**
- * Consultor del atributo "fcNodeStatus" de la clase que registra el estado
- * actual en el que se encuentra la maquina de estados
+ * Método público consultor del atributo "fcNodeStatus" de la clase que registra 
+ * el estado actual en el que se encuentra la máquina de estados
  * @return Atributo "fcNodeStatus" de la clase
  */
 short RosNode_FrontCamera::getFcNodeStatus() {
@@ -69,7 +69,7 @@ short RosNode_FrontCamera::getFcNodeStatus() {
 }
 
 /**
- * Modificador del atributo "fcNodeStatus" de la clase
+ * Método público modificador del atributo "fcNodeStatus" de la clase
  * @param[in] newFcNodeStatus Nuevo valor para el atributo
  */
 void RosNode_FrontCamera::setFcNodeStatus(short newFcNodeStatus) {
@@ -77,8 +77,8 @@ void RosNode_FrontCamera::setFcNodeStatus(short newFcNodeStatus) {
 }
 
 /**
- * Consultor del atributo "pubFrontCameraInfo" de la clase con el publicador 
- * de informacion del estado de la camara
+ * Método público consultor del atributo "pubFrontCameraInfo" de la clase con el 
+ * publicador de información del estado de la cámara
  * @return Atributo "pubFrontCameraInfo"
  */
 ros::Publisher RosNode_FrontCamera::getPubFrontCameraInfo() {
@@ -86,8 +86,9 @@ ros::Publisher RosNode_FrontCamera::getPubFrontCameraInfo() {
 }
 
 /**
- * Consultor del atributo "dFrontCamera" de la clase con una referencia a la 
- * instancia de la clase que gestiona la comunicacion con la camara
+ * Método público consultor del atributo "dFrontCamera" de la clase con una 
+ * referencia a la instancia de la clase que gestiona la comunicación con la 
+ * cámara
  * @return Atributo "dFrontCamera"
  */
 AxisP3364LveDriver *RosNode_FrontCamera::getDriverMng() {

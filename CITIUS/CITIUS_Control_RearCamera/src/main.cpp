@@ -1,17 +1,17 @@
 
 /** 
  * @file  main.cpp
- * @brief Funcion principal del nodo RearCamera del subsistema de control
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Función principal del nodo RearCamera del subsistema de control
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_RearCamera.h"
 
 /**
- * Metodo principal del nodo. Inicializa modulos ROS y lanza el
- * intercambio y la recepcion de mensajes con la camara
- * @param[in] argc Numero de argumentos
+ * Metodo principal del nodo. Inicializa modulos ROS y lanza el intercambio de 
+ * mensajes con la cámara
+ * @param[in] argc Número de argumentos
  * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */

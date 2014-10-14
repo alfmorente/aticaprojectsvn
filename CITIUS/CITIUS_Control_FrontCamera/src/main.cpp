@@ -1,17 +1,17 @@
 
 /** 
  * @file  main.cpp
- * @brief Funcion principal del nodo FrontCamera del subsistema de control
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Función principal del nodo FrontCamera del subsistema de control
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_FrontCamera.h"
 
 /**
- * Metodo principal del nodo. Inicializa modulos ROS y lanza el
- * intercambio y la recepcion de mensajes con la camara
- * @param[in] argc Numero de argumentos
+ * Metodo principal del nodo. Inicializa modulos ROS y lanza el intercambio de 
+ * mensajes con la cámara
+ * @param[in] argc Número de argumentos
  * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */
@@ -51,11 +51,9 @@ int main(int argc, char** argv) {
         initTime = clock();
 
         // Envio de parametros (activo para no perder informacion)
-        fc->getDriverMng()->sentSetToDevice(ORDER_PAN, fc->getDriverMng()->getPan());
-
-        fc->getDriverMng()->sentSetToDevice(ORDER_TILT, fc->getDriverMng()->getTilt());
-
-        fc->getDriverMng()->sentSetToDevice(ORDER_ZOOM, fc->getDriverMng()->getZoom());
+        fc->getDriverMng()->sendSetToDevice(ORDER_PAN, fc->getDriverMng()->getPan());
+        fc->getDriverMng()->sendSetToDevice(ORDER_TILT, fc->getDriverMng()->getTilt());
+        fc->getDriverMng()->sendSetToDevice(ORDER_ZOOM, fc->getDriverMng()->getZoom());
 
         // Requerimiento de informacion de dispositivo
         LensPosition lensPos = fc->getDriverMng()->getPosition();

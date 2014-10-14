@@ -1,16 +1,16 @@
 
 /** 
  * @file  RosNode_RearCamera.cpp
- * @brief Implementacion de la clase "RosNode_RearCamera"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "RosNode_RearCamera"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_RearCamera.h"
 
 /**
  * Constructor de la clase. Inicia la maquina de estados del nodo y crea la 
- * instancia que permite la gestion de la camara
+ * instancia que permite la gestion de la cámara
  */
 RosNode_RearCamera::RosNode_RearCamera() {
   rcNodeStatus = NODESTATUS_INIT;
@@ -18,7 +18,7 @@ RosNode_RearCamera::RosNode_RearCamera() {
 }
 
 /**
- * Inicializador de artefactos ROS de la clase
+ * Método público inicializador de artefactos ROS de la clase
  */
 void RosNode_RearCamera::initROS() {
   ros::NodeHandle nh;
@@ -28,9 +28,9 @@ void RosNode_RearCamera::initROS() {
 }
 
 /**
- * Receptor de mensajes ROS para el control de la camara. Recibe las ordenes
- * y las transmite hacia la camara
- * @param[in] msg Mensaje ROS con ordenes de actuacion sobre la camara
+ * Método privado receptor de mensajes ROS para el control de la cámara. Recibe 
+ * las órdenes y las transmite hacia la cámara
+ * @param[in] msg Mensaje ROS con órdenes de actuacion sobre la cámara
  */
 void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg) {
   if (msg.isZoom) dRearCamera->setZoom(msg.zoom);
@@ -39,12 +39,12 @@ void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_c
 }
 
 /**
- * Rutina del servidor de estados del nodo. Recibe las peticiones de transicion
- * y las ejecuta segun la logica establecida
- * @param[in] rq Parametros de requerimiento
- * @param[in] rsp Parametros de respuesta
+ * Método privado que recepciona las peticionesde cambios de estado del nodo. 
+ * Recibe las peticiones de transición y las ejecuta segun la lógica establecida
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
  * @return Booleano que indica si se ha realizado el correcto tratamiento de
- * la peticion de servicio
+ * la petición de servicio
  */
 bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp) {
   if (rq.status == NODESTATUS_OK) {
@@ -60,16 +60,16 @@ bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_node
 }
 
 /**
- * Consultor del atributo "rcNodeStatus" de la clase que registra el estado
- * actual en el que se encuentra la maquina de estados
- * @return Atributo "fcNodeStatus" de la clase
+ * Método público consultor del atributo "rcNodeStatus" de la clase que registra 
+ * el estado actual en el que se encuentra la máquina de estados
+ * @return Atributo "rcNodeStatus" de la clase
  */
 short RosNode_RearCamera::getRcNodeStatus() {
   return rcNodeStatus;
 }
 
 /**
- * Modificador del atributo "rcNodeStatus" de la clase
+ * Método público modificador del atributo "rcNodeStatus" de la clase
  * @param[in] newRcNodeStatus Nuevo valor para el atributo
  */
 void RosNode_RearCamera::setRcNodeStatus(short newRcNodeStatus) {
@@ -77,8 +77,8 @@ void RosNode_RearCamera::setRcNodeStatus(short newRcNodeStatus) {
 }
 
 /**
- * Consultor del atributo "pubRearCameraInfo" de la clase con el publicador 
- * de informacion del estado de la camara
+ * Método público consultor del atributo "pubRearCameraInfo" de la clase con el 
+ * publicador de información del estado de la cámara
  * @return Atributo "pubRearCameraInfo"
  */
 ros::Publisher RosNode_RearCamera::getPubRearCameraInfo() {
@@ -86,8 +86,9 @@ ros::Publisher RosNode_RearCamera::getPubRearCameraInfo() {
 }
 
 /**
- * Consultor del atributo "dRearCamera" de la clase con una referencia a la 
- * instancia de la clase que gestiona la comunicacion con la camara
+ * Método público consultor del atributo "dRearCamera" de la clase con una 
+ * referencia a la instancia de la clase que gestiona la comunicación con la 
+ * cámara
  * @return Atributo "dRearCamera"
  */
 AxisP3364LveDriver *RosNode_RearCamera::getDriverMng() {

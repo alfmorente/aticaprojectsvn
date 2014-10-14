@@ -4,6 +4,7 @@
 CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/AxisP3364LveDriver.cpp
  include/AxisP3364LveDriver.h
+ include/constant.h
 CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
