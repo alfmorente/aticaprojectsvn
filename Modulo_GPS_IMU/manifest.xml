@@ -1,0 +1,16 @@
+<package>
+  <description brief="Modulo_GPS_IMU">
+
+     Modulo_GPS_IMU
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_GPS_IMU</url>
+  <depend package="roscpp"/>
+  <depend package="Common_files"/>
+
+</package>
+
+
