@@ -3,8 +3,10 @@
  * @file  JausHandler.h
  * @brief Declara el tipo de la clase "JausHandler"
  * - La clase implementa el manejo del NodeManager en la arquitectura JAUS
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef JAUSHANDLER_H
@@ -16,8 +18,11 @@
 #include <unistd.h>
 #include <termios.h>
 
-#endif	/* JAUSHANDLER_H */
-
+/**
+ * /class JausHandler
+ * /brief Clase que representa al manejador de eventos producidos durante la
+ * ejecucion del middleware de JAUS
+ */
 class JausHandler : public EventHandler {
 public:
   JausHandler();
@@ -27,3 +32,9 @@ private:
   // Manejador de eventos
   void handleEvent(NodeManagerEvent *e);
 };
+
+#endif	/* JAUSHANDLER_H */
+
+/**
+ * @}
+ */

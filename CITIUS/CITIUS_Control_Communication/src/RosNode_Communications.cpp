@@ -1,9 +1,9 @@
 
 /** 
  * @file  RosNode_Communications.cpp
- * @brief Implementacion de la clase "RosNode_Communications"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "RosNode_Communications"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_Communications.h"
@@ -12,8 +12,9 @@
 bool RosNode_Communications::instanceCreated = false;
 RosNode_Communications *RosNode_Communications::instance = NULL;
 
-/** Implementacion de patron Singleton. Aseguramiento de una única instancia de 
- * la clase.
+/** 
+ * Método público utilizado para el uso del patron Singleton. Aseguramiento de 
+ * una única instancia de la clase.
  * @return Instancia de la clase "RosNode_Communications" si no existiera
  */
 RosNode_Communications *RosNode_Communications::getInstance() {
@@ -24,13 +25,18 @@ RosNode_Communications *RosNode_Communications::getInstance() {
   return instance;
 }
 
-/** Constructor de la clase*/
+/** 
+ * Constructor de la clase
+ */
 RosNode_Communications::RosNode_Communications() {
   subsystemController = 3; // UGV
   nodeController = 1; // Control
 }
 
-/** Inicia los artefactos ROS que la clase contiene en sus atributos */
+/** 
+ * Método público que inicia los artefactos ROS que la clase contiene en sus 
+ * atributos 
+ */
 void RosNode_Communications::initROS() {
   ros::NodeHandle nh;
   // Inicializacion de publicadores
@@ -67,8 +73,10 @@ void RosNode_Communications::initROS() {
   this->clientShootTel = nh.serviceClient<CITIUS_Control_Communication::srv_shoot>("LRFShoot");
 }
 
-/** Inicia los artefactos JAUS que la clase contiene en sus atributos y puesta 
- * en marcha */
+/** 
+ * Método público que inicia los artefactos JAUS que la clase contiene en sus 
+ * atributos y puesta en marcha de los mismos
+ */
 void RosNode_Communications::initJAUS() {
 
   // Inicializacion de JAUS
@@ -221,8 +229,10 @@ void RosNode_Communications::initJAUS() {
   ojCmptRun(heartBeatInformationComponent);
 }
 
-/** Destructor de artefactos JAUS de la clase*/
-
+/** 
+ * Método público que hace de destructor de componentes JAUS de la clase para
+ * su finalización
+ */
 void RosNode_Communications::endJAUS() {
   ojCmptDestroy(missionSpoolerComponent);
   ojCmptDestroy(primitiveDriverComponent);
@@ -234,6 +244,54 @@ void RosNode_Communications::endJAUS() {
   ojCmptDestroy(heartBeatInformationComponent);
 }
 
+/** 
+ * Método público que obtiene el modo de operación activo de la máquina de 
+ * estados, lo traduce a JAUS (Report Mission Status) y lo envía al controlador
+ */
+void RosNode_Communications::informStatus() {
+
+  // Obtencion del estado
+  int status;
+  ros::NodeHandle nh;
+  nh.getParam("vehicleStatus", status);
+  JausMessage jMsg = NULL;
+
+  // Creacion de la direccion destinataria
+  JausAddress jAdd = jausAddressCreate();
+  jAdd->subsystem = instance->subsystemController;
+  jAdd->node = instance->nodeController;
+  jAdd->component = JAUS_MISSION_SPOOLER;
+  jAdd->instance = 2;
+
+  // Generacion de mensaje especifico UGV Info
+  ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
+  if (status == OPERATION_MODE_LOCAL) {
+    rmsm->missionId = 1;
+  } else if (status == OPERATION_MODE_CONDUCCION) {
+    rmsm->missionId = 5;
+  } else if (status == OPERATION_MODE_OBSERVACION) {
+    rmsm->missionId = 6;
+  } else {
+    rmsm->missionId = 0;
+  }
+  rmsm->status = 0;
+
+  jausAddressCopy(rmsm->destination, jAdd);
+
+  // Generacion de mensaje JUAS global
+  jMsg = reportMissionStatusMessageToJausMessage(rmsm);
+
+  if (jMsg != NULL) {
+    ojCmptSendMessage(instance->missionSpoolerComponent, jMsg);
+  } else {
+    ////ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+  }
+  // Liberacion de memoria
+  reportMissionStatusMessageDestroy(rmsm);
+  jausAddressDestroy(jAdd);
+  jausMessageDestroy(jMsg);
+}
+
 
 /*******************************************************************************
  *******************************************************************************
@@ -241,11 +299,12 @@ void RosNode_Communications::endJAUS() {
  *******************************************************************************
  ******************************************************************************/
 
-/** Consumidor de topic asociado a informacion de la camara de apoyo a la
- * conduccion delantera. Traduce la informacion a JAUS y la envia al controlador
- * @param[in] msg Mensaje ROS con informacion de la camara delantera
+/** 
+ * Método privado consumidor de topic asociado a información de la cámara de 
+ * apoyo a la conducción delantera. Traduce la información a JAUS y la envia al 
+ * controlador
+ * @param[in] msg Mensaje ROS con información de la cámara delantera
  */
-
 void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion de camara delantera");
 
@@ -264,11 +323,12 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion de la camara de apoyo a la
- * conduccion trasera. Traduce la informacion a JAUS y la envia al controlador
- * @param[in] msg Mensaje ROS con informacion de la camara trasera
+/** 
+ * Método privado consumidor de topic asociado a información de la cámara de 
+ * apoyo a la conducción trasera. Traduce la información a JAUS y la envia al 
+ * controlador
+ * @param[in] msg Mensaje ROS con información de la cámara trasera
  */
-
 void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communication::msg_rearCameraInfo msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion de camara trasera");
 
@@ -287,13 +347,13 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion del modulo de conduccion del 
- * vehiculo. Traduce la informacion a JAUS (Report Discrete Device/Report Wrench
- * Effort/Report Signaling Elements/Report Travel Speed) y la envia al 
- * controlador
+/** 
+ * Método privado consumidor de topic asociado a información del modulo de 
+ * conducción del vehículo. Traduce la información a JAUS (Report Discrete 
+ * Device/Report Wrench Effort/Report Signaling Elements/Report Travel Speed) y 
+ * la envía al controlador
  * @param[in] msg Mensaje ROS con informacion del modulo de conduccion
  */
-
 void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion de vehiculo");
 
@@ -356,12 +416,12 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion del modulo de gestion energetica
- *  del vehiculo. Traduce la informacion a JAUS (UGV Info) y la envia al 
- * controlador
- * @param[in] msg Mensaje ROS con informacion del modulo de conduccion
+/** 
+ * Método privado consumidor de topic asociado a información del módulo de 
+ * gestión eléctrica del vehículo. Traduce la información a JAUS (UGV Info) y la 
+ * envía al controlador
+ * @param[in] msg Mensaje ROS con información del modulo de conducción
  */
-
 void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion electrica");
 
@@ -380,12 +440,13 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion recopilada de los sensores de 
- * Posicion/Orientacion. Traduce la informacion a JAUS (Report Global Pose/
- * Report Velocity State/Additional GPS/INS Info) y la envia al controlador
- * @param[in] msg Mensaje ROS con informacion de posicion/orientacion
+/** 
+ * Método privado consumidor de topic asociado a información recopilada de los 
+ * sensores de Posición/Orientación. Traduce la información a JAUS (Report 
+ * Global Pose/Report Velocity State/Additional GPS/INS Info) y la envía al 
+ * controlador
+ * @param[in] msg Mensaje ROS con información de posición/orientación
  */
-
 void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::msg_posOriInfo msg) {
 
   //ROS_INFO("[Control] Communications - Recibido mensaje de Position Orientation");
@@ -467,12 +528,12 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion recopilada de la camara IR.
- *  Traduce la informacion a JAUS (Report Night-time Camera) y la envia al 
- * controlador
- * @param[in] msg Mensaje ROS con informacion de camara IR
+/** 
+ * Método privado consumidor de topic asociado a información recopilada de la 
+ * cámara IR. Traduce la información a JAUS (Report Night-time Camera) y la 
+ * envía al controlador
+ * @param[in] msg Mensaje ROS con información de camara IR
  */
-
 void RosNode_Communications::fcn_subs_irCameraInfo(CITIUS_Control_Communication::msg_irinfo msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion camara IR");
 
@@ -491,11 +552,12 @@ void RosNode_Communications::fcn_subs_irCameraInfo(CITIUS_Control_Communication:
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion recopilada del telemetro.
- *  Traduce la informacion a JAUS (Report Telemeter) y la envia al controlador
- * @param[in] msg Mensaje ROS con informacion de telemetro
+/** 
+ * Método privado consumidor de topic asociado a información recopilada del 
+ * telémetro. Traduce la información a JAUS (Report Telemeter) y la envía al 
+ * controlador
+ * @param[in] msg Mensaje ROS con información de telemetro
  */
-
 void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion telemetro");
 
@@ -514,12 +576,12 @@ void RosNode_Communications::fcn_subs_telemeterInfo(CITIUS_Control_Communication
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion recopilada de la camara TV.
- *  Traduce la informacion a JAUS (Report Day-time Camera) y la envia al 
- * controlador
- * @param[in] msg Mensaje ROS con informacion de camara TV
+/** 
+ * Método privado consumidor de topic asociado a información recopilada de la 
+ * cámara TV. Traduce la información a JAUS (Report Day-time Camera) y la envía 
+ * al controlador
+ * @param[in] msg Mensaje ROS con información de camara TV
  */
-
 void RosNode_Communications::fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion camara diurna (TV)");
 
@@ -538,11 +600,12 @@ void RosNode_Communications::fcn_subs_tvCameraInfo(CITIUS_Control_Communication:
   jausMessageDestroy(jMsg);
 }
 
-/** Consumidor de topic asociado a informacion recopilada del posicionador
- *  Traduce la informacion a JAUS (Report Positioner) y la envia al controlador
- * @param[in] msg Mensaje ROS con informacion del posicionador
+/** 
+ * Método privado consumidor de topic asociado a información recopilada del 
+ * posicionador. Traduce la información a JAUS (Report Positioner) y la envía al 
+ * controlador
+ * @param[in] msg Mensaje ROS con información del posicionador
  */
-
 void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg) {
   //ROS_INFO("[Control] Communications - Recibida informacion posicionador");
 
@@ -561,53 +624,6 @@ void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communicatio
   jausMessageDestroy(jMsg);
 }
 
-/** Obtiene el modo de operacion activo de la maquina de estados, lo traduce a
- * JAUS (Report Mission Status) y lo envia al controlador
- */
-void RosNode_Communications::informStatus() {
-
-  // Obtencion del estado
-  int status;
-  ros::NodeHandle nh;
-  nh.getParam("vehicleStatus", status);
-  JausMessage jMsg = NULL;
-
-  // Creacion de la direccion destinataria
-  JausAddress jAdd = jausAddressCreate();
-  jAdd->subsystem = instance->subsystemController;
-  jAdd->node = instance->nodeController;
-  jAdd->component = JAUS_MISSION_SPOOLER;
-  jAdd->instance = 2;
-
-  // Generacion de mensaje especifico UGV Info
-  ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
-  if (status == OPERATION_MODE_LOCAL) {
-    rmsm->missionId = 1;
-  } else if (status == OPERATION_MODE_CONDUCCION) {
-    rmsm->missionId = 5;
-  } else if (status == OPERATION_MODE_OBSERVACION) {
-    rmsm->missionId = 6;
-  } else {
-    rmsm->missionId = 0;
-  }
-  rmsm->status = 0;
-
-  jausAddressCopy(rmsm->destination, jAdd);
-
-  // Generacion de mensaje JUAS global
-  jMsg = reportMissionStatusMessageToJausMessage(rmsm);
-
-  if (jMsg != NULL) {
-    ojCmptSendMessage(instance->missionSpoolerComponent, jMsg);
-  } else {
-    ////ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
-  }
-  // Liberacion de memoria
-  reportMissionStatusMessageDestroy(rmsm);
-  jausAddressDestroy(jAdd);
-  jausMessageDestroy(jMsg);
-}
-
 /*******************************************************************************
  *******************************************************************************
  *                              CALLBACKS JAUS                                 *
@@ -616,12 +632,12 @@ void RosNode_Communications::informStatus() {
 
 // Componente Mission Spooler
 
-/** Receptor de mensaje JAUS "Run Mission". Solicita cambio de modo de operacion
- * a la maquina de estados
+/** 
+ * Método privado que recibe mensajes tipo JAUS "Run Mission". Solicita cambio 
+ * de modo de operacióna la maquina de estados
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
-
 void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg) {
   RunMissionMessage rMission = runMissionMessageFromJausMessage(msg);
   CITIUS_Control_Communication::srv_vehicleStatus vehicleStatus;
@@ -655,13 +671,13 @@ void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg
 
 // Componente Primitive Driver
 
-/** Receptor de mensaje JAUS "Set Wrench Effort". Traduce la informacion a 
- * mensaje ROS (msg_command) y la publica en el topic correspondiente para la 
- * ejecucion de comandos de control del vehiculo 
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Wrench Effort". Traduce 
+ * la información a mensaje ROS (msg_command) y la publica en el topic 
+ * correspondiente para la ejecución de comandos de control del vehiculo 
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
-
 void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
   SetWrenchEffortMessage sWrenchEffort = setWrenchEffortMessageFromJausMessage(msg);
   CITIUS_Control_Communication::msg_command command;
@@ -692,13 +708,13 @@ void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessa
   setWrenchEffortMessageDestroy(sWrenchEffort);
 }
 
-/** Receptor de mensaje JAUS "Set Discrete Devices". Traduce la informacion a 
- * mensaje ROS (msg_command) y la publica en el topic correspondiente para la 
- * ejecucion de comandos de control del vehiculo 
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Discrete Devices". 
+ * Traduce la información a mensaje ROS (msg_command) y la publica en el topic 
+ * correspondiente para la ejecución de comandos de control del vehiculo 
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
-
 void RosNode_Communications::fcn_receive_set_discrete_devices(OjCmpt cmp, JausMessage msg) {
   SetDiscreteDevicesMessage sDiscreteDevice = setDiscreteDevicesMessageFromJausMessage(msg);
   CITIUS_Control_Communication::msg_command command;
@@ -727,14 +743,14 @@ void RosNode_Communications::fcn_receive_set_discrete_devices(OjCmpt cmp, JausMe
 
 // Componente Visual Sensor
 
-/** Receptor de mensaje JAUS "Set Camera Pose". Traduce la informacion a 
- * mensaje ROS (msg_ctrlXCamera) y la publica en el topic correspondiente para
- * la ejecucion de comandos de control sobre las camaras de apoyo a la 
- * conduccion
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Camera Pose". Traduce la 
+ * información a mensaje ROS (msg_ctrlXCamera) y la publica en el topic 
+ * correspondiente para la ejecución de comandos de control sobre las cámaras de 
+ * apoyo a la conducción
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
-
 void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage msg) {
   SetCameraPoseMessage sCameraPose = setCameraPoseMessageFromJausMessage(msg);
   // Camara delantera
@@ -799,9 +815,11 @@ void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage
   setCameraPoseMessageDestroy(sCameraPose);
 }
 
-/** Receptor de mensaje JAUS "Set Signaling Elements". Traduce la informacion a 
- * mensaje ROS (msg_command) y la publica en el topic correspondiente para la 
- * ejecucion de ordenes sobre elementos de señalizacion del vehiculo
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Signaling Elements". 
+ * Traduce la información a mensaje ROS (msg_command) y la publica en el topic 
+ * correspondiente para la ejecución de órdenes sobre elementos de señalización 
+ * del vehículo
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
@@ -855,9 +873,10 @@ void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, Jaus
   setSignalingElements18MessageDestroy(sSignaling);
 }
 
-/** Receptor de mensaje JAUS "Set Positioner". Obtiene la informacion del 
- * mensaje y hace uso de los servicios ROS disponibles para solicitar la 
- * ejecucion de las ordenes de actuacion sobre el posicionador
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Positioner". Obtiene la 
+ * información del mensaje y hace uso de los servicios ROS disponibles para 
+ * solicitar la ejecución de las ordenes de actuación sobre el posicionador
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
@@ -938,9 +957,11 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
 
 }
 
-/** Receptor de mensaje JAUS "Set Day-time Camera". Obtiene la informacion del 
- * mensaje y hace uso de los servicios ROS disponibles para solicitar la 
- * ejecucion de las ordenes de actuacion sobre la camara TV
+/** 
+ * Método privado que recibe mensajes de tipo JAUS "Set Day-time Camera". 
+ * Obtiene la información del mensaje y hace uso de los servicios ROS 
+ * disponibles para solicitar la ejecución de las órdenes de actuación sobre la 
+ * cámara TV
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
@@ -1020,9 +1041,11 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
   }
 }
 
-/** Receptor de mensaje JAUS "Set Day-time Camera". Obtiene la informacion del 
- * mensaje y hace uso de los servicios ROS disponibles para solicitar la 
- * ejecucion de las ordenes de actuacion sobre la camara IR
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Day-time Camera". 
+ * Obtiene la información del mensaje y hace uso de los servicios ROS 
+ * disponibles para solicitar la ejecución de las órdenes de actuación sobre la 
+ * cámara IR
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
@@ -1069,9 +1092,10 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
 
 // Componente Platform Sensor
 
-/** Receptor de mensaje JAUS "Set Telemeter". Obtiene la informacion del 
- * mensaje y hace uso de los servicios ROS disponibles para solicitar la 
- * ejecucion de las ordenes de actuacion sobre el telemetro
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Telemeter". Obtiene la 
+ * información del mensaje y hace uso de los servicios ROS disponibles para 
+ * solicitar la ejecución de las órdenes de actuación sobre el telémetro
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
@@ -1098,9 +1122,10 @@ void RosNode_Communications::fcn_receive_set_telemeter(OjCmpt cmp, JausMessage m
 
 // Componente Velocity State Sensor
 
-/** Receptor de mensaje JAUS "Set Travel Speed". Traduce la informacion a 
- * mensaje ROS (msg_command) y la publica en el topic correspondiente para la 
- * ejecucion de comandos de control del vehiculo 
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "Set Travel Speed". Traduce 
+ * la información a mensaje ROS (msg_command) y la publica en el topic 
+ * correspondiente para la ejecución de comandos de control del vehículo 
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
  */
@@ -1119,7 +1144,8 @@ void RosNode_Communications::fcn_receive_set_travel_speed(OjCmpt cmp, JausMessag
 
 // Componente HeartBeat Information
 
-/** Receptor de mensaje JAUS "HeartBeat - Channel State".
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "HeartBeat - Channel State".
  * @todo Recepcion innecesaria en este nivel? 
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado
@@ -1128,7 +1154,8 @@ void RosNode_Communications::fcn_receive_heartbeat_channel_state(OjCmpt cmp, Jau
 
 }
 
-/** Receptor de mensaje JAUS "HeartBeat - Position Info".
+/** 
+ * Método privado que recibe mensajes JAUS de tipo "HeartBeat - Position Info".
  * @todo Recepcion innecesaria en este nivel? 
  * @param[in] cmp Componente JAUS emisor
  * @param[in] msg Mensaje JAUS capturado

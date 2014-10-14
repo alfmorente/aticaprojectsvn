@@ -4,8 +4,10 @@
  * @brief Declara el tipo de la clase "RosNode_Communication"
  * - La clase implementa la gestión del nodo de Comunicaciones del 
  * Subsistema de control del UGV
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef COMMUNICATION_H
@@ -49,10 +51,12 @@
 #include "openJaus.h"
 #include "JausHandler.h"
 
-#endif	/* COMMUNICATION_H */
-
 using namespace std;
 
+/**
+ * /class RosNode_Communications
+ * /brief Clase que representa al nodo ROS de gestión de comunicaciones
+*/
 class RosNode_Communications {
 public:
 
@@ -156,3 +160,9 @@ private:
   void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
 
 };
+
+#endif	/* COMMUNICATION_H */
+
+/**
+ * @}
+ */
