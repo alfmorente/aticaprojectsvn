@@ -1,9 +1,9 @@
 
 /** 
  * @file  TranslatorROSJAUS.cpp
- * @brief Implementacion de la clase "TranslatorROSJAUS"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "TranslatorROSJAUS"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "TranslatorROSJAUS.h"
@@ -14,8 +14,8 @@ TranslatorROSJAUS::TranslatorROSJAUS() {
 }
 
 /**
- * Obtiene mensaje JAUS - Report Wrench Effort a partir de informacion del 
- * vehículo
+ * Método público que obtiene mensaje JAUS - Report Wrench Effort a partir de 
+ * información del vehículo
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] steer Valor de lectura de la dirección
@@ -49,8 +49,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(int subDest, int n
 }
 
 /**
- * Obtiene mensaje JAUS - Report Discrete Devices a partir de informacion del 
- * vehículo 
+ * Método público que obtiene mensaje JAUS - Report Discrete Devices a partir de
+ * información del vehículo 
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] parkingbrake Valor de lectura del freno de estacionamiento
@@ -83,8 +83,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(int subDest, int
 }
 
 /**
- * Obtiene mensaje JAUS - Report Travel Speed a partir de informacion del 
- * vehículo 
+ * Método público que obtiene mensaje JAUS - Report Travel Speed a partir de 
+ * información del vehículo 
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] speed Valor de lectura de la velocidad de crucero
@@ -114,8 +114,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(int subDest, int no
 }
 
 /**
- * Obtiene mensaje JAUS - UGV Info a partir de informacion electrica del 
- * vehículo 
+ * Método público que obtiene mensaje JAUS - UGV Info a partir de información 
+ * eléctrica del vehículo 
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] motorRPM Valor de lectura de las rpm a las que opera el motor
@@ -148,8 +148,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(int subDest, int nodDest, s
 }
 
 /**
- * Obtiene mensaje JAUS - Report Signaling Elements a partir de informacion de 
- * señalizacion del vehiculo
+ * Método público que obtiene mensaje JAUS - Report Signaling Elements a partir 
+ * de información de señalización del vehículo
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] blinker_left Valor de lectura del intermitente izquierdo
@@ -189,14 +189,14 @@ JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(int subDest, int nodD
 }
 
 /**
- * Obtiene mensaje JAUS - UGV Info a partir de informacion electrica del 
- * vehiculo
+ * Método público que obtiene mensaje JAUS - UGV Info a partir de información 
+ * eléctrica del vehículo
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
- * @param[in] bat_level Nivel de bateria
- * @param[in] bat_voltage Tension de bateria
- * @param[in] bat_current Intensidad de bateria
- * @param[in] bat_temp Temperatura de bateria
+ * @param[in] bat_level Nivel de batería
+ * @param[in] bat_voltage Tensión de batería
+ * @param[in] bat_current Intensidad de batería
+ * @param[in] bat_temp Temperatura de batería
  * @param[in] alarms Alarmas subsistema electrico
  * @return Mensaje JAUS - UGV Info
  */
@@ -234,11 +234,11 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDe
 }
 
 /**
- * Obtiene mensaje JAUS - Report Camera Pose a partir de informacion de
- * posicionamiento de las camaras de apoyo a la conduccion
+ * Método público que obtiene mensaje JAUS - Report Camera Pose a partir de 
+ * información de posicionamiento de las cámaras de apoyo a la conducción
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
- * @param[in] id_camera Identificador de camara
+ * @param[in] id_camera Identificador de cámara
  * @param[in] pan Valor de lectura de PAN
  * @param[in] tilt Valor de lectura de TILT
  * @param[in] zoom Valor de lectura de ZOOM
@@ -274,8 +274,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(int subDest, int nodDest
 }
 
 /**
- * Obtiene mensaje JAUS - Report Night-time Camera a partir de informacion de la
- * camara IR
+ * Método público que obtiene mensaje JAUS - Report Night-time Camera a partir 
+ * de información de la cámara IR
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] zoom Valor de lectura de ZOOM
@@ -313,8 +313,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(int subDest, int nodDe
 }
 
 /**
- * Obtiene mensaje JAUS - Report Telemeter a partir de informacion del
- * telemetro
+ * Método público que obtiene mensaje JAUS - Report Telemeter a partir de 
+ * información del telémetro
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] ecs Valor de lectura de los ecos encontrados
@@ -348,8 +348,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodD
 }
 
 /**
- * Obtiene mensaje JAUS - Report Day-time Camera a partir de informacion de la
- * camara TV
+ * Método público que obtiene mensaje JAUS - Report Day-time Camera a partir de 
+ * información de la cámara TV
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] zoom Valor de lectura de ZOOM
@@ -385,8 +385,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTVCamera(int subDest, int nodDest, 
 }
 
 /**
- * Obtiene mensaje JAUS - Report Positioner a partir de informacion del
- * posicionador
+ * Método público que obtiene mensaje JAUS - Report Positioner a partir de 
+ * información del posicionador
  * @param[in] subDest Subsistema de destino
  * @param[in] nodDest Nodo de destino
  * @param[in] pan Valor de lectura de PAN

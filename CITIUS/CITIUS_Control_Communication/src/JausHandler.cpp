@@ -1,9 +1,9 @@
 
 /** 
  * @file  JausHandler.cpp
- * @brief Implementacion de la clase "JausHandler"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "JausHandler"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "JausHandler.h"
@@ -18,7 +18,9 @@ JausHandler::~JausHandler() {
 
 }
 
-/** Capturador de eventos generados en NodeManager
+/** 
+ * Método privado que recepciona y gestiona los eventos generados en el nodo
+ * JAUS NodeManager
  * @param[in] e Evento capturado
  */
 void JausHandler::handleEvent(NodeManagerEvent *e) {

@@ -1,17 +1,17 @@
 
 /** 
  * @file  main.cpp
- * @brief Funcion principal del nodo de Comunicaciones del subsistema de control
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Función principal del nodo de Comunicaciones del subsistema de control
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "RosNode_Communications.h"
 
 /**
- * Metodo principal del nodo. Inicializa modulos ROS y JAUS y lanza el
- * intercambio y la recepcion de mensajes
- * @param[in] argc Numero de argumentos
+ * Método principal del nodo. Inicializa modulos ROS y JAUS y lanza el
+ * intercambio y la traducción de mensajes
+ * @param[in] argc Número de argumentos
  * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */

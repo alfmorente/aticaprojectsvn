@@ -4,8 +4,10 @@
  * @brief Declara el tipo de la clase "TranslatorROSJAUS"
  * - La clase implementa la traducción entre mensajes ROS y JAUS como puente
  * entre el Subsistema C2 y UGV de la arquitectura JAUS.
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef TRANSLATORROSJAUS_H
@@ -18,8 +20,11 @@
 #include "message/experimental/ugvInfo12Message.h"
 #include "message/experimental/reportSignalingElements25Message.h"
 
-#endif	/* TRANSLATORROSJAUS_H */
-
+/**
+ * /class TranslatorROSJAUS
+ * /brief Clase que representa el generador de mensajes JAUS globales a partir
+ * de los datos concretos que componen un mensaje específico
+ */
 class TranslatorROSJAUS {
 public:
   TranslatorROSJAUS();
@@ -36,6 +41,11 @@ public:
   JausMessage getJausMsgFromTelemeterInfo(int subDest, int nodDest, short *ecs);
   JausMessage getJausMsgFromTVCamera(int subDest, int nodDest, short zoom, short focus, bool autofocus);
   JausMessage getJausMsgFromPositioner(int subDest, int nodDest, short pan, short tilt);
-private:
 
 };
+
+#endif	/* TRANSLATORROSJAUS_H */
+
+/**
+ * @}
+ */
