@@ -2,10 +2,12 @@
 /** 
  * @file  DrivingConnectionManager.h
  * @brief Declara el tipo de la clase "DrivingConnectionManager"
- * - La clase implementa la comunicacion con el modulo de conduccion del 
- * subsistema payload de conduccion.
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * - La clase implementa la comunicación con el módulo de conducción del 
+ * subsistema payload de conducción
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef DRIVINGCONNECTIONMANAGER_H
@@ -24,11 +26,13 @@
 #include <fcntl.h>
 #include <arpa/inet.h>
 
-#endif	/* DrivingConnectionManager */
-
-
 using namespace std;
 
+/**
+ * /class DrivingConnectionManager
+ * /brief Clase que representa al driver de comunicación con el módulo de
+ * conducción del vehículo
+*/
 class DrivingConnectionManager {
 private:
 
@@ -46,8 +50,9 @@ private:
   short steeringAlarms;
   // Modificadores privados
   void setVehicleInfo(short id_device, short value);
-  short getDriveAlarms();
-  short getSteeringAlarms();
+  void setAlarmsInfo(short element, short value);
+  // Metodos de gestion privados
+  RtxStruct informResponse(bool, short);
 
 
 public:
@@ -74,10 +79,12 @@ public:
 
   // Tratamiento de la cola de mensajes criticos
   void addToQueue(FrameDriving frame);
-  RtxStruct informResponse(bool, short);
-
-  // Tratamiento de atributos de alarmas
-  void setAlarmsInfo(short element, short value);
+    
 
 };
 
+#endif	/* DrivingConnectionManager */
+
+/**
+ * @}
+ */

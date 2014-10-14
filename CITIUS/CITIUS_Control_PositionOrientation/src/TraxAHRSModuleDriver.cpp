@@ -1,16 +1,16 @@
 
 /** 
  * @file  TraxAHRSModuleDriver.cpp
- * @brief Implementacion de la clase "TraxAHRSModuleDriver"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Implementación de la clase "TraxAHRSModuleDriver"
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "TraxAHRSModuleDriver.h"
 
 /**
- * Constructor la clase. Almacena las estructuras de almacenaje de informacion
- * que se vaya leyendo del magnetometro
+ * Constructor la clase. Almacena las estructuras de almacenaje de información
+ * que se vaya leyendo del magnetómetro
  */
 TraxAHRSModuleDriver::TraxAHRSModuleDriver() {
   canal = -1;
@@ -35,8 +35,8 @@ TraxAHRSModuleDriver::~TraxAHRSModuleDriver() {
 }
 
 /**
- * Inicia la conexion con el dispositivo
- * @return Booleano que indica si la conexion se ha realizado con exito
+ * Método público que inicia la conexión con el dispositivo
+ * @return Booleano que indica si la conexión se ha realizado con éxito
  */
 bool TraxAHRSModuleDriver::connectToDevice() {
 
@@ -81,22 +81,24 @@ bool TraxAHRSModuleDriver::connectToDevice() {
 }
 
 /**
- * Cierra la conexion con el dispositivo
+ * Método público que cierra la conexion con el dispositivo
  */
 void TraxAHRSModuleDriver::disconnectDevice() {
   close(canal);
 }
 
 /**
- * Solicita la configuracion del dispositivo con los parametros establecidos
+ * Método público que solicita la configuración del dispositivo con los 
+ * parámetros establecidos
  */
 void TraxAHRSModuleDriver::configureDevice() {
   sendToDevice(kSetDataComponents());
 }
 
 /**
- * Compone un mensaje de tipo KGetModInfo para transmitir al dispositivo
- * @return Estructura con informacion para envio de la trama
+ * Método privado que compone un mensaje de tipo KGetModInfo para transmitir al 
+ * dispositivo
+ * @return Estructura con información para envio de la trama
  */
 TraxMsg TraxAHRSModuleDriver::kGetModInfo() {
 
@@ -109,7 +111,8 @@ TraxMsg TraxAHRSModuleDriver::kGetModInfo() {
 }
 
 /**
- * Compone un mensaje de tipo KGetData para transmitir al dispositivo
+ * Método privado que compone un mensaje de tipo KGetData para transmitir al 
+ * dispositivo
  * @return Estructura con informacion para envio de la trama
  */
 TraxMsg TraxAHRSModuleDriver::kGetData() {
@@ -123,7 +126,8 @@ TraxMsg TraxAHRSModuleDriver::kGetData() {
 }
 
 /**
- * Compone un mensaje de tipo kSetDataComponents para transmitir al dispositivo
+ * Método privado que compone un mensaje de tipo kSetDataComponents para transmitir al 
+ * dispositivo
  * @return Estructura con informacion para envio de la trama
  */
 TraxMsg TraxAHRSModuleDriver::kSetDataComponents() {
@@ -149,9 +153,11 @@ TraxMsg TraxAHRSModuleDriver::kSetDataComponents() {
 }
 
 /**
- * Completa el mensaje añadiendo la cola del mensaje y lo envia al dispositivo
- * @param[in] traxMsg Estructura con informacion de la trama a enviar
+ * Método privado que completa el mensaje añadiendo la cola del mensaje y lo 
+ * envía al dispositivo
+ * @param[in] traxMsg Estructura con información de la trama a enviar
  */
+
 void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
   short len = hexa2short(traxMsg.byteCount);
 
@@ -188,7 +194,8 @@ void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
 }
 
 /**
- * Lectura y desencapsulacion de una trama procedente del dispositivo
+ * Método privado para la lectura y desencapsulación de una trama procedente del 
+ * dispositivo
  */
 void TraxAHRSModuleDriver::rcvResponse() {
 
@@ -235,10 +242,10 @@ void TraxAHRSModuleDriver::rcvResponse() {
 }
 
 /**
- * Obtiene la informacion de una trama a partir de los datos en crudo que se
- * obtienen del dispositivo
+ * Método privado que obtiene la informacion de una trama a partir de los datos 
+ * en crudo que se obtienen del dispositivo
  * @param[in] bufferPacket Datos en crudo leidos del dispositivo
- * @return Estructura con informacion almacenada en tipos obtenida
+ * @return Estructura con información almacenada en tipos obtenida
  */
 TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket) {
   TraxMsg packet;
@@ -281,8 +288,8 @@ TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket) {
 }
 
 /**
- * Obtiene la informacion de los datos en crudo del fragmento "payload" donde
- * se almacenan los datos efectivos de la trama
+ * Método privado que obtiene la información de los datos en crudo del fragmento 
+ * "payload" donde se almacenan los datos efectivos de la trama
  * @param[in] payload Datos en crudo del campo "payload" de la trama
  * @return Estructura con las medidas obtenidas de los datos "payload" de la 
  * trama
@@ -383,16 +390,17 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload(std::vector<char> payload) {
 }
 
 /**
- * Consultor del atributo "oriInfo" de la clase que almacena la informacion de
- * la ultima lectura de los dispositivos
- * @return 
+ * Método público consultor del atributo "oriInfo" de la clase que almacena la 
+ * información de la última lectura de los dispositivos
+ * @return Atributo "oriInfo" de la clase
  */
 TraxMeasurement TraxAHRSModuleDriver::getInfo() {
   return oriInfo;
 }
 
 /**
- * Envio de mensaje KGetData para la solicitud de informacion al dispositivo
+ * Método público para el envío de mensaje KGetData para la solicitud de 
+ * información al dispositivo
  * @return Booleano que indica cuando la transmision llega a su fin 
  */
 bool TraxAHRSModuleDriver::getData() {

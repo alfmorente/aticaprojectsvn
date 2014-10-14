@@ -3,9 +3,11 @@
  * @file  RosNode_PositionOrientation.h
  * @brief Declara el tipo de la clase "RosNode_PositionOrientation"
  * - La clase implementa la gestión del nodo que controla los dispositivos que
- * proporcionan la posicion y orientacion del vehiculo
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * proporcionan la posición y orientación del vehículo
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef ROSNOSE_POSITIONORIENTATION_H
@@ -22,9 +24,13 @@
 
 using namespace std;
 
-#endif	/* ROSNOSE_POSITIONORIENTATION_H */
-
+/**
+ * /class RosNode_PositionOrientation
+ * /brief Clase que representa al nodo ROS que gestiona la comunicación con los
+ * dispositivos que obtiene la posición y orientación del vehículo
+*/
 class RosNode_PositionOrientation {
+  
 private:
   // Estado del nodo
   short poNodeStatus;
@@ -39,6 +45,8 @@ private:
   // Flags de actividad
   bool magnOK;
   bool gpsinsOK;
+  // Callbacks ROS
+  bool fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &);
 
 public:
   // Constructor
@@ -48,9 +56,6 @@ public:
 
   // Inicializador de artefactos ROS
   void initROS();
-
-  // Callbacks ROS
-  bool fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &);
 
   // Getter and Setter necesarios
   //ros::Publisher getPubPosOriInfo();
@@ -70,5 +75,8 @@ public:
   void configureDevices();
 };
 
+#endif	/* ROSNOSE_POSITIONORIENTATION_H */
 
-
+/**
+ * @}
+ */

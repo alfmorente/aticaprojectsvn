@@ -2,8 +2,8 @@
 /** 
  * @file  ElectricConnectionManager.cpp
  * @brief Implementacion de la clase "ElectricConnectionManager"
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "ElectricConnectionManager.h"
@@ -24,15 +24,15 @@ ElectricConnectionManager::ElectricConnectionManager() {
 }
 
 /**
- * Realiza la inicializacion y conexion del socket de comunicacion con el 
- * vehiculo. 
- * @return Booleano que indica si la conexion ha sido posible
+ * Método público que realiza la inicialización y conexión del socket de 
+ * conmunicación con el vehículo 
+ * @return Booleano que indica si la conexión ha sido posible
  */
 bool ElectricConnectionManager::connectVehicle() {
   // Creacion y apertura del socket
   this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
   if (this->socketDescriptor < 0) {
-    ROS_INFO("[Control] Electric - Imposible crear socket para comunicacion con Payload de Conduccion");
+    ROS_INFO("[Control] Electric - Imposible crear socket para conmunicación con Payload de Conduccion");
     return false;
   } else {
     struct hostent *he;
@@ -49,7 +49,7 @@ bool ElectricConnectionManager::connectVehicle() {
 
     if ((this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
       /* llamada a socket() */
-      ROS_INFO("[Control] Electric - Imposible crear socket para comunicacion con Payload de Conduccion");
+      ROS_INFO("[Control] Electric - Imposible crear socket para conmunicación con Payload de Conduccion");
       exit(-1);
     }
 
@@ -62,7 +62,7 @@ bool ElectricConnectionManager::connectVehicle() {
 
     if (connect(this->socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
       /* llamada a connect() */
-      ROS_INFO("[Control] Electric - Imposible conectar con socket socket para comunicacion con Payload de Conduccion");
+      ROS_INFO("[Control] Electric - Imposible conectar con socket socket para conmunicación con Payload de Conduccion");
       exit(-1);
 
     }
@@ -79,22 +79,22 @@ bool ElectricConnectionManager::connectVehicle() {
 }
 
 /**
- * Realiza la desconexion del vehiculo mediante la liberacion del socket de
- * comunicacion
- * @return Booleano que indica si la desconexion se ha realizado con exito
+ * Método público que realiza la desconexión del vehículo mediante la liberación 
+ * del socket de comunicación
+ * @return Booleano que indica si la desconexión se ha realizado con éxito
  */
 bool ElectricConnectionManager::disconnectVehicle() {
   // Cierre del socket
-  shutdown(this->getSocketDescriptor(), 2);
-  close(this->getSocketDescriptor());
+  shutdown(socketDescriptor, 2);
+  close(socketDescriptor);
   ROS_INFO("[Control] Electric :: Socket cerrado correctamente");
   return true;
 }
 
 /**
- * Envia la informacion de una trama al vehiculo haciendo uso del socket de
- * comunicacion
- * @param[in] frame Trama a enviar via socket al vehiculo 
+ * Método público que envía la información de una trama al vehículo haciendo uso 
+ * del socket de comunicación
+ * @param[in] frame Trama a enviar via socket al vehículo 
  */
 void ElectricConnectionManager::sendToVehicle(FrameDriving frame) {
 
@@ -113,8 +113,8 @@ void ElectricConnectionManager::sendToVehicle(FrameDriving frame) {
 }
 
 /**
- * Envia una serie de tramas de tipo GET solicitando la informacion electrica 
- * del vehiculo
+ * Método público que envía una serie de tramas de tipo GET solicitando la 
+ * información del vehículo
  */
 void ElectricConnectionManager::reqElectricInfo() {
 
@@ -144,8 +144,8 @@ void ElectricConnectionManager::reqElectricInfo() {
 }
 
 /**
- * Envia mensaje de confirmacion (SET) para indicar el fin de un apagado 
- * ordenado de los distintos modulos del vehiculo
+ * Método público que envía un mensaje de confirmacion (SET) para indicar el 
+ * fin de un apagado ordenado de los distintos módulos del vehículo
  */
 void ElectricConnectionManager::setTurnOff() {
   FrameDriving frame;
@@ -157,9 +157,10 @@ void ElectricConnectionManager::setTurnOff() {
 }
 
 /**
- * Realiza una lectura por el socket de comunicacion con el vehiculo y obtiene 
- * una trama en caso de que el propio vehiculo la haya enviado. La clasifica 
- * segun el elemento al que hace referencia y procede a su tratamiento
+ * Método público que realiza una lectura por el socket de comunicación con el 
+ * vehículo y obtiene una trama en caso de que el propio vehículo la haya 
+ * enviado. La clasifica según el elemento al que hace referencia y procede a su 
+ * tratamiento
  * @return Booleano que indica si se ha llevado a cabo una lectura via socket
  */
 bool ElectricConnectionManager::checkForVehicleMessages() {
@@ -216,16 +217,8 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
 }
 
 /**
- * Consultor del atributo "socketDescriptor" de la clase 
- * @return Atributo "socketDescriptor" de la clase
- */
-int ElectricConnectionManager::getSocketDescriptor() {
-  return socketDescriptor;
-}
-
-/**
- * Consultor del atributo "electricInfo" de la clase que almacena la informacion
- * de la ultima lectura realizada del vehiculo
+ * Método público consultor del atributo "electricInfo" de la clase que almacena 
+ * la información de la última lectura realizada del vehículo
  * @return Atributo "electricInfo" de la clase
  */
 ElectricInfo ElectricConnectionManager::getVehicleInfo() {
@@ -233,8 +226,8 @@ ElectricInfo ElectricConnectionManager::getVehicleInfo() {
 }
 
 /**
- * Modificador del atributo "electricInfo" de la clase con la informacion de un
- * dispositivo electrico concreto
+ * Método público modificador del atributo "electricInfo" de la clase con la 
+ * información de un dispositivo eléctrico concreto
  * @param[in] id_device Identificador del dispositivo a modificar
  * @param[in] value Valor de lectura del dispositivo a modificar
  */
@@ -261,8 +254,8 @@ void ElectricConnectionManager::setVehicleInfo(short id_device, short value) {
 }
 
 /**
- * Consultor del atributo "countMsg" de la clase utilizado para llevar el 
- * conteo de los mensajes criticos (mecanismo de integridad)
+ * Método público consultor  del atributo "countMsg" de la clase utilizado para 
+ * llevar el conteo de los mensajes criticos (mecanismo de integridad)
  * @return Atributo "countMsg" de la clase
  */
 short ElectricConnectionManager::getCountCriticalMessages() {
@@ -270,9 +263,10 @@ short ElectricConnectionManager::getCountCriticalMessages() {
 }
 
 /**
- * Modificador del atributo "countMsg" de la clase utilizado para llevar el
- * conteo del los mensajes criticos (mecanismo de integridad). Contempla que se
- * lleve a cabo segun un contador incremental con intervalo 1..1024
+ * Método público modificador del atributo "countMsg" de la clase utilizado para
+ * llevar el conteo del los mensajes críticos (mecanismo de integridad). 
+ * Contempla que se lleve a cabo según un contador incremental con intervalo 
+ * 1..1024
  * @param[in] cont Nuevo valor para el atributo "countMsg"
  */
 void ElectricConnectionManager::setCountCriticalMessages(short cont) {
@@ -283,8 +277,9 @@ void ElectricConnectionManager::setCountCriticalMessages(short cont) {
 }
 
 /**
- * Consultor del atributo "turnOff" de la clase utilizado para indicar que se 
- * ha recibido una peticion de apagado ordenado por parte del vehiculo
+ * Método público consultor del atributo "turnOff" de la clase utilizado para 
+ * indicar que se ha recibido una petición de apagado ordenado por parte del 
+ * vehículo
  * @return Atributo "turnOff" de la clase
  */
 bool ElectricConnectionManager::getTurnOffFlag() {
@@ -292,9 +287,9 @@ bool ElectricConnectionManager::getTurnOffFlag() {
 }
 
 /**
- * Consultor del atributo "swPosition" de la clase utilizado para indicar que 
- * ha habido un cambio en la posicion del conmutador (switcher) local / 
- * teleoperado
+ * Método público consultor del atributo "swPosition" de la clase utilizado para 
+ * indicar que ha habido un cambio en la posición del conmutador (switcher) 
+ * local / teleoperado
  * @return Atributo "swPosition" de la clase
  */
 SwitcherStruct ElectricConnectionManager::getSwitcherStruct() {
@@ -302,10 +297,11 @@ SwitcherStruct ElectricConnectionManager::getSwitcherStruct() {
 }
 
 /**
- * Modificador del atributo "swPosition" de la clase que se actualiza cuando se
- * detecta un cambio de posicion del conmutador (switcher) local / teleoperado
- * del vehiculo o cuando se ha llevado a cabo el tratamiento tras su deteccion
- * @param[in] flag Nueva posicion del estado de la estructura de tratamiento
+ * Método público modificador del atributo "swPosition" de la clase que se 
+ * actualiza cuando se detecta un cambio de posición del conmutador (switcher) 
+ * local / teleoperado del vehículo o cuando se ha llevado a cabo el tratamiento 
+ * tras su detección
+ * @param[in] flag Nueva posición del estado de la estructura de tratamiento
  */
 void ElectricConnectionManager::setSwitcherStruct(bool flag) {
   swPosition.flag = flag;
@@ -313,20 +309,20 @@ void ElectricConnectionManager::setSwitcherStruct(bool flag) {
 }
 
 /**
- * Consultor del atributo "supplyAlarms" de la clase que indica la ultima
- * lectura realizada del vector de alarmas del modulo electrico del Payload de
- * conduccion del vehiculo
- * @return 
+ * Método público consultor del atributo "supplyAlarms" de la clase que indica 
+ * la última lectura realizada del vector de alarmas del módulo eléctrico del 
+ * Payload de conduccion del vehículo
+ * @return Atributo "supplyAlarms" de la clase
  */
 short ElectricConnectionManager::getSupplyAlarms() {
   return supplyAlarms;
 }
 
 /**
- * Consulta si un elemento es critico y por tanto debe ser contemplado para
- * llevar a cabo el mecanismo de integridad
+ * Método público que comprueba si un elemento es crítico y por tanto debe ser 
+ * contemplado para llevar a cabo el mecanismo de integridad
  * @param[in] element Elemento de consulta
- * @return Booleano que indica si el elemento es critico o  no
+ * @return Booleano que indica si el elemento es crítico o  no
  */
 bool ElectricConnectionManager::isCriticalInstruction(short element) {
   if (element == SUPPLY_TURN_ON) {
@@ -337,26 +333,26 @@ bool ElectricConnectionManager::isCriticalInstruction(short element) {
 }
 
 /**
- * Una vez que un mensaje es considerado critico, se utiliza este metodo para
- * encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en caso
- * de obtener un NACK
- * @param[in] frame Trama a incluir en la cola de mensajes criticos
+ * Método público que, una vez que un mensaje es considerado crítico, se utiliza 
+ * para encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en 
+ * caso de obtener un NACK
+ * @param[in] frame Trama a incluir en la cola de mensajes críticos
  */
 void ElectricConnectionManager::addToQueue(FrameDriving frame) {
   messageQueue.push_back(frame);
 }
 
 /**
- * Tratamiento de la cola de mensajes tras la recepcion de un mensaje de 
- * confirmacion (ACK) o negacion (NACK). En el caso de recibir un ACK, se 
- * desencolan todos los mensajes cuyo campo "id_instruccion" es menor al que
- * se incluye en la trama del propio ACK. En el caso de recibir un NACK, se 
- * retransmiten todos los mensajes de la cola cuyo campo "id_instruccion" sea
+ * Método privado para el tratamiento de la cola de mensajes tras la recepcion 
+ * de un mensaje de confirmación (ACK) o negación (NACK). En el caso de recibir 
+ * un ACK, se desencolan todos los mensajes cuyo campo "id_instruccion" es menor 
+ * al que se incluye en la trama del propio ACK. En el caso de recibir un NACK, 
+ * se retransmiten todos los mensajes de la cola cuyo campo "id_instruccion" sea
  * menor o igual que el que se incluye en la trama del propio ACK y se elimina
  * el resto
  * @param[in] ack Indica si se ha recibido un ACK (true) o un NACK (false) 
  * @param[in] id_instruction Indica el campo "id_instruccion" (cuenta) del mensaje
- * recibido del vehiculo
+ * recibido del vehículo
  * @return Estructura con el numero de mensajes a retransmitir (en caso de
  * haberlos) y una lista de dichos mensajes.
  */

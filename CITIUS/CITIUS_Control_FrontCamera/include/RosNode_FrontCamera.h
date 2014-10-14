@@ -4,8 +4,10 @@
  * @brief Declara el tipo de la clase "RosNode_FrontCamera"
  * - La clase implementa la gestión del nodo que controla la camara de apoyo 
  * a la conduccion
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef ROSNODE_FRONTCAMERA_H
@@ -22,8 +24,11 @@
 
 using namespace std;
 
-#endif	/* ROSNODE_FRONTCAMERA_H */
-
+/**
+ * /class RosNode_FrontCamera
+ * /brief Clase que representa al nodo ROS que gestiona la comunicación con la
+ * cámara de apoyo a la conducción
+*/
 class RosNode_FrontCamera {
 private:
   // Estado del nodo
@@ -36,6 +41,10 @@ private:
   ros::ServiceServer servNodeStatus;
   // Driver de la cámara
   AxisP3364LveDriver *dFrontCamera;
+  // Callbacks ROS
+  void fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg);
+  bool fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_nodeStatus::Request &rq, CITIUS_Control_FrontCamera::srv_nodeStatus::Response &rsp);
+
 public:
 
   // Constructor
@@ -44,10 +53,6 @@ public:
   // Inicializador de artefactos ROS
   void initROS();
 
-  // Callbacks ROS
-  void fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg);
-  bool fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_nodeStatus::Request &rq, CITIUS_Control_FrontCamera::srv_nodeStatus::Response &rsp);
-
   // Getter and Setter necesarios
   ros::Publisher getPubFrontCameraInfo();
   short getFcNodeStatus();
@@ -55,4 +60,10 @@ public:
   AxisP3364LveDriver *getDriverMng();
 
 };
+
+#endif	/* ROSNODE_FRONTCAMERA_H */
+
+/**
+ * @}
+ */
 

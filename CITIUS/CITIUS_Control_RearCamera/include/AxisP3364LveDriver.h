@@ -4,10 +4,11 @@
  * @brief Declara el tipo de la clase "AxisP3364LveDriver"
  * - La clase implementa la comunicacion con el dispositivo AXIS P3364-LVe que 
  * se utiliza como camara de apoyo a la conduccion.
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
-
 #ifndef AXISP3364LVEDRIVER_H
 #define	AXISP3364LVEDRIVER_H
 
@@ -21,30 +22,15 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sstream>
-
-#define IP_CAMERA "192.168.24.120"
-#define PORT_CAMERA 80
-
-#define AUTH_CAM_USER "root"
-#define AUTH_CAM_PASS "usv"
-
-#define PTZ_ROUTE "/axis-cgi/com/ptz.cgi?"
-
-#define ORDER_ZOOM 0
-#define ORDER_PAN 1
-#define ORDER_TILT 2
-
-typedef struct {
-  bool state; /// Valor del estado (actualizado o no) de lectura de variables
-  float zoom; /// Valor de zoom
-  float pan; /// Valor de pan
-  float tilt; /// Valor de tilt
-} LensPosition;
+#include "constant.h"
 
 using namespace std;
 
-#endif	/* AXISP3364LVEDRIVER_H */
-
+/**
+ * /class AxisP3364LveDriver
+ * /brief Clase que representa al driver de comunicación con el dispositivo
+ * cámara de apoyo a la conducción AXIS P3364Lve
+*/
 class AxisP3364LveDriver {
 public:
 
@@ -82,3 +68,9 @@ private:
   float extractPan(char[]);
 
 };
+
+#endif	/* AXISP3364LVEDRIVER_H */
+
+/**
+ * @}
+ */

@@ -2,10 +2,12 @@
 /** 
  * @file  ElectricConnectionManager.h
  * @brief Declara el tipo de la clase "ElectricConnectionManager"
- * - La clase implementa la comunicacion con el modulo electrico del 
- * subsistema payload de conduccion.
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * - La clase implementa la comunicación con el módulo electrico del 
+ * subsistema payload de conducción.
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef ELECTRICCONNECTIONMANAGER_H
@@ -24,11 +26,13 @@
 #include <fcntl.h>
 #include <arpa/inet.h>
 
-#endif	/* ElectricConnectionManager */
-
-
 using namespace std;
 
+/**
+ * /class ElectricConnectionManager
+ * /brief Clase que representa al driver de comunicación con el módulo de
+ * alimentación del vehículo
+*/
 class ElectricConnectionManager {
 private:
 
@@ -47,6 +51,12 @@ private:
   SwitcherStruct swPosition;
   // Alarmas del subsistema electrico
   short supplyAlarms;
+  //Consultores/modificadores privados
+  void setVehicleInfo(short, short);
+  short getSupplyAlarms();
+  // Metodos de gestion privados
+  RtxStruct informResponse(bool, short);
+  bool isCriticalInstruction(short element);
 
 public:
   // Constructor
@@ -63,20 +73,23 @@ public:
   void setTurnOff();
 
   // Getter y setter necesarios
-  int getSocketDescriptor();
+  bool getTurnOffFlag();
+  ElectricInfo getVehicleInfo();
   short getCountCriticalMessages();
   void setCountCriticalMessages(short);
-  ElectricInfo getVehicleInfo();
-  void setVehicleInfo(short, short);
-  bool getTurnOffFlag();
-  SwitcherStruct getSwitcherStruct();
   void setSwitcherStruct(bool);
-  short getSupplyAlarms();
+  SwitcherStruct getSwitcherStruct();
 
   // Metodos auxiliares
-  bool isCriticalInstruction(short element);
+  
 
   // Tratamiento de la cola de mensajes criticos
   void addToQueue(FrameDriving frame);
-  RtxStruct informResponse(bool, short);
+  
 };
+
+#endif	/* ElectricConnectionManager */
+
+/**
+ * @}
+ */

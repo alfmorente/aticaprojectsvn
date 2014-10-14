@@ -2,11 +2,13 @@
 /** 
  * @file  Manager.h
  * @brief Declara el tipo de la clase "Manager"
- * - La clase implementa la maquina de estados del vehiculo y gestiona las 
- * peticiones de transicion que puedan producirse. Gestiona la puesta en marcha
+ * - La clase implementa la máquina de estados del vehículo y gestiona las 
+ * peticiones de transición que puedan producirse. Gestiona la puesta en marcha
  * y final del estado de los nodos ROS secundarios
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef MANAGER_H
@@ -21,8 +23,10 @@
 
 using namespace std;
 
-#endif	/* MANAGER_H */
-
+/**
+ * /class Manager
+ * /brief Clase que representa al nodo ROS Manager
+*/
 class Manager {
 public:
   Manager();
@@ -71,5 +75,8 @@ private:
   void fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher);
 };
 
+#endif	/* MANAGER_H */
 
-
+/**
+ * @}
+ */

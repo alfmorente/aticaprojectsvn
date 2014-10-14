@@ -1,17 +1,17 @@
 
 /** 
  * @file  main.cpp
- * @brief Funcion principal del nodo Manager del subsistema de control
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @brief Función principal del nodo Manager del subsistema de control
+ * @author Carlos Amores
+ * @date 2013, 2014
  */
 
 #include "Manager.h"
 
 /**
- * Metodo principal del nodo. Inicializa la maquina de estados y la pone en 
- * marcha gestionando el estado del resto de nodos del vehiculo
- * @param[in] argc Numero de argumentos
+ * Método principal del nodo. Inicializa la máquina de estados y la pone en 
+ * marcha gestionando el estado del resto de nodos del vehículo
+ * @param[in] argc Número de argumentos
  * @param[in] argv Vector de argumentos
  * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario.
  */

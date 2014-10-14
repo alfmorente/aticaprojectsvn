@@ -14,10 +14,6 @@ AxisP3364LveDriver.h
 RosNode_FrontCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.h
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp
-RosNode_FrontCamera.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode_FrontCamera.h
-
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
 -
@@ -653,6 +649,8 @@ arpa/inet.h
 -
 sstream
 -
+constant.h
+include/constant.h
 
 include/RosNode_FrontCamera.h
 time.h

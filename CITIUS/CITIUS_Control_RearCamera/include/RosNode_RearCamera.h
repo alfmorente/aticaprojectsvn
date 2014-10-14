@@ -4,8 +4,10 @@
  * @brief Declara el tipo de la clase "RosNode_RearCamera"
  * - La clase implementa la gestión del nodo que controla la camara de apoyo 
  * a la conduccion
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef ROSNODE_REARCAMERA_H
@@ -20,11 +22,11 @@
 #include "ros/ros.h"
 #include <cstdlib>
 
-using namespace std;
-
-#endif	/* ROSNODE_REARCAMERA_H */
-
-
+/**
+ * /class RosNode_RearCamera
+ * /brief Clase que representa al nodo ROS que gestiona la comunicación con la
+ * cámara de apoyo a la conducción
+*/
 class RosNode_RearCamera {
 private:
   // Estado del nodo
@@ -37,14 +39,16 @@ private:
   ros::ServiceServer servNodeStatus;
   // Driver de la cámara
   AxisP3364LveDriver *dRearCamera;
+  // Callbacks ROS
+  void fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg);
+  bool fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp);
+  
 public:
   // Constructor
   RosNode_RearCamera();
   // Inicializador de artefactos ROS
   void initROS();
-  // Callbacks ROS
-  void fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg);
-  bool fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp);
+  
   // Getter and Setter necesarios
   ros::Publisher getPubRearCameraInfo();
   short getRcNodeStatus();
@@ -53,3 +57,8 @@ public:
 
 };
 
+#endif	/* ROSNODE_REARCAMERA_H */
+
+/**
+ * @}
+ */

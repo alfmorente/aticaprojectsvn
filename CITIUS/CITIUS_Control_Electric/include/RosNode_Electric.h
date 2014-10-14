@@ -2,10 +2,12 @@
 /** 
  * @file  RosNode_Electric.h
  * @brief Declara el tipo de la clase "RosNode_Electric"
- * - La clase implementa la gestión del nodo de conduccion (Electric) del 
+ * - La clase implementa la gestión del nodo de conducción (Electric) del 
  * Subsistema de control de UGV
- * @author: Carlos Amores
- * @date: 2013, 2014
+ * @author Carlos Amores
+ * @date 2013, 2014
+ * @addtogroup Control Subsistema de Control
+ * @{
  */
 
 #ifndef ROSNODE_ELECTRIC_H
@@ -22,8 +24,11 @@
 
 using namespace std;
 
-#endif	/* ROSNODE_ELECTRIC_H */
-
+/**
+ * /class RosNode_Driving
+ * /brief Clase que representa al nodo ROS que gestiona la comunicación con el 
+ * módulo de alimentación del vehículo
+*/
 class RosNode_Electric {
 private:
   // Estado del nodo
@@ -56,3 +61,9 @@ public:
   // Publicar consignas ON/OFF de actuadores
   void publishSetupCommands(bool on);
 };
+
+#endif	/* ROSNODE_ELECTRIC_H */
+
+/**
+ * @}
+ */

@@ -67,6 +67,7 @@ CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: srv_gen
 
 CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o: src/TraxAHRSModuleDriver.cpp
 CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o: include/TraxAHRSModuleDriver.h
+CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o: include/constant.h
 CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o: include/conversionTypes.h
 CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o: include/crc16calc.h
 
