@@ -4,6 +4,9 @@
 CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.cpp
  include/AxisP3364LveDriver.h
+CMakeFiles/rearCamera.dir/src/RosNode.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode.cpp
+ include/RosNode.h
 CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h

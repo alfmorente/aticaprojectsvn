@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
-DrivingConnectionManager.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.cpp
+RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.h
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp
 RosNode_Driving.h
@@ -658,9 +658,13 @@ fcntl.h
 arpa/inet.h
 -
 
+include/RosNode.h
+
 include/RosNode_Driving.h
 time.h
 -
+RosNode.h
+include/RosNode.h
 DrivingConnectionManager.h
 include/DrivingConnectionManager.h
 CITIUS_Control_Driving/msg_command.h

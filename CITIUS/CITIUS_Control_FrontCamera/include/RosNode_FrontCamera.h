@@ -14,6 +14,7 @@
 #define	ROSNODE_FRONTCAMERA_H
 
 #include <time.h>
+#include "RosNode.h"
 #include "AxisP3364LveDriver.h"
 #include "constant.h"
 #include "CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h"
@@ -29,10 +30,8 @@ using namespace std;
  * /brief Clase que representa al nodo ROS que gestiona la comunicación con la
  * cámara de apoyo a la conducción
 */
-class RosNode_FrontCamera {
+class RosNode_FrontCamera: public RosNode {
 private:
-  // Estado del nodo
-  short fcNodeStatus;
   // Publicador de informacion de camara
   ros::Publisher pubFrontCameraInfo;
   // Suscriptor para control de camara
@@ -55,8 +54,6 @@ public:
 
   // Getter and Setter necesarios
   ros::Publisher getPubFrontCameraInfo();
-  short getFcNodeStatus();
-  void setFcNodeStatus(short newFcNodeStatus);
   AxisP3364LveDriver *getDriverMng();
 
 };

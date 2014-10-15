@@ -112,6 +112,7 @@
         <df name="CITIUS_Control_Driving">
         </df>
         <in>DrivingConnectionManager.h</in>
+        <in>RosNode.h</in>
         <in>RosNode_Driving.h</in>
         <in>constant.h</in>
       </df>
@@ -139,6 +140,7 @@
           </df>
         </df>
         <in>DrivingConnectionManager.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_Driving.cpp</in>
         <in>main.cpp</in>
       </df>

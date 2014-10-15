@@ -13,6 +13,7 @@
 #ifndef ROSNODE_REARCAMERA_H
 #define	ROSNODE_REARCAMERA_H
 
+#include "RosNode.h"
 #include <time.h>
 #include "AxisP3364LveDriver.h"
 #include "constant.h"
@@ -27,10 +28,8 @@
  * /brief Clase que representa al nodo ROS que gestiona la comunicación con la
  * cámara de apoyo a la conducción
 */
-class RosNode_RearCamera {
+class RosNode_RearCamera: public RosNode {
 private:
-  // Estado del nodo
-  short rcNodeStatus;
   // Publicador de informacion de camara
   ros::Publisher pubRearCameraInfo;
   // Suscriptor para control de camara
@@ -51,8 +50,6 @@ public:
   
   // Getter and Setter necesarios
   ros::Publisher getPubRearCameraInfo();
-  short getRcNodeStatus();
-  void setRcNodeStatus(short newFcNodeStatus);
   AxisP3364LveDriver *getDriverMng();
 
 };

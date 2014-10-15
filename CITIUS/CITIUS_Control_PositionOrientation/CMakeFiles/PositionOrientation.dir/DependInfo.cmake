@@ -4,6 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNodePositionOrientation.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o"

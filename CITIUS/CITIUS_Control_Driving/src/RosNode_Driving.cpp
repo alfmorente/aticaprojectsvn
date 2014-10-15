@@ -13,7 +13,7 @@
  * instancia del driver de conexión con el vehículo
  */
 RosNode_Driving::RosNode_Driving() {
-  vmNodeStatus = NODESTATUS_INIT;
+  nodeStatus = NODESTATUS_INIT;
   dVehicle = new DrivingConnectionManager();
 }
 
@@ -39,7 +39,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
   int currentVehicleStatus = OPERATION_MODE_INICIANDO;
   nh.getParam("vehicleStatus", currentVehicleStatus);
   if (currentVehicleStatus == OPERATION_MODE_CONDUCCION) {
-    if (vmNodeStatus == NODESTATUS_OK) {
+    if (nodeStatus == NODESTATUS_OK) {
       ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
       if (checkCommand(msg)) {
         // Envio de comando a vehículo
@@ -63,7 +63,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
         ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
       }
     } else {
-      ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d", vmNodeStatus);
+      ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d", nodeStatus);
     }
   } else {
     ROS_INFO("[Control Driving - Descartado comando - Vehiculo fuera del modo CONDUCCION]");
@@ -80,34 +80,16 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
  */
 bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp) {
   if (rq.status == NODESTATUS_OK) {
-    setVMNodeStatus(NODESTATUS_OK);
+    nodeStatus = NODESTATUS_OK;
     rsp.confirmation = true;
   } else if (rq.status == NODESTATUS_OFF) {
     getDriverMng()->disconnectVehicle();
-    setVMNodeStatus(NODESTATUS_OFF);
+    nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {
     rsp.confirmation = false;
   }
   return true;
-}
-
-/**
- * Método público consultor del atributo "vmNodeStatus" de la clase que 
- * proporciona el estado actual de la máquina de estados del nodo
- * @return Atributo "vmNodeStatus" de la clase
- */
-short RosNode_Driving::getVMNodeStatus() {
-  return vmNodeStatus;
-}
-
-/**
- * Método público modificador del atributo "vmNodeStatus" de la clase para 
- * realizar una transición en la máquina de estados del nodo
- * @param[in] newVMNodeStatus Nuevo estado al que realizar la transición 
- */
-void RosNode_Driving::setVMNodeStatus(short newVMNodeStatus) {
-  vmNodeStatus = newVMNodeStatus;
 }
 
 /**

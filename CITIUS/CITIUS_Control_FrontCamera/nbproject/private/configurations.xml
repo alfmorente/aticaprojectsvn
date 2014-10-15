@@ -37,6 +37,8 @@
           <df name="src">
           </df>
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_FrontCamera.dir">
@@ -108,6 +110,7 @@
         <df name="CITIUS_Control_FrontCamera">
         </df>
         <in>AxisP3364LveDriver.h</in>
+        <in>RosNode.h</in>
         <in>RosNode_FrontCamera.h</in>
         <in>constant.h</in>
       </df>
@@ -135,6 +138,7 @@
           </df>
         </df>
         <in>AxisP3364LveDriver.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_FrontCamera.cpp</in>
         <in>main.cpp</in>
       </df>

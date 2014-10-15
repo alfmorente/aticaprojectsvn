@@ -33,6 +33,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rearCamera.dir">
           <df name="src">
           </df>
@@ -108,6 +110,7 @@
         <df name="CITIUS_Control_RearCamera">
         </df>
         <in>AxisP3364LveDriver.h</in>
+        <in>RosNode.h</in>
         <in>RosNode_RearCamera.h</in>
         <in>constant.h</in>
       </df>
@@ -135,12 +138,20 @@
           </df>
         </df>
         <in>AxisP3364LveDriver.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_RearCamera.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">
       </df>
       <df name="srv_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_RearCamera">
+              <in>srv_nodeStatus.h</in>
+            </df>
+          </df>
+        </df>
         <df name="lisp">
         </df>
       </df>

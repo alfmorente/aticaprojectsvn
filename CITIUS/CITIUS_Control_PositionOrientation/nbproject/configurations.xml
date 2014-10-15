@@ -11,6 +11,7 @@
         </df>
       </df>
       <df name="src">
+        <in>RosNode.cpp</in>
         <in>RosNodePositionOrientation.cpp</in>
         <in>TraxAHRSModuleDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
@@ -216,6 +217,8 @@
           </undefinedList>
         </ccTool>
       </folder>
+      <item path="src/RosNode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="src/RosNodePositionOrientation.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>

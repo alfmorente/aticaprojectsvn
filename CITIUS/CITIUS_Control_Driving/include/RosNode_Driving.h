@@ -14,6 +14,7 @@
 #define	ROSNODE_DRIVING_H
 
 #include <time.h>
+#include "RosNode.h"
 #include "DrivingConnectionManager.h"
 #include "CITIUS_Control_Driving/msg_command.h"
 #include "CITIUS_Control_Driving/msg_vehicleInfo.h"
@@ -24,10 +25,8 @@
  * /brief Clase que representa al nodo ROS que gestiona la comunicación con el 
  * módulo de conducción del vehículo
 */
-class RosNode_Driving {
+class RosNode_Driving: public RosNode {
 private:
-  // Estado del nodo
-  short vmNodeStatus;
   // Publicador de informacion de camara
   ros::Publisher pubVehicleInfo;
   // Suscriptor para control de camara
@@ -50,9 +49,7 @@ public:
   // Inicializador de artefactos ROS
   void initROS();
   
-  // Consultores modificadores de la clase
-  short getVMNodeStatus();
-  void setVMNodeStatus(short newVMNodeStatus);
+  // Consultores / modificadores de la clase
   DrivingConnectionManager *getDriverMng();
    
   // Publicacion de informacion de vehiculo

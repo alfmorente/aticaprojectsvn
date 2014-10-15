@@ -13,7 +13,7 @@
  * instancia que permite la gestion de la cámara
  */
 RosNode_RearCamera::RosNode_RearCamera() {
-  rcNodeStatus = NODESTATUS_INIT;
+  nodeStatus = NODESTATUS_INIT;
   dRearCamera = new AxisP3364LveDriver();
 }
 
@@ -48,32 +48,15 @@ void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_c
  */
 bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp) {
   if (rq.status == NODESTATUS_OK) {
-    rcNodeStatus = NODESTATUS_OK;
+    nodeStatus = NODESTATUS_OK;
     rsp.confirmation = true;
   } else if (rq.status == NODESTATUS_OFF) {
-    rcNodeStatus = NODESTATUS_OFF;
+    nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {
     rsp.confirmation = false;
   }
   return true;
-}
-
-/**
- * Método público consultor del atributo "rcNodeStatus" de la clase que registra 
- * el estado actual en el que se encuentra la máquina de estados
- * @return Atributo "rcNodeStatus" de la clase
- */
-short RosNode_RearCamera::getRcNodeStatus() {
-  return rcNodeStatus;
-}
-
-/**
- * Método público modificador del atributo "rcNodeStatus" de la clase
- * @param[in] newRcNodeStatus Nuevo valor para el atributo
- */
-void RosNode_RearCamera::setRcNodeStatus(short newRcNodeStatus) {
-  rcNodeStatus = newRcNodeStatus;
 }
 
 /**

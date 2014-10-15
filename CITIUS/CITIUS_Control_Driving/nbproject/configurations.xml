@@ -12,6 +12,7 @@
       </df>
       <df name="src">
         <in>DrivingConnectionManager.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_Driving.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -173,9 +174,6 @@
       </folder>
       <folder path="0/src">
         <ccTool>
-          <incDir>
-            <pElem>include</pElem>
-          </incDir>
           <preprocessorList>
             <Elem>ROS_PACKAGE_NAME="CITIUS_Control_Driving"</Elem>
           </preprocessorList>
@@ -217,14 +215,46 @@
       </folder>
       <item path="src/DrivingConnectionManager.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
+            <pElem>.</pElem>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/RosNode.cpp" ex="false" tool="1" flavor2="0">
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/RosNode_Driving.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
+            <pElem>.</pElem>
+            <pElem>include</pElem>
+          </incDir>
         </ccTool>
       </item>
     </conf>

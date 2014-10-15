@@ -13,7 +13,7 @@
  * instancia que permite la gestión de los dispositivos
  */
 RosNode_PositionOrientation::RosNode_PositionOrientation() {
-  poNodeStatus = NODESTATUS_INIT;
+  nodeStatus = NODESTATUS_INIT;
   gpsinsDriver = new XSensMTi700Driver();
   magnetometerDriver = new TraxAHRSModuleDriver();
   magnOK = false;
@@ -65,39 +65,21 @@ void RosNode_PositionOrientation::configureDevices() {
 bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &rq, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &rsp) {
 
   if (rq.status == NODESTATUS_OK) {
-    if (poNodeStatus != NODESTATUS_OK) {
-      poNodeStatus = NODESTATUS_OK;
+    if (nodeStatus != NODESTATUS_OK) {
+      nodeStatus = NODESTATUS_OK;
       rsp.confirmation = true;
     } else {
       rsp.confirmation = false;
     }
 
   } else if (rq.status == NODESTATUS_OFF) {
-    poNodeStatus = NODESTATUS_OFF;
+    nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {
     rsp.confirmation = false;
   }
 
   return true;
-}
-
-/**
- * Método público consultor del atributo "poNodeStatus" de la clase que almacena 
- * el valor actual de la máquina de estados del nodo
- * @return Atributo "poNodeStatus" de la clase
- */
-short RosNode_PositionOrientation::getPONodeStatus() {
-  return poNodeStatus;
-}
-
-/**
- * Método público modificador del atributo "poNodeStatus" de la clase para 
- * modificar el valor de la máquina de estados del nodo
- * @param[in] newPONodeStatus Nuevo valor para el atributo "poNodeStatus"
- */
-void RosNode_PositionOrientation::setPONodeStatus(short newPONodeStatus) {
-  poNodeStatus = newPONodeStatus;
 }
 
 /**

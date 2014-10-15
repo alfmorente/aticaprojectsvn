@@ -73,11 +73,11 @@ int main(int argc, char** argv) {
     // Espera a permiso para comenzar a operar ROSNODE_OK
     ROS_INFO("[Control] Position / Orientation - Esperando activacion de nodo");
 
-    while (nodePosOri->getPONodeStatus() == NODESTATUS_INIT) {
+    while (nodePosOri->getNodeStatus() == NODESTATUS_INIT) {
       ros::spinOnce();
     }
 
-    if (nodePosOri->getPONodeStatus() == NODESTATUS_OK) {
+    if (nodePosOri->getNodeStatus() == NODESTATUS_OK) {
 
       nodePosOri->configureDevices();
       ROS_INFO("[Control] Position / Orientation - Nodo activado y listo para operar");
@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
     // Bucle principal Funcionamiento completo (GPS/INS + Mag)
     if (nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
 
-      while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
+      while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
 
         ros::spinOnce();
 
@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
       // Bucle principal Funcionamiento parcial solo GPS/INS
     else if (nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus()) {
 
-      while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
+      while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
 
         ros::spinOnce();
 
@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
     else if (!nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
       clock_t t0 = clock();
       clock_t t1;
-      while (ros::ok() && nodePosOri->getPONodeStatus() != NODESTATUS_OFF) {
+      while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
 
         ros::spinOnce();
 

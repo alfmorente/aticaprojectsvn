@@ -154,11 +154,48 @@ CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o.provides: CMakeFiles/fro
 
 CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o.provides.build: CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o
 
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: CMakeFiles/frontCamera.dir/flags.make
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: src/RosNode.cpp
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: manifest.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/frontCamera.dir/src/RosNode.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/frontCamera.dir/src/RosNode.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode.cpp
+
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/frontCamera.dir/src/RosNode.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode.cpp > CMakeFiles/frontCamera.dir/src/RosNode.cpp.i
+
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/frontCamera.dir/src/RosNode.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/RosNode.cpp -o CMakeFiles/frontCamera.dir/src/RosNode.cpp.s
+
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.requires:
+.PHONY : CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.requires
+
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.provides: CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.requires
+	$(MAKE) -f CMakeFiles/frontCamera.dir/build.make CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.provides.build
+.PHONY : CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.provides
+
+CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.provides.build: CMakeFiles/frontCamera.dir/src/RosNode.cpp.o
+
 # Object files for target frontCamera
 frontCamera_OBJECTS = \
 "CMakeFiles/frontCamera.dir/src/main.cpp.o" \
 "CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o" \
-"CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o"
+"CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o" \
+"CMakeFiles/frontCamera.dir/src/RosNode.cpp.o"
 
 # External object files for target frontCamera
 frontCamera_EXTERNAL_OBJECTS =
@@ -166,6 +203,7 @@ frontCamera_EXTERNAL_OBJECTS =
 bin/frontCamera: CMakeFiles/frontCamera.dir/src/main.cpp.o
 bin/frontCamera: CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o
 bin/frontCamera: CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o
+bin/frontCamera: CMakeFiles/frontCamera.dir/src/RosNode.cpp.o
 bin/frontCamera: CMakeFiles/frontCamera.dir/build.make
 bin/frontCamera: CMakeFiles/frontCamera.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/frontCamera"
@@ -178,6 +216,7 @@ CMakeFiles/frontCamera.dir/build: bin/frontCamera
 CMakeFiles/frontCamera.dir/requires: CMakeFiles/frontCamera.dir/src/main.cpp.o.requires
 CMakeFiles/frontCamera.dir/requires: CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o.requires
 CMakeFiles/frontCamera.dir/requires: CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o.requires
+CMakeFiles/frontCamera.dir/requires: CMakeFiles/frontCamera.dir/src/RosNode.cpp.o.requires
 .PHONY : CMakeFiles/frontCamera.dir/requires
 
 CMakeFiles/frontCamera.dir/clean:
