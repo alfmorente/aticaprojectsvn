@@ -49,22 +49,10 @@ int main(int argc, char** argv) {
 
         // Clear del timer
         initTime = clock();
+        
+        // Envio de estado, requerimiento de info y publicacion
+        fc->manageDevice();
 
-        // Envio de parametros (activo para no perder informacion)
-        fc->getDriverMng()->sendSetToDevice(ORDER_PAN, fc->getDriverMng()->getPan());
-        fc->getDriverMng()->sendSetToDevice(ORDER_TILT, fc->getDriverMng()->getTilt());
-        fc->getDriverMng()->sendSetToDevice(ORDER_ZOOM, fc->getDriverMng()->getZoom());
-
-        // Requerimiento de informacion de dispositivo
-        LensPosition lensPos = fc->getDriverMng()->getPosition();
-        if (lensPos.state) {
-          CITIUS_Control_FrontCamera::msg_frontCameraInfo fcMsg;
-          fcMsg.pan = lensPos.pan / 50; // * (100/5000) Conversion de formato camara
-          fcMsg.tilt = lensPos.tilt / 50; // * (100/5000) Conversion de formato camara
-          fcMsg.zoom = lensPos.zoom / 50; // * (100/5000) Conversion de formato camara
-          fc->getPubFrontCameraInfo().publish(fcMsg);
-          ROS_INFO("[Control] FrontCamera - Enviado mensaje con informacion de camara");
-        }
       }
     }
   } else {

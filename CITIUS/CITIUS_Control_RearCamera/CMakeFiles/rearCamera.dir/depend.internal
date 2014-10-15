@@ -64,6 +64,7 @@ CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/AxisP3364LveDriver.h
+ include/RosNode.h
  include/RosNode_RearCamera.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_RearCamera/msg_ctrlRearCamera.h
@@ -126,6 +127,7 @@ CMakeFiles/rearCamera.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/AxisP3364LveDriver.h
+ include/RosNode.h
  include/RosNode_RearCamera.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_RearCamera/msg_ctrlRearCamera.h

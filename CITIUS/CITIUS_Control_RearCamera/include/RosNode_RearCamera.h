@@ -47,10 +47,10 @@ public:
   RosNode_RearCamera();
   // Inicializador de artefactos ROS
   void initROS();
-  
-  // Getter and Setter necesarios
-  ros::Publisher getPubRearCameraInfo();
+  // Consultores
   AxisP3364LveDriver *getDriverMng();
+  // Metodos de gestion
+  void manageDevice();
 
 };
 

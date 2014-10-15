@@ -60,15 +60,6 @@ bool RosNode_FrontCamera::fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_no
 }
 
 /**
- * Método público consultor del atributo "pubFrontCameraInfo" de la clase con el 
- * publicador de información del estado de la cámara
- * @return Atributo "pubFrontCameraInfo"
- */
-ros::Publisher RosNode_FrontCamera::getPubFrontCameraInfo() {
-  return pubFrontCameraInfo;
-}
-
-/**
  * Método público consultor del atributo "dFrontCamera" de la clase con una 
  * referencia a la instancia de la clase que gestiona la comunicación con la 
  * cámara
@@ -76,4 +67,24 @@ ros::Publisher RosNode_FrontCamera::getPubFrontCameraInfo() {
  */
 AxisP3364LveDriver *RosNode_FrontCamera::getDriverMng() {
   return dFrontCamera;
+}
+
+/**
+ * Método público que transmite el estado al dispositivo, solicita el estado 
+ * real y lo publica mediante el topic correspondiente
+ */
+void RosNode_FrontCamera::manageDevice() {
+    dFrontCamera->sendSetToDevice(ORDER_PAN, dFrontCamera->getPan());
+    dFrontCamera->sendSetToDevice(ORDER_TILT, dFrontCamera->getTilt());
+    dFrontCamera->sendSetToDevice(ORDER_ZOOM, dFrontCamera->getZoom());
+
+    // Requerimiento de informacion de dispositivo
+    LensPosition lensPos = dFrontCamera->getPosition();
+    if (lensPos.state) {
+        CITIUS_Control_FrontCamera::msg_frontCameraInfo rcMsg;
+        rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+        rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+        rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+        pubFrontCameraInfo.publish(rcMsg);
+    }
 }

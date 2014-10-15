@@ -49,21 +49,10 @@ int main(int argc, char** argv) {
 
         // Clear del timer
         initTime = clock();
-
-        // Envio de parametros (activo para no perder informacion)
-        rc->getDriverMng()->sentSetToDevice(ORDER_PAN, rc->getDriverMng()->getPan());
-        rc->getDriverMng()->sentSetToDevice(ORDER_TILT, rc->getDriverMng()->getTilt());
-        rc->getDriverMng()->sentSetToDevice(ORDER_ZOOM, rc->getDriverMng()->getZoom());
-
-        // Requerimiento de informacion de dispositivo
-        LensPosition lensPos = rc->getDriverMng()->getPosition();
-        if (lensPos.state) {
-          CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
-          rcMsg.pan = lensPos.pan / 50; // * (100/5000) Conversion de formato camara
-          rcMsg.tilt = lensPos.tilt / 50; // * (100/5000) Conversion de formato camara
-          rcMsg.zoom = lensPos.zoom / 50; // * (100/5000) Conversion de formato camara
-          rc->getPubRearCameraInfo().publish(rcMsg);
-        }
+        
+        // Envio de estado, requerimiento de info y publicacion
+        rc->manageDevice();
+        
       }
     }
   } else {
