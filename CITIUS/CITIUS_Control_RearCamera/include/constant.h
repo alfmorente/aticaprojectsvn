@@ -46,6 +46,12 @@
 #define ORDER_PAN 1 /// Identificador de orden PAN
 #define ORDER_TILT 2 /// Identificador de orden TILT
 
+/*******************************************************************************
+ * CONVERSION PTZ CAMARA
+ ******************************************************************************/
+
+#define CONV_TO_CAMERA 1/50 /// Factor de conversion entre PTZ porcentual y valores de cámara
+
 /**
  * /struct FrameDriving
  * /brief Estructura de intercambio con payload de conducción
