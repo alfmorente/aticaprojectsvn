@@ -13,6 +13,7 @@
 #ifndef ROSNOSE_POSITIONORIENTATION_H
 #define	ROSNOSE_POSITIONORIENTATION_H
 
+#include "RosNode.h"
 #include "CITIUS_Control_PositionOrientation/srv_nodeStatus.h"
 #include "CITIUS_Control_PositionOrientation/msg_posOriInfo.h"
 #include "constant.h"
@@ -29,11 +30,9 @@ using namespace std;
  * /brief Clase que representa al nodo ROS que gestiona la comunicación con los
  * dispositivos que obtiene la posición y orientación del vehículo
 */
-class RosNode_PositionOrientation {
+class RosNode_PositionOrientation: public RosNode {
   
 private:
-  // Estado del nodo
-  short poNodeStatus;
   // Publicador de informacion de Posicion/Orientacion
   ros::Publisher pubPosOriInfo;
   // Cliente de servicio de estado de nodo
@@ -58,9 +57,6 @@ public:
   void initROS();
 
   // Getter and Setter necesarios
-  //ros::Publisher getPubPosOriInfo();
-  short getPONodeStatus();
-  void setPONodeStatus(short);
   XSensMTi700Driver *getXSensManager();
   TraxAHRSModuleDriver *getMagnetometerManager();
   bool getGpsStatus();

@@ -71,24 +71,6 @@ void RosNode_Electric::initROS(){
 }
 
 /**
- * Método público consultor del atributo "emNodeStatus" de la clase que 
- * proporciona el estado actual de la máquina de estados del nodo
- * @return Atributo "emNodeStatus" de la clase
- */
-//short RosNode_Electric::getEMNodeStatus() {
-//  return emNodeStatus;
-//}
-
-/**
- * Método público modificador del atributo "emNodeStatus" de la clase para 
- * realizar una transición en la máquina de estados del nodo
- * @param[in] newStatus Nuevo estado al que realizar la transición
- */
-//void RosNode_Electric::setEMNodeStatus(short newStatus) {
-//  emNodeStatus = newStatus;
-//}
-
-/**
  * Método público consultor del atributo "dElectric" de la clase que 
  * proporciona la instancia del driver utilizado en la comunicación con el 
  * vehículo

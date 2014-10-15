@@ -12,6 +12,7 @@
       </df>
       <df name="src">
         <in>AxisP3364LveDriver.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_FrontCamera.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -73,22 +74,21 @@
       <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
+        <cTool>
+        </cTool>
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
-      </item>
-      <item path="/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
+            flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
         <cTool>
           <preprocessorList>
             <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
@@ -141,12 +141,16 @@
       <item path="CMakeFiles/CompilerIdC/CMakeCCompilerId.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
+        <cTool>
+        </cTool>
       </item>
       <item path="CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
+            flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <folder path="0">
         <ccTool>
@@ -204,6 +208,8 @@
         </ccTool>
       </folder>
       <item path="src/AxisP3364LveDriver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/RosNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/RosNode_FrontCamera.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>

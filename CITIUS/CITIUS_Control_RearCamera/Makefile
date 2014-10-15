@@ -498,6 +498,30 @@ src/AxisP3364LveDriver.cpp.s:
 	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.s
 .PHONY : src/AxisP3364LveDriver.cpp.s
 
+src/RosNode.o: src/RosNode.cpp.o
+.PHONY : src/RosNode.o
+
+# target to build an object file
+src/RosNode.cpp.o:
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/RosNode.cpp.o
+.PHONY : src/RosNode.cpp.o
+
+src/RosNode.i: src/RosNode.cpp.i
+.PHONY : src/RosNode.i
+
+# target to preprocess a source file
+src/RosNode.cpp.i:
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/RosNode.cpp.i
+.PHONY : src/RosNode.cpp.i
+
+src/RosNode.s: src/RosNode.cpp.s
+.PHONY : src/RosNode.s
+
+# target to generate assembly for a file
+src/RosNode.cpp.s:
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/RosNode.cpp.s
+.PHONY : src/RosNode.cpp.s
+
 src/RosNode_RearCamera.o: src/RosNode_RearCamera.cpp.o
 .PHONY : src/RosNode_RearCamera.o
 
@@ -587,6 +611,9 @@ help:
 	@echo "... src/AxisP3364LveDriver.o"
 	@echo "... src/AxisP3364LveDriver.i"
 	@echo "... src/AxisP3364LveDriver.s"
+	@echo "... src/RosNode.o"
+	@echo "... src/RosNode.i"
+	@echo "... src/RosNode.s"
 	@echo "... src/RosNode_RearCamera.o"
 	@echo "... src/RosNode_RearCamera.i"
 	@echo "... src/RosNode_RearCamera.s"

@@ -13,7 +13,7 @@
  * instancia que permite la gestion de la cámara
  */
 RosNode_FrontCamera::RosNode_FrontCamera() {
-  fcNodeStatus = NODESTATUS_INIT;
+  nodeStatus = NODESTATUS_INIT;
   dFrontCamera = new AxisP3364LveDriver();
 }
 
@@ -48,32 +48,15 @@ void RosNode_FrontCamera::fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::ms
  */
 bool RosNode_FrontCamera::fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_nodeStatus::Request &rq, CITIUS_Control_FrontCamera::srv_nodeStatus::Response &rsp) {
   if (rq.status == NODESTATUS_OK) {
-    fcNodeStatus = NODESTATUS_OK;
+    nodeStatus = NODESTATUS_OK;
     rsp.confirmation = true;
   } else if (rq.status == NODESTATUS_OFF) {
-    fcNodeStatus = NODESTATUS_OFF;
+    nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {
     rsp.confirmation = false;
   }
   return true;
-}
-
-/**
- * Método público consultor del atributo "fcNodeStatus" de la clase que registra 
- * el estado actual en el que se encuentra la máquina de estados
- * @return Atributo "fcNodeStatus" de la clase
- */
-short RosNode_FrontCamera::getFcNodeStatus() {
-  return fcNodeStatus;
-}
-
-/**
- * Método público modificador del atributo "fcNodeStatus" de la clase
- * @param[in] newFcNodeStatus Nuevo valor para el atributo
- */
-void RosNode_FrontCamera::setFcNodeStatus(short newFcNodeStatus) {
-  fcNodeStatus = newFcNodeStatus;
 }
 
 /**

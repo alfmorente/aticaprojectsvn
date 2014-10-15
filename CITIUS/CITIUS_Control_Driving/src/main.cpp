@@ -28,10 +28,10 @@ int main(int argc, char** argv) {
 
     // Espera a permiso para comenzar a operar ROSNODE_OK
     ROS_INFO("[Control] Driving - Esperando activacion de nodo");
-    while (nodeDriving->getVMNodeStatus() == NODESTATUS_INIT) {
+    while (nodeDriving->getNodeStatus() == NODESTATUS_INIT) {
       ros::spinOnce();
     }
-    if (nodeDriving->getVMNodeStatus() == NODESTATUS_OK)
+    if (nodeDriving->getNodeStatus() == NODESTATUS_OK)
       ROS_INFO("[Control] Driving - Nodo listo para operar");
 
     // Temporizador de requerimiento de informacion
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     short hzCount = 0;
 
     //Bucle principal
-    while (ros::ok() && nodeDriving->getVMNodeStatus() != NODESTATUS_OFF) {
+    while (ros::ok() && nodeDriving->getNodeStatus() != NODESTATUS_OFF) {
       if (nodeDriving->getDriverMng()->getSocketDescriptor() == -1) {
         ROS_INFO("[Control] Driving - Se ha perdido comunicacion con servidor");
       } else {

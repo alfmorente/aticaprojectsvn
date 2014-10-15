@@ -4,6 +4,9 @@
 CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: src/AxisP3364LveDriver.cpp
 CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o: include/AxisP3364LveDriver.h
 
+CMakeFiles/rearCamera.dir/src/RosNode.cpp.o: src/RosNode.cpp
+CMakeFiles/rearCamera.dir/src/RosNode.cpp.o: include/RosNode.h
+
 CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o: src/RosNode_RearCamera.cpp
 CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
 CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o: /opt/ros/groovy/include/XmlRpcValue.h

@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
     // Espera a permiso para comenzar a operar ROSNODE_OK
     ROS_INFO("[Control] FrontCamera - Esperando activacion de nodo");
-    while (fc->getFcNodeStatus() != NODESTATUS_OK) {
+    while (fc->getNodeStatus() != NODESTATUS_OK) {
       ros::spinOnce();
     }
     ROS_INFO("[Control] FrontCamera - Nodo listo para operar");
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     initTime = clock();
 
     //Bucle principal
-    while (ros::ok() && fc->getFcNodeStatus() != NODESTATUS_OFF) {
+    while (ros::ok() && fc->getNodeStatus() != NODESTATUS_OFF) {
 
       // Recepcion de mensaje
       ros::spinOnce();

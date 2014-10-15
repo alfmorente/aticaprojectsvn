@@ -474,6 +474,30 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/RosNode.o: src/RosNode.cpp.o
+.PHONY : src/RosNode.o
+
+# target to build an object file
+src/RosNode.cpp.o:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o
+.PHONY : src/RosNode.cpp.o
+
+src/RosNode.i: src/RosNode.cpp.i
+.PHONY : src/RosNode.i
+
+# target to preprocess a source file
+src/RosNode.cpp.i:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.i
+.PHONY : src/RosNode.cpp.i
+
+src/RosNode.s: src/RosNode.cpp.s
+.PHONY : src/RosNode.s
+
+# target to generate assembly for a file
+src/RosNode.cpp.s:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.s
+.PHONY : src/RosNode.cpp.s
+
 src/RosNodePositionOrientation.o: src/RosNodePositionOrientation.cpp.o
 .PHONY : src/RosNodePositionOrientation.o
 
@@ -656,6 +680,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/RosNode.o"
+	@echo "... src/RosNode.i"
+	@echo "... src/RosNode.s"
 	@echo "... src/RosNodePositionOrientation.o"
 	@echo "... src/RosNodePositionOrientation.i"
 	@echo "... src/RosNodePositionOrientation.s"

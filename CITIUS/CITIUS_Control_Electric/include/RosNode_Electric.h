@@ -51,8 +51,6 @@ public:
 
   // Getter and Setter necesarios
   ros::ServiceClient getClientVehicleStatus();
-  //short getEMNodeStatus();
-  //void setEMNodeStatus(short newEMNodeStatus);
   ElectricConnectionManager *getDriverMng();
 
   // Publicar informacion de vehiculo

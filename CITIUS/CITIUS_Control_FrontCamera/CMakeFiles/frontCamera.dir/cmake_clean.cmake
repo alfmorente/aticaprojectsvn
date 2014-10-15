@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/frontCamera.dir/src/main.cpp.o"
   "CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o"
   "CMakeFiles/frontCamera.dir/src/AxisP3364LveDriver.cpp.o"
+  "CMakeFiles/frontCamera.dir/src/RosNode.cpp.o"
   "bin/frontCamera.pdb"
   "bin/frontCamera"
 )
