@@ -58,6 +58,9 @@ CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: /opt/ros/groovy/inc
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: include/ElectricConnectionManager.h
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: include/constant.h
 
+CMakeFiles/electric.dir/src/RosNode.cpp.o: src/RosNode.cpp
+CMakeFiles/electric.dir/src/RosNode.cpp.o: include/RosNode.h
+
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: src/RosNode_Electric.cpp
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/XmlRpcValue.h
@@ -114,6 +117,7 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/ros/
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/ElectricConnectionManager.h
+CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/RosNode.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/RosNode_Electric.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/constant.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
@@ -177,6 +181,7 @@ CMakeFiles/electric.dir/src/main.cpp.o: /opt/ros/groovy/include/ros/wall_timer.h
 CMakeFiles/electric.dir/src/main.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/electric.dir/src/main.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/ElectricConnectionManager.h
+CMakeFiles/electric.dir/src/main.cpp.o: include/RosNode.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/RosNode_Electric.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/constant.h
 CMakeFiles/electric.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h

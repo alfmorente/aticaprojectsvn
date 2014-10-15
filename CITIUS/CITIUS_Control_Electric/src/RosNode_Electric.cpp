@@ -13,7 +13,8 @@
  * instancia del driver de conexión con el vehículo
  */
 RosNode_Electric::RosNode_Electric() {
-  emNodeStatus = NODESTATUS_INIT;
+  //emNodeStatus = NODESTATUS_INIT;
+  nodeStatus = NODESTATUS_INIT;
   dElectric = new ElectricConnectionManager();
 }
 
@@ -22,8 +23,8 @@ RosNode_Electric::RosNode_Electric() {
  * Consulta la posición del conmutador local/teleoperado y solicita la inicialización de la maquina de
  * estados de modos de operacion del vehículo con la señal obtenida
  */
-void RosNode_Electric::initROS() {
-
+void RosNode_Electric::initROS(){
+  
   ros::NodeHandle nh;
 
   clientVehicleStatus = nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
@@ -59,10 +60,12 @@ void RosNode_Electric::initROS() {
   }
   if (service.response.confirmation) {
     ROS_INFO("[Control] Electric - Se ha iniciado el vehículo");
-    emNodeStatus = NODESTATUS_OK;
+    //emNodeStatus = NODESTATUS_OK;
+    nodeStatus = NODESTATUS_OK;
   } else {
     ROS_INFO("[Control] Electric - El vehículo no se ha podido iniciar");
-    emNodeStatus = NODESTATUS_OFF;
+    //emNodeStatus = NODESTATUS_OFF;
+    nodeStatus = NODESTATUS_OFF;
   }
 
 }
@@ -72,18 +75,18 @@ void RosNode_Electric::initROS() {
  * proporciona el estado actual de la máquina de estados del nodo
  * @return Atributo "emNodeStatus" de la clase
  */
-short RosNode_Electric::getEMNodeStatus() {
-  return emNodeStatus;
-}
+//short RosNode_Electric::getEMNodeStatus() {
+//  return emNodeStatus;
+//}
 
 /**
  * Método público modificador del atributo "emNodeStatus" de la clase para 
  * realizar una transición en la máquina de estados del nodo
  * @param[in] newStatus Nuevo estado al que realizar la transición
  */
-void RosNode_Electric::setEMNodeStatus(short newStatus) {
-  emNodeStatus = newStatus;
-}
+//void RosNode_Electric::setEMNodeStatus(short newStatus) {
+//  emNodeStatus = newStatus;
+//}
 
 /**
  * Método público consultor del atributo "dElectric" de la clase que 

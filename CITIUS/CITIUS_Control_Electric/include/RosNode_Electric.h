@@ -14,6 +14,7 @@
 #define	ROSNODE_ELECTRIC_H
 
 #include <time.h>
+#include "RosNode.h"
 #include "ElectricConnectionManager.h"
 #include "CITIUS_Control_Electric/msg_electricInfo.h"
 #include "CITIUS_Control_Electric/msg_command.h"
@@ -29,10 +30,10 @@ using namespace std;
  * /brief Clase que representa al nodo ROS que gestiona la comunicación con el 
  * módulo de alimentación del vehículo
 */
-class RosNode_Electric {
+class RosNode_Electric: public RosNode {
 private:
   // Estado del nodo
-  short emNodeStatus;
+  //short emNodeStatus;
   // Publicador de informacion de camara
   ros::Publisher pubElectricInfo;
   ros::Publisher pubCommand;
@@ -50,8 +51,8 @@ public:
 
   // Getter and Setter necesarios
   ros::ServiceClient getClientVehicleStatus();
-  short getEMNodeStatus();
-  void setEMNodeStatus(short newEMNodeStatus);
+  //short getEMNodeStatus();
+  //void setEMNodeStatus(short newEMNodeStatus);
   ElectricConnectionManager *getDriverMng();
 
   // Publicar informacion de vehiculo

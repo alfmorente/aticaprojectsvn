@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric
 
@@ -137,6 +140,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric
+
+# Build rule for target.
+ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric
+.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric
+
+# fast build rule for target.
+ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric.dir/build
+.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -176,6 +192,19 @@ ROSBUILD_genmsg_py/fast:
 .PHONY : ROSBUILD_genmsg_py/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmsg_roseus_CITIUS_Control_Electric
+
+# Build rule for target.
+ROSBUILD_genmsg_roseus_CITIUS_Control_Electric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_roseus_CITIUS_Control_Electric
+.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_Electric
+
+# fast build rule for target.
+ROSBUILD_genmsg_roseus_CITIUS_Control_Electric/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Electric.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Electric.dir/build
+.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_Electric/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -213,6 +242,19 @@ ROSBUILD_gensrv_py: cmake_check_build_system
 ROSBUILD_gensrv_py/fast:
 	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
 .PHONY : ROSBUILD_gensrv_py/fast
+
+#=============================================================================
+# Target rules for targets named ROSBUILD_gensrv_roseus_CITIUS_Control_Electric
+
+# Build rule for target.
+ROSBUILD_gensrv_roseus_CITIUS_Control_Electric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_roseus_CITIUS_Control_Electric
+.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Electric
+
+# fast build rule for target.
+ROSBUILD_gensrv_roseus_CITIUS_Control_Electric/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Electric.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Electric.dir/build
+.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Electric/fast
 
 #=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
@@ -498,6 +540,30 @@ src/ElectricConnectionManager.cpp.s:
 	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.s
 .PHONY : src/ElectricConnectionManager.cpp.s
 
+src/RosNode.o: src/RosNode.cpp.o
+.PHONY : src/RosNode.o
+
+# target to build an object file
+src/RosNode.cpp.o:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode.cpp.o
+.PHONY : src/RosNode.cpp.o
+
+src/RosNode.i: src/RosNode.cpp.i
+.PHONY : src/RosNode.i
+
+# target to preprocess a source file
+src/RosNode.cpp.i:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode.cpp.i
+.PHONY : src/RosNode.cpp.i
+
+src/RosNode.s: src/RosNode.cpp.s
+.PHONY : src/RosNode.s
+
+# target to generate assembly for a file
+src/RosNode.cpp.s:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode.cpp.s
+.PHONY : src/RosNode.cpp.s
+
 src/RosNode_Electric.o: src/RosNode_Electric.cpp.o
 .PHONY : src/RosNode_Electric.o
 
@@ -552,12 +618,15 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_genmsg_py"
+	@echo "... ROSBUILD_genmsg_roseus_CITIUS_Control_Electric"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... ROSBUILD_gensrv_py"
+	@echo "... ROSBUILD_gensrv_roseus_CITIUS_Control_Electric"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... doxygen"
@@ -587,6 +656,9 @@ help:
 	@echo "... src/ElectricConnectionManager.o"
 	@echo "... src/ElectricConnectionManager.i"
 	@echo "... src/ElectricConnectionManager.s"
+	@echo "... src/RosNode.o"
+	@echo "... src/RosNode.i"
+	@echo "... src/RosNode.s"
 	@echo "... src/RosNode_Electric.o"
 	@echo "... src/RosNode_Electric.i"
 	@echo "... src/RosNode_Electric.s"

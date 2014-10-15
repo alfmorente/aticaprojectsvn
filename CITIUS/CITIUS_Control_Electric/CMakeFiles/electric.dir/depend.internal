@@ -58,6 +58,9 @@ CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/ElectricConnectionManager.h
  include/constant.h
+CMakeFiles/electric.dir/src/RosNode.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode.cpp
+ include/RosNode.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
@@ -115,6 +118,7 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/ElectricConnectionManager.h
+ include/RosNode.h
  include/RosNode_Electric.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
@@ -178,6 +182,7 @@ CMakeFiles/electric.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/ElectricConnectionManager.h
+ include/RosNode.h
  include/RosNode_Electric.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h

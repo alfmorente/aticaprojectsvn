@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/electric.dir/src/main.cpp.o"
   "CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o"
   "CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o"
+  "CMakeFiles/electric.dir/src/RosNode.cpp.o"
   "bin/electric.pdb"
   "bin/electric"
 )
