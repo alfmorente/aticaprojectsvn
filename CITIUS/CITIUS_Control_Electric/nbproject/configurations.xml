@@ -10,8 +10,12 @@
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
       </df>
+      <df name="include">
+        <in>RosNode.h</in>
+      </df>
       <df name="src">
         <in>ElectricConnectionManager.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_Electric.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -203,7 +207,11 @@
           </undefinedList>
         </ccTool>
       </folder>
+      <item path="include/RosNode.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/ElectricConnectionManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/RosNode.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/RosNode_Electric.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -36,7 +36,8 @@ int main(int argc, char** argv) {
     nodeElectric->initROS();
 
     // Espera a permiso para comenzar a operar ROSNODE_OK
-    if (nodeElectric->getEMNodeStatus() != NODESTATUS_OFF) {
+    //if (nodeElectric->getEMNodeStatus() != NODESTATUS_OFF) {
+    if(nodeElectric->getNodeStatus() != NODESTATUS_OFF){
       ROS_INFO("[Control] Electric - Nodo listo para operar");
     }
 
@@ -45,7 +46,8 @@ int main(int argc, char** argv) {
     initTime = clock();
 
     //Bucle principal
-    while (ros::ok() && nodeElectric->getEMNodeStatus() != NODESTATUS_OFF) {
+    //while (ros::ok() && nodeElectric->getEMNodeStatus() != NODESTATUS_OFF) {
+    while(ros::ok() && nodeElectric->getNodeStatus()!=NODESTATUS_OFF){
 
       // Recepcion de mensaje ROS
       ros::spinOnce();
@@ -76,7 +78,8 @@ int main(int argc, char** argv) {
           nodeElectric->getDriverMng()->disconnectVehicle();
 
           // Cambiar el estado del nodo para finalizar
-          nodeElectric->setEMNodeStatus(NODESTATUS_OFF);
+          //nodeElectric->setEMNodeStatus(NODESTATUS_OFF);
+          nodeElectric->setNodeStatus(NODESTATUS_OFF);
 
         } else {
           ROS_INFO("[Control] Electric - Sin confirmacion para apagar el vehiculo");

@@ -108,6 +108,7 @@
         <df name="CITIUS_Control_Electric">
         </df>
         <in>ElectricConnectionManager.h</in>
+        <in>RosNode.h</in>
         <in>RosNode_Electric.h</in>
         <in>constant.h</in>
       </df>
@@ -136,6 +137,7 @@
           </df>
         </df>
         <in>ElectricConnectionManager.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_Electric.cpp</in>
         <in>main.cpp</in>
       </df>
