@@ -114,7 +114,6 @@
         <in>TraxAHRSModuleDriver.h</in>
         <in>XSensMTi700Driver.h</in>
         <in>constant.h</in>
-        <in>conversionTypes.h</in>
         <in>crc16calc.h</in>
       </df>
       <df name="lib">
@@ -143,7 +142,6 @@
         <in>RosNodePositionOrientation.cpp</in>
         <in>TraxAHRSModuleDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
-        <in>conversionTypes.cpp</in>
         <in>crc16calc.cpp</in>
         <in>main.cpp</in>
       </df>

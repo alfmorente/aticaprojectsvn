@@ -21,10 +21,10 @@
 #include <stdlib.h> 
 #include <string.h>
 #include <complex>
-#include "crc16calc.h"
-#include "conversionTypes.h"
 #include <vector>
 #include "constant.h"
+#include <stdint.h>
+#include "crc16calc.h"
 
 using namespace std;
 
@@ -32,9 +32,10 @@ using namespace std;
  * /class TraxAHRSModuleDriver
  * /brief Clase que representa al driver de comunicación con el dispositivo
  * magnetómetro Trax AHRS Module
-*/
+ */
 class TraxAHRSModuleDriver {
 private:
+  
   // Datos recibidos
   TraxMeasurement oriInfo;
 
@@ -51,6 +52,13 @@ private:
   void rcvResponse();
   TraxMsg mngPacket(std::vector< char>);
   TraxMeasurement unpackPayload(std::vector<char>);
+  
+  // Conversion de tipos
+  float hexa2float(std::vector<char>);
+  double hexa2double(std::vector<unsigned char>);
+  int hexa2int(std::vector<unsigned char>);
+  short hexa2short(std::vector<char>);
+  std::vector<char> shortToHexa(short);
 
 public:
 
@@ -65,6 +73,7 @@ public:
   
   // Retorno de estructura de datos
   TraxMeasurement getInfo();
+
 };
 
 #endif	/* TRAXAHRSMODULEDRIVER_H */

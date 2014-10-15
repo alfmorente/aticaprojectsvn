@@ -120,6 +120,9 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Electric">
+              <in>msg_command.h</in>
+              <in>msg_electricInfo.h</in>
+              <in>msg_switcher.h</in>
             </df>
           </df>
         </df>

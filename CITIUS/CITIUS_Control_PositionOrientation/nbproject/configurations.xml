@@ -15,7 +15,6 @@
         <in>RosNodePositionOrientation.cpp</in>
         <in>TraxAHRSModuleDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
-        <in>conversionTypes.cpp</in>
         <in>crc16calc.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -228,10 +227,6 @@
         </ccTool>
       </item>
       <item path="src/XSensMTi700Driver.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="src/conversionTypes.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
