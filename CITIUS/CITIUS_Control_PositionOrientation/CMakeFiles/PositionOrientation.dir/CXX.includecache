@@ -6,9 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.cpp
-RosNode.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/crc16calc.cpp
+crc16calc.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/crc16calc.h
 
-include/RosNode.h
+include/crc16calc.h
+stdint.h
+-
 
