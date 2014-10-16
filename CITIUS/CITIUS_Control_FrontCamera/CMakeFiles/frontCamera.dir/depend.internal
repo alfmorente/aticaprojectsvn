@@ -65,6 +65,7 @@ CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/AxisP3364LveDriver.h
+ include/RosNode.h
  include/RosNode_FrontCamera.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h
@@ -127,6 +128,7 @@ CMakeFiles/frontCamera.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/AxisP3364LveDriver.h
+ include/RosNode.h
  include/RosNode_FrontCamera.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h

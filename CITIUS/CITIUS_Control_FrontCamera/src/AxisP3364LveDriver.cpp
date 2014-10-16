@@ -297,7 +297,7 @@ float AxisP3364LveDriver::getZoom() {
  * @param[in] newPan Nuevo valor del atributo "pan"
  */
 void AxisP3364LveDriver::setPan(float newPan) {
-  pan = newPan * 50; // *5000/100 Conversiona  formato cámara
+  pan = newPan * CONV_FROM_CAMERA; // *5000/100 Conversiona  formato cámara
 }
 
 /**
@@ -306,7 +306,7 @@ void AxisP3364LveDriver::setPan(float newPan) {
  * @param[in] newPan Nuevo valor del atributo "tilt"
  */
 void AxisP3364LveDriver::setTilt(float newTilt) {
-  tilt = newTilt * 50; // *5000/100 Conversiona  formato cámara
+  tilt = newTilt * CONV_FROM_CAMERA; // *5000/100 Conversiona  formato cámara
 }
 
 /**
@@ -315,5 +315,5 @@ void AxisP3364LveDriver::setTilt(float newTilt) {
  * @param[in] newPan Nuevo valor del atributo "zoom"
  */
 void AxisP3364LveDriver::setZoom(float newZoom) {
-  zoom = newZoom * 50; // *5000/100 Conversiona  formato cámara
+  zoom = newZoom * CONV_FROM_CAMERA; // *5000/100 Conversiona  formato cámara
 }

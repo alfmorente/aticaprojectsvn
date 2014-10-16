@@ -53,6 +53,7 @@
  ******************************************************************************/
 
 #define CONV_TO_CAMERA 1/50 /// Factor de conversion entre PTZ porcentual y valores de cámara
+#define CONV_FROM_CAMERA 50 /// Factor de conversion entre  valores de cámara y PTZ porcentual
 
 /**
  * /struct FrameDriving
