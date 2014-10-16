@@ -35,7 +35,6 @@ using namespace std;
 */
 class DrivingConnectionManager {
 private:
-
   // Socket
   int socketDescriptor;
   // Contador para la cola de mensajes (Integridad)
@@ -53,34 +52,25 @@ private:
   void setAlarmsInfo(short element, short value);
   // Metodos de gestion privados
   RtxStruct informResponse(bool, short);
-
-
 public:
   // Constructor
   DrivingConnectionManager();
-
   // Gestion del vehiculo
   bool connectVehicle();
   bool disconnectVehicle();
-
   // Mensajeria con vehiculo
   void sendToVehicle(FrameDriving frame);
   void reqVehicleInfo(bool full);
   bool checkForVehicleMessages();
-
   // Getter y setter necesarios
   DrivingInfo getVehicleInfo(bool full);
   int getSocketDescriptor();
   short getCountCriticalMessages();
   void setCountCriticalMessages(short cont);
-
   // Metodos auxiliares
   bool isCriticalInstruction(short element);
-
   // Tratamiento de la cola de mensajes criticos
   void addToQueue(FrameDriving frame);
-    
-
 };
 
 #endif	/* DrivingConnectionManager */

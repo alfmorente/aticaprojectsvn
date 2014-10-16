@@ -266,13 +266,13 @@ void RosNode_Communications::informStatus() {
   // Generacion de mensaje especifico UGV Info
   ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
   if (status == OPERATION_MODE_LOCAL) {
-    rmsm->missionId = 1;
+    rmsm->missionId = JAUS_OPERATION_MODE_LOCAL;
   } else if (status == OPERATION_MODE_CONDUCCION) {
-    rmsm->missionId = 5;
+    rmsm->missionId = JAUS_OPERATION_MODE_CONDUCCION;
   } else if (status == OPERATION_MODE_OBSERVACION) {
-    rmsm->missionId = 6;
+    rmsm->missionId = JAUS_OPERATION_MODE_OBSERVACION;
   } else {
-    rmsm->missionId = 0;
+    rmsm->missionId = JAUS_OPERATION_MODE_INICIANDO;
   }
   rmsm->status = 0;
 

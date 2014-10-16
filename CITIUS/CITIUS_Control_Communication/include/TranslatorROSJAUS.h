@@ -28,7 +28,6 @@
 class TranslatorROSJAUS {
 public:
   TranslatorROSJAUS();
-  
   // Obtencion de mensajes JAUS en base a informacion previa
   JausMessage getJausMsgFromWrenchEffortInfo(int subDest, int nodDest, short steer, short throttle, short brake);
   JausMessage getJausMsgFromDiscreteDeviceInfo(int subDest, int nodDest, bool parkingbrake, short gear);
@@ -41,7 +40,6 @@ public:
   JausMessage getJausMsgFromTelemeterInfo(int subDest, int nodDest, short *ecs);
   JausMessage getJausMsgFromTVCamera(int subDest, int nodDest, short zoom, short focus, bool autofocus);
   JausMessage getJausMsgFromPositioner(int subDest, int nodDest, short pan, short tilt);
-
 };
 
 #endif	/* TRANSLATORROSJAUS_H */

@@ -35,10 +35,8 @@ using namespace std;
 */
 class ElectricConnectionManager {
 private:
-
   // Socket
   int socketDescriptor;
-
   // Contador para la cola de mensajes (Integridad)
   short countMsg;
   // Manejador de la cola de mensajes (Integridad)
@@ -57,21 +55,17 @@ private:
   // Metodos de gestion privados
   RtxStruct informResponse(bool, short);
   bool isCriticalInstruction(short element);
-
 public:
   // Constructor
   ElectricConnectionManager();
-
   // Gestion del vehiculo
   bool connectVehicle();
   bool disconnectVehicle();
-
   // Mensajeria con vehiculo
   void sendToVehicle(FrameDriving);
   bool checkForVehicleMessages();
   void reqElectricInfo();
   void setTurnOff();
-
   // Getter y setter necesarios
   bool getTurnOffFlag();
   ElectricInfo getVehicleInfo();
@@ -79,13 +73,8 @@ public:
   void setCountCriticalMessages(short);
   void setSwitcherStruct(bool);
   SwitcherStruct getSwitcherStruct();
-
-  // Metodos auxiliares
-  
-
   // Tratamiento de la cola de mensajes criticos
   void addToQueue(FrameDriving frame);
-  
 };
 
 #endif	/* ElectricConnectionManager */

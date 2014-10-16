@@ -34,17 +34,13 @@ using namespace std;
 */
 class AxisP3364LveDriver {
 public:
-
   AxisP3364LveDriver();
   ~AxisP3364LveDriver();
-
   // Conexion con la camara (comprobacion de disponibilidad)
   bool checkConnection();
-
   // Envio / Requerimiento de informacion
   bool sendSetToDevice(short order, float value);
   LensPosition getPosition();
-
   // Getter y setter necesarios
   float getPan();
   float getTilt();
@@ -52,22 +48,17 @@ public:
   void setPan(float);
   void setTilt(float);
   void setZoom(float);
-
 private:
-
   int socketDescriptor;
   struct hostent *he;
   struct sockaddr_in server;
-
   // Propiedades de control
   float pan;
   float tilt;
   float zoom;
-
   float extractZoom(char[]);
   float extractTilt(char[]);
   float extractPan(char[]);
-
 };
 
 #endif	/* AXISP3364LVEDRIVER_H */

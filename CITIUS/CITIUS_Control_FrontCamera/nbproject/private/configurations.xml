@@ -146,7 +146,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_FrontCamera">
-              <in>srv_nodeStatus.h</in>
             </df>
           </df>
         </df>

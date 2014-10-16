@@ -28,6 +28,7 @@
 
 using namespace std;
 
+
 /**
  * /class TraxAHRSModuleDriver
  * /brief Clase que representa al driver de comunicación con el dispositivo
@@ -35,45 +36,35 @@ using namespace std;
  */
 class TraxAHRSModuleDriver {
 private:
-  
   // Datos recibidos
   TraxMeasurement oriInfo;
-
   // Puerto serie
   struct termios newtio, oldtio;
   int canal;
-
   // Operaciones a bajo nivel
   TraxMsg kGetModInfo();
   TraxMsg kGetData();
   TraxMsg kSetDataComponents();
-
   void sendToDevice(TraxMsg);
   void rcvResponse();
   TraxMsg mngPacket(std::vector< char>);
   TraxMeasurement unpackPayload(std::vector<char>);
-  
   // Conversion de tipos
   float hexa2float(std::vector<char>);
   double hexa2double(std::vector<unsigned char>);
   int hexa2int(std::vector<unsigned char>);
   short hexa2short(std::vector<char>);
   std::vector<char> shortToHexa(short);
-
 public:
-
   TraxAHRSModuleDriver();
   ~TraxAHRSModuleDriver();
-
   // Operaciones a alto nivel
   bool connectToDevice();
   void disconnectDevice();
   void configureDevice();
   bool getData();
-  
   // Retorno de estructura de datos
   TraxMeasurement getInfo();
-
 };
 
 #endif	/* TRAXAHRSMODULEDRIVER_H */
