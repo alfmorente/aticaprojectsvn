@@ -37,8 +37,6 @@
           <df name="src">
           </df>
         </df>
-        <df name="Progress">
-        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_PositionOrientation.dir">
@@ -124,7 +122,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_PositionOrientation">
-              <in>msg_posOriInfo.h</in>
             </df>
           </df>
         </df>
@@ -151,7 +148,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_PositionOrientation">
-              <in>srv_nodeStatus.h</in>
             </df>
           </df>
         </df>

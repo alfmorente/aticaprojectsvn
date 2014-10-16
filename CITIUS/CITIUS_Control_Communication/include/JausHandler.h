@@ -28,7 +28,6 @@ public:
   JausHandler();
   ~JausHandler();
 private:
-
   // Manejador de eventos
   void handleEvent(NodeManagerEvent *e);
 };

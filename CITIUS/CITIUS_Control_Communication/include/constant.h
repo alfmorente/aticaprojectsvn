@@ -95,6 +95,11 @@
 #define OPERATION_MODE_OBSERVACION 3 /// Identificador del modo de operación OPERATION_MODE_OBSERVACION de la máquina de estados del vehículo
 #define OPERATION_MODE_APAGANDO 4 /// Identificador del modo de operación OPERATION_MODE_APAGANDO de la máquina de estados del vehículo
 
+#define JAUS_OPERATION_MODE_INICIANDO 0 /// Identificador del modo de operación INICIANDO de la máquina de estados del vehículo para transmitir en mensaje JAUS
+#define JAUS_OPERATION_MODE_LOCAL 1 /// Identificador del modo de operación LOCAL de la máquina de estados del vehículo para transmitir en mensaje JAUS
+#define JAUS_OPERATION_MODE_CONDUCCION 5 /// Identificador del modo de operación CONDUCCION de la máquina de estados del vehículo para transmitir en mensaje JAUS
+#define JAUS_OPERATION_MODE_OBSERVACION 6 /// Identificador del modo de operación OBSERVACION de la máquina de estados del vehículo para transmitir en mensaje JAUS
+
 /*******************************************************************************
  * FRECUENCIA -> PERIODO
  ******************************************************************************/

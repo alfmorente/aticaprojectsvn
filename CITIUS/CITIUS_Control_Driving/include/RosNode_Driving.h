@@ -40,21 +40,15 @@ private:
   bool fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp);
   // Criba de comandos fuera de rango
   bool checkCommand(CITIUS_Control_Driving::msg_command msg);
-  
 public:
-  
   // Constructor
   RosNode_Driving();
-  
   // Inicializador de artefactos ROS
   void initROS();
-  
   // Consultores / modificadores de la clase
   DrivingConnectionManager *getDriverMng();
-   
   // Publicacion de informacion de vehiculo
   void publishDrivingInfo(DrivingInfo);
-
 };
 
 #endif	/* ROSNODE_DRIVING_H */

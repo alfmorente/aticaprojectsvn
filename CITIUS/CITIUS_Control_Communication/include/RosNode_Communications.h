@@ -59,35 +59,26 @@ using namespace std;
 */
 class RosNode_Communications {
 public:
-
   // Constructor Singleton
   static RosNode_Communications *getInstance();
   RosNode_Communications();
-
   // Manejadores ROS/JAUS
   void initROS();
   void initJAUS();
   void endJAUS();
-
   // Generacion de mensaje de estado para Controller
   void informStatus();
-
-
 private:
-
   // Patron Singleton
   static RosNode_Communications *instance;
   static bool instanceCreated;
-
   // Manejador de JAUS 
   FileLoader *configData;
   JausHandler *handler;
   NodeManager *nm;
-
   // Controlador activo
   int subsystemController;
   int nodeController;
-
   // Artefactos ROS
   // Subsistema de control
   ros::Subscriber subsFrontCameraInfo;
@@ -115,7 +106,6 @@ private:
   ros::ServiceClient clientPosTiltAbs;
   ros::ServiceClient clientPosTiltRate;
   ros::ServiceClient clientShootTel;
-
   // Componentes JAUS
   OjCmpt missionSpoolerComponent;
   OjCmpt primitiveDriverComponent;
@@ -125,7 +115,6 @@ private:
   OjCmpt velocityStateSensorComponent;
   OjCmpt globalPoseSensorComponent;
   OjCmpt heartBeatInformationComponent;
-
   // Callbacks JAUS
   // Componente Mission Spooler
   static void fcn_receive_run_mission(OjCmpt, JausMessage);
@@ -145,7 +134,6 @@ private:
   // Componente HeartBeat Information
   static void fcn_receive_heartbeat_channel_state(OjCmpt, JausMessage);
   static void fcn_receive_heartbeat_position_info(OjCmpt, JausMessage);
-
   // Callbacks ROS
   // Subsistema de control
   void fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg);
@@ -158,7 +146,6 @@ private:
   void fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg);
   void fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg);
   void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
-
 };
 
 #endif	/* COMMUNICATION_H */

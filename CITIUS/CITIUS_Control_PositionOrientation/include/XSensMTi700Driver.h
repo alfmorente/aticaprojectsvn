@@ -54,18 +54,14 @@ private:
   // Rutinas de recepcion y manejo de datos
   void packetMng(dataPacketMT2);
   bool frameMng(std::vector<unsigned char>);
-  
 public:
-  
   XSensMTi700Driver();
   ~XSensMTi700Driver();
-  
   // Operaciones a alto nivel
   bool connectToDevice();
   void disconnectDevice();
   void configureDevice();
   bool getData();
-  
   // Retorno de estructura de datos
   GPSINSInfo getInfo();
 };

@@ -46,16 +46,13 @@ private:
   bool gpsinsOK;
   // Callbacks ROS
   bool fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &);
-
 public:
   // Constructor
   RosNode_PositionOrientation();
   // Destructor
   ~RosNode_PositionOrientation();
-
   // Inicializador de artefactos ROS
   void initROS();
-
   // Getter and Setter necesarios
   XSensMTi700Driver *getXSensManager();
   TraxAHRSModuleDriver *getMagnetometerManager();
@@ -63,10 +60,8 @@ public:
   bool getMagnStatus();
   void setGpsStatus(bool);
   void setMagnStatus(bool);
-
   // Publicador de la informacion
   void publishInformation();
-
   // Configuracion de dispositivos
   void configureDevices();
 };

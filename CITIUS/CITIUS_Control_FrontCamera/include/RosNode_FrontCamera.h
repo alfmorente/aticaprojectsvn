@@ -43,9 +43,7 @@ private:
   // Callbacks ROS
   void fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg);
   bool fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_nodeStatus::Request &rq, CITIUS_Control_FrontCamera::srv_nodeStatus::Response &rsp);
-
 public:
-
   // Constructor
   RosNode_FrontCamera();
   // Inicializador de artefactos ROS
@@ -54,7 +52,6 @@ public:
   AxisP3364LveDriver *getDriverMng();
   // Metodos de gestion
   void manageDevice();
-
 };
 
 #endif	/* ROSNODE_FRONTCAMERA_H */

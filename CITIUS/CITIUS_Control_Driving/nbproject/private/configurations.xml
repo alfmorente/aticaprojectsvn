@@ -121,14 +121,6 @@
       <df name="msg">
       </df>
       <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Driving">
-              <in>msg_command.h</in>
-              <in>msg_vehicleInfo.h</in>
-            </df>
-          </df>
-        </df>
         <df name="lisp">
         </df>
       </df>
@@ -150,7 +142,6 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Driving">
-              <in>srv_nodeStatus.h</in>
             </df>
           </df>
         </df>
@@ -274,12 +265,6 @@
       <df name="msg">
       </df>
       <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Driving">
-            </df>
-          </df>
-        </df>
         <df name="lisp">
         </df>
       </df>

@@ -41,7 +41,6 @@ private:
   // Callbacks ROS
   void fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg);
   bool fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp);
-  
 public:
   // Constructor
   RosNode_RearCamera();
@@ -51,7 +50,6 @@ public:
   AxisP3364LveDriver *getDriverMng();
   // Metodos de gestion
   void manageDevice();
-
 };
 
 #endif	/* ROSNODE_REARCAMERA_H */

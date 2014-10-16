@@ -45,14 +45,11 @@ private:
 public:
   // Constructor
   RosNode_Electric();
-
   // Inicializador de artefactos ROS
   void initROS();
-
   // Getter and Setter necesarios
   ros::ServiceClient getClientVehicleStatus();
   ElectricConnectionManager *getDriverMng();
-
   // Publicar informacion de vehiculo
   void publishElectricInfo(ElectricInfo info);
   // Publicar informacion de conmutador Local/Teleoperado

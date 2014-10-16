@@ -64,7 +64,6 @@ CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: include
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: include/TraxAHRSModuleDriver.h
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: include/XSensMTi700Driver.h
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: include/constant.h
-CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: include/crc16calc.h
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: srv_gen/cpp/include/CITIUS_Control_PositionOrientation/srv_nodeStatus.h
 
@@ -74,6 +73,7 @@ CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o: include/const
 
 CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o: src/XSensMTi700Driver.cpp
 CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o: include/XSensMTi700Driver.h
+CMakeFiles/PositionOrientation.dir/src/XSensMTi700Driver.cpp.o: include/constant.h
 
 CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o: src/crc16calc.cpp
 CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o: include/crc16calc.h
@@ -138,7 +138,6 @@ CMakeFiles/PositionOrientation.dir/src/main.cpp.o: include/RosNose_PositionOrien
 CMakeFiles/PositionOrientation.dir/src/main.cpp.o: include/TraxAHRSModuleDriver.h
 CMakeFiles/PositionOrientation.dir/src/main.cpp.o: include/XSensMTi700Driver.h
 CMakeFiles/PositionOrientation.dir/src/main.cpp.o: include/constant.h
-CMakeFiles/PositionOrientation.dir/src/main.cpp.o: include/crc16calc.h
 CMakeFiles/PositionOrientation.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
 CMakeFiles/PositionOrientation.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_PositionOrientation/srv_nodeStatus.h
 

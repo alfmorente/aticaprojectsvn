@@ -509,8 +509,3 @@ vector<char> TraxAHRSModuleDriver::shortToHexa(short s) {
   return out;
 
 }
-
-
-
-
-

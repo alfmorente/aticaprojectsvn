@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
+DrivingConnectionManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.cpp
 RosNode.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.h
