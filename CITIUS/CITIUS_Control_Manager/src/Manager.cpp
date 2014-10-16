@@ -29,6 +29,7 @@ Manager::Manager() {
  * Destructor de la clase
  */
 Manager::~Manager() {
+    
 }
 
 /**
@@ -82,7 +83,6 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     case OPERATION_MODE_INICIANDO:
 
       // Encendido del sistema. Se mandan a arrancar el resto de los modulos
-      // Position/Orientation - FCamera - RCamera - Driving
 
       service.request.status = NODESTATUS_OK;
 

@@ -49,13 +49,12 @@ int main(int argc, char** argv) {
 
         // Comprobacion de recepcion de mensaje ROS
         ros::spinOnce();
-
         // Comprobacion de recpcion de mensajes de vehiculo
         nodeDriving->getDriverMng()->checkForVehicleMessages();
-
+        
         // Comprobacion de alarmas
         // TODO
-
+        
         // Comprobación del temporizador y requerimiento de info
         finalTime = clock() - initTime;
         if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_5HZ) {
@@ -92,6 +91,7 @@ int main(int argc, char** argv) {
   } else {
     ROS_INFO("[Control] Driving - No se puede conectar al vehiculo");
   }
+  delete(nodeDriving);
   ROS_INFO("[Control] Driving - Nodo finalizado");
   return 0;
 }

@@ -23,6 +23,11 @@ ElectricConnectionManager::ElectricConnectionManager() {
   supplyAlarms = 0x0000;
 }
 
+/** Destructor de la clase*/
+ElectricConnectionManager::~ElectricConnectionManager(){
+
+}
+
 /**
  * Método público que realiza la inicialización y conexión del socket de 
  * conmunicación con el vehículo 
@@ -141,6 +146,40 @@ void ElectricConnectionManager::reqElectricInfo() {
   frame.element = SUPPLY_ALARMS;
   sendToVehicle(frame);
 
+}
+
+short ElectricConnectionManager::waitForSwitcherPosition() {
+    short pos = SWITCHER_INIT;
+    FrameDriving frame;
+    frame.instruction = GET;
+    frame.id_instruction = -1;
+    frame.element = OPERATION_MODE_SWITCH;
+    frame.value = -1;
+    // Envio a vehículo
+    sendToVehicle(frame);
+    while (!swPosition.flag) {
+        checkForVehicleMessages();
+    }
+    pos = swPosition.position;
+    setSwitcherStruct(false);
+    return pos;
+}
+
+/**
+ * Método público que envía un mensaje para SET para solicitar el inicio del 
+ * suministro eléctrico del vehículo
+ */
+void ElectricConnectionManager::setTurnOn() {
+    FrameDriving frame;
+    frame.instruction = SET;
+    frame.id_instruction = countMsg;
+    countMsg++;
+    frame.element = SUPPLY_TURN_ON;
+    frame.value = 1;
+    // Cola de comandos criticos
+    messageQueue.push_back(frame);
+    // Envio a vehículo
+    sendToVehicle(frame);
 }
 
 /**
@@ -330,16 +369,6 @@ bool ElectricConnectionManager::isCriticalInstruction(short element) {
   } else {
     return false;
   }
-}
-
-/**
- * Método público que, una vez que un mensaje es considerado crítico, se utiliza 
- * para encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en 
- * caso de obtener un NACK
- * @param[in] frame Trama a incluir en la cola de mensajes críticos
- */
-void ElectricConnectionManager::addToQueue(FrameDriving frame) {
-  messageQueue.push_back(frame);
 }
 
 /**

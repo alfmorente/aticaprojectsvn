@@ -147,6 +147,7 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Electric">
+              <in>srv_vehicleStatus.h</in>
             </df>
           </df>
         </df>

@@ -120,6 +120,8 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_RearCamera">
+              <in>msg_ctrlRearCamera.h</in>
+              <in>msg_rearCameraInfo.h</in>
             </df>
           </df>
         </df>
@@ -144,6 +146,7 @@
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_RearCamera">
+              <in>srv_nodeStatus.h</in>
             </df>
           </df>
         </df>

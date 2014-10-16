@@ -55,6 +55,8 @@ private:
 public:
   // Constructor
   DrivingConnectionManager();
+  // Destructor
+  ~DrivingConnectionManager();
   // Gestion del vehiculo
   bool connectVehicle();
   bool disconnectVehicle();

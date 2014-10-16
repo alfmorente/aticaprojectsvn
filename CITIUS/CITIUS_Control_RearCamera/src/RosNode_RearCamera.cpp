@@ -18,6 +18,13 @@ RosNode_RearCamera::RosNode_RearCamera() {
 }
 
 /**
+ * Destructor de la clase
+ */
+RosNode_RearCamera::~RosNode_RearCamera(){
+    delete(dRearCamera);
+}
+
+/**
  * Método público inicializador de artefactos ROS de la clase
  */
 void RosNode_RearCamera::initROS() {

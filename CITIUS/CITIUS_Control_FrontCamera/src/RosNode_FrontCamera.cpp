@@ -18,6 +18,13 @@ RosNode_FrontCamera::RosNode_FrontCamera() {
 }
 
 /**
+ * Destructor de la clase
+ */
+RosNode_FrontCamera::~RosNode_FrontCamera(){
+    delete(dFrontCamera);
+}
+
+/**
  * Método público inicializador de artefactos ROS de la clase
  */
 void RosNode_FrontCamera::initROS() {

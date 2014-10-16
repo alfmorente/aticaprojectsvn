@@ -45,10 +45,11 @@ private:
 public:
   // Constructor
   RosNode_Electric();
+  // Destructor
+  ~RosNode_Electric();
   // Inicializador de artefactos ROS
   void initROS();
   // Getter and Setter necesarios
-  ros::ServiceClient getClientVehicleStatus();
   ElectricConnectionManager *getDriverMng();
   // Publicar informacion de vehiculo
   void publishElectricInfo(ElectricInfo info);
@@ -56,6 +57,10 @@ public:
   void publishSwitcherInfo(short position);
   // Publicar consignas ON/OFF de actuadores
   void publishSetupCommands(bool on);
+  // Gestion de evento Turn Off
+  void checkTurnOff();
+  // Gestion de evento Switcher
+  void checkSwitcher();
 };
 
 #endif	/* ROSNODE_ELECTRIC_H */

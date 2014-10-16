@@ -58,6 +58,8 @@ private:
 public:
   // Constructor
   ElectricConnectionManager();
+  // Destructor
+  ~ElectricConnectionManager();
   // Gestion del vehiculo
   bool connectVehicle();
   bool disconnectVehicle();
@@ -65,6 +67,8 @@ public:
   void sendToVehicle(FrameDriving);
   bool checkForVehicleMessages();
   void reqElectricInfo();
+  short waitForSwitcherPosition();
+  void setTurnOn();
   void setTurnOff();
   // Getter y setter necesarios
   bool getTurnOffFlag();
@@ -73,8 +77,6 @@ public:
   void setCountCriticalMessages(short);
   void setSwitcherStruct(bool);
   SwitcherStruct getSwitcherStruct();
-  // Tratamiento de la cola de mensajes criticos
-  void addToQueue(FrameDriving frame);
 };
 
 #endif	/* ElectricConnectionManager */

@@ -25,8 +25,8 @@ RosNode_PositionOrientation::RosNode_PositionOrientation() {
  * clases driver de los dispositivos
  */
 RosNode_PositionOrientation::~RosNode_PositionOrientation() {
-  delete gpsinsDriver;
-  delete magnetometerDriver;
+  delete(gpsinsDriver);
+  delete(magnetometerDriver);
 }
 
 /**

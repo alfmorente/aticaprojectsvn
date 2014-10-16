@@ -43,6 +43,8 @@ private:
 public:
   // Constructor
   RosNode_Driving();
+  // Destructor
+  ~RosNode_Driving();
   // Inicializador de artefactos ROS
   void initROS();
   // Consultores / modificadores de la clase

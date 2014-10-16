@@ -44,6 +44,8 @@ private:
 public:
   // Constructor
   RosNode_RearCamera();
+  // Destructor
+  ~RosNode_RearCamera();
   // Inicializador de artefactos ROS
   void initROS();
   // Consultores

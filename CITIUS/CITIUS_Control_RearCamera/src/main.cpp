@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
   } else {
     ROS_INFO("[Control] RearCamera - No se puede conectar con la cámara");
   }
+  delete(rc);
   ROS_INFO("[Control] RearCamera - Nodo finalizado");
   return 0;
 }
