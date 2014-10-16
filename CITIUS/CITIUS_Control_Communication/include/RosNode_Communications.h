@@ -62,10 +62,11 @@ public:
   // Constructor Singleton
   static RosNode_Communications *getInstance();
   RosNode_Communications();
+  ~RosNode_Communications();
   // Manejadores ROS/JAUS
   void initROS();
   void initJAUS();
-  void endJAUS();
+  void finishJAUS();
   // Generacion de mensaje de estado para Controller
   void informStatus();
 private:

@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
   } else {
     ROS_INFO("[Control] FrontCamera - No se puede conectar con la camara");
   }
+  delete(fc);
   ROS_INFO("[Control] FrontCamera - Nodo finalizado");
   return 0;
 }

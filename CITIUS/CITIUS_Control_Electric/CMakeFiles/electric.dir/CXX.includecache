@@ -10,10 +10,6 @@
 ElectricConnectionManager.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/ElectricConnectionManager.h
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode.cpp
-RosNode.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp
 RosNode_Electric.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.h

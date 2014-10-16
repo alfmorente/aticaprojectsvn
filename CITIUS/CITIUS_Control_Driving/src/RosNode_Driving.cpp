@@ -18,6 +18,13 @@ RosNode_Driving::RosNode_Driving() {
 }
 
 /**
+ * Destructor de la clase
+ */
+RosNode_Driving::~RosNode_Driving(){
+    delete(dVehicle);
+}
+
+/**
  * Método privado que inicia los artefactos ROS atributos de la clase
  */
 void RosNode_Driving::initROS() {

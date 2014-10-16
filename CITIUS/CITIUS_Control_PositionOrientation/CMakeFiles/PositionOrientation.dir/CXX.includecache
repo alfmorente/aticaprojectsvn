@@ -673,6 +673,8 @@ constant.h
 include/constant.h
 stdint.h
 -
+crc16calc.h
+include/crc16calc.h
 
 include/XSensMTi700Driver.h
 iostream
@@ -699,6 +701,10 @@ constant.h
 include/constant.h
 
 include/constant.h
+
+include/crc16calc.h
+stdint.h
+-
 
 msg_gen/cpp/include/CITIUS_Control_PositionOrientation/msg_posOriInfo.h
 string

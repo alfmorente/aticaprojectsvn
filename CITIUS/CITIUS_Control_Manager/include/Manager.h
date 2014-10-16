@@ -30,7 +30,7 @@ using namespace std;
 class Manager {
 public:
   Manager();
-  virtual ~Manager();
+  ~Manager();
   void initROS();
 private:
   // Estado de los demas nodos

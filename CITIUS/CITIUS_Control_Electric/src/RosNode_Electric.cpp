@@ -13,9 +13,15 @@
  * instancia del driver de conexión con el vehículo
  */
 RosNode_Electric::RosNode_Electric() {
-  //emNodeStatus = NODESTATUS_INIT;
-  nodeStatus = NODESTATUS_INIT;
-  dElectric = new ElectricConnectionManager();
+    nodeStatus = NODESTATUS_INIT;
+    dElectric = new ElectricConnectionManager();
+}
+
+/**
+ * Destructor de la clase
+ */
+RosNode_Electric::~RosNode_Electric() {
+    delete(dElectric);
 }
 
 /**
@@ -23,50 +29,39 @@ RosNode_Electric::RosNode_Electric() {
  * Consulta la posición del conmutador local/teleoperado y solicita la inicialización de la maquina de
  * estados de modos de operacion del vehículo con la señal obtenida
  */
-void RosNode_Electric::initROS(){
-  
-  ros::NodeHandle nh;
+void RosNode_Electric::initROS() {
 
-  clientVehicleStatus = nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
+    ros::NodeHandle nh;
 
-  pubElectricInfo = nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInfo", 1000);
-  pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command", 1000);
-  pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher", 1000);
+    clientVehicleStatus = nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
 
-  // Se solicita la activacion del resto de nodos del vehículo
-  ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehículo");
+    pubElectricInfo = nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInfo", 1000);
+    pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command", 1000);
+    pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher", 1000);
 
-  // Set up del suministro electrico
-  FrameDriving frame;
-  frame.instruction = SET;
-  frame.id_instruction = dElectric->getCountCriticalMessages();
-  dElectric->setCountCriticalMessages(dElectric->getCountCriticalMessages() + 1);
-  frame.element = SUPPLY_TURN_ON;
-  frame.value = 1;
-  // Cola de comandos criticos
-  dElectric->addToQueue(frame);
-  // Envio a vehículo
-  dElectric->sendToVehicle(frame);
-  usleep(1000);
+    // Se solicita la activacion del resto de nodos del vehículo
+    ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehículo");
 
-  CITIUS_Control_Electric::srv_vehicleStatus service;
-  service.request.status = OPERATION_MODE_INICIANDO;
-  // Solicitar a vehículo posicion conmutador local/teleoperado
-  // TODO
-  service.request.posSwitcher = SWITCHER_LOCAL; // comentar
+    // Set up del suministro electrico
+    dElectric->setTurnOn();
 
-  while (!clientVehicleStatus.call(service)) {
-    ros::spinOnce();
-  }
-  if (service.response.confirmation) {
-    ROS_INFO("[Control] Electric - Se ha iniciado el vehículo");
-    //emNodeStatus = NODESTATUS_OK;
-    nodeStatus = NODESTATUS_OK;
-  } else {
-    ROS_INFO("[Control] Electric - El vehículo no se ha podido iniciar");
-    //emNodeStatus = NODESTATUS_OFF;
-    nodeStatus = NODESTATUS_OFF;
-  }
+    CITIUS_Control_Electric::srv_vehicleStatus service;
+    service.request.status = OPERATION_MODE_INICIANDO;
+    // Solicitar a vehículo posicion conmutador local/teleoperado
+    ROS_INFO("[Control] Electric - Esperando posicion del conmutador local/teleoperado para arrancar");
+    //service.request.posSwitcher = dElectric->waitForSwitcherPosition();
+    service.request.posSwitcher = SWITCHER_LOCAL;
+
+    while (!clientVehicleStatus.call(service)) {
+        ros::spinOnce();
+    }
+    if (service.response.confirmation) {
+        ROS_INFO("[Control] Electric - Se ha iniciado el vehículo");
+        nodeStatus = NODESTATUS_OK;
+    } else {
+        ROS_INFO("[Control] Electric - El vehículo no se ha podido iniciar");
+        nodeStatus = NODESTATUS_OFF;
+    }
 
 }
 
@@ -77,17 +72,7 @@ void RosNode_Electric::initROS(){
  * @return Atributo "dElectric" de la clase
  */
 ElectricConnectionManager *RosNode_Electric::getDriverMng() {
-  return dElectric;
-}
-
-/**
- * Método público consultor del atributo "clientVehicleStatus" de la clase que 
- * proporciona el cliente que realiza peticiones para las transiciones en la 
- * máquina de estados de los modos de operación del vehículo
- * @return Atributo "clientVehicleStatus" de la clase
- */
-ros::ServiceClient RosNode_Electric::getClientVehicleStatus() {
-  return clientVehicleStatus;
+    return dElectric;
 }
 
 /**
@@ -97,15 +82,15 @@ ros::ServiceClient RosNode_Electric::getClientVehicleStatus() {
  */
 void RosNode_Electric::publishElectricInfo(ElectricInfo info) {
 
-  CITIUS_Control_Electric::msg_electricInfo msg;
+    CITIUS_Control_Electric::msg_electricInfo msg;
 
-  msg.battery_level = info.battery_level;
-  msg.battery_voltage = info.battery_voltage;
-  msg.battery_current = info.battery_current;
-  msg.battery_temperature = info.battery_temperature;
-  msg.supply_alarms = info.supply_alarms;
+    msg.battery_level = info.battery_level;
+    msg.battery_voltage = info.battery_voltage;
+    msg.battery_current = info.battery_current;
+    msg.battery_temperature = info.battery_temperature;
+    msg.supply_alarms = info.supply_alarms;
 
-  pubElectricInfo.publish(msg);
+    pubElectricInfo.publish(msg);
 
 }
 
@@ -117,9 +102,9 @@ void RosNode_Electric::publishElectricInfo(ElectricInfo info) {
  */
 void RosNode_Electric::publishSwitcherInfo(short position) {
 
-  CITIUS_Control_Electric::msg_switcher msg;
-  msg.switcher = position;
-  pubElectricInfo.publish(msg);
+    CITIUS_Control_Electric::msg_switcher msg;
+    msg.switcher = position;
+    pubElectricInfo.publish(msg);
 
 }
 
@@ -130,39 +115,87 @@ void RosNode_Electric::publishSwitcherInfo(short position) {
  */
 void RosNode_Electric::publishSetupCommands(bool on) {
 
-  CITIUS_Control_Electric::msg_command msg;
+    CITIUS_Control_Electric::msg_command msg;
 
-  if (on)
-    msg.value = 1;
-  else
-    msg.value = 0;
+    if (on)
+        msg.value = 1;
+    else
+        msg.value = 0;
 
-  // Activa/desactiva acelerador
-  msg.id_device = MT_THROTTLE;
-  pubCommand.publish(msg);
+    // Activa/desactiva acelerador
+    msg.id_device = MT_THROTTLE;
+    pubCommand.publish(msg);
 
-  // Activa/desactiva freno de servicio
-  msg.id_device = MT_BRAKE;
-  pubCommand.publish(msg);
+    // Activa/desactiva freno de servicio
+    msg.id_device = MT_BRAKE;
+    pubCommand.publish(msg);
 
-  // Activa/desactiva freno de estacionamiento
-  msg.id_device = MT_HANDBRAKE;
-  pubCommand.publish(msg);
+    // Activa/desactiva freno de estacionamiento
+    msg.id_device = MT_HANDBRAKE;
+    pubCommand.publish(msg);
 
-  // Activa/desactiva direccion
-  msg.id_device = MT_STEERING;
-  pubCommand.publish(msg);
+    // Activa/desactiva direccion
+    msg.id_device = MT_STEERING;
+    pubCommand.publish(msg);
 
-  // Activa/desactiva marcha
-  msg.id_device = MT_GEAR;
-  pubCommand.publish(msg);
+    // Activa/desactiva marcha
+    msg.id_device = MT_GEAR;
+    pubCommand.publish(msg);
 
-  // Activa/desactiva luces
-  msg.id_device = MT_LIGHTS;
-  pubCommand.publish(msg);
+    // Activa/desactiva luces
+    msg.id_device = MT_LIGHTS;
+    pubCommand.publish(msg);
 
-  // Activa/desactiva intermitentes
-  msg.id_device = MT_BLINKERS;
-  pubCommand.publish(msg);
+    // Activa/desactiva intermitentes
+    msg.id_device = MT_BLINKERS;
+    pubCommand.publish(msg);
 
+}
+
+/**
+ * Método público que comprueba si el último mensaje recibido del vehículo es
+ * una petición de finalizar la ejecución y da soporte en caso afirmativo
+ */
+void RosNode_Electric::checkTurnOff(){
+    if (dElectric->getTurnOffFlag()) {
+        // Solicitud de cambio a vehicleStatus -> APAGANDO
+        CITIUS_Control_Electric::srv_vehicleStatus srvTurnOff;
+        srvTurnOff.request.status = OPERATION_MODE_APAGANDO;
+        while (!clientVehicleStatus.call(srvTurnOff)) {
+            ros::spinOnce();
+        }
+        if (srvTurnOff.response.confirmation) {
+            // Cambio delmodo de operacion
+            ros::NodeHandle nh;
+            nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
+            // Enviar confirmacion de apagado                    
+            dElectric->setTurnOff();
+            // Desconexion del socket con vehiculo
+            dElectric->disconnectVehicle();
+            // Cambiar el estado del nodo para finalizar
+            nodeStatus = NODESTATUS_OFF;
+        } else {
+            ROS_INFO("[Control] Electric - Sin confirmacion para apagar el vehiculo");
+        }
+    }
+}
+
+/**
+ * Método público que comprueba si el último mensaje recibido del vehículo es 
+ * un cambio de posición en el conmutador local / teleoperado y da soporte al
+ * mismo en caso afirmativo
+ */
+void RosNode_Electric::checkSwitcher() {
+    if (dElectric->getSwitcherStruct().flag) {
+        // Envio de mensaje msg_switcher
+        publishSwitcherInfo(dElectric->getSwitcherStruct().position);
+        // Activacion / Desactivacion de actuadores
+        if (dElectric->getSwitcherStruct().position == 1) {
+            publishSetupCommands(true);
+        } else {
+            publishSetupCommands(false);
+        }
+        // Clear del indicador de cambio
+        dElectric->setSwitcherStruct(false);
+    }
 }

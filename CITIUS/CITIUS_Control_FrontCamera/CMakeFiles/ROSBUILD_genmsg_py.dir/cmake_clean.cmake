@@ -7,8 +7,8 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_FrontCamera/srv"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/CITIUS_Control_FrontCamera/msg/__init__.py"
-  "src/CITIUS_Control_FrontCamera/msg/_msg_frontCameraInfo.py"
   "src/CITIUS_Control_FrontCamera/msg/_msg_ctrlFrontCamera.py"
+  "src/CITIUS_Control_FrontCamera/msg/_msg_frontCameraInfo.py"
 )
 
 # Per-language clean rules from dependency scanning.

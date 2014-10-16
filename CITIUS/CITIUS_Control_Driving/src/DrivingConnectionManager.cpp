@@ -34,6 +34,13 @@ DrivingConnectionManager::DrivingConnectionManager() {
 }
 
 /**
+ * Destructor de la clase
+ */
+DrivingConnectionManager::~DrivingConnectionManager(){
+
+}
+
+/**
  * Método público que realiza la inicialización y conexión del socket de 
  * comunicación con el vehículo
  * @return Booleano que indica si la conexión ha sido posible

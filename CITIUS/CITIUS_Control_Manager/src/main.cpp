@@ -42,6 +42,8 @@ int main(int argc, char** argv) {
     ros::spinOnce();
 
   }
+  
+  delete(manager);
   ROS_INFO("[Control] Manager - Nodo finalizado");
 
   return 0;

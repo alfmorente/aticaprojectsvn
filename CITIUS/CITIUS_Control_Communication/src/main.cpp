@@ -54,7 +54,8 @@ int main(int argc, char** argv) {
     nh.getParam("vehicleStatus", currentStatus);
 
   }
-  nodeComm->endJAUS();
+  nodeComm->finishJAUS();
+  delete(nodeComm);
 
   ROS_INFO("[Control] Communications - Nodo finalizado");
 

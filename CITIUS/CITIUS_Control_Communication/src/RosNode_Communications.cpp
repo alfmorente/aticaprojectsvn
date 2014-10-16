@@ -33,6 +33,13 @@ RosNode_Communications::RosNode_Communications() {
   nodeController = 1; // Control
 }
 
+/**
+ * Destructor de la clase
+ */
+RosNode_Communications::~RosNode_Communications(){
+    
+}
+
 /** 
  * Método público que inicia los artefactos ROS que la clase contiene en sus 
  * atributos 
@@ -233,7 +240,7 @@ void RosNode_Communications::initJAUS() {
  * Método público que hace de destructor de componentes JAUS de la clase para
  * su finalización
  */
-void RosNode_Communications::endJAUS() {
+void RosNode_Communications::finishJAUS() {
   ojCmptDestroy(missionSpoolerComponent);
   ojCmptDestroy(primitiveDriverComponent);
   ojCmptDestroy(visualSensorComponent);

@@ -100,10 +100,8 @@ int main(int argc, char** argv) {
         ROS_INFO("[Control] Position / Orientation - Desconectado dispositivo GPS/INS");
 
     }
-
+    delete(nodePosOri);
     ROS_INFO("[Control] Position / Orientation - Nodo finalizado");
-
-    nodePosOri->~RosNode_PositionOrientation();
 
     return 0;
 }

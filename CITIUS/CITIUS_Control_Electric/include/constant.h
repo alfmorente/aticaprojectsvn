@@ -114,7 +114,7 @@ using namespace std;
  *******************************************************************************/
 
 #define IP_PAYLOAD_CONDUCCION_DRIVING "127.0.0.1" /// Dirección IP para creación del socket de comunicación
-#define PORT_PAYLOAD_CONDUCCION_DRIVING 10000 /// Puerto para creación del socket de comunicación
+#define PORT_PAYLOAD_CONDUCCION_DRIVING 20000 /// Puerto para creación del socket de comunicación
 
 /*******************************************************************************
  * FRECUENCIA -> PERIODO
