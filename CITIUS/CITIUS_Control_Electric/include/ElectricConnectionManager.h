@@ -29,8 +29,8 @@
 using namespace std;
 
 /**
- * /class ElectricConnectionManager
- * /brief Clase que representa al driver de comunicación con el módulo de
+ * \class ElectricConnectionManager
+ * \brief Clase que representa al driver de comunicación con el módulo de
  * alimentación del vehículo
 */
 class ElectricConnectionManager {
@@ -50,11 +50,11 @@ private:
   // Alarmas del subsistema electrico
   short supplyAlarms;
   //Consultores/modificadores privados
-  void setVehicleInfo(short, short);
+  void setVehicleInfo(DeviceID id_device, short value);
   short getSupplyAlarms();
   // Metodos de gestion privados
-  RtxStruct informResponse(bool, short);
-  bool isCriticalInstruction(short element);
+  RtxStruct informResponse(bool ack, short id_instruction);
+  bool isCriticalInstruction(DeviceID element);
 public:
   // Constructor
   ElectricConnectionManager();
@@ -74,8 +74,8 @@ public:
   bool getTurnOffFlag();
   ElectricInfo getVehicleInfo();
   short getCountCriticalMessages();
-  void setCountCriticalMessages(short);
-  void setSwitcherStruct(bool);
+  void setCountCriticalMessages(short count);
+  void setSwitcherStruct(bool position);
   SwitcherStruct getSwitcherStruct();
 };
 

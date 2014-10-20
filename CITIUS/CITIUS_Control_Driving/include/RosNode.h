@@ -13,19 +13,22 @@
 #ifndef ROSNODE_H
 #define	ROSNODE_H
 
+#include "constant.h"
+
+
 using namespace std;
 
 /**
- * /class RosNode
- * /brief Superclase con métodos comunes a todos los nodos ROS
+ * \class RosNode
+ * \brief Superclase con métodos comunes a todos los nodos ROS
 */
 class RosNode{
 protected:
-  short nodeStatus;
+  NodeStatus nodeStatus;
 public:
   virtual void initROS();
-  void setNodeStatus(short newNodeStatus);
-  short getNodeStatus();
+  void setNodeStatus(NodeStatus newNodeStatus);
+  NodeStatus getNodeStatus();
 };
 
 #endif	/* ROSNODE_H */

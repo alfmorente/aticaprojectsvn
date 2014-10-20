@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
+DrivingConnectionManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.cpp
+RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp
+RosNode_Driving.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
 RosNode_Driving.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.h
@@ -651,6 +663,8 @@ arpa/inet.h
 -
 
 include/RosNode.h
+constant.h
+include/constant.h
 
 include/RosNode_Driving.h
 time.h
@@ -667,6 +681,8 @@ CITIUS_Control_Driving/srv_nodeStatus.h
 include/CITIUS_Control_Driving/srv_nodeStatus.h
 
 include/constant.h
+vector
+-
 
 msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
 string

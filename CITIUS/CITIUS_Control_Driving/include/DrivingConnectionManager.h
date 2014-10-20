@@ -29,8 +29,8 @@
 using namespace std;
 
 /**
- * /class DrivingConnectionManager
- * /brief Clase que representa al driver de comunicación con el módulo de
+ * \class DrivingConnectionManager
+ * \brief Clase que representa al driver de comunicación con el módulo de
  * conducción del vehículo
 */
 class DrivingConnectionManager {
@@ -48,10 +48,10 @@ private:
   // Alarmas de direccion
   short steeringAlarms;
   // Modificadores privados
-  void setVehicleInfo(short id_device, short value);
-  void setAlarmsInfo(short element, short value);
+  void setVehicleInfo(DeviceID element, short value);
+  void setAlarmsInfo(DeviceID element, short value);
   // Metodos de gestion privados
-  RtxStruct informResponse(bool, short);
+  RtxStruct informResponse(bool ack, short id_instruction);
 public:
   // Constructor
   DrivingConnectionManager();
@@ -70,7 +70,7 @@ public:
   short getCountCriticalMessages();
   void setCountCriticalMessages(short cont);
   // Metodos auxiliares
-  bool isCriticalInstruction(short element);
+  bool isCriticalInstruction(DeviceID element);
   // Tratamiento de la cola de mensajes criticos
   void addToQueue(FrameDriving frame);
 };

@@ -659,6 +659,8 @@ arpa/inet.h
 -
 
 include/RosNode.h
+constant.h
+include/constant.h
 
 include/RosNode_Electric.h
 time.h
@@ -681,6 +683,8 @@ cstdlib
 -
 
 include/constant.h
+vector
+-
 
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
 string

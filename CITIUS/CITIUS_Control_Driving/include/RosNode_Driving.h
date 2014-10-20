@@ -21,8 +21,8 @@
 #include "CITIUS_Control_Driving/srv_nodeStatus.h"
 
 /**
- * /class RosNode_Driving
- * /brief Clase que representa al nodo ROS que gestiona la comunicación con el 
+ * \class RosNode_Driving
+ * \brief Clase que representa al nodo ROS que gestiona la comunicación con el 
  * módulo de conducción del vehículo
 */
 class RosNode_Driving: public RosNode {
