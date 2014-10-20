@@ -83,6 +83,7 @@ CMakeFiles/simCommSend.dir/src/JausController.cpp.o
  lib/libjaus/include/message/experimental/reportPositioner20Message.h
  lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
  lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+ lib/libjaus/include/message/experimental/reportTelemeter27Message.h
  lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
  lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
  lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -92,6 +93,7 @@ CMakeFiles/simCommSend.dir/src/JausController.cpp.o
  lib/libjaus/include/message/experimental/setPositioner19Message.h
  lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
  lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+ lib/libjaus/include/message/experimental/setTelemeter26Message.h
  lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
  lib/libjaus/include/message/experimental/setUSVRemote1Message.h
  lib/libjaus/include/message/experimental/ugvInfo12Message.h
@@ -318,6 +320,7 @@ CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o
  lib/libjaus/include/message/experimental/reportPositioner20Message.h
  lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
  lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+ lib/libjaus/include/message/experimental/reportTelemeter27Message.h
  lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
  lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
  lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -327,6 +330,7 @@ CMakeFiles/simCommSend.dir/src/JausHandler.cpp.o
  lib/libjaus/include/message/experimental/setPositioner19Message.h
  lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
  lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+ lib/libjaus/include/message/experimental/setTelemeter26Message.h
  lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
  lib/libjaus/include/message/experimental/setUSVRemote1Message.h
  lib/libjaus/include/message/experimental/ugvInfo12Message.h
@@ -554,6 +558,7 @@ CMakeFiles/simCommSend.dir/src/main.cpp.o
  lib/libjaus/include/message/experimental/reportPositioner20Message.h
  lib/libjaus/include/message/experimental/reportScientificOperations13Message.h
  lib/libjaus/include/message/experimental/reportSignalingElements25Message.h
+ lib/libjaus/include/message/experimental/reportTelemeter27Message.h
  lib/libjaus/include/message/experimental/reportUSVObservationsConfig8Message.h
  lib/libjaus/include/message/experimental/reportUSVRemoteControl2Message.h
  lib/libjaus/include/message/experimental/scpmInfo6Message.h
@@ -563,6 +568,7 @@ CMakeFiles/simCommSend.dir/src/main.cpp.o
  lib/libjaus/include/message/experimental/setPositioner19Message.h
  lib/libjaus/include/message/experimental/setScientificsOperations11Message.h
  lib/libjaus/include/message/experimental/setSignalingElements18Message.h
+ lib/libjaus/include/message/experimental/setTelemeter26Message.h
  lib/libjaus/include/message/experimental/setUSVObservationsConfig7Message.h
  lib/libjaus/include/message/experimental/setUSVRemote1Message.h
  lib/libjaus/include/message/experimental/ugvInfo12Message.h

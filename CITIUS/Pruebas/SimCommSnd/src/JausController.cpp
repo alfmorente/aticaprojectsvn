@@ -208,13 +208,15 @@ void JausController::sendMessage(int identifier){
         case 8: // Telemeter Info
             sendTelemeterInfoMessage();
             break;
-        case 9: // Set Positioner
+        case 9: // Set Signaling Elements
+            sendSignalingElementsMessage();
+        case 10: // Set Positioner
             sendPositionerMessage();
             break;
-        case 10: // Set Day-time camera
+        case 11: // Set Day-time camera
             sendTVCameraMessage();
             break;
-        case 11: // Set Night-time camera
+        case 12: // Set Night-time camera
             sendIRCameraMessage();
             break;
     }
@@ -503,7 +505,69 @@ void JausController::sendTelemeterInfoMessage(){
     jausAddressDestroy(jAdd);
     jausMessageDestroy(jMsg);
     cout << "Enviado mensaje SET TELEMETER" << endl;
-}       
+}  
+
+// Set Signaling Elements
+void JausController::sendSignalingElementsMessage(){
+    JausMessage jMsg = NULL;    
+    // Creacion de la direccion destinataria
+    JausAddress jAdd = jausAddressCreate();
+    jAdd->subsystem = subsystemController;
+    jAdd->node = nodeController;
+    jAdd->component = JAUS_VISUAL_SENSOR;
+    jAdd->instance = 1;
+    
+    SetSignalingElements18Message spfMsg = setSignalingElements18MessageCreate();
+    int intAux;
+    // Intermitente derecha
+    cout << "Selecciona un valor para el intermitente derecho {0,1}:" << endl;
+    cin >> intAux;
+    if(intAux == 1) spfMsg->blinker_right = JAUS_TRUE;
+    else spfMsg->blinker_right = JAUS_FALSE; 
+
+    // Intermitente izquierda
+    cout << "Selecciona un valor para el intermitente izquierdo {0,1}:" << endl;
+    cin >> intAux;
+    if(intAux == 1) spfMsg->blinker_left = JAUS_TRUE;
+    else spfMsg->blinker_left = JAUS_FALSE; 
+
+    // Luces de posicion
+    cout << "Selecciona un valor para luces de posicion {0,1}:" << endl;
+    cin >> intAux;
+    if(intAux == 1) spfMsg->dipsp = JAUS_TRUE;
+    else spfMsg->dipsp = JAUS_FALSE; 
+
+    // Luces cortas
+    cout << "Selecciona un valor para luces cortas {0,1}:" << endl;
+    cin >> intAux;
+    if(intAux == 1) spfMsg->dipss = JAUS_TRUE;
+    else spfMsg->dipss = JAUS_FALSE; 
+
+    // Luces largas
+    cout << "Selecciona un valor para luces largas {0,1}:" << endl;
+    cin >> intAux;
+    if(intAux == 1) spfMsg->dipsr = JAUS_TRUE;
+    else spfMsg->dipsr = JAUS_FALSE; 
+
+    // Bocina
+    cout << "Selecciona un valor para bocina {0,1}:" << endl;
+    cin >> intAux;
+    if(intAux == 1) spfMsg->klaxon = JAUS_TRUE;
+    else spfMsg->klaxon = JAUS_FALSE; 
+    
+    jausAddressCopy(spfMsg->destination,jAdd);
+    jMsg = setSignalingElements18MessageToJausMessage(spfMsg);
+    if (jMsg != NULL) {
+        ojCmptSendMessage(instance->visualSensorComponent, jMsg);
+    } else {
+        cout << "No se ha podido generar mensaje JAUS" << endl;
+    }
+    // Liberacion de memoria
+    setSignalingElements18MessageDestroy(spfMsg);
+    jausAddressDestroy(jAdd);
+    jausMessageDestroy(jMsg);
+    cout << "Enviado mensaje SET DISCRETE DEVICE" << endl;
+}
 
 // Set Positioner
 void JausController::sendPositionerMessage(){
