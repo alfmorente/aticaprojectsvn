@@ -3,6 +3,7 @@
 
 CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o: src/RosNode.cpp
 CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o: include/RosNode.h
+CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o: include/constant.h
 
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: src/RosNodePositionOrientation.cpp
 CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h

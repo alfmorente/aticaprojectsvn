@@ -30,8 +30,8 @@ using namespace std;
 
 
 /**
- * /class TraxAHRSModuleDriver
- * /brief Clase que representa al driver de comunicación con el dispositivo
+ * \class TraxAHRSModuleDriver
+ * \brief Clase que representa al driver de comunicación con el dispositivo
  * magnetómetro Trax AHRS Module
  */
 class TraxAHRSModuleDriver {
