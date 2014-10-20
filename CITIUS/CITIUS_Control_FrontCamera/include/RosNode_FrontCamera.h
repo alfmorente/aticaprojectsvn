@@ -26,8 +26,8 @@
 using namespace std;
 
 /**
- * /class RosNode_FrontCamera
- * /brief Clase que representa al nodo ROS que gestiona la comunicación con la
+ * \class RosNode_FrontCamera
+ * \brief Clase que representa al nodo ROS que gestiona la comunicación con la
  * cámara de apoyo a la conducción
 */
 class RosNode_FrontCamera: public RosNode {
