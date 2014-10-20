@@ -273,7 +273,7 @@ DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
  * @param[in] id_device Identificador del dispositivo a modificar
  * @param[in] value Valor de lectura del dispositivo a modificar
  */
-void DrivingConnectionManager::setVehicleInfo(short id_device, short value) {
+void DrivingConnectionManager::setVehicleInfo(DeviceID id_device, short value) {
   switch (id_device) {
     case THROTTLE:
       vehicleInfo.thottle = value;
@@ -353,7 +353,7 @@ void DrivingConnectionManager::setCountCriticalMessages(short cont) {
  * @param[in] value Nuevo valor del vector de alarmas a modificar en el atributo
  * correspondiente
  */
-void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
+void DrivingConnectionManager::setAlarmsInfo(DeviceID element, short value) {
   if (element == DRIVE_ALARMS)
     driveAlarms = value;
   else if (element == STEERING_ALARMS)
@@ -366,7 +366,7 @@ void DrivingConnectionManager::setAlarmsInfo(short element, short value) {
  * @param[in] element Elemento de consulta
  * @return Booleano que indica si el elemento es crítico o  no
  */
-bool DrivingConnectionManager::isCriticalInstruction(short element) {
+bool DrivingConnectionManager::isCriticalInstruction(DeviceID element) {
   if (element == RESET
           || element == GEAR
           || element == MT_GEAR

@@ -52,9 +52,9 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
         // Envio de comando a vehículo
         FrameDriving command;
         command.instruction = SET;
-        command.element = msg.id_device;
+        command.element = static_cast<DeviceID>(msg.id_device);
         command.value = msg.value;
-        if (dVehicle->isCriticalInstruction(msg.id_device)) {
+        if (dVehicle->isCriticalInstruction(static_cast<DeviceID>(msg.id_device))) {
           short cont = dVehicle->getCountCriticalMessages();
           // Valor de ID_INSTRUCCION
           command.id_instruccion = cont;
@@ -118,9 +118,8 @@ DrivingConnectionManager *RosNode_Driving::getDriverMng() {
  */
 bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg) {
   bool ret = true;
-  short element = msg.id_device;
   short value = msg.value;
-  switch (element) {
+  switch (msg.id_device) {
     case (RESET):
       if (value < 0 || value > 1) ret = false;
       break;

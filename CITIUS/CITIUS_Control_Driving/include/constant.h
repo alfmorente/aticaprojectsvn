@@ -13,6 +13,8 @@
 #ifndef CONSTANT_H
 #define	CONSTANT_H
 
+#include <vector>
+
 using namespace std;
 
 /*******************************************************************************
@@ -20,94 +22,118 @@ using namespace std;
  * IDENTIFICADOR DE INSTRUCCION
  *******************************************************************************/
 
-#define SET 0 /// Valor para generación de instrucción SET
-#define GET 1 /// Valor para generación de instrucción GET
-#define INFO 2 /// Valor para generación de instrucción INFO
-#define ACK 3 /// Valor para generación de instrucción ACK
-#define NACK 4 /// Valor para generación de instrucción NACK
+/**
+ * \enum CommandID
+ * \brief Identificador de comando para protocolo con Payload de conducción
+ */
+typedef enum{
+  SET = 0, /// Valor para generación de instrucción SET
+  GET = 1, /// Valor para generación de instrucción GET
+  INFO = 2, /// Valor para generación de instrucción INFO
+  ACK = 3, /// Valor para generación de instrucción ACK
+  NACK = 4 /// Valor para generación de instrucción NACK
+}CommandID;
 
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
  * IDENTIFICADOR DE ELEMENTO
  *******************************************************************************/
 
-#define RESET 0 /// Valor para formación de comando RESET
-#define BLINKER_RIGHT 1 /// Valor para formación de comando BLINKER_RIGHT
-#define BLINKER_LEFT 2 /// Valor para formación de comando BLINKER_LEFT
-#define BLINKER_EMERGENCY 3 /// Valor para formación de comando BLINKER_EMERGENCY
-#define MT_BLINKERS 4 /// Valor para formación de comando MT_BLINKERS
-#define DIPSP 5 /// Valor para formación de comando DIPSP
-#define DIPSS 6 /// Valor para formación de comando DIPSS
-#define DIPSR 7 /// Valor para formación de comando DIPSR
-#define KLAXON 8 /// Valor para formación de comando KLAXON
-#define MT_LIGHTS 9 /// Valor para formación de comando MT_LIGHTS
-#define GEAR 10 /// Valor para formación de comando GEAR
-#define MT_GEAR 11 /// Valor para formación de comando MT_GEAR
-#define THROTTLE 12 /// Valor para formación de comando THROTTLE
-#define MOTOR_RPM 13 /// Valor para formación de comando MOTOR_RPM
-#define CRUISING_SPEED 14 /// Valor para formación de comando CRUISING_SPEED
-#define MT_THROTTLE 15 /// Valor para formación de comando MT_THROTTLE
-#define MOTOR_TEMPERATURE 16 /// Valor para formación de comando MOTOR_TEMPERATURE
-#define HANDBRAKE 17 /// Valor para formación de comando HANDBRAKE
-#define MT_HANDBRAKE 18 /// Valor para formación de comando MT_HANDBRAKE
-#define BRAKE 19 /// Valor para formación de comando BRAKE
-#define MT_BRAKE 20 /// Valor para formación de comando MT_BRAKE
-#define STEERING 21 /// Valor para formación de comando STEERING
-#define STEERING_ALARMS 22 /// Valor para formación de comando STEERING_ALARMS
-#define MT_STEERING 23 /// Valor para formación de comando MT_STEERING
-#define DRIVE_ALARMS 24 /// Valor para formación de comando DRIVE_ALARMS
-#define BATTERY_LEVEL 25 /// Valor para formación de comando BATTERY_LEVEL
-#define BATTERY_VOLTAGE 26 /// Valor para formación de comando BATTERY_VOLTAGE
-#define BATTERY_CURRENT 27 /// Valor para formación de comando BATTERY_CURRENT
-#define BATTERY_TEMPERATURE 28 /// Valor para formación de comando BATTERY_TEMPERATURE
-#define SUPPLY_TURN_ON 29 /// Valor para formación de comando SUPPLY_TURN_ON
-#define SUPPLY_CHECK 30 /// Valor para formación de comando SUPPLY_CHECK
-#define TURN_OFF 31 /// Valor para formación de comando TURN_OFF
-#define SUPPLY_5 32 /// Valor para formación de comando SUPPLY_5
-#define SUPPLY_12 33 /// Valor para formación de comando SUPPLY_12
-#define SUPPLY_24_DRIVE 34 /// Valor para formación de comando SUPPLY_24_DRIVE
-#define SUPPLY_24_OCC 35 /// Valor para formación de comando SUPPLY_24_OCC
-#define CONTROL_SYSTEM_SUPPLY 36 /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY
-#define CONTROL_SYSTEM_SUPPLY_5 37 /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_5
-#define CONTROL_SYSTEM_SUPPLY_12 38 /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_12
-#define CONTROL_SYSTEM_SUPPLY_24 39 /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_24
-#define CONTROL_SYSTEM_SUPPLY_48 40 /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_48
-#define DRIVE_SYSTEM_SUPPLY 41 /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY
-#define DRIVE_SYSTEM_SUPPLY_5 42 /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_5
-#define DRIVE_SYSTEM_SUPPLY_12 43 /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_12
-#define DRIVE_SYSTEM_SUPPLY_24 44 /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_24
-#define DRIVE_SYSTEM_SUPPLY_48 45 /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_48
-#define COMM_SYSTEM_SUPPLY 46 /// Valor para formación de comando COMM_SYSTEM_SUPPLY
-#define COMM_SYSTEM_SUPPLY_5 47 /// Valor para formación de comando COMM_SYSTEM_SUPPLY_5
-#define COMM_SYSTEM_SUPPLY_12 48 /// Valor para formación de comando COMM_SYSTEM_SUPPLY_12
-#define COMM_SYSTEM_SUPPLY_24 49 /// Valor para formación de comando COMM_SYSTEM_SUPPLY_24
-#define COMM_SYSTEM_SUPPLY_48 50 /// Valor para formación de comando COMM_SYSTEM_SUPPLY_48
-#define OBSERVATION_SYSTEM_SUPPLY 51 /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY
-#define OBSERVATION_SYSTEM_SUPPLY_5 52 /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_5
-#define OBSERVATION_SYSTEM_SUPPLY_12 53 /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_12
-#define OBSERVATION_SYSTEM_SUPPLY_24 54 /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_24
-#define OBSERVATION_SYSTEM_SUPPLY_48 55 /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_48
-#define SUPPLY_ALARMS 56 /// Valor para formación de comando SUPPLY_ALARMS
-#define OPERATION_MODE_SWITCH 57 /// Valor para formación de comando OPERATION_MODE_SWITCH
+/**
+ * \enum DeviceID
+ * \brief Identificador de dispositivo para protocolo con Payload de conducción
+ */
+typedef enum{
+  RESET = 0 , /// Valor para formación de comando RESET
+  BLINKER_RIGHT = 1 , /// Valor para formación de comando BLINKER_RIGHT
+  BLINKER_LEFT = 2 , /// Valor para formación de comando BLINKER_LEFT
+  BLINKER_EMERGENCY = 3 , /// Valor para formación de comando BLINKER_EMERGENCY
+  MT_BLINKERS = 4 , /// Valor para formación de comando MT_BLINKERS
+  DIPSP = 5 , /// Valor para formación de comando DIPSP
+  DIPSS = 6 , /// Valor para formación de comando DIPSS
+  DIPSR = 7 , /// Valor para formación de comando DIPSR
+  KLAXON = 8 , /// Valor para formación de comando KLAXON
+  MT_LIGHTS = 9 , /// Valor para formación de comando MT_LIGHTS
+  GEAR = 10 , /// Valor para formación de comando GEAR
+  MT_GEAR = 11 , /// Valor para formación de comando MT_GEAR
+  THROTTLE = 12 , /// Valor para formación de comando THROTTLE
+  MOTOR_RPM = 13 , /// Valor para formación de comando MOTOR_RPM
+  CRUISING_SPEED = 14 , /// Valor para formación de comando CRUISING_SPEED
+  MT_THROTTLE = 15 , /// Valor para formación de comando MT_THROTTLE
+  MOTOR_TEMPERATURE = 16 , /// Valor para formación de comando MOTOR_TEMPERATURE
+  HANDBRAKE = 17 , /// Valor para formación de comando HANDBRAKE
+  MT_HANDBRAKE = 18 , /// Valor para formación de comando MT_HANDBRAKE
+  BRAKE = 19 , /// Valor para formación de comando BRAKE
+  MT_BRAKE = 20 , /// Valor para formación de comando MT_BRAKE
+  STEERING = 21 , /// Valor para formación de comando STEERING
+  STEERING_ALARMS = 22 , /// Valor para formación de comando STEERING_ALARMS
+  MT_STEERING = 23 , /// Valor para formación de comando MT_STEERING
+  DRIVE_ALARMS = 24 , /// Valor para formación de comando DRIVE_ALARMS
+  BATTERY_LEVEL = 25 , /// Valor para formación de comando BATTERY_LEVEL
+  BATTERY_VOLTAGE = 26 , /// Valor para formación de comando BATTERY_VOLTAGE
+  BATTERY_CURRENT = 27 , /// Valor para formación de comando BATTERY_CURRENT
+  BATTERY_TEMPERATURE = 28 , /// Valor para formación de comando BATTERY_TEMPERATURE
+  SUPPLY_TURN_ON = 29 , /// Valor para formación de comando SUPPLY_TURN_ON
+  SUPPLY_CHECK = 30 , /// Valor para formación de comando SUPPLY_CHECK
+  TURN_OFF = 31 , /// Valor para formación de comando TURN_OFF
+  SUPPLY_5 = 32 , /// Valor para formación de comando SUPPLY_5
+  SUPPLY_12 = 33 , /// Valor para formación de comando SUPPLY_12
+  SUPPLY_24_DRIVE = 34 , /// Valor para formación de comando SUPPLY_24_DRIVE
+  SUPPLY_24_OCC = 35 , /// Valor para formación de comando SUPPLY_24_OCC
+  CONTROL_SYSTEM_SUPPLY = 36 , /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY
+  CONTROL_SYSTEM_SUPPLY_5 = 37 , /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_5
+  CONTROL_SYSTEM_SUPPLY_12 = 38 , /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_12
+  CONTROL_SYSTEM_SUPPLY_24 = 39 , /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_24
+  CONTROL_SYSTEM_SUPPLY_48 = 40 , /// Valor para formación de comando CONTROL_SYSTEM_SUPPLY_48
+  DRIVE_SYSTEM_SUPPLY = 41 , /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY
+  DRIVE_SYSTEM_SUPPLY_5 = 42 , /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_5
+  DRIVE_SYSTEM_SUPPLY_12 = 43 , /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_12
+  DRIVE_SYSTEM_SUPPLY_24 = 44 , /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_24
+  DRIVE_SYSTEM_SUPPLY_48 = 45 , /// Valor para formación de comando DRIVE_SYSTEM_SUPPLY_48
+  COMM_SYSTEM_SUPPLY = 46 , /// Valor para formación de comando COMM_SYSTEM_SUPPLY
+  COMM_SYSTEM_SUPPLY_5 = 47 , /// Valor para formación de comando COMM_SYSTEM_SUPPLY_5
+  COMM_SYSTEM_SUPPLY_12 = 48 , /// Valor para formación de comando COMM_SYSTEM_SUPPLY_12
+  COMM_SYSTEM_SUPPLY_24 = 49 , /// Valor para formación de comando COMM_SYSTEM_SUPPLY_24
+  COMM_SYSTEM_SUPPLY_48 = 50 , /// Valor para formación de comando COMM_SYSTEM_SUPPLY_48
+  OBSERVATION_SYSTEM_SUPPLY = 51 , /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY
+  OBSERVATION_SYSTEM_SUPPLY_5 = 52 , /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_5
+  OBSERVATION_SYSTEM_SUPPLY_12 = 53 , /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_12
+  OBSERVATION_SYSTEM_SUPPLY_24 = 54 , /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_24
+  OBSERVATION_SYSTEM_SUPPLY_48 = 55 , /// Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_48
+  SUPPLY_ALARMS = 56 , /// Valor para formación de comando SUPPLY_ALARMS
+  OPERATION_MODE_SWITCH = 57 /// Valor para formación de comando OPERATION_MODE_SWITCH
+}DeviceID;
 
 /*******************************************************************************
  *                              ESTADOS DEL NODO
  *******************************************************************************/
 
-#define NODESTATUS_INIT 0 /// Identificador del estado INIT de la máquina de estados de nodo
-#define NODESTATUS_OK 1 /// Identificador del estado OK de la máquina de estados de nodo
-#define NODESTATUS_CORRUPT 2 /// Identificador del estado CORRUPT de la máquina de estados de nodo
-#define NODESTATUS_OFF 3 /// Identificador del estado OFF de la máquina de estados de nodo
+/**
+ * \enum NodeStatus
+ * \brief Tipos para estado local de nodo
+ */
+typedef enum{
+  NODESTATUS_INIT = 0 , /// Identificador del estado INIT de la máquina de estados de nodo
+  NODESTATUS_OK = 1 , /// Identificador del estado OK de la máquina de estados de nodo
+  NODESTATUS_CORRUPT = 2 , /// Identificador del estado CORRUPT de la máquina de estados de nodo
+  NODESTATUS_OFF = 3 /// Identificador del estado OFF de la máquina de estados de nodo
+}NodeStatus;
 
 /*******************************************************************************
  *                          MODOS DE OPERACION DEL VEHICULO
  *******************************************************************************/
 
-#define OPERATION_MODE_LOCAL 0 /// Identificador del modo de operación LOCAL de la máquina de estados del vehículo
-#define OPERATION_MODE_INICIANDO 1 /// Identificador del modo de operación OPERATION_MODE_INICIANDO de la máquina de estados del vehículo
-#define OPERATION_MODE_CONDUCCION 2 /// Identificador del modo de operación OPERATION_MODE_CONDUCCION de la máquina de estados del vehículo
-#define OPERATION_MODE_OBSERVACION 3 /// Identificador del modo de operación OPERATION_MODE_OBSERVACION de la máquina de estados del vehículo
-#define OPERATION_MODE_APAGANDO 4 /// Identificador del modo de operación OPERATION_MODE_APAGANDO de la máquina de estados del vehículo
+/**
+ * \enum OperationMode
+ * \brief Tipos para modos de operación
+ */
+typedef enum{
+  OPERATION_MODE_LOCAL = 0 , /// Identificador del modo de operación LOCAL de la máquina de estados del vehículo
+  OPERATION_MODE_INICIANDO = 1 , /// Identificador del modo de operación OPERATION_MODE_INICIANDO de la máquina de estados del vehículo
+  OPERATION_MODE_CONDUCCION = 2 , /// Identificador del modo de operación OPERATION_MODE_CONDUCCION de la máquina de estados del vehículo
+  OPERATION_MODE_OBSERVACION = 3 , /// Identificador del modo de operación OPERATION_MODE_OBSERVACION de la máquina de estados del vehículo
+  OPERATION_MODE_APAGANDO = 4 /// Identificador del modo de operación OPERATION_MODE_APAGANDO de la máquina de estados del vehículo        
+}OperationMode;
 
 /*******************************************************************************
  *                   SOCKET PAYLOAD DE CONDUCCION
@@ -130,13 +156,13 @@ using namespace std;
  *******************************************************************************/
 
 /**
- * /struct FrameDriving
- * /brief Estructura de intercambio con payload de conducción
+ * \struct FrameDriving
+ * \brief Estructura de intercambio con payload de conducción
  */
 typedef struct {
-  short instruction; /// Tipo de instruccion
+  CommandID instruction; /// Tipo de instruccion
   short id_instruccion; /// Identificador para mecanismo de integridad
-  short element; /// Elemento de demanda
+  DeviceID element; /// Elemento de demanda
   short value; /// Valor de demanda
 } FrameDriving;
 
@@ -145,8 +171,8 @@ typedef struct {
  *******************************************************************************/
 
 /**
- * /struct DrivingInfo
- * /brief Estructura contenedor de información del vehículo
+ * \struct DrivingInfo
+ * \brief Estructura contenedor de información del vehículo
  */
 typedef struct {
   short steering; /// Valor de direccion
@@ -171,8 +197,8 @@ typedef struct {
  *******************************************************************************/
 
 /**
- * /struct RtxStruct
- * /brief Estructura para manejo de retransmisión de mensajes ante recepción de
+ * \struct RtxStruct
+ * \brief Estructura para manejo de retransmisión de mensajes ante recepción de
  * NACK
  */
 typedef struct {

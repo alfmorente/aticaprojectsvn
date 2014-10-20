@@ -270,7 +270,7 @@ ElectricInfo ElectricConnectionManager::getVehicleInfo() {
  * @param[in] id_device Identificador del dispositivo a modificar
  * @param[in] value Valor de lectura del dispositivo a modificar
  */
-void ElectricConnectionManager::setVehicleInfo(short id_device, short value) {
+void ElectricConnectionManager::setVehicleInfo(DeviceID id_device, short value) {
   switch (id_device) {
     case BATTERY_LEVEL:
       electricInfo.battery_level = value;
@@ -363,7 +363,7 @@ short ElectricConnectionManager::getSupplyAlarms() {
  * @param[in] element Elemento de consulta
  * @return Booleano que indica si el elemento es crítico o  no
  */
-bool ElectricConnectionManager::isCriticalInstruction(short element) {
+bool ElectricConnectionManager::isCriticalInstruction(DeviceID element) {
   if (element == SUPPLY_TURN_ON) {
     return true;
   } else {
