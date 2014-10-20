@@ -14,10 +14,16 @@
  *                              ESTADOS DEL NODO
  *******************************************************************************/
 
-#define NODESTATUS_INIT 0 /// Identificador del estado INIT de la máquina de estados de nodo
-#define NODESTATUS_OK 1 /// Identificador del estado OK de la máquina de estados de nodo
-#define NODESTATUS_CORRUPT 2 /// Identificador del estado CORRUPT de la máquina de estados de nodo
-#define NODESTATUS_OFF 3 /// Identificador del estado OFF de la máquina de estados de nodo
+/**
+ * \enum NodeStatus
+ * \brief Tipos para estado local de nodo
+ */
+typedef enum{
+  NODESTATUS_INIT = 0 , /// Identificador del estado INIT de la máquina de estados de nodo
+  NODESTATUS_OK = 1 , /// Identificador del estado OK de la máquina de estados de nodo
+  NODESTATUS_CORRUPT = 2 , /// Identificador del estado CORRUPT de la máquina de estados de nodo
+  NODESTATUS_OFF = 3 /// Identificador del estado OFF de la máquina de estados de nodo
+}NodeStatus;
 
 /*******************************************************************************
  *                   SOCKET PAYLOAD DE CONDUCCION
@@ -54,8 +60,8 @@
 #define CONV_FROM_CAMERA 50 /// Factor de conversion entre  valores de cámara y PTZ porcentual
 
 /**
- * /struct FrameDriving
- * /brief Estructura de intercambio con payload de conducción
+ * \struct FrameDriving
+ * \brief Estructura de intercambio con payload de conducción
  */
 typedef struct {
   bool state; /// Valor del estado (actualizado o no) de lectura de variables

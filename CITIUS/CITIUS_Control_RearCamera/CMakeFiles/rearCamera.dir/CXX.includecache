@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.cpp
+AxisP3364LveDriver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/AxisP3364LveDriver.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode.cpp
+RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.cpp
 RosNode_RearCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.h
@@ -653,6 +661,8 @@ constant.h
 include/constant.h
 
 include/RosNode.h
+constant.h
+include/constant.h
 
 include/RosNode_RearCamera.h
 RosNode.h
