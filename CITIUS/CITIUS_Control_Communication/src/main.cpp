@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
   initTime = clock();
 
   // Control del modo de operacion del vehiculo
-  int currentStatus = 0;
+  int currentStatus = OPERATION_MODE_INICIANDO;
   ros::NodeHandle nh;
 
   while (ros::ok() && currentStatus != OPERATION_MODE_APAGANDO) {

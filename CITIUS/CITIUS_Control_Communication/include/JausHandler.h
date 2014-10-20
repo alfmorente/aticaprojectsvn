@@ -19,8 +19,8 @@
 #include <termios.h>
 
 /**
- * /class JausHandler
- * /brief Clase que representa al manejador de eventos producidos durante la
+ * \class JausHandler
+ * \brief Clase que representa al manejador de eventos producidos durante la
  * ejecucion del middleware de JAUS
  */
 class JausHandler : public EventHandler {
