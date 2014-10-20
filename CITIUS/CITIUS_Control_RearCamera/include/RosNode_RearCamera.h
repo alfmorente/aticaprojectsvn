@@ -24,8 +24,8 @@
 #include <cstdlib>
 
 /**
- * /class RosNode_RearCamera
- * /brief Clase que representa al nodo ROS que gestiona la comunicación con la
+ * \class RosNode_RearCamera
+ * \brief Clase que representa al nodo ROS que gestiona la comunicación con la
  * cámara de apoyo a la conducción
 */
 class RosNode_RearCamera: public RosNode {

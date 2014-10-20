@@ -27,8 +27,8 @@
 using namespace std;
 
 /**
- * /class AxisP3364LveDriver
- * /brief Clase que representa al driver de comunicación con el dispositivo
+ * \class AxisP3364LveDriver
+ * \brief Clase que representa al driver de comunicación con el dispositivo
  * cámara de apoyo a la conducción AXIS P3364Lve
 */
 class AxisP3364LveDriver {
