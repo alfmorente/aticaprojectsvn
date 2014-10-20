@@ -82,6 +82,7 @@ private:
     void sendPauseMissionMessage();
     void sendResumeMissionMessage();
     void sendTelemeterInfoMessage();
+    void sendSignalingElementsMessage();
     void sendPositionerMessage();
     void sendTVCameraMessage();
     void sendIRCameraMessage();

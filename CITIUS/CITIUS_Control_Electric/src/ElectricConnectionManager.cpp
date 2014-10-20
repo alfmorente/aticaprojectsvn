@@ -209,11 +209,14 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
   if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
     // Estructura de recepcion
     FrameDriving fdr;
-
+    short aux;
+    
     // Rellenado del buffer
-    memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
+    memcpy(&aux, &bufData[0], sizeof (aux));
+    fdr.instruction = static_cast<CommandID>(aux);
     memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
-    memcpy(&fdr.element, &bufData[4], sizeof (fdr.element));
+    memcpy(&aux, &bufData[4], sizeof (aux));
+    fdr.element = static_cast<DeviceID>(aux);
     memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
 
     if (fdr.instruction == ACK) {
