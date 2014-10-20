@@ -13,14 +13,22 @@
 #ifndef CONSTANT_H
 #define	CONSTANT_H
 
+#include <vector>
+
 /*******************************************************************************
  * ESTADOS DEL NODO
  *******************************************************************************/
 
-#define NODESTATUS_INIT 0 /// Identificador del estado INIT de la máquina de estados de nodo
-#define NODESTATUS_OK 1 /// Identificador del estado OK de la máquina de estados de nodo
-#define NODESTATUS_CORRUPT 2 /// Identificador del estado CORRUPT de la máquina de estados de nodo
-#define NODESTATUS_OFF 3 /// Identificador del estado OFF de la máquina de estados de nodo
+/**
+ * \enum NodeStatus
+ * \brief Tipos para estado local de nodo
+ */
+typedef enum{
+  NODESTATUS_INIT = 0 , /// Identificador del estado INIT de la máquina de estados de nodo
+  NODESTATUS_OK = 1 , /// Identificador del estado OK de la máquina de estados de nodo
+  NODESTATUS_CORRUPT = 2 , /// Identificador del estado CORRUPT de la máquina de estados de nodo
+  NODESTATUS_OFF = 3 /// Identificador del estado OFF de la máquina de estados de nodo
+}NodeStatus;
 
 /*******************************************************************************
  * FRECUENCIA -> PERIODO
@@ -63,8 +71,8 @@
  ******************************************************************************/
 
 /**
- * /struct PacketFrame
- * /brief Estructura contenedor de payload's Trax en crudo
+ * \struct PacketFrame
+ * \brief Estructura contenedor de payload's Trax en crudo
  */
 typedef struct {
   char idFrame; /// Identificador de la trama
@@ -72,8 +80,8 @@ typedef struct {
 } PacketFrame;
 
 /**
- * /struct TraxMsg
- * /brief Estructura contenedor de distintos campos de las tramas Trax
+ * \struct TraxMsg
+ * \brief Estructura contenedor de distintos campos de las tramas Trax
  */
 typedef struct {
   std::vector<char> byteCount; /// Valor del campo byteCount de la trama en crudo
@@ -83,8 +91,8 @@ typedef struct {
 } TraxMsg;
 
 /**
- * /struct TraxMeasurement
- * /brief Estructura contenedor de las medidas obtenidas de una trama Trax
+ * \struct TraxMeasurement
+ * \brief Estructura contenedor de las medidas obtenidas de una trama Trax
  */
 typedef struct {
   char heading_status; /// Valor del estado de la orientacion obtenida
@@ -122,8 +130,8 @@ typedef struct {
  ******************************************************************************/
 
 /**
- * /struct GPSINSInfo
- * /brief Estructura contenedor de las medidas obtenidas de una trama de datos
+ * \struct GPSINSInfo
+ * \brief Estructura contenedor de las medidas obtenidas de una trama de datos
  * XSens
  */
 typedef struct{
@@ -153,8 +161,8 @@ typedef struct{
 } GPSINSInfo;
 
 /**
- * /struct XsensMsg
- * /brief Estructura para descomposición de trama XSens
+ * \struct XsensMsg
+ * \brief Estructura para descomposición de trama XSens
  */
 typedef struct {
     unsigned char pre; /// Valor en crudo del campo PRE de la trama
@@ -166,8 +174,8 @@ typedef struct {
 } XsensMsg;
 
 /**
- * /struct dataPacketMT2
- * /brief Estructura para descomposición de campo Data de las tramas de datos
+ * \struct dataPacketMT2
+ * \brief Estructura para descomposición de campo Data de las tramas de datos
  * XSens
  */
 typedef struct {

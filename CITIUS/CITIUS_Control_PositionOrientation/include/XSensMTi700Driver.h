@@ -28,8 +28,8 @@
 using namespace std;
 
 /**
- * /class XSensMTi700Driver
- * /brief Clase que representa al driver de comunicación con el dispositivo
+ * \class XSensMTi700Driver
+ * \brief Clase que representa al driver de comunicación con el dispositivo
  * GPS+IMU XSens MTi-G 700
 */
 class XSensMTi700Driver {
