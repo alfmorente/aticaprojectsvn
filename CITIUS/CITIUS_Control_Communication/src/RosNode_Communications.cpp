@@ -29,8 +29,8 @@ RosNode_Communications *RosNode_Communications::getInstance() {
  * Constructor de la clase
  */
 RosNode_Communications::RosNode_Communications() {
-  subsystemController = 3; // UGV
-  nodeController = 1; // Control
+  subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
+  nodeController = JAUS_NODE_CONTROL; // Control
 }
 
 /**

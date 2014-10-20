@@ -23,7 +23,7 @@ TranslatorROSJAUS::TranslatorROSJAUS() {
  * @param[in] brake Valor de lectura del freno de servicio
  * @return Mensaje JAUS - Report Wrench Effort
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(int subDest, int nodDest, short steer, short throttle, short brake) {
+JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(JausSubsystemID subDest, JausNodeID nodDest, short steer, short throttle, short brake) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
   // Creacion de la direccion destinataria
@@ -57,7 +57,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(int subDest, int n
  * @param[in] gear Valor de lectura de la marcha
  * @return Mensaje JAUS - Report Discrete Devices
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(int subDest, int nodDest, bool parkingbrake, short gear) {
+JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID subDest, JausNodeID nodDest, bool parkingbrake, short gear) {
 
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
@@ -90,7 +90,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(int subDest, int
  * @param[in] speed Valor de lectura de la velocidad de crucero
  * @return Mensaje JAUS - Report Travel Speed
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(int subDest, int nodDest, short speed) {
+JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(JausSubsystemID subDest, JausNodeID nodDest, short speed) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
   // Creacion de la direccion destinataria
@@ -122,7 +122,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(int subDest, int no
  * @param[in] motorTemperature Valor de lectura de la temperatura del motor
  * @return Mensaje JAUS - UGV Info
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(int subDest, int nodDest, short motorRPM, short motorTemperature) {
+JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(JausSubsystemID subDest, JausNodeID nodDest, short motorRPM, short motorTemperature) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
   // Creacion de la direccion destinataria
@@ -160,7 +160,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(int subDest, int nodDest, s
  * @param[in] klaxon Valor de lectura de la bocina
  * @return Mensaje JAUS - Report Signaling Elements
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(int subDest, int nodDest, bool blinker_left, bool blinker_right, bool dipsp, bool dipss, bool dipsr, bool klaxon) {
+JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(JausSubsystemID subDest, JausNodeID nodDest, bool blinker_left, bool blinker_right, bool dipsp, bool dipss, bool dipsr, bool klaxon) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
   // Creacion de la direccion destinataria
@@ -200,7 +200,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(int subDest, int nodD
  * @param[in] alarms Alarmas subsistema electrico
  * @return Mensaje JAUS - UGV Info
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDest, short bat_level, short bat_voltage, short bat_current, short bat_temp, short alarms) {
+JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(JausSubsystemID subDest, JausNodeID nodDest, short bat_level, short bat_voltage, short bat_current, short bat_temp, short alarms) {
 
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
@@ -244,7 +244,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(int subDest, int nodDe
  * @param[in] zoom Valor de lectura de ZOOM
  * @return  Mensaje JAUS - Report Camera Pose
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(int subDest, int nodDest, short id_camera, short pan, short tilt, short zoom) {
+JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, CameraID id_camera, short pan, short tilt, short zoom) {
 
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
@@ -282,7 +282,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(int subDest, int nodDest
  * @param[in] polarity Valor de lectura de POLARIDAD
  * @return Mensaje JAUS - Report Night-time Camera
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(int subDest, int nodDest, short zoom, short polarity) {
+JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, short polarity) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
 
@@ -320,7 +320,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(int subDest, int nodDe
  * @param[in] ecs Valor de lectura de los ecos encontrados
  * @return Mensaje JAUS - Report Telemeter
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodDest, short *ecs) {
+JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(JausSubsystemID subDest, JausNodeID nodDest, short *ecs) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
 
@@ -357,7 +357,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(int subDest, int nodD
  * @param[in] autofocus Valor de lectura de AUTOFOCO
  * @return Mensaje JAUS - Report Day-time Camera
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromTVCamera(int subDest, int nodDest, short zoom, short focus, bool autofocus) {
+JausMessage TranslatorROSJAUS::getJausMsgFromTVCamera(JausSubsystemID subDest, JausNodeID nodDest, short zoom, short focus, bool autofocus) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
 
@@ -393,7 +393,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTVCamera(int subDest, int nodDest, 
  * @param[in] tilt Valor de lectura de TILT
  * @return Mensaje JAUS - Report Positioner
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromPositioner(int subDest, int nodDest, short pan, short tilt) {
+JausMessage TranslatorROSJAUS::getJausMsgFromPositioner(JausSubsystemID subDest, JausNodeID nodDest, short pan, short tilt) {
   // Mensaje de devoluvion
   JausMessage jMsg = NULL;
 

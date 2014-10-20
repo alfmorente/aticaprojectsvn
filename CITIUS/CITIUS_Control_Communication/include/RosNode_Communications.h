@@ -54,8 +54,8 @@
 using namespace std;
 
 /**
- * /class RosNode_Communications
- * /brief Clase que representa al nodo ROS de gestión de comunicaciones
+ * \class RosNode_Communications
+ * \brief Clase que representa al nodo ROS de gestión de comunicaciones
 */
 class RosNode_Communications {
 public:
@@ -78,8 +78,8 @@ private:
   JausHandler *handler;
   NodeManager *nm;
   // Controlador activo
-  int subsystemController;
-  int nodeController;
+  JausSubsystemID subsystemController;
+  JausNodeID nodeController;
   // Artefactos ROS
   // Subsistema de control
   ros::Subscriber subsFrontCameraInfo;
