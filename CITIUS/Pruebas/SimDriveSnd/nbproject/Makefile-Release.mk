@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/MessageDispatcher.o \
 	${OBJECTDIR}/mainServer.o
 
 
@@ -61,6 +62,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/simdrivesnd: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/simdrivesnd ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/MessageDispatcher.o: MessageDispatcher.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageDispatcher.o MessageDispatcher.cpp
 
 ${OBJECTDIR}/mainServer.o: mainServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}

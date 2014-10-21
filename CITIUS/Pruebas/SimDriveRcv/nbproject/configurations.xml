@@ -4,7 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>SimuladorPayloadConduccion.h</itemPath>
       <itemPath>constant.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -38,8 +37,6 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="SimuladorPayloadConduccion.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="constant.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mainServer.cpp" ex="false" tool="1" flavor2="0">
@@ -65,8 +62,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="SimuladorPayloadConduccion.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="constant.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mainServer.cpp" ex="false" tool="1" flavor2="0">
