@@ -313,7 +313,7 @@ void JausController::sendDiscreteDeviceMessage(){
     
     // Campo marcha
     int intAux;
-    cout << "Selecciona un valor para la marcha {1,2,3}:" << endl;
+    cout << "Selecciona un valor para la marcha {0,1,2}:" << endl;
     cin >> intAux;
     spfMsg->gear = intAux;
     
