@@ -49,7 +49,7 @@ bool DrivingConnectionManager::connectVehicle() {
   // Creacion y apertura del socket
   socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
   if (socketDescriptor < 0) {
-    ROS_INFO("[Control] Driving - Imposible crear socket para comunicación con Payload de Conduccion");
+    ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
     return false;
   } else {
     struct hostent *he;
@@ -66,7 +66,7 @@ bool DrivingConnectionManager::connectVehicle() {
 
     if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
       /* llamada a socket() */
-      ROS_INFO("[Control] Driving - Imposible crear socket para comunicación con Payload de Conduccion");
+      ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
       exit(-1);
     }
 
@@ -309,6 +309,10 @@ void DrivingConnectionManager::setVehicleInfo(DeviceID id_device, short value) {
     case BLINKER_RIGHT:
       vehicleInfo.blinkerRight = (bool) value;
       break;
+    case BLINKER_EMERGENCY:
+        vehicleInfo.blinkerRight = (bool) value;
+        vehicleInfo.blinkerLeft = (bool) value;
+        break;
     case KLAXON:
       vehicleInfo.klaxon = (bool) value;
       break;
