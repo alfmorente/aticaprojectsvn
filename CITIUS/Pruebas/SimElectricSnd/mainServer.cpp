@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 
     server.sin_family = AF_INET;
 
-    server.sin_port = htons(PORT);
+    server.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
     /* ¿Recuerdas a htons() de la sección "Conversiones"? =) */
 
     server.sin_addr.s_addr = INADDR_ANY;
