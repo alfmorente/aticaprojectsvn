@@ -282,7 +282,7 @@ void ElectricConnectionManager::setVehicleInfo(DeviceID id_device, short value) 
       electricInfo.battery_voltage = value;
       break;
     case BATTERY_CURRENT:
-      electricInfo.battery_current = (bool) value;
+      electricInfo.battery_current = value;
       break;
     case BATTERY_TEMPERATURE:
       electricInfo.battery_temperature = value;
