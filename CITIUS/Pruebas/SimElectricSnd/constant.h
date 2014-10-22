@@ -19,7 +19,7 @@ extern "C" {
 }
 #endif
 
-#endif	/* CONSTANT_H */
+
 
 
 /*******************************************************************************
@@ -145,3 +145,4 @@ typedef struct{
     short value;
 }FrameDriving;
 
+#endif	/* CONSTANT_H */

@@ -35,7 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/1419545479/mainServer.o
+	${OBJECTDIR}/MessageDispatcher.o \
+	${OBJECTDIR}/mainServer.o
 
 
 # C Compiler Flags
@@ -62,10 +63,15 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/simelectricsnd: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/simelectricsnd ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/_ext/1419545479/mainServer.o: ../SimDriveSnd/mainServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/_ext/1419545479
+${OBJECTDIR}/MessageDispatcher.o: MessageDispatcher.cpp 
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1419545479/mainServer.o ../SimDriveSnd/mainServer.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageDispatcher.o MessageDispatcher.cpp
+
+${OBJECTDIR}/mainServer.o: mainServer.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mainServer.o mainServer.cpp
 
 # Subprojects
 .build-subprojects:

@@ -206,18 +206,8 @@ void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsg
 }
 
 bool isCriticalInstruction(short element){
-    if(element == RESET
-            || element == GEAR
-            || element == MT_GEAR
-            || element == THROTTLE
-            || element == MT_THROTTLE
-            || element == CRUISING_SPEED
-            || element == HANDBRAKE
-            || element == MT_HANDBRAKE
-            || element == BRAKE
-            || element == MT_BRAKE
-            || element == STEERING
-            || element == MT_STEERING){
+    if(element == SUPPLY_TURN_ON
+            || element == TURN_OFF){
         return true;
     }else{
         return false;

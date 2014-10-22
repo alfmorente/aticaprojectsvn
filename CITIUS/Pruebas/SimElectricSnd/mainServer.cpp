@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: atica
  *
- * Created on 26 de junio de 2014, 10:05
+ * Created on 19 de junio de 2014, 10:05
  */
 
 #include <stdio.h>          
@@ -15,39 +15,22 @@
 #include <unistd.h>
 #include "constant.h"
 
-#define PORT 20000 /* El puerto que será abierto */
+#define PORT 10000 /* El puerto que será abierto */
 #define BACKLOG 1 /* El número de conexiones permitidas */
 
 #define MAXDATASIZE 100   
 
-typedef struct {
-    short battery_level;
-    short battery_voltage;
-    short battery_current;
-    short battery_temperature;
-    short supply_alarms;
-}ElectricInfo;
+#include "constant.h"
+#include "MessageDispatcher.h"
 
 /*******************************************************************************
     *               PROTOTIPOS DE FUNCIONES SECUNDARIAS
 *******************************************************************************/
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, ElectricInfo *electricInfo);
-
-bool isCriticalInstruction(short element);
-
-short getDeviceValue(short element, ElectricInfo electricInfo);
-
-void setDeviceValue(ElectricInfo *electricInfo, short element, short value);
+int printfMenu();
+void requestDispatcher(int socketDispatcher, int request);
 
 int main(int argc, char *argv[]) {
-    
-    ElectricInfo electricInfo;
-    electricInfo.battery_level = 0;
-    electricInfo.battery_voltage = 0;
-    electricInfo.battery_current = 0;
-    electricInfo.battery_temperature = 0;
-    electricInfo.supply_alarms = 0x00;
     
     int fd, fd2, currentMsgCount = 1; /* los ficheros descriptores */
 
@@ -90,8 +73,7 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
     sin_size = sizeof (struct sockaddr_in);
-    printf("Esperando conexion de RosNode_Electric\n");
-    
+    printf("Esperando conexion de RosNode_Driving\n");
     /* A continuación la llamada a accept() */
     if ((fd2 = accept(fd, (struct sockaddr *) &client, &sin_size)) == -1) {
         printf("Error en accept()\n");
@@ -100,171 +82,175 @@ int main(int argc, char *argv[]) {
 
     printf("Se obtuvo una conexión desde %s\n", inet_ntoa(client.sin_addr));
     /* que mostrará la IP del cliente */
+    
+    bool exit = false;
+    
+    int newSt = 0;
 
+  while (!exit) {
 
-    while (1) {
-        // Buffer de envio
-        char bufData[8];
-        if ((recv(fd2, bufData, MAXDATASIZE, 0)) <= 0) {
-            /* llamada a recv() */
-            printf("No se recibe na \n");
-            exit(-1);
-        } else {
-            // Estructura de recepcion
-            FrameDriving fdr;
-            // Rellenado del buffer
-            memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
-            memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
-            memcpy(&fdr.element, &bufData[4], sizeof (fdr.element));
-            memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-            if(fdr.instruction == SET){
-                printf("SET: %d = %d\n",fdr.element, fdr.value);
-                if(isCriticalInstruction(fdr.element)){
-                    printf("Cuanta sim: %d - Cuenta mensaje: %d\n",currentMsgCount,fdr.id_instruction);
-                }
-            }else if(fdr.instruction == GET){
-                printf("GET: %d\n",fdr.element);
-            }else{
-                printf("comando desconocido\n");
-            }
-            
-            // Gestiona las peticiones
-            requestDispatcher(fdr, fd2, &currentMsgCount, &electricInfo);
-            
-        }
+    newSt = printfMenu();
+    if (newSt == 33) { // Salir
+      exit = true;
+    } else { // Opcion valida
+      requestDispatcher(fd2, newSt);
     }
+  }
 }
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, ElectricInfo *electricInfo){
-    if(frame.instruction == SET){
-        if(isCriticalInstruction(frame.element)){
-            // Despacha peticion y devuelve ACK (con ID_INSTRUCCION)
-            if(frame.id_instruction == *currentMsgCount){ // Orden OK --> ACK
-                FrameDriving ret;
-                ret.instruction = ACK;
-                ret.id_instruction = *currentMsgCount;
-                ret.element = frame.element;
-                ret.value = frame.value;
-                //Buffer de envio 
-                char buff[8];
-                memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-                memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-                memcpy(&buff[4], &ret.element, sizeof (ret.element));
-                memcpy(&buff[6], &ret.value, sizeof (ret.value));
-                send(socketDescriptor, buff, sizeof (buff), 0);
-                usleep(100); 
-                (*currentMsgCount)= (*currentMsgCount)+1;
-            }else{                                      // Orden ERROR --> NACK
-                FrameDriving ret;
-                ret.instruction = NACK;
-                ret.id_instruction = *currentMsgCount;
-                ret.element = frame.element;
-                ret.value = frame.value;
-                //Buffer de envio 
-                char buff[8];
-                memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-                memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-                memcpy(&buff[4], &ret.element, sizeof (ret.element));
-                memcpy(&buff[6], &ret.value, sizeof (ret.value));
-                send(socketDescriptor, buff, sizeof (buff), 0);
-                usleep(100); 
-            }
-        } else {
-            // Despacha peticion y devuelve ACK (sin ID_INSTRUCCION)
-            FrameDriving ret;
-            ret.instruction = ACK;
-            ret.id_instruction = 0;
-            ret.element = frame.element;
-            ret.value = frame.value;
-            //Buffer de envio 
-            char buff[8];
-            memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-            memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-            memcpy(&buff[4], &ret.element, sizeof (ret.element));
-            memcpy(&buff[6], &ret.value, sizeof (ret.value));
-            send(socketDescriptor, buff, sizeof (buff), 0);
-            usleep(100); 
-        }
-        setDeviceValue(electricInfo, frame.element, frame.value);
-    }else if(frame.instruction == GET) {
-        // Despacha peticion y devuelve INFO  (sin ID_INSTRUCCION)
-        FrameDriving ret;
-        ret.instruction = INFO;
-        ret.id_instruction = 0;
-        ret.element = frame.element;
-        ret.value = getDeviceValue(frame.element,*electricInfo);
-        //Buffer de envio 
-        char buff[8];
-        memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-        memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-        memcpy(&buff[4], &ret.element, sizeof (ret.element));
-        memcpy(&buff[6], &ret.value, sizeof (ret.value));
-        send(socketDescriptor, buff, sizeof (buff), 0);
-        usleep(100); 
-    }
-    *currentMsgCount++;
-}
+int printfMenu() {
+  
+  cout << "****************************************" << endl;
+  cout << "1 ) Enviar mensaje BATTERY LEVEL" << endl;
+  cout << "2 ) Enviar mensaje BATTERY VOLTAGE" << endl;
+  cout << "3 ) Enviar mensaje BATTERY CURRENT" << endl;
+  cout << "4 ) Enviar mensaje BATTERY TEMPERATURE" << endl;
+  cout << "5 ) Enviar mensaje SUPPLY CHECK" << endl;
+  cout << "6 ) Enviar mensaje TURN OFF" << endl;
+  cout << "7 ) Enviar mensaje SUPPLY 5" << endl;
+  cout << "8 ) Enviar mensaje SUPPLY 12" << endl;
+  cout << "9 ) Enviar mensaje SUPPLY 24 DRIVE" << endl;
+  cout << "10) Enviar mensaje SUPPLY 24 OCC" << endl;
+  cout << "11) Enviar mensaje CONTROL SYSTEM SUPPLY" << endl;
+  cout << "12) Enviar mensaje CONTROL SYSTEM SUPPLY 5" << endl;
+  cout << "13) Enviar mensaje CONTROL SYSTEM SUPPLY 12" << endl;
+  cout << "14) Enviar mensaje CONTROL SYSTEM SUPPLY 24" << endl;
+  cout << "15) Enviar mensaje CONTROL SYSTEM SUPPLY 48" << endl;
+  cout << "16) Enviar mensaje DRIVE SYSTEM SUPPLY" << endl;
+  cout << "17) Enviar mensaje DRIVE SYSTEM SUPPLY 5" << endl;
+  cout << "18) Enviar mensaje DRIVE SYSTEM SUPPLY 12" << endl;
+  cout << "19) Enviar mensaje DRIVE SYSTEM SUPPLY 24" << endl;
+  cout << "20) Enviar mensaje DRIVE SYSTEM SUPPLY 48" << endl;
+  cout << "21) Enviar mensaje COMM SYSTEM SUPPLY" << endl;
+  cout << "22) Enviar mensaje COMM SYSTEM SUPPLY 5" << endl;
+  cout << "23) Enviar mensaje COMM SYSTEM SUPPLY 12" << endl;
+  cout << "24) Enviar mensaje COMM SYSTEM SUPPLY 24" << endl;
+  cout << "25) Enviar mensaje COMM SYSTEM SUPPLY 48" << endl;
+  cout << "26) Enviar mensaje OBSERVATION SYSTEM SUPPLY" << endl;
+  cout << "27) Enviar mensaje OBSERVATION SYSTEM SUPPLY 5" << endl;
+  cout << "28) Enviar mensaje OBSERVATION SYSTEM SUPPLY 12" << endl;
+  cout << "29) Enviar mensaje OBSERVATION SYSTEM SUPPLY 24" << endl;
+  cout << "30) Enviar mensaje OBSERVATION SYSTEM SUPPLY 48" << endl;
+  cout << "31) Enviar mensaje SUPPLY ALARMS" << endl;
+  cout << "32) Enviar mensaje OPERATION MODE SWITCH" << endl;
+  cout << "33) Salir" << endl;
+  cout << "****************************************" << endl;
+  cout << " Selecciona una opcion:" << endl;
 
-bool isCriticalInstruction(short element){
-    if(element == RESET
-            || element == GEAR
-            || element == MT_GEAR
-            || element == THROTTLE
-            || element == MT_THROTTLE
-            || element == CRUISING_SPEED
-            || element == HANDBRAKE
-            || element == MT_HANDBRAKE
-            || element == BRAKE
-            || element == MT_BRAKE
-            || element == STEERING
-            || element == MT_STEERING){
-        return true;
-    }else{
-        return false;
-    }
+  int intAux;
+  cin >> intAux;
+
+  if (intAux < 1 || intAux > 33) {
+    cout << "Opcion no valida" << endl;
+    return 0;
+  } else {
+    return intAux;
+  }
 
 }
 
-short getDeviceValue(short element, ElectricInfo electricInfo) {
-    switch (element) {
-        case BATTERY_LEVEL:
-            return electricInfo.battery_level;
-            break;
-        case BATTERY_VOLTAGE:
-            return electricInfo.battery_voltage;
-            break;
-        case BATTERY_CURRENT:
-            return electricInfo.battery_current;
-            break;
-        case BATTERY_TEMPERATURE:
-            return electricInfo.battery_temperature;
-            break;
-        case SUPPLY_ALARMS:
-            return electricInfo.supply_alarms;
-            break;
-        default:
-            break;
-    }
-}
+void requestDispatcher(int socketDescriptor, int request) {
+  MessageDispatcher *disp = new MessageDispatcher();
+  switch (request) {
+    case 1: // bettery level
+      disp->sendBatteryLevelMsg(socketDescriptor);
+      break;
+    case 2: // battery voltage 
+      disp->sendBatteryVoltageMsg(socketDescriptor);
+      break;
+    case 3: // battery current 
+      disp->sendBatteryCurrentMsg(socketDescriptor);
+      break;
+    case 4: // battery temperature
+      disp->sendBatteryTemperatureMsg(socketDescriptor);
+      break;
+    case 5: // supply check
+      disp->sendSupplyCheckMsg(socketDescriptor);
+      break;
+    case 6: // turn off
+      disp->sendTurnOffMsg(socketDescriptor);
+      break;
+    case 7: // supply 5
+      disp->sendSupply5Msg(socketDescriptor);
+      break;
+    case 8: // supply 12
+      disp->sendSupply12Msg(socketDescriptor);
+      break;
+    case 9: // supply 24 drive
+      disp->sendSupply24DriveMsg(socketDescriptor);
+      break;
+    case 10: // supply 24 occ
+      disp->sendSupply24OCCMsg(socketDescriptor);
+      break;
+    case 11: // control system supply
+      disp->sendControlSystemSupplyMsg(socketDescriptor);
+      break;
+    case 12: // control system supply 5
+      disp->sendControlSystemSupply5Msg(socketDescriptor);
+      break;
+    case 13: // control system supply 12
+      disp->sendControlSystemSupply12Msg(socketDescriptor);
+      break;
+    case 14: // control system supply 24
+      disp->sendControlSystemSupply24Msg(socketDescriptor);
+      break;
+    case 15: // control system supply 48
+      disp->sendControlSystemSupply48Msg(socketDescriptor);
+      break;
+    case 16: // drive system supply 
+      disp->sendDriveSystemSupplyMsg(socketDescriptor);
+      break;
+    case 17: // drive system supply 5
+      disp->sendDriveSystemSupply5Msg(socketDescriptor);
+      break;
+    case 18: // drive system supply 12
+      disp->sendDriveSystemSupply12Msg(socketDescriptor);
+      break;
+    case 19: // drive system supply 24
+      disp->sendDriveSystemSupply24Msg(socketDescriptor);
+      break;
+    case 20: // drive system supply 48
+      disp->sendDriveSystemSupply48Msg(socketDescriptor);
+      break;
+    case 21: // comm system supply 
+      disp->sendCommSystemSupplyMsg(socketDescriptor);
+      break;
+    case 22: // comm system supply 5
+      disp->sendCommSystemSupply5Msg(socketDescriptor);
+      break;
+    case 23: // comm system supply 12
+      disp->sendCommSystemSupply12Msg(socketDescriptor);
+      break;
+    case 24: // comm system supply 24
+      disp->sendCommSystemSupply24Msg(socketDescriptor);
+      break;
+    case 25: // comm system supply 48
+      disp->sendCommSystemSupply48Msg(socketDescriptor);
+      break;
+    case 26: // observation system supply 
+      disp->sendObservationSystemSupplyMsg(socketDescriptor);
+      break;
+    case 27: // observation system supply 5
+      disp->sendObservationSystemSupply5Msg(socketDescriptor);
+      break;
+    case 28: // observation system supply 12
+      disp->sendObservationSystemSupply12Msg(socketDescriptor);
+      break;
+    case 29: // observation system supply 24
+      disp->sendObservationSystemSupply24Msg(socketDescriptor);
+      break;
+    case 30: // observation system supply 48
+      disp->sendObservationSystemSupply48Msg(socketDescriptor);
+      break;
+    case 31: // supply alarms
+      disp->sendSupplyAlarmsMsg(socketDescriptor);
+      break;
+    case 32: // operation mode switch
+      disp->sendOperationModeSwitchMsg(socketDescriptor);
+      break;
+    default: // nothing to do
+      break;
 
-void setDeviceValue(ElectricInfo *electricInfo, short element, short value){
-    switch (element) {
-        case BATTERY_LEVEL:
-            (*electricInfo).battery_level = value;
-            break;
-        case BATTERY_VOLTAGE:
-            (*electricInfo).battery_voltage = value;
-            break;
-        case BATTERY_CURRENT:
-            (*electricInfo).battery_current = (bool) value;
-            break;
-        case BATTERY_TEMPERATURE:
-            (*electricInfo).battery_temperature = value;
-            break;
-        case SUPPLY_ALARMS:
-            (*electricInfo).supply_alarms = value;
-            break;
-        default:
-            break;
-    }
+
+  }
 }
