@@ -20,56 +20,18 @@
 
 #define MAXDATASIZE 100   
 
-typedef struct {
-    short steering;
-    short thottle;
-    short brake;
-    bool parkingBrake;
-    unsigned short gear;
-    unsigned short speed;
-    short motorRPM;
-    short motorTemperature;
-    bool lights;
-    bool blinkerLeft;
-    bool blinkerRight;
-    bool dipss;
-    bool dipsr;
-    bool dipsp;
-    bool klaxon;
-}DrivingInfo;
+#include "constant.h"
+#include "MessageDispatcher.h"
 
 /*******************************************************************************
     *               PROTOTIPOS DE FUNCIONES SECUNDARIAS
 *******************************************************************************/
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, DrivingInfo *vehicleInfo);
-
-bool isCriticalInstruction(short element);
-
-short getDeviceValue(short element, DrivingInfo vehicleInfo);
-
-void setDeviceValue(DrivingInfo *vehicleInfo, short element, short value);
-
+int printfMenu();
+void requestDispatcher(int socketDispatcher, int request);
 
 int main(int argc, char *argv[]) {
     
-    DrivingInfo vehicleInfo;
-    vehicleInfo.lights = false;
-    vehicleInfo.blinkerLeft = false;
-    vehicleInfo.blinkerRight = false;
-    vehicleInfo.dipsp = false;
-    vehicleInfo.dipsr = false;
-    vehicleInfo.dipss = false;
-    vehicleInfo.klaxon = false;
-    vehicleInfo.brake = 0;
-    vehicleInfo.thottle = 0;
-    vehicleInfo.steering = 0;
-    vehicleInfo.parkingBrake = false;
-    vehicleInfo.gear = 0;
-    vehicleInfo.speed = 0;
-    vehicleInfo.motorTemperature = 0;
-    vehicleInfo.motorRPM = 0;
-
     int fd, fd2, currentMsgCount = 1; /* los ficheros descriptores */
 
     struct sockaddr_in server;
@@ -120,226 +82,143 @@ int main(int argc, char *argv[]) {
 
     printf("Se obtuvo una conexión desde %s\n", inet_ntoa(client.sin_addr));
     /* que mostrará la IP del cliente */
+    
+    bool exit = false;
+    
+    int newSt = 0;
 
+  while (!exit) {
 
-    while (1) {
-        
-        // Buffer de envio
-        char bufData[8];
-        if ((recv(fd2, bufData, MAXDATASIZE, 0)) == -1) {
-            /* llamada a recv() */
-            printf("Error en recv() \n");
-            exit(-1);
-        } else {
-            // Estructura de recepcion
-            FrameDriving fdr;
-            // Rellenado del buffer
-            memcpy(&fdr.instruction, &bufData[0], sizeof (fdr.instruction));
-            memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
-            memcpy(&fdr.element, &bufData[4], sizeof (fdr.element));
-            memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-            if(fdr.instruction == SET){
-                printf("SET: %d = %d\n", fdr.element, fdr.value);
-                if(isCriticalInstruction(fdr.element)){
-                    printf("Cuanta sim: %d - Cuenta mensaje: %d\n",currentMsgCount,fdr.id_instruction);
-                }
-            }else if(fdr.instruction == GET){
-                printf("GET: %d\n", fdr.element);
-            }else{
-                printf("Comando desconocido\n");
-            }
-            
-            // Gestiona las peticiones
-            requestDispatcher(fdr, fd2, &currentMsgCount, &vehicleInfo);
-            
-        }
+    newSt = printfMenu();
+    if (newSt == 25) { // Salir
+      exit = true;
+    } else { // Opcion valida
+      requestDispatcher(fd2, newSt);
     }
+  }
 }
 
-void requestDispatcher(FrameDriving frame, int socketDescriptor, int *currentMsgCount, DrivingInfo *vehicleInfo){
-    if(frame.instruction == SET){
-        if(isCriticalInstruction(frame.element)){
-            // Despacha peticion y devuelve ACK (con ID_INSTRUCCION)
-            if(frame.id_instruction == *currentMsgCount){ // Orden OK --> ACK
-                FrameDriving ret;
-                ret.instruction = ACK;
-                ret.id_instruction = *currentMsgCount;
-                ret.element = frame.element;
-                ret.value = frame.value;
-                //Buffer de envio 
-                char buff[8];
-                memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-                memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-                memcpy(&buff[4], &ret.element, sizeof (ret.element));
-                memcpy(&buff[6], &ret.value, sizeof (ret.value));
-                send(socketDescriptor, buff, sizeof (buff), 0);
-                usleep(100); 
-                (*currentMsgCount)= (*currentMsgCount)+1;
-            }else{                                      // Orden ERROR --> NACK
-                FrameDriving ret;
-                ret.instruction = NACK;
-                ret.id_instruction = *currentMsgCount;
-                ret.element = frame.element;
-                ret.value = frame.value;
-                //Buffer de envio 
-                char buff[8];
-                memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-                memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-                memcpy(&buff[4], &ret.element, sizeof (ret.element));
-                memcpy(&buff[6], &ret.value, sizeof (ret.value));
-                send(socketDescriptor, buff, sizeof (buff), 0);
-                usleep(100); 
-            }
-        } else {
-            // Despacha peticion y devuelve ACK (sin ID_INSTRUCCION)
-            FrameDriving ret;
-            ret.instruction = ACK;
-            ret.id_instruction = 0;
-            ret.element = frame.element;
-            ret.value = frame.value;
-            //Buffer de envio 
-            char buff[8];
-            memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-            memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-            memcpy(&buff[4], &ret.element, sizeof (ret.element));
-            memcpy(&buff[6], &ret.value, sizeof (ret.value));
-            send(socketDescriptor, buff, sizeof (buff), 0);
-            usleep(100); 
-        }
-        setDeviceValue(vehicleInfo, frame.element, frame.value);
-    }else if(frame.instruction == GET) {
-        // Despacha peticion y devuelve INFO  (sin ID_INSTRUCCION)
-        FrameDriving ret;
-        ret.instruction = INFO;
-        ret.id_instruction = 0;
-        ret.element = frame.element;
-        ret.value = getDeviceValue(frame.element,*vehicleInfo);
-        //Buffer de envio 
-        char buff[8];
-        memcpy(&buff[0], &ret.instruction, sizeof (ret.instruction));
-        memcpy(&buff[2], &ret.id_instruction, sizeof (ret.id_instruction));
-        memcpy(&buff[4], &ret.element, sizeof (ret.element));
-        memcpy(&buff[6], &ret.value, sizeof (ret.value));
-        send(socketDescriptor, buff, sizeof (buff), 0);
-        usleep(100); 
-    }
-    *currentMsgCount++;
-}
+int printfMenu() {
 
-bool isCriticalInstruction(short element){
-    if(element == RESET
-            || element == GEAR
-            || element == MT_GEAR
-            || element == THROTTLE
-            || element == MT_THROTTLE
-            || element == CRUISING_SPEED
-            || element == HANDBRAKE
-            || element == MT_HANDBRAKE
-            || element == BRAKE
-            || element == MT_BRAKE
-            || element == STEERING
-            || element == MT_STEERING){
-        return true;
-    }else{
-        return false;
-    }
+  cout << "****************************************" << endl;
+  cout << "1 ) Enviar mensaje THROTTLE" << endl;
+  cout << "2 ) Enviar mensaje BRAKE" << endl;
+  cout << "3 ) Enviar mensaje HANDBRAKE" << endl;
+  cout << "4 ) Enviar mensaje STEERING" << endl;
+  cout << "5 ) Enviar mensaje GEAR" << endl;
+  cout << "6 ) Enviar mensaje STEERING ALARMS" << endl;
+  cout << "7 ) Enviar mensaje DRIVE ALARMS" << endl;
+  cout << "8 ) Enviar mensaje BLINKER LEFT" << endl;
+  cout << "9 ) Enviar mensaje BLINKER RIGHT" << endl;
+  cout << "10) Enviar mensaje EMERGENCY BLINKER" << endl;
+  cout << "11) Enviar mensaje DIPSS" << endl;
+  cout << "12) Enviar mensaje DIPSR" << endl;
+  cout << "13) Enviar mensaje DIPSP" << endl;
+  cout << "14) Enviar mensaje KLAXON" << endl;
+  cout << "15) Enviar mensaje MT THROTTLE" << endl;
+  cout << "16) Enviar mensaje MT BRAKE" << endl;
+  cout << "17) Enviar mensaje MT HANDBRAKE" << endl;
+  cout << "18) Enviar mensaje MT STEERING" << endl;
+  cout << "19) Enviar mensaje MT GEAR" << endl;
+  cout << "20) Enviar mensaje MT BLINKER" << endl;
+  cout << "21) Enviar mensaje MT LIGHTS" << endl;
+  cout << "22) Enviar mensaje MOTOR RPM" << endl;
+  cout << "23) Enviar mensaje MOTOR TEMPERATURE" << endl;
+  cout << "24) Enviar mensaje CRUISSING SPEED" << endl;
+  cout << "25) Salir" << endl;
+  cout << "****************************************" << endl;
+  cout << " Selecciona una opcion:" << endl;
+
+  int intAux;
+  cin >> intAux;
+
+  if (intAux < 1 || intAux > 25) {
+    cout << "Opcion no valida" << endl;
+    return 0;
+  } else {
+    return intAux;
+  }
 
 }
 
-short getDeviceValue(short element, DrivingInfo vehicleInfo) {
-    switch (element) {
-        case THROTTLE:
-            return vehicleInfo.thottle;
-            break;
-        case BRAKE:
-            return vehicleInfo.brake;
-            break;
-        case HANDBRAKE:
-            return vehicleInfo.parkingBrake;
-            break;
-        case STEERING:
-            return vehicleInfo.steering;
-            break;
-        case GEAR:
-            return vehicleInfo.gear;
-            break;
-        case MOTOR_RPM:
-            return vehicleInfo.motorRPM;
-            break;
-        case CRUISING_SPEED:
-            return vehicleInfo.speed;
-            break;
-        case MOTOR_TEMPERATURE:
-            return vehicleInfo.motorTemperature;
-            break;
-        case BLINKER_LEFT:
-            return vehicleInfo.blinkerLeft;
-            break;
-        case BLINKER_RIGHT:
-            return vehicleInfo.blinkerRight;
-            break;
-        case KLAXON:
-            return vehicleInfo.klaxon;
-            break;
-        case DIPSP:
-            return vehicleInfo.dipsp;
-            break;
-        case DIPSS:
-            return vehicleInfo.dipss;
-            break;
-        case DIPSR:
-            return vehicleInfo.dipsr;
-            break;
-        default:
-            break;
-    }
-}
+void requestDispatcher(int socketDescriptor, int request) {
+  MessageDispatcher *disp = new MessageDispatcher();
+  switch (request) {
+    case 1: // throttle
+      disp->sendThrottleInfo(socketDescriptor);
+      break;
+    case 2: // brake
+      disp->sendBrakeInfo(socketDescriptor);
+      break;
+    case 3: // handbrake
+      disp->sendHandbrakeInfo(socketDescriptor);
+      break;
+    case 4: // steering
+      disp->sendSteeringInfo(socketDescriptor);
+      break;
+    case 5: // gear
+      disp->sendGearInfo(socketDescriptor);
+      break;
+    case 6: // steering alarms
+      disp->sendSteeringAlarmsInfo(socketDescriptor);
+      break;
+    case 7: // drive alarms
+      disp->sendDriveAlarmsInfo(socketDescriptor);
+      break;
+    case 8: // blinker left
+      disp->sendBlinkerLeftInfo(socketDescriptor);
+      break;
+    case 9: // blinker right
+      disp->sendBlinkerRightInfo(socketDescriptor);
+      break;
+    case 10: // emergency blinkers
+      disp->sendEmergencyBlinkerInfo(socketDescriptor);
+      break;
+    case 11: // dipss
+      disp->sendDipssInfo(socketDescriptor);
+      break;
+    case 12: // dipsr
+      disp->sendDipsrInfo(socketDescriptor);
+      break;
+    case 13: // dipsp
+      disp->sendDipspInfo(socketDescriptor);
+      break;
+    case 14: // klaxon
+      disp->sendKlaxonInfo(socketDescriptor);
+      break;
+    case 15: // mt_throttle
+      disp->sendMTThrottleInfo(socketDescriptor);
+      break;
+    case 16: // mt_brake
+      disp->sendMTBrakeInfo(socketDescriptor);
+      break;
+    case 17: // mt_handbrake
+      disp->sendMTHandbrakeInfo(socketDescriptor);
+      break;
+    case 18: // mr_steering
+      disp->sendMTSteeringInfo(socketDescriptor);
+      break;
+    case 19: // mt_gear
+      disp->sendMTGearInfo(socketDescriptor);
+      break;
+    case 20: // mt_blinker
+      disp->sendMTBlinkersInfo(socketDescriptor);
+      break;
+    case 21: // mt_lights
+      disp->sendMTLightsInfo(socketDescriptor);
+      break;
+    case 22: // motor rpm
+      disp->sendMotorRPMInfo(socketDescriptor);
+      break;
+    case 23: // motor temperature
+      disp->sendMotorTemperatureInfo(socketDescriptor);
+      break;
+    case 24: // cruissing speed
+      disp->sendCruissingSpeedInfo(socketDescriptor);
+      break;
+    default: // nothing to do
+      break;
 
-void setDeviceValue(DrivingInfo *vehicleInfo, short element, short value){
-    switch (element) {
-        case THROTTLE:
-            (*vehicleInfo).thottle = value;
-            break;
-        case BRAKE:
-            (*vehicleInfo).brake = value;
-            break;
-        case HANDBRAKE:
-            (*vehicleInfo).parkingBrake = (bool) value;
-            break;
-        case STEERING:
-            (*vehicleInfo).steering = value;
-            break;
-        case GEAR:
-            (*vehicleInfo).gear = value;
-            break;
-        case MOTOR_RPM:
-            (*vehicleInfo).motorRPM = value;
-            break;
-        case CRUISING_SPEED:
-            (*vehicleInfo).speed = value;
-            break;
-        case MOTOR_TEMPERATURE:
-            (*vehicleInfo).motorTemperature = value;
-            break;
-        case BLINKER_LEFT:
-            (*vehicleInfo).blinkerLeft = (bool) value;
-            break;
-        case BLINKER_RIGHT:
-            (*vehicleInfo).blinkerRight = (bool) value;
-            break;
-        case KLAXON:
-            (*vehicleInfo).klaxon = (bool) value;
-            break;
-        case DIPSP:
-            (*vehicleInfo).dipsp = (bool) value;
-            break;
-        case DIPSS:
-            (*vehicleInfo).dipss = (bool) value;
-            break;
-        case DIPSR:
-            (*vehicleInfo).dipsr = (bool) value;
-            break;
-        default:
-            break;
-    }
+
+  }
 }
