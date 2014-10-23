@@ -12,7 +12,7 @@
  * Constructor de la clase. Inicializa los flags de estados de nodos secundarios
  */
 Manager::Manager() {
-
+  communication = false;
   positionOrientationOK = false;
   frontCameraOK = false;
   rearCameraOK = false;
@@ -39,6 +39,7 @@ void Manager::initROS() {
 
   ros::NodeHandle nh;
 
+  cmNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("cmNodeStatus");
   poNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("poNodeStatus");
   fcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("fcNodeStatus");
   rcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("rcNodeStatus");
@@ -85,6 +86,26 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       // Encendido del sistema. Se mandan a arrancar el resto de los modulos
 
       service.request.status = NODESTATUS_OK;
+      
+      // Activacion Communication
+      while (!cmNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
+        ROS_INFO("[Control] Manager - Reintentando conexion con nodo Communication...");
+        numOfAttemps++;
+      }
+
+      if (numOfAttemps < MAX_ATTEMPS) {
+        if (!service.response.confirmation) {
+          // Position/Orientation no ha sido activado
+          ROS_INFO("[Control] Manager - Nodo Communication no pudo arrancar");
+        } else {
+          ROS_INFO("[Control] Manager - Nodo Communication arrancado correctamente");
+          communication = true;
+        }
+      } else {
+        ROS_INFO("[Control] Manager - Nodo Communication no pudo arrancar. Cumplido numero maximo de reintentos");
+      }
+
+      numOfAttemps = 0;
 
       // Activacion Position/Orientation
       while (!poNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
@@ -313,6 +334,17 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       // Apagado ordenado del sistema. Se mandan a arrancar el resto de los modulos
       // Position/Orientation - FCamera - RCamera - Driving
       service.request.status = NODESTATUS_OFF;
+
+      // Apagado Communication
+      if (communication) {
+        while (!cmNodeStatus.call(service));
+        if (!service.response.confirmation) {
+          // Position/Orientation no ha sido apagado
+          ROS_INFO("[Control] Manager - Nodo Communication no se pudo apagar");
+        } else {
+          ROS_INFO("[Control] Manager - Nodo Communication apagado correctamente");
+        }
+      }
 
       // Apagado Position/Orientation
       if (positionOrientationOK) {
