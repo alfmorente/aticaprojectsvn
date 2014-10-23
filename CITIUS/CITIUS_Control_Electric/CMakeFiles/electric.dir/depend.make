@@ -60,6 +60,7 @@ CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: include/constant.h
 
 CMakeFiles/electric.dir/src/RosNode.cpp.o: src/RosNode.cpp
 CMakeFiles/electric.dir/src/RosNode.cpp.o: include/RosNode.h
+CMakeFiles/electric.dir/src/RosNode.cpp.o: include/constant.h
 
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: src/RosNode_Electric.cpp
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h

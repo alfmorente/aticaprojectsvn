@@ -243,7 +243,7 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
         turnOff = true;
 
       } else if (fdr.element == OPERATION_MODE_SWITCH) {
-        ROS_INFO("[Control] Electric - Preparando el apagado del sistema");
+        ROS_INFO("[Control] Electric - Cambio en posicion del conmutador local/teleoperado");
         swPosition.flag = true;
         swPosition.position = fdr.value;
 
