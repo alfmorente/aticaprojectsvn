@@ -34,6 +34,7 @@ public:
   void initROS();
 private:
   // Estado de los demas nodos
+  bool communication;
   bool positionOrientationOK;
   bool frontCameraOK;
   bool rearCameraOK;
@@ -45,6 +46,8 @@ private:
   // Posicion del conmutador Local/teleoperado
   short currentSwitcher;
   // Artefactos ROS
+  // Estado del nodo Communication
+  ros::ServiceClient cmNodeStatus;
   // Estado del nodo Position/Orientation
   ros::ServiceClient poNodeStatus;
   // Estado del nodo FrontCamera
