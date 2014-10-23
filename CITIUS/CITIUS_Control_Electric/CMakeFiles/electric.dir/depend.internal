@@ -61,6 +61,7 @@ CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o
 CMakeFiles/electric.dir/src/RosNode.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode.cpp
  include/RosNode.h
+ include/constant.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h

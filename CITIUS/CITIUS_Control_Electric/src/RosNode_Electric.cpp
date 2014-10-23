@@ -188,10 +188,8 @@ void RosNode_Electric::checkTurnOff(){
 void RosNode_Electric::checkSwitcher() {
     if (dElectric->getSwitcherStruct().flag) {
         // Envio de mensaje msg_switcher
-        printf("1\n");
         publishSwitcherInfo(dElectric->getSwitcherStruct().position);
         // Activacion / Desactivacion de actuadores
-        printf("2\n");
         if (dElectric->getSwitcherStruct().position == 1) {
             publishSetupCommands(true);
         } else {
