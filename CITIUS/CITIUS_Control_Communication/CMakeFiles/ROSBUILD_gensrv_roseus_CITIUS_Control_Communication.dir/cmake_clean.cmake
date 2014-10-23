@@ -18,6 +18,8 @@ FILE(REMOVE_RECURSE
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_focusDirect.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_nodeStatus.l"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_tiltRate.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/srv/srv_autofocusMode.l"

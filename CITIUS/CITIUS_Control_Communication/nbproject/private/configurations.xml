@@ -37,6 +37,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_CITIUS_Control_Communication.dir">
@@ -108,6 +110,7 @@
         <df name="CITIUS_Control_Communication">
         </df>
         <in>JausHandler.h</in>
+        <in>RosNode.h</in>
         <in>RosNode_Communications.h</in>
         <in>TranslatorROSJAUS.h</in>
         <in>constant.h</in>
@@ -819,6 +822,7 @@
           </df>
         </df>
         <in>JausHandler.cpp</in>
+        <in>RosNode.cpp</in>
         <in>RosNode_Communications.cpp</in>
         <in>TranslatorROSJAUS.cpp</in>
         <in>main.cpp</in>
@@ -832,6 +836,7 @@
               <in>srv_autofocusMode.h</in>
               <in>srv_dzoom.h</in>
               <in>srv_focusDirect.h</in>
+              <in>srv_nodeStatus.h</in>
               <in>srv_panAbsolutePosition.h</in>
               <in>srv_panRate.h</in>
               <in>srv_polarity.h</in>

@@ -25,6 +25,12 @@ int main(int argc, char** argv) {
   nodeComm->initROS();
   nodeComm->initJAUS();
 
+  // Espera a permiso para comenzar a operar ROSNODE_OK
+  ROS_INFO("[Control] Communications - Esperando activacion de nodo");
+  while (nodeComm->getNodeStatus() == NODESTATUS_INIT) {
+    ros::spinOnce();
+  }
+  
   ROS_INFO("[Control] Communications - Nodo listo para operar");
 
   // Temporizador de envio de estado
@@ -32,10 +38,9 @@ int main(int argc, char** argv) {
   initTime = clock();
 
   // Control del modo de operacion del vehiculo
-  int currentStatus = OPERATION_MODE_INICIANDO;
   ros::NodeHandle nh;
 
-  while (ros::ok() && currentStatus != OPERATION_MODE_APAGANDO) {
+  while (ros::ok() && nodeComm->getNodeStatus() != NODESTATUS_OFF) {
 
     // Recepcion de mensajeria ROS
     ros::spinOnce();
@@ -50,8 +55,6 @@ int main(int argc, char** argv) {
       nodeComm->informStatus();
 
     }
-
-    nh.getParam("vehicleStatus", currentStatus);
 
   }
   nodeComm->finishJAUS();

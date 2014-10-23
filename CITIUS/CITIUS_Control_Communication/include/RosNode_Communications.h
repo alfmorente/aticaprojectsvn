@@ -25,6 +25,7 @@
 #include "CITIUS_Control_Communication/msg_frontCameraInfo.h"
 #include "CITIUS_Control_Communication/msg_rearCameraInfo.h"
 #include "CITIUS_Control_Communication/srv_vehicleStatus.h"
+#include "CITIUS_Control_Communication/srv_nodeStatus.h"
 
 // Mensajes y servicios subsistema de payload de observacion
 #include "CITIUS_Control_Communication/msg_tvinfo.h"
@@ -45,6 +46,7 @@
 
 #include "constant.h"
 #include "TranslatorROSJAUS.h"
+#include "RosNode.h"
 
 // Librerias de JAUS
 #include "jaus.h"
@@ -57,7 +59,7 @@ using namespace std;
  * \class RosNode_Communications
  * \brief Clase que representa al nodo ROS de gestión de comunicaciones
 */
-class RosNode_Communications {
+class RosNode_Communications: public RosNode {
 public:
   // Constructor Singleton
   static RosNode_Communications *getInstance();
@@ -107,6 +109,8 @@ private:
   ros::ServiceClient clientPosTiltAbs;
   ros::ServiceClient clientPosTiltRate;
   ros::ServiceClient clientShootTel;
+  // Servidor de estado de nodo
+  ros::ServiceServer servNodeStatus;
   // Componentes JAUS
   OjCmpt missionSpoolerComponent;
   OjCmpt primitiveDriverComponent;
@@ -147,6 +151,8 @@ private:
   void fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg);
   void fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg);
   void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
+  // Maquina de estados local
+  bool fcv_serv_nodeStatus(CITIUS_Control_Communication::srv_nodeStatus::Request &rq, CITIUS_Control_Communication::srv_nodeStatus::Response &rsp);
 };
 
 #endif	/* COMMUNICATION_H */
