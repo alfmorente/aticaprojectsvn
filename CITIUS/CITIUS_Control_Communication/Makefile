@@ -540,6 +540,30 @@ src/JausHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/JausHandler.cpp.s
 .PHONY : src/JausHandler.cpp.s
 
+src/RosNode.o: src/RosNode.cpp.o
+.PHONY : src/RosNode.o
+
+# target to build an object file
+src/RosNode.cpp.o:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode.cpp.o
+.PHONY : src/RosNode.cpp.o
+
+src/RosNode.i: src/RosNode.cpp.i
+.PHONY : src/RosNode.i
+
+# target to preprocess a source file
+src/RosNode.cpp.i:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode.cpp.i
+.PHONY : src/RosNode.cpp.i
+
+src/RosNode.s: src/RosNode.cpp.s
+.PHONY : src/RosNode.s
+
+# target to generate assembly for a file
+src/RosNode.cpp.s:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode.cpp.s
+.PHONY : src/RosNode.cpp.s
+
 src/RosNode_Communications.o: src/RosNode_Communications.cpp.o
 .PHONY : src/RosNode_Communications.o
 
@@ -656,6 +680,9 @@ help:
 	@echo "... src/JausHandler.o"
 	@echo "... src/JausHandler.i"
 	@echo "... src/JausHandler.s"
+	@echo "... src/RosNode.o"
+	@echo "... src/RosNode.i"
+	@echo "... src/RosNode.s"
 	@echo "... src/RosNode_Communications.o"
 	@echo "... src/RosNode_Communications.i"
 	@echo "... src/RosNode_Communications.s"
