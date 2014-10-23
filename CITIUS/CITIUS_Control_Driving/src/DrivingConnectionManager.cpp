@@ -83,7 +83,7 @@ bool DrivingConnectionManager::connectVehicle() {
       exit(-1);
 
     }
-    ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con éxito y conectado");
+    ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con exito y conectado");
     // Test if the socket is in non-blocking mode:
     // Put the socket in non-blocking mode:
     if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
