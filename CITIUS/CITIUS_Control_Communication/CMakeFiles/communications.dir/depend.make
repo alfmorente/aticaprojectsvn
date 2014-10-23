@@ -238,6 +238,10 @@ CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libopenJaus/include/uti
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libopenJaus/include/utils/queue.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libopenJaus/include/utils/timeLib.h
 
+CMakeFiles/communications.dir/src/RosNode.cpp.o: src/RosNode.cpp
+CMakeFiles/communications.dir/src/RosNode.cpp.o: include/RosNode.h
+CMakeFiles/communications.dir/src/RosNode.cpp.o: include/constant.h
+
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: src/RosNode_Communications.cpp
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/include/XmlRpcValue.h

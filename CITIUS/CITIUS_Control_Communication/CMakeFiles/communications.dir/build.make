@@ -193,12 +193,49 @@ CMakeFiles/communications.dir/src/JausHandler.cpp.o.provides: CMakeFiles/communi
 
 CMakeFiles/communications.dir/src/JausHandler.cpp.o.provides.build: CMakeFiles/communications.dir/src/JausHandler.cpp.o
 
+CMakeFiles/communications.dir/src/RosNode.cpp.o: CMakeFiles/communications.dir/flags.make
+CMakeFiles/communications.dir/src/RosNode.cpp.o: src/RosNode.cpp
+CMakeFiles/communications.dir/src/RosNode.cpp.o: manifest.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/RosNode.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/RosNode.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp
+
+CMakeFiles/communications.dir/src/RosNode.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/RosNode.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp > CMakeFiles/communications.dir/src/RosNode.cpp.i
+
+CMakeFiles/communications.dir/src/RosNode.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/RosNode.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp -o CMakeFiles/communications.dir/src/RosNode.cpp.s
+
+CMakeFiles/communications.dir/src/RosNode.cpp.o.requires:
+.PHONY : CMakeFiles/communications.dir/src/RosNode.cpp.o.requires
+
+CMakeFiles/communications.dir/src/RosNode.cpp.o.provides: CMakeFiles/communications.dir/src/RosNode.cpp.o.requires
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode.cpp.o.provides.build
+.PHONY : CMakeFiles/communications.dir/src/RosNode.cpp.o.provides
+
+CMakeFiles/communications.dir/src/RosNode.cpp.o.provides.build: CMakeFiles/communications.dir/src/RosNode.cpp.o
+
 # Object files for target communications
 communications_OBJECTS = \
 "CMakeFiles/communications.dir/src/main.cpp.o" \
 "CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o" \
 "CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o" \
-"CMakeFiles/communications.dir/src/JausHandler.cpp.o"
+"CMakeFiles/communications.dir/src/JausHandler.cpp.o" \
+"CMakeFiles/communications.dir/src/RosNode.cpp.o"
 
 # External object files for target communications
 communications_EXTERNAL_OBJECTS =
@@ -207,6 +244,7 @@ bin/communications: CMakeFiles/communications.dir/src/main.cpp.o
 bin/communications: CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o
 bin/communications: CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o
 bin/communications: CMakeFiles/communications.dir/src/JausHandler.cpp.o
+bin/communications: CMakeFiles/communications.dir/src/RosNode.cpp.o
 bin/communications: CMakeFiles/communications.dir/build.make
 bin/communications: CMakeFiles/communications.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/communications"
@@ -220,6 +258,7 @@ CMakeFiles/communications.dir/requires: CMakeFiles/communications.dir/src/main.c
 CMakeFiles/communications.dir/requires: CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o.requires
 CMakeFiles/communications.dir/requires: CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o.requires
 CMakeFiles/communications.dir/requires: CMakeFiles/communications.dir/src/JausHandler.cpp.o.requires
+CMakeFiles/communications.dir/requires: CMakeFiles/communications.dir/src/RosNode.cpp.o.requires
 .PHONY : CMakeFiles/communications.dir/requires
 
 CMakeFiles/communications.dir/clean:

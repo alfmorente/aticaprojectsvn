@@ -238,6 +238,10 @@ CMakeFiles/communications.dir/src/JausHandler.cpp.o
  lib/libopenJaus/include/utils/inetAddress.h
  lib/libopenJaus/include/utils/queue.h
  lib/libopenJaus/include/utils/timeLib.h
+CMakeFiles/communications.dir/src/RosNode.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp
+ include/RosNode.h
+ include/constant.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
