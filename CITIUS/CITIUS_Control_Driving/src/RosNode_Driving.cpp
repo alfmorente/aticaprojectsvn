@@ -45,7 +45,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
   ros::NodeHandle nh;
   int currentVehicleStatus = OPERATION_MODE_INICIANDO;
   nh.getParam("vehicleStatus", currentVehicleStatus);
-  if (currentVehicleStatus == OPERATION_MODE_CONDUCCION) {
+  if (currentVehicleStatus == OPERATION_MODE_CONDUCCION || dVehicle->isMTCommand(static_cast<DeviceID>(msg.id_device))) {
     if (nodeStatus == NODESTATUS_OK) {
       ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
       if (checkCommand(msg)) {

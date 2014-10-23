@@ -394,6 +394,27 @@ bool DrivingConnectionManager::isCriticalInstruction(DeviceID element) {
 }
 
 /**
+ * Método público que comprueba si un elemento es de tipo MT para activación /
+ * desactivación de actuadores
+ * @param[in] element Elemento de consulta
+ * @return Booleano que indica si el elemento es de tipo MT o no
+ */
+bool DrivingConnectionManager::isMTCommand(DeviceID element) {
+  if (element == RESET
+          || element == MT_GEAR
+          || element == MT_THROTTLE
+          || element == MT_HANDBRAKE
+          || element == MT_BRAKE
+          || element == MT_STEERING
+          || element == MT_BLINKERS
+          || element == MT_LIGHTS) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+/**
  * Método público que, una vez que un mensaje es considerado crítico, se utiliza 
  * para encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en 
  * caso de obtener un NACK

@@ -71,6 +71,7 @@ public:
   void setCountCriticalMessages(short cont);
   // Metodos auxiliares
   bool isCriticalInstruction(DeviceID element);
+  bool isMTCommand(DeviceID element);
   // Tratamiento de la cola de mensajes criticos
   void addToQueue(FrameDriving frame);
 };
