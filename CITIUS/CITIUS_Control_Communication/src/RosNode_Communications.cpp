@@ -32,6 +32,7 @@ RosNode_Communications::RosNode_Communications() {
   //subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
     subsystemController = JAUS_SUBSYSTEM_UGV;
     nodeController = JAUS_NODE_CONTROL; // Control
+    nodeStatus = NODESTATUS_INIT;
 }
 
 /**
@@ -48,37 +49,39 @@ RosNode_Communications::~RosNode_Communications(){
 void RosNode_Communications::initROS() {
   ros::NodeHandle nh;
   // Inicializacion de publicadores
-  this->pubCommand = nh.advertise<CITIUS_Control_Communication::msg_command>("command", 1000);
-  this->pubCtrlFrontCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlFrontCamera>("ctrlFrontCamera", 1000);
-  this->pubCtrlRearCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlRearCamera>("ctrlRearCamera", 1000);
+  pubCommand = nh.advertise<CITIUS_Control_Communication::msg_command>("command", 1000);
+  pubCtrlFrontCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlFrontCamera>("ctrlFrontCamera", 1000);
+  pubCtrlRearCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlRearCamera>("ctrlRearCamera", 1000);
   // Inicializacion de suscriptores
   //          Subsistema de control
-  this->subsElectricInfo = nh.subscribe("electricInfo", 1000, &RosNode_Communications::fnc_subs_electricInfo, this);
-  this->subsVehicleInfo = nh.subscribe("vehicleInfo", 1000, &RosNode_Communications::fnc_subs_vehicleInfo, this);
-  this->subsFrontCameraInfo = nh.subscribe("frontCameraInfo", 1000, &RosNode_Communications::fnc_subs_frontCameraInfo, this);
-  this->subsRearCameraInfo = nh.subscribe("rearCameraInfo", 1000, &RosNode_Communications::fnc_subs_rearCameraInfo, this);
-  this->subsPosOriInfo = nh.subscribe("posOriInfo", 1000, &RosNode_Communications::fnc_subs_posOriInfo, this);
+  subsElectricInfo = nh.subscribe("electricInfo", 1000, &RosNode_Communications::fnc_subs_electricInfo, this);
+  subsVehicleInfo = nh.subscribe("vehicleInfo", 1000, &RosNode_Communications::fnc_subs_vehicleInfo, this);
+  subsFrontCameraInfo = nh.subscribe("frontCameraInfo", 1000, &RosNode_Communications::fnc_subs_frontCameraInfo, this);
+  subsRearCameraInfo = nh.subscribe("rearCameraInfo", 1000, &RosNode_Communications::fnc_subs_rearCameraInfo, this);
+  subsPosOriInfo = nh.subscribe("posOriInfo", 1000, &RosNode_Communications::fnc_subs_posOriInfo, this);
   //          Subsistema de payload de observacion
-  this->subsIRCameraInfo = nh.subscribe("IRInformation", 1000, &RosNode_Communications::fcn_subs_irCameraInfo, this);
-  this->subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_positionerInfo, this);
-  this->subsTVCameraInfo = nh.subscribe("TVInformation", 1000, &RosNode_Communications::fcn_subs_tvCameraInfo, this);
-  this->subsPositionerInfo = nh.subscribe("PanTiltPosition", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
+  subsIRCameraInfo = nh.subscribe("IRInformation", 1000, &RosNode_Communications::fcn_subs_irCameraInfo, this);
+  subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_positionerInfo, this);
+  subsTVCameraInfo = nh.subscribe("TVInformation", 1000, &RosNode_Communications::fcn_subs_tvCameraInfo, this);
+  subsPositionerInfo = nh.subscribe("PanTiltPosition", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
 
   // Inicializacion de servicios
   //          Subsistema de control
-  this->clientStatus = nh.serviceClient<CITIUS_Control_Communication::srv_vehicleStatus>("vehicleStatus");
+  clientStatus = nh.serviceClient<CITIUS_Control_Communication::srv_vehicleStatus>("vehicleStatus");
   //          Subsistema de payload de observacion
-  this->clientIRCameraPolarity = nh.serviceClient<CITIUS_Control_Communication::srv_polarity>("IRPolarity");
-  this->clientIRCameraZoom = nh.serviceClient<CITIUS_Control_Communication::srv_dzoom>("IRDZoom");
-  this->clientTVCameraDirectZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomDirect>("TVZoomDirect");
-  this->clientTVCameraContZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomCommand>("TVZoomCommand");
-  this->clientTVCameraFocus = nh.serviceClient<CITIUS_Control_Communication::srv_focusDirect>("TVFocusDirect");
-  this->clientTVCameraAutofocus = nh.serviceClient<CITIUS_Control_Communication::srv_autofocusMode>("TVAutofocusMode");
-  this->clientPosPanAbs = nh.serviceClient<CITIUS_Control_Communication::srv_panAbsolutePosition>("setPanPosition");
-  this->clientPosPanRate = nh.serviceClient<CITIUS_Control_Communication::srv_panRate>("setPanRate");
-  this->clientPosTiltAbs = nh.serviceClient<CITIUS_Control_Communication::srv_tiltAbsolutePosition>("setTiltPosition");
-  this->clientPosTiltRate = nh.serviceClient<CITIUS_Control_Communication::srv_tiltRate>("setTiltRate");
-  this->clientShootTel = nh.serviceClient<CITIUS_Control_Communication::srv_shoot>("LRFShoot");
+  clientIRCameraPolarity = nh.serviceClient<CITIUS_Control_Communication::srv_polarity>("IRPolarity");
+  clientIRCameraZoom = nh.serviceClient<CITIUS_Control_Communication::srv_dzoom>("IRDZoom");
+  clientTVCameraDirectZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomDirect>("TVZoomDirect");
+  clientTVCameraContZoom = nh.serviceClient<CITIUS_Control_Communication::srv_zoomCommand>("TVZoomCommand");
+  clientTVCameraFocus = nh.serviceClient<CITIUS_Control_Communication::srv_focusDirect>("TVFocusDirect");
+  clientTVCameraAutofocus = nh.serviceClient<CITIUS_Control_Communication::srv_autofocusMode>("TVAutofocusMode");
+  clientPosPanAbs = nh.serviceClient<CITIUS_Control_Communication::srv_panAbsolutePosition>("setPanPosition");
+  clientPosPanRate = nh.serviceClient<CITIUS_Control_Communication::srv_panRate>("setPanRate");
+  clientPosTiltAbs = nh.serviceClient<CITIUS_Control_Communication::srv_tiltAbsolutePosition>("setTiltPosition");
+  clientPosTiltRate = nh.serviceClient<CITIUS_Control_Communication::srv_tiltRate>("setTiltRate");
+  clientShootTel = nh.serviceClient<CITIUS_Control_Communication::srv_shoot>("LRFShoot");
+  // Maquina de estados del nodo
+  servNodeStatus = nh.advertiseService("cmNodeStatus", &RosNode_Communications::fcv_serv_nodeStatus, this);
 }
 
 /** 
@@ -329,6 +332,28 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
   }
   // Destruccion del mensaje
   jausMessageDestroy(jMsg);
+}
+
+
+/**
+ * Método privado encargado del tratamiento de servicios para la modificación de
+ * la máquina de estados del nodo
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
+ * @return Booleano que indica si se ha realizado el correcto tratamiento de
+ * la petición  de servicio
+ */
+bool RosNode_Communications::fcv_serv_nodeStatus(CITIUS_Control_Communication::srv_nodeStatus::Request &rq, CITIUS_Control_Communication::srv_nodeStatus::Response &rsp) {
+  if (rq.status == NODESTATUS_OK) {
+    nodeStatus = NODESTATUS_OK;
+    rsp.confirmation = true;
+  } else if (rq.status == NODESTATUS_OFF) {
+    nodeStatus = NODESTATUS_OFF;
+    rsp.confirmation = true;
+  } else {
+    rsp.confirmation = false;
+  }
+  return true;
 }
 
 /** 

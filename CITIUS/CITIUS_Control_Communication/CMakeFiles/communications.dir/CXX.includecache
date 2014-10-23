@@ -636,6 +636,10 @@ unistd.h
 termios.h
 -
 
+include/RosNode.h
+constant.h
+include/constant.h
+
 include/RosNode_Communications.h
 ros/ros.h
 include/ros/ros.h
@@ -659,6 +663,8 @@ CITIUS_Control_Communication/msg_rearCameraInfo.h
 include/CITIUS_Control_Communication/msg_rearCameraInfo.h
 CITIUS_Control_Communication/srv_vehicleStatus.h
 include/CITIUS_Control_Communication/srv_vehicleStatus.h
+CITIUS_Control_Communication/srv_nodeStatus.h
+include/CITIUS_Control_Communication/srv_nodeStatus.h
 CITIUS_Control_Communication/msg_tvinfo.h
 include/CITIUS_Control_Communication/msg_tvinfo.h
 CITIUS_Control_Communication/msg_echoesFound.h
@@ -693,6 +699,8 @@ constant.h
 include/constant.h
 TranslatorROSJAUS.h
 include/TranslatorROSJAUS.h
+RosNode.h
+include/RosNode.h
 jaus.h
 include/jaus.h
 openJaus.h
@@ -2539,6 +2547,30 @@ ros/service_traits.h
 srv_gen/cpp/include/CITIUS_Control_Communication/ros/service_traits.h
 
 srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/serialization.h
+ros/builtin_message_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/builtin_message_traits.h
+ros/message_operations.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/message_operations.h
+ros/time.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/time.h
+ros/macros.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/macros.h
+ros/assert.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
+ros/service_traits.h
+srv_gen/cpp/include/CITIUS_Control_Communication/ros/service_traits.h
+
+srv_gen/cpp/include/CITIUS_Control_Communication/srv_nodeStatus.h
 string
 -
 vector
