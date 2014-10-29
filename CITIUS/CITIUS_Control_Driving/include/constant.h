@@ -105,6 +105,13 @@ typedef enum{
 }DeviceID;
 
 /*******************************************************************************
+ * FICHERO DE CONFIGURACION
+ ******************************************************************************/
+
+#define CONFIG_FILE_IP_NAME "IP" ///<Identificador de búsqueda en fichero de IP
+#define CONFIG_FILE_PORT_NAME "PORT" ///<Identificador de búsqueda en fichero de PORT
+
+/*******************************************************************************
  *                              ESTADOS DEL NODO
  *******************************************************************************/
 
@@ -134,13 +141,6 @@ typedef enum{
   OPERATION_MODE_OBSERVACION = 3 , ///<Identificador del modo de operación OPERATION_MODE_OBSERVACION de la máquina de estados del vehículo
   OPERATION_MODE_APAGANDO = 4 ///<Identificador del modo de operación OPERATION_MODE_APAGANDO de la máquina de estados del vehículo        
 }OperationMode;
-
-/*******************************************************************************
- *                   SOCKET PAYLOAD DE CONDUCCION
- *******************************************************************************/
-
-#define IP_PAYLOAD_CONDUCCION_DRIVING "192.168.24.200" ///<Dirección IP para creación del socket de comunicación
-#define PORT_PAYLOAD_CONDUCCION_DRIVING 10000 ///<Puerto para creación del socket de comunicación
 
 /*******************************************************************************
  * FRECUENCIA -> PERIODO
