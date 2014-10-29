@@ -25,12 +25,62 @@ AxisP3364LveDriver::~AxisP3364LveDriver() {
 }
 
 /**
+ * Método privado que busca en el fichero de configuración el valor del campo
+ * de configuración que recibe como parámetro
+ * @param parameter Identificador del campo a buscar en el fichero
+ * @return String con el resultado de la búsqueda
+ */
+string AxisP3364LveDriver::getValueFromConfig(string parameter) {
+
+    int pos;
+    string cadena, parametro, value = "";
+    bool found = false;
+    ifstream fichero;
+    fichero.open("socket.conf");
+
+    if (!fichero.is_open()) {
+        return "";
+    }
+
+    while (!fichero.eof() && !found) {
+        getline(fichero, cadena);
+        if (cadena[0] != '#' && cadena[0] != NULL) {
+            pos = cadena.find(":");
+            if (pos != -1) {
+                parametro = cadena.substr(0, pos);
+                if (parametro == parameter) {
+                    value = cadena.substr(pos + 1);
+                    while (isspace(value[0])) {
+                        value = value.substr(1);
+                    }
+                    found = true;
+                }
+            }
+        }
+    }
+    fichero.close();
+
+    return value;
+
+}
+
+/**
  * Método público que comprueba la disponibilidad de la cámara IP en la red 
  * @return Booleano que indica si la cámara está operativa para ser utilizada
  */
 bool AxisP3364LveDriver::checkConnection() {
+    
+    string ipFile = getValueFromConfig(CONFIG_FILE_IP_NAME);
+    if (ipFile == "") return false;
+    
+    ip_address = ipFile.c_str();
 
-  if ((he = gethostbyname(IP_CAMERA)) == NULL) {
+    string portFile = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+    if (portFile == "") return false;
+    
+    port = atoi(portFile.c_str());
+
+  if ((he = gethostbyname(ip_address)) == NULL) {
     return false;
   }
 
@@ -40,7 +90,7 @@ bool AxisP3364LveDriver::checkConnection() {
     return false;
   }
   server.sin_family = AF_INET;
-  server.sin_port = htons(PORT_CAMERA);
+  server.sin_port = htons(port);
   server.sin_addr = *((struct in_addr *) he->h_addr);
 
   bzero(&(server.sin_zero), 8);
@@ -66,7 +116,7 @@ bool AxisP3364LveDriver::checkConnection() {
  */
 bool AxisP3364LveDriver::sendSetToDevice(short order, float value) {
 
-  if ((he = gethostbyname(IP_CAMERA)) == NULL) {
+  if ((he = gethostbyname(ip_address)) == NULL) {
     return false;
   }
 
@@ -77,7 +127,7 @@ bool AxisP3364LveDriver::sendSetToDevice(short order, float value) {
   }
 
   server.sin_family = AF_INET;
-  server.sin_port = htons(PORT_CAMERA);
+  server.sin_port = htons(port);
   server.sin_addr = *((struct in_addr *) he->h_addr);
 
   bzero(&(server.sin_zero), 8);
@@ -89,7 +139,7 @@ bool AxisP3364LveDriver::sendSetToDevice(short order, float value) {
 
   }
   stringstream stream;
-  stream << "GET http://" /*<< AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" */ << IP_CAMERA << PTZ_ROUTE;
+  stream << "GET http://" /*<< AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" */ << ip_address << PTZ_ROUTE;
   switch (order) {
     case ORDER_ZOOM:
       stream << "zoom=";
@@ -160,9 +210,9 @@ LensPosition AxisP3364LveDriver::getPosition() {
 
   if (socketDescriptor >= 0) {
 
-    if ((he = gethostbyname(IP_CAMERA)) != NULL) {
+    if ((he = gethostbyname(ip_address)) != NULL) {
       server.sin_family = AF_INET;
-      server.sin_port = htons(PORT_CAMERA);
+      server.sin_port = htons(port);
       server.sin_addr = *((struct in_addr *) he->h_addr);
 
       bzero(&(server.sin_zero), 8);
@@ -170,7 +220,7 @@ LensPosition AxisP3364LveDriver::getPosition() {
       if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) != -1) {
         //printf("Socket d: %d\n",socketDescriptor);
         stringstream stream;
-        stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << IP_CAMERA << PTZ_ROUTE << "query=position\r\n";
+        stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << ip_address << PTZ_ROUTE << "query=position\r\n";
         //printf("Comando generado: %s", stream.str().c_str());
 
         int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
