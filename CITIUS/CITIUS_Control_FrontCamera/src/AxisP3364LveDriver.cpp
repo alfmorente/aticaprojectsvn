@@ -39,7 +39,6 @@ bool AxisP3364LveDriver::checkConnection() {
     usleep(500);
     return false;
   }
-  printf("Socket d: %d\n", socketDescriptor);
   server.sin_family = AF_INET;
   server.sin_port = htons(PORT_CAMERA);
   server.sin_addr = *((struct in_addr *) he->h_addr);
