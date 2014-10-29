@@ -6,7 +6,7 @@
  * AHRS Module encargado de obtener la orientación del vehículo
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup MagnetometerDriver
  * @{
  */
 

@@ -13,7 +13,7 @@
  * que se vaya leyendo del GPS+IMU
  */
 XSensMTi700Driver::XSensMTi700Driver() {
-  canal = -1;
+  socketDescriptor = -1;
   // Inicio variable recepcion de datos
   posOriInfo.orientationStatus = 0;
   posOriInfo.positionStatus = 0;
@@ -42,63 +42,97 @@ XSensMTi700Driver::~XSensMTi700Driver() {
 }
 
 /**
+ * Método privado que busca en el fichero de configuración el valor del campo
+ * de configuración que recibe como parámetro
+ * @param parameter Identificador del campo a buscar en el fichero
+ * @return String con el resultado de la búsqueda
+ */
+string XSensMTi700Driver::getValueFromConfig(string parameter){
+    
+    int pos;
+    string cadena,parametro, value="";
+    bool found = false;
+    ifstream fichero;
+    fichero.open("socket_INSGPS.conf");
+
+    if (!fichero.is_open()) {
+        return "";
+    }
+
+    while (!fichero.eof() && !found) {
+        getline(fichero, cadena);
+        if (cadena[0] != '#' && cadena[0] != NULL) {
+            pos = cadena.find(":");
+            if (pos != -1) {
+                parametro = cadena.substr(0, pos);
+                if(parametro == parameter){
+                    value = cadena.substr(pos + 1);
+                    while(isspace(value[0])){
+                        value = value.substr(1);
+                    }
+                    found = true;
+                }
+            }
+        }
+    }
+    fichero.close();
+    
+    return value;
+
+}
+
+/**
  * Método público que inicia la conexión con el dispositivo
  * @return Booleano que indica si la conexión se ha realizado con éxito
  */
 bool XSensMTi700Driver::connectToDevice() {
+    
+    
 
-  char * serial_name = (char *) "/dev/ttyUSB0";
+    string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+    if(ip==""){
+        cout << "No se puede obtener la IP del fichero de configuracion" << endl;
+        return false;
+    }
+    
+    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+    if(port==""){
+        cout << "No se puede obtener la PORT del fichero de configuracion" << endl;
+        return false;
+    }    
 
-  canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
+    if ((he = gethostbyname(ip.c_str())) == NULL) {
+        return false;
+    }
 
-  if (canal < 0) {
+    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    server.sin_family = AF_INET;
+    server.sin_port = htons(atoi(port.c_str()));
+    server.sin_addr = *((struct in_addr *) he->h_addr);
 
-    return false;
+    bzero(&(server.sin_zero), 8);
 
-  } else {
-
-    tcgetattr(canal, &oldtio);
-    bzero(&newtio, sizeof (newtio));
-    newtio.c_cflag = B115200 | CRTSCTS | CS8 | CLOCAL | CREAD;
-    newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
-    newtio.c_oflag = 0;
-    newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
-
-    newtio.c_cc[VINTR] = 0; /* Ctrl-c */
-    newtio.c_cc[VQUIT] = 0; /* Ctrl-\ */
-    newtio.c_cc[VERASE] = 0; /* del */
-    newtio.c_cc[VKILL] = 0; /* @ */
-    newtio.c_cc[VEOF] = 4; /* Ctrl-d */
-    newtio.c_cc[VTIME] = 0; /* temporizador entre caracter, no usado */
-    newtio.c_cc[VMIN] = 1; /* bloqu.lectura hasta llegada de caracter. 1 */
-    newtio.c_cc[VSWTC] = 0; /* '\0' */
-    newtio.c_cc[VSTART] = 0; /* Ctrl-q */
-    newtio.c_cc[VSTOP] = 0; /* Ctrl-s */
-    newtio.c_cc[VSUSP] = 0; /* Ctrl-z */
-    newtio.c_cc[VEOL] = 0; /* '\0' */
-    newtio.c_cc[VREPRINT] = 0; /* Ctrl-r */
-    newtio.c_cc[VDISCARD] = 0; /* Ctrl-u */
-    newtio.c_cc[VWERASE] = 0; /* Ctrl-w */
-    newtio.c_cc[VLNEXT] = 0; /* Ctrl-v */
-    newtio.c_cc[VEOL2] = 0; /* '\0' */
-
-    tcflush(canal, TCIFLUSH);
-    tcsetattr(canal, TCSANOW, &newtio);
-
-    // Cambio de modo configuracion para no sobrecargar el buffer
-    usleep(100);
+    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    usleep(500);
     sendToDevice(goToConfig());
+    usleep(500);
+    return true;
 
-  }
-
-  return true;
 }
 
 /**
  * Método público que cierra la conexión con el dispositivo
  */
 void XSensMTi700Driver::disconnectDevice() {
-  close(canal);
+    close(socketDescriptor);
 }
 
 /**
@@ -107,11 +141,11 @@ void XSensMTi700Driver::disconnectDevice() {
  */
 void XSensMTi700Driver::configureDevice() {
 
-  // Configuracion de dispositivo
-  sendToDevice(setOutPutConfiguration());
+    // Configuracion de dispositivo
+    sendToDevice(setOutPutConfiguration());
 
-  // Modo stream de medidas
-  sendToDevice(goToMeasurement());
+    // Modo stream de medidas
+    sendToDevice(goToMeasurement());
 
 }
 
@@ -122,26 +156,26 @@ void XSensMTi700Driver::configureDevice() {
  */
 bool XSensMTi700Driver::getData() {
 
-  vector<unsigned char> frame2;
+    vector<unsigned char> frame2;
   unsigned char byte, len;
   bool dataFound = false;
 
   while (!dataFound) {
 
     // HEADER (PRE + BID + MID)
-    if (read(canal, &byte, 1) > 0) {
+    if (recv(socketDescriptor, &byte, 1,0) > 0) {
       frame2.push_back(byte);
     }
 
     if (frame2.size() == 3) {
 
       // LEN
-      if (read(canal, &len, 1) > 0) {
+      if (recv(socketDescriptor, &len, 1,0) > 0) {
 
         frame2.push_back(len);
         // DATA + CS
         while (frame2.size() < len + 5) {
-          if (read(canal, &byte, 1) > 0) {
+          if (recv(socketDescriptor, &byte, 1,0) > 0) {
             frame2.push_back(byte);
           }
         }
@@ -295,8 +329,8 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
     }
   }
   msg2send[msg.len + 4] = msg.cs;
-
-  if (write(canal, msg2send, msg.len + 5) > 0) {
+  
+  if (send(socketDescriptor, msg2send, msg.len + 5, 0) > 0) {
     waitForAck(msg.mid);
   } else {
     printf("Error en escritura");
@@ -322,19 +356,19 @@ void XSensMTi700Driver::waitForAck(unsigned char _mid) {
   while (!ackFound) {
 
     // HEADER (PRE + BID + MID)
-    if (read(canal, &byte, 1) > 0) {
+    if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       frame2.push_back(byte);
     }
 
     if (frame2.size() == 3) {
 
       // LEN
-      if (read(canal, &len, 1) > 0) {
+      if (recv(socketDescriptor, &len, 1, 0) > 0) {
 
         frame2.push_back(len);
         // DATA + CS
         while (frame2.size() < len + 5) {
-          if (read(canal, &byte, 1) > 0) {
+          if (recv(socketDescriptor, &byte, 1, 0) > 0) {
             frame2.push_back(byte);
           }
         }

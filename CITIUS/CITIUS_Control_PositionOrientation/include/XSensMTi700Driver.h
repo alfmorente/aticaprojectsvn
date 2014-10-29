@@ -6,7 +6,7 @@
  * encargado de obtener la posición y orientación del vehículo
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup INSGPSDriver
  * @{
  */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h> 
@@ -23,9 +22,19 @@
 #include <complex>
 #include <pthread.h>
 #include <vector>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
 #include "constant.h"
 
 using namespace std;
+
+
 
 /**
  * \class XSensMTi700Driver
@@ -36,10 +45,14 @@ class XSensMTi700Driver {
 private:
   // Datos recibidos
   GPSINSInfo posOriInfo;
-  // Puerto serie
-  struct termios newtio, oldtio;
-  int canal;
+  
+  // Socket
+  int socketDescriptor;
+  struct hostent *he;
+  struct sockaddr_in server;  
+  
   // Operaciones a bajo nivel
+  string getValueFromConfig(string parameter);
   void sendToDevice(XsensMsg);
   void waitForAck(unsigned char);
   unsigned char calcChecksum(XsensMsg);
@@ -54,7 +67,9 @@ private:
   // Rutinas de recepcion y manejo de datos
   void packetMng(dataPacketMT2);
   bool frameMng(std::vector<unsigned char>);
+  
 public:
+  
   XSensMTi700Driver();
   ~XSensMTi700Driver();
   // Operaciones a alto nivel
