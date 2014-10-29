@@ -661,6 +661,8 @@ constant.h
 include/constant.h
 
 include/RosNode.h
+constant.h
+include/constant.h
 
 include/RosNode_FrontCamera.h
 time.h

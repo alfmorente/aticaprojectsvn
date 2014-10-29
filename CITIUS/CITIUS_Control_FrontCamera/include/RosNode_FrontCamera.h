@@ -6,7 +6,7 @@
  * a la conduccion
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup FrontCameraRosNode
  * @{
  */
 
