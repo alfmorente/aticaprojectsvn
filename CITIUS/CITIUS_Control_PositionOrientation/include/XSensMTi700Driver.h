@@ -45,12 +45,10 @@ class XSensMTi700Driver {
 private:
   // Datos recibidos
   GPSINSInfo posOriInfo;
-  
   // Socket
   int socketDescriptor;
   struct hostent *he;
   struct sockaddr_in server;  
-  
   // Operaciones a bajo nivel
   string getValueFromConfig(string parameter);
   void sendToDevice(XsensMsg);

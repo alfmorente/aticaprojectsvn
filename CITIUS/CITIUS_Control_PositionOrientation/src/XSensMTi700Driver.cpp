@@ -38,7 +38,7 @@ XSensMTi700Driver::XSensMTi700Driver() {
  * Destructor de la clase
  */
 XSensMTi700Driver::~XSensMTi700Driver() {
-
+    
 }
 
 /**
@@ -87,23 +87,13 @@ string XSensMTi700Driver::getValueFromConfig(string parameter){
  */
 bool XSensMTi700Driver::connectToDevice() {
     
-    
-
     string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
-    if(ip==""){
-        cout << "No se puede obtener la IP del fichero de configuracion" << endl;
-        return false;
-    }
+    if(ip=="")  return false;
     
     string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
-    if(port==""){
-        cout << "No se puede obtener la PORT del fichero de configuracion" << endl;
-        return false;
-    }    
+    if(port=="") return false;
 
-    if ((he = gethostbyname(ip.c_str())) == NULL) {
-        return false;
-    }
+    if ((he = gethostbyname(ip.c_str())) == NULL)  return false;
 
     if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
         close(socketDescriptor);
@@ -113,9 +103,7 @@ bool XSensMTi700Driver::connectToDevice() {
     server.sin_family = AF_INET;
     server.sin_port = htons(atoi(port.c_str()));
     server.sin_addr = *((struct in_addr *) he->h_addr);
-
     bzero(&(server.sin_zero), 8);
-
     if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
         close(socketDescriptor);
         usleep(500);
@@ -123,7 +111,6 @@ bool XSensMTi700Driver::connectToDevice() {
     }
     usleep(500);
     sendToDevice(goToConfig());
-    usleep(500);
     return true;
 
 }

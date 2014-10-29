@@ -13,7 +13,7 @@
  * que se vaya leyendo del magnetómetro
  */
 TraxAHRSModuleDriver::TraxAHRSModuleDriver() {
-  canal = -1;
+  socketDescriptor = -1;
   // Inicio variable recepcion de datos
   oriInfo.heading_status = 0;
   oriInfo.roll = 0;
@@ -35,56 +35,83 @@ TraxAHRSModuleDriver::~TraxAHRSModuleDriver() {
 }
 
 /**
+ * Método privado que busca en el fichero de configuración el valor del campo
+ * de configuración que recibe como parámetro
+ * @param parameter Identificador del campo a buscar en el fichero
+ * @return String con el resultado de la búsqueda
+ */
+string TraxAHRSModuleDriver::getValueFromConfig(string parameter){
+    
+    int pos;
+    string cadena,parametro, value="";
+    bool found = false;
+    ifstream fichero;
+    fichero.open("socket_MAGN.conf");
+
+    if (!fichero.is_open()) {
+        return "";
+    }
+
+    while (!fichero.eof() && !found) {
+        getline(fichero, cadena);
+        if (cadena[0] != '#' && cadena[0] != NULL) {
+            pos = cadena.find(":");
+            if (pos != -1) {
+                parametro = cadena.substr(0, pos);
+                if(parametro == parameter){
+                    value = cadena.substr(pos + 1);
+                    while(isspace(value[0])){
+                        value = value.substr(1);
+                    }
+                    found = true;
+                }
+            }
+        }
+    }
+    fichero.close();
+    
+    return value;
+
+}
+
+/**
  * Método público que inicia la conexión con el dispositivo
  * @return Booleano que indica si la conexión se ha realizado con éxito
  */
 bool TraxAHRSModuleDriver::connectToDevice() {
 
-  char * serial_name = (char *) "/dev/ttyUSB1";
+  string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+    if(ip=="")  return false;
+    
+    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+    if(port=="") return false;
 
-  canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
+    if ((he = gethostbyname(ip.c_str())) == NULL)  return false;
 
-  if (canal < 0) {
-    return false;
-  } else {
+    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    server.sin_family = AF_INET;
+    server.sin_port = htons(atoi(port.c_str()));
+    server.sin_addr = *((struct in_addr *) he->h_addr);
+    bzero(&(server.sin_zero), 8);
+    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    usleep(500);
+    return true;
 
-    tcgetattr(canal, &oldtio);
-    bzero(&newtio, sizeof (newtio));
-    newtio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
-    newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
-    newtio.c_oflag = 0;
-    newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
-
-    newtio.c_cc[VINTR] = 0; /* Ctrl-c */
-    newtio.c_cc[VQUIT] = 0; /* Ctrl-\ */
-    newtio.c_cc[VERASE] = 0; /* del */
-    newtio.c_cc[VKILL] = 0; /* @ */
-    newtio.c_cc[VEOF] = 4; /* Ctrl-d */
-    newtio.c_cc[VTIME] = 0; /* temporizador entre caracter, no usado */
-    newtio.c_cc[VMIN] = 1; /* bloqu.lectura hasta llegada de caracter. 1 */
-    newtio.c_cc[VSWTC] = 0; /* '\0' */
-    newtio.c_cc[VSTART] = 0; /* Ctrl-q */
-    newtio.c_cc[VSTOP] = 0; /* Ctrl-s */
-    newtio.c_cc[VSUSP] = 0; /* Ctrl-z */
-    newtio.c_cc[VEOL] = 0; /* '\0' */
-    newtio.c_cc[VREPRINT] = 0; /* Ctrl-r */
-    newtio.c_cc[VDISCARD] = 0; /* Ctrl-u */
-    newtio.c_cc[VWERASE] = 0; /* Ctrl-w */
-    newtio.c_cc[VLNEXT] = 0; /* Ctrl-v */
-    newtio.c_cc[VEOL2] = 0; /* '\0' */
-
-    tcflush(canal, TCIFLUSH);
-    tcsetattr(canal, TCSANOW, &newtio);
-  }
-
-  return true;
 }
 
 /**
  * Método público que cierra la conexion con el dispositivo
  */
 void TraxAHRSModuleDriver::disconnectDevice() {
-  close(canal);
+  close(socketDescriptor);
 }
 
 /**
@@ -184,7 +211,7 @@ void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
   msg2send[index++] = shortToHexa(crc16short)[0];
   msg2send[index++] = shortToHexa(crc16short)[1];
 
-  if (write(canal, msg2send, len) == len) {
+  if (send(socketDescriptor, msg2send, len, 0) == len) {
     if (traxMsg.packFrame.idFrame == IDFRAME_KGETDATA) rcvResponse();
   } else {
     printf("Problemas en la escritura\n");
@@ -211,7 +238,7 @@ void TraxAHRSModuleDriver::rcvResponse() {
 
   // Tamaño de la trama
   while (index < 2) {
-    if (read(canal, &byte, 1) > 0) {
+    if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       recievedFrame.push_back(byte);
       index++;
     } else {
@@ -227,7 +254,7 @@ void TraxAHRSModuleDriver::rcvResponse() {
 
   // Resto de la trama
   while (index < tam) {
-    if (read(canal, &byte, 1) > 0) {
+    if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       recievedFrame.push_back(byte);
       index++;
     }
