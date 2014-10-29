@@ -145,37 +145,28 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       }
 
       numOfAttemps = 0;
-      /*
+      
       // Activacion RearCamera
             
       while(!rcNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS){
-                
           ROS_INFO("[Control] Manager - Reintentando conexion con nodo RearCamera...");
           numOfAttemps++;
-                
       }
             
       if (numOfAttemps < MAX_ATTEMPS) {
-                
           if (!service.response.confirmation) {
-                    
               // Position/Orientation no ha sido activado
               ROS_INFO("[Control] Manager - Nodo RearCamera no pudo arrancar");
-                    
           } else {
-                    
               ROS_INFO("[Control] Manager - Nodo RearCamera arrancado correctamente");
               rearCameraOK = true;
           }
-                
       } else {
-                
           ROS_INFO("[Control] Manager - Nodo RearCamera no pudo arrancar. Cumplido numero maximo de reintentos");
-           
       }
             
       numOfAttemps = 0;
-       */
+       
       // Activacion Driving
 
       while (!drNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
@@ -273,7 +264,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       // Comprobacion de errores
       // No se ha conectado con Driving. Se finaliza la ejecucion tras informar
       if (!drivingOK) {
-        ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehículo. Finalizado");
+        ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehiculo. Finalizado");
         nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
         rsp.confirmation = false;
       } else {
@@ -345,6 +336,17 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
           ROS_INFO("[Control] Manager - Nodo Communication apagado correctamente");
         }
       }
+      
+      // Apagado Driving
+      if (drivingOK) {
+        while (!drNodeStatus.call(service))
+          if (!service.response.confirmation) {
+            // Position/Orientation no ha sido apagado
+            ROS_INFO("[Control] Manager - Nodo Driving no se pudo apagar");
+          } else {
+            ROS_INFO("[Control] Manager - Nodo Driving apagado correctamente");
+          }
+      }
 
       // Apagado Position/Orientation
       if (positionOrientationOK) {
@@ -367,7 +369,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
           ROS_INFO("[Control] Manager - Nodo FrontCamera apagado correctamente");
         }
       }
-      /*
+      
       // Apagado RearCamera
       if (rearCameraOK) {
           while (!rcNodeStatus.call(service));
@@ -378,7 +380,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
               ROS_INFO("[Control] Manager - Nodo RearCamera apagado correctamente");
           }
       }
-       */
+       
       // Camara IR
       if (irCameraOK) {
         while (!irNodeStatus.call(service));
@@ -423,16 +425,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
 
-      // Apagado Driving
-      if (drivingOK) {
-        while (!drNodeStatus.call(service))
-          if (!service.response.confirmation) {
-            // Position/Orientation no ha sido apagado
-            ROS_INFO("[Control] Manager - Nodo Driving no se pudo apagar");
-          } else {
-            ROS_INFO("[Control] Manager - Nodo Driving apagado correctamente");
-          }
-      }
+      
 
       rsp.confirmation = true;
       nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
