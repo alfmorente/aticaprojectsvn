@@ -7,7 +7,7 @@
  * y final del estado de los nodos ROS secundarios
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup Manager
  * @{
  */
 
