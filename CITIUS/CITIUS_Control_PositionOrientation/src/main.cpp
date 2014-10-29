@@ -1,4 +1,3 @@
-
 /** 
  * @file  main.cpp
  * @brief Funcion principal del nodo PositionOrientation del subsistema de 
@@ -105,5 +104,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-

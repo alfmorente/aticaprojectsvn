@@ -6,7 +6,7 @@
  * específico para la abstracción de las funciones comunes
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup CommonRosNode
  * @{
  */
 

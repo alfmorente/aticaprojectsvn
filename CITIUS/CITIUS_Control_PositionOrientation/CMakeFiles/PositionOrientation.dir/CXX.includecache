@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.cpp
-RosNode.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNodePositionOrientation.cpp
-RosNose_PositionOrientation.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.cpp
-TraxAHRSModuleDriver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
-XSensMTi700Driver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/main.cpp
 RosNose_PositionOrientation.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
@@ -695,8 +679,6 @@ iostream
 -
 stdio.h
 -
-termios.h
--
 unistd.h
 -
 fcntl.h
@@ -711,10 +693,28 @@ pthread.h
 -
 vector
 -
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+netdb.h
+-
+arpa/inet.h
+-
+cstdlib
+-
+iostream
+-
+fstream
+-
 constant.h
 include/constant.h
 
 include/constant.h
+vector
+-
 
 include/crc16calc.h
 stdint.h

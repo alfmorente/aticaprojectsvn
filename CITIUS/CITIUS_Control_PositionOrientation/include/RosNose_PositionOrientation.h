@@ -6,7 +6,7 @@
  * proporcionan la posición y orientación del vehículo
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup PositionOrientationRosNode
  * @{
  */
 
