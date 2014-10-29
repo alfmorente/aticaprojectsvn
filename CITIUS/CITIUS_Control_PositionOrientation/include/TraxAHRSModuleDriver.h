@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h> 
@@ -24,6 +23,14 @@
 #include <vector>
 #include "constant.h"
 #include <stdint.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
 #include "crc16calc.h"
 
 using namespace std;
@@ -38,10 +45,12 @@ class TraxAHRSModuleDriver {
 private:
   // Datos recibidos
   TraxMeasurement oriInfo;
-  // Puerto serie
-  struct termios newtio, oldtio;
-  int canal;
+  // Socket
+  int socketDescriptor;
+  struct hostent *he;
+  struct sockaddr_in server;  
   // Operaciones a bajo nivel
+  string getValueFromConfig(string parameter);
   TraxMsg kGetModInfo();
   TraxMsg kGetData();
   TraxMsg kSetDataComponents();
