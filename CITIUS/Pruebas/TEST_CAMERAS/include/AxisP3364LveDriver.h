@@ -30,7 +30,12 @@ extern "C" {
 #include <arpa/inet.h>
 #include <sstream>
 
-#define IP_CAMERA "192.168.24.120"
+
+#define ST_FRONT_CAM 1
+#define ST_REAR_CAM 2
+
+#define IP_FRONT_CAMERA "192.168.24.120"
+#define IP_REAR_CAMERA "192.168.24.121"
 #define PORT_CAMERA 80
 
 #define AUTH_CAM_USER "root"
@@ -57,8 +62,8 @@ public:
     
     AxisP3364LveDriver();
     ~AxisP3364LveDriver();
-    bool sentSetToDevice(short order, float value);
-    LensPosition getPosition();
+    bool sentSetToDevice(short order, float value, int id_camera);
+    LensPosition getPosition(int id_camera);
 
 private:
 

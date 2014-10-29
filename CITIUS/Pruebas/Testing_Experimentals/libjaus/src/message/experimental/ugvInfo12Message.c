@@ -123,7 +123,7 @@ static JausBoolean dataFromBuffer(UGVInfo12Message message, unsigned char *buffe
                 return JAUS_FALSE;
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->battery_current = jausShortToDouble(tempByte, 0, 300);
+            message->battery_current = jausShortToDouble(tempShort, 0, 300);
         }
 
         if (jausByteIsBitSet(message->presenceVector, JAUS_12_PV_BATTERY_TEMPERATURE_BIT)) {

@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
     sin_size = sizeof (struct sockaddr_in);
-    printf("Esperando conexion de RosNode_Driving\n");
+    printf("Esperando conexion de RosNode_Electric\n");
     /* A continuación la llamada a accept() */
     if ((fd2 = accept(fd, (struct sockaddr *) &client, &sin_size)) == -1) {
         printf("Error en accept()\n");

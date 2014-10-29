@@ -20,7 +20,7 @@ AxisP3364LveDriver::~AxisP3364LveDriver() {
                         ENVIAR COMANDO DE CONTROL
  ******************************************************************************/
 
-bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
+bool AxisP3364LveDriver::sentSetToDevice(short order, float value, int id_camera){
     socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
 
     if (socketDescriptor < 0) {
@@ -28,8 +28,15 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
         return false;
 
     } else {
+        char *ipCam;
+        
+        if(id_camera == ST_FRONT_CAM){
+            ipCam = IP_FRONT_CAMERA;
+        }else{
+            ipCam = IP_REAR_CAMERA;
+        }
 
-        if ((he = gethostbyname(IP_CAMERA)) == NULL) {
+        if ((he = gethostbyname(ipCam)) == NULL) {
             return false;
         }
 
@@ -50,7 +57,7 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
         } else {
 
             stringstream stream;
-            stream << "GET http://" /*<< AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" */ << IP_CAMERA << PTZ_ROUTE;
+            stream << "GET http://" /*<< AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" */ << ipCam << PTZ_ROUTE;
             switch (order) {
                 case ORDER_ZOOM:
                     stream << "zoom=";
@@ -87,7 +94,7 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
                 nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
             }
             
-            LensPosition lenspos = getPosition();
+            LensPosition lenspos = getPosition(id_camera);
             
             if(lenspos.state){
                 
@@ -114,7 +121,7 @@ bool AxisP3364LveDriver::sentSetToDevice(short order, float value){
                          LECTURA DE LA POSICION
  ******************************************************************************/
 
-LensPosition AxisP3364LveDriver::getPosition() {
+LensPosition AxisP3364LveDriver::getPosition(int id_camera) {
 
     LensPosition pos;
     pos.state = false;
@@ -125,8 +132,16 @@ LensPosition AxisP3364LveDriver::getPosition() {
     socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
 
     if (socketDescriptor >= 0) {
-
-        if ((he = gethostbyname(IP_CAMERA)) != NULL) {
+        
+        char *ipCam;
+        
+        if(id_camera == ST_FRONT_CAM){
+            ipCam = IP_FRONT_CAMERA;
+        }else{
+            ipCam = IP_REAR_CAMERA;
+        }
+        
+        if ((he = gethostbyname(ipCam)) != NULL) {
             server.sin_family = AF_INET;
             server.sin_port = htons(PORT_CAMERA);
             server.sin_addr = *((struct in_addr *) he->h_addr);
@@ -136,7 +151,7 @@ LensPosition AxisP3364LveDriver::getPosition() {
             if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) != -1) {
 
                 stringstream stream;
-                stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << IP_CAMERA << PTZ_ROUTE << "query=position\r\n";
+                stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << ipCam << PTZ_ROUTE << "query=position\r\n";
                 //printf("Comando generado: %s", stream.str().c_str());
 
                 int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);

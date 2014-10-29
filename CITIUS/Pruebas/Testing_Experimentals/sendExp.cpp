@@ -718,7 +718,7 @@ void send_msg_exp12_pv(OjCmpt comp, JausAddress jAdd){
     
     // Tercer parametro
     msgExp->presenceVector = 0x04;
-    msgExp->battery_current = 199;
+    msgExp->battery_current = 250;
     // Envio el mensaje JAUS
     jMsg = ugvInfo12MessageToJausMessage(msgExp);    
     ojCmptSendMessage(comp, jMsg);
