@@ -81,9 +81,9 @@ AxisP3364LveDriver *RosNode_RearCamera::getDriverMng() {
  * real y lo publica mediante el topic correspondiente
  */
 void RosNode_RearCamera::manageDevice() {
-    dRearCamera->sentSetToDevice(ORDER_PAN, dRearCamera->getPan());
-    dRearCamera->sentSetToDevice(ORDER_TILT, dRearCamera->getTilt());
-    dRearCamera->sentSetToDevice(ORDER_ZOOM, dRearCamera->getZoom());
+    dRearCamera->sendSetToDevice(ORDER_PAN, dRearCamera->getPan());
+    dRearCamera->sendSetToDevice(ORDER_TILT, dRearCamera->getTilt());
+    dRearCamera->sendSetToDevice(ORDER_ZOOM, dRearCamera->getZoom());
 
     // Requerimiento de informacion de dispositivo
     LensPosition lensPos = dRearCamera->getPosition();
