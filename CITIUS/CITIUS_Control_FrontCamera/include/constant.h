@@ -28,11 +28,11 @@ typedef enum{
 }NodeStatus;
 
 /*******************************************************************************
- *                   SOCKET PAYLOAD DE CONDUCCION
- *******************************************************************************/
+ * FICHERO DE CONFIGURACION
+ ******************************************************************************/
 
-#define IP_CAMERA "192.168.24.120" ///<Direccion IP de la cámara
-#define PORT_CAMERA 80 ///<Puerto de acceso a la cámara
+#define CONFIG_FILE_IP_NAME "IP" ///<Identificador de búsqueda en fichero de IP
+#define CONFIG_FILE_PORT_NAME "PORT" ///<Identificador de búsqueda en fichero de PORT
 
 /*******************************************************************************
  * FRECUENCIA -> PERIODO
