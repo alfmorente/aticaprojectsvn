@@ -6,7 +6,7 @@
  * entre el Subsistema C2 y UGV de la arquitectura JAUS.
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup JAUSModule
  * @{
  */
 

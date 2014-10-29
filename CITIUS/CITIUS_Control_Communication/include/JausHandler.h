@@ -5,7 +5,7 @@
  * - La clase implementa el manejo del NodeManager en la arquitectura JAUS
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup JAUSModule
  * @{
  */
 
