@@ -6,7 +6,7 @@
  * subsistema payload de conducción.
  * @author Carlos Amores
  * @date 2013, 2014
- * @addtogroup Control Subsistema de Control
+ * @addtogroup ElectricDriver
  * @{
  */
 

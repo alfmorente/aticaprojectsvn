@@ -40,7 +40,7 @@ void RosNode_Electric::initROS() {
     pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher", 1000);
 
     // Se solicita la activacion del resto de nodos del vehículo
-    ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehículo");
+    ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehiculo");
 
     // Set up del suministro electrico
     dElectric->setTurnOn();
@@ -56,10 +56,10 @@ void RosNode_Electric::initROS() {
         ros::spinOnce();
     }
     if (service.response.confirmation) {
-        ROS_INFO("[Control] Electric - Se ha iniciado el vehículo");
+        ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
         nodeStatus = NODESTATUS_OK;
     } else {
-        ROS_INFO("[Control] Electric - El vehículo no se ha podido iniciar");
+        ROS_INFO("[Control] Electric - El vehiculo no ha podido iniciar");
         nodeStatus = NODESTATUS_OFF;
     }
 
