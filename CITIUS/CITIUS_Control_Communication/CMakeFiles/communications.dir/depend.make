@@ -298,6 +298,7 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/JausHandler.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/RosNode.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/RosNode_Communications.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/TranslatorROSJAUS.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/constant.h
@@ -550,6 +551,7 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/incl
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_autofocusMode.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_dzoom.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_focusDirect.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_nodeStatus.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_panAbsolutePosition.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_panRate.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_polarity.h

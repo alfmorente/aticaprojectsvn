@@ -29,8 +29,8 @@ RosNode_Communications *RosNode_Communications::getInstance() {
  * Constructor de la clase
  */
 RosNode_Communications::RosNode_Communications() {
-  //subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
-    subsystemController = JAUS_SUBSYSTEM_UGV;
+  subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
+    //subsystemController = JAUS_SUBSYSTEM_UGV;
     nodeController = JAUS_NODE_CONTROL; // Control
     nodeStatus = NODESTATUS_INIT;
 }
@@ -91,11 +91,11 @@ void RosNode_Communications::initROS() {
 void RosNode_Communications::initJAUS() {
 
   // Inicializacion de JAUS
-  configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
+  configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
   handler = new JausHandler();
 
   try {
-    configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
+    configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
     handler = new JausHandler();
     nm = new NodeManager(this->configData, this->handler);
   } catch (...) {
@@ -272,7 +272,7 @@ void RosNode_Communications::informStatus() {
   jAdd->subsystem = instance->subsystemController;
   jAdd->node = instance->nodeController;
   jAdd->component = JAUS_MISSION_SPOOLER;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Generacion de mensaje especifico UGV Info
   ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
@@ -465,7 +465,6 @@ void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication:
   if (jMsg != NULL) {
     // Envio via JAUS    
     ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
-    //ROS_INFO("[Control] Communications - Enviado mensaje via JAUS");
   } else {
     //ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
   }

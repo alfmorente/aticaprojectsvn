@@ -31,15 +31,17 @@ JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(JausSubsystemID su
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Traduccion
 
   ReportWrenchEffortMessage rwem = reportWrenchEffortMessageCreate();
-  rwem->presenceVector = (PRESENCE_VECTOR_THROTTLE | PRESENCE_VECTOR_BRAKE | PRESENCE_VECTOR_STEER);
+  rwem->presenceVector = (PRESENCE_VECTOR_BRAKE | 
+          PRESENCE_VECTOR_THROTTLE | 
+          PRESENCE_VECTOR_STEER);
   rwem->propulsiveLinearEffortXPercent = throttle;
   rwem->resistiveLinearEffortXPercent = brake;
-  rwem->resistiveRotationalEffortZPercent = steer;
+  rwem->propulsiveRotationalEffortZPercent = steer;
   jausAddressCopy(rwem->destination, jAdd);
   // Generacion de mensaje JUAS global
   jMsg = reportWrenchEffortMessageToJausMessage(rwem);
@@ -66,7 +68,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID 
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Traduccion
 
@@ -98,7 +100,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(JausSubsystemID sub
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Traduccion
 
@@ -130,7 +132,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(JausSubsystemID subDest, Ja
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Traduccion
 
@@ -168,7 +170,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(JausSubsystemID subDe
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Traduccion
 
@@ -209,11 +211,10 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(JausSubsystemID subDes
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-  ugvm->presenceVector = 0x00 |
-          PRESENCE_VECTOR_BATTERY_LEVEL |
+  ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_LEVEL |
           PRESENCE_VECTOR_BATTERY_VOLTAGE |
           PRESENCE_VECTOR_BATTERY_CURRENT |
           PRESENCE_VECTOR_BATTERY_TEMPERATURE |
@@ -223,11 +224,12 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(JausSubsystemID subDes
   ugvm->battery_current = bat_current;
   ugvm->battery_temperature = bat_temp;
   ugvm->alarms = alarms;
+  jausAddressCopy(ugvm->destination, jAdd);
   jMsg = ugvInfo12MessageToJausMessage(ugvm);
   ugvInfo12MessageDestroy(ugvm);
 
   // Destruccion de la estructura destinatario
-  jausAddressDestroy(jAdd);
+  //jausAddressDestroy(jAdd);
   // Destruccion del mensaje
   return jMsg;
 
@@ -253,7 +255,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(JausSubsystemID subDest,
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Generacion de mensaje especifico UGV Info
   ReportCameraPoseMessage rcpm = reportCameraPoseMessageCreate();
@@ -291,7 +293,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDes
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Mensaje especifico
   ReportNightTimeCamera24Message ircm = reportNightTimeCamera24MessageCreate();
@@ -329,7 +331,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(JausSubsystemID subDe
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PLATFORM_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Mensaje especifico
   ReportTelemeter27Message tim = reportTelemeter27MessageCreate();
@@ -366,7 +368,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTVCamera(JausSubsystemID subDest, J
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Mensaje especifico
   ReportDayTimeCamera22Message dtcm = reportDayTimeCamera22MessageCreate();
@@ -402,7 +404,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromPositioner(JausSubsystemID subDest,
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // Mensaje especifico
   ReportPositioner20Message posm = reportPositioner20MessageCreate();
