@@ -21,8 +21,6 @@ iostream
 -
 stdio.h
 -
-termios.h
--
 unistd.h
 -
 fcntl.h
@@ -35,6 +33,28 @@ complex
 -
 pthread.h
 -
+vector
+-
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+netdb.h
+-
+arpa/inet.h
+-
+cstdlib
+-
+iostream
+-
+fstream
+-
+constant.h
+include/constant.h
+
+include/constant.h
 vector
 -
 

@@ -118,42 +118,6 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o.provides: CMakeF
 
 CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o.provides.build: CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o
 
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: CMakeFiles/TEST_MAGNETOMETER.dir/flags.make
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: src/conversionTypes.cpp
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: manifest.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp
-
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp > CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i
-
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp -o CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s
-
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.requires:
-.PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.requires
-
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.provides: CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.requires
-	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.provides.build
-.PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.provides
-
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.provides.build: CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o
-
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: CMakeFiles/TEST_MAGNETOMETER.dir/flags.make
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: src/crc16calc.cpp
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: manifest.xml
@@ -169,7 +133,7 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: /opt/ros/groovy/share/std_
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp
 
@@ -194,7 +158,6 @@ CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o.provides.build: CMakeFiles/
 TEST_MAGNETOMETER_OBJECTS = \
 "CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o" \
 "CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o" \
-"CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o" \
 "CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o"
 
 # External object files for target TEST_MAGNETOMETER
@@ -202,7 +165,6 @@ TEST_MAGNETOMETER_EXTERNAL_OBJECTS =
 
 bin/TEST_MAGNETOMETER: CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o
 bin/TEST_MAGNETOMETER: CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o
-bin/TEST_MAGNETOMETER: CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o
 bin/TEST_MAGNETOMETER: CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o
 bin/TEST_MAGNETOMETER: CMakeFiles/TEST_MAGNETOMETER.dir/build.make
 bin/TEST_MAGNETOMETER: CMakeFiles/TEST_MAGNETOMETER.dir/link.txt
@@ -215,7 +177,6 @@ CMakeFiles/TEST_MAGNETOMETER.dir/build: bin/TEST_MAGNETOMETER
 
 CMakeFiles/TEST_MAGNETOMETER.dir/requires: CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o.requires
 CMakeFiles/TEST_MAGNETOMETER.dir/requires: CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o.requires
-CMakeFiles/TEST_MAGNETOMETER.dir/requires: CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o.requires
 CMakeFiles/TEST_MAGNETOMETER.dir/requires: CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o.requires
 .PHONY : CMakeFiles/TEST_MAGNETOMETER.dir/requires
 

@@ -4,16 +4,13 @@
 CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.o
  /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/TraxAHRSModuleDriver.cpp
  include/TraxAHRSModuleDriver.h
- include/conversionTypes.h
+ include/constant.h
  include/crc16calc.h
-CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o
- /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/conversionTypes.cpp
- include/conversionTypes.h
 CMakeFiles/TEST_MAGNETOMETER.dir/src/crc16calc.cpp.o
  /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/crc16calc.cpp
  include/crc16calc.h
 CMakeFiles/TEST_MAGNETOMETER.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_MAGNETOMETER/src/main.cpp
  include/TraxAHRSModuleDriver.h
- include/conversionTypes.h
+ include/constant.h
  include/crc16calc.h

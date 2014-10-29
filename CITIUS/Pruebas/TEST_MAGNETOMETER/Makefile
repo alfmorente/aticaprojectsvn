@@ -446,30 +446,6 @@ src/TraxAHRSModuleDriver.cpp.s:
 	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/src/TraxAHRSModuleDriver.cpp.s
 .PHONY : src/TraxAHRSModuleDriver.cpp.s
 
-src/conversionTypes.o: src/conversionTypes.cpp.o
-.PHONY : src/conversionTypes.o
-
-# target to build an object file
-src/conversionTypes.cpp.o:
-	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.o
-.PHONY : src/conversionTypes.cpp.o
-
-src/conversionTypes.i: src/conversionTypes.cpp.i
-.PHONY : src/conversionTypes.i
-
-# target to preprocess a source file
-src/conversionTypes.cpp.i:
-	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.i
-.PHONY : src/conversionTypes.cpp.i
-
-src/conversionTypes.s: src/conversionTypes.cpp.s
-.PHONY : src/conversionTypes.s
-
-# target to generate assembly for a file
-src/conversionTypes.cpp.s:
-	$(MAKE) -f CMakeFiles/TEST_MAGNETOMETER.dir/build.make CMakeFiles/TEST_MAGNETOMETER.dir/src/conversionTypes.cpp.s
-.PHONY : src/conversionTypes.cpp.s
-
 src/crc16calc.o: src/crc16calc.cpp.o
 .PHONY : src/crc16calc.o
 
@@ -555,9 +531,6 @@ help:
 	@echo "... src/TraxAHRSModuleDriver.o"
 	@echo "... src/TraxAHRSModuleDriver.i"
 	@echo "... src/TraxAHRSModuleDriver.s"
-	@echo "... src/conversionTypes.o"
-	@echo "... src/conversionTypes.i"
-	@echo "... src/conversionTypes.s"
 	@echo "... src/crc16calc.o"
 	@echo "... src/crc16calc.i"
 	@echo "... src/crc16calc.s"

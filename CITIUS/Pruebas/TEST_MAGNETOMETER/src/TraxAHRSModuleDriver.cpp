@@ -1,383 +1,538 @@
 
+/** 
+ * @file  TraxAHRSModuleDriver.cpp
+ * @brief Implementación de la clase "TraxAHRSModuleDriver"
+ * @author Carlos Amores
+ * @date 2013, 2014
+ */
 
 #include "TraxAHRSModuleDriver.h"
 
-using namespace std;
-
-/*******************************************************************************
- * CONSTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Constructor la clase. Almacena las estructuras de almacenaje de información
+ * que se vaya leyendo del magnetómetro
+ */
 TraxAHRSModuleDriver::TraxAHRSModuleDriver() {
-    canal = -1;
-    // Inicio variable recepcion de datos
-    oriInfo.heading_status = 0;
-    oriInfo.roll = 0;
-    oriInfo.pitch = 0;
-    oriInfo.heading = 0;
-    oriInfo.accX = 0;
-    oriInfo.accY = 0;
-    oriInfo.accZ = 0;
-    oriInfo.gyrX = 0;
-    oriInfo.gyrY = 0;
-    oriInfo.gyrZ = 0;
+  socketDescriptor = -1;
+  // Inicio variable recepcion de datos
+  oriInfo.heading_status = 0;
+  oriInfo.roll = 0;
+  oriInfo.pitch = 0;
+  oriInfo.heading = 0;
+  oriInfo.accX = 0;
+  oriInfo.accY = 0;
+  oriInfo.accZ = 0;
+  oriInfo.gyrX = 0;
+  oriInfo.gyrY = 0;
+  oriInfo.gyrZ = 0;
 }
 
-/*******************************************************************************
-    * DESTRUCTOR DE LA CLASE
- ******************************************************************************/
-
+/**
+ * Destructor de la clase
+ */
 TraxAHRSModuleDriver::~TraxAHRSModuleDriver() {
-    
+
 }
 
-/*******************************************************************************
- * CONEXIÓN DEL DISPOSITIVO
- ******************************************************************************/
-
-bool TraxAHRSModuleDriver::connectToDevice() {
+/**
+ * Método privado que busca en el fichero de configuración el valor del campo
+ * de configuración que recibe como parámetro
+ * @param parameter Identificador del campo a buscar en el fichero
+ * @return String con el resultado de la búsqueda
+ */
+string TraxAHRSModuleDriver::getValueFromConfig(string parameter){
     
-    char * serial_name = (char *) "/dev/ttyUSB1";
+    int pos;
+    string cadena,parametro, value="";
+    bool found = false;
+    ifstream fichero;
+    fichero.open("socket_MAGN.conf");
 
-    canal = open(serial_name, O_RDWR | O_NOCTTY | O_NDELAY);
-
-    if (canal < 0) {
-
-        return false;
-
-    } else {
-
-        tcgetattr(canal, &oldtio);
-        bzero(&newtio, sizeof (newtio));
-        newtio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
-        newtio.c_iflag &= ~(IGNBRK | BRKINT | ICRNL | INLCR | PARMRK | INPCK | ISTRIP | IXON);
-        newtio.c_oflag = 0;
-        newtio.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN | ISIG);
-
-        newtio.c_cc[VINTR] = 0; /* Ctrl-c */
-        newtio.c_cc[VQUIT] = 0; /* Ctrl-\ */
-        newtio.c_cc[VERASE] = 0; /* del */
-        newtio.c_cc[VKILL] = 0; /* @ */
-        newtio.c_cc[VEOF] = 4; /* Ctrl-d */
-        newtio.c_cc[VTIME] = 0; /* temporizador entre caracter, no usado */
-        newtio.c_cc[VMIN] = 1; /* bloqu.lectura hasta llegada de caracter. 1 */
-        newtio.c_cc[VSWTC] = 0; /* '\0' */
-        newtio.c_cc[VSTART] = 0; /* Ctrl-q */
-        newtio.c_cc[VSTOP] = 0; /* Ctrl-s */
-        newtio.c_cc[VSUSP] = 0; /* Ctrl-z */
-        newtio.c_cc[VEOL] = 0; /* '\0' */
-        newtio.c_cc[VREPRINT] = 0; /* Ctrl-r */
-        newtio.c_cc[VDISCARD] = 0; /* Ctrl-u */
-        newtio.c_cc[VWERASE] = 0; /* Ctrl-w */
-        newtio.c_cc[VLNEXT] = 0; /* Ctrl-v */
-        newtio.c_cc[VEOL2] = 0; /* '\0' */
-
-        tcflush(canal, TCIFLUSH);
-        tcsetattr(canal, TCSANOW, &newtio);
+    if (!fichero.is_open()) {
+        return "";
     }
+
+    while (!fichero.eof() && !found) {
+        getline(fichero, cadena);
+        if (cadena[0] != '#' && cadena[0] != NULL) {
+            pos = cadena.find(":");
+            if (pos != -1) {
+                parametro = cadena.substr(0, pos);
+                if(parametro == parameter){
+                    value = cadena.substr(pos + 1);
+                    while(isspace(value[0])){
+                        value = value.substr(1);
+                    }
+                    found = true;
+                }
+            }
+        }
+    }
+    fichero.close();
     
+    return value;
+
+}
+
+/**
+ * Método público que inicia la conexión con el dispositivo
+ * @return Booleano que indica si la conexión se ha realizado con éxito
+ */
+bool TraxAHRSModuleDriver::connectToDevice() {
+
+  string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+    if(ip=="")  return false;
+    
+    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+    if(port=="") return false;
+
+    if ((he = gethostbyname(ip.c_str())) == NULL)  return false;
+
+    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    server.sin_family = AF_INET;
+    server.sin_port = htons(atoi(port.c_str()));
+    server.sin_addr = *((struct in_addr *) he->h_addr);
+    bzero(&(server.sin_zero), 8);
+    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+        close(socketDescriptor);
+        usleep(500);
+        return false;
+    }
+    usleep(500);
     return true;
+
 }
 
-/*******************************************************************************
- * DESCONEXION DE DISPOSITIVO
- ******************************************************************************/
-
+/**
+ * Método público que cierra la conexion con el dispositivo
+ */
 void TraxAHRSModuleDriver::disconnectDevice() {
-    
-    close(canal);
+  close(socketDescriptor);
 }
 
-/*******************************************************************************
- * CONFIGURACION DE DISPOSITIVO DE LA CLASE
- ******************************************************************************/
-
-void TraxAHRSModuleDriver::configureDevice(){
-
-    sendToDevice(kSetDataComponents());
-    
+/**
+ * Método público que solicita la configuración del dispositivo con los 
+ * parámetros establecidos
+ */
+void TraxAHRSModuleDriver::configureDevice() {
+  sendToDevice(kSetDataComponents());
 }
 
-/*******************************************************************************
- * FORMACION DE MENSAJES A ENVIAR
- ******************************************************************************/
+/**
+ * Método privado que compone un mensaje de tipo KGetModInfo para transmitir al 
+ * dispositivo
+ * @return Estructura con información para envio de la trama
+ */
+TraxMsg TraxAHRSModuleDriver::kGetModInfo() {
 
-TraxMsg TraxAHRSModuleDriver::kGetModInfo(){
-    
-    TraxMsg retTraxMsg;
-    
-    retTraxMsg.byteCount = shortToHexa(5);
-    retTraxMsg.packFrame.idFrame = IDFRAME_KGETMODINFO;
-    
-    return retTraxMsg;
+  TraxMsg retTraxMsg;
+
+  retTraxMsg.byteCount = shortToHexa(5);
+  retTraxMsg.packFrame.idFrame = IDFRAME_KGETMODINFO;
+
+  return retTraxMsg;
 }
 
-TraxMsg TraxAHRSModuleDriver::kGetData(){
-    
-    TraxMsg retTraxMsg;
-    
-    retTraxMsg.byteCount = shortToHexa(5);
-    retTraxMsg.packFrame.idFrame = IDFRAME_KGETDATA;
-    
-    return retTraxMsg;
+/**
+ * Método privado que compone un mensaje de tipo KGetData para transmitir al 
+ * dispositivo
+ * @return Estructura con informacion para envio de la trama
+ */
+TraxMsg TraxAHRSModuleDriver::kGetData() {
+
+  TraxMsg retTraxMsg;
+
+  retTraxMsg.byteCount = shortToHexa(5);
+  retTraxMsg.packFrame.idFrame = IDFRAME_KGETDATA;
+
+  return retTraxMsg;
 }
 
-TraxMsg TraxAHRSModuleDriver::kSetDataComponents(){
-    TraxMsg retTraxMsg;
-    
-    retTraxMsg.byteCount = shortToHexa(10);
-    retTraxMsg.packFrame.idFrame = IDFRAME_KSETDATACOMPONENTS;
-    
-    // Se solicita heading, roll, pitch, heading status
-    retTraxMsg.packFrame.payload.push_back(0x0A);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_PITCH);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ROLL);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING_STATUS);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCX);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCY);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCZ);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRX);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRY);
-    retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRZ);
-        
-    return retTraxMsg;
+/**
+ * Método privado que compone un mensaje de tipo kSetDataComponents para transmitir al 
+ * dispositivo
+ * @return Estructura con informacion para envio de la trama
+ */
+TraxMsg TraxAHRSModuleDriver::kSetDataComponents() {
+  TraxMsg retTraxMsg;
+
+  retTraxMsg.byteCount = shortToHexa(10);
+  retTraxMsg.packFrame.idFrame = IDFRAME_KSETDATACOMPONENTS;
+
+  // Se solicita heading, roll, pitch, heading status
+  retTraxMsg.packFrame.payload.push_back(0x0A);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_PITCH);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_ROLL);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING_STATUS);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCX);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCY);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_ACCZ);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRX);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRY);
+  retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRZ);
+
+  return retTraxMsg;
 }
 
-/*******************************************************************************
- * OPERACIONES DE ENVIO DE MENSAJES Y RECEPCION DE ACK
- ******************************************************************************/
+/**
+ * Método privado que completa el mensaje añadiendo la cola del mensaje y lo 
+ * envía al dispositivo
+ * @param[in] traxMsg Estructura con información de la trama a enviar
+ */
 
 void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
-    short len = hexa2short(traxMsg.byteCount);
-    
-    char *msg2send = (char *) malloc(len);
-    
-    int index = 0;
-    
-    // Bytecount
-    msg2send[index++] = traxMsg.byteCount[0];
-    msg2send[index++] = traxMsg.byteCount[1];
-    
-    // ID Frame
-    msg2send[index++] = traxMsg.packFrame.idFrame;
+  short len = hexa2short(traxMsg.byteCount);
 
-    // Payload
-    if (len>5) {
-        for (int i = 0; i < len - 5; i++) {
-            msg2send[index++] = traxMsg.packFrame.payload[i];
-        }
+  char *msg2send = (char *) malloc(len);
+
+  int index = 0;
+
+  // Bytecount
+  msg2send[index++] = traxMsg.byteCount[0];
+  msg2send[index++] = traxMsg.byteCount[1];
+
+  // ID Frame
+  msg2send[index++] = traxMsg.packFrame.idFrame;
+
+  // Payload
+  if (len > 5) {
+    for (int i = 0; i < len - 5; i++) {
+      msg2send[index++] = traxMsg.packFrame.payload[i];
     }
-     
-    // CRC16
-    short crc16short = crc16ccitt_xmodem((uint8_t *)msg2send,len-2);
-    msg2send[index++] = shortToHexa(crc16short)[0];
-    msg2send[index++] = shortToHexa(crc16short)[1];
-          
-    if(write(canal, msg2send, len)==len){
-        if(traxMsg.packFrame.idFrame == IDFRAME_KGETDATA) rcvResponse();
-    }else {
-        printf("Problemas en la escritura\n");
-    }
-    
-    free(msg2send);
+  }
+
+  // CRC16
+  short crc16short = crc16ccitt_xmodem((uint8_t *) msg2send, len - 2);
+  msg2send[index++] = shortToHexa(crc16short)[0];
+  msg2send[index++] = shortToHexa(crc16short)[1];
+
+  if (send(socketDescriptor, msg2send, len, 0) == len) {
+    if (traxMsg.packFrame.idFrame == IDFRAME_KGETDATA) rcvResponse();
+  } else {
+    printf("Problemas en la escritura\n");
+  }
+
+  free(msg2send);
 }
 
-/*******************************************************************************
- * RECOPILACION DE DATOS
- ******************************************************************************/
-
+/**
+ * Método privado para la lectura y desencapsulación de una trama procedente del 
+ * dispositivo
+ */
 void TraxAHRSModuleDriver::rcvResponse() {
-    
-    // Contador de bytes leidos
-    int index = 0;
-    // Buffer de recepcion
-    //unsigned char* recievedFrame;
-    vector< char> recievedFrame;
-    //unsigned char byte;
-    TraxMsg msgRcv;
-    
-    unsigned char byte;
 
-    // Tamaño de la trama
-    while (index < 2) {
-        if (read(canal, &byte, 1) > 0) {
-            recievedFrame.push_back(byte);
-            index++;
-        }else{
-        }
+  // Contador de bytes leidos
+  int index = 0;
+  // Buffer de recepcion
+  //unsigned char* recievedFrame;
+  vector< char> recievedFrame;
+  //unsigned char byte;
+  TraxMsg msgRcv;
+
+  unsigned char byte;
+
+  // Tamaño de la trama
+  while (index < 2) {
+    if (recv(socketDescriptor, &byte, 1, 0) > 0) {
+      recievedFrame.push_back(byte);
+      index++;
+    } else {
     }
+  }
 
-    short tam = hexa2short(recievedFrame);
+  short tam = hexa2short(recievedFrame);
 
-    recievedFrame.clear();
+  recievedFrame.clear();
 
-    recievedFrame.push_back(shortToHexa(tam)[0]);
-    recievedFrame.push_back(shortToHexa(tam)[1]);
+  recievedFrame.push_back(shortToHexa(tam)[0]);
+  recievedFrame.push_back(shortToHexa(tam)[1]);
 
-    // Resto de la trama
-    while (index < tam) {
-        if (read(canal, &byte, 1) > 0) {
-            recievedFrame.push_back(byte);
-            index++;
-        }
+  // Resto de la trama
+  while (index < tam) {
+    if (recv(socketDescriptor, &byte, 1, 0) > 0) {
+      recievedFrame.push_back(byte);
+      index++;
     }
-    
-    TraxMsg pkg = mngPacket(recievedFrame);
-    
-    if(pkg.checked){
-        oriInfo = unpackPayload(pkg.packFrame.payload);
-    }
-    
+  }
+
+  TraxMsg pkg = mngPacket(recievedFrame);
+
+  if (pkg.checked) {
+    oriInfo = unpackPayload(pkg.packFrame.payload);
+  }
+
 }
 
-/*******************************************************************************
- * FUNCIONES DE TRATAMIENTO DE DATOS 
- ******************************************************************************/
+/**
+ * Método privado que obtiene la informacion de una trama a partir de los datos 
+ * en crudo que se obtienen del dispositivo
+ * @param[in] bufferPacket Datos en crudo leidos del dispositivo
+ * @return Estructura con información almacenada en tipos obtenida
+ */
+TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket) {
+  TraxMsg packet;
 
-TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket){
-    TraxMsg packet;
-    
-    packet.checked = false;
+  packet.checked = false;
 
-    // Desempaqueta del paquete
-    
-    // Tamaño
-    packet.byteCount.push_back(bufferPacket[0]);
-    packet.byteCount.push_back(bufferPacket[1]);
-    short tam = hexa2short(packet.byteCount);
+  // Desempaqueta del paquete
 
-    // Frame ID
-    packet.packFrame.idFrame = bufferPacket[2];
+  // Tamaño
+  packet.byteCount.push_back(bufferPacket[0]);
+  packet.byteCount.push_back(bufferPacket[1]);
+  short tam = hexa2short(packet.byteCount);
 
-    // Payload
-    for (int i = 0; i < (tam - 5); i++) {
-        packet.packFrame.payload.push_back(bufferPacket[i + 3]);
-    }
+  // Frame ID
+  packet.packFrame.idFrame = bufferPacket[2];
 
-    // CRC16
-    packet.crc.push_back(bufferPacket[tam-2]);
-    packet.crc.push_back(bufferPacket[tam-1]);
+  // Payload
+  for (int i = 0; i < (tam - 5); i++) {
+    packet.packFrame.payload.push_back(bufferPacket[i + 3]);
+  }
 
-    char *auxBuff = (char *) malloc(tam-2);
-    for(int i=0;i < tam -2; i++){
-        auxBuff[i] = bufferPacket[i];
-    }
-    if((short)(crc16ccitt_xmodem((uint8_t *)auxBuff,tam-2)) == hexa2short(packet.crc)){
-        // Recepcion correcta por CRC16
-        packet.checked = true;
-    }else{
-        printf("Checksum error. Frame discarted\n");
-    }
-    free(auxBuff);
-    
-    return packet;
-   
+  // CRC16
+  packet.crc.push_back(bufferPacket[tam - 2]);
+  packet.crc.push_back(bufferPacket[tam - 1]);
+
+  char *auxBuff = (char *) malloc(tam - 2);
+  for (int i = 0; i < tam - 2; i++) {
+    auxBuff[i] = bufferPacket[i];
+  }
+  if ((short) (crc16ccitt_xmodem((uint8_t *) auxBuff, tam - 2)) == hexa2short(packet.crc)) {
+    // Recepcion correcta por CRC16
+    packet.checked = true;
+  } else {
+    printf("Checksum error. Frame discarted\n");
+  }
+  free(auxBuff);
+
+  return packet;
+
 }
 
-TraxMeasurement TraxAHRSModuleDriver::unpackPayload( std::vector<char> payload){
-    int tam = payload[0];
-    int numData = 0;
-    int index = 1;
-   // char *bufFloat = (char *)malloc(4);
-    vector<char> bufFloat;
-    
-    TraxMeasurement measureDev;
-    
-    while(numData < tam){
-        switch(payload[index]){
-            case IDMEASURE_HEADING:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.heading = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_PITCH:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.pitch = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_ROLL:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.roll = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_HEADING_STATUS:
-                measureDev.heading_status = payload[index+1];
-                index+=2;
-                break;
-            case IDMEASURE_ACCX:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.accX = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_ACCY:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.accY = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_ACCZ:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.accZ = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_GYRX:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.gyrX = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_GYRY:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.gyrY = hexa2float(bufFloat);
-                index+=5;
-                break;
-            case IDMEASURE_GYRZ:
-                bufFloat.push_back(payload[index+1]);
-                bufFloat.push_back(payload[index+2]);
-                bufFloat.push_back(payload[index+3]);
-                bufFloat.push_back(payload[index+4]);
-                measureDev.gyrZ = hexa2float(bufFloat);
-                index+=5;
-                break;
-            default:
-                break;
-        }
-        numData++;
+/**
+ * Método privado que obtiene la información de los datos en crudo del fragmento 
+ * "payload" donde se almacenan los datos efectivos de la trama
+ * @param[in] payload Datos en crudo del campo "payload" de la trama
+ * @return Estructura con las medidas obtenidas de los datos "payload" de la 
+ * trama
+ */
+TraxMeasurement TraxAHRSModuleDriver::unpackPayload(std::vector<char> payload) {
+  int tam = payload[0];
+  int numData = 0;
+  int index = 1;
+  // char *bufFloat = (char *)malloc(4);
+  vector<char> bufFloat;
+
+  TraxMeasurement measureDev;
+
+  while (numData < tam) {
+    switch (payload[index]) {
+      case IDMEASURE_HEADING:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.heading = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_PITCH:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.pitch = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_ROLL:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.roll = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_HEADING_STATUS:
+        measureDev.heading_status = payload[index + 1];
+        index += 2;
+        break;
+      case IDMEASURE_ACCX:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.accX = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_ACCY:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.accY = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_ACCZ:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.accZ = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_GYRX:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.gyrX = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_GYRY:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.gyrY = hexa2float(bufFloat);
+        index += 5;
+        break;
+      case IDMEASURE_GYRZ:
+        bufFloat.push_back(payload[index + 1]);
+        bufFloat.push_back(payload[index + 2]);
+        bufFloat.push_back(payload[index + 3]);
+        bufFloat.push_back(payload[index + 4]);
+        measureDev.gyrZ = hexa2float(bufFloat);
+        index += 5;
+        break;
+      default:
+        break;
     }
-    return measureDev;
+    numData++;
+  }
+  return measureDev;
 }
 
-/*******************************************************************************
- * GET DE DATOS OBTENIDOS
- ******************************************************************************/
-
-TraxMeasurement TraxAHRSModuleDriver::getInfo(){ return oriInfo; }
-
-bool TraxAHRSModuleDriver::getData(){
-    sendToDevice(kGetData());
-    return true;
+/**
+ * Método público consultor del atributo "oriInfo" de la clase que almacena la 
+ * información de la última lectura de los dispositivos
+ * @return Atributo "oriInfo" de la clase
+ */
+TraxMeasurement TraxAHRSModuleDriver::getInfo() {
+  return oriInfo;
 }
 
+/**
+ * Método público para el envío de mensaje KGetData para la solicitud de 
+ * información al dispositivo
+ * @return Booleano que indica cuando la transmision llega a su fin 
+ */
+bool TraxAHRSModuleDriver::getData() {
+  sendToDevice(kGetData());
+  return true;
+}
+
+/**
+ * Función de conversion de tipos. Convierte un vector de bytes en un float
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Float resultado de la conversion
+ */
+float TraxAHRSModuleDriver::hexa2float(vector<char> buffer) {
+
+  union {
+    float value;
+    unsigned char buffer[4];
+
+  } floatUnion;
+
+  floatUnion.buffer[0] = buffer[3];
+  floatUnion.buffer[1] = buffer[2];
+  floatUnion.buffer[2] = buffer[1];
+  floatUnion.buffer[3] = buffer[0];
+
+  return floatUnion.value;
+}
+
+/**
+ * Función de conversion de tipos. Convierte un vector de bytes en un int
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Int resultado de la conversion
+ */
+int TraxAHRSModuleDriver::hexa2int(std::vector<unsigned char> buffer) {
+
+  union {
+    int value;
+    unsigned char buffer[4];
+
+  } intUnion;
+
+  intUnion.buffer[0] = buffer[3];
+  intUnion.buffer[1] = buffer[2];
+  intUnion.buffer[2] = buffer[1];
+  intUnion.buffer[3] = buffer[0];
+
+  return intUnion.value;
+}
+
+/**
+ * Función de conversion de tipos. Convierte un vector de bytes en un short
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Short resultado de la conversion
+ */
+short TraxAHRSModuleDriver::hexa2short(vector<char> buffer) {
+
+  union {
+    short value;
+    unsigned char buffer[2];
+
+  } shortUnion;
+
+  shortUnion.buffer[0] = buffer[1];
+  shortUnion.buffer[1] = buffer[0];
+
+  return shortUnion.value;
+}
+
+/**
+ * Función de conversion de tipos. Convierte un vector de bytes en un double
+ * @param[in] buffer[in] Datos en crudo a convertir
+ * @return Double resultado de la conversion
+ */
+double TraxAHRSModuleDriver::hexa2double(std::vector<unsigned char> buffer) {
+
+  union {
+    double value;
+    unsigned char buffer[8];
+  } doubleUnion;
+
+  doubleUnion.buffer[0] = buffer[7];
+  doubleUnion.buffer[1] = buffer[6];
+  doubleUnion.buffer[2] = buffer[5];
+  doubleUnion.buffer[3] = buffer[4];
+  doubleUnion.buffer[4] = buffer[3];
+  doubleUnion.buffer[5] = buffer[2];
+  doubleUnion.buffer[6] = buffer[1];
+  doubleUnion.buffer[7] = buffer[0];
+
+  return doubleUnion.value;
+}
+
+/**
+ * Función de conversion de tipos. Convierte un dato de tipo short a una cadena
+ * de bytes
+ * @param[in] buffer[in] Dato a convertir en bytes
+ * @return Vector de bytes resultado de la conversion
+ */
+vector<char> TraxAHRSModuleDriver::shortToHexa(short s) {
+  char *buf = (char *) malloc(2);
+  vector<char> out;
+  memcpy(buf, &s, 2);
+  out.push_back(buf[1]);
+  out.push_back(buf[0]);
+  free(buf);
+  return out;
+
+}

@@ -4,6 +4,8 @@
 CMakeFiles/example.dir/src/XSensMTi700Driver.cpp.o
  /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/XSensMTi700Driver.cpp
  include/XSensMTi700Driver.h
+ include/constant.h
 CMakeFiles/example.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/Pruebas/TEST_GPS_IMU/src/main.cpp
  include/XSensMTi700Driver.h
+ include/constant.h

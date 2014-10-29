@@ -104,6 +104,7 @@
         <df name="TEST_GPS_IMU">
         </df>
         <in>XSensMTi700Driver.h</in>
+        <in>constant.h</in>
       </df>
       <df name="lib">
       </df>
