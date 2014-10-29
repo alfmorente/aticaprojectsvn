@@ -36,7 +36,7 @@ JausController::JausController() {
 void JausController::initJAUS() {
     
     // Inicializacion de JAUS
-    /*configData = new FileLoader("nodeManager.conf");
+    configData = new FileLoader("nodeManager.conf");
     handler = new JausHandler();
     
     try {
@@ -49,7 +49,7 @@ void JausController::initJAUS() {
         
         cout << "Modulo JAUS iniciado" << endl;
                 
-    }*/
+    }
     
     /*
      * Creacion de componentes
@@ -290,7 +290,7 @@ void JausController::fcn_receive_report_discrete_devices(OjCmpt comp, JausMessag
     }
     // Marcha
     if(jausByteIsBitSet(rDiscreteDevices->presenceVector,JAUS_DEVICES_PV_GEAR_BIT)){
-        cout << "    Marcha: " << rDiscreteDevices->gear << endl;
+        cout << "    Marcha: " << (short)rDiscreteDevices->gear << endl;
     }
     reportDiscreteDevicesMessageDestroy(rDiscreteDevices);
     cout << " ---- " << endl;

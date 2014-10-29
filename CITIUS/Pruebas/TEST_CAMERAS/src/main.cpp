@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
                 }else if(status == ST_FRONT_CAM){
                     system("firefox http://192.168.24.120/jpg/image.jpg");
                 }else if(status == ST_REAR_CAM){
-                    system("firefox http://192.168.24.120/jpg/image.jpg");
+                    system("firefox http://192.168.24.121/jpg/image.jpg");
                 }else{
                     cout << "Opcion invalida" << endl;
                 }
@@ -56,10 +56,10 @@ int main(int argc, char** argv) {
                     status = auxStatus;
                 }else if(status == ST_FRONT_CAM){
                     int value = cinValue();
-                    driverFrontCam->sentSetToDevice(ORDER_PAN,value);
+                    driverFrontCam->sentSetToDevice(ORDER_PAN,value, ST_FRONT_CAM);
                 }else if(status == ST_REAR_CAM){
                     int value = cinValue();
-                    driverRearCam->sentSetToDevice(ORDER_PAN,value);
+                    driverRearCam->sentSetToDevice(ORDER_PAN,value, ST_REAR_CAM);
                 }else{
                     cout << "Opcion invalida" << endl;
                 }
@@ -69,10 +69,10 @@ int main(int argc, char** argv) {
                     status = ST_EXIT;
                 }else if(status == ST_FRONT_CAM){
                     int value = cinValue();
-                    driverFrontCam->sentSetToDevice(ORDER_TILT,value);
+                    driverFrontCam->sentSetToDevice(ORDER_TILT,value, ST_FRONT_CAM);
                 }else if(status == ST_REAR_CAM){
                     int value = cinValue();
-                    driverRearCam->sentSetToDevice(ORDER_TILT,value);
+                    driverRearCam->sentSetToDevice(ORDER_TILT,value, ST_REAR_CAM);
                 }else{
                     cout << "Opcion invalida" << endl;
                 }
@@ -80,12 +80,12 @@ int main(int argc, char** argv) {
             case 4:
                 if(status == ST_FRONT_CAM){
                     int value = cinValue();
-                    if(driverFrontCam->sentSetToDevice(ORDER_ZOOM,value)){
+                    if(driverFrontCam->sentSetToDevice(ORDER_ZOOM,value,ST_FRONT_CAM)){
                     
                     }
                 }else if(status == ST_REAR_CAM){
                     int value = cinValue();
-                    driverRearCam->sentSetToDevice(ORDER_ZOOM,value);
+                    driverRearCam->sentSetToDevice(ORDER_ZOOM,value,ST_REAR_CAM);
                 }else{
                     cout << "Opcion invalida" << endl;
                 }
