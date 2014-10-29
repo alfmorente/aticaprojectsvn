@@ -37,6 +37,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_TEST_MAGNETOMETER.dir">
@@ -104,7 +106,7 @@
         <df name="TEST_MAGNETOMETER">
         </df>
         <in>TraxAHRSModuleDriver.h</in>
-        <in>conversionTypes.h</in>
+        <in>constant.h</in>
         <in>crc16calc.h</in>
       </df>
       <df name="lib">
