@@ -41,58 +41,104 @@ DrivingConnectionManager::~DrivingConnectionManager(){
 }
 
 /**
+ * Método privado que busca en el fichero de configuración el valor del campo
+ * de configuración que recibe como parámetro
+ * @param parameter Identificador del campo a buscar en el fichero
+ * @return String con el resultado de la búsqueda
+ */
+string DrivingConnectionManager::getValueFromConfig(string parameter){
+    
+    int pos;
+    string cadena,parametro, value="";
+    bool found = false;
+    ifstream fichero;
+    fichero.open("socket.conf");
+
+    if (!fichero.is_open()) {
+        return "";
+    }
+
+    while (!fichero.eof() && !found) {
+        getline(fichero, cadena);
+        if (cadena[0] != '#' && cadena[0] != NULL) {
+            pos = cadena.find(":");
+            if (pos != -1) {
+                parametro = cadena.substr(0, pos);
+                if (parametro == parameter) {
+                    value = cadena.substr(pos + 1);
+                    while (isspace(value[0])) {
+                        value = value.substr(1);
+                    }
+                    found = true;
+                }
+            }
+        }
+    }
+    fichero.close();
+
+    return value;
+
+}
+
+/**
  * Método público que realiza la inicialización y conexión del socket de 
  * comunicación con el vehículo
  * @return Booleano que indica si la conexión ha sido posible
  */
 bool DrivingConnectionManager::connectVehicle() {
-  // Creacion y apertura del socket
-  socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
-  if (socketDescriptor < 0) {
-    ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
-    return false;
-  } else {
+
+    string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+    if (ip == "") return false;
+
+    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+    if (port == "") return false;
+
+    // Creacion y apertura del socket
+    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketDescriptor < 0) {
+        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
+        return false;
+    }
     struct hostent *he;
     /* estructura que recibirá información sobre el nodo remoto */
 
     struct sockaddr_in server;
     /* información sobre la dirección del servidor */
 
-    if ((he = gethostbyname(IP_PAYLOAD_CONDUCCION_DRIVING)) == NULL) {
-      /* llamada a gethostbyname() */
-      ROS_INFO("[Control] Driving - Imposible obtener el nombre del servidor socket");
-      exit(-1);
+    if ((he = gethostbyname(ip.c_str())) == NULL) {
+        /* llamada a gethostbyname() */
+        ROS_INFO("[Control] Driving - Imposible obtener el nombre del servidor socket");
+        exit(-1);
     }
 
     if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-      /* llamada a socket() */
-      ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
-      exit(-1);
+        /* llamada a socket() */
+        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
+        exit(-1);
     }
 
     server.sin_family = AF_INET;
-    server.sin_port = htons(PORT_PAYLOAD_CONDUCCION_DRIVING);
+    server.sin_port = htons(atoi(port.c_str()));
     /* htons() es necesaria nuevamente ;-o */
     server.sin_addr = *((struct in_addr *) he->h_addr);
     /*he->h_addr pasa la información de ``*he'' a "h_addr" */
     bzero(&(server.sin_zero), 8);
 
     if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-      /* llamada a connect() */
-      ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicación con Payload de Conduccion");
-      exit(-1);
+        /* llamada a connect() */
+        ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicación con Payload de Conduccion");
+        exit(-1);
 
     }
     ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con exito y conectado");
     // Test if the socket is in non-blocking mode:
     // Put the socket in non-blocking mode:
     if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
-      ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones L/E");
+        ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones L/E");
     } else {
-      ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones L/E");
+        ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones L/E");
     }
-  }
-  return true;
+    return true;
 }
 
 /**

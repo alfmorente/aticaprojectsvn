@@ -25,6 +25,7 @@
 #include <netdb.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
+#include <fstream>
 
 using namespace std;
 
@@ -58,6 +59,7 @@ public:
   // Destructor
   ~DrivingConnectionManager();
   // Gestion del vehiculo
+  string getValueFromConfig(string parameter);
   bool connectVehicle();
   bool disconnectVehicle();
   // Mensajeria con vehiculo
