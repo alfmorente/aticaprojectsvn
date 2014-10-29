@@ -31,7 +31,7 @@ void RosNode_RearCamera::initROS() {
   ros::NodeHandle nh;
   pubRearCameraInfo = nh.advertise<CITIUS_Control_RearCamera::msg_rearCameraInfo>("rearCameraInfo", 1000);
   subsCtrlRearCamera = nh.subscribe("ctrlRearCamera", 1000, &RosNode_RearCamera::fcn_sub_ctrlRearCamera, this);
-  servNodeStatus = nh.advertiseService("fcNodeStatus", &RosNode_RearCamera::fcv_serv_nodeStatus, this);
+  servNodeStatus = nh.advertiseService("rcNodeStatus", &RosNode_RearCamera::fcv_serv_nodeStatus, this);
 }
 
 /**
