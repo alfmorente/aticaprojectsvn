@@ -32,6 +32,7 @@
 #include <iostream>
 #include <fstream>
 #include "crc16calc.h"
+#include "SocketDriver.h"
 
 using namespace std;
 
@@ -40,16 +41,11 @@ using namespace std;
  * \brief Clase que representa al driver de comunicación con el dispositivo
  * magnetómetro Trax AHRS Module
  */
-class TraxAHRSModuleDriver {
+class TraxAHRSModuleDriver:public SocketDriver {
 private:
   // Datos recibidos
   TraxMeasurement oriInfo;
-  // Socket
-  int socketDescriptor;
-  struct hostent *he;
-  struct sockaddr_in server;
   // Operaciones a bajo nivel
-  string getValueFromConfig(string parameter);
   TraxMsg kGetModInfo();
   TraxMsg kGetData();
   TraxMsg kSetDataComponents();
@@ -67,8 +63,6 @@ public:
   TraxAHRSModuleDriver();
   ~TraxAHRSModuleDriver();
   // Operaciones a alto nivel
-  bool connectToDevice();
-  void disconnectDevice();
   void configureDevice();
   bool getData();
   // Retorno de estructura de datos

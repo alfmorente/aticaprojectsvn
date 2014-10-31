@@ -31,6 +31,7 @@
 #include <iostream>
 #include <fstream>
 #include "constant.h"
+#include "SocketDriver.h"
 
 using namespace std;
 
@@ -39,16 +40,11 @@ using namespace std;
  * \brief Clase que representa al driver de comunicación con el dispositivo
  * GPS+IMU XSens MTi-G 700
  */
-class XSensMTi700Driver {
+class XSensMTi700Driver:public SocketDriver {
 private:
   // Datos recibidos
   GPSINSInfo posOriInfo;
-  // Socket
-  int socketDescriptor;
-  struct hostent *he;
-  struct sockaddr_in server;
   // Operaciones a bajo nivel
-  string getValueFromConfig(string parameter);
   void sendToDevice(XsensMsg);
   void waitForAck(unsigned char);
   unsigned char calcChecksum(XsensMsg);
@@ -69,8 +65,6 @@ public:
   XSensMTi700Driver();
   ~XSensMTi700Driver();
   // Operaciones a alto nivel
-  bool connectToDevice();
-  void disconnectDevice();
   void configureDevice();
   bool getData();
   // Retorno de estructura de datos

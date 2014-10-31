@@ -298,6 +298,42 @@ CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o.provides: CMakeFiles/Position
 
 CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o.provides.build: CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o
 
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: CMakeFiles/PositionOrientation.dir/flags.make
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: src/SocketDriver.cpp
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: manifest.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/SocketDriver.cpp
+
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/SocketDriver.cpp > CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.i
+
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/SocketDriver.cpp -o CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.s
+
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.requires:
+.PHONY : CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.requires
+
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.provides: CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.requires
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.provides.build
+.PHONY : CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.provides
+
+CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.provides.build: CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o
+
 # Object files for target PositionOrientation
 PositionOrientation_OBJECTS = \
 "CMakeFiles/PositionOrientation.dir/src/main.cpp.o" \
@@ -306,7 +342,8 @@ PositionOrientation_OBJECTS = \
 "CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDriver.cpp.o" \
 "CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o" \
 "CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o" \
-"CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o"
+"CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o" \
+"CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o"
 
 # External object files for target PositionOrientation
 PositionOrientation_EXTERNAL_OBJECTS =
@@ -318,6 +355,7 @@ bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/TraxAHRSModuleDr
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o
+bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/build.make
 bin/PositionOrientation: CMakeFiles/PositionOrientation.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/PositionOrientation"
@@ -334,6 +372,7 @@ CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/
 CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o.requires
 CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o.requires
 CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o.requires
+CMakeFiles/PositionOrientation.dir/requires: CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o.requires
 .PHONY : CMakeFiles/PositionOrientation.dir/requires
 
 CMakeFiles/PositionOrientation.dir/clean:

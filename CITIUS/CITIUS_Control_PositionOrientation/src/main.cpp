@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
   RosNode_PositionOrientation *nodePosOri = new RosNode_PositionOrientation();
 
   // Conexion con GPS/INS
-  if (nodePosOri->getXSensManager()->connectToDevice()) {
+  if (nodePosOri->getXSensManager()->doConnect(DEVICE_XSENS)) {
     ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo GPS/INS");
     nodePosOri->setGpsStatus(true);
   } else {
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
   }
 
   // Conexion con magnetometro
-  if (nodePosOri->getMagnetometerManager()->connectToDevice()) {
+  if (nodePosOri->getMagnetometerManager()->doConnect(DEVICE_AHRS)) {
     ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo Magnetometro");
     nodePosOri->setMagnStatus(true);
   } else {
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
     }
 
     // Desconectar dispositivo GPS/INS
-    nodePosOri->getXSensManager()->disconnectDevice();
+    nodePosOri->getXSensManager()->disconnect();
 
     ROS_INFO("[Control] Position / Orientation - Desconectado dispositivo GPS/INS");
 
