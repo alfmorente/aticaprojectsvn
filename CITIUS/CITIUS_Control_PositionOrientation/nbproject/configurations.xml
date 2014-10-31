@@ -174,6 +174,10 @@
       </folder>
       <folder path="0/src">
         <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+          </incDir>
           <preprocessorList>
             <Elem>ROS_PACKAGE_NAME="CITIUS_Control_PositionOrientation"</Elem>
           </preprocessorList>
@@ -215,69 +219,27 @@
       </folder>
       <item path="src/RosNode.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
-          <incDir>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-            <pElem>include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/RosNodePositionOrientation.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
-          <incDir>
-            <pElem>include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/Timer.cpp" ex="false" tool="1" flavor2="0">
-        <ccTool>
-          <incDir>
-            <pElem>include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
-        </ccTool>
       </item>
       <item path="src/TraxAHRSModuleDriver.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
-          <incDir>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-            <pElem>include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/XSensMTi700Driver.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
-          <incDir>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-            <pElem>include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="src/crc16calc.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
-          <incDir>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-            <pElem>include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-          </incDir>
         </ccTool>
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

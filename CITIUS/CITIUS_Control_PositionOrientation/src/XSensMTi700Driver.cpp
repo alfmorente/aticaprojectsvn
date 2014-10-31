@@ -38,7 +38,7 @@ XSensMTi700Driver::XSensMTi700Driver() {
  * Destructor de la clase
  */
 XSensMTi700Driver::~XSensMTi700Driver() {
-    
+
 }
 
 /**
@@ -47,37 +47,37 @@ XSensMTi700Driver::~XSensMTi700Driver() {
  * @param parameter Identificador del campo a buscar en el fichero
  * @return String con el resultado de la búsqueda
  */
-string XSensMTi700Driver::getValueFromConfig(string parameter){
-    
-    int pos;
-    string cadena,parametro, value="";
-    bool found = false;
-    ifstream fichero;
-    fichero.open("socket_INSGPS.conf");
+string XSensMTi700Driver::getValueFromConfig(string parameter) {
 
-    if (!fichero.is_open()) {
-        return "";
-    }
+  int pos;
+  string cadena, parametro, value = "";
+  bool found = false;
+  ifstream fichero;
+  fichero.open("socket_INSGPS.conf");
 
-    while (!fichero.eof() && !found) {
-        getline(fichero, cadena);
-        if (cadena[0] != '#' && cadena[0] != NULL) {
-            pos = cadena.find(":");
-            if (pos != -1) {
-                parametro = cadena.substr(0, pos);
-                if(parametro == parameter){
-                    value = cadena.substr(pos + 1);
-                    while(isspace(value[0])){
-                        value = value.substr(1);
-                    }
-                    found = true;
-                }
-            }
+  if (!fichero.is_open()) {
+    return "";
+  }
+
+  while (!fichero.eof() && !found) {
+    getline(fichero, cadena);
+    if (cadena[0] != '#' && cadena[0] != NULL) {
+      pos = cadena.find(":");
+      if (pos != -1) {
+        parametro = cadena.substr(0, pos);
+        if (parametro == parameter) {
+          value = cadena.substr(pos + 1);
+          while (isspace(value[0])) {
+            value = value.substr(1);
+          }
+          found = true;
         }
+      }
     }
-    fichero.close();
-    
-    return value;
+  }
+  fichero.close();
+
+  return value;
 
 }
 
@@ -86,32 +86,32 @@ string XSensMTi700Driver::getValueFromConfig(string parameter){
  * @return Booleano que indica si la conexión se ha realizado con éxito
  */
 bool XSensMTi700Driver::connectToDevice() {
-    
-    string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
-    if(ip=="")  return false;
-    
-    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
-    if(port=="") return false;
 
-    if ((he = gethostbyname(ip.c_str())) == NULL)  return false;
+  string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+  if (ip == "") return false;
 
-    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-        close(socketDescriptor);
-        usleep(500);
-        return false;
-    }
-    server.sin_family = AF_INET;
-    server.sin_port = htons(atoi(port.c_str()));
-    server.sin_addr = *((struct in_addr *) he->h_addr);
-    bzero(&(server.sin_zero), 8);
-    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-        close(socketDescriptor);
-        usleep(500);
-        return false;
-    }
+  string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+  if (port == "") return false;
+
+  if ((he = gethostbyname(ip.c_str())) == NULL) return false;
+
+  if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+    close(socketDescriptor);
     usleep(500);
-    sendToDevice(goToConfig());
-    return true;
+    return false;
+  }
+  server.sin_family = AF_INET;
+  server.sin_port = htons(atoi(port.c_str()));
+  server.sin_addr = *((struct in_addr *) he->h_addr);
+  bzero(&(server.sin_zero), 8);
+  if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+    close(socketDescriptor);
+    usleep(500);
+    return false;
+  }
+  usleep(500);
+  sendToDevice(goToConfig());
+  return true;
 
 }
 
@@ -119,7 +119,7 @@ bool XSensMTi700Driver::connectToDevice() {
  * Método público que cierra la conexión con el dispositivo
  */
 void XSensMTi700Driver::disconnectDevice() {
-    close(socketDescriptor);
+  close(socketDescriptor);
 }
 
 /**
@@ -128,11 +128,11 @@ void XSensMTi700Driver::disconnectDevice() {
  */
 void XSensMTi700Driver::configureDevice() {
 
-    // Configuracion de dispositivo
-    sendToDevice(setOutPutConfiguration());
+  // Configuracion de dispositivo
+  sendToDevice(setOutPutConfiguration());
 
-    // Modo stream de medidas
-    sendToDevice(goToMeasurement());
+  // Modo stream de medidas
+  sendToDevice(goToMeasurement());
 
 }
 
@@ -143,26 +143,26 @@ void XSensMTi700Driver::configureDevice() {
  */
 bool XSensMTi700Driver::getData() {
 
-    vector<unsigned char> frame2;
+  vector<unsigned char> frame2;
   unsigned char byte, len;
   bool dataFound = false;
 
   while (!dataFound) {
 
     // HEADER (PRE + BID + MID)
-    if (recv(socketDescriptor, &byte, 1,0) > 0) {
+    if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       frame2.push_back(byte);
     }
 
     if (frame2.size() == 3) {
 
       // LEN
-      if (recv(socketDescriptor, &len, 1,0) > 0) {
+      if (recv(socketDescriptor, &len, 1, 0) > 0) {
 
         frame2.push_back(len);
         // DATA + CS
         while (frame2.size() < len + 5) {
-          if (recv(socketDescriptor, &byte, 1,0) > 0) {
+          if (recv(socketDescriptor, &byte, 1, 0) > 0) {
             frame2.push_back(byte);
           }
         }
@@ -316,7 +316,7 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
     }
   }
   msg2send[msg.len + 4] = msg.cs;
-  
+
   if (send(socketDescriptor, msg2send, msg.len + 5, 0) > 0) {
     waitForAck(msg.mid);
   } else {

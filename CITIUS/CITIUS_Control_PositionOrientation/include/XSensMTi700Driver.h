@@ -34,13 +34,11 @@
 
 using namespace std;
 
-
-
 /**
  * \class XSensMTi700Driver
  * \brief Clase que representa al driver de comunicación con el dispositivo
  * GPS+IMU XSens MTi-G 700
-*/
+ */
 class XSensMTi700Driver {
 private:
   // Datos recibidos
@@ -48,7 +46,7 @@ private:
   // Socket
   int socketDescriptor;
   struct hostent *he;
-  struct sockaddr_in server;  
+  struct sockaddr_in server;
   // Operaciones a bajo nivel
   string getValueFromConfig(string parameter);
   void sendToDevice(XsensMsg);
@@ -65,9 +63,9 @@ private:
   // Rutinas de recepcion y manejo de datos
   void packetMng(dataPacketMT2);
   bool frameMng(std::vector<unsigned char>);
-  
+
 public:
-  
+
   XSensMTi700Driver();
   ~XSensMTi700Driver();
   // Operaciones a alto nivel
