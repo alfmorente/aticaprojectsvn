@@ -22,6 +22,7 @@
 #include <cstdlib>
 #include "ros/ros.h"
 #include <ros/node_handle.h>
+#include "Timer.h"
 
 using namespace std;
 

@@ -10,13 +10,13 @@
 RosNose_PositionOrientation.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.cpp
-TraxAHRSModuleDriver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
-XSensMTi700Driver.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/Timer.cpp
+Timer.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/Timer.h
+unistd.h
+-
+sys/time.h
+-
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/main.cpp
 RosNose_PositionOrientation.h
@@ -659,6 +659,10 @@ ros/ros.h
 include/ros/ros.h
 ros/node_handle.h
 -
+Timer.h
+include/Timer.h
+
+include/Timer.h
 
 include/TraxAHRSModuleDriver.h
 iostream

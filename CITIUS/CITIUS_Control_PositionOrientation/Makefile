@@ -522,6 +522,30 @@ src/RosNodePositionOrientation.cpp.s:
 	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/RosNodePositionOrientation.cpp.s
 .PHONY : src/RosNodePositionOrientation.cpp.s
 
+src/Timer.o: src/Timer.cpp.o
+.PHONY : src/Timer.o
+
+# target to build an object file
+src/Timer.cpp.o:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o
+.PHONY : src/Timer.cpp.o
+
+src/Timer.i: src/Timer.cpp.i
+.PHONY : src/Timer.i
+
+# target to preprocess a source file
+src/Timer.cpp.i:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/Timer.cpp.i
+.PHONY : src/Timer.cpp.i
+
+src/Timer.s: src/Timer.cpp.s
+.PHONY : src/Timer.s
+
+# target to generate assembly for a file
+src/Timer.cpp.s:
+	$(MAKE) -f CMakeFiles/PositionOrientation.dir/build.make CMakeFiles/PositionOrientation.dir/src/Timer.cpp.s
+.PHONY : src/Timer.cpp.s
+
 src/TraxAHRSModuleDriver.o: src/TraxAHRSModuleDriver.cpp.o
 .PHONY : src/TraxAHRSModuleDriver.o
 
@@ -662,6 +686,9 @@ help:
 	@echo "... src/RosNodePositionOrientation.o"
 	@echo "... src/RosNodePositionOrientation.i"
 	@echo "... src/RosNodePositionOrientation.s"
+	@echo "... src/Timer.o"
+	@echo "... src/Timer.i"
+	@echo "... src/Timer.s"
 	@echo "... src/TraxAHRSModuleDriver.o"
 	@echo "... src/TraxAHRSModuleDriver.i"
 	@echo "... src/TraxAHRSModuleDriver.s"

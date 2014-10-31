@@ -109,6 +109,7 @@
         </df>
         <in>RosNode.h</in>
         <in>RosNose_PositionOrientation.h</in>
+        <in>Timer.h</in>
         <in>TraxAHRSModuleDriver.h</in>
         <in>XSensMTi700Driver.h</in>
         <in>constant.h</in>
@@ -138,6 +139,7 @@
         </df>
         <in>RosNode.cpp</in>
         <in>RosNodePositionOrientation.cpp</in>
+        <in>Timer.cpp</in>
         <in>TraxAHRSModuleDriver.cpp</in>
         <in>XSensMTi700Driver.cpp</in>
         <in>crc16calc.cpp</in>
