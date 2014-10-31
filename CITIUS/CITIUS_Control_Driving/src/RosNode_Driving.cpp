@@ -20,8 +20,8 @@ RosNode_Driving::RosNode_Driving() {
 /**
  * Destructor de la clase
  */
-RosNode_Driving::~RosNode_Driving(){
-    delete(dVehicle);
+RosNode_Driving::~RosNode_Driving() {
+  delete(dVehicle);
 }
 
 /**
@@ -45,16 +45,16 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
   ros::NodeHandle nh;
   int currentVehicleStatus = OPERATION_MODE_INICIANDO;
   nh.getParam("vehicleStatus", currentVehicleStatus);
-  if (currentVehicleStatus == OPERATION_MODE_CONDUCCION || dVehicle->isMTCommand(static_cast<DeviceID>(msg.id_device))) {
+  if (currentVehicleStatus == OPERATION_MODE_CONDUCCION || dVehicle->isMTCommand(static_cast<DeviceID> (msg.id_device))) {
     if (nodeStatus == NODESTATUS_OK) {
       ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
       if (checkCommand(msg)) {
         // Envio de comando a vehículo
         FrameDriving command;
         command.instruction = SET;
-        command.element = static_cast<DeviceID>(msg.id_device);
+        command.element = static_cast<DeviceID> (msg.id_device);
         command.value = msg.value;
-        if (dVehicle->isCriticalInstruction(static_cast<DeviceID>(msg.id_device))) {
+        if (dVehicle->isCriticalInstruction(static_cast<DeviceID> (msg.id_device))) {
           short cont = dVehicle->getCountCriticalMessages();
           // Valor de ID_INSTRUCCION
           command.id_instruccion = cont;
