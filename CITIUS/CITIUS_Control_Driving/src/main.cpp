@@ -32,15 +32,15 @@ int main(int argc, char** argv) {
       ros::spinOnce();
     }
     if (nodeDriving->getNodeStatus() == NODESTATUS_OK)
-      ROS_INFO("[Control] Driving - Nodo listo para operar");
-
-    // Temporizador de requerimiento de informacion
-    clock_t initTime, finalTime;
-    initTime = clock();
-
+      ROS_INFO("[Control] Driving - Nodo listo para operar");    
+    
     // Conteo de 5 hz -> 5 * 1hz (Vehiculo 5Hz, Senalizacion 1Hz))
     short hzCount = 0;
-
+    
+    // Temporizador de requerimiento de informacion
+    Timer *timer = new Timer();    
+    timer->Enable();
+        
     //Bucle principal
     while (ros::ok() && nodeDriving->getNodeStatus() != NODESTATUS_OFF) {
       if (nodeDriving->getDriverMng()->getSocketDescriptor() == -1) {
@@ -49,6 +49,7 @@ int main(int argc, char** argv) {
 
         // Comprobacion de recepcion de mensaje ROS
         ros::spinOnce();
+        
         // Comprobacion de recpcion de mensajes de vehiculo
         nodeDriving->getDriverMng()->checkForVehicleMessages();
         
@@ -56,14 +57,13 @@ int main(int argc, char** argv) {
         // TODO
         
         // Comprobación del temporizador y requerimiento de info
-        finalTime = clock() - initTime;
-        if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_5HZ) {
-
-          // Clear del timer
-          initTime = clock();
+        if(timer->GetTimed() >= FREC_5HZ){
+            
+            // Clear del timer
+            timer->Reset();
 
           hzCount++;
-          DrivingInfo info;
+          
           if (hzCount == 5) {
 
             hzCount = 0;
@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
             // Requiere al vehiculo (GET)
             nodeDriving->getDriverMng()->reqVehicleInfo(true);
             // Obtiene informacion existente para publicar
-            info = nodeDriving->getDriverMng()->getVehicleInfo(true);
+            nodeDriving->publishDrivingInfo(nodeDriving->getDriverMng()->getVehicleInfo(true));
 
           } else {
 
@@ -79,15 +79,14 @@ int main(int argc, char** argv) {
             // Requiere al vehiculo (GET)
             nodeDriving->getDriverMng()->reqVehicleInfo(false);
             // Obtiene informacion existente para publicar
-            info = nodeDriving->getDriverMng()->getVehicleInfo(false);
+            nodeDriving->publishDrivingInfo(nodeDriving->getDriverMng()->getVehicleInfo(false));
 
           }
-          nodeDriving->publishDrivingInfo(info);
-
         }
       }
-
+      usleep(100000);
     }
+    delete(timer);
   } else {
     ROS_INFO("[Control] Driving - No se puede conectar al vehiculo");
   }
