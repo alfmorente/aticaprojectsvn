@@ -110,6 +110,7 @@
         <in>AxisP3364LveDriver.h</in>
         <in>RosNode.h</in>
         <in>RosNode_RearCamera.h</in>
+        <in>Timer.h</in>
         <in>constant.h</in>
       </df>
       <df name="lib">
@@ -138,6 +139,7 @@
         <in>AxisP3364LveDriver.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_RearCamera.cpp</in>
+        <in>Timer.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">

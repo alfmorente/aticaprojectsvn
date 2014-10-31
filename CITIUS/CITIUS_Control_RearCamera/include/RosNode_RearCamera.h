@@ -21,6 +21,7 @@
 #include "CITIUS_Control_RearCamera/msg_rearCameraInfo.h"
 #include "CITIUS_Control_RearCamera/srv_nodeStatus.h"
 #include "ros/ros.h"
+#include "Timer.h"
 #include <cstdlib>
 
 /**

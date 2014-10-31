@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.cpp
-RosNode_RearCamera.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/main.cpp
 RosNode_RearCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.h
@@ -675,8 +671,12 @@ CITIUS_Control_RearCamera/srv_nodeStatus.h
 include/CITIUS_Control_RearCamera/srv_nodeStatus.h
 ros/ros.h
 include/ros/ros.h
+Timer.h
+include/Timer.h
 cstdlib
 -
+
+include/Timer.h
 
 include/constant.h
 
