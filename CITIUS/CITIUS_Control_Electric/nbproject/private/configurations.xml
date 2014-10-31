@@ -110,6 +110,7 @@
         <in>ElectricConnectionManager.h</in>
         <in>RosNode.h</in>
         <in>RosNode_Electric.h</in>
+        <in>Timer.h</in>
         <in>constant.h</in>
       </df>
       <df name="lib">
@@ -139,6 +140,7 @@
         <in>ElectricConnectionManager.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_Electric.cpp</in>
+        <in>Timer.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">

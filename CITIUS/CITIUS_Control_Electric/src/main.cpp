@@ -41,8 +41,8 @@ int main(int argc, char** argv) {
     }
 
     // Temporizador de requerimiento de informacion
-    clock_t initTime, finalTime;
-    initTime = clock();
+    Timer *timer = new Timer();
+    timer->Enable();
 
     //Bucle principal
     while(ros::ok() && nodeElectric->getNodeStatus()!=NODESTATUS_OFF){
@@ -60,19 +60,18 @@ int main(int argc, char** argv) {
       // TODO
 
       // Comprobación del temporizador y requerimiento de info
-      finalTime = clock() - initTime;
-      if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
+      if (timer->GetTimed() >= FREC_2HZ) {
         // Clear del timer
-        initTime = clock();
+          timer->Reset();
         // Requerimiento de informacion de sistema energetico
-        nodeElectric->getDriverMng()->reqElectricInfo();
+        //nodeElectric->getDriverMng()->reqElectricInfo();
         // Publicacion de la informacion existente
         nodeElectric->publishElectricInfo(nodeElectric->getDriverMng()->getVehicleInfo());
 
       }
-
+      usleep(100000);
     }
-
+    delete(timer);
   } else {
     ROS_INFO("[Control] Electric - No se puede conectar al vehiculo. Maximo numero de reintentos realizados.");
   }

@@ -121,11 +121,15 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
  include/ElectricConnectionManager.h
  include/RosNode.h
  include/RosNode_Electric.h
+ include/Timer.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h
+CMakeFiles/electric.dir/src/Timer.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/Timer.cpp
+ include/Timer.h
 CMakeFiles/electric.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
@@ -185,6 +189,7 @@ CMakeFiles/electric.dir/src/main.cpp.o
  include/ElectricConnectionManager.h
  include/RosNode.h
  include/RosNode_Electric.h
+ include/Timer.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
