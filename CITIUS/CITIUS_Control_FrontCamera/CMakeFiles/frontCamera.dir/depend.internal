@@ -68,6 +68,7 @@ CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o
  include/AxisP3364LveDriver.h
  include/RosNode.h
  include/RosNode_FrontCamera.h
+ include/Timer.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_frontCameraInfo.h
