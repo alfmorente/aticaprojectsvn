@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
   while (nodeComm->getNodeStatus() == NODESTATUS_INIT) {
     ros::spinOnce();
   }
-  
+
   ROS_INFO("[Control] Communications - Nodo listo para operar");
 
   // Control del modo de operacion del vehiculo
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
   // Temporizador de envio de estado
   Timer *timer = new Timer();
   timer->Enable();
-  
+
   while (ros::ok() && nodeComm->getNodeStatus() != NODESTATUS_OFF) {
 
     // Recepcion de mensajeria ROS
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     if (timer->GetTimed() >= FREC_10HZ) {
 
       // Clear del timer
-        timer->Reset();
+      timer->Reset();
       // Requerimiento de informacion de dispositivo
       nodeComm->informStatus();
 

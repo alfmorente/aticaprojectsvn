@@ -36,8 +36,8 @@ JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(JausSubsystemID su
   // Traduccion
 
   ReportWrenchEffortMessage rwem = reportWrenchEffortMessageCreate();
-  rwem->presenceVector = (PRESENCE_VECTOR_BRAKE | 
-          PRESENCE_VECTOR_THROTTLE | 
+  rwem->presenceVector = (PRESENCE_VECTOR_BRAKE |
+          PRESENCE_VECTOR_THROTTLE |
           PRESENCE_VECTOR_STEER);
   rwem->propulsiveLinearEffortXPercent = throttle;
   rwem->resistiveLinearEffortXPercent = brake;

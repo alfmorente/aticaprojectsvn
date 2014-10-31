@@ -59,8 +59,8 @@ using namespace std;
 /**
  * \class RosNode_Communications
  * \brief Clase que representa al nodo ROS de gestión de comunicaciones
-*/
-class RosNode_Communications: public RosNode {
+ */
+class RosNode_Communications : public RosNode {
 public:
   // Constructor Singleton
   static RosNode_Communications *getInstance();
