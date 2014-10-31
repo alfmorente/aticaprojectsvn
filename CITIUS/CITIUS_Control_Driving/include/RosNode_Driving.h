@@ -19,6 +19,7 @@
 #include "CITIUS_Control_Driving/msg_command.h"
 #include "CITIUS_Control_Driving/msg_vehicleInfo.h"
 #include "CITIUS_Control_Driving/srv_nodeStatus.h"
+#include "Timer.h"
 
 /**
  * \class RosNode_Driving

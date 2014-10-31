@@ -165,13 +165,13 @@ void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
   char bufData[8];
 
   // Rellenado del buffer
-  memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
+  /*memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
   memcpy(&bufData[4], &frame.element, sizeof (frame.element));
   memcpy(&bufData[6], &frame.value, sizeof (frame.value));
 
   // Envio via socket
-  send(socketDescriptor, bufData, sizeof (bufData), 0);
+  send(socketDescriptor, bufData, sizeof (bufData), 0);*/
   usleep(1000);
 }
 
@@ -193,7 +193,7 @@ void DrivingConnectionManager::reqVehicleInfo(bool full) {
   frame.element = THROTTLE;
   sendToVehicle(frame);
   // Freno 
-  frame.element = BRAKE;
+  /*frame.element = BRAKE;
   sendToVehicle(frame);
   // Freno de mano
   frame.element = HANDBRAKE;
@@ -236,7 +236,7 @@ void DrivingConnectionManager::reqVehicleInfo(bool full) {
     frame.element = KLAXON;
     sendToVehicle(frame);
 
-  }
+  }*/
 }
 
 /**
