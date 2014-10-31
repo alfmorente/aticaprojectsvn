@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
-RosNode_Communications.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
-TranslatorROSJAUS.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
@@ -715,6 +707,10 @@ openJaus.h
 include/openJaus.h
 JausHandler.h
 include/JausHandler.h
+Timer.h
+include/Timer.h
+
+include/Timer.h
 
 include/TranslatorROSJAUS.h
 jaus.h

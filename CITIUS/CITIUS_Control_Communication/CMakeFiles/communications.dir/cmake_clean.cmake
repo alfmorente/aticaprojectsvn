@@ -10,6 +10,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o"
   "CMakeFiles/communications.dir/src/JausHandler.cpp.o"
   "CMakeFiles/communications.dir/src/RosNode.cpp.o"
+  "CMakeFiles/communications.dir/src/Timer.cpp.o"
   "bin/communications.pdb"
   "bin/communications"
 )

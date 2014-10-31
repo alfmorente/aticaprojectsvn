@@ -110,6 +110,7 @@
         <in>JausHandler.h</in>
         <in>RosNode.h</in>
         <in>RosNode_Communications.h</in>
+        <in>Timer.h</in>
         <in>TranslatorROSJAUS.h</in>
         <in>constant.h</in>
       </df>
@@ -822,6 +823,7 @@
         <in>JausHandler.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_Communications.cpp</in>
+        <in>Timer.cpp</in>
         <in>TranslatorROSJAUS.cpp</in>
         <in>main.cpp</in>
       </df>
