@@ -18,13 +18,9 @@ RosNode.h
 RosNode_Electric.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.h
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/Timer.cpp
-Timer.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/Timer.h
-unistd.h
--
-sys/time.h
--
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.cpp
+SocketDriver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.h
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp
 RosNode_Electric.h
@@ -651,6 +647,8 @@ ros/ros.h
 include/ros/ros.h
 constant.h
 include/constant.h
+SocketDriver.h
+include/SocketDriver.h
 string.h
 -
 stdio.h
@@ -697,6 +695,30 @@ cstdlib
 -
 Timer.h
 include/Timer.h
+
+include/SocketDriver.h
+constant.h
+include/constant.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+netdb.h
+-
+fcntl.h
+-
+arpa/inet.h
+-
+fstream
+-
 
 include/Timer.h
 

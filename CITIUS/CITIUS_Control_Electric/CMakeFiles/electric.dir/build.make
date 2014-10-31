@@ -226,13 +226,50 @@ CMakeFiles/electric.dir/src/Timer.cpp.o.provides: CMakeFiles/electric.dir/src/Ti
 
 CMakeFiles/electric.dir/src/Timer.cpp.o.provides.build: CMakeFiles/electric.dir/src/Timer.cpp.o
 
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: CMakeFiles/electric.dir/flags.make
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: src/SocketDriver.cpp
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: manifest.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/electric.dir/src/SocketDriver.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/electric.dir/src/SocketDriver.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.cpp
+
+CMakeFiles/electric.dir/src/SocketDriver.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/electric.dir/src/SocketDriver.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.cpp > CMakeFiles/electric.dir/src/SocketDriver.cpp.i
+
+CMakeFiles/electric.dir/src/SocketDriver.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/electric.dir/src/SocketDriver.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.cpp -o CMakeFiles/electric.dir/src/SocketDriver.cpp.s
+
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o.requires:
+.PHONY : CMakeFiles/electric.dir/src/SocketDriver.cpp.o.requires
+
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o.provides: CMakeFiles/electric.dir/src/SocketDriver.cpp.o.requires
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/SocketDriver.cpp.o.provides.build
+.PHONY : CMakeFiles/electric.dir/src/SocketDriver.cpp.o.provides
+
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o.provides.build: CMakeFiles/electric.dir/src/SocketDriver.cpp.o
+
 # Object files for target electric
 electric_OBJECTS = \
 "CMakeFiles/electric.dir/src/main.cpp.o" \
 "CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o" \
 "CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o" \
 "CMakeFiles/electric.dir/src/RosNode.cpp.o" \
-"CMakeFiles/electric.dir/src/Timer.cpp.o"
+"CMakeFiles/electric.dir/src/Timer.cpp.o" \
+"CMakeFiles/electric.dir/src/SocketDriver.cpp.o"
 
 # External object files for target electric
 electric_EXTERNAL_OBJECTS =
@@ -242,6 +279,7 @@ bin/electric: CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o
 bin/electric: CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
 bin/electric: CMakeFiles/electric.dir/src/RosNode.cpp.o
 bin/electric: CMakeFiles/electric.dir/src/Timer.cpp.o
+bin/electric: CMakeFiles/electric.dir/src/SocketDriver.cpp.o
 bin/electric: CMakeFiles/electric.dir/build.make
 bin/electric: CMakeFiles/electric.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/electric"
@@ -256,6 +294,7 @@ CMakeFiles/electric.dir/requires: CMakeFiles/electric.dir/src/ElectricConnection
 CMakeFiles/electric.dir/requires: CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o.requires
 CMakeFiles/electric.dir/requires: CMakeFiles/electric.dir/src/RosNode.cpp.o.requires
 CMakeFiles/electric.dir/requires: CMakeFiles/electric.dir/src/Timer.cpp.o.requires
+CMakeFiles/electric.dir/requires: CMakeFiles/electric.dir/src/SocketDriver.cpp.o.requires
 .PHONY : CMakeFiles/electric.dir/requires
 
 CMakeFiles/electric.dir/clean:

@@ -56,6 +56,7 @@ CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: /opt/ros/groovy/inc
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: include/ElectricConnectionManager.h
+CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: include/SocketDriver.h
 CMakeFiles/electric.dir/src/ElectricConnectionManager.cpp.o: include/constant.h
 
 CMakeFiles/electric.dir/src/RosNode.cpp.o: src/RosNode.cpp
@@ -120,12 +121,17 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: /opt/ros/groovy/include/rosc
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/ElectricConnectionManager.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/RosNode.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/RosNode_Electric.h
+CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/SocketDriver.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/Timer.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/constant.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h
+
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: src/SocketDriver.cpp
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: include/SocketDriver.h
+CMakeFiles/electric.dir/src/SocketDriver.cpp.o: include/constant.h
 
 CMakeFiles/electric.dir/src/Timer.cpp.o: src/Timer.cpp
 CMakeFiles/electric.dir/src/Timer.cpp.o: include/Timer.h
@@ -188,6 +194,7 @@ CMakeFiles/electric.dir/src/main.cpp.o: /opt/ros/groovy/include/rosconsole/macro
 CMakeFiles/electric.dir/src/main.cpp.o: include/ElectricConnectionManager.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/RosNode.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/RosNode_Electric.h
+CMakeFiles/electric.dir/src/main.cpp.o: include/SocketDriver.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/Timer.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/constant.h
 CMakeFiles/electric.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h

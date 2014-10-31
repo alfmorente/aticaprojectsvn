@@ -546,6 +546,30 @@ src/RosNode_Electric.cpp.s:
 	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/RosNode_Electric.cpp.s
 .PHONY : src/RosNode_Electric.cpp.s
 
+src/SocketDriver.o: src/SocketDriver.cpp.o
+.PHONY : src/SocketDriver.o
+
+# target to build an object file
+src/SocketDriver.cpp.o:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/SocketDriver.cpp.o
+.PHONY : src/SocketDriver.cpp.o
+
+src/SocketDriver.i: src/SocketDriver.cpp.i
+.PHONY : src/SocketDriver.i
+
+# target to preprocess a source file
+src/SocketDriver.cpp.i:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/SocketDriver.cpp.i
+.PHONY : src/SocketDriver.cpp.i
+
+src/SocketDriver.s: src/SocketDriver.cpp.s
+.PHONY : src/SocketDriver.s
+
+# target to generate assembly for a file
+src/SocketDriver.cpp.s:
+	$(MAKE) -f CMakeFiles/electric.dir/build.make CMakeFiles/electric.dir/src/SocketDriver.cpp.s
+.PHONY : src/SocketDriver.cpp.s
+
 src/Timer.o: src/Timer.cpp.o
 .PHONY : src/Timer.o
 
@@ -641,6 +665,9 @@ help:
 	@echo "... src/RosNode_Electric.o"
 	@echo "... src/RosNode_Electric.i"
 	@echo "... src/RosNode_Electric.s"
+	@echo "... src/SocketDriver.o"
+	@echo "... src/SocketDriver.i"
+	@echo "... src/SocketDriver.s"
 	@echo "... src/Timer.o"
 	@echo "... src/Timer.i"
 	@echo "... src/Timer.s"

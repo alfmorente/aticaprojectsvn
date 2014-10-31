@@ -171,7 +171,7 @@ void RosNode_Electric::checkTurnOff() {
       // Enviar confirmacion de apagado                    
       dElectric->setTurnOff();
       // Desconexion del socket con vehiculo
-      dElectric->disconnectVehicle();
+      dElectric->disconnect();
       // Cambiar el estado del nodo para finalizar
       nodeStatus = NODESTATUS_OFF;
     } else {
