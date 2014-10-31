@@ -166,6 +166,7 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateZ = information.rateZ;
 
       pubPosOriInfo.publish(msgSnd);
+      
     }
 
   } else if (!gpsinsOK && magnOK) {
@@ -192,7 +193,6 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateY = information.gyrY;
       msgSnd.rateZ = information.gyrZ;
 
-      pubPosOriInfo.publish(msgSnd);
     }
 
   } else if (gpsinsOK && magnOK) {

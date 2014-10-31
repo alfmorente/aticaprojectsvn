@@ -66,6 +66,7 @@ int main(int argc, char** argv) {
                 ros::spinOnce();
                 // Requerimiento y publicacion de informacion de dispositivo GPS/INS
                 nodePosOri->publishInformation();
+                usleep(50000);
             }
         }
             // Bucle principal Funcionamiento parcial solo GPS/INS
@@ -75,22 +76,23 @@ int main(int argc, char** argv) {
                 ros::spinOnce();
                 // Requerimiento y publicacion de informacion de dispositivo GPS/INS
                 nodePosOri->publishInformation();
+                usleep(50000);
             }
         }
             // Bucle principal Funcionamiento parcial solo Mag
         else if (!nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
-            clock_t t0 = clock();
-            clock_t t1;
+            Timer *timer = new Timer();
+            timer->Enable();
             ROS_INFO("[Control] Position / Orientation - Funcionando solo con Magnetometro");
             while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
                 ros::spinOnce();
-                t1 = clock();
-                if ((float(t1 - t0) / CLOCKS_PER_SEC) >= 0.1) {
+                if (timer->GetTimed()>=FREC_10HZ) {
                     // Requerimiento y publicacion de informacion de dispositivo GPS/INS
                     nodePosOri->publishInformation();
-                    t0 = clock();
+                    usleep(50000);
                 }
             }
+            delete(timer);
         }
 
         // Desconectar dispositivo GPS/INS
