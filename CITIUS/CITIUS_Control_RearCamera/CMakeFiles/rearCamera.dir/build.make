@@ -190,12 +190,49 @@ CMakeFiles/rearCamera.dir/src/RosNode.cpp.o.provides: CMakeFiles/rearCamera.dir/
 
 CMakeFiles/rearCamera.dir/src/RosNode.cpp.o.provides.build: CMakeFiles/rearCamera.dir/src/RosNode.cpp.o
 
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: CMakeFiles/rearCamera.dir/flags.make
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: src/Timer.cpp
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: manifest.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/rearCamera.dir/src/Timer.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/rearCamera.dir/src/Timer.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/Timer.cpp
+
+CMakeFiles/rearCamera.dir/src/Timer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rearCamera.dir/src/Timer.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/Timer.cpp > CMakeFiles/rearCamera.dir/src/Timer.cpp.i
+
+CMakeFiles/rearCamera.dir/src/Timer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rearCamera.dir/src/Timer.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/Timer.cpp -o CMakeFiles/rearCamera.dir/src/Timer.cpp.s
+
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o.requires:
+.PHONY : CMakeFiles/rearCamera.dir/src/Timer.cpp.o.requires
+
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o.provides: CMakeFiles/rearCamera.dir/src/Timer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/rearCamera.dir/build.make CMakeFiles/rearCamera.dir/src/Timer.cpp.o.provides.build
+.PHONY : CMakeFiles/rearCamera.dir/src/Timer.cpp.o.provides
+
+CMakeFiles/rearCamera.dir/src/Timer.cpp.o.provides.build: CMakeFiles/rearCamera.dir/src/Timer.cpp.o
+
 # Object files for target rearCamera
 rearCamera_OBJECTS = \
 "CMakeFiles/rearCamera.dir/src/main.cpp.o" \
 "CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o" \
 "CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o" \
-"CMakeFiles/rearCamera.dir/src/RosNode.cpp.o"
+"CMakeFiles/rearCamera.dir/src/RosNode.cpp.o" \
+"CMakeFiles/rearCamera.dir/src/Timer.cpp.o"
 
 # External object files for target rearCamera
 rearCamera_EXTERNAL_OBJECTS =
@@ -204,6 +241,7 @@ bin/rearCamera: CMakeFiles/rearCamera.dir/src/main.cpp.o
 bin/rearCamera: CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o
 bin/rearCamera: CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o
 bin/rearCamera: CMakeFiles/rearCamera.dir/src/RosNode.cpp.o
+bin/rearCamera: CMakeFiles/rearCamera.dir/src/Timer.cpp.o
 bin/rearCamera: CMakeFiles/rearCamera.dir/build.make
 bin/rearCamera: CMakeFiles/rearCamera.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/rearCamera"
@@ -217,6 +255,7 @@ CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/main.cpp.o.req
 CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/RosNode_RearCamera.cpp.o.requires
 CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/AxisP3364LveDriver.cpp.o.requires
 CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/RosNode.cpp.o.requires
+CMakeFiles/rearCamera.dir/requires: CMakeFiles/rearCamera.dir/src/Timer.cpp.o.requires
 .PHONY : CMakeFiles/rearCamera.dir/requires
 
 CMakeFiles/rearCamera.dir/clean:
