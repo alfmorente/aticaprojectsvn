@@ -93,5 +93,6 @@ void RosNode_FrontCamera::manageDevice() {
         rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
         rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
         pubFrontCameraInfo.publish(rcMsg);
+        usleep(50000);
     }
 }

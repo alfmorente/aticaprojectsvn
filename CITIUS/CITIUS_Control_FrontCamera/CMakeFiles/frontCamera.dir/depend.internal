@@ -72,6 +72,9 @@ CMakeFiles/frontCamera.dir/src/RosNode_FrontCamera.cpp.o
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_frontCameraInfo.h
  srv_gen/cpp/include/CITIUS_Control_FrontCamera/srv_nodeStatus.h
+CMakeFiles/frontCamera.dir/src/Timer.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/Timer.cpp
+ include/Timer.h
 CMakeFiles/frontCamera.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_FrontCamera/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
@@ -131,6 +134,7 @@ CMakeFiles/frontCamera.dir/src/main.cpp.o
  include/AxisP3364LveDriver.h
  include/RosNode.h
  include/RosNode_FrontCamera.h
+ include/Timer.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_ctrlFrontCamera.h
  msg_gen/cpp/include/CITIUS_Control_FrontCamera/msg_frontCameraInfo.h
