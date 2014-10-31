@@ -20,8 +20,8 @@ RosNode_FrontCamera::RosNode_FrontCamera() {
 /**
  * Destructor de la clase
  */
-RosNode_FrontCamera::~RosNode_FrontCamera(){
-    delete(dFrontCamera);
+RosNode_FrontCamera::~RosNode_FrontCamera() {
+  delete(dFrontCamera);
 }
 
 /**
@@ -81,18 +81,18 @@ AxisP3364LveDriver *RosNode_FrontCamera::getDriverMng() {
  * real y lo publica mediante el topic correspondiente
  */
 void RosNode_FrontCamera::manageDevice() {
-    dFrontCamera->sendSetToDevice(ORDER_PAN, dFrontCamera->getPan());
-    dFrontCamera->sendSetToDevice(ORDER_TILT, dFrontCamera->getTilt());
-    dFrontCamera->sendSetToDevice(ORDER_ZOOM, dFrontCamera->getZoom());
+  dFrontCamera->sendSetToDevice(ORDER_PAN, dFrontCamera->getPan());
+  dFrontCamera->sendSetToDevice(ORDER_TILT, dFrontCamera->getTilt());
+  dFrontCamera->sendSetToDevice(ORDER_ZOOM, dFrontCamera->getZoom());
 
-    // Requerimiento de informacion de dispositivo
-    LensPosition lensPos = dFrontCamera->getPosition();
-    if (lensPos.state) {
-        CITIUS_Control_FrontCamera::msg_frontCameraInfo rcMsg;
-        rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-        rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-        rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-        pubFrontCameraInfo.publish(rcMsg);
-        usleep(50000);
-    }
+  // Requerimiento de informacion de dispositivo
+  LensPosition lensPos = dFrontCamera->getPosition();
+  if (lensPos.state) {
+    CITIUS_Control_FrontCamera::msg_frontCameraInfo rcMsg;
+    rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    pubFrontCameraInfo.publish(rcMsg);
+    usleep(50000);
+  }
 }

@@ -42,12 +42,12 @@ int main(int argc, char** argv) {
 
       // Recepcion de mensaje
       ros::spinOnce();
-      
+
       // Comprobación del temporizador y requerimiento de info
       if (timer->GetTimed() >= FREC_2HZ) {
 
         // Clear del timer
-          timer->Reset();
+        timer->Reset();
         // Envio de estado, requerimiento de info y publicacion
         fc->manageDevice();
 
