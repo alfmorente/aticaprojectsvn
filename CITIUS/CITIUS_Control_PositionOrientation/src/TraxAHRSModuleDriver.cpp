@@ -40,37 +40,37 @@ TraxAHRSModuleDriver::~TraxAHRSModuleDriver() {
  * @param parameter Identificador del campo a buscar en el fichero
  * @return String con el resultado de la búsqueda
  */
-string TraxAHRSModuleDriver::getValueFromConfig(string parameter){
-    
-    int pos;
-    string cadena,parametro, value="";
-    bool found = false;
-    ifstream fichero;
-    fichero.open("socket_MAGN.conf");
+string TraxAHRSModuleDriver::getValueFromConfig(string parameter) {
 
-    if (!fichero.is_open()) {
-        return "";
-    }
+  int pos;
+  string cadena, parametro, value = "";
+  bool found = false;
+  ifstream fichero;
+  fichero.open("socket_MAGN.conf");
 
-    while (!fichero.eof() && !found) {
-        getline(fichero, cadena);
-        if (cadena[0] != '#' && cadena[0] != NULL) {
-            pos = cadena.find(":");
-            if (pos != -1) {
-                parametro = cadena.substr(0, pos);
-                if(parametro == parameter){
-                    value = cadena.substr(pos + 1);
-                    while(isspace(value[0])){
-                        value = value.substr(1);
-                    }
-                    found = true;
-                }
-            }
+  if (!fichero.is_open()) {
+    return "";
+  }
+
+  while (!fichero.eof() && !found) {
+    getline(fichero, cadena);
+    if (cadena[0] != '#' && cadena[0] != NULL) {
+      pos = cadena.find(":");
+      if (pos != -1) {
+        parametro = cadena.substr(0, pos);
+        if (parametro == parameter) {
+          value = cadena.substr(pos + 1);
+          while (isspace(value[0])) {
+            value = value.substr(1);
+          }
+          found = true;
         }
+      }
     }
-    fichero.close();
-    
-    return value;
+  }
+  fichero.close();
+
+  return value;
 
 }
 
@@ -81,29 +81,29 @@ string TraxAHRSModuleDriver::getValueFromConfig(string parameter){
 bool TraxAHRSModuleDriver::connectToDevice() {
 
   string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
-    if(ip=="")  return false;
-    
-    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
-    if(port=="") return false;
+  if (ip == "") return false;
 
-    if ((he = gethostbyname(ip.c_str())) == NULL)  return false;
+  string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+  if (port == "") return false;
 
-    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-        close(socketDescriptor);
-        usleep(500);
-        return false;
-    }
-    server.sin_family = AF_INET;
-    server.sin_port = htons(atoi(port.c_str()));
-    server.sin_addr = *((struct in_addr *) he->h_addr);
-    bzero(&(server.sin_zero), 8);
-    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-        close(socketDescriptor);
-        usleep(500);
-        return false;
-    }
+  if ((he = gethostbyname(ip.c_str())) == NULL) return false;
+
+  if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+    close(socketDescriptor);
     usleep(500);
-    return true;
+    return false;
+  }
+  server.sin_family = AF_INET;
+  server.sin_port = htons(atoi(port.c_str()));
+  server.sin_addr = *((struct in_addr *) he->h_addr);
+  bzero(&(server.sin_zero), 8);
+  if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+    close(socketDescriptor);
+    usleep(500);
+    return false;
+  }
+  usleep(500);
+  return true;
 
 }
 

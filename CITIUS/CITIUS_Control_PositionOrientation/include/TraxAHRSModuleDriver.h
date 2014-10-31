@@ -35,7 +35,6 @@
 
 using namespace std;
 
-
 /**
  * \class TraxAHRSModuleDriver
  * \brief Clase que representa al driver de comunicación con el dispositivo
@@ -48,7 +47,7 @@ private:
   // Socket
   int socketDescriptor;
   struct hostent *he;
-  struct sockaddr_in server;  
+  struct sockaddr_in server;
   // Operaciones a bajo nivel
   string getValueFromConfig(string parameter);
   TraxMsg kGetModInfo();

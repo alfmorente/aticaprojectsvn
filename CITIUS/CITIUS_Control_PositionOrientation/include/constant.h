@@ -23,12 +23,12 @@
  * \enum NodeStatus
  * \brief Tipos para estado local de nodo
  */
-typedef enum{
-  NODESTATUS_INIT = 0 , ///<Identificador del estado INIT de la máquina de estados de nodo
-  NODESTATUS_OK = 1 , ///<Identificador del estado OK de la máquina de estados de nodo
-  NODESTATUS_CORRUPT = 2 , ///<Identificador del estado CORRUPT de la máquina de estados de nodo
+typedef enum {
+  NODESTATUS_INIT = 0, ///<Identificador del estado INIT de la máquina de estados de nodo
+  NODESTATUS_OK = 1, ///<Identificador del estado OK de la máquina de estados de nodo
+  NODESTATUS_CORRUPT = 2, ///<Identificador del estado CORRUPT de la máquina de estados de nodo
   NODESTATUS_OFF = 3 ///<Identificador del estado OFF de la máquina de estados de nodo
-}NodeStatus;
+} NodeStatus;
 
 /*******************************************************************************
  * FRECUENCIA -> PERIODO
@@ -141,7 +141,7 @@ typedef struct {
  * \brief Estructura contenedor de las medidas obtenidas de una trama de datos
  * XSens
  */
-typedef struct{
+typedef struct {
   // Estado
   short positionStatus; ///<Valor del estado de la posicion
   short orientationStatus; ///<Valor del estado de la orientacion
@@ -172,12 +172,12 @@ typedef struct{
  * \brief Estructura para descomposición de trama XSens
  */
 typedef struct {
-    unsigned char pre; ///<Valor en crudo del campo PRE de la trama
-    unsigned char bid; ///<Valor en crudo del campo BID de la trama
-    unsigned char mid; ///<Valor en crudo del campo MID de la trama
-    unsigned char len; ///<Valor en crudo del campo LEN de la trama
-    std::vector<unsigned char> data; ///<Datos en crudo de la trama
-    unsigned char cs; ///<Valor en crudo del campo CS de la trama
+  unsigned char pre; ///<Valor en crudo del campo PRE de la trama
+  unsigned char bid; ///<Valor en crudo del campo BID de la trama
+  unsigned char mid; ///<Valor en crudo del campo MID de la trama
+  unsigned char len; ///<Valor en crudo del campo LEN de la trama
+  std::vector<unsigned char> data; ///<Datos en crudo de la trama
+  unsigned char cs; ///<Valor en crudo del campo CS de la trama
 } XsensMsg;
 
 /**

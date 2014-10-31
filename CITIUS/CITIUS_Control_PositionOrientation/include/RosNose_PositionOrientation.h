@@ -30,9 +30,8 @@ using namespace std;
  * \class RosNode_PositionOrientation
  * \brief Clase que representa al nodo ROS que gestiona la comunicación con los
  * dispositivos que obtiene la posición y orientación del vehículo
-*/
-class RosNode_PositionOrientation: public RosNode {
-  
+ */
+class RosNode_PositionOrientation : public RosNode {
 private:
   // Publicador de informacion de Posicion/Orientacion
   ros::Publisher pubPosOriInfo;

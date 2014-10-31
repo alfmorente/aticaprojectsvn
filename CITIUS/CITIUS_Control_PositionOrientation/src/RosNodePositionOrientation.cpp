@@ -166,7 +166,7 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateZ = information.rateZ;
 
       pubPosOriInfo.publish(msgSnd);
-      
+
     }
 
   } else if (!gpsinsOK && magnOK) {

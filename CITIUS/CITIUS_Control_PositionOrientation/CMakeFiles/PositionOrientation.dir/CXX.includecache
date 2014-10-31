@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.cpp
+RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNode.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNodePositionOrientation.cpp
 RosNose_PositionOrientation.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/RosNose_PositionOrientation.h
@@ -17,6 +21,18 @@ unistd.h
 -
 sys/time.h
 -
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.cpp
+TraxAHRSModuleDriver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/TraxAHRSModuleDriver.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.cpp
+XSensMTi700Driver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/XSensMTi700Driver.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/crc16calc.cpp
+crc16calc.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/crc16calc.h
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/src/main.cpp
 RosNose_PositionOrientation.h
