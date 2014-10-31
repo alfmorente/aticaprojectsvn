@@ -34,27 +34,26 @@ int main(int argc, char** argv) {
     ROS_INFO("[Control] FrontCamera - Nodo listo para operar");
 
     // Temporizador de requerimiento de informacion
-    clock_t initTime, finalTime;
-    initTime = clock();
+    Timer *timer = new Timer();
+    timer->Enable();
 
     //Bucle principal
     while (ros::ok() && fc->getNodeStatus() != NODESTATUS_OFF) {
 
       // Recepcion de mensaje
       ros::spinOnce();
+      
       // Comprobación del temporizador y requerimiento de info
-      finalTime = clock() - initTime;
-
-      if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_2HZ) {
+      if (timer->GetTimed() >= FREC_2HZ) {
 
         // Clear del timer
-        initTime = clock();
-        
+          timer->Reset();
         // Envio de estado, requerimiento de info y publicacion
         fc->manageDevice();
 
       }
     }
+    delete(timer);
   } else {
     ROS_INFO("[Control] FrontCamera - No se puede conectar con la camara");
   }

@@ -21,6 +21,7 @@
 #include "CITIUS_Control_FrontCamera/msg_frontCameraInfo.h"
 #include "CITIUS_Control_FrontCamera/srv_nodeStatus.h"
 #include "ros/ros.h"
+#include "Timer.h"
 #include <cstdlib>
 
 using namespace std;

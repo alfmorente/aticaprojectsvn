@@ -14,6 +14,7 @@
         <in>AxisP3364LveDriver.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_FrontCamera.cpp</in>
+        <in>Timer.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -214,6 +215,8 @@
       <item path="src/RosNode_FrontCamera.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
