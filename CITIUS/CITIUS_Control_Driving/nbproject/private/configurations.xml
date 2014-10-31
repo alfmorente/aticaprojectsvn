@@ -114,6 +114,7 @@
         <in>DrivingConnectionManager.h</in>
         <in>RosNode.h</in>
         <in>RosNode_Driving.h</in>
+        <in>SocketDriver.h</in>
         <in>Timer.h</in>
         <in>constant.h</in>
       </df>
@@ -143,6 +144,7 @@
         <in>DrivingConnectionManager.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_Driving.cpp</in>
+        <in>SocketDriver.cpp</in>
         <in>Timer.cpp</in>
         <in>main.cpp</in>
       </df>

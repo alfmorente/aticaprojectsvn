@@ -152,6 +152,15 @@ typedef enum {
 #define FREC_1HZ 1 ///<Periodo para ejecución de rutinas con frecuencia 1Hz
 
 /*******************************************************************************
+ * IDENTIFICADORES DE DISPOSITIVO
+ ******************************************************************************/
+
+#define DEVICE_XSENS 1 ///<Identificador para abrir el fichero de configuración del socket XSENS
+#define DEVICE_AHRS 2 ///<Identificador para abrir el fichero de configuración del socket AHRS
+#define DEVICE_DRIVING 3 ///<Identificador para abrir el fichero de configuración del socket DRIVING
+#define DEVICE_ELECTRIC 4 ///<Identificador para abrir el fichero de configuración del socket ELECTRIC
+
+/*******************************************************************************
  *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
  *******************************************************************************/
 

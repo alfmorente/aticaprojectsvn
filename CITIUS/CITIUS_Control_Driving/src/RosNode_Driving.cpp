@@ -90,7 +90,7 @@ bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus
     nodeStatus = NODESTATUS_OK;
     rsp.confirmation = true;
   } else if (rq.status == NODESTATUS_OFF) {
-    getDriverMng()->disconnectVehicle();
+    dVehicle->disconnect();
     nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {

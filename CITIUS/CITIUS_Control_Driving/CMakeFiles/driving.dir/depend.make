@@ -56,6 +56,7 @@ CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/inclu
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/include/ros/wall_timer_options.h
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/include/rosconsole/macros_generated.h
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/DrivingConnectionManager.h
+CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/SocketDriver.h
 CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: include/constant.h
 
 CMakeFiles/driving.dir/src/RosNode.cpp.o: src/RosNode.cpp
@@ -120,11 +121,16 @@ CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: /opt/ros/groovy/include/roscon
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/DrivingConnectionManager.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/RosNode.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/RosNode_Driving.h
+CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/SocketDriver.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/Timer.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: include/constant.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_vehicleInfo.h
 CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o: srv_gen/cpp/include/CITIUS_Control_Driving/srv_nodeStatus.h
+
+CMakeFiles/driving.dir/src/SocketDriver.cpp.o: src/SocketDriver.cpp
+CMakeFiles/driving.dir/src/SocketDriver.cpp.o: include/SocketDriver.h
+CMakeFiles/driving.dir/src/SocketDriver.cpp.o: include/constant.h
 
 CMakeFiles/driving.dir/src/Timer.cpp.o: src/Timer.cpp
 CMakeFiles/driving.dir/src/Timer.cpp.o: include/Timer.h
@@ -187,6 +193,7 @@ CMakeFiles/driving.dir/src/main.cpp.o: /opt/ros/groovy/include/rosconsole/macros
 CMakeFiles/driving.dir/src/main.cpp.o: include/DrivingConnectionManager.h
 CMakeFiles/driving.dir/src/main.cpp.o: include/RosNode.h
 CMakeFiles/driving.dir/src/main.cpp.o: include/RosNode_Driving.h
+CMakeFiles/driving.dir/src/main.cpp.o: include/SocketDriver.h
 CMakeFiles/driving.dir/src/main.cpp.o: include/Timer.h
 CMakeFiles/driving.dir/src/main.cpp.o: include/constant.h
 CMakeFiles/driving.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Driving/msg_command.h

@@ -14,6 +14,7 @@
         <in>DrivingConnectionManager.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_Driving.cpp</in>
+        <in>SocketDriver.cpp</in>
         <in>Timer.cpp</in>
         <in>main.cpp</in>
       </df>
@@ -217,11 +218,11 @@
       <item path="src/DrivingConnectionManager.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
           <incDir>
+            <pElem>include</pElem>
             <pElem>/opt/ros/groovy/include</pElem>
             <pElem>msg_gen/cpp/include</pElem>
             <pElem>srv_gen/cpp/include</pElem>
             <pElem>.</pElem>
-            <pElem>include</pElem>
           </incDir>
         </ccTool>
       </item>
@@ -247,7 +248,7 @@
           </incDir>
         </ccTool>
       </item>
-      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/SocketDriver.cpp" ex="false" tool="1" flavor2="0">
         <ccTool>
           <incDir>
             <pElem>include</pElem>
@@ -255,6 +256,17 @@
             <pElem>msg_gen/cpp/include</pElem>
             <pElem>srv_gen/cpp/include</pElem>
             <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>msg_gen/cpp/include</pElem>
+            <pElem>srv_gen/cpp/include</pElem>
+            <pElem>.</pElem>
+            <pElem>include</pElem>
           </incDir>
         </ccTool>
       </item>

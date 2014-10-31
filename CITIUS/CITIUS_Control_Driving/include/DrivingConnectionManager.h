@@ -16,6 +16,7 @@
 #include <vector>
 #include "ros/ros.h"
 #include "constant.h"
+#include "SocketDriver.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,10 +35,8 @@ using namespace std;
  * \brief Clase que representa al driver de comunicación con el módulo de
  * conducción del vehículo
  */
-class DrivingConnectionManager {
+class DrivingConnectionManager: public SocketDriver {
 private:
-  // Socket
-  int socketDescriptor;
   // Contador para la cola de mensajes (Integridad)
   short countMsg;
   // Manejador de la cola de mensajes (Integridad)
@@ -58,10 +57,6 @@ public:
   DrivingConnectionManager();
   // Destructor
   ~DrivingConnectionManager();
-  // Gestion del vehiculo
-  string getValueFromConfig(string parameter);
-  bool connectVehicle();
-  bool disconnectVehicle();
   // Mensajeria con vehiculo
   void sendToVehicle(FrameDriving frame);
   void reqVehicleInfo(bool full);
