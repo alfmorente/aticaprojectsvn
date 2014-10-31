@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     ros::spinOnce();
     usleep(100000);
   }
-  
+
   delete(manager);
   ROS_INFO("[Control] Manager - Nodo finalizado");
 

@@ -26,7 +26,7 @@ using namespace std;
 /**
  * \class Manager
  * \brief Clase que representa al nodo ROS Manager
-*/
+ */
 class Manager {
 public:
   Manager();
