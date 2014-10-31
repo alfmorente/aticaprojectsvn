@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.cpp
-Manager.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/main.cpp
 Manager.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/Manager.h
