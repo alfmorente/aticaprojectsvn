@@ -32,35 +32,35 @@ AxisP3364LveDriver::~AxisP3364LveDriver() {
  */
 string AxisP3364LveDriver::getValueFromConfig(string parameter) {
 
-    int pos;
-    string cadena, parametro, value = "";
-    bool found = false;
-    ifstream fichero;
-    fichero.open("socket.conf");
+  int pos;
+  string cadena, parametro, value = "";
+  bool found = false;
+  ifstream fichero;
+  fichero.open("socket.conf");
 
-    if (!fichero.is_open()) {
-        return "";
-    }
+  if (!fichero.is_open()) {
+    return "";
+  }
 
-    while (!fichero.eof() && !found) {
-        getline(fichero, cadena);
-        if (cadena[0] != '#' && cadena[0] != NULL) {
-            pos = cadena.find(":");
-            if (pos != -1) {
-                parametro = cadena.substr(0, pos);
-                if (parametro == parameter) {
-                    value = cadena.substr(pos + 1);
-                    while (isspace(value[0])) {
-                        value = value.substr(1);
-                    }
-                    found = true;
-                }
-            }
+  while (!fichero.eof() && !found) {
+    getline(fichero, cadena);
+    if (cadena[0] != '#' && cadena[0] != NULL) {
+      pos = cadena.find(":");
+      if (pos != -1) {
+        parametro = cadena.substr(0, pos);
+        if (parametro == parameter) {
+          value = cadena.substr(pos + 1);
+          while (isspace(value[0])) {
+            value = value.substr(1);
+          }
+          found = true;
         }
+      }
     }
-    fichero.close();
+  }
+  fichero.close();
 
-    return value;
+  return value;
 
 }
 
@@ -69,16 +69,16 @@ string AxisP3364LveDriver::getValueFromConfig(string parameter) {
  * @return Booleano que indica si la cámara está operativa para ser utilizada
  */
 bool AxisP3364LveDriver::checkConnection() {
-    
-    string ipFile = getValueFromConfig(CONFIG_FILE_IP_NAME);
-    if (ipFile == "") return false;
-    
-    ip_address = ipFile.c_str();
 
-    string portFile = getValueFromConfig(CONFIG_FILE_PORT_NAME);
-    if (portFile == "") return false;
-    
-    port = atoi(portFile.c_str());
+  string ipFile = getValueFromConfig(CONFIG_FILE_IP_NAME);
+  if (ipFile == "") return false;
+
+  ip_address = ipFile.c_str();
+
+  string portFile = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+  if (portFile == "") return false;
+
+  port = atoi(portFile.c_str());
 
   if ((he = gethostbyname(ip_address)) == NULL) {
     return false;

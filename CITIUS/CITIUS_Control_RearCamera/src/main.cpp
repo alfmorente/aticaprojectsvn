@@ -47,11 +47,11 @@ int main(int argc, char** argv) {
       if (timer->GetTimed() >= FREC_2HZ) {
 
         // Clear del timer
-          timer->Reset();
-        
+        timer->Reset();
+
         // Envio de estado, requerimiento de info y publicacion
         rc->manageDevice();
-        
+
       }
     }
     delete(timer);

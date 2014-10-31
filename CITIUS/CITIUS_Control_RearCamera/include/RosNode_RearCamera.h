@@ -28,8 +28,8 @@
  * \class RosNode_RearCamera
  * \brief Clase que representa al nodo ROS que gestiona la comunicación con la
  * cámara de apoyo a la conducción
-*/
-class RosNode_RearCamera: public RosNode {
+ */
+class RosNode_RearCamera : public RosNode {
 private:
   // Publicador de informacion de camara
   ros::Publisher pubRearCameraInfo;
