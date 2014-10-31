@@ -30,16 +30,16 @@ RosNode_Communications *RosNode_Communications::getInstance() {
  */
 RosNode_Communications::RosNode_Communications() {
   subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
-    //subsystemController = JAUS_SUBSYSTEM_UGV;
-    nodeController = JAUS_NODE_CONTROL; // Control
-    nodeStatus = NODESTATUS_INIT;
+  //subsystemController = JAUS_SUBSYSTEM_UGV;
+  nodeController = JAUS_NODE_CONTROL; // Control
+  nodeStatus = NODESTATUS_INIT;
 }
 
 /**
  * Destructor de la clase
  */
-RosNode_Communications::~RosNode_Communications(){
-    
+RosNode_Communications::~RosNode_Communications() {
+
 }
 
 /** 
@@ -333,7 +333,6 @@ void RosNode_Communications::fnc_subs_frontCameraInfo(CITIUS_Control_Communicati
   // Destruccion del mensaje
   jausMessageDestroy(jMsg);
 }
-
 
 /**
  * Método privado encargado del tratamiento de servicios para la modificación de
@@ -812,7 +811,7 @@ void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage
 
     instance->pubCtrlFrontCamera.publish(fcCommand);
 
-  }    // Camara trasera
+  }// Camara trasera
   else if (sCameraPose->cameraID == REAR_CAMERA_ID) {
 
     CITIUS_Control_Communication::msg_ctrlRearCamera rcCommand;
