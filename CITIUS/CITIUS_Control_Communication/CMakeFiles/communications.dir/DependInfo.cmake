@@ -7,6 +7,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/communications.dir/src/JausHandler.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/communications.dir/src/RosNode.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o"
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/communications.dir/src/Timer.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles/communications.dir/src/main.cpp.o"
   )

@@ -31,31 +31,32 @@ int main(int argc, char** argv) {
   
   ROS_INFO("[Control] Communications - Nodo listo para operar");
 
-  // Temporizador de envio de estado
-  clock_t initTime, finalTime;
-  initTime = clock();
-
   // Control del modo de operacion del vehiculo
   ros::NodeHandle nh;
 
+  // Temporizador de envio de estado
+  Timer *timer = new Timer();
+  timer->Enable();
+  
   while (ros::ok() && nodeComm->getNodeStatus() != NODESTATUS_OFF) {
 
     // Recepcion de mensajeria ROS
     ros::spinOnce();
 
     // Temporizador para envio de estado
-    finalTime = clock() - initTime;
-    if (((double) finalTime / ((double) CLOCKS_PER_SEC)) >= FREC_10HZ) {
+    if (timer->GetTimed() >= FREC_10HZ) {
 
       // Clear del timer
-      initTime = clock();
+        timer->Reset();
       // Requerimiento de informacion de dispositivo
       nodeComm->informStatus();
 
     }
+    usleep(50000);
 
   }
   nodeComm->finishJAUS();
+  delete(timer);
   delete(nodeComm);
 
   ROS_INFO("[Control] Communications - Nodo finalizado");

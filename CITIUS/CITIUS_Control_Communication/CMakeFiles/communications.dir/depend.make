@@ -300,6 +300,7 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/JausHandler.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/RosNode.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/RosNode_Communications.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/Timer.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/TranslatorROSJAUS.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: include/constant.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: lib/libjaus/include/jaus.h
@@ -561,6 +562,9 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/incl
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_vehicleStatus.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomCommand.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: srv_gen/cpp/include/CITIUS_Control_Communication/srv_zoomDirect.h
+
+CMakeFiles/communications.dir/src/Timer.cpp.o: src/Timer.cpp
+CMakeFiles/communications.dir/src/Timer.cpp.o: include/Timer.h
 
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: src/TranslatorROSJAUS.cpp
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: include/TranslatorROSJAUS.h
@@ -858,6 +862,7 @@ CMakeFiles/communications.dir/src/main.cpp.o: /opt/ros/groovy/include/rosconsole
 CMakeFiles/communications.dir/src/main.cpp.o: include/JausHandler.h
 CMakeFiles/communications.dir/src/main.cpp.o: include/RosNode.h
 CMakeFiles/communications.dir/src/main.cpp.o: include/RosNode_Communications.h
+CMakeFiles/communications.dir/src/main.cpp.o: include/Timer.h
 CMakeFiles/communications.dir/src/main.cpp.o: include/TranslatorROSJAUS.h
 CMakeFiles/communications.dir/src/main.cpp.o: include/constant.h
 CMakeFiles/communications.dir/src/main.cpp.o: lib/libjaus/include/jaus.h

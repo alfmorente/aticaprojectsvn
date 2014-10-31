@@ -546,6 +546,30 @@ src/RosNode_Communications.cpp.s:
 	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s
 .PHONY : src/RosNode_Communications.cpp.s
 
+src/Timer.o: src/Timer.cpp.o
+.PHONY : src/Timer.o
+
+# target to build an object file
+src/Timer.cpp.o:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/Timer.cpp.o
+.PHONY : src/Timer.cpp.o
+
+src/Timer.i: src/Timer.cpp.i
+.PHONY : src/Timer.i
+
+# target to preprocess a source file
+src/Timer.cpp.i:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/Timer.cpp.i
+.PHONY : src/Timer.cpp.i
+
+src/Timer.s: src/Timer.cpp.s
+.PHONY : src/Timer.s
+
+# target to generate assembly for a file
+src/Timer.cpp.s:
+	$(MAKE) -f CMakeFiles/communications.dir/build.make CMakeFiles/communications.dir/src/Timer.cpp.s
+.PHONY : src/Timer.cpp.s
+
 src/TranslatorROSJAUS.o: src/TranslatorROSJAUS.cpp.o
 .PHONY : src/TranslatorROSJAUS.o
 
@@ -641,6 +665,9 @@ help:
 	@echo "... src/RosNode_Communications.o"
 	@echo "... src/RosNode_Communications.i"
 	@echo "... src/RosNode_Communications.s"
+	@echo "... src/Timer.o"
+	@echo "... src/Timer.i"
+	@echo "... src/Timer.s"
 	@echo "... src/TranslatorROSJAUS.o"
 	@echo "... src/TranslatorROSJAUS.i"
 	@echo "... src/TranslatorROSJAUS.s"
