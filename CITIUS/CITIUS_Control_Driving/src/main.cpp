@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 
   RosNode_Driving *nodeDriving = new RosNode_Driving();
 
-  if (nodeDriving->getDriverMng()->connectVehicle()) {
+  if (nodeDriving->getDriverMng()->doConnect(DEVICE_DRIVING)) {
     // Inicio de artefactos ROS
     nodeDriving->initROS();
 

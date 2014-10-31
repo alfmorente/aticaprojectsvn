@@ -10,6 +10,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o"
   "CMakeFiles/driving.dir/src/RosNode.cpp.o"
   "CMakeFiles/driving.dir/src/Timer.cpp.o"
+  "CMakeFiles/driving.dir/src/SocketDriver.cpp.o"
   "bin/driving.pdb"
   "bin/driving"
 )
