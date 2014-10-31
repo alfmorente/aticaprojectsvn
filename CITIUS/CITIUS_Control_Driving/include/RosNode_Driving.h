@@ -25,8 +25,8 @@
  * \class RosNode_Driving
  * \brief Clase que representa al nodo ROS que gestiona la comunicación con el 
  * módulo de conducción del vehículo
-*/
-class RosNode_Driving: public RosNode {
+ */
+class RosNode_Driving : public RosNode {
 private:
   // Publicador de informacion de camara
   ros::Publisher pubVehicleInfo;

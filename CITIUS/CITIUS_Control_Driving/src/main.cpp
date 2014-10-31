@@ -32,15 +32,15 @@ int main(int argc, char** argv) {
       ros::spinOnce();
     }
     if (nodeDriving->getNodeStatus() == NODESTATUS_OK)
-      ROS_INFO("[Control] Driving - Nodo listo para operar");    
-    
+      ROS_INFO("[Control] Driving - Nodo listo para operar");
+
     // Conteo de 5 hz -> 5 * 1hz (Vehiculo 5Hz, Senalizacion 1Hz))
     short hzCount = 0;
-    
+
     // Temporizador de requerimiento de informacion
-    Timer *timer = new Timer();    
+    Timer *timer = new Timer();
     timer->Enable();
-        
+
     //Bucle principal
     while (ros::ok() && nodeDriving->getNodeStatus() != NODESTATUS_OFF) {
       if (nodeDriving->getDriverMng()->getSocketDescriptor() == -1) {
@@ -49,21 +49,21 @@ int main(int argc, char** argv) {
 
         // Comprobacion de recepcion de mensaje ROS
         ros::spinOnce();
-        
+
         // Comprobacion de recpcion de mensajes de vehiculo
         nodeDriving->getDriverMng()->checkForVehicleMessages();
-        
+
         // Comprobacion de alarmas
         // TODO
-        
+
         // Comprobación del temporizador y requerimiento de info
-        if(timer->GetTimed() >= FREC_5HZ){
-            
-            // Clear del timer
-            timer->Reset();
+        if (timer->GetTimed() >= FREC_5HZ) {
+
+          // Clear del timer
+          timer->Reset();
 
           hzCount++;
-          
+
           if (hzCount == 5) {
 
             hzCount = 0;

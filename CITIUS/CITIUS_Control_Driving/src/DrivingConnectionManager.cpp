@@ -36,7 +36,7 @@ DrivingConnectionManager::DrivingConnectionManager() {
 /**
  * Destructor de la clase
  */
-DrivingConnectionManager::~DrivingConnectionManager(){
+DrivingConnectionManager::~DrivingConnectionManager() {
 
 }
 
@@ -46,37 +46,37 @@ DrivingConnectionManager::~DrivingConnectionManager(){
  * @param parameter Identificador del campo a buscar en el fichero
  * @return String con el resultado de la búsqueda
  */
-string DrivingConnectionManager::getValueFromConfig(string parameter){
-    
-    int pos;
-    string cadena,parametro, value="";
-    bool found = false;
-    ifstream fichero;
-    fichero.open("socket.conf");
+string DrivingConnectionManager::getValueFromConfig(string parameter) {
 
-    if (!fichero.is_open()) {
-        return "";
-    }
+  int pos;
+  string cadena, parametro, value = "";
+  bool found = false;
+  ifstream fichero;
+  fichero.open("socket.conf");
 
-    while (!fichero.eof() && !found) {
-        getline(fichero, cadena);
-        if (cadena[0] != '#' && cadena[0] != NULL) {
-            pos = cadena.find(":");
-            if (pos != -1) {
-                parametro = cadena.substr(0, pos);
-                if (parametro == parameter) {
-                    value = cadena.substr(pos + 1);
-                    while (isspace(value[0])) {
-                        value = value.substr(1);
-                    }
-                    found = true;
-                }
-            }
+  if (!fichero.is_open()) {
+    return "";
+  }
+
+  while (!fichero.eof() && !found) {
+    getline(fichero, cadena);
+    if (cadena[0] != '#' && cadena[0] != NULL) {
+      pos = cadena.find(":");
+      if (pos != -1) {
+        parametro = cadena.substr(0, pos);
+        if (parametro == parameter) {
+          value = cadena.substr(pos + 1);
+          while (isspace(value[0])) {
+            value = value.substr(1);
+          }
+          found = true;
         }
+      }
     }
-    fichero.close();
+  }
+  fichero.close();
 
-    return value;
+  return value;
 
 }
 
@@ -87,58 +87,58 @@ string DrivingConnectionManager::getValueFromConfig(string parameter){
  */
 bool DrivingConnectionManager::connectVehicle() {
 
-    string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
-    if (ip == "") return false;
+  string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+  if (ip == "") return false;
 
-    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
-    if (port == "") return false;
+  string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+  if (port == "") return false;
 
-    // Creacion y apertura del socket
-    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
-    if (socketDescriptor < 0) {
-        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
-        return false;
-    }
-    struct hostent *he;
-    /* estructura que recibirá información sobre el nodo remoto */
+  // Creacion y apertura del socket
+  socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+  if (socketDescriptor < 0) {
+    ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
+    return false;
+  }
+  struct hostent *he;
+  /* estructura que recibirá información sobre el nodo remoto */
 
-    struct sockaddr_in server;
-    /* información sobre la dirección del servidor */
+  struct sockaddr_in server;
+  /* información sobre la dirección del servidor */
 
-    if ((he = gethostbyname(ip.c_str())) == NULL) {
-        /* llamada a gethostbyname() */
-        ROS_INFO("[Control] Driving - Imposible obtener el nombre del servidor socket");
-        exit(-1);
-    }
+  if ((he = gethostbyname(ip.c_str())) == NULL) {
+    /* llamada a gethostbyname() */
+    ROS_INFO("[Control] Driving - Imposible obtener el nombre del servidor socket");
+    exit(-1);
+  }
 
-    if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-        /* llamada a socket() */
-        ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
-        exit(-1);
-    }
+  if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+    /* llamada a socket() */
+    ROS_INFO("[Control] Driving - Imposible crear socket para comunicacion con Payload de Conduccion");
+    exit(-1);
+  }
 
-    server.sin_family = AF_INET;
-    server.sin_port = htons(atoi(port.c_str()));
-    /* htons() es necesaria nuevamente ;-o */
-    server.sin_addr = *((struct in_addr *) he->h_addr);
-    /*he->h_addr pasa la información de ``*he'' a "h_addr" */
-    bzero(&(server.sin_zero), 8);
+  server.sin_family = AF_INET;
+  server.sin_port = htons(atoi(port.c_str()));
+  /* htons() es necesaria nuevamente ;-o */
+  server.sin_addr = *((struct in_addr *) he->h_addr);
+  /*he->h_addr pasa la información de ``*he'' a "h_addr" */
+  bzero(&(server.sin_zero), 8);
 
-    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-        /* llamada a connect() */
-        ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicación con Payload de Conduccion");
-        exit(-1);
+  if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
+    /* llamada a connect() */
+    ROS_INFO("[Control] Driving - Imposible conectar con socket socket para comunicación con Payload de Conduccion");
+    exit(-1);
 
-    }
-    ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con exito y conectado");
-    // Test if the socket is in non-blocking mode:
-    // Put the socket in non-blocking mode:
-    if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
-        ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones L/E");
-    } else {
-        ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones L/E");
-    }
-    return true;
+  }
+  ROS_INFO("[Control] Driving - Socket con Payload de Conduccion creado con exito y conectado");
+  // Test if the socket is in non-blocking mode:
+  // Put the socket in non-blocking mode:
+  if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
+    ROS_INFO("[Control] Driving - Socket establecido como no bloqueante en operaciones L/E");
+  } else {
+    ROS_INFO("[Control] Driving - Imposible establecer socket como no bloqueante en operaciones L/E");
+  }
+  return true;
 }
 
 /**
@@ -164,14 +164,15 @@ void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
   // Buffer de envio
   char bufData[8];
 
+  // AQUI FALLA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // Rellenado del buffer
-  /*memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
+  memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
   memcpy(&bufData[4], &frame.element, sizeof (frame.element));
   memcpy(&bufData[6], &frame.value, sizeof (frame.value));
 
   // Envio via socket
-  send(socketDescriptor, bufData, sizeof (bufData), 0);*/
+  send(socketDescriptor, bufData, sizeof (bufData), 0);
   usleep(1000);
 }
 
@@ -248,19 +249,19 @@ void DrivingConnectionManager::reqVehicleInfo(bool full) {
  */
 bool DrivingConnectionManager::checkForVehicleMessages() {
   char bufData[8];
-  
+
 
   if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
-      
+
     // Estructura de recepcion
     FrameDriving fdr;
     short aux;
     // Rellenado del buffer
     memcpy(&aux, &bufData[0], sizeof (aux));
-    fdr.instruction = static_cast<CommandID>(aux);
+    fdr.instruction = static_cast<CommandID> (aux);
     memcpy(&fdr.id_instruccion, &bufData[2], sizeof (fdr.id_instruccion));
     memcpy(&aux, &bufData[4], sizeof (aux));
-    fdr.element = static_cast<DeviceID>(aux);
+    fdr.element = static_cast<DeviceID> (aux);
     memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
 
     if (fdr.instruction == ACK) {
@@ -278,7 +279,7 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
       }
 
     } else if (fdr.instruction == INFO) {
-        
+
       if (fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS) {
         setAlarmsInfo(fdr.element, fdr.value);
       } else { // INFO corriente
@@ -356,9 +357,9 @@ void DrivingConnectionManager::setVehicleInfo(DeviceID id_device, short value) {
       vehicleInfo.blinkerRight = (bool) value;
       break;
     case BLINKER_EMERGENCY:
-        vehicleInfo.blinkerRight = (bool) value;
-        vehicleInfo.blinkerLeft = (bool) value;
-        break;
+      vehicleInfo.blinkerRight = (bool) value;
+      vehicleInfo.blinkerLeft = (bool) value;
+      break;
     case KLAXON:
       vehicleInfo.klaxon = (bool) value;
       break;

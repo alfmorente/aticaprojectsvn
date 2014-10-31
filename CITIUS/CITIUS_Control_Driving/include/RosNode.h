@@ -21,8 +21,8 @@ using namespace std;
 /**
  * \class RosNode
  * \brief Superclase con métodos comunes a todos los nodos ROS
-*/
-class RosNode{
+ */
+class RosNode {
 protected:
   NodeStatus nodeStatus;
 public:

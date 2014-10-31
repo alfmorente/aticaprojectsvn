@@ -33,7 +33,7 @@ using namespace std;
  * \class DrivingConnectionManager
  * \brief Clase que representa al driver de comunicación con el módulo de
  * conducción del vehículo
-*/
+ */
 class DrivingConnectionManager {
 private:
   // Socket
