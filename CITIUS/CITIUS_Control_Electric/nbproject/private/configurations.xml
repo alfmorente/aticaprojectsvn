@@ -110,6 +110,7 @@
         <in>ElectricConnectionManager.h</in>
         <in>RosNode.h</in>
         <in>RosNode_Electric.h</in>
+        <in>SocketDriver.h</in>
         <in>Timer.h</in>
         <in>constant.h</in>
       </df>
@@ -140,6 +141,7 @@
         <in>ElectricConnectionManager.cpp</in>
         <in>RosNode.cpp</in>
         <in>RosNode_Electric.cpp</in>
+        <in>SocketDriver.cpp</in>
         <in>Timer.cpp</in>
         <in>main.cpp</in>
       </df>

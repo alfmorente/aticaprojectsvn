@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
   // Intentos de reconexion
   short numOfAttemps = 0;
   ROS_INFO("[Control] Electric - Conectando con subsistema de gestion de energia");
-  while (!nodeElectric->getDriverMng()->connectVehicle() && numOfAttemps < MAX_ATTEMPS) {
+  while (!nodeElectric->getDriverMng()->doConnect(DEVICE_ELECTRIC) && numOfAttemps < MAX_ATTEMPS) {
     numOfAttemps++;
   }
 

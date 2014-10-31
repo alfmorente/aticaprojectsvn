@@ -10,6 +10,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o"
   "CMakeFiles/electric.dir/src/RosNode.cpp.o"
   "CMakeFiles/electric.dir/src/Timer.cpp.o"
+  "CMakeFiles/electric.dir/src/SocketDriver.cpp.o"
   "bin/electric.pdb"
   "bin/electric"
 )
