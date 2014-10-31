@@ -73,6 +73,17 @@ typedef enum {
 #define CONFIG_FILE_IP_NAME "IP" ///<Identificador de búsqueda en fichero de IP
 #define CONFIG_FILE_PORT_NAME "PORT" ///<Identificador de búsqueda en fichero de PORT
 
+
+/*******************************************************************************
+ * IDENTIFICADORES DE DISPOSITIVO
+ ******************************************************************************/
+
+#define DEVICE_XSENS 1 ///<Identificador para abrir el fichero de configuración del socket XSENS
+#define DEVICE_AHRS 2 ///<Identificador para abrir el fichero de configuración del socket AHRS
+#define DEVICE_DRIVING 3 ///<Identificador para abrir el fichero de configuración del socket DRIVING
+#define DEVICE_ELECTRIC 4 ///<Identificador para abrir el fichero de configuración del socket ELECTRIC
+
+
 /*******************************************************************************
  * ESTRUCTURA MANEJO DE MAGNETOMETRO (TRAX)
  ******************************************************************************/

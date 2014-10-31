@@ -12,6 +12,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/PositionOrientation.dir/src/crc16calc.cpp.o"
   "CMakeFiles/PositionOrientation.dir/src/RosNode.cpp.o"
   "CMakeFiles/PositionOrientation.dir/src/Timer.cpp.o"
+  "CMakeFiles/PositionOrientation.dir/src/SocketDriver.cpp.o"
   "bin/PositionOrientation.pdb"
   "bin/PositionOrientation"
 )
