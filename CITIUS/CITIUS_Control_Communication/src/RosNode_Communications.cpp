@@ -488,7 +488,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
   jAdd->subsystem = subsystemController;
   jAdd->node = nodeController;
   jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   // MENSAJE REPORT GLOBAL POSE
   // Formacion del mensaje
@@ -520,7 +520,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
 
   // Direccion
   jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   jausAddressCopy(rvsm->destination, jAdd);
   jMsg = reportVelocityStateMessageToJausMessage(rvsm);
@@ -543,7 +543,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
 
   // Direccion
   jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
-  jAdd->instance = 2;
+  jAdd->instance = 1;
 
   jausAddressCopy(agim->destination, jAdd);
   jMsg = aditionalGPSINSInfo4MessageToJausMessage(agim);
