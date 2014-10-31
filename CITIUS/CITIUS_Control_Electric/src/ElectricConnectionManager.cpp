@@ -24,7 +24,7 @@ ElectricConnectionManager::ElectricConnectionManager() {
 }
 
 /** Destructor de la clase*/
-ElectricConnectionManager::~ElectricConnectionManager(){
+ElectricConnectionManager::~ElectricConnectionManager() {
 
 }
 
@@ -34,37 +34,37 @@ ElectricConnectionManager::~ElectricConnectionManager(){
  * @param parameter Identificador del campo a buscar en el fichero
  * @return String con el resultado de la búsqueda
  */
-string ElectricConnectionManager::getValueFromConfig(string parameter){
-    
-    int pos;
-    string cadena,parametro, value="";
-    bool found = false;
-    ifstream fichero;
-    fichero.open("socket.conf");
+string ElectricConnectionManager::getValueFromConfig(string parameter) {
 
-    if (!fichero.is_open()) {
-        return "";
-    }
+  int pos;
+  string cadena, parametro, value = "";
+  bool found = false;
+  ifstream fichero;
+  fichero.open("socket.conf");
 
-    while (!fichero.eof() && !found) {
-        getline(fichero, cadena);
-        if (cadena[0] != '#' && cadena[0] != NULL) {
-            pos = cadena.find(":");
-            if (pos != -1) {
-                parametro = cadena.substr(0, pos);
-                if (parametro == parameter) {
-                    value = cadena.substr(pos + 1);
-                    while (isspace(value[0])) {
-                        value = value.substr(1);
-                    }
-                    found = true;
-                }
-            }
+  if (!fichero.is_open()) {
+    return "";
+  }
+
+  while (!fichero.eof() && !found) {
+    getline(fichero, cadena);
+    if (cadena[0] != '#' && cadena[0] != NULL) {
+      pos = cadena.find(":");
+      if (pos != -1) {
+        parametro = cadena.substr(0, pos);
+        if (parametro == parameter) {
+          value = cadena.substr(pos + 1);
+          while (isspace(value[0])) {
+            value = value.substr(1);
+          }
+          found = true;
         }
+      }
     }
-    fichero.close();
+  }
+  fichero.close();
 
-    return value;
+  return value;
 
 }
 
@@ -74,13 +74,13 @@ string ElectricConnectionManager::getValueFromConfig(string parameter){
  * @return Booleano que indica si la conexión ha sido posible
  */
 bool ElectricConnectionManager::connectVehicle() {
-    
-    string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
-    if (ip == "") return false;
 
-    string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
-    if (port == "") return false;
-    
+  string ip = getValueFromConfig(CONFIG_FILE_IP_NAME);
+  if (ip == "") return false;
+
+  string port = getValueFromConfig(CONFIG_FILE_PORT_NAME);
+  if (port == "") return false;
+
   // Creacion y apertura del socket
   this->socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
   if (this->socketDescriptor < 0) {
@@ -153,6 +153,7 @@ void ElectricConnectionManager::sendToVehicle(FrameDriving frame) {
   // Buffer de envio
   char bufData[8];
 
+  // AQUI FALLA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // Rellenado del buffer
   memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruction, sizeof (frame.id_instruction));
@@ -196,20 +197,20 @@ void ElectricConnectionManager::reqElectricInfo() {
 }
 
 short ElectricConnectionManager::waitForSwitcherPosition() {
-    short pos = SWITCHER_INIT;
-    FrameDriving frame;
-    frame.instruction = GET;
-    frame.id_instruction = -1;
-    frame.element = OPERATION_MODE_SWITCH;
-    frame.value = -1;
-    // Envio a vehículo
-    sendToVehicle(frame);
-    while (!swPosition.flag) {
-        checkForVehicleMessages();
-    }
-    pos = swPosition.position;
-    setSwitcherStruct(false);
-    return pos;
+  short pos = SWITCHER_INIT;
+  FrameDriving frame;
+  frame.instruction = GET;
+  frame.id_instruction = -1;
+  frame.element = OPERATION_MODE_SWITCH;
+  frame.value = -1;
+  // Envio a vehículo
+  sendToVehicle(frame);
+  while (!swPosition.flag) {
+    checkForVehicleMessages();
+  }
+  pos = swPosition.position;
+  setSwitcherStruct(false);
+  return pos;
 }
 
 /**
@@ -217,16 +218,16 @@ short ElectricConnectionManager::waitForSwitcherPosition() {
  * suministro eléctrico del vehículo
  */
 void ElectricConnectionManager::setTurnOn() {
-    FrameDriving frame;
-    frame.instruction = SET;
-    frame.id_instruction = countMsg;
-    countMsg++;
-    frame.element = SUPPLY_TURN_ON;
-    frame.value = 1;
-    // Cola de comandos criticos
-    messageQueue.push_back(frame);
-    // Envio a vehículo
-    sendToVehicle(frame);
+  FrameDriving frame;
+  frame.instruction = SET;
+  frame.id_instruction = countMsg;
+  countMsg++;
+  frame.element = SUPPLY_TURN_ON;
+  frame.value = 1;
+  // Cola de comandos criticos
+  messageQueue.push_back(frame);
+  // Envio a vehículo
+  sendToVehicle(frame);
 }
 
 /**
@@ -257,13 +258,13 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
     // Estructura de recepcion
     FrameDriving fdr;
     short aux;
-    
+
     // Rellenado del buffer
     memcpy(&aux, &bufData[0], sizeof (aux));
-    fdr.instruction = static_cast<CommandID>(aux);
+    fdr.instruction = static_cast<CommandID> (aux);
     memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
     memcpy(&aux, &bufData[4], sizeof (aux));
-    fdr.element = static_cast<DeviceID>(aux);
+    fdr.element = static_cast<DeviceID> (aux);
     memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
 
     if (fdr.instruction == ACK) {

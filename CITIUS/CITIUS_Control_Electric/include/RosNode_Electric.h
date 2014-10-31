@@ -30,8 +30,8 @@ using namespace std;
  * \class RosNode_Driving
  * \brief Clase que representa al nodo ROS que gestiona la comunicación con el 
  * módulo de alimentación del vehículo
-*/
-class RosNode_Electric: public RosNode {
+ */
+class RosNode_Electric : public RosNode {
 private:
   // Estado del nodo
   //short emNodeStatus;

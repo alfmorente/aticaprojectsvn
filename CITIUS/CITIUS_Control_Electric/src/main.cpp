@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     nodeElectric->initROS();
 
     // Espera a permiso para comenzar a operar ROSNODE_OK
-    if(nodeElectric->getNodeStatus() != NODESTATUS_OFF){
+    if (nodeElectric->getNodeStatus() != NODESTATUS_OFF) {
       ROS_INFO("[Control] Electric - Nodo listo para operar");
     }
 
@@ -45,14 +45,14 @@ int main(int argc, char** argv) {
     timer->Enable();
 
     //Bucle principal
-    while(ros::ok() && nodeElectric->getNodeStatus()!=NODESTATUS_OFF){
+    while (ros::ok() && nodeElectric->getNodeStatus() != NODESTATUS_OFF) {
 
       // Recepcion de mensaje ROS
       ros::spinOnce();
       // Comprobacion de recpcion de mensajes de vehiculo
       nodeElectric->getDriverMng()->checkForVehicleMessages();
       // Comprobacion de señalizacion de apagado
-      nodeElectric->checkTurnOff();      
+      nodeElectric->checkTurnOff();
       // Comprobacion de cambio en posicion conmutador local/teleop
       nodeElectric->checkSwitcher();
 
@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
       // Comprobación del temporizador y requerimiento de info
       if (timer->GetTimed() >= FREC_2HZ) {
         // Clear del timer
-          timer->Reset();
+        timer->Reset();
         // Requerimiento de informacion de sistema energetico
         //nodeElectric->getDriverMng()->reqElectricInfo();
         // Publicacion de la informacion existente
@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
   } else {
     ROS_INFO("[Control] Electric - No se puede conectar al vehiculo. Maximo numero de reintentos realizados.");
   }
-  
+
   delete(nodeElectric);
   ROS_INFO("[Control] Electric - Nodo finalizado");
   return 0;

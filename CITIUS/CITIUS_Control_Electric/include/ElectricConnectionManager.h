@@ -33,7 +33,7 @@ using namespace std;
  * \class ElectricConnectionManager
  * \brief Clase que representa al driver de comunicación con el módulo de
  * alimentación del vehículo
-*/
+ */
 class ElectricConnectionManager {
 private:
   // Socket
