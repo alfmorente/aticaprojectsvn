@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
   while (ros::ok() && status != OPERATION_MODE_APAGANDO) {
     nh.getParam("vehicleStatus", status);
     ros::spinOnce();
-
+    usleep(100000);
   }
   
   delete(manager);
