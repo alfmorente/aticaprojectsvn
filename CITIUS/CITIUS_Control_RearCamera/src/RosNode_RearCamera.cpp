@@ -20,8 +20,8 @@ RosNode_RearCamera::RosNode_RearCamera() {
 /**
  * Destructor de la clase
  */
-RosNode_RearCamera::~RosNode_RearCamera(){
-    delete(dRearCamera);
+RosNode_RearCamera::~RosNode_RearCamera() {
+  delete(dRearCamera);
 }
 
 /**
@@ -73,7 +73,7 @@ bool RosNode_RearCamera::fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_node
  * @return Atributo "dRearCamera"
  */
 AxisP3364LveDriver *RosNode_RearCamera::getDriverMng() {
-    return dRearCamera;
+  return dRearCamera;
 }
 
 /**
@@ -81,18 +81,18 @@ AxisP3364LveDriver *RosNode_RearCamera::getDriverMng() {
  * real y lo publica mediante el topic correspondiente
  */
 void RosNode_RearCamera::manageDevice() {
-    dRearCamera->sendSetToDevice(ORDER_PAN, dRearCamera->getPan());
-    dRearCamera->sendSetToDevice(ORDER_TILT, dRearCamera->getTilt());
-    dRearCamera->sendSetToDevice(ORDER_ZOOM, dRearCamera->getZoom());
+  dRearCamera->sendSetToDevice(ORDER_PAN, dRearCamera->getPan());
+  dRearCamera->sendSetToDevice(ORDER_TILT, dRearCamera->getTilt());
+  dRearCamera->sendSetToDevice(ORDER_ZOOM, dRearCamera->getZoom());
 
-    // Requerimiento de informacion de dispositivo
-    LensPosition lensPos = dRearCamera->getPosition();
-    if (lensPos.state) {
-        CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
-        rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-        rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-        rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-        pubRearCameraInfo.publish(rcMsg);
-        usleep(50000);
-    }
+  // Requerimiento de informacion de dispositivo
+  LensPosition lensPos = dRearCamera->getPosition();
+  if (lensPos.state) {
+    CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
+    rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    pubRearCameraInfo.publish(rcMsg);
+    usleep(50000);
+  }
 }
