@@ -23,6 +23,9 @@ int main(int argc, char** argv) {
   RosNode_Driving *nodeDriving = new RosNode_Driving();
 
   if (nodeDriving->getDriverMng()->doConnect(DEVICE_DRIVING)) {
+    
+    ROS_INFO("[Control] Driving - Establecida conexion con vehiculo");
+    
     // Inicio de artefactos ROS
     nodeDriving->initROS();
 
