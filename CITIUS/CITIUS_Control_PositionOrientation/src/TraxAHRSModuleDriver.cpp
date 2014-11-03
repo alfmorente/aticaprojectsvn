@@ -257,7 +257,7 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload(std::vector<char> payload) {
         bufFloat.push_back(payload[index + 2]);
         bufFloat.push_back(payload[index + 3]);
         bufFloat.push_back(payload[index + 4]);
-        measureDev.heading = hexa2float(bufFloat);
+        measureDev.heading = degrees2radians(hexa2float(bufFloat));
         index += 5;
         break;
       case IDMEASURE_PITCH:
@@ -265,7 +265,7 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload(std::vector<char> payload) {
         bufFloat.push_back(payload[index + 2]);
         bufFloat.push_back(payload[index + 3]);
         bufFloat.push_back(payload[index + 4]);
-        measureDev.pitch = hexa2float(bufFloat);
+        measureDev.pitch = degrees2radians(hexa2float(bufFloat));
         index += 5;
         break;
       case IDMEASURE_ROLL:
@@ -273,7 +273,7 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload(std::vector<char> payload) {
         bufFloat.push_back(payload[index + 2]);
         bufFloat.push_back(payload[index + 3]);
         bufFloat.push_back(payload[index + 4]);
-        measureDev.roll = hexa2float(bufFloat);
+        measureDev.roll = degrees2radians(hexa2float(bufFloat));
         index += 5;
         break;
       case IDMEASURE_HEADING_STATUS:
@@ -455,4 +455,14 @@ vector<char> TraxAHRSModuleDriver::shortToHexa(short s) {
   free(buf);
   return out;
 
+}
+
+/**
+ * Método privado de conversión de tipos. Convierte un valor en grados a
+ * radianes
+ * @param[in] value Valor a convertir
+ * @return Resultado de la conversión
+ */
+float TraxAHRSModuleDriver::degrees2radians(float value){
+  return (value * M_PI)/180;
 }

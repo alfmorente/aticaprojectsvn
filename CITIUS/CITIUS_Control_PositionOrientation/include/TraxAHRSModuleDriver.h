@@ -59,6 +59,7 @@ private:
   int hexa2int(std::vector<unsigned char>);
   short hexa2short(std::vector<char>);
   std::vector<char> shortToHexa(short);
+  float degrees2radians(float);
 public:
   TraxAHRSModuleDriver();
   ~TraxAHRSModuleDriver();

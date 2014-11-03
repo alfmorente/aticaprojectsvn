@@ -53,7 +53,6 @@ int main(int argc, char** argv) {
     }
 
     if (nodePosOri->getNodeStatus() == NODESTATUS_OK) {
-
       nodePosOri->configureDevices();
       ROS_INFO("[Control] Position / Orientation - Nodo activado y listo para operar");
 
