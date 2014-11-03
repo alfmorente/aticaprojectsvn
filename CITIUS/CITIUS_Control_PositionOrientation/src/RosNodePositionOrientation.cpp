@@ -63,7 +63,6 @@ void RosNode_PositionOrientation::configureDevices() {
  * la petición de servicio
  */
 bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &rq, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &rsp) {
-
   if (rq.status == NODESTATUS_OK) {
     if (nodeStatus != NODESTATUS_OK) {
       nodeStatus = NODESTATUS_OK;

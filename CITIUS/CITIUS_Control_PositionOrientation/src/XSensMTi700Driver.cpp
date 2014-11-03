@@ -46,13 +46,12 @@ XSensMTi700Driver::~XSensMTi700Driver() {
  * parámetros establecidos
  */
 void XSensMTi700Driver::configureDevice() {
-
+  // Modo configuracion
+  sendToDevice(goToConfig());
   // Configuracion de dispositivo
   sendToDevice(setOutPutConfiguration());
-
   // Modo stream de medidas
   sendToDevice(goToMeasurement());
-
 }
 
 /**
@@ -235,13 +234,13 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
     }
   }
   msg2send[msg.len + 4] = msg.cs;
-
   if (send(socketDescriptor, msg2send, msg.len + 5, 0) > 0) {
     waitForAck(msg.mid);
   } else {
     printf("Error en escritura");
     exit(-1);
   }
+  printf("\n");
   free(msg2send);
 
 }
@@ -417,9 +416,9 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
           //printf("   Euler Angles %d bytes\n", dataPacket.len);
           for (int i = 0; i < 12; i++) auxBuf.push_back(dataPacket.data[i]);
 
-          posOriInfo.roll = hexa2float(vector<unsigned char>(auxBuf.begin(), auxBuf.begin() + 4));
-          posOriInfo.pitch = hexa2float(vector<unsigned char>(auxBuf.begin() + 4, auxBuf.begin() + 8));
-          posOriInfo.yaw = hexa2float(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 12));
+          posOriInfo.roll = degrees2radians(hexa2float(vector<unsigned char>(auxBuf.begin(), auxBuf.begin() + 4)));
+          posOriInfo.pitch = degrees2radians(hexa2float(vector<unsigned char>(auxBuf.begin() + 4, auxBuf.begin() + 8)));
+          posOriInfo.yaw = degrees2radians(hexa2float(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 12)));
 
           break;
         default:
@@ -692,6 +691,16 @@ double XSensMTi700Driver::hexa2double(vector<unsigned char> buffer) {
   doubleUnion.buffer[7] = buffer[0];
 
   return doubleUnion.value;
+}
+
+/**
+ * Método privado de conversión de tipos. Convierte un valor en grados a
+ * radianes
+ * @param[in] value Valor a convertir
+ * @return Resultado de la conversión
+ */
+float XSensMTi700Driver::degrees2radians(float value){
+  return (value * M_PI)/180;
 }
 
 /**

@@ -56,6 +56,7 @@ private:
   float hexa2float(std::vector<unsigned char>);
   double hexa2double(std::vector<unsigned char>);
   int hexa2int(std::vector<unsigned char>);
+  float degrees2radians(float);
   // Rutinas de recepcion y manejo de datos
   void packetMng(dataPacketMT2);
   bool frameMng(std::vector<unsigned char>);
