@@ -32,6 +32,9 @@ int main(int argc, char** argv) {
   }
 
   if (numOfAttemps < MAX_ATTEMPS) {
+    
+    ROS_INFO("[Control] Electric - Conexion establecida con vehiculo");
+    
     // Inicio de artefactos ROS
     nodeElectric->initROS();
 

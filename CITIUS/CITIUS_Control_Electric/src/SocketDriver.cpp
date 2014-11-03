@@ -20,13 +20,11 @@ bool SocketDriver::doConnect(int device) {
   if (port == "") return false;
 
   if ((he = gethostbyname(ip.c_str())) == NULL) {
-    printf("Imposible obtener el nombre del servidor socket");
-    exit(-1);
+    return false;
   }
 
   if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-    printf("Imposible crear socket para comunicacion con Payload de Conduccion");
-    exit(-1);
+    return false;
   }
 
   server.sin_family = AF_INET;
@@ -35,17 +33,14 @@ bool SocketDriver::doConnect(int device) {
   bzero(&(server.sin_zero), 8);
 
   if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
-    printf("Imposible conectar con socket destino");
-    exit(-1);
+    return false;
 
   }
-  printf("Socket creado con exito y conectado");
 
-  if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) >= 0) {
-    printf("Socket establecido como no bloqueante en operaciones L/E");
-  } else {
-    printf("Imposible establecer socket como no bloqueante en operaciones L/E");
+  if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) < 0) {
+    printf("Imposible establecer socket como no bloqueante en operaciones L/E\n");
   }
+  
   return true;
 }
 
@@ -56,7 +51,6 @@ bool SocketDriver::doConnect(int device) {
 void SocketDriver::disconnect() {
   shutdown(socketDescriptor, 2);
   close(socketDescriptor);
-  printf("Socket cerrado correctamente");
 }
 
 /**
