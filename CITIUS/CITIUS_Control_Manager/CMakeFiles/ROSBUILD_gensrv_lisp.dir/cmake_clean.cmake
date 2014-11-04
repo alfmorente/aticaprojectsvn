@@ -6,12 +6,12 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Manager/msg"
   "src/CITIUS_Control_Manager/srv"
   "CMakeFiles/ROSBUILD_gensrv_lisp"
-  "srv_gen/lisp/srv_vehicleStatus.lisp"
-  "srv_gen/lisp/_package.lisp"
-  "srv_gen/lisp/_package_srv_vehicleStatus.lisp"
   "srv_gen/lisp/srv_nodeStatus.lisp"
   "srv_gen/lisp/_package.lisp"
   "srv_gen/lisp/_package_srv_nodeStatus.lisp"
+  "srv_gen/lisp/srv_vehicleStatus.lisp"
+  "srv_gen/lisp/_package.lisp"
+  "srv_gen/lisp/_package_srv_vehicleStatus.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

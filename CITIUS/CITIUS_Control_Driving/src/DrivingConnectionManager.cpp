@@ -50,7 +50,6 @@ void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
   // Buffer de envio
   char bufData[8];
 
-  // AQUI FALLA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // Rellenado del buffer
   memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
@@ -165,7 +164,6 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
       }
 
     } else if (fdr.instruction == INFO) {
-
       if (fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS) {
         setAlarmsInfo(fdr.element, fdr.value);
       } else { // INFO corriente

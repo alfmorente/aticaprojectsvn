@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
           }
         }
       }
-      usleep(100000);
+      usleep(1000);
     }
     delete(timer);
   } else {
