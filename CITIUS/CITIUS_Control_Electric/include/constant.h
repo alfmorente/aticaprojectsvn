@@ -232,6 +232,20 @@ typedef struct {
   short position; ///<Posicion del conmutador tras el cambio
 } SwitcherStruct;
 
+/*******************************************************************************
+ *           ESTRUCTURA DE ALARMAS DEL MODULO ELECTRICO
+ *******************************************************************************/
+
+/**
+ * \struct SupplyAlarmsStruct
+ * \brief Estructura para manejo de indicaciones de cambio en el vector de
+ * alarmas
+ */
+typedef struct {
+  bool flag; ///<Indicador nuevo valor recibido del vector de alarms
+  short alarms; ///<Vector de alarmas
+} SupplyAlarmsStruct;
+
 #endif	/* CONSTANT_H */
 
 /**

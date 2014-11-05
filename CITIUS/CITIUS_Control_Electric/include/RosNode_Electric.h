@@ -62,6 +62,8 @@ public:
   void checkTurnOff();
   // Gestion de evento Switcher
   void checkSwitcher();
+  // Gestion de evento SupplyAlarms
+  void checkSupplyAlarms();
 };
 
 #endif	/* ROSNODE_ELECTRIC_H */

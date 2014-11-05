@@ -20,7 +20,8 @@ ElectricConnectionManager::ElectricConnectionManager() {
   turnOff = false;
   swPosition.flag = false;
   swPosition.position = -1;
-  supplyAlarms = 0x0000;
+  supplyAlarms.flag = false;
+  supplyAlarms.alarms = 0x0000;
 }
 
 /** Destructor de la clase*/
@@ -38,7 +39,6 @@ void ElectricConnectionManager::sendToVehicle(FrameDriving frame) {
   // Buffer de envio
   char bufData[8];
 
-  // AQUI FALLA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // Rellenado del buffer
   memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruction, sizeof (frame.id_instruction));
@@ -221,7 +221,8 @@ void ElectricConnectionManager::setVehicleInfo(DeviceID id_device, short value) 
       electricInfo.battery_temperature = value;
       break;
     case SUPPLY_ALARMS:
-      supplyAlarms = value;
+      supplyAlarms.flag = true;
+      supplyAlarms.alarms = value;
       break;
     default:
       break;
@@ -289,8 +290,19 @@ void ElectricConnectionManager::setSwitcherStruct(bool flag) {
  * Payload de conduccion del vehículo
  * @return Atributo "supplyAlarms" de la clase
  */
-short ElectricConnectionManager::getSupplyAlarms() {
+SupplyAlarmsStruct ElectricConnectionManager::getSupplyAlarmsStruct(){
   return supplyAlarms;
+}
+
+/**
+ * Método público modificador del atributo "supplyAlarms" de la clase que se 
+ * actualiza cuando se detecta un cambio en el vector de alarmas recibida
+ * @param[in] newState Indica si el estado ha cambiado o no para identificar
+ * el modo de control de cambios
+ */
+void ElectricConnectionManager::setSupplyAlarmsStruct(bool newState) {
+  supplyAlarms.flag = newState;
+  supplyAlarms.alarms = 0x0000;
 }
 
 /**
