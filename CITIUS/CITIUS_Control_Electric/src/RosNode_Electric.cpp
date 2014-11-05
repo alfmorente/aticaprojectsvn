@@ -199,3 +199,18 @@ void RosNode_Electric::checkSwitcher() {
     dElectric->setSwitcherStruct(false);
   }
 }
+
+/**
+ * Método público que comprueba si el último mensaje recibido del vehículo es 
+ * un cambio en el vector de alarms y da soporte al mismo en caso afirmativo
+ */
+void RosNode_Electric::checkSupplyAlarms() {
+  if(dElectric->getSupplyAlarmsStruct().flag){
+    // Tratamiento de alarmas 
+    short alarms = dElectric->getSupplyAlarmsStruct().alarms;
+    // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    // CLear del indicador de cambio
+    dElectric->setSupplyAlarmsStruct(false);
+  }
+}

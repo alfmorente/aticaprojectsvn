@@ -48,10 +48,9 @@ private:
   // Posicion del conmutador local/teleoperado
   SwitcherStruct swPosition;
   // Alarmas del subsistema electrico
-  short supplyAlarms;
+  SupplyAlarmsStruct supplyAlarms;
   //Consultores/modificadores privados
   void setVehicleInfo(DeviceID id_device, short value);
-  short getSupplyAlarms();
   // Metodos de gestion privados
   RtxStruct informResponse(bool ack, short id_instruction);
   bool isCriticalInstruction(DeviceID element);
@@ -73,7 +72,9 @@ public:
   short getCountCriticalMessages();
   void setCountCriticalMessages(short count);
   void setSwitcherStruct(bool position);
+  void setSupplyAlarmsStruct(bool newState);
   SwitcherStruct getSwitcherStruct();
+  SupplyAlarmsStruct getSupplyAlarmsStruct();
 };
 
 #endif	/* ElectricConnectionManager */

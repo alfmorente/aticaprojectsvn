@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
       nodeElectric->checkTurnOff();
       // Comprobacion de cambio en posicion conmutador local/teleop
       nodeElectric->checkSwitcher();
-
       // Tratamiento de alarmas 
+      nodeElectric->checkSupplyAlarms();
       // TODO
 
       // Comprobación del temporizador y requerimiento de info
