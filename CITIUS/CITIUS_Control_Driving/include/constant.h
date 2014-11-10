@@ -215,6 +215,37 @@ typedef struct {
   vector<FrameDriving> msgs; ///<Coleccion de mensajes a retransmitir
 } RtxStruct;
 
+/*******************************************************************************
+ *           ESTRUCTURA DE VECTOR DE ALARMAS
+ *******************************************************************************/
+
+/**
+ * \struct AlarmsStruct
+ * \brief Estructura para manejo de recepción y tratamiento del vector de
+ * alarmas del módulo de conducción del Payload de conducción
+ */
+typedef struct {
+  bool flag; ///<Indicador de cambio en recepción del vector de alarmas
+  short driveAlarms; ///<Vector de alarmas del vehículo
+  short steeringAlarms; ///<Vector de alarmas del sistema de dirección
+} AlarmsStruct;
+
+/*******************************************************************************
+ *           MÁSCARAS DE IDENTIFICACIÓN DE ALARMAS
+ *******************************************************************************/
+
+#define MASK_NOT_ALARMS 0x0000 ///<Indicador de todas las alarmas a 0
+#define MASK_ALARMS_CONNECTION_STEERING_FAILED 0x0001 ///<Indicador de fallo de conexión con sistema de dirección
+#define MASK_ALARMS_STEERING_FAILED 0x0002 ///<Indicador de fallo en la dirección
+#define MASK_ALARMS_BRAKE_CONNECTION_FAILED 0x0004 ///<Indicador de fallo de conexión con freno de servicio
+#define MASK_ALARMS_BRAKE_FAILED 0x0008 ///<Indicador de fallo de freno de servicio
+#define MASK_ALARMS_HANDBRAKE_CONNECTION_FALED 0x0010 ///<Indicador de fallo de conexión con freno de estacionamiento
+#define MASK_ALARMS_HANDBRAKE_FAILED 0x0020 ///<Indicador de fallo de freno de estacionamiento
+#define MASK_ALARMS_MOTOR_TEMPERATURE 0x0040 ///<Indicador de alta temperatura de motor
+#define MASK_ALARMS_FLAGS_FAILED 0x0080 ///< Indicador de fallo en los testigos
+#define MASK_ALARMS_ACC_FAILED 0x0100 ///<Indicador de fallo en aceleración
+#define MASK_ALARMS_GEAR_FAILED 0x0200 ///<Indicador de fallo en el cambio de marchas
+
 #endif	/* CONSTANT_H */
 
 /**
