@@ -641,16 +641,55 @@ void MessageDispatcher::sendObservationSystemSupply48Msg(int socketDescriptor){
 }
 
 void MessageDispatcher::sendSupplyAlarmsMsg(int socketDescriptor){
-  short value;
-  cout << "Selecciona el valor para SUPPLY ALARMS (0:65536):" << endl;
-  cin >> value;
-
+    short value = 0;
+  while((value < 1) || (value > 13)){
+    cout << "Selecciona la alarma a enviar:" << endl;
+    cout << "1 ) Todos los bits a 0" << endl;
+    cout << "2 ) Temperatura de baterias" << endl;
+    cout << "3 ) Tension de baterias" << endl;
+    cout << "4 ) Corriente de baterias" << endl;
+    cout << "5 ) Fallo DC/DC 48V" << endl;
+    cout << "6 ) Fallo DC/DC 24V (conduccion)" << endl;
+    cout << "7 ) Fallo DC/DC 24V (resto)" << endl;
+    cout << "8 ) Fallo DC/DC 12V" << endl;
+    cout << "9 ) Fallo DC/DC 5V" << endl;
+    cout << "10) Fallo en Subs. Control" << endl;
+    cout << "11) Fallo en Subs. Payload conduccion" << endl;
+    cout << "12) Fallo en Subs. Comunicaciones" << endl;
+    cout << "13) Fallo en Subs. Payload observacion" << endl;
+    cin >> value;
+  }
   FrameDriving frame;
   frame.instruction = INFO;
   frame.id_instruction = -1;
   frame.element = SUPPLY_ALARMS;
-  frame.value = value;
-
+  if (value == 1) {
+    frame.value = MASK_NOT_ALARMS;
+  } else if (value == 2) {
+    frame.value = MASK_ALARMS_BATTERY_TEMPERATURE;
+  } else if (value == 3) {
+    frame.value = MASK_ALARMS_BATTERY_VOLTAGE;
+  } else if (value == 4) {
+    frame.value = MASK_ALARMS_BATTERY_CURRENT;
+  } else if (value == 5) {
+    frame.value = MASK_ALARMS_48V_FAILED;
+  } else if (value == 6) {
+    frame.value = MASK_ALARMS_24V_DRIVING_FAILED;
+  } else if (value == 7) {
+    frame.value = MASK_ALARMS_24V_FAILED;
+  } else if (value == 8) {
+    frame.value = MASK_ALARMS_12V_FAILED;
+  } else if (value == 9) {
+    frame.value = MASK_ALARMS_5V_FAILED;
+  } else if (value == 10) {
+    frame.value = MASK_ALARMS_CONTROL_FAILED;
+  } else if (value == 11) {
+    frame.value = MASK_ALARMS_DRIVING_FAILED;
+  } else if (value == 12) {
+    frame.value = MASK_ALARMS_COMM_FAILED;
+  } else if (value == 13) {
+    frame.value = MASK_ALARMS_OBSERVATION_FAILED;
+  }
   //Buffer de envio 
   char buff[8];
   memcpy(&buff[0], &frame.instruction, sizeof (frame.instruction));
