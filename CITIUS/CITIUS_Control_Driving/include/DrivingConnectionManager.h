@@ -44,7 +44,7 @@ private:
   // Informacion actualizable del vehiculo
   DrivingInfo vehicleInfo;
   // Alarmas de conduccion
-  short driveAlarms;
+  AlarmsStruct alarms;
   // Alarmas de direccion
   short steeringAlarms;
   // Modificadores privados
@@ -66,6 +66,8 @@ public:
   int getSocketDescriptor();
   short getCountCriticalMessages();
   void setCountCriticalMessages(short cont);
+  AlarmsStruct getAlarmsStruct();
+  void setAlarmsStruct(bool flag);
   // Metodos auxiliares
   bool isCriticalInstruction(DeviceID element);
   bool isMTCommand(DeviceID element);

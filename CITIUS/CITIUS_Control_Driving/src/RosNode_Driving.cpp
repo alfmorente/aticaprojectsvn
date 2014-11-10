@@ -15,6 +15,7 @@
 RosNode_Driving::RosNode_Driving() {
   nodeStatus = NODESTATUS_INIT;
   dVehicle = new DrivingConnectionManager();
+  electricAlarms = false;
 }
 
 /**
@@ -42,12 +43,25 @@ void RosNode_Driving::initROS() {
  * @param[in] msg Mensaje ROS recibido
  */
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
+  // Comprobacion de aviso de alarmas en Electric
+  if (msg.id_device == SUPPLY_ALARMS) {
+    // Alarmas modulo electrico: OFF
+    if (msg.value == 0) {
+      electricAlarms = false;
+      dVehicle->setAlarmsStruct(true);
+    }// Alarmas modulo electrico: ON
+    else {
+      electricAlarms = true;
+      dVehicle->setAlarmsStruct(true);
+    }
+    return;
+  }
   ros::NodeHandle nh;
   int currentVehicleStatus = OPERATION_MODE_INICIANDO;
   nh.getParam("vehicleStatus", currentVehicleStatus);
   if (currentVehicleStatus == OPERATION_MODE_CONDUCCION || dVehicle->isMTCommand(static_cast<DeviceID> (msg.id_device))) {
-    if (nodeStatus == NODESTATUS_OK) {
-      ROS_INFO("[Control] Driving - Comando de telecontrol recibido");
+    if (nodeStatus == NODESTATUS_OK || dVehicle->isMTCommand(static_cast<DeviceID> (msg.id_device))) {
+      ROS_INFO("[Control] Driving - Comando de telecontrol recibido: %d:=%d", msg.id_device, msg.value);
       if (checkCommand(msg)) {
         // Envio de comando a vehículo
         FrameDriving command;
@@ -67,13 +81,13 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
         }
         dVehicle->sendToVehicle(command);
       } else {
-        ROS_INFO("[Control] Driving - Descartado comando - Fuera de rango");
+        ROS_INFO("[Control] Driving - Descartado comando %d:=%d - Fuera de rango", msg.id_device, msg.value);
       }
     } else {
-      ROS_INFO("[Control] Driving - Descartado comando - Nodo en estado %d", nodeStatus);
+      ROS_INFO("[Control] Driving - Descartado comando %d:=%d - Nodo en estado %d", msg.id_device, msg.value, nodeStatus);
     }
   } else {
-    ROS_INFO("[Control Driving - Descartado comando - Vehiculo fuera del modo CONDUCCION]");
+    ROS_INFO("[Control] Driving - Descartado comando %d:=%d - Vehiculo fuera del modo CONDUCCION", msg.id_device, msg.value);
   }
 }
 
@@ -213,4 +227,177 @@ void RosNode_Driving::publishDrivingInfo(DrivingInfo info) {
   msg.dipsp = info.dipsp;
   msg.klaxon = info.klaxon;
   pubVehicleInfo.publish(msg);
+}
+
+/**
+ * Método público que comprueba si ha habido cambio en cualquiera de los
+ * vectores de alarmas del sistema y da tratamiento en caso afirmativo
+ */
+void RosNode_Driving::checkAlarms() {
+  if (dVehicle->getAlarmsStruct().flag) {
+    if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) == MASK_NOT_ALARMS) && !electricAlarms) {
+      if (nodeStatus == NODESTATUS_CORRUPT) { // Fin de las alarmas en ambos subsistemas
+        ROS_INFO("[Control] Driving - Nodo en estado OK - Sin alarmas");
+        nodeStatus = NODESTATUS_OK;
+      }
+    } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) == MASK_NOT_ALARMS) && electricAlarms) {
+      if (nodeStatus == NODESTATUS_OK) { // Nuevas alarmas en Electric
+        ROS_INFO("[Control] Driving - Nodo en estado DEGRADADO - Alarmas en Electric");
+        // Rutina de emergencia - Parada de vehiculo
+        setEmergecyCommands();
+        nodeStatus = NODESTATUS_CORRUPT;
+      } else { // Deja de haber alarmas en Driving
+        ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Fin de alarmas en Driving pero hay alarmas en Electric");
+      }
+    } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) != MASK_NOT_ALARMS) && !electricAlarms) {
+      if (nodeStatus == NODESTATUS_OK) { // Nuevas alarmas en Driving
+        ROS_INFO("[Control] Driving - Nodo en estado DEGRADADO - Alarmas en Driving");
+        // Rutina de emergencia - Parada de vehiculo
+        setEmergecyCommands();
+        nodeStatus = NODESTATUS_CORRUPT;
+        // Identificacion de alarms
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_CONNECTION_STEERING_FAILED) == MASK_ALARMS_CONNECTION_STEERING_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo de conexion");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_STEERING_FAILED) == MASK_ALARMS_STEERING_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo en sistema de direccion");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_BRAKE_CONNECTION_FAILED) == MASK_ALARMS_BRAKE_CONNECTION_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo de conexion con freno de servicio");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_BRAKE_FAILED) == MASK_ALARMS_BRAKE_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo en freno de servicio");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_HANDBRAKE_CONNECTION_FALED) == MASK_ALARMS_HANDBRAKE_CONNECTION_FALED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo de conexion con freno de estacionamiento");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_HANDBRAKE_FAILED) == MASK_ALARMS_HANDBRAKE_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo en freno de estacionamiento");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_MOTOR_TEMPERATURE) == MASK_ALARMS_MOTOR_TEMPERATURE) {
+          ROS_INFO("[Control] Driving - Alarma: Temperatura de motor");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_FLAGS_FAILED) == MASK_ALARMS_FLAGS_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo en testigos");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_ACC_FAILED) == MASK_ALARMS_ACC_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo en aceleracion");
+        }
+        if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_GEAR_FAILED) == MASK_ALARMS_GEAR_FAILED) {
+          ROS_INFO("[Control] Driving - Alarma: Fallo en cambio de marchas");
+        }
+      } else { // Deja de haber alarmas en Electric
+        ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Fin de alarmas en Electric pero hay alarmas en Driving");
+      }
+    } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) != MASK_NOT_ALARMS) && electricAlarms) {
+      ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Alarmas en Driving & Electric");
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_CONNECTION_STEERING_FAILED) == MASK_ALARMS_CONNECTION_STEERING_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo de conexion");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_STEERING_FAILED) == MASK_ALARMS_STEERING_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo en sistema de direccion");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_BRAKE_CONNECTION_FAILED) == MASK_ALARMS_BRAKE_CONNECTION_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo de conexion con freno de servicio");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_BRAKE_FAILED) == MASK_ALARMS_BRAKE_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo en freno de servicio");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_HANDBRAKE_CONNECTION_FALED) == MASK_ALARMS_HANDBRAKE_CONNECTION_FALED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo de conexion con freno de estacionamiento");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_HANDBRAKE_FAILED) == MASK_ALARMS_HANDBRAKE_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo en freno de estacionamiento");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_MOTOR_TEMPERATURE) == MASK_ALARMS_MOTOR_TEMPERATURE) {
+        ROS_INFO("[Control] Driving - Alarma: Temperatura de motor");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_FLAGS_FAILED) == MASK_ALARMS_FLAGS_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo en testigos");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_ACC_FAILED) == MASK_ALARMS_ACC_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo en aceleracion");
+      }
+      if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_GEAR_FAILED) == MASK_ALARMS_GEAR_FAILED) {
+        ROS_INFO("[Control] Driving - Alarma: Fallo en cambio de marchas");
+      }
+    }
+
+    // Clear del indicador de cambio
+    dVehicle->setAlarmsStruct(false);
+  }
+}
+
+/**
+ * Método privado que envía una serie de comandos al vehículo para deternerlo 
+ * ante una emergencia
+ */
+void RosNode_Driving::setEmergecyCommands() {
+  ROS_INFO("[Control] Driving - Rutina de seguridad - Detencion del vehiculo");
+  FrameDriving command;
+  command.instruction = SET;
+
+  // Acelerador a 0
+  command.element = THROTTLE;
+  command.value = 0;
+  short cont = dVehicle->getCountCriticalMessages();
+  // Valor de ID_INSTRUCCION
+  command.id_instruccion = cont;
+  // Introduccion en la cola de mensajes críticos
+  dVehicle->addToQueue(command);
+  // Incremento del contador
+  dVehicle->setCountCriticalMessages(cont + 1);
+  // Envio a dispositivo
+  dVehicle->sendToVehicle(command);
+
+  // Direccion a 0
+  command.element = STEERING;
+  cont = dVehicle->getCountCriticalMessages();
+  // Valor de ID_INSTRUCCION
+  command.id_instruccion = cont;
+  // Introduccion en la cola de mensajes críticos
+  dVehicle->addToQueue(command);
+  // Incremento del contador
+  dVehicle->setCountCriticalMessages(cont + 1);
+  // Envio a dispositivo
+  dVehicle->sendToVehicle(command);
+
+  // Marcha a 0
+  command.element = GEAR;
+  cont = dVehicle->getCountCriticalMessages();
+  // Valor de ID_INSTRUCCION
+  command.id_instruccion = cont;
+  // Introduccion en la cola de mensajes críticos
+  dVehicle->addToQueue(command);
+  // Incremento del contador
+  dVehicle->setCountCriticalMessages(cont + 1);
+  // Envio a dispositivo
+  dVehicle->sendToVehicle(command);
+
+  // Freno a 100
+  command.element = BRAKE;
+  command.value = 100;
+  cont = dVehicle->getCountCriticalMessages();
+  // Valor de ID_INSTRUCCION
+  command.id_instruccion = cont;
+  // Introduccion en la cola de mensajes críticos
+  dVehicle->addToQueue(command);
+  // Incremento del contador
+  dVehicle->setCountCriticalMessages(cont + 1);
+  // Envio a dispositivo
+  dVehicle->sendToVehicle(command);
+
+  // Freno de estacionamiento a 1
+  command.element = HANDBRAKE;
+  command.value = 1;
+  cont = dVehicle->getCountCriticalMessages();
+  // Valor de ID_INSTRUCCION
+  command.id_instruccion = cont;
+  // Introduccion en la cola de mensajes críticos
+  dVehicle->addToQueue(command);
+  // Incremento del contador
+  dVehicle->setCountCriticalMessages(cont + 1);
+  // Envio a dispositivo
+  dVehicle->sendToVehicle(command);
+
 }

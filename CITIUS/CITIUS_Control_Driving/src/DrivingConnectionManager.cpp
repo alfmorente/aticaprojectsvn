@@ -29,8 +29,9 @@ DrivingConnectionManager::DrivingConnectionManager() {
   vehicleInfo.speed = 0;
   vehicleInfo.motorTemperature = 0;
   vehicleInfo.motorRPM = 0;
-  driveAlarms = 0x0000;
-  steeringAlarms = 0x0000;
+  alarms.flag = false;
+  alarms.driveAlarms = 0x0000;
+  alarms.steeringAlarms = 0x0000;
 }
 
 /**
@@ -293,10 +294,34 @@ void DrivingConnectionManager::setCountCriticalMessages(short cont) {
  * correspondiente
  */
 void DrivingConnectionManager::setAlarmsInfo(DeviceID element, short value) {
-  if (element == DRIVE_ALARMS)
-    driveAlarms = value;
-  else if (element == STEERING_ALARMS)
-    steeringAlarms = value;
+  
+  if (element == DRIVE_ALARMS){
+    alarms.flag = true;
+    alarms.driveAlarms = value;
+  }else if (element == STEERING_ALARMS){
+    alarms.flag = true;
+    alarms.steeringAlarms = value;
+  }
+}
+
+/**
+ * Método público que devuelve el atributo "alarms" de la clase que contiene la
+ * última lectura de los vectores de alarms que pueden darse en el sistema
+ * @return Atributo "alarms" de la clase
+ */
+AlarmsStruct DrivingConnectionManager::getAlarmsStruct(){
+  return alarms;
+}
+
+/**
+ * Método público modificador del atriburo "alarms" de la clase para indicar que
+ * ha habido un cambio en cualquiera de los vectores de alarms que pueden darse
+ * en el sistema
+ * @param[in] flag Indica la posición del indicador de cambio en las alarmas del
+ * vehículo
+ */
+void DrivingConnectionManager::setAlarmsStruct(bool flag) {
+  alarms.flag = flag;
 }
 
 /**

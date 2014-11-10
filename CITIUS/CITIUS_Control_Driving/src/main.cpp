@@ -53,39 +53,43 @@ int main(int argc, char** argv) {
         // Comprobacion de recepcion de mensaje ROS
         ros::spinOnce();
 
-        // Comprobacion de recpcion de mensajes de vehiculo
-        nodeDriving->getDriverMng()->checkForVehicleMessages();
+        // Funcionamiento normal (sin alarms)
+        if (nodeDriving->getNodeStatus() == NODESTATUS_OK) {
+          
+          // Comprobacion de recpcion de mensajes de vehiculo
+          nodeDriving->getDriverMng()->checkForVehicleMessages();
+          // Comprobacion de alarmas
+          nodeDriving->checkAlarms();
 
-        // Comprobacion de alarmas
-        // TODO
-
-        // Comprobación del temporizador y requerimiento de info
-        if (timer->GetTimed() >= FREC_5HZ) {
-
-          // Clear del timer
-          timer->Reset();
-
-          hzCount++;
-
-          if (hzCount == 5) {
-
-            hzCount = 0;
-            // Informacion completa: dispositivos y senalizacion
-            // Requiere al vehiculo (GET)
-            nodeDriving->getDriverMng()->reqVehicleInfo(true);
-            // Obtiene informacion existente para publicar
-            nodeDriving->publishDrivingInfo(nodeDriving->getDriverMng()->getVehicleInfo(true));
-
-          } else {
-
-            // Informacion basica: dispositivos
-            // Requiere al vehiculo (GET)
-            nodeDriving->getDriverMng()->reqVehicleInfo(false);
-            // Obtiene informacion existente para publicar
-            nodeDriving->publishDrivingInfo(nodeDriving->getDriverMng()->getVehicleInfo(false));
-
+          // Comprobación del temporizador y requerimiento de info
+          if (timer->GetTimed() >= FREC_5HZ) {
+            // Clear del timer
+            timer->Reset();
+            hzCount++;
+            if (hzCount == 5) {
+              hzCount = 0;
+              // Informacion completa: dispositivos y senalizacion
+              // Requiere al vehiculo (GET)
+              nodeDriving->getDriverMng()->reqVehicleInfo(true);
+              // Obtiene informacion existente para publicar
+              nodeDriving->publishDrivingInfo(nodeDriving->getDriverMng()->getVehicleInfo(true));
+            } else {
+              // Informacion basica: dispositivos
+              // Requiere al vehiculo (GET)
+              nodeDriving->getDriverMng()->reqVehicleInfo(false);
+              // Obtiene informacion existente para publicar
+              nodeDriving->publishDrivingInfo(nodeDriving->getDriverMng()->getVehicleInfo(false));
+            }
           }
         }
+        // Funcionamiento en modo degradado (alarmas)
+        else if(nodeDriving->getNodeStatus() == NODESTATUS_CORRUPT){
+          // Comprobacion de recpcion de mensajes de vehiculo
+          nodeDriving->getDriverMng()->checkForVehicleMessages();
+          // Comprobacion de alarmas
+          nodeDriving->checkAlarms();
+        }
+                
       }
       usleep(1000);
     }
