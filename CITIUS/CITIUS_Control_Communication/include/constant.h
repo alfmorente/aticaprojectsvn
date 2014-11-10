@@ -212,6 +212,8 @@ typedef enum {
   JAUS_NODE_AOC = 4 ///<Identificador de nodo JAUS AOC
 } JausNodeID;
 
+#define JAUS_DESTINANTION_INSTANCE 1 ///<Instancia JAUS destino 
+
 /*******************************************************************************
  *              IDENTIFICADOR DE CAMARA DE APOYO A LA CONDUCCION
  ******************************************************************************/
