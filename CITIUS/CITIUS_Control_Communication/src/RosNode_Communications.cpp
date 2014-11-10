@@ -29,8 +29,8 @@ RosNode_Communications *RosNode_Communications::getInstance() {
  * Constructor de la clase
  */
 RosNode_Communications::RosNode_Communications() {
-  subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
-  //subsystemController = JAUS_SUBSYSTEM_UGV;
+  //subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
+  subsystemController = JAUS_SUBSYSTEM_UGV;
   nodeController = JAUS_NODE_CONTROL; // Control
   nodeStatus = NODESTATUS_INIT;
 }
@@ -272,7 +272,7 @@ void RosNode_Communications::informStatus() {
   jAdd->subsystem = instance->subsystemController;
   jAdd->node = instance->nodeController;
   jAdd->component = JAUS_MISSION_SPOOLER;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Generacion de mensaje especifico UGV Info
   ReportMissionStatusMessage rmsm = reportMissionStatusMessageCreate();
@@ -488,7 +488,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
   jAdd->subsystem = subsystemController;
   jAdd->node = nodeController;
   jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // MENSAJE REPORT GLOBAL POSE
   // Formacion del mensaje
@@ -520,7 +520,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
 
   // Direccion
   jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   jausAddressCopy(rvsm->destination, jAdd);
   jMsg = reportVelocityStateMessageToJausMessage(rvsm);
@@ -543,7 +543,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
 
   // Direccion
   jAdd->component = JAUS_GLOBAL_POSE_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   jausAddressCopy(agim->destination, jAdd);
   jMsg = aditionalGPSINSInfo4MessageToJausMessage(agim);

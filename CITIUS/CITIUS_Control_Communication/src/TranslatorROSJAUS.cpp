@@ -31,7 +31,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromWrenchEffortInfo(JausSubsystemID su
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Traduccion
 
@@ -68,7 +68,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID 
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Traduccion
 
@@ -100,7 +100,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(JausSubsystemID sub
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Traduccion
 
@@ -132,7 +132,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(JausSubsystemID subDest, Ja
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Traduccion
 
@@ -170,7 +170,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromSignalingInfo(JausSubsystemID subDe
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Traduccion
 
@@ -211,7 +211,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(JausSubsystemID subDes
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   UGVInfo12Message ugvm = ugvInfo12MessageCreate();
   ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_LEVEL |
@@ -255,7 +255,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(JausSubsystemID subDest,
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Generacion de mensaje especifico UGV Info
   ReportCameraPoseMessage rcpm = reportCameraPoseMessageCreate();
@@ -293,7 +293,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDes
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Mensaje especifico
   ReportNightTimeCamera24Message ircm = reportNightTimeCamera24MessageCreate();
@@ -331,7 +331,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTelemeterInfo(JausSubsystemID subDe
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_PLATFORM_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Mensaje especifico
   ReportTelemeter27Message tim = reportTelemeter27MessageCreate();
@@ -368,7 +368,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTVCamera(JausSubsystemID subDest, J
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Mensaje especifico
   ReportDayTimeCamera22Message dtcm = reportDayTimeCamera22MessageCreate();
@@ -404,7 +404,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromPositioner(JausSubsystemID subDest,
   jAdd->subsystem = subDest;
   jAdd->node = nodDest;
   jAdd->component = JAUS_VISUAL_SENSOR;
-  jAdd->instance = 1;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
 
   // Mensaje especifico
   ReportPositioner20Message posm = reportPositioner20MessageCreate();
