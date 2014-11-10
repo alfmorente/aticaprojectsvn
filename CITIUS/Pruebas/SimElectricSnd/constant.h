@@ -145,4 +145,23 @@ typedef struct{
     short value;
 }FrameDriving;
 
+/*******************************************************************************
+ *           MÁSCARAS DE IDENTIFICACIÓN DE ALARMAS
+ *******************************************************************************/
+
+#define MASK_NOT_ALARMS 0x0000 ///<Indicador de todas las alarmas a 0
+#define MASK_ALARMS_BATTERY_TEMPERATURE 0x0001 ///<Indicador de temperatura de las baterías
+#define MASK_ALARMS_BATTERY_VOLTAGE 0x0002 ///<Indicador de tensión de las baterías
+#define MASK_ALARMS_BATTERY_CURRENT 0x0004 ///<Indicador de corriente de las baterías 
+#define MASK_ALARMS_48V_FAILED 0x0008 ///<Indicador de fallo en DC/DC 48V
+#define MASK_ALARMS_24V_DRIVING_FAILED 0x0010 ///<Indicador de fallo en DC/DC 24V (conducción)
+#define MASK_ALARMS_24V_FAILED 0x0020 ///<Indicador de fallo en DC/DC 24V (resto)
+#define MASK_ALARMS_12V_FAILED 0x0040 ///<Indicador de fallo en DC/DC 12V
+#define MASK_ALARMS_5V_FAILED 0x0080 ///<Indicador de fallo en DC/DC 5V
+#define MASK_ALARMS_CONTROL_FAILED 0x0100 ///<Indicador de fallo subsistema de control
+#define MASK_ALARMS_DRIVING_FAILED 0x0200 ///<Indicador de fallo en subsistema de Payload de conducción
+#define MASK_ALARMS_COMM_FAILED 0x0400 ///<Indicador de fallo en subsistema de comunicaciones
+#define MASK_ALARMS_OBSERVATION_FAILED 0x0800 ///<Indicador de fallo en subsistema de Payload de observación
+
+
 #endif	/* CONSTANT_H */
