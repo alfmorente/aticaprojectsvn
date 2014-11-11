@@ -57,7 +57,6 @@ int main(int argc, char** argv) {
                 if(status == ST_CONNECTED){
                    
                     if(driver->getData()){
-                        
                         GPSINSInfo info = driver->getInfo();
                         cout << "Datos: " << endl;
                         cout << "Estado posicion: " << info.positionStatus << endl;
