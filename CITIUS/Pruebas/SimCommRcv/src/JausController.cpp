@@ -36,7 +36,7 @@ JausController::JausController() {
 void JausController::initJAUS() {
     
     // Inicializacion de JAUS
-    configData = new FileLoader("nodeManager.conf");
+    /*configData = new FileLoader("nodeManager.conf");
     handler = new JausHandler();
     
     try {
@@ -49,7 +49,7 @@ void JausController::initJAUS() {
         
         cout << "Modulo JAUS iniciado" << endl;
                 
-    }
+    }*/
     
     /*
      * Creacion de componentes
