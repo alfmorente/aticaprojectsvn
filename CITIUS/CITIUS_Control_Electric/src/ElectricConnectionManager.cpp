@@ -20,8 +20,8 @@ ElectricConnectionManager::ElectricConnectionManager() {
   turnOff = false;
   swPosition.flag = false;
   swPosition.position = -1;
-  supplyAlarms.flag = false;
-  supplyAlarms.alarms = 0x0000;
+  alarms.flag = false;
+  alarms.supplyAlarms = 0x0000;
 }
 
 /** Destructor de la clase*/
@@ -74,9 +74,6 @@ void ElectricConnectionManager::reqElectricInfo() {
   sendToVehicle(frame);
   // Temperatura bateria
   frame.element = BATTERY_TEMPERATURE;
-  sendToVehicle(frame);
-  // Alarmas de suministro
-  frame.element = SUPPLY_ALARMS;
   sendToVehicle(frame);
 
 }
@@ -164,18 +161,18 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
         sendToVehicle((FrameDriving) rtxList.msgs.at(i));
       }
 
-    } else if (fdr.instruction == INFO) {
-
+    } else if (fdr.instruction == INFO) { 
       if (fdr.element == SUPPLY_ALARMS) {
 
-        // TODO ALARMAS
         setVehicleInfo(fdr.element, fdr.value);
 
       } else if (fdr.element == TURN_OFF) {
+
         ROS_INFO("[Control] Electric - Preparando el apagado del sistema");
         turnOff = true;
 
       } else if (fdr.element == OPERATION_MODE_SWITCH) {
+  
         ROS_INFO("[Control] Electric - Cambio en posicion del conmutador local/teleoperado");
         swPosition.flag = true;
         swPosition.position = fdr.value;
@@ -221,8 +218,8 @@ void ElectricConnectionManager::setVehicleInfo(DeviceID id_device, short value) 
       electricInfo.battery_temperature = value;
       break;
     case SUPPLY_ALARMS:
-      supplyAlarms.flag = true;
-      supplyAlarms.alarms = value;
+      alarms.flag = true;
+      alarms.supplyAlarms = value;
       break;
     default:
       break;
@@ -281,28 +278,26 @@ SwitcherStruct ElectricConnectionManager::getSwitcherStruct() {
  */
 void ElectricConnectionManager::setSwitcherStruct(bool flag) {
   swPosition.flag = flag;
-  swPosition.position = -1;
 }
 
 /**
- * Método público consultor del atributo "supplyAlarms" de la clase que indica 
- * la última lectura realizada del vector de alarmas del módulo eléctrico del 
+ * Método público consultor del atributo "alarms" de la clase que indica la
+ * última lectura realizada del vector de alarmas del módulo eléctrico del 
  * Payload de conduccion del vehículo
- * @return Atributo "supplyAlarms" de la clase
+ * @return Atributo "alarms" de la clase
  */
-SupplyAlarmsStruct ElectricConnectionManager::getSupplyAlarmsStruct(){
-  return supplyAlarms;
+SupplyAlarmsStruct ElectricConnectionManager::getSupplyAlarmsStruct() {
+  return alarms;
 }
 
 /**
- * Método público modificador del atributo "supplyAlarms" de la clase que se 
- * actualiza cuando se detecta un cambio en el vector de alarmas recibida
- * @param[in] newState Indica si el estado ha cambiado o no para identificar
- * el modo de control de cambios
+ * Método público modificador del atributo "alarms" de la clase que se 
+ * actualiza cuando se detecta un cambio en el vector de alarmas del vehículo o 
+ * cuando se ha llevado a cabo el tratamiento tras su detección
+ * @param[in] flag Indica si es para puesta a cero del indicador de cambio
  */
-void ElectricConnectionManager::setSupplyAlarmsStruct(bool newState) {
-  supplyAlarms.flag = newState;
-  supplyAlarms.alarms = 0x0000;
+void ElectricConnectionManager::setSupplyAlarmsStruct(bool flag) {
+  alarms.flag = flag;
 }
 
 /**
