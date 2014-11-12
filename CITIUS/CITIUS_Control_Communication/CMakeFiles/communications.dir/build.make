@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication
 
@@ -63,15 +66,15 @@ CMakeFiles/communications.dir/src/main.cpp.o: /opt/ros/groovy/share/xmlrpcpp/pac
 CMakeFiles/communications.dir/src/main.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/main.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
 
 CMakeFiles/communications.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/main.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp > CMakeFiles/communications.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp > CMakeFiles/communications.dir/src/main.cpp.i
 
 CMakeFiles/communications.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/main.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp -o CMakeFiles/communications.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp -o CMakeFiles/communications.dir/src/main.cpp.s
 
 CMakeFiles/communications.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/communications.dir/src/main.cpp.o.requires
@@ -99,15 +102,15 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
 
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/RosNode_Communications.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp > CMakeFiles/communications.dir/src/RosNode_Communications.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp > CMakeFiles/communications.dir/src/RosNode_Communications.cpp.i
 
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp -o CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp -o CMakeFiles/communications.dir/src/RosNode_Communications.cpp.s
 
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o.requires:
 .PHONY : CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o.requires
@@ -135,15 +138,15 @@ CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: /opt/ros/groovy/share
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
 
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp > CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp > CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.i
 
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp -o CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp -o CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.s
 
 CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o.requires:
 .PHONY : CMakeFiles/communications.dir/src/TranslatorROSJAUS.cpp.o.requires
@@ -171,15 +174,15 @@ CMakeFiles/communications.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/xmlrp
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/JausHandler.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/JausHandler.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/JausHandler.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp
 
 CMakeFiles/communications.dir/src/JausHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/JausHandler.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp > CMakeFiles/communications.dir/src/JausHandler.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp > CMakeFiles/communications.dir/src/JausHandler.cpp.i
 
 CMakeFiles/communications.dir/src/JausHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/JausHandler.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp -o CMakeFiles/communications.dir/src/JausHandler.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp -o CMakeFiles/communications.dir/src/JausHandler.cpp.s
 
 CMakeFiles/communications.dir/src/JausHandler.cpp.o.requires:
 .PHONY : CMakeFiles/communications.dir/src/JausHandler.cpp.o.requires
@@ -207,15 +210,15 @@ CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/xmlrpcpp/
 CMakeFiles/communications.dir/src/RosNode.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/RosNode.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/RosNode.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/RosNode.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp
 
 CMakeFiles/communications.dir/src/RosNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/RosNode.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp > CMakeFiles/communications.dir/src/RosNode.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp > CMakeFiles/communications.dir/src/RosNode.cpp.i
 
 CMakeFiles/communications.dir/src/RosNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/RosNode.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp -o CMakeFiles/communications.dir/src/RosNode.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp -o CMakeFiles/communications.dir/src/RosNode.cpp.s
 
 CMakeFiles/communications.dir/src/RosNode.cpp.o.requires:
 .PHONY : CMakeFiles/communications.dir/src/RosNode.cpp.o.requires
@@ -243,15 +246,15 @@ CMakeFiles/communications.dir/src/Timer.cpp.o: /opt/ros/groovy/share/xmlrpcpp/pa
 CMakeFiles/communications.dir/src/Timer.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/communications.dir/src/Timer.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/Timer.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/communications.dir/src/Timer.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp
 
 CMakeFiles/communications.dir/src/Timer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/communications.dir/src/Timer.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp > CMakeFiles/communications.dir/src/Timer.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp > CMakeFiles/communications.dir/src/Timer.cpp.i
 
 CMakeFiles/communications.dir/src/Timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/communications.dir/src/Timer.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp -o CMakeFiles/communications.dir/src/Timer.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp -o CMakeFiles/communications.dir/src/Timer.cpp.s
 
 CMakeFiles/communications.dir/src/Timer.cpp.o.requires:
 .PHONY : CMakeFiles/communications.dir/src/Timer.cpp.o.requires
