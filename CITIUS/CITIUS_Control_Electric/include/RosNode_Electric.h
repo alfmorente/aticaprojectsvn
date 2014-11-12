@@ -62,7 +62,7 @@ public:
   void checkTurnOff();
   // Gestion de evento Switcher
   void checkSwitcher();
-  // Gestion de evento SupplyAlarms
+  // Gestion de evento Alarmas
   void checkSupplyAlarms();
 };
 

@@ -47,8 +47,8 @@ private:
   bool turnOff;
   // Posicion del conmutador local/teleoperado
   SwitcherStruct swPosition;
-  // Alarmas del subsistema electrico
-  SupplyAlarmsStruct supplyAlarms;
+  // Vector de alarmas del modulo
+  SupplyAlarmsStruct alarms;
   //Consultores/modificadores privados
   void setVehicleInfo(DeviceID id_device, short value);
   // Metodos de gestion privados
@@ -72,8 +72,8 @@ public:
   short getCountCriticalMessages();
   void setCountCriticalMessages(short count);
   void setSwitcherStruct(bool position);
-  void setSupplyAlarmsStruct(bool newState);
   SwitcherStruct getSwitcherStruct();
+  void setSupplyAlarmsStruct(bool flag);
   SupplyAlarmsStruct getSupplyAlarmsStruct();
 };
 
