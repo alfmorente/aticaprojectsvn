@@ -39,6 +39,7 @@
                    root="/usr/share/cmake-2.8/Modules">
       <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
       <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
+      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h</itemPath>
       <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
     </logicalFolder>
     <logicalFolder name="src"
@@ -94,6 +95,11 @@
       <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
             ex="false"
             tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h"
+            ex="false"
+            tool="3"
             flavor2="0">
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
