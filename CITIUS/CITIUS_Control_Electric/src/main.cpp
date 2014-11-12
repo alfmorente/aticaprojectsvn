@@ -52,26 +52,42 @@ int main(int argc, char** argv) {
 
       // Recepcion de mensaje ROS
       ros::spinOnce();
-      // Comprobacion de recpcion de mensajes de vehiculo
-      nodeElectric->getDriverMng()->checkForVehicleMessages();
-      // Comprobacion de señalizacion de apagado
-      nodeElectric->checkTurnOff();
-      // Comprobacion de cambio en posicion conmutador local/teleop
-      nodeElectric->checkSwitcher();
-      // Tratamiento de alarmas 
-      nodeElectric->checkSupplyAlarms();
-      // TODO
 
-      // Comprobación del temporizador y requerimiento de info
-      if (timer->GetTimed() >= FREC_2HZ) {
-        // Clear del timer
-        timer->Reset();
-        // Requerimiento de informacion de sistema energetico
-        //nodeElectric->getDriverMng()->reqElectricInfo();
-        // Publicacion de la informacion existente
-        nodeElectric->publishElectricInfo(nodeElectric->getDriverMng()->getVehicleInfo());
+      // Funcionamiento correcto (sin alarmas)
+      if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
 
+        // Comprobacion de recpcion de mensajes de vehiculo
+        nodeElectric->getDriverMng()->checkForVehicleMessages();
+        // Comprobacion de señalizacion de apagado
+        nodeElectric->checkTurnOff();
+        // Comprobacion de cambio en posicion conmutador local/teleop
+        nodeElectric->checkSwitcher();
+        // Comprobacion de cambio en los vectores de alarmas
+        nodeElectric->checkSupplyAlarms();
+
+        // Comprobación del temporizador y requerimiento de info
+        if (timer->GetTimed() >= FREC_2HZ) {
+          // Clear del timer
+          timer->Reset();
+          // Requerimiento de informacion de sistema energetico
+          nodeElectric->getDriverMng()->reqElectricInfo();
+          // Publicacion de la informacion existente
+          nodeElectric->publishElectricInfo(nodeElectric->getDriverMng()->getVehicleInfo());
+        }
+      
       }
+      // Funcionamiento en modo degradado 
+      else if(nodeElectric->getNodeStatus() == NODESTATUS_CORRUPT){
+        // Comprobacion de cambio en los vectores de alarmas
+        nodeElectric->checkSupplyAlarms();
+        // Comprobacion recepción de nuevo vector de alarmas o apagado
+        nodeElectric->getDriverMng()->checkForVehicleMessages();
+        // Comprobqacion de señalizacion de apagado
+        nodeElectric->checkTurnOff();
+        // Comprobacion de cambio en posicion conmutador local/teleop
+        nodeElectric->checkSwitcher();
+      }
+      
       usleep(1000);
     }
     delete(timer);
