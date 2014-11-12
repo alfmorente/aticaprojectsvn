@@ -192,7 +192,7 @@ void RosNode_Electric::checkSwitcher() {
     // Activacion / Desactivacion de actuadores
     if (dElectric->getSwitcherStruct().position == 1) {
       publishSetupCommands(true);
-    } else {
+    } else if (dElectric->getSwitcherStruct().position == 0) {
       publishSetupCommands(false);
     }
     // Clear del indicador de cambio
@@ -201,16 +201,71 @@ void RosNode_Electric::checkSwitcher() {
 }
 
 /**
- * Método público que comprueba si el último mensaje recibido del vehículo es 
- * un cambio en el vector de alarms y da soporte al mismo en caso afirmativo
+ * Método público que comprueba si se ha recibido un nuevo mensaje con el vector
+ * de alarmas del vehículo y se encarga de su tratamiento
  */
 void RosNode_Electric::checkSupplyAlarms() {
-  if(dElectric->getSupplyAlarmsStruct().flag){
-    // Tratamiento de alarmas 
-    short alarms = dElectric->getSupplyAlarmsStruct().alarms;
-    // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-    // CLear del indicador de cambio
+  if (dElectric->getSupplyAlarmsStruct().flag) {
+    if ((dElectric->getSupplyAlarmsStruct().supplyAlarms | MASK_NOT_ALARMS) == MASK_NOT_ALARMS) {
+      if (nodeStatus == NODESTATUS_CORRUPT) {
+        ROS_INFO("[Control] Electric - Sin alarmas activas - Nodo en modo OK");
+        nodeStatus = NODESTATUS_OK;
+        // Aviso al módulo de conducción
+        CITIUS_Control_Electric::msg_command msg;
+        msg.id_device = SUPPLY_ALARMS;
+        msg.value = 0;
+        pubCommand.publish(msg);
+      }
+    } else {
+      if (nodeStatus == NODESTATUS_OK) {
+        ROS_INFO("[Control] Electric - Alarmas activas - Nodo DEGRADADO");
+        nodeStatus = NODESTATUS_CORRUPT;
+        // Aviso al módulo de conducción
+        CITIUS_Control_Electric::msg_command msg;
+        msg.id_device = SUPPLY_ALARMS;
+        msg.value = 1;
+        pubCommand.publish(msg);
+      }
+        // Identificacion de alarms
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_BATTERY_TEMPERATURE) == MASK_ALARMS_BATTERY_TEMPERATURE) {
+          ROS_INFO("[Control] Electric - Alarma: Temperatura de las baterias");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_BATTERY_VOLTAGE) == MASK_ALARMS_BATTERY_VOLTAGE) {
+          ROS_INFO("[Control] Electric - Alarma: Tension de las baterias");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_BATTERY_CURRENT) == MASK_ALARMS_BATTERY_CURRENT) {
+          ROS_INFO("[Control] Electric - Alarma: Corriente de las baterias");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_48V_FAILED) == MASK_ALARMS_48V_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en DC/DC 48V");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_24V_DRIVING_FAILED) == MASK_ALARMS_24V_DRIVING_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en DC/DC 24V (Conduccion)");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_24V_FAILED) == MASK_ALARMS_24V_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en DC/DC 24V (Resto)");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_12V_FAILED) == MASK_ALARMS_12V_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en DC/DC 12V");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_5V_FAILED) == MASK_ALARMS_5V_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en DC/DC 5V");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_CONTROL_FAILED) == MASK_ALARMS_CONTROL_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en Control");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_DRIVING_FAILED) == MASK_ALARMS_DRIVING_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en Payload de conduccion");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_COMM_FAILED) == MASK_ALARMS_COMM_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en Comunicaciones");
+        }
+        if ((dElectric->getSupplyAlarmsStruct().supplyAlarms & MASK_ALARMS_OBSERVATION_FAILED) == MASK_ALARMS_OBSERVATION_FAILED) {
+          ROS_INFO("[Control] Electric - Alarma: Fallo en Payload de observacion");
+        }
+
+    }
+    //Clear del indicador de cambio
     dElectric->setSupplyAlarmsStruct(false);
   }
 }
