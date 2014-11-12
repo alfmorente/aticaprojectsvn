@@ -13,8 +13,6 @@
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/CMakeLists.txt</file>
             <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp</file>
         </group>
-        <group>
-            <file>file:/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
