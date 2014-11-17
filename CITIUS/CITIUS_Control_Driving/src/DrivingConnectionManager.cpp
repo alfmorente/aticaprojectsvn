@@ -56,10 +56,10 @@ void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
   memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
   memcpy(&bufData[4], &frame.element, sizeof (frame.element));
   memcpy(&bufData[6], &frame.value, sizeof (frame.value));
-
+  printf("Enviado: %d-%d-%d-%d\n",frame.instruction,frame.id_instruccion,frame.element,frame.value);
   // Envio via socket
   send(socketDescriptor, bufData, sizeof (bufData), 0);
-  usleep(1000);
+  usleep(10000);
 }
 
 /**
@@ -149,28 +149,24 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
     memcpy(&aux, &bufData[4], sizeof (aux));
     fdr.element = static_cast<DeviceID> (aux);
     memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-
+    
+    printf("RCV :: %d - %d - %d - %d\n",fdr.instruction,fdr.id_instruccion,fdr.element,fdr.value);
+    
     if (fdr.instruction == ACK) {
-
-      printf("Recibido ACK\n");
-      if (isCriticalInstruction(fdr.element))
-        informResponse(true, fdr.id_instruccion);
-
+      if (isCriticalInstruction(fdr.element)){
+          informResponse(true, fdr.id_instruccion);
+      }
     } else if (fdr.instruction == NACK) {
-
-      printf("Recibido NACK\n");
       RtxStruct rtxList = informResponse(false, fdr.id_instruccion);
       for (int i = 0; i < rtxList.numOfMsgs; i++) {
         sendToVehicle((FrameDriving) rtxList.msgs.at(i));
       }
-
     } else if (fdr.instruction == INFO) {
       if (fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS) {
         setAlarmsInfo(fdr.element, fdr.value);
       } else { // INFO corriente
         setVehicleInfo(fdr.element, fdr.value);
       }
-
     }
     return true;
   } else {
