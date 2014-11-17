@@ -50,7 +50,7 @@ void RosNode_Electric::initROS() {
   // Solicitar a vehículo posicion conmutador local/teleoperado
   ROS_INFO("[Control] Electric - Esperando posicion del conmutador local/teleoperado para arrancar");
   //service.request.posSwitcher = dElectric->waitForSwitcherPosition();
-  service.request.posSwitcher = SWITCHER_LOCAL;
+  service.request.posSwitcher = SWITCHER_TELECONTROL;
 
   while (!clientVehicleStatus.call(service)) {
     ros::spinOnce();
@@ -123,7 +123,8 @@ void RosNode_Electric::publishSetupCommands(bool on) {
     msg.value = 0;
 
   // Activa/desactiva acelerador
-  msg.id_device = MT_THROTTLE;
+  // Decomentar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  /*msg.id_device = MT_THROTTLE;
   pubCommand.publish(msg);
 
   // Activa/desactiva freno de servicio
@@ -148,7 +149,8 @@ void RosNode_Electric::publishSetupCommands(bool on) {
 
   // Activa/desactiva intermitentes
   msg.id_device = MT_BLINKERS;
-  pubCommand.publish(msg);
+  pubCommand.publish(msg);*/
+  
 
 }
 

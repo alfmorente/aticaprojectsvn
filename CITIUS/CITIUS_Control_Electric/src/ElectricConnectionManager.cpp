@@ -148,6 +148,8 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
     memcpy(&aux, &bufData[4], sizeof (aux));
     fdr.element = static_cast<DeviceID> (aux);
     memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
+    
+    printf("RCV :: %d - %d - %d - %d\n",fdr.instruction,fdr.id_instruction,fdr.element,fdr.value);
 
     if (fdr.instruction == ACK) {
 
