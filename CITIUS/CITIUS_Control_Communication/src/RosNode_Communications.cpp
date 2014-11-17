@@ -91,11 +91,11 @@ void RosNode_Communications::initROS() {
 void RosNode_Communications::initJAUS() {
 
   // Inicializacion de JAUS
-  configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
+  configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
   handler = new JausHandler();
 
   try {
-    configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
+    configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
     handler = new JausHandler();
     nm = new NodeManager(this->configData, this->handler);
   } catch (...) {
