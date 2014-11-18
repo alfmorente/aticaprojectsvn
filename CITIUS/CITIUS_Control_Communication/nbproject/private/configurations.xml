@@ -790,6 +790,7 @@
         </df>
       </df>
       <df name="msg">
+        <in>msg_electricCommand.msg</in>
       </df>
       <df name="msg_gen">
         <df name="cpp">
@@ -799,6 +800,7 @@
               <in>msg_ctrlFrontCamera.h</in>
               <in>msg_ctrlRearCamera.h</in>
               <in>msg_echoesFound.h</in>
+              <in>msg_electricCommand.h</in>
               <in>msg_electricInfo.h</in>
               <in>msg_frontCameraInfo.h</in>
               <in>msg_irinfo.h</in>

@@ -6,7 +6,31 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp
+JausHandler.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp
+RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
+RosNode_Communications.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp
+Timer.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.h
+unistd.h
+-
+sys/time.h
+-
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
+TranslatorROSJAUS.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
 

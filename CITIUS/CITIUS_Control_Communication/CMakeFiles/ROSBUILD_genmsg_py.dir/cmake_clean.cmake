@@ -9,6 +9,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/msg/__init__.py"
   "src/CITIUS_Control_Communication/msg/_msg_frontCameraInfo.py"
   "src/CITIUS_Control_Communication/msg/_msg_tvinfo.py"
+  "src/CITIUS_Control_Communication/msg/_msg_electricCommand.py"
   "src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py"
   "src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py"
   "src/CITIUS_Control_Communication/msg/_msg_irinfo.py"

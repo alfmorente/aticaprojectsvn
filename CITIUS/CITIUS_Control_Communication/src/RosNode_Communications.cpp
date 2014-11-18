@@ -303,6 +303,9 @@ void RosNode_Communications::informStatus() {
   jausMessageDestroy(jMsg);
 }
 
+void RosNode_Communications::informCameraToStream(){
+
+}
 
 /*******************************************************************************
  *******************************************************************************

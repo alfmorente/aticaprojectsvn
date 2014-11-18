@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/ROSBUILD_genmsg_cpp"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_tvinfo.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricCommand.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_posOriInfo.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_irinfo.h"

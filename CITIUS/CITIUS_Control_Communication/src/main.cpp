@@ -37,6 +37,7 @@ int main(int argc, char** argv) {
   // Temporizador de envio de estado
   Timer *timer = new Timer();
   timer->Enable();
+  int count1Hz = 0;
 
   while (ros::ok() && nodeComm->getNodeStatus() != NODESTATUS_OFF) {
 
@@ -48,8 +49,16 @@ int main(int argc, char** argv) {
 
       // Clear del timer
       timer->Reset();
-      // Requerimiento de informacion de dispositivo
+      // Informe del estado del modo de operacion
       nodeComm->informStatus();
+      
+      // Temporizador para envio de identificador de camara activa a pinchar
+      count1Hz++;
+      if(count1Hz==10){
+        count1Hz = 0;
+        // Informe de la camara activa a pinchar
+        nodeComm->informCameraToStream();
+      }
 
     }
     usleep(50000);
