@@ -541,6 +541,7 @@ CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/incl
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h
+CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricCommand.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h
 CMakeFiles/communications.dir/src/RosNode_Communications.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_irinfo.h
@@ -1103,6 +1104,7 @@ CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_ctrlRearCamera.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h
+CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricCommand.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricInfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_frontCameraInfo.h
 CMakeFiles/communications.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Communication/msg_irinfo.h

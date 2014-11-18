@@ -33,6 +33,9 @@ RosNode_Communications::RosNode_Communications() {
   //subsystemController = JAUS_SUBSYSTEM_UGV;
   nodeController = JAUS_NODE_CONTROL; // Control
   nodeStatus = NODESTATUS_INIT;
+  // Inicializador de selectores de camaras
+  currentDrivingCamera = FRONT_CAMERA_ID;
+  currentObservationCamera = TV_CAMERA;
 }
 
 /**
@@ -50,6 +53,7 @@ void RosNode_Communications::initROS() {
   ros::NodeHandle nh;
   // Inicializacion de publicadores
   pubCommand = nh.advertise<CITIUS_Control_Communication::msg_command>("command", 1000);
+  pubElectricCommand = nh.advertise<CITIUS_Control_Communication::msg_electricCommand>("electricCommand", 1000);
   pubCtrlFrontCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlFrontCamera>("ctrlFrontCamera", 1000);
   pubCtrlRearCamera = nh.advertise<CITIUS_Control_Communication::msg_ctrlRearCamera>("ctrlRearCamera", 1000);
   // Inicializacion de suscriptores
@@ -147,6 +151,7 @@ void RosNode_Communications::initJAUS() {
     ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_POSITIONER_20, 0xFF);
     ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_DAY_TIME_CAMERA_22, 0xFF);
     ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_REPORT_NIGHT_TIME_CAMERA_24, 0xFF);
+    ojCmptAddServiceOutputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SELECT_CAMERA, 0xFF);
     // Mensajes que recibe
     ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_CAMERA_POSE, 0xFF);
     ojCmptAddServiceInputMessage(visualSensorComponent, JAUS_VISUAL_SENSOR, JAUS_SET_SIGNALING_ELEMENTS_18, 0xFF);
@@ -303,8 +308,45 @@ void RosNode_Communications::informStatus() {
   jausMessageDestroy(jMsg);
 }
 
+/**
+ * Método público que envía información sobre la cámara de la que debe enviar el
+ * streaming el nodo JAUS de Communication Management
+ */
 void RosNode_Communications::informCameraToStream(){
+  // Obtencion del estado
+  int status;
+  ros::NodeHandle nh;
+  nh.getParam("vehicleStatus", status);
+  JausMessage jMsg = NULL;
 
+  // Creacion de la direccion destinataria
+  JausAddress jAdd = jausAddressCreate();
+  jAdd->subsystem = JAUS_SUBSYSTEM_UGV;
+  jAdd->node = JAUS_NODE_COMM_MNG;
+  jAdd->component = JAUS_VISUAL_SENSOR;
+
+  // Generacion de mensaje especifico UGV Info
+  SelectCameraMessage scm = selectCameraMessageCreate();
+  if (status == OPERATION_MODE_OBSERVACION) {
+    scm->cameraID = currentObservationCamera;
+  } else {
+    scm->cameraID = currentDrivingCamera;
+  } 
+
+  jausAddressCopy(scm->destination, jAdd);
+
+  // Generacion de mensaje JUAS global
+  jMsg = selectCameraMessageToJausMessage(scm);
+
+  if (jMsg != NULL) {
+    ojCmptSendMessage(instance->visualSensorComponent, jMsg);
+  } else {
+    ////ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion electrica de vehiculo");
+  }
+  // Liberacion de memoria
+  selectCameraMessageDestroy(scm);
+  jausAddressDestroy(jAdd);
+  jausMessageDestroy(jMsg);
 }
 
 /*******************************************************************************
@@ -390,6 +432,13 @@ void RosNode_Communications::fnc_subs_rearCameraInfo(CITIUS_Control_Communicatio
  * @param[in] msg Mensaje ROS con informacion del modulo de conduccion
  */
 void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg) {
+  
+  // Actualiza selector de camara
+  if(msg.gear == 2) // Marcha atras
+    instance->currentDrivingCamera = REAR_CAMERA_ID;
+  else
+    instance->currentDrivingCamera = FRONT_CAMERA_ID;
+  
   //ROS_INFO("[Control] Communications - Recibida informacion de vehiculo");
 
   // Conversor ROS -> JAUS
@@ -999,6 +1048,10 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
+  
+  // Actualiza selector de camara
+  instance->currentObservationCamera = TV_CAMERA;
+  
   SetDayTimeCamera21Message setDayCam = setDayTimeCamera21MessageFromJausMessage(msg);
 
   if (jausByteIsBitSet(setDayCam->presenceVector, JAUS_21_PV_DIRECT_ZOOM_BIT)) {
@@ -1083,6 +1136,10 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
+  
+  // Actualiza selector de camara
+  instance->currentObservationCamera = IR_CAMERA;
+  
   SetNightTimeCamera23Message setNightCam = setNightTimeCamera23MessageFromJausMessage(msg);
 
   if (jausByteIsBitSet(setNightCam->presenceVector, JAUS_23_PV_ZOOM_BIT)) {
