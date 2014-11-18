@@ -6,31 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp
-JausHandler.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.cpp
-RosNode.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode.h
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.cpp
-RosNode_Communications.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.cpp
-Timer.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/Timer.h
-unistd.h
--
-sys/time.h
--
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.cpp
-TranslatorROSJAUS.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/TranslatorROSJAUS.h
-
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/main.cpp
 RosNode_Communications.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/RosNode_Communications.h
 
@@ -671,6 +647,8 @@ cstdlib
 -
 CITIUS_Control_Communication/msg_command.h
 include/CITIUS_Control_Communication/msg_command.h
+CITIUS_Control_Communication/msg_electricCommand.h
+include/CITIUS_Control_Communication/msg_electricCommand.h
 CITIUS_Control_Communication/msg_ctrlFrontCamera.h
 include/CITIUS_Control_Communication/msg_ctrlFrontCamera.h
 CITIUS_Control_Communication/msg_ctrlRearCamera.h
@@ -2329,6 +2307,28 @@ ros/assert.h
 msg_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
 
 msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+msg_gen/cpp/include/CITIUS_Control_Communication/ros/serialization.h
+ros/builtin_message_traits.h
+msg_gen/cpp/include/CITIUS_Control_Communication/ros/builtin_message_traits.h
+ros/message_operations.h
+msg_gen/cpp/include/CITIUS_Control_Communication/ros/message_operations.h
+ros/time.h
+msg_gen/cpp/include/CITIUS_Control_Communication/ros/time.h
+ros/macros.h
+msg_gen/cpp/include/CITIUS_Control_Communication/ros/macros.h
+ros/assert.h
+msg_gen/cpp/include/CITIUS_Control_Communication/ros/assert.h
+
+msg_gen/cpp/include/CITIUS_Control_Communication/msg_electricCommand.h
 string
 -
 vector

@@ -75,7 +75,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID 
   ReportDiscreteDevicesMessage rddm = reportDiscreteDevicesMessageCreate();
   rddm->presenceVector = (PRESENCE_VECTOR_PARKING_BRAKE | PRESENCE_VECTOR_GEAR);
   rddm->parkingBrake = (JausBoolean) parkingbrake;
-  rddm->gear = gear;
+  rddm->gear = gear+1;
   jausAddressCopy(rddm->destination, jAdd);
   // Generacion de mensaje JUAS global
   jMsg = reportDiscreteDevicesMessageToJausMessage(rddm);

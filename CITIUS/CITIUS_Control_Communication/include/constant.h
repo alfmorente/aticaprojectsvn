@@ -216,7 +216,7 @@ typedef enum {
 #define JAUS_DESTINANTION_INSTANCE 1 ///<Instancia JAUS destino 
 
 /*******************************************************************************
- *              IDENTIFICADOR DE CAMARA DE APOYO A LA CONDUCCION
+ *                      IDENTIFICADOR DE CAMARAS
  ******************************************************************************/
 
 /**
@@ -225,8 +225,11 @@ typedef enum {
  */
 typedef enum {
   FRONT_CAMERA_ID = 1, ///<Identificador de cámara de apoyo a la conducción delantera
-  REAR_CAMERA_ID = 2 ///<Identificador de cámara de apoyo a la conducción trasera
+  REAR_CAMERA_ID = 2, ///<Identificador de cámara de apoyo a la conducción trasera
+  TV_CAMERA = 3, ///<Identificador de cámara diurna Payload de Observación
+  IR_CAMERA = 4 ///<Identificador de cámara nocturna Payload de Observación
 } CameraID;
+
 
 #endif	/* CONSTANT_H */
 

@@ -97,6 +97,7 @@ private:
   ros::Publisher pubCtrlFrontCamera;
   ros::Publisher pubCtrlRearCamera;
   ros::Publisher pubCommand;
+  ros::Publisher pubElectricCommand;
   ros::ServiceClient clientStatus;
   // Subsistema de Payload de observacion
   ros::Subscriber subsIRCameraInfo;
@@ -158,6 +159,9 @@ private:
   void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
   // Maquina de estados local
   bool fcv_serv_nodeStatus(CITIUS_Control_Communication::srv_nodeStatus::Request &rq, CITIUS_Control_Communication::srv_nodeStatus::Response &rsp);
+  // Seleccion de camara para streaming
+  short currentObservationCamera;
+  short currentDrivingCamera;
 };
 
 #endif	/* COMMUNICATION_H */
