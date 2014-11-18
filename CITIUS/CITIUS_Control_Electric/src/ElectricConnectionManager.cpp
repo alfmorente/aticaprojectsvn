@@ -17,6 +17,26 @@ ElectricConnectionManager::ElectricConnectionManager() {
   electricInfo.battery_current = 0;
   electricInfo.battery_temperature = 0;
   electricInfo.supply_alarms = 0;
+  systemSupplies.controlSystemSupply = 0;
+  systemSupplies.controlSystemSupply5 = 0;
+  systemSupplies.controlSystemSupply12 = 0;
+  systemSupplies.controlSystemSupply24 = 0;
+  systemSupplies.controlSystemSupply48 = 0;
+  systemSupplies.driveSystemSupply = 0;
+  systemSupplies.driveSystemSupply5 = 0;
+  systemSupplies.driveSystemSupply12 = 0;
+  systemSupplies.driveSystemSupply24 = 0;
+  systemSupplies.driveSystemSupply48 = 0;
+  systemSupplies.commSystemSupply = 0;
+  systemSupplies.commSystemSupply5 = 0;
+  systemSupplies.commSystemSupply12 = 0;
+  systemSupplies.commSystemSupply24 = 0;
+  systemSupplies.commSystemSupply48 = 0;
+  systemSupplies.observationSystemSupply = 0;
+  systemSupplies.observationSystemSupply5 = 0;
+  systemSupplies.observationSystemSupply12 = 0;
+  systemSupplies.observationSystemSupply24 = 0;
+  systemSupplies.observationSystemSupply48 = 0;
   turnOff = false;
   swPosition.flag = false;
   swPosition.position = -1;
@@ -222,6 +242,66 @@ void ElectricConnectionManager::setVehicleInfo(DeviceID id_device, short value) 
     case SUPPLY_ALARMS:
       alarms.flag = true;
       alarms.supplyAlarms = value;
+      break;
+    case CONTROL_SYSTEM_SUPPLY:
+      systemSupplies.controlSystemSupply = value;
+      break;
+    case CONTROL_SYSTEM_SUPPLY_5:
+      systemSupplies.controlSystemSupply5 = value;
+      break;
+    case CONTROL_SYSTEM_SUPPLY_12:
+      systemSupplies.controlSystemSupply12 = value;
+      break;
+    case CONTROL_SYSTEM_SUPPLY_24:
+      systemSupplies.controlSystemSupply24 = value;
+      break;
+    case CONTROL_SYSTEM_SUPPLY_48:
+      systemSupplies.controlSystemSupply48 = value;
+      break;
+    case DRIVE_SYSTEM_SUPPLY:
+      systemSupplies.driveSystemSupply = value;
+      break;
+    case DRIVE_SYSTEM_SUPPLY_5:
+      systemSupplies.driveSystemSupply5 = value;
+      break;
+    case DRIVE_SYSTEM_SUPPLY_12:
+      systemSupplies.driveSystemSupply12 = value;
+      break;
+    case DRIVE_SYSTEM_SUPPLY_24:
+      systemSupplies.driveSystemSupply24 = value;
+      break;
+    case DRIVE_SYSTEM_SUPPLY_48:
+      systemSupplies.driveSystemSupply48 = value;
+      break;
+    case COMM_SYSTEM_SUPPLY:
+      systemSupplies.commSystemSupply = value;
+      break;
+    case COMM_SYSTEM_SUPPLY_5:
+      systemSupplies.commSystemSupply5 = value;
+      break;
+    case COMM_SYSTEM_SUPPLY_12:
+      systemSupplies.commSystemSupply12 = value;
+      break;
+    case COMM_SYSTEM_SUPPLY_24:
+      systemSupplies.commSystemSupply24 = value;
+      break;
+    case COMM_SYSTEM_SUPPLY_48:
+      systemSupplies.commSystemSupply48 = value;
+      break;
+    case OBSERVATION_SYSTEM_SUPPLY:
+      systemSupplies.observationSystemSupply = value;
+      break;
+    case OBSERVATION_SYSTEM_SUPPLY_5:
+      systemSupplies.observationSystemSupply5 = value;
+      break;
+    case OBSERVATION_SYSTEM_SUPPLY_12:
+      systemSupplies.observationSystemSupply12 = value;
+      break;
+    case OBSERVATION_SYSTEM_SUPPLY_24:
+      systemSupplies.observationSystemSupply24 = value;
+      break;
+    case OBSERVATION_SYSTEM_SUPPLY_48:
+      systemSupplies.observationSystemSupply48 = value;
       break;
     default:
       break;

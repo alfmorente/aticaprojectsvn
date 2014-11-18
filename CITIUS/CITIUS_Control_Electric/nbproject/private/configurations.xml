@@ -117,12 +117,14 @@
       <df name="lib">
       </df>
       <df name="msg">
+        <in>msg_electricCommand.msg</in>
       </df>
       <df name="msg_gen">
         <df name="cpp">
           <df name="include">
             <df name="CITIUS_Control_Electric">
               <in>msg_command.h</in>
+              <in>msg_electricCommand.h</in>
               <in>msg_electricInfo.h</in>
               <in>msg_switcher.h</in>
             </df>
