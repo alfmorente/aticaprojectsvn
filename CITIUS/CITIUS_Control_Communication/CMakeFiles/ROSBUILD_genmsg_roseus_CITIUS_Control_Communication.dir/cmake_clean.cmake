@@ -10,6 +10,8 @@ FILE(REMOVE_RECURSE
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_tvinfo.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_electricCommand.l"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_ctrlFrontCamera.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_posOriInfo.l"

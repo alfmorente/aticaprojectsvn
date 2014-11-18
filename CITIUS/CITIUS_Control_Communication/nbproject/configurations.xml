@@ -24,6 +24,9 @@
           </df>
         </df>
       </df>
+      <df name="msg">
+        <in>msg_electricCommand.msg</in>
+      </df>
       <df name="src">
         <in>JausHandler.cpp</in>
         <in>RosNode.cpp</in>
@@ -261,6 +264,8 @@
             flavor2="2">
         <cTool>
         </cTool>
+      </item>
+      <item path="msg/msg_electricCommand.msg" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/JausHandler.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>

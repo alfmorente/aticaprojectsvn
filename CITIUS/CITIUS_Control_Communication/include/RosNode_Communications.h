@@ -15,8 +15,10 @@
 
 #include "ros/ros.h"
 #include <cstdlib>
+
 // Mensajes y servicios subsitema de control
 #include "CITIUS_Control_Communication/msg_command.h"
+#include "CITIUS_Control_Communication/msg_electricCommand.h"
 #include "CITIUS_Control_Communication/msg_ctrlFrontCamera.h"
 #include "CITIUS_Control_Communication/msg_ctrlRearCamera.h"
 #include "CITIUS_Control_Communication/msg_electricInfo.h"
@@ -72,6 +74,8 @@ public:
   void finishJAUS();
   // Generacion de mensaje de estado para Controller
   void informStatus();
+  // Generacion de mensaje de seleccion de camara
+  void informCameraToStream();
 private:
   // Patron Singleton
   static RosNode_Communications *instance;

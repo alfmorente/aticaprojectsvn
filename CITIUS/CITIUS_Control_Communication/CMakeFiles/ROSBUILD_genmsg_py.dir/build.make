@@ -49,6 +49,7 @@ CMakeFiles/ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/__init__.py
 
 src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_frontCameraInfo.py
 src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_tvinfo.py
+src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_electricCommand.py
 src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py
 src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py
 src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_irinfo.py
@@ -61,7 +62,7 @@ src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communicati
 src/CITIUS_Control_Communication/msg/__init__.py: src/CITIUS_Control_Communication/msg/_msg_echoesFound.py
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/__init__.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_frontCameraInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_tvinfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlFrontCamera.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_posOriInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_irinfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlRearCamera.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_rearCameraInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_command.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_panTiltPosition.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_vehicleInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_echoesFound.msg
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_frontCameraInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_tvinfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricCommand.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlFrontCamera.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_posOriInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_irinfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlRearCamera.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_rearCameraInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_command.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_panTiltPosition.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_vehicleInfo.msg /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_echoesFound.msg
 
 src/CITIUS_Control_Communication/msg/_msg_frontCameraInfo.py: msg/msg_frontCameraInfo.msg
 src/CITIUS_Control_Communication/msg/_msg_frontCameraInfo.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -103,6 +104,26 @@ src/CITIUS_Control_Communication/msg/_msg_tvinfo.py: /opt/ros/groovy/share/roscp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_tvinfo.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_tvinfo.msg
 
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: msg/msg_electricCommand.msg
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: manifest.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/rostime/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/genmsg/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/genpy/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/CITIUS_Control_Communication/msg/_msg_electricCommand.py: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_electricCommand.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricCommand.msg
+
 src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: msg/msg_ctrlFrontCamera.msg
 src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
 src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
@@ -119,7 +140,7 @@ src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: /opt/ros/groovy/sh
 src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlFrontCamera.msg
 
@@ -139,7 +160,7 @@ src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py: /opt/ros/groovy/share/s
 src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_posOriInfo.msg
 
@@ -159,7 +180,7 @@ src/CITIUS_Control_Communication/msg/_msg_irinfo.py: /opt/ros/groovy/share/std_m
 src/CITIUS_Control_Communication/msg/_msg_irinfo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_irinfo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_irinfo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_irinfo.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_irinfo.msg
 
@@ -179,7 +200,7 @@ src/CITIUS_Control_Communication/msg/_msg_ctrlRearCamera.py: /opt/ros/groovy/sha
 src/CITIUS_Control_Communication/msg/_msg_ctrlRearCamera.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_ctrlRearCamera.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_ctrlRearCamera.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_ctrlRearCamera.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlRearCamera.msg
 
@@ -199,7 +220,7 @@ src/CITIUS_Control_Communication/msg/_msg_electricInfo.py: /opt/ros/groovy/share
 src/CITIUS_Control_Communication/msg/_msg_electricInfo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_electricInfo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_electricInfo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_electricInfo.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricInfo.msg
 
@@ -219,7 +240,7 @@ src/CITIUS_Control_Communication/msg/_msg_rearCameraInfo.py: /opt/ros/groovy/sha
 src/CITIUS_Control_Communication/msg/_msg_rearCameraInfo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_rearCameraInfo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_rearCameraInfo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_rearCameraInfo.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_rearCameraInfo.msg
 
@@ -239,7 +260,7 @@ src/CITIUS_Control_Communication/msg/_msg_command.py: /opt/ros/groovy/share/std_
 src/CITIUS_Control_Communication/msg/_msg_command.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_command.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_command.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_command.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_command.msg
 
@@ -259,7 +280,7 @@ src/CITIUS_Control_Communication/msg/_msg_panTiltPosition.py: /opt/ros/groovy/sh
 src/CITIUS_Control_Communication/msg/_msg_panTiltPosition.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_panTiltPosition.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_panTiltPosition.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_panTiltPosition.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_panTiltPosition.msg
 
@@ -279,7 +300,7 @@ src/CITIUS_Control_Communication/msg/_msg_vehicleInfo.py: /opt/ros/groovy/share/
 src/CITIUS_Control_Communication/msg/_msg_vehicleInfo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_vehicleInfo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_vehicleInfo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_vehicleInfo.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_vehicleInfo.msg
 
@@ -299,7 +320,7 @@ src/CITIUS_Control_Communication/msg/_msg_echoesFound.py: /opt/ros/groovy/share/
 src/CITIUS_Control_Communication/msg/_msg_echoesFound.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/CITIUS_Control_Communication/msg/_msg_echoesFound.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/CITIUS_Control_Communication/msg/_msg_echoesFound.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/CITIUS_Control_Communication/msg/_msg_echoesFound.py"
 	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_echoesFound.msg
 
@@ -307,6 +328,7 @@ ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py
 ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/__init__.py
 ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/_msg_frontCameraInfo.py
 ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/_msg_tvinfo.py
+ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/_msg_electricCommand.py
 ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/_msg_ctrlFrontCamera.py
 ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/_msg_posOriInfo.py
 ROSBUILD_genmsg_py: src/CITIUS_Control_Communication/msg/_msg_irinfo.py

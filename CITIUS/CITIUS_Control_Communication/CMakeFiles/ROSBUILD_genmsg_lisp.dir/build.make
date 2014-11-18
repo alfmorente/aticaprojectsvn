@@ -51,6 +51,9 @@ CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_frontCameraInfo.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_tvinfo.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_tvinfo.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_electricCommand.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_electricCommand.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_ctrlFrontCamera.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_ctrlFrontCamera.lisp
@@ -130,6 +133,30 @@ msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_tvinfo.lisp
 
 msg_gen/lisp/_package_msg_tvinfo.lisp: msg_gen/lisp/msg_tvinfo.lisp
 
+msg_gen/lisp/msg_electricCommand.lisp: msg/msg_electricCommand.msg
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/lisp/msg_electricCommand.lisp: manifest.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/lisp/msg_electricCommand.lisp: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_electricCommand.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_electricCommand.lisp"
+	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricCommand.msg
+
+msg_gen/lisp/_package.lisp: msg_gen/lisp/msg_electricCommand.lisp
+
+msg_gen/lisp/_package_msg_electricCommand.lisp: msg_gen/lisp/msg_electricCommand.lisp
+
 msg_gen/lisp/msg_ctrlFrontCamera.lisp: msg/msg_ctrlFrontCamera.msg
 msg_gen/lisp/msg_ctrlFrontCamera.lisp: /opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py
 msg_gen/lisp/msg_ctrlFrontCamera.lisp: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
@@ -146,7 +173,7 @@ msg_gen/lisp/msg_ctrlFrontCamera.lisp: /opt/ros/groovy/share/std_msgs/package.xm
 msg_gen/lisp/msg_ctrlFrontCamera.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_ctrlFrontCamera.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_ctrlFrontCamera.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_ctrlFrontCamera.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_ctrlFrontCamera.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlFrontCamera.msg
 
@@ -170,7 +197,7 @@ msg_gen/lisp/msg_posOriInfo.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_posOriInfo.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_posOriInfo.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_posOriInfo.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_posOriInfo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_posOriInfo.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_posOriInfo.msg
 
@@ -194,7 +221,7 @@ msg_gen/lisp/msg_irinfo.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_irinfo.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_irinfo.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_irinfo.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_irinfo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_irinfo.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_irinfo.msg
 
@@ -218,7 +245,7 @@ msg_gen/lisp/msg_ctrlRearCamera.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_ctrlRearCamera.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_ctrlRearCamera.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_ctrlRearCamera.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_ctrlRearCamera.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_ctrlRearCamera.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_ctrlRearCamera.msg
 
@@ -242,7 +269,7 @@ msg_gen/lisp/msg_electricInfo.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_electricInfo.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_electricInfo.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_electricInfo.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_electricInfo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_electricInfo.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_electricInfo.msg
 
@@ -266,7 +293,7 @@ msg_gen/lisp/msg_rearCameraInfo.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_rearCameraInfo.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_rearCameraInfo.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_rearCameraInfo.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_rearCameraInfo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_rearCameraInfo.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_rearCameraInfo.msg
 
@@ -290,7 +317,7 @@ msg_gen/lisp/msg_command.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_command.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_command.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_command.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_command.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_command.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_command.msg
 
@@ -314,7 +341,7 @@ msg_gen/lisp/msg_panTiltPosition.lisp: /opt/ros/groovy/share/std_msgs/package.xm
 msg_gen/lisp/msg_panTiltPosition.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_panTiltPosition.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_panTiltPosition.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_panTiltPosition.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_panTiltPosition.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_panTiltPosition.msg
 
@@ -338,7 +365,7 @@ msg_gen/lisp/msg_vehicleInfo.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_vehicleInfo.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_vehicleInfo.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_vehicleInfo.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_vehicleInfo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_vehicleInfo.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_vehicleInfo.msg
 
@@ -362,7 +389,7 @@ msg_gen/lisp/msg_echoesFound.lisp: /opt/ros/groovy/share/std_msgs/package.xml
 msg_gen/lisp/msg_echoesFound.lisp: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/lisp/msg_echoesFound.lisp: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/lisp/msg_echoesFound.lisp: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/lisp/msg_echoesFound.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_echoesFound.lisp"
 	/opt/ros/groovy/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg/msg_echoesFound.msg
 
@@ -377,6 +404,9 @@ ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_frontCameraInfo.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_tvinfo.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_tvinfo.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_electricCommand.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
+ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_electricCommand.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/msg_ctrlFrontCamera.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: msg_gen/lisp/_package_msg_ctrlFrontCamera.lisp

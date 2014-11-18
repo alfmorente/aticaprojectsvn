@@ -10,6 +10,7 @@ SET(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_ctrlFrontCamera.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_ctrlFrontCamera.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_ctrlRearCamera.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_ctrlRearCamera.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_echoesFound.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_echoesFound.lisp"
+  "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_electricCommand.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_electricCommand.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_electricInfo.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_electricInfo.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_frontCameraInfo.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_frontCameraInfo.lisp"
   "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/_package_msg_irinfo.lisp" "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/msg_gen/lisp/msg_irinfo.lisp"
