@@ -38,6 +38,7 @@ void RosNode_Electric::initROS() {
   pubElectricInfo = nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInfo", 1000);
   pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command", 1000);
   pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher", 1000);
+  subsElectricCommand = nh.subscribe("electricCommand", 1000, &RosNode_Electric::fcn_sub_electricCommand,this);
 
   // Se solicita la activacion del resto de nodos del vehículo
   ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehiculo");
@@ -63,6 +64,36 @@ void RosNode_Electric::initROS() {
     nodeStatus = NODESTATUS_OFF;
   }
 
+}
+
+/**
+ * Método privado consumidor del topic para la recepción de mensajes ROS con 
+ * comandos de actuacion sobre el vehículo. Lo transmite el vehículo y lo encola 
+ * si el elemento es considerado crítico y por tanto debe llevarse a cabo el 
+ * mecanismo de integridad
+ * @param[in] msg Mensaje ROS recibido
+ */
+void RosNode_Electric::fcn_sub_electricCommand(CITIUS_Control_Electric::msg_electricCommand msg){
+  if(msg.id_device == SUPPLY_TURN_ON ||
+          msg.id_device == SUPPLY_5 || 
+          msg.id_device == SUPPLY_12 ||
+          msg.id_device == SUPPLY_24_DRIVE ||
+          msg.id_device == SUPPLY_24_OCC ||
+          msg.id_device == SUPPLY_48 ||
+          msg.id_device == CONTROL_SYSTEM_SUPPLY ||
+          msg.id_device == DRIVE_SYSTEM_SUPPLY ||
+          msg.id_device == COMM_SYSTEM_SUPPLY ||
+          msg.id_device == OBSERVATION_SYSTEM_SUPPLY) {
+    ROS_INFO("[Control] Driving - Comando de telecontrol recibido: %d:=%d", msg.id_device, msg.value);
+    FrameDriving command;
+    command.instruction = SET;
+    command.id_instruction = -1;
+    command.element = static_cast<DeviceID> (msg.id_device);
+    command.value = msg.value;
+    dElectric->sendToVehicle(command);
+  } else {
+    ROS_INFO("[Control] Electric - Descartado comando - Dispositivo incorrecto");
+  }
 }
 
 /**

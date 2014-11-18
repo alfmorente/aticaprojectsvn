@@ -43,6 +43,7 @@ private:
   vector<FrameDriving> messageQueue;
   // Informacion actualizable del vehiculo
   ElectricInfo electricInfo;
+  SystemSupplies systemSupplies;
   // Solicitud de apagado del vehiculo
   bool turnOff;
   // Posicion del conmutador local/teleoperado

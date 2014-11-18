@@ -17,6 +17,7 @@
 #include "RosNode.h"
 #include "ElectricConnectionManager.h"
 #include "CITIUS_Control_Electric/msg_electricInfo.h"
+#include "CITIUS_Control_Electric/msg_electricCommand.h"
 #include "CITIUS_Control_Electric/msg_command.h"
 #include "CITIUS_Control_Electric/msg_switcher.h"
 #include "CITIUS_Control_Electric/srv_vehicleStatus.h"
@@ -35,13 +36,15 @@ class RosNode_Electric : public RosNode {
 private:
   // Estado del nodo
   //short emNodeStatus;
-  // Publicador de informacion de camara
+  // Publicadores
   ros::Publisher pubElectricInfo;
   ros::Publisher pubCommand;
   ros::Publisher pubSwitcher;
+  // Suscriptor
+  ros::Subscriber subsElectricCommand;
   // Cliente de estado de vehiculo
   ros::ServiceClient clientVehicleStatus;
-  // Driver de la cámara
+  // Driver del socket
   ElectricConnectionManager *dElectric;
 public:
   // Constructor
@@ -50,6 +53,8 @@ public:
   ~RosNode_Electric();
   // Inicializador de artefactos ROS
   void initROS();
+  // Callback ROS
+  void fcn_sub_electricCommand(CITIUS_Control_Electric::msg_electricCommand msg);
   // Getter and Setter necesarios
   ElectricConnectionManager *getDriverMng();
   // Publicar informacion de vehiculo

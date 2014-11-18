@@ -1,6 +1,7 @@
 # Hashes of file build rules.
 02c52e32236f07a528988bb1be254d34 /home/atica/.ros/roseus/groovy/CITIUS_Control_Electric/manifest.l
 636f9ebe9686b8654895f0f1f148dfff /home/atica/.ros/roseus/groovy/CITIUS_Control_Electric/msg/msg_command.l
+a4231725cad9addb21d79caadf5f1373 /home/atica/.ros/roseus/groovy/CITIUS_Control_Electric/msg/msg_electricCommand.l
 20149216e00df8cdad47f857f5e4598d /home/atica/.ros/roseus/groovy/CITIUS_Control_Electric/msg/msg_electricInfo.l
 7008b3ff9d728466547e072cfa4eaf82 /home/atica/.ros/roseus/groovy/CITIUS_Control_Electric/msg/msg_switcher.l
 71a1deb42ecbb1f4079952af0597962c /home/atica/.ros/roseus/groovy/CITIUS_Control_Electric/srv/srv_vehicleStatus.l
@@ -31,13 +32,16 @@ ea10c91dc702678ac6a5688f9c89d1df CMakeFiles/clean_test_results
 34eef2dd7c3ec3ffdb3fd08b94e48416 CMakeFiles/test-results-run
 34eef2dd7c3ec3ffdb3fd08b94e48416 CMakeFiles/tests
 abdc2c6e3d986106b88a13652d8378a5 msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+28305efa6b2ccf35b8d9d5f6d42f42f5 msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 f74949ba0aaa199a0e5066886452ce2f msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
 259c5d304fff27eec970028de59d7e06 msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
 90d4b728a10d7b2c8e616cdfa98c803c msg_gen/lisp/msg_command.lisp
+2eb1c88281225e278c8f31663de7c4a2 msg_gen/lisp/msg_electricCommand.lisp
 47dbaf1a87ae0a03e767d46bfc02c713 msg_gen/lisp/msg_electricInfo.lisp
 91507666d20ebbd23e44b546db5c281b msg_gen/lisp/msg_switcher.lisp
-eaca02afc3c7bcb95c103bae46df7838 src/CITIUS_Control_Electric/msg/__init__.py
+5b42ecefd4f5489b3c8ef43870f9c6ff src/CITIUS_Control_Electric/msg/__init__.py
 b75ed75576d837ef25937f3efd4ffbbf src/CITIUS_Control_Electric/msg/_msg_command.py
+8f71dd0f3229f8d66eae89bfee473b73 src/CITIUS_Control_Electric/msg/_msg_electricCommand.py
 737cfc9d9ba1d8ed435e8a3f97830189 src/CITIUS_Control_Electric/msg/_msg_electricInfo.py
 86b9b363f76ae7ea8f0fc339750d2a42 src/CITIUS_Control_Electric/msg/_msg_switcher.py
 736167bc970247b46aaa257f25f1c6f8 src/CITIUS_Control_Electric/srv/__init__.py

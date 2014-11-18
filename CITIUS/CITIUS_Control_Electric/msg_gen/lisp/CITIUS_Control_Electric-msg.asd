@@ -4,6 +4,8 @@
 (defsystem "CITIUS_Control_Electric-msg"
   :depends-on (:roslisp-msg-protocol :roslisp-utils )
   :components ((:file "_package")
+    (:file "msg_electricCommand" :depends-on ("_package_msg_electricCommand"))
+    (:file "_package_msg_electricCommand" :depends-on ("_package"))
     (:file "msg_electricInfo" :depends-on ("_package_msg_electricInfo"))
     (:file "_package_msg_electricInfo" :depends-on ("_package"))
     (:file "msg_switcher" :depends-on ("_package_msg_switcher"))
