@@ -4,6 +4,7 @@
 CMakeFiles/communications.dir/src/JausHandler.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/src/JausHandler.cpp
  include/JausHandler.h
+ include/constant.h
  lib/libjaus/include/jaus.h
  lib/libjaus/include/jausAddress.h
  lib/libjaus/include/jausArray.h

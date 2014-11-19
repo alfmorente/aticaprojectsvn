@@ -28,6 +28,10 @@ int main(int argc, char** argv) {
   while (nodeComm->getNodeStatus() == NODESTATUS_INIT) {
     ros::spinOnce();
   }
+  ROS_INFO("[Control] Communications - Esperando controlador (MyC / Tablet)...");
+  while(!nodeComm->isControllerAvailable()){
+    usleep(100000);
+  }
 
   ROS_INFO("[Control] Communications - Nodo listo para operar");
 
