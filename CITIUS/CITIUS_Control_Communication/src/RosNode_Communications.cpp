@@ -29,8 +29,7 @@ RosNode_Communications *RosNode_Communications::getInstance() {
  * Constructor de la clase
  */
 RosNode_Communications::RosNode_Communications() {
-  subsystemController = JAUS_SUBSYSTEM_MYC; // UGV
-  //subsystemController = JAUS_SUBSYSTEM_UGV;
+  subsystemController = JAUS_SUBSYSTEM_MYC; // MyC
   nodeController = JAUS_NODE_CONTROL; // Control
   nodeStatus = NODESTATUS_INIT;
   // Inicializador de selectores de camaras
@@ -94,16 +93,12 @@ void RosNode_Communications::initROS() {
  */
 void RosNode_Communications::initJAUS() {
 
-  // Inicializacion de JAUS
-  configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
-  handler = new JausHandler();
-
   try {
     configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
     handler = new JausHandler();
     nm = new NodeManager(this->configData, this->handler);
   } catch (...) {
-    //ROS_INFO("[Control] Communications - No se ha podido inicializar JAUS");
+    ROS_INFO("[Control] Communications - No se ha podido inicializar JAUS");
   }
 
   //Creacion de componentes
@@ -243,6 +238,7 @@ void RosNode_Communications::initJAUS() {
   ojCmptRun(velocityStateSensorComponent);
   ojCmptRun(globalPoseSensorComponent);
   ojCmptRun(heartBeatInformationComponent);
+
 }
 
 /** 
@@ -258,6 +254,28 @@ void RosNode_Communications::finishJAUS() {
   ojCmptDestroy(velocityStateSensorComponent);
   ojCmptDestroy(globalPoseSensorComponent);
   ojCmptDestroy(heartBeatInformationComponent);
+}
+
+/**
+ * Método público que espera a la disponibilidad de uno de los controladores
+ * (MyC o Tablet) en la arquitectura JAUS
+ * @return 
+ */
+bool RosNode_Communications::isControllerAvailable(){
+  if(handler->isMyCAvailable()){
+    ROS_INFO("[Control] Communications - Controlador: Mando y Control");
+    subsystemController = JAUS_SUBSYSTEM_MYC;
+    nodeController = JAUS_NODE_CONTROL;
+    return true;
+  }else{
+    if(handler->isTabletAvailable()){
+      ROS_INFO("[Control] Communications - Controlador: Tablet");
+      subsystemController = JAUS_SUBSYSTEM_UGV;
+      nodeController = JAUS_NODE_TABLET;
+      return true;
+    }
+  }
+  return false;
 }
 
 /** 

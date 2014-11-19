@@ -76,6 +76,8 @@ public:
   void informStatus();
   // Generacion de mensaje de seleccion de camara
   void informCameraToStream();
+  // Espera activa a disponibilidad de un controlador
+  bool isControllerAvailable();
 private:
   // Patron Singleton
   static RosNode_Communications *instance;
@@ -87,7 +89,7 @@ private:
   // Controlador activo
   JausSubsystemID subsystemController;
   JausNodeID nodeController;
-  // Artefactos ROS
+    // Artefactos ROS
   // Subsistema de control
   ros::Subscriber subsFrontCameraInfo;
   ros::Subscriber subsRearCameraInfo;

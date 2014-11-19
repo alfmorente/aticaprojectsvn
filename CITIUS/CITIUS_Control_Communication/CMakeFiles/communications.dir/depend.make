@@ -3,6 +3,7 @@
 
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: src/JausHandler.cpp
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: include/JausHandler.h
+CMakeFiles/communications.dir/src/JausHandler.cpp.o: include/constant.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/jaus.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/jausAddress.h
 CMakeFiles/communications.dir/src/JausHandler.cpp.o: lib/libjaus/include/jausArray.h

@@ -27,9 +27,13 @@ class JausHandler : public EventHandler {
 public:
   JausHandler();
   ~JausHandler();
+  bool isMyCAvailable();
+  bool isTabletAvailable();
 private:
   // Manejador de eventos
   void handleEvent(NodeManagerEvent *e);
+  bool mycAvailable;
+  bool tabletAvailable;
 };
 
 #endif	/* JAUSHANDLER_H */
