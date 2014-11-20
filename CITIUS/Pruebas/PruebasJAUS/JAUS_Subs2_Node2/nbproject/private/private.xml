@@ -7,4 +7,10 @@
         <activeConfTypeElem>0</activeConfTypeElem>
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausController.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausHandler.cpp</file>
+        </group>
+    </open-files>
 </project-private>

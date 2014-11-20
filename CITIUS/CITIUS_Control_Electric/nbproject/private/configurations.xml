@@ -150,15 +150,6 @@
       <df name="srv">
       </df>
       <df name="srv_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Electric">
-              <in>srv_vehicleStatus.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
       </df>
       <df name="test_results">
       </df>

@@ -38,7 +38,7 @@ void JausController::initJAUS() {
     // Inicializacion de JAUS
     configData = new FileLoader("nodeManager.conf");
     handler = new JausHandler();
-    /*
+    
     try {
         
         configData = new FileLoader("nodeManager.conf");
@@ -50,7 +50,7 @@ void JausController::initJAUS() {
         cout << "No se ha podido inicializar JAUS" << endl;
         
     }
-    */ // DECOMENTAR CUANDO TENGA NODEMANAGER PROPIO
+     // DECOMENTAR CUANDO TENGA NODEMANAGER PROPIO
     /*
      * Creacion de componentes
      * 
