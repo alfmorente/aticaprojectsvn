@@ -1,0 +1,4 @@
+Scanning dependencies of target ROSBUILD_genmanifest_roseus_JAUS_Subs2_Node2
+[100%] Generating /home/atica/.ros/roseus/groovy/JAUS_Subs2_Node2/manifest.l
+[36m;; writing to /home/atica/.ros/roseus/groovy/JAUS_Subs2_Node2/manifest.l
+[0m[100%] Built target ROSBUILD_genmanifest_roseus_JAUS_Subs2_Node2
