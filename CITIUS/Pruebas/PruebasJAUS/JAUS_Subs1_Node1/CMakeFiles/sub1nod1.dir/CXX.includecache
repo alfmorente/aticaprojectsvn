@@ -6,9 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs1_Node1/src/main.cpp
-cstdlib
--
+/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs1_Node1/src/JausController.cpp
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs1_Node1/src/JausController.h
 

@@ -10,16 +10,6 @@
 JausController.h
 /home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausController.h
 
-/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausHandler.cpp
-JausHandler.h
-/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausHandler.h
-
-/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/main.cpp
-cstdlib
--
-JausController.h
-/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausController.h
-
 include/JausController.h
 jaus.h
 include/jaus.h
