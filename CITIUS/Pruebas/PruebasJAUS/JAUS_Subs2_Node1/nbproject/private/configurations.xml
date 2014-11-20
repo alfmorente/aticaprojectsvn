@@ -2,6 +2,8 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="bin">
+      </df>
       <df name="catkin">
         <df name="catkin_generated">
           <df name="version">
@@ -59,6 +61,10 @@
         </df>
         <df name="run_tests.dir">
         </df>
+        <df name="sub2nod1.dir">
+          <df name="src">
+          </df>
+        </df>
         <df name="test-future.dir">
         </df>
         <df name="test-results-run.dir">
@@ -93,6 +99,8 @@
       <df name="include">
         <df name="JAUS_Subs2_Node1">
         </df>
+        <in>JausController.h</in>
+        <in>JausHandler.h</in>
       </df>
       <df name="lib">
         <df name="libjaus">
@@ -768,6 +776,8 @@
         </df>
       </df>
       <df name="src">
+        <in>JausController.cpp</in>
+        <in>JausHandler.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="test_results">

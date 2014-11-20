@@ -2,6 +2,8 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="bin">
+      </df>
       <df name="catkin">
         <df name="catkin_generated">
           <df name="version">
@@ -31,6 +33,8 @@
         </df>
         <df name="doxygen.dir">
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
         <df name="ROSBUILD_genmanifest_roseus_JAUS_Subs2_Node2.dir">
@@ -58,6 +62,10 @@
         <df name="rospack_gensrv.dir">
         </df>
         <df name="run_tests.dir">
+        </df>
+        <df name="sub2nod2.dir">
+          <df name="src">
+          </df>
         </df>
         <df name="test-future.dir">
         </df>
@@ -93,6 +101,8 @@
       <df name="include">
         <df name="JAUS_Subs2_Node2">
         </df>
+        <in>JausController.h</in>
+        <in>JausHandler.h</in>
       </df>
       <df name="lib">
         <df name="libjaus">
@@ -768,6 +778,8 @@
         </df>
       </df>
       <df name="src">
+        <in>JausController.cpp</in>
+        <in>JausHandler.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="test_results">

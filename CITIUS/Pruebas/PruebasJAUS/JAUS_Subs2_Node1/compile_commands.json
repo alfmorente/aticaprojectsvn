@@ -5,6 +5,16 @@
   "file": "/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/src/main.cpp"
 },
 {
+  "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/lib/libjaus/include -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/lib/libopenJaus/include    -DROS_PACKAGE_NAME='\"JAUS_Subs2_Node1\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/sub2nod1.dir/src/JausController.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/src/JausController.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/src/JausController.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/lib/libjaus/include -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/lib/libopenJaus/include    -DROS_PACKAGE_NAME='\"JAUS_Subs2_Node1\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/sub2nod1.dir/src/JausHandler.cpp.o -c /home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/src/JausHandler.cpp",
+  "file": "/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/src/JausHandler.cpp"
+},
+{
   "directory": "/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/gtest",
   "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node1/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"JAUS_Subs2_Node1\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
   "file": "/usr/src/gtest/src/gtest-all.cc"

@@ -464,6 +464,54 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/JausController.o: src/JausController.cpp.o
+.PHONY : src/JausController.o
+
+# target to build an object file
+src/JausController.cpp.o:
+	$(MAKE) -f CMakeFiles/sub2nod1.dir/build.make CMakeFiles/sub2nod1.dir/src/JausController.cpp.o
+.PHONY : src/JausController.cpp.o
+
+src/JausController.i: src/JausController.cpp.i
+.PHONY : src/JausController.i
+
+# target to preprocess a source file
+src/JausController.cpp.i:
+	$(MAKE) -f CMakeFiles/sub2nod1.dir/build.make CMakeFiles/sub2nod1.dir/src/JausController.cpp.i
+.PHONY : src/JausController.cpp.i
+
+src/JausController.s: src/JausController.cpp.s
+.PHONY : src/JausController.s
+
+# target to generate assembly for a file
+src/JausController.cpp.s:
+	$(MAKE) -f CMakeFiles/sub2nod1.dir/build.make CMakeFiles/sub2nod1.dir/src/JausController.cpp.s
+.PHONY : src/JausController.cpp.s
+
+src/JausHandler.o: src/JausHandler.cpp.o
+.PHONY : src/JausHandler.o
+
+# target to build an object file
+src/JausHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/sub2nod1.dir/build.make CMakeFiles/sub2nod1.dir/src/JausHandler.cpp.o
+.PHONY : src/JausHandler.cpp.o
+
+src/JausHandler.i: src/JausHandler.cpp.i
+.PHONY : src/JausHandler.i
+
+# target to preprocess a source file
+src/JausHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/sub2nod1.dir/build.make CMakeFiles/sub2nod1.dir/src/JausHandler.cpp.i
+.PHONY : src/JausHandler.cpp.i
+
+src/JausHandler.s: src/JausHandler.cpp.s
+.PHONY : src/JausHandler.s
+
+# target to generate assembly for a file
+src/JausHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/sub2nod1.dir/build.make CMakeFiles/sub2nod1.dir/src/JausHandler.cpp.s
+.PHONY : src/JausHandler.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -525,6 +573,12 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/JausController.o"
+	@echo "... src/JausController.i"
+	@echo "... src/JausController.s"
+	@echo "... src/JausHandler.o"
+	@echo "... src/JausHandler.i"
+	@echo "... src/JausHandler.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
