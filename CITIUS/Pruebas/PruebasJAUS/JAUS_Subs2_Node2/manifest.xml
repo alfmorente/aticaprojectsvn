@@ -1,0 +1,15 @@
+<package>
+  <description brief="JAUS_Subs2_Node2">
+
+     JAUS_Subs2_Node2
+
+  </description>
+  <author>atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/JAUS_Subs2_Node2</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
