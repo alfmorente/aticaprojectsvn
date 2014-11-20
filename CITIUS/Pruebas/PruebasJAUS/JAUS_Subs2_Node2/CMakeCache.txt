@@ -256,7 +256,7 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
 //Path to a file.
-_file_name:FILEPATH=/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/main.cpp
+_file_name:FILEPATH=/home/atica/catkin_ws/src/CITIUS/Pruebas/PruebasJAUS/JAUS_Subs2_Node2/src/JausHandler.cpp
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/groovy/share/catkin/cmake

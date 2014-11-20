@@ -6,6 +6,7 @@
  */
 
 #include <cstdlib>
+#include "JausController.h"
 
 using namespace std;
 
@@ -13,7 +14,14 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+  
+  JausController *nodeComm = JausController::getInstance();
+
+  nodeComm->initJAUS();
+  
+  while(true){
+    usleep(1000000);
+  }
 
   return 0;
 }
-

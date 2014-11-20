@@ -1,5 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/sub1nod1.dir/src/main.cpp.o"
+  "CMakeFiles/sub1nod1.dir/src/JausController.cpp.o"
+  "CMakeFiles/sub1nod1.dir/src/JausHandler.cpp.o"
   "bin/sub1nod1.pdb"
   "bin/sub1nod1"
 )
