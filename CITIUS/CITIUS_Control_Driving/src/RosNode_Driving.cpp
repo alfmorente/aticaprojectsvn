@@ -43,10 +43,8 @@ void RosNode_Driving::initROS() {
  * @param[in] msg Mensaje ROS recibido
  */
 void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
-  // Comprobacion de aviso de alarmas en Electric
   if (msg.id_device == SUPPLY_ALARMS) {
-    // Alarmas modulo electrico: OFF
-    if (msg.value == 0) {
+    if (msg.value == 0) { // Todas OFF
       electricAlarms = false;
       dVehicle->setAlarmsStruct(true);
     }// Alarmas modulo electrico: ON
@@ -63,18 +61,14 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
     if (nodeStatus == NODESTATUS_OK || dVehicle->isMTCommand(static_cast<DeviceID> (msg.id_device))) {
       ROS_INFO("[Control] Driving - Comando de telecontrol recibido: %d:=%d", msg.id_device, msg.value);
       if (checkCommand(msg)) {
-        // Envio de comando a vehículo
         FrameDriving command;
         command.instruction = SET;
         command.element = static_cast<DeviceID> (msg.id_device);
         command.value = msg.value;
         if (dVehicle->isCriticalInstruction(static_cast<DeviceID> (msg.id_device))) {
           short cont = dVehicle->getCountCriticalMessages();
-          // Valor de ID_INSTRUCCION
           command.id_instruccion = cont;
-          // Introduccion en la cola de mensajes críticos
           dVehicle->addToQueue(command);
-          // Incremento del contador
           dVehicle->setCountCriticalMessages(cont + 1);
         } else {
           command.id_instruccion = -1;
@@ -210,7 +204,6 @@ bool RosNode_Driving::checkCommand(CITIUS_Control_Driving::msg_command msg) {
  */
 void RosNode_Driving::publishDrivingInfo(DrivingInfo info) {
   CITIUS_Control_Driving::msg_vehicleInfo msg;
-
   msg.steering = info.steering;
   msg.thottle = info.thottle;
   msg.brake = info.brake;
@@ -243,19 +236,16 @@ void RosNode_Driving::checkAlarms() {
     } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) == MASK_NOT_ALARMS) && electricAlarms) {
       if (nodeStatus == NODESTATUS_OK) { // Nuevas alarmas en Electric
         ROS_INFO("[Control] Driving - Nodo en estado DEGRADADO - Alarmas en Electric");
-        // Rutina de emergencia - Parada de vehiculo
         setEmergecyCommands();
         nodeStatus = NODESTATUS_CORRUPT;
-      } else { // Deja de haber alarmas en Driving
+      } else { 
         ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Fin de alarmas en Driving pero hay alarmas en Electric");
       }
     } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) != MASK_NOT_ALARMS) && !electricAlarms) {
       if (nodeStatus == NODESTATUS_OK) { // Nuevas alarmas en Driving
         ROS_INFO("[Control] Driving - Nodo en estado DEGRADADO - Alarmas en Driving");
-        // Rutina de emergencia - Parada de vehiculo
         setEmergecyCommands();
         nodeStatus = NODESTATUS_CORRUPT;
-        // Identificacion de alarms
         if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_CONNECTION_STEERING_FAILED) == MASK_ALARMS_CONNECTION_STEERING_FAILED) {
           ROS_INFO("[Control] Driving - Alarma: Fallo de conexion");
         }
@@ -322,7 +312,6 @@ void RosNode_Driving::checkAlarms() {
         ROS_INFO("[Control] Driving - Alarma: Fallo en cambio de marchas");
       }
     }
-
     // Clear del indicador de cambio
     dVehicle->setAlarmsStruct(false);
   }
@@ -336,68 +325,42 @@ void RosNode_Driving::setEmergecyCommands() {
   ROS_INFO("[Control] Driving - Rutina de seguridad - Detencion del vehiculo");
   FrameDriving command;
   command.instruction = SET;
-
-  // Acelerador a 0
+  // Acelerador
   command.element = THROTTLE;
   command.value = 0;
   short cont = dVehicle->getCountCriticalMessages();
-  // Valor de ID_INSTRUCCION
   command.id_instruccion = cont;
-  // Introduccion en la cola de mensajes críticos
   dVehicle->addToQueue(command);
-  // Incremento del contador
   dVehicle->setCountCriticalMessages(cont + 1);
-  // Envio a dispositivo
   dVehicle->sendToVehicle(command);
-
-  // Direccion a 0
+  // Direccion
   command.element = STEERING;
   cont = dVehicle->getCountCriticalMessages();
-  // Valor de ID_INSTRUCCION
   command.id_instruccion = cont;
-  // Introduccion en la cola de mensajes críticos
   dVehicle->addToQueue(command);
-  // Incremento del contador
   dVehicle->setCountCriticalMessages(cont + 1);
-  // Envio a dispositivo
   dVehicle->sendToVehicle(command);
-
-  // Marcha a 0
+  // Marcha
   command.element = GEAR;
   cont = dVehicle->getCountCriticalMessages();
-  // Valor de ID_INSTRUCCION
   command.id_instruccion = cont;
-  // Introduccion en la cola de mensajes críticos
   dVehicle->addToQueue(command);
-  // Incremento del contador
   dVehicle->setCountCriticalMessages(cont + 1);
-  // Envio a dispositivo
   dVehicle->sendToVehicle(command);
-
-  // Freno a 100
+  // Freno
   command.element = BRAKE;
   command.value = 100;
   cont = dVehicle->getCountCriticalMessages();
-  // Valor de ID_INSTRUCCION
   command.id_instruccion = cont;
-  // Introduccion en la cola de mensajes críticos
   dVehicle->addToQueue(command);
-  // Incremento del contador
   dVehicle->setCountCriticalMessages(cont + 1);
-  // Envio a dispositivo
   dVehicle->sendToVehicle(command);
-
-  // Freno de estacionamiento a 1
+  // Freno de estacionamiento
   command.element = HANDBRAKE;
   command.value = 1;
   cont = dVehicle->getCountCriticalMessages();
-  // Valor de ID_INSTRUCCION
   command.id_instruccion = cont;
-  // Introduccion en la cola de mensajes críticos
   dVehicle->addToQueue(command);
-  // Incremento del contador
   dVehicle->setCountCriticalMessages(cont + 1);
-  // Envio a dispositivo
   dVehicle->sendToVehicle(command);
-
 }

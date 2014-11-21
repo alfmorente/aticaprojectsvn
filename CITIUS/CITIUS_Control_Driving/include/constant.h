@@ -17,11 +17,6 @@
 
 using namespace std;
 
-/*******************************************************************************
- * PROTOCOLO PAYLOAD DE CONDUCCION             
- * IDENTIFICADOR DE INSTRUCCION
- *******************************************************************************/
-
 /**
  * \enum CommandID
  * \brief Identificador de comando para protocolo con Payload de conducción
@@ -33,11 +28,6 @@ typedef enum {
   ACK = 3, ///<Valor para generación de instrucción ACK
   NACK = 4 ///<Valor para generación de instrucción NACK
 } CommandID;
-
-/*******************************************************************************
- * PROTOCOLO PAYLOAD DE CONDUCCION             
- * IDENTIFICADOR DE ELEMENTO
- *******************************************************************************/
 
 /**
  * \enum DeviceID
@@ -105,16 +95,8 @@ typedef enum {
   OPERATION_MODE_SWITCH = 58 ///<Valor para formación de comando OPERATION_MODE_SWITCH
 } DeviceID;
 
-/*******************************************************************************
- * FICHERO DE CONFIGURACION
- ******************************************************************************/
-
 #define CONFIG_FILE_IP_NAME "IP" ///<Identificador de búsqueda en fichero de IP
 #define CONFIG_FILE_PORT_NAME "PORT" ///<Identificador de búsqueda en fichero de PORT
-
-/*******************************************************************************
- *                              ESTADOS DEL NODO
- *******************************************************************************/
 
 /**
  * \enum NodeStatus
@@ -126,10 +108,6 @@ typedef enum {
   NODESTATUS_CORRUPT = 2, ///<Identificador del estado CORRUPT de la máquina de estados de nodo
   NODESTATUS_OFF = 3 ///<Identificador del estado OFF de la máquina de estados de nodo
 } NodeStatus;
-
-/*******************************************************************************
- *                          MODOS DE OPERACION DEL VEHICULO
- *******************************************************************************/
 
 /**
  * \enum OperationMode
@@ -143,27 +121,15 @@ typedef enum {
   OPERATION_MODE_APAGANDO = 4 ///<Identificador del modo de operación OPERATION_MODE_APAGANDO de la máquina de estados del vehículo        
 } OperationMode;
 
-/*******************************************************************************
- * FRECUENCIA -> PERIODO
- ******************************************************************************/
-
 #define FREC_10HZ 0.1 ///<Periodo para ejecución de rutinas con frecuencia 10Hz
 #define FREC_5HZ 0.2 ///<Periodo para ejecución de rutinas con frecuencia 5Hz
 #define FREC_2HZ 0.5 ///<Periodo para ejecución de rutinas con frecuencia 2Hz
 #define FREC_1HZ 1 ///<Periodo para ejecución de rutinas con frecuencia 1Hz
 
-/*******************************************************************************
- * IDENTIFICADORES DE DISPOSITIVO
- ******************************************************************************/
-
 #define DEVICE_XSENS 1 ///<Identificador para abrir el fichero de configuración del socket XSENS
 #define DEVICE_AHRS 2 ///<Identificador para abrir el fichero de configuración del socket AHRS
 #define DEVICE_DRIVING 3 ///<Identificador para abrir el fichero de configuración del socket DRIVING
 #define DEVICE_ELECTRIC 4 ///<Identificador para abrir el fichero de configuración del socket ELECTRIC
-
-/*******************************************************************************
- *           ESTRUCTURA DE INTERCAMBIO CON PAYLOAD DE CONDUCCION
- *******************************************************************************/
 
 /**
  * \struct FrameDriving
@@ -175,10 +141,6 @@ typedef struct {
   DeviceID element; ///<Elemento de demanda
   short value; ///<Valor de demanda
 } FrameDriving;
-
-/*******************************************************************************
- *           ESTRUCTURA DE INFORMACION DE VEHICULO
- *******************************************************************************/
 
 /**
  * \struct DrivingInfo
@@ -202,10 +164,6 @@ typedef struct {
   bool klaxon; ///<Valor de vocina
 } DrivingInfo;
 
-/*******************************************************************************
- *           ESTRUCTURA DE MANEJO DE NACK's
- *******************************************************************************/
-
 /**
  * \struct RtxStruct
  * \brief Estructura para manejo de retransmisión de mensajes ante recepción de
@@ -215,10 +173,6 @@ typedef struct {
   int numOfMsgs; ///<Numero de mensajes a retransmitir
   vector<FrameDriving> msgs; ///<Coleccion de mensajes a retransmitir
 } RtxStruct;
-
-/*******************************************************************************
- *           ESTRUCTURA DE VECTOR DE ALARMAS
- *******************************************************************************/
 
 /**
  * \struct AlarmsStruct
@@ -230,10 +184,6 @@ typedef struct {
   short driveAlarms; ///<Vector de alarmas del vehículo
   short steeringAlarms; ///<Vector de alarmas del sistema de dirección
 } AlarmsStruct;
-
-/*******************************************************************************
- *           MÁSCARAS DE IDENTIFICACIÓN DE ALARMAS
- *******************************************************************************/
 
 #define MASK_NOT_ALARMS 0x0000 ///<Indicador de todas las alarmas a 0
 #define MASK_ALARMS_CONNECTION_STEERING_FAILED 0x0001 ///<Indicador de fallo de conexión con sistema de dirección

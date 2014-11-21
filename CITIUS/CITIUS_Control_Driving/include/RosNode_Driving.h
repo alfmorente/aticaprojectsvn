@@ -28,35 +28,21 @@
  */
 class RosNode_Driving : public RosNode {
 private:
-  // Publicador de informacion de camara
   ros::Publisher pubVehicleInfo;
-  // Suscriptor para control de camara
   ros::Subscriber subsCommand;
-  // Servidor de estado de nodo
   ros::ServiceServer servNodeStatus;
-  // Driver de la cámara
   DrivingConnectionManager *dVehicle;
-  // Indicador de alarmas en Electric
   bool electricAlarms;
-  // Callbacks ROS
   void fcn_sub_command(CITIUS_Control_Driving::msg_command msg);
   bool fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus::Request &rq, CITIUS_Control_Driving::srv_nodeStatus::Response &rsp);
-  // Criba de comandos fuera de rango
   bool checkCommand(CITIUS_Control_Driving::msg_command msg);
-  // Rutina de emergencia y parada de vehiculo
   void setEmergecyCommands();
 public:
-  // Constructor
   RosNode_Driving();
-  // Destructor
   ~RosNode_Driving();
-  // Inicializador de artefactos ROS
   void initROS();
-  // Consultores / modificadores de la clase
   DrivingConnectionManager *getDriverMng();
-  // Publicacion de informacion de vehiculo
   void publishDrivingInfo(DrivingInfo);
-  // Comprobacion del vector de alarmas
   void checkAlarms();
 };
 

@@ -47,17 +47,11 @@ DrivingConnectionManager::~DrivingConnectionManager() {
  * @param[in] frame Trama a enviar via socket al vehículo 
  */
 void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
-
-  // Buffer de envio
   char bufData[8];
-
-  // Rellenado del buffer
   memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
   memcpy(&bufData[4], &frame.element, sizeof (frame.element));
   memcpy(&bufData[6], &frame.value, sizeof (frame.value));
-  printf("Enviado: %d-%d-%d-%d\n",frame.instruction,frame.id_instruccion,frame.element,frame.value);
-  // Envio via socket
   send(socketDescriptor, bufData, sizeof (bufData), 0);
   usleep(10000);
 }
@@ -70,59 +64,38 @@ void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
  */
 void DrivingConnectionManager::reqVehicleInfo(bool full) {
   FrameDriving frame;
-
-  // Comun 
   frame.instruction = GET;
   frame.id_instruccion = -1;
   frame.value = -1;
-
-  // Acelerador
   frame.element = THROTTLE;
   sendToVehicle(frame);
-  // Freno 
   frame.element = BRAKE;
   sendToVehicle(frame);
-  // Freno de mano
   frame.element = HANDBRAKE;
   sendToVehicle(frame);
-  // Direccion
   frame.element = STEERING;
   sendToVehicle(frame);
-  // Marcha
   frame.element = GEAR;
   sendToVehicle(frame);
-  // Velocidad de crucero
   frame.element = CRUISING_SPEED;
   sendToVehicle(frame);
-  // Temperatura de motor
   frame.element = MOTOR_TEMPERATURE;
   sendToVehicle(frame);
-  // rpm de motor
   frame.element = MOTOR_RPM;
   sendToVehicle(frame);
-
-  // Completa la peticion con elementos de señalizacion
-
   if (full) {
-    // Luces de posicion
     frame.element = DIPSP;
     sendToVehicle(frame);
-    // Luces cortas
     frame.element = DIPSS;
     sendToVehicle(frame);
-    // Luces largas
     frame.element = DIPSR;
     sendToVehicle(frame);
-    // Intermitente derecha
     frame.element = BLINKER_RIGHT;
     sendToVehicle(frame);
-    // Intermitente izquierda
     frame.element = BLINKER_LEFT;
     sendToVehicle(frame);
-    // Claxon
     frame.element = KLAXON;
     sendToVehicle(frame);
-
   }
 }
 
@@ -135,23 +108,15 @@ void DrivingConnectionManager::reqVehicleInfo(bool full) {
  */
 bool DrivingConnectionManager::checkForVehicleMessages() {
   char bufData[8];
-
-
   if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
-
-    // Estructura de recepcion
     FrameDriving fdr;
     short aux;
-    // Rellenado del buffer
     memcpy(&aux, &bufData[0], sizeof (aux));
     fdr.instruction = static_cast<CommandID> (aux);
     memcpy(&fdr.id_instruccion, &bufData[2], sizeof (fdr.id_instruccion));
     memcpy(&aux, &bufData[4], sizeof (aux));
     fdr.element = static_cast<DeviceID> (aux);
-    memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-    
-    printf("RCV :: %d - %d - %d - %d\n",fdr.instruction,fdr.id_instruccion,fdr.element,fdr.value);
-    
+    memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));    
     if (fdr.instruction == ACK) {
       if (isCriticalInstruction(fdr.element)){
           informResponse(true, fdr.id_instruccion);
@@ -190,12 +155,10 @@ int DrivingConnectionManager::getSocketDescriptor() {
  */
 DrivingInfo DrivingConnectionManager::getVehicleInfo(bool full) {
   DrivingInfo ret = vehicleInfo;
-
   if (full)
     ret.lights = true;
   else
     ret.lights = false;
-
   return ret;
 }
 
@@ -276,7 +239,6 @@ short DrivingConnectionManager::getCountCriticalMessages() {
  */
 void DrivingConnectionManager::setCountCriticalMessages(short cont) {
   countMsg = cont;
-  // Contador: 1 .. 1024
   if (countMsg == 1025)
     countMsg = 1;
 }
@@ -290,7 +252,6 @@ void DrivingConnectionManager::setCountCriticalMessages(short cont) {
  * correspondiente
  */
 void DrivingConnectionManager::setAlarmsInfo(DeviceID element, short value) {
-  
   if (element == DRIVE_ALARMS){
     alarms.flag = true;
     alarms.driveAlarms = value;
@@ -391,34 +352,23 @@ void DrivingConnectionManager::addToQueue(FrameDriving frame) {
  * haberlos) y una lista de dichos mensajes.
  */
 RtxStruct DrivingConnectionManager::informResponse(bool ack, short id_instruction) {
-
   RtxStruct ret;
   ret.numOfMsgs = 0;
-
-  // Se situa el iterador al principio de la cola
   vector<FrameDriving>::iterator it = messageQueue.begin();
-
   if (ack) { // ACK
-
     if (id_instruction == (*it).id_instruccion) { // Primer elemento y requerido coinciden
-      // Se elimina el primer elemento
       messageQueue.erase(it);
     } else if (id_instruction > (*it).id_instruccion) { // Confirmacion de varios elementos
       while (id_instruction >= (*it).id_instruccion) {
         messageQueue.erase(it);
       }
     }
-
   } else { // NACK
-
     while (it != messageQueue.end()) {
-      // Se incluyen en la respuesta todos los  mensajes no confirmados
-      // para retransmitir
       ret.numOfMsgs++;
       ret.msgs.push_back((*it));
       it++;
     }
-
   }
   return ret;
 }
