@@ -12,10 +12,6 @@
 #ifndef CONSTANT_H
 #define	CONSTANT_H
 
-/*******************************************************************************
- *                              ESTADOS DEL NODO
- *******************************************************************************/
-
 /**
  * \enum NodeStatus
  * \brief Tipos para estado local de nodo
@@ -27,25 +23,13 @@ typedef enum {
   NODESTATUS_OFF = 3 ///<Identificador del estado OFF de la máquina de estados de nodo
 } NodeStatus;
 
-/*******************************************************************************
- * FICHERO DE CONFIGURACION
- ******************************************************************************/
-
 #define CONFIG_FILE_IP_NAME "IP" ///<Identificador de búsqueda en fichero de IP
 #define CONFIG_FILE_PORT_NAME "PORT" ///<Identificador de búsqueda en fichero de PORT
-
-/*******************************************************************************
- * FRECUENCIA -> PERIODO
- ******************************************************************************/
 
 #define FREC_10HZ 0.1 ///<Periodo para ejecución de rutinas con frecuencia 10Hz
 #define FREC_5HZ 0.2 ///<Periodo para ejecución de rutinas con frecuencia 5Hz
 #define FREC_2HZ 0.5 ///<Periodo para ejecución de rutinas con frecuencia 2Hz
 #define FREC_1HZ 1 ///<Periodo para ejecución de rutinas con frecuencia 1Hz
-
-/*******************************************************************************
- * MONTAJE DE COMANDOS
- ******************************************************************************/
 
 #define AUTH_CAM_USER "root" ///<User de autenticación con cámara
 #define AUTH_CAM_PASS "usv" ///<Pass de autenticación con cámara
@@ -53,10 +37,6 @@ typedef enum {
 #define ORDER_ZOOM 0 ///<Identificador de orden ZOOM
 #define ORDER_PAN 1 ///<Identificador de orden PAN
 #define ORDER_TILT 2 ///<Identificador de orden TILT
-
-/*******************************************************************************
- * CONVERSION PTZ CAMARA
- ******************************************************************************/
 
 #define CONV_TO_CAMERA 1/50 ///<Factor de conversion entre PTZ porcentual y valores de cámara
 #define CONV_FROM_CAMERA 50 ///<Factor de conversion entre  valores de cámara y PTZ porcentual
