@@ -84,8 +84,6 @@ void RosNode_FrontCamera::manageDevice() {
   dFrontCamera->sendSetToDevice(ORDER_PAN, dFrontCamera->getPan());
   dFrontCamera->sendSetToDevice(ORDER_TILT, dFrontCamera->getTilt());
   dFrontCamera->sendSetToDevice(ORDER_ZOOM, dFrontCamera->getZoom());
-
-  // Requerimiento de informacion de dispositivo
   LensPosition lensPos = dFrontCamera->getPosition();
   if (lensPos.state) {
     CITIUS_Control_FrontCamera::msg_frontCameraInfo rcMsg;
