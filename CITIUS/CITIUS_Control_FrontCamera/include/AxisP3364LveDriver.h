@@ -37,13 +37,10 @@ class AxisP3364LveDriver {
 public:
   AxisP3364LveDriver();
   ~AxisP3364LveDriver();
-  // Conexion con la camara (comprobacion de disponibilidad)
   bool checkConnection();
   string getValueFromConfig(string parameter);
-  // Envio / Requerimiento de informacion
   bool sendSetToDevice(short order, float value);
   LensPosition getPosition();
-  // Getter y setter necesarios
   float getPan();
   float getTilt();
   float getZoom();
@@ -54,10 +51,8 @@ private:
   int socketDescriptor;
   struct hostent *he;
   struct sockaddr_in server;
-  // Configuracion de la camara
   const char *ip_address;
   int port;
-  // Propiedades de control
   float pan;
   float tilt;
   float zoom;

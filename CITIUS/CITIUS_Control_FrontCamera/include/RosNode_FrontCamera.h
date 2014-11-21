@@ -33,27 +33,17 @@ using namespace std;
  */
 class RosNode_FrontCamera : public RosNode {
 private:
-  // Publicador de informacion de camara
   ros::Publisher pubFrontCameraInfo;
-  // Suscriptor para control de camara
   ros::Subscriber subsCtrlFrontCamera;
-  // Servidor de estado de nodo
   ros::ServiceServer servNodeStatus;
-  // Driver de la cámara
   AxisP3364LveDriver *dFrontCamera;
-  // Callbacks ROS
   void fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg);
   bool fcv_serv_nodeStatus(CITIUS_Control_FrontCamera::srv_nodeStatus::Request &rq, CITIUS_Control_FrontCamera::srv_nodeStatus::Response &rsp);
 public:
-  // Constructor
   RosNode_FrontCamera();
-  // Destructor
   ~RosNode_FrontCamera();
-  // Inicializador de artefactos ROS
   void initROS();
-  // Consultores
   AxisP3364LveDriver *getDriverMng();
-  // Metodos de gestion
   void manageDevice();
 };
 
