@@ -31,27 +31,17 @@
  */
 class RosNode_RearCamera : public RosNode {
 private:
-  // Publicador de informacion de camara
   ros::Publisher pubRearCameraInfo;
-  // Suscriptor para control de camara
   ros::Subscriber subsCtrlRearCamera;
-  // Servidor de estado de nodo
   ros::ServiceServer servNodeStatus;
-  // Driver de la cámara
   AxisP3364LveDriver *dRearCamera;
-  // Callbacks ROS
   void fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg);
   bool fcv_serv_nodeStatus(CITIUS_Control_RearCamera::srv_nodeStatus::Request &rq, CITIUS_Control_RearCamera::srv_nodeStatus::Response &rsp);
 public:
-  // Constructor
   RosNode_RearCamera();
-  // Destructor
   ~RosNode_RearCamera();
-  // Inicializador de artefactos ROS
   void initROS();
-  // Consultores
   AxisP3364LveDriver *getDriverMng();
-  // Metodos de gestion
   void manageDevice();
 };
 

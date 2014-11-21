@@ -18,14 +18,6 @@ RosNode.h
 RosNode_RearCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.h
 
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/Timer.cpp
-Timer.h
-/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/Timer.h
-unistd.h
--
-sys/time.h
--
-
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/main.cpp
 RosNode_RearCamera.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/src/RosNode_RearCamera.h
