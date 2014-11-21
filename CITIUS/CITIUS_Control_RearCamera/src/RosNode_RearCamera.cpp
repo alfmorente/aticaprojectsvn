@@ -84,8 +84,6 @@ void RosNode_RearCamera::manageDevice() {
   dRearCamera->sendSetToDevice(ORDER_PAN, dRearCamera->getPan());
   dRearCamera->sendSetToDevice(ORDER_TILT, dRearCamera->getTilt());
   dRearCamera->sendSetToDevice(ORDER_ZOOM, dRearCamera->getZoom());
-
-  // Requerimiento de informacion de dispositivo
   LensPosition lensPos = dRearCamera->getPosition();
   if (lensPos.state) {
     CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
