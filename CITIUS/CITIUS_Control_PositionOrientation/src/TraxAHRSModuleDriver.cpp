@@ -48,12 +48,9 @@ void TraxAHRSModuleDriver::configureDevice() {
  * @return Estructura con información para envio de la trama
  */
 TraxMsg TraxAHRSModuleDriver::kGetModInfo() {
-
   TraxMsg retTraxMsg;
-
   retTraxMsg.byteCount = shortToHexa(5);
   retTraxMsg.packFrame.idFrame = IDFRAME_KGETMODINFO;
-
   return retTraxMsg;
 }
 
@@ -63,12 +60,9 @@ TraxMsg TraxAHRSModuleDriver::kGetModInfo() {
  * @return Estructura con informacion para envio de la trama
  */
 TraxMsg TraxAHRSModuleDriver::kGetData() {
-
   TraxMsg retTraxMsg;
-
   retTraxMsg.byteCount = shortToHexa(5);
   retTraxMsg.packFrame.idFrame = IDFRAME_KGETDATA;
-
   return retTraxMsg;
 }
 
@@ -79,11 +73,8 @@ TraxMsg TraxAHRSModuleDriver::kGetData() {
  */
 TraxMsg TraxAHRSModuleDriver::kSetDataComponents() {
   TraxMsg retTraxMsg;
-
   retTraxMsg.byteCount = shortToHexa(10);
   retTraxMsg.packFrame.idFrame = IDFRAME_KSETDATACOMPONENTS;
-
-  // Se solicita heading, roll, pitch, heading status
   retTraxMsg.packFrame.payload.push_back(0x0A);
   retTraxMsg.packFrame.payload.push_back(IDMEASURE_HEADING);
   retTraxMsg.packFrame.payload.push_back(IDMEASURE_PITCH);
@@ -95,7 +86,6 @@ TraxMsg TraxAHRSModuleDriver::kSetDataComponents() {
   retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRX);
   retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRY);
   retTraxMsg.packFrame.payload.push_back(IDMEASURE_GYRZ);
-
   return retTraxMsg;
 }
 
@@ -107,36 +97,24 @@ TraxMsg TraxAHRSModuleDriver::kSetDataComponents() {
 
 void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
   short len = hexa2short(traxMsg.byteCount);
-
   char *msg2send = (char *) malloc(len);
-
   int index = 0;
-
-  // Bytecount
   msg2send[index++] = traxMsg.byteCount[0];
   msg2send[index++] = traxMsg.byteCount[1];
-
-  // ID Frame
   msg2send[index++] = traxMsg.packFrame.idFrame;
-
-  // Payload
   if (len > 5) {
     for (int i = 0; i < len - 5; i++) {
       msg2send[index++] = traxMsg.packFrame.payload[i];
     }
   }
-
-  // CRC16
   short crc16short = crc16ccitt_xmodem((uint8_t *) msg2send, len - 2);
   msg2send[index++] = shortToHexa(crc16short)[0];
   msg2send[index++] = shortToHexa(crc16short)[1];
-
   if (send(socketDescriptor, msg2send, len, 0) == len) {
     if (traxMsg.packFrame.idFrame == IDFRAME_KGETDATA) rcvResponse();
   } else {
     printf("Problemas en la escritura\n");
   }
-
   free(msg2send);
 }
 
@@ -145,47 +123,30 @@ void TraxAHRSModuleDriver::sendToDevice(TraxMsg traxMsg) {
  * dispositivo
  */
 void TraxAHRSModuleDriver::rcvResponse() {
-
-  // Contador de bytes leidos
   int index = 0;
-  // Buffer de recepcion
-  //unsigned char* recievedFrame;
   vector< char> recievedFrame;
-  //unsigned char byte;
   TraxMsg msgRcv;
-
   unsigned char byte;
-
-  // Tamaño de la trama
   while (index < 2) {
     if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       recievedFrame.push_back(byte);
       index++;
-    } else {
     }
   }
-
   short tam = hexa2short(recievedFrame);
-
   recievedFrame.clear();
-
   recievedFrame.push_back(shortToHexa(tam)[0]);
   recievedFrame.push_back(shortToHexa(tam)[1]);
-
-  // Resto de la trama
   while (index < tam) {
     if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       recievedFrame.push_back(byte);
       index++;
     }
   }
-
   TraxMsg pkg = mngPacket(recievedFrame);
-
   if (pkg.checked) {
     oriInfo = unpackPayload(pkg.packFrame.payload);
   }
-
 }
 
 /**
@@ -196,40 +157,26 @@ void TraxAHRSModuleDriver::rcvResponse() {
  */
 TraxMsg TraxAHRSModuleDriver::mngPacket(vector<char> bufferPacket) {
   TraxMsg packet;
-
   packet.checked = false;
-
-  // Desempaqueta del paquete
-
-  // Tamaño
   packet.byteCount.push_back(bufferPacket[0]);
   packet.byteCount.push_back(bufferPacket[1]);
   short tam = hexa2short(packet.byteCount);
-
-  // Frame ID
   packet.packFrame.idFrame = bufferPacket[2];
-
-  // Payload
   for (int i = 0; i < (tam - 5); i++) {
     packet.packFrame.payload.push_back(bufferPacket[i + 3]);
   }
-
-  // CRC16
   packet.crc.push_back(bufferPacket[tam - 2]);
   packet.crc.push_back(bufferPacket[tam - 1]);
-
   char *auxBuff = (char *) malloc(tam - 2);
   for (int i = 0; i < tam - 2; i++) {
     auxBuff[i] = bufferPacket[i];
   }
   if ((short) (crc16ccitt_xmodem((uint8_t *) auxBuff, tam - 2)) == hexa2short(packet.crc)) {
-    // Recepcion correcta por CRC16
     packet.checked = true;
   } else {
     printf("Checksum error. Frame discarted\n");
   }
   free(auxBuff);
-
   return packet;
 
 }
@@ -245,11 +192,8 @@ TraxMeasurement TraxAHRSModuleDriver::unpackPayload(std::vector<char> payload) {
   int tam = payload[0];
   int numData = 0;
   int index = 1;
-  // char *bufFloat = (char *)malloc(4);
   vector<char> bufFloat;
-
   TraxMeasurement measureDev;
-
   while (numData < tam) {
     switch (payload[index]) {
       case IDMEASURE_HEADING:
@@ -361,18 +305,14 @@ bool TraxAHRSModuleDriver::getData() {
  * @return Float resultado de la conversion
  */
 float TraxAHRSModuleDriver::hexa2float(vector<char> buffer) {
-
   union {
     float value;
     unsigned char buffer[4];
-
   } floatUnion;
-
   floatUnion.buffer[0] = buffer[3];
   floatUnion.buffer[1] = buffer[2];
   floatUnion.buffer[2] = buffer[1];
   floatUnion.buffer[3] = buffer[0];
-
   return floatUnion.value;
 }
 
@@ -382,18 +322,14 @@ float TraxAHRSModuleDriver::hexa2float(vector<char> buffer) {
  * @return Int resultado de la conversion
  */
 int TraxAHRSModuleDriver::hexa2int(std::vector<unsigned char> buffer) {
-
   union {
     int value;
     unsigned char buffer[4];
-
   } intUnion;
-
   intUnion.buffer[0] = buffer[3];
   intUnion.buffer[1] = buffer[2];
   intUnion.buffer[2] = buffer[1];
   intUnion.buffer[3] = buffer[0];
-
   return intUnion.value;
 }
 
@@ -403,16 +339,13 @@ int TraxAHRSModuleDriver::hexa2int(std::vector<unsigned char> buffer) {
  * @return Short resultado de la conversion
  */
 short TraxAHRSModuleDriver::hexa2short(vector<char> buffer) {
-
   union {
     short value;
     unsigned char buffer[2];
-
   } shortUnion;
 
   shortUnion.buffer[0] = buffer[1];
   shortUnion.buffer[1] = buffer[0];
-
   return shortUnion.value;
 }
 
@@ -422,12 +355,10 @@ short TraxAHRSModuleDriver::hexa2short(vector<char> buffer) {
  * @return Double resultado de la conversion
  */
 double TraxAHRSModuleDriver::hexa2double(std::vector<unsigned char> buffer) {
-
   union {
     double value;
     unsigned char buffer[8];
   } doubleUnion;
-
   doubleUnion.buffer[0] = buffer[7];
   doubleUnion.buffer[1] = buffer[6];
   doubleUnion.buffer[2] = buffer[5];
@@ -436,7 +367,6 @@ double TraxAHRSModuleDriver::hexa2double(std::vector<unsigned char> buffer) {
   doubleUnion.buffer[5] = buffer[2];
   doubleUnion.buffer[6] = buffer[1];
   doubleUnion.buffer[7] = buffer[0];
-
   return doubleUnion.value;
 }
 
@@ -454,7 +384,6 @@ vector<char> TraxAHRSModuleDriver::shortToHexa(short s) {
   out.push_back(buf[0]);
   free(buf);
   return out;
-
 }
 
 /**

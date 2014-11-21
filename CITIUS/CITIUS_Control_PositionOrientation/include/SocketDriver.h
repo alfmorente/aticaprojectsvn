@@ -40,7 +40,6 @@ protected:
 public:
   bool doConnect(int device);
   void disconnect();
-  
 };
 
 #endif	/* SOCKETDRIVER_H */

@@ -42,9 +42,7 @@ using namespace std;
  */
 class XSensMTi700Driver:public SocketDriver {
 private:
-  // Datos recibidos
   GPSINSInfo posOriInfo;
-  // Operaciones a bajo nivel
   void sendToDevice(XsensMsg);
   void waitForAck(unsigned char);
   unsigned char calcChecksum(XsensMsg);
@@ -52,23 +50,17 @@ private:
   XsensMsg goToConfig();
   XsensMsg goToMeasurement();
   XsensMsg setOutPutConfiguration();
-  // Conversion de tipos
   float hexa2float(std::vector<unsigned char>);
   double hexa2double(std::vector<unsigned char>);
   int hexa2int(std::vector<unsigned char>);
   float degrees2radians(float);
-  // Rutinas de recepcion y manejo de datos
   void packetMng(dataPacketMT2);
   bool frameMng(std::vector<unsigned char>);
-
 public:
-
   XSensMTi700Driver();
   ~XSensMTi700Driver();
-  // Operaciones a alto nivel
   void configureDevice();
   bool getData();
-  // Retorno de estructura de datos
   GPSINSInfo getInfo();
 };
 
