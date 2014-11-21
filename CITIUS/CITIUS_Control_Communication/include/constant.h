@@ -12,11 +12,6 @@
 #ifndef CONSTANT_H
 #define	CONSTANT_H
 
-/*******************************************************************************
- * PROTOCOLO PAYLOAD DE CONDUCCION             
- * IDENTIFICADOR DE ELEMENTO
- *******************************************************************************/
-
 /**
  * \enum DeviceID
  * \brief Identificador de dispositivo para protocolo con Payload de conducción
@@ -83,10 +78,6 @@ typedef enum {
   OPERATION_MODE_SWITCH = 58 ///<Valor para formación de comando OPERATION_MODE_SWITCH
 } DeviceID;
 
-/*******************************************************************************
- *                              ESTADOS DEL NODO
- *******************************************************************************/
-
 /**
  * \enum NodeStatus
  * \brief Tipos para estado local de nodo
@@ -97,10 +88,6 @@ typedef enum {
   NODESTATUS_CORRUPT = 2, ///<Identificador del estado CORRUPT de la máquina de estados de nodo
   NODESTATUS_OFF = 3 ///<Identificador del estado OFF de la máquina de estados de nodo
 } NodeStatus;
-
-/*******************************************************************************
- *                          MODOS DE OPERACION DEL VEHICULO
- *******************************************************************************/
 
 /**
  * \enum OperationMode
@@ -125,18 +112,10 @@ typedef enum {
   JAUS_OPERATION_MODE_OBSERVACION = 6 ///<Identificador del modo de operación OBSERVACION de la máquina de estados del vehículo para transmitir en mensaje JAUS
 } JausOperationMode;
 
-/*******************************************************************************
- * FRECUENCIA -> PERIODO
- ******************************************************************************/
-
 #define FREC_10HZ 0.1 ///<Periodo para ejecución de rutinas con frecuencia 10Hz
 #define FREC_5HZ 0.2 ///<Periodo para ejecución de rutinas con frecuencia 5Hz
 #define FREC_2HZ 0.5 ///<Periodo para ejecución de rutinas con frecuencia 2Hz
 #define FREC_1HZ 1 ///<Periodo para ejecución de rutinas con frecuencia 1Hz
-
-/*******************************************************************************
- *           MANEJO DE PRESENCE VECTOR
- *******************************************************************************/
 
 // Set/Report Wrench Effort
 #define PRESENCE_VECTOR_THROTTLE 0x0001 ///<Obtención de PV de acelerador en mensajes JAUS Set/Report Wrench Effort
@@ -177,16 +156,6 @@ typedef enum {
 #define PRESENCE_VECTOR_DIPSR 0x04 ///<Obtención de PV de luces largas en mensajes JAUS Report Signaling Elements
 #define PRESENCE_VECTOR_DIPSS 0x01 ///<Obtención de PV de luces cortas en mensajes JAUS Report Signaling Elements
 
-/*******************************************************************************
- ********************************************************************************
- *                       ARTEFACTOS JAUS
- ********************************************************************************
- *******************************************************************************/
-
-/*******************************************************************************
- *                        SUBSISTEMAS JAUS
- *******************************************************************************/
-
 /**
  * \enum JausSubsystemID
  * \brief Identificador de subsistemas JAUS
@@ -196,10 +165,6 @@ typedef enum {
   JAUS_SUBSYSTEM_USV = 2, ///<Identificador de subsistema JAUS USV
   JAUS_SUBSYSTEM_UGV = 3 ///<Identificador de subsistema JAUS UGV
 } JausSubsystemID;
-
-/*******************************************************************************
- *                           NODOS JAUS
- *******************************************************************************/
 
 /**
  * \enum JausNodeID
@@ -214,10 +179,6 @@ typedef enum {
 } JausNodeID;
 
 #define JAUS_DESTINANTION_INSTANCE 1 ///<Instancia JAUS destino 
-
-/*******************************************************************************
- *                      IDENTIFICADOR DE CAMARAS
- ******************************************************************************/
 
 /**
  * \enum CameraID
