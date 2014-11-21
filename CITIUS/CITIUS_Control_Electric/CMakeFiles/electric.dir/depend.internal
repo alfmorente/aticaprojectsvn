@@ -126,6 +126,7 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o
  include/Timer.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+ msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h
@@ -199,6 +200,7 @@ CMakeFiles/electric.dir/src/main.cpp.o
  include/Timer.h
  include/constant.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+ msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
  msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h

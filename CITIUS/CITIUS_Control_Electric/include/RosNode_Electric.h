@@ -34,40 +34,23 @@ using namespace std;
  */
 class RosNode_Electric : public RosNode {
 private:
-  // Estado del nodo
-  //short emNodeStatus;
-  // Publicadores
   ros::Publisher pubElectricInfo;
   ros::Publisher pubCommand;
   ros::Publisher pubSwitcher;
-  // Suscriptor
   ros::Subscriber subsElectricCommand;
-  // Cliente de estado de vehiculo
   ros::ServiceClient clientVehicleStatus;
-  // Driver del socket
   ElectricConnectionManager *dElectric;
 public:
-  // Constructor
   RosNode_Electric();
-  // Destructor
   ~RosNode_Electric();
-  // Inicializador de artefactos ROS
   void initROS();
-  // Callback ROS
   void fcn_sub_electricCommand(CITIUS_Control_Electric::msg_electricCommand msg);
-  // Getter and Setter necesarios
   ElectricConnectionManager *getDriverMng();
-  // Publicar informacion de vehiculo
   void publishElectricInfo(ElectricInfo info);
-  // Publicar informacion de conmutador Local/Teleoperado
   void publishSwitcherInfo(short position);
-  // Publicar consignas ON/OFF de actuadores
   void publishSetupCommands(bool on);
-  // Gestion de evento Turn Off
   void checkTurnOff();
-  // Gestion de evento Switcher
   void checkSwitcher();
-  // Gestion de evento Alarmas
   void checkSupplyAlarms();
 };
 

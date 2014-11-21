@@ -37,37 +37,25 @@ using namespace std;
  */
 class ElectricConnectionManager:public SocketDriver {
 private:
-  // Contador para la cola de mensajes (Integridad)
   short countMsg;
-  // Manejador de la cola de mensajes (Integridad)
   vector<FrameDriving> messageQueue;
-  // Informacion actualizable del vehiculo
   ElectricInfo electricInfo;
   SystemSupplies systemSupplies;
-  // Solicitud de apagado del vehiculo
   bool turnOff;
-  // Posicion del conmutador local/teleoperado
   SwitcherStruct swPosition;
-  // Vector de alarmas del modulo
   SupplyAlarmsStruct alarms;
-  //Consultores/modificadores privados
   void setVehicleInfo(DeviceID id_device, short value);
-  // Metodos de gestion privados
   RtxStruct informResponse(bool ack, short id_instruction);
   bool isCriticalInstruction(DeviceID element);
 public:
-  // Constructor
   ElectricConnectionManager();
-  // Destructor
   ~ElectricConnectionManager();
-  // Mensajeria con vehiculo
   void sendToVehicle(FrameDriving);
   bool checkForVehicleMessages();
   void reqElectricInfo();
   short waitForSwitcherPosition();
   void setTurnOn();
   void setTurnOff();
-  // Getter y setter necesarios
   bool getTurnOffFlag();
   ElectricInfo getVehicleInfo();
   short getCountCriticalMessages();

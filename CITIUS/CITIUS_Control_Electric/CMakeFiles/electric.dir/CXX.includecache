@@ -14,6 +14,14 @@ ElectricConnectionManager.h
 RosNode_Electric.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.h
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.cpp
+SocketDriver.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/SocketDriver.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/main.cpp
+RosNode_Electric.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/src/RosNode_Electric.h
+
 /opt/ros/groovy/include/XmlRpcDecl.h
 ros/macros.h
 -
@@ -671,6 +679,8 @@ ElectricConnectionManager.h
 include/ElectricConnectionManager.h
 CITIUS_Control_Electric/msg_electricInfo.h
 include/CITIUS_Control_Electric/msg_electricInfo.h
+CITIUS_Control_Electric/msg_electricCommand.h
+include/CITIUS_Control_Electric/msg_electricCommand.h
 CITIUS_Control_Electric/msg_command.h
 include/CITIUS_Control_Electric/msg_command.h
 CITIUS_Control_Electric/msg_switcher.h
@@ -715,6 +725,28 @@ vector
 -
 
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+msg_gen/cpp/include/CITIUS_Control_Electric/ros/serialization.h
+ros/builtin_message_traits.h
+msg_gen/cpp/include/CITIUS_Control_Electric/ros/builtin_message_traits.h
+ros/message_operations.h
+msg_gen/cpp/include/CITIUS_Control_Electric/ros/message_operations.h
+ros/time.h
+msg_gen/cpp/include/CITIUS_Control_Electric/ros/time.h
+ros/macros.h
+msg_gen/cpp/include/CITIUS_Control_Electric/ros/macros.h
+ros/assert.h
+msg_gen/cpp/include/CITIUS_Control_Electric/ros/assert.h
+
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 string
 -
 vector
