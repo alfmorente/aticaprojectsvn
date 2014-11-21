@@ -13,7 +13,6 @@
 #ifndef TRANSLATORROSJAUS_H
 #define	TRANSLATORROSJAUS_H
 
-// Librerias de JAUS
 #include "jaus.h"
 #include "openJaus.h"
 #include "constant.h"
@@ -28,7 +27,6 @@
 class TranslatorROSJAUS {
 public:
   TranslatorROSJAUS();
-  // Obtencion de mensajes JAUS en base a informacion previa
   JausMessage getJausMsgFromWrenchEffortInfo(JausSubsystemID subDest, JausNodeID nodDest, short steer, short throttle, short brake);
   JausMessage getJausMsgFromDiscreteDeviceInfo(JausSubsystemID subDest, JausNodeID nodDest, bool parkingbrake, short gear);
   JausMessage getJausMsgFromTravelSpeedInfo(JausSubsystemID subDest, JausNodeID nodDest, short speed);
