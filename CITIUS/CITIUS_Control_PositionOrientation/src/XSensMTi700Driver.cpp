@@ -14,7 +14,6 @@
  */
 XSensMTi700Driver::XSensMTi700Driver() {
   socketDescriptor = -1;
-  // Inicio variable recepcion de datos
   posOriInfo.orientationStatus = 0;
   posOriInfo.positionStatus = 0;
   posOriInfo.latitude = 0;
@@ -46,11 +45,8 @@ XSensMTi700Driver::~XSensMTi700Driver() {
  * parámetros establecidos
  */
 void XSensMTi700Driver::configureDevice() {
-  // Modo configuracion
   sendToDevice(goToConfig());
-  // Configuracion de dispositivo
   sendToDevice(setOutPutConfiguration());
-  // Modo stream de medidas
   sendToDevice(goToMeasurement());
 }
 
@@ -60,31 +56,21 @@ void XSensMTi700Driver::configureDevice() {
  * @return Booleano que indica si la lectura se ha realizado con éxito
  */
 bool XSensMTi700Driver::getData() {
-
   vector<unsigned char> frame2;
   unsigned char byte, len;
   bool dataFound = false;
-
   while (!dataFound) {
-
-    // HEADER (PRE + BID + MID)
     if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       frame2.push_back(byte);
     }
-
     if (frame2.size() == 3) {
-
-      // LEN
       if (recv(socketDescriptor, &len, 1, 0) > 0) {
-
         frame2.push_back(len);
-        // DATA + CS
         while (frame2.size() < len + 5) {
           if (recv(socketDescriptor, &byte, 1, 0) > 0) {
             frame2.push_back(byte);
           }
         }
-
         if (frameMng(frame2)) {
           dataFound = true;
         } else {
@@ -173,9 +159,7 @@ XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
   xsMsg.data.push_back(0x10);
   xsMsg.data.push_back(0x00);
   xsMsg.data.push_back(FREC_REQ_DATA);
-
   xsMsg.cs = calcChecksum(xsMsg);
-
   return xsMsg;
 }
 
@@ -187,11 +171,9 @@ XsensMsg XSensMTi700Driver::setOutPutConfiguration() {
  */
 unsigned char XSensMTi700Driver::calcChecksum(XsensMsg msg) {
   unsigned char cs = 0;
-
   cs += msg.bid;
   cs += msg.mid;
   cs += msg.len;
-
   if (msg.len > 0) {
     for (int i = 0; i < msg.len; i++) {
       cs += msg.data[i];
@@ -209,11 +191,9 @@ unsigned char XSensMTi700Driver::calcChecksum(XsensMsg msg) {
  */
 bool XSensMTi700Driver::isCheckSumOK(vector<unsigned char> frame) {
   unsigned char cs = 0;
-
   for (unsigned int i = 1; i < frame.size(); i++) {
     cs += frame[i];
   }
-
   return cs == 0x00;
 }
 
@@ -242,7 +222,6 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
   }
   printf("\n");
   free(msg2send);
-
 }
 
 /**
@@ -251,33 +230,21 @@ void XSensMTi700Driver::sendToDevice(XsensMsg msg) {
  * @param[in] _mid Identificador de la trama del que se espera obtener un ACK
  */
 void XSensMTi700Driver::waitForAck(unsigned char _mid) {
-
   vector<unsigned char> frame2;
-
   unsigned char byte, len;
-
   bool ackFound = false;
-
   while (!ackFound) {
-
-    // HEADER (PRE + BID + MID)
     if (recv(socketDescriptor, &byte, 1, 0) > 0) {
       frame2.push_back(byte);
     }
-
     if (frame2.size() == 3) {
-
-      // LEN
       if (recv(socketDescriptor, &len, 1, 0) > 0) {
-
         frame2.push_back(len);
-        // DATA + CS
         while (frame2.size() < len + 5) {
           if (recv(socketDescriptor, &byte, 1, 0) > 0) {
             frame2.push_back(byte);
           }
         }
-
         if (isCheckSumOK(frame2) && (_mid + 1 == frame2[2])) {
           ackFound = true;
         } else {
@@ -299,7 +266,6 @@ bool XSensMTi700Driver::frameMng(vector<unsigned char> frame) {
     if (frame[1] == COMMAND_BID) {
       if (frame[2] == COMMAND_MID_MTDATA2) {
         if (isCheckSumOK(frame)) {
-
           unsigned int index = 4;
           while (index < frame.size() - 1) {
             dataPacketMT2 pMT2;
@@ -330,15 +296,10 @@ bool XSensMTi700Driver::frameMng(vector<unsigned char> frame) {
  * de datos
  */
 void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
-  //printf("ID Packet found:Group %02X Signal %02X with length %d\n",dataPacket.idGroup,dataPacket.idSignal,dataPacket.len);
   vector<unsigned char> auxBuf;
-
-  //rintf("\n");
   switch (dataPacket.idGroup) {
-
     case 0x10: // Timestamp
-      /*printf("Got timestamp packet\n");
-      switch (dataPacket.idSignal & 0xF0) {
+      /*switch (dataPacket.idSignal & 0xF0) {
           case 0x10: // UTC Time
               printf("   UTC time %d bytes\n", dataPacket.len);
               break;
@@ -369,10 +330,8 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       }*/
       //printf("\n");
       break;
-
     case 0x08: // Temperature
-      /*printf("Got temperature packet\n");
-      if ((dataPacket.idSignal & 0xF0) == 0x10) { // Temperature
+      /*if ((dataPacket.idSignal & 0xF0) == 0x10) { // Temperature
           printf("TEMPERATURE: %lf ºC\n", hexa2double(auxBuf));
       } else
           printf("   UNKNOWN :: Temperature %d bytes\n", dataPacket.len);
@@ -401,10 +360,7 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
 
       //printf("\n");
       break;
-
     case 0x20: // Orientation
-      //printf("Got orientation packet\n");
-      //printf("ORIENTATION:\n");
       switch (dataPacket.idSignal & 0xF0) {
         case 0x10: // Quaternion
           //printf("   Quaternion %d bytes\n", dataPacket.len);
@@ -415,84 +371,60 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
         case 0x30: // Euler Angles
           //printf("   Euler Angles %d bytes\n", dataPacket.len);
           for (int i = 0; i < 12; i++) auxBuf.push_back(dataPacket.data[i]);
-
           posOriInfo.roll = degrees2radians(hexa2float(vector<unsigned char>(auxBuf.begin(), auxBuf.begin() + 4)));
           posOriInfo.pitch = degrees2radians(hexa2float(vector<unsigned char>(auxBuf.begin() + 4, auxBuf.begin() + 8)));
           posOriInfo.yaw = degrees2radians(hexa2float(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 12)));
-
           break;
         default:
           printf("   UNKNOWN :: Orientation %d bytes\n", dataPacket.len);
           break;
       }
-
       //printf("\n");
       break;
-
     case 0x30: // Pressure
-      /*printf("Got pressure packet\n");
-      if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
+      /*if((dataPacket.idSignal & 0xF0) == 0x10) // Pressure
           printf("   Pressure: %f mbar\n",  (float) hexa2int(dataPacket.data) / 100);
       else
           printf("   UNKNOWN :: Pressure %d bytes \n", dataPacket.len);*/
       //printf("\n");
       break;
-
     case 0x40: // Acceleration
-      //printf("Got acceleration packet\n");
-      // printf("ACCELERATION:\n");
       switch (dataPacket.idSignal & 0xF0) {
         case 0x10: // Delta V
           //printf("   Delta V %d bytes\n", dataPacket.len);
         case 0x20: // Acceleration
           //printf("   Acceleration %d bytes\n", dataPacket.len);
           for (int i = 0; i < 12; i++) auxBuf.push_back(dataPacket.data[i]);
-
           posOriInfo.accX = hexa2float(vector<unsigned char>(auxBuf.begin(), auxBuf. begin() + 4));
           posOriInfo.accY = hexa2float(vector<unsigned char>(auxBuf.begin() + 4, auxBuf.begin() + 8));
           posOriInfo.accZ = hexa2float(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 12));
-
           break;
         case 0x30: // Free acceleration
-          //printf("   Free acceleration %d bytes\n", dataPacket.len);
           break;
         default:
-          //printf("   UNKNOWN :: Acceleration %d bytes\n", dataPacket.len);
           break;
       }
       //printf("\n");
       break;
-
     case 0x50: // Position
-      //printf("Got position packet\n");
-      //printf("POSITION:\n");
       switch (dataPacket.idSignal & 0xF0) {
         case 0x10: // Altitude MSL
-          //printf("   Altitude MSL %d bytes\n", dataPacket.len);
-
           for (int i = 0; i < 4; i++) auxBuf.push_back(dataPacket.data[i]);
-
           posOriInfo.altitude = hexa2float(auxBuf);
-
           break;
         case 0x20: // Altitude Ellipsoid
           //printf("   Altitude Ellipsoid %d bytes\n", dataPacket.len);
           for (int i = 0; i < 4; i++) auxBuf.push_back(dataPacket.data[i]);
-
           posOriInfo.altitude = hexa2float(auxBuf);
-
           break;
         case 0x30: // Position ECEF
           //printf("   Position ECEF %d bytes\n", dataPacket.len);
           break;
         case 0x40: // LatLon
           //printf("   LatLon %d bytes\n", dataPacket.len);
-
           for (int i = 0; i < 16; i++) auxBuf.push_back(dataPacket.data[i]);
-
           posOriInfo.latitude = hexa2double(vector<unsigned char>(auxBuf.begin(), auxBuf.begin() + 8));
           posOriInfo.longitude = hexa2double(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 16));
-
           break;
         default:
           printf("   UNKNOWN :: position %d bytes\n", dataPacket.len);
@@ -500,18 +432,14 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       }
       //printf("\n");
       break;
-
     case 0x80: // Angular velocity
-      //printf("Got angular velocity packet\n");
       switch (dataPacket.idSignal & 0xF0) {
         case 0x20: // Rate of Turn
           //printf("   Rate of Turn %d bytes\n", dataPacket.len);
           for (int i = 0; i < 12; i++) auxBuf.push_back(dataPacket.data[i]);
-
           posOriInfo.rateX = hexa2float(vector<unsigned char>(auxBuf.begin(), auxBuf. begin() + 4));
           posOriInfo.rateY = hexa2float(vector<unsigned char>(auxBuf.begin() + 4, auxBuf.begin() + 8));
           posOriInfo.rateZ = hexa2float(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 12));
-
           break;
         case 0x30: // Delta Q
           //printf("   Delta Q %d bytes\n", dataPacket.len);
@@ -522,7 +450,6 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       }
       //printf("\n");
       break;
-
     case 0xA0: // Sensor component readout
       /*printf("Got sensor component readout packet\n");
       switch (dataPacket.idSignal & 0xF0) {
@@ -538,10 +465,8 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       }*/
       //printf("\n");
       break;
-
     case 0xB0: // Analog in
-      /*printf("Got analog in packet\n");
-      switch (dataPacket.idSignal & 0xF0) {
+      /*switch (dataPacket.idSignal & 0xF0) {
           case 0x10: // Analog in 1
               printf("   Analog in 1 %d bytes\n", dataPacket.len);
               break;
@@ -554,10 +479,8 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       }*/
       //printf("\n");
       break;
-
     case 0xC0: // Magnetic
-      /*printf("Got magnetic packet\n");
-      if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
+      /*if ((dataPacket.idSignal & 0xF0) == 0x20) { // Magnetic field{
           printf("   Magnetic field %d bytes\n", dataPacket.len);
           unsigned char * buf;
           buf = (unsigned char *) malloc(4);
@@ -573,22 +496,17 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       break;
 
     case 0xD0: // Velocity
-      //printf("Got velocity packet\n");
       if ((dataPacket.idSignal & 0xF0) == 0x10) { // Velocity XYZ
         //printf("   Velocity XYZ %d bytes\n", dataPacket.len);
         for (int i = 0; i < 12; i++) auxBuf.push_back(dataPacket.data[i]);
-
         posOriInfo.velX = hexa2float(vector<unsigned char>(auxBuf.begin(), auxBuf. begin() + 4));
         posOriInfo.velY = hexa2float(vector<unsigned char>(auxBuf.begin() + 4, auxBuf.begin() + 8));
         posOriInfo.velZ = hexa2float(vector<unsigned char>(auxBuf.begin() + 8, auxBuf.begin() + 12));
-
       } else
         printf("   UNKNOWN :: Velocity %d bytes\n", dataPacket.len);
       //printf("\n");
       break;
-
     case 0xE0: // Status
-      //printf("Got status packet\n");
       switch (dataPacket.idSignal & 0xF0) {
         case 0x10: // Status Byte
           //printf("   Status Byte %d bytes\n", dataPacket.len);
@@ -614,13 +532,10 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
       }
       //printf("\n");
       break;
-
-
     default: // Unknown
       printf("Got KNOWN packet: %02X\n", dataPacket.idGroup);
       //printf("\n");
       break;
-
   }
 }
 
@@ -631,18 +546,14 @@ void XSensMTi700Driver::packetMng(dataPacketMT2 dataPacket) {
  * @return Float resultado de la conversion
  */
 float XSensMTi700Driver::hexa2float(vector<unsigned char> buffer) {
-
   union {
     float value;
     unsigned char buffer[4];
-
   } floatUnion;
-
   floatUnion.buffer[0] = buffer[3];
   floatUnion.buffer[1] = buffer[2];
   floatUnion.buffer[2] = buffer[1];
   floatUnion.buffer[3] = buffer[0];
-
   return floatUnion.value;
 }
 
@@ -653,18 +564,14 @@ float XSensMTi700Driver::hexa2float(vector<unsigned char> buffer) {
  * @return Int resultado de la conversion
  */
 int XSensMTi700Driver::hexa2int(vector<unsigned char> buffer) {
-
   union {
     int value;
     unsigned char buffer[4];
-
   } intUnion;
-
   intUnion.buffer[0] = buffer[3];
   intUnion.buffer[1] = buffer[2];
   intUnion.buffer[2] = buffer[1];
   intUnion.buffer[3] = buffer[0];
-
   return intUnion.value;
 }
 
@@ -675,12 +582,10 @@ int XSensMTi700Driver::hexa2int(vector<unsigned char> buffer) {
  * @return Double resultado de la conversion
  */
 double XSensMTi700Driver::hexa2double(vector<unsigned char> buffer) {
-
   union {
     double value;
     unsigned char buffer[8];
   } doubleUnion;
-
   doubleUnion.buffer[0] = buffer[7];
   doubleUnion.buffer[1] = buffer[6];
   doubleUnion.buffer[2] = buffer[5];
@@ -689,7 +594,6 @@ double XSensMTi700Driver::hexa2double(vector<unsigned char> buffer) {
   doubleUnion.buffer[5] = buffer[2];
   doubleUnion.buffer[6] = buffer[1];
   doubleUnion.buffer[7] = buffer[0];
-
   return doubleUnion.value;
 }
 

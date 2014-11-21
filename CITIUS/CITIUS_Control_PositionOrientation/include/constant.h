@@ -15,10 +15,6 @@
 
 #include <vector>
 
-/*******************************************************************************
- * ESTADOS DEL NODO
- *******************************************************************************/
-
 /**
  * \enum NodeStatus
  * \brief Tipos para estado local de nodo
@@ -30,10 +26,6 @@ typedef enum {
   NODESTATUS_OFF = 3 ///<Identificador del estado OFF de la máquina de estados de nodo
 } NodeStatus;
 
-/*******************************************************************************
- * FRECUENCIA -> PERIODO
- ******************************************************************************/
-
 #define FREC_30HZ 0.03 ///<Periodo para ejecución de rutinas con frecuencia 30Hz
 #define FREC_25HZ 0.04 ///<Periodo para ejecución de rutinas con frecuencia 25Hz
 #define FREC_10HZ 0.1 ///<Periodo para ejecución de rutinas con frecuencia 10Hz
@@ -41,19 +33,11 @@ typedef enum {
 #define FREC_2HZ 0.5 ///<Periodo para ejecución de rutinas con frecuencia 2Hz
 #define FREC_1HZ 1 ///<Periodo para ejecución de rutinas con frecuencia 1Hz
 
-/*******************************************************************************
- * ID FRAME (TRAX)
- ******************************************************************************/
-
 #define IDFRAME_KGETMODINFO 0x01 ///<Identificador de trama (Trax) kGetModInfo
 #define IDFRAME_KGETMODINFORESP 0x02  ///<Identificador de trama (Trax) kGetModInfoResp
 #define IDFRAME_KSETDATACOMPONENTS 0x03  ///<Identificador de trama (Trax) kSetDataComponents
 #define IDFRAME_KGETDATA 0x04 ///<Identificador de trama (Trax) kGetData
 #define IDFRAME_KGETDATARESP 0x05 ///<Identificador de trama (Trax) kGetDataInfo
-
-/*******************************************************************************
- * ID MEASURE (TRAX)
- ******************************************************************************/
 
 #define IDMEASURE_HEADING 0x05 ///<Identificador en trama (Trax) de Heading
 #define IDMEASURE_PITCH 0x18 ///<Identificador en trama (Trax) de Pitch
@@ -66,27 +50,13 @@ typedef enum {
 #define IDMEASURE_GYRY 0x4B ///<Identificador en trama (Trax) de GyrY
 #define IDMEASURE_GYRZ 0x4C ///<Identificador en trama (Trax) de GyrZ
 
-/*******************************************************************************
- * FICHERO DE CONFIGURACION
- ******************************************************************************/
-
 #define CONFIG_FILE_IP_NAME "IP" ///<Identificador de búsqueda en fichero de IP
 #define CONFIG_FILE_PORT_NAME "PORT" ///<Identificador de búsqueda en fichero de PORT
-
-
-/*******************************************************************************
- * IDENTIFICADORES DE DISPOSITIVO
- ******************************************************************************/
 
 #define DEVICE_XSENS 1 ///<Identificador para abrir el fichero de configuración del socket XSENS
 #define DEVICE_AHRS 2 ///<Identificador para abrir el fichero de configuración del socket AHRS
 #define DEVICE_DRIVING 3 ///<Identificador para abrir el fichero de configuración del socket DRIVING
 #define DEVICE_ELECTRIC 4 ///<Identificador para abrir el fichero de configuración del socket ELECTRIC
-
-
-/*******************************************************************************
- * ESTRUCTURA MANEJO DE MAGNETOMETRO (TRAX)
- ******************************************************************************/
 
 /**
  * \struct PacketFrame
@@ -125,10 +95,6 @@ typedef struct {
   float gyrZ; ///<Velocidad rotacional componente Z
 } TraxMeasurement;
 
-/*******************************************************************************
- * IDENTIFICACION DE TRAMAS (XSENS)
- ******************************************************************************/
-
 #define COMMAND_PRE 0xFA ///<Identificador de campo PRE
 #define COMMAND_BID 0xFF ///<Identificador de campo BID
 #define COMMAND_MID_GOTOCONFIG 0x30 ///<Identificador de campo MID GoToConfig
@@ -143,36 +109,26 @@ typedef struct {
 #define COMMAND_LEN_0 0x00 ///<Identificador de campo LEN
 #define FREC_REQ_DATA 0x0A  ///<Identificador para frecuencia de solicitud de datos
 
-/*******************************************************************************
- * ESTRUCTURA MANEJO DE GPS+IMU (XSENS)
- ******************************************************************************/
-
 /**
  * \struct GPSINSInfo
  * \brief Estructura contenedor de las medidas obtenidas de una trama de datos
  * XSens
  */
 typedef struct {
-  // Estado
   short positionStatus; ///<Valor del estado de la posicion
   short orientationStatus; ///<Valor del estado de la orientacion
-  // Posicion
   double latitude; ///<Valor de posicion en latitud
   double longitude; ///<Valor de la posicion en longitud
   float altitude; ///<Valor de la posicion en altitud
-  // Orientacion
   float roll; ///<Valor de la orientacion en roll (Y)
   float pitch; ///<Valor de la orientacion en pitch (X)
   float yaw; ///<Valor de la orientacion en yaw (Z)
-  // Velocidad longitudinal
   float velX; ///<Valor de la velocidad longitudinal componente X
   float velY; ///<Valor de la velocidad longitudinal componente Y
   float velZ; ///<Valor de la velocidad longitudinal componente Z
-  // Acc longitudinal
   float accX; ///<Valor de la aceleracion longitudinal componente X
   float accY; ///<Valor de la aceleracion longitudinal componente Y
   float accZ; ///<Valor de la aceleracion longitudinal componente Z
-  // Acc rotacional
   float rateX; ///<Valor de la aceleracion rotacional componente X
   float rateY; ///<Valor de la aceleracion rotacional componente Y
   float rateZ; ///<Valor de la aceleracion rotacional componente Z

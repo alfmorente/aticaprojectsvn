@@ -47,7 +47,6 @@ void RosNode_PositionOrientation::configureDevices() {
     gpsinsDriver->configureDevice();
     ROS_INFO("[Control] Position / Orientation - Configuracion de GPS/INS establecida");
   }
-
   if (magnOK) {
     magnetometerDriver->configureDevice();
     ROS_INFO("[Control] Position / Orientation - Configuracion de Magnetometro establecida");
@@ -70,14 +69,12 @@ bool RosNode_PositionOrientation::fcn_serv_nodeStatus(CITIUS_Control_PositionOri
     } else {
       rsp.confirmation = false;
     }
-
   } else if (rq.status == NODESTATUS_OFF) {
     nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {
     rsp.confirmation = false;
   }
-
   return true;
 }
 
@@ -138,14 +135,10 @@ void RosNode_PositionOrientation::setMagnStatus(bool status) {
  * y publica la información en el topic correspondiente
  */
 void RosNode_PositionOrientation::publishInformation() {
-
   if (gpsinsOK && !magnOK) {
     if (gpsinsDriver->getData()) {
-      // Conversion a mensaje ROS y publicacion
-
       CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
       GPSINSInfo information = gpsinsDriver->getInfo();
-
       msgSnd.positionStatus = information.positionStatus;
       msgSnd.orientationStatus = information.orientationStatus;
       msgSnd.latitude = information.latitude;
@@ -163,17 +156,12 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateX = information.rateX;
       msgSnd.rateY = information.rateY;
       msgSnd.rateZ = information.rateZ;
-
       pubPosOriInfo.publish(msgSnd);
-
     }
-
   } else if (!gpsinsOK && magnOK) {
     if (magnetometerDriver->getData()) {
-      // Conversion a mensaje ROS y publicacion
       CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
       TraxMeasurement information = magnetometerDriver->getInfo();
-
       msgSnd.positionStatus = 0;
       msgSnd.orientationStatus = information.heading_status;
       msgSnd.latitude = 0;
@@ -191,17 +179,11 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateX = information.gyrX;
       msgSnd.rateY = information.gyrY;
       msgSnd.rateZ = information.gyrZ;
-
     }
-
   } else if (gpsinsOK && magnOK) {
     if (gpsinsDriver->getData()) {
-      // Conversion a mensaje ROS y publicacion
-
       CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
-
       GPSINSInfo informationG = gpsinsDriver->getInfo();
-
       msgSnd.positionStatus = informationG.positionStatus;
       msgSnd.latitude = informationG.latitude;
       msgSnd.longitude = informationG.longitude;
@@ -209,13 +191,9 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.velX = informationG.velX;
       msgSnd.velY = informationG.velY;
       msgSnd.velZ = informationG.velZ;
-
       if (magnetometerDriver->getData()) {
-
         TraxMeasurement informationM = magnetometerDriver->getInfo();
-
         if (informationM.heading_status == 1) {
-
           msgSnd.orientationStatus = informationM.heading_status;
           msgSnd.roll = informationM.roll;
           msgSnd.pitch = informationM.pitch;
@@ -226,9 +204,7 @@ void RosNode_PositionOrientation::publishInformation() {
           msgSnd.rateX = informationM.gyrX;
           msgSnd.rateY = informationM.gyrY;
           msgSnd.rateZ = informationM.gyrZ;
-
         } else {
-
           msgSnd.orientationStatus = informationG.orientationStatus;
           msgSnd.roll = informationG.roll;
           msgSnd.pitch = informationG.pitch;
@@ -240,9 +216,7 @@ void RosNode_PositionOrientation::publishInformation() {
           msgSnd.rateY = informationG.rateY;
           msgSnd.rateZ = informationG.rateZ;
         }
-
       } else {
-
         msgSnd.orientationStatus = informationG.orientationStatus;
         msgSnd.roll = informationG.roll;
         msgSnd.pitch = informationG.pitch;
@@ -253,9 +227,7 @@ void RosNode_PositionOrientation::publishInformation() {
         msgSnd.rateX = informationG.rateX;
         msgSnd.rateY = informationG.rateY;
         msgSnd.rateZ = informationG.rateZ;
-
       }
-
       pubPosOriInfo.publish(msgSnd);
     }
 

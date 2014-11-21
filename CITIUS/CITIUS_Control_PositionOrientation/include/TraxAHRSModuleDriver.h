@@ -43,9 +43,7 @@ using namespace std;
  */
 class TraxAHRSModuleDriver:public SocketDriver {
 private:
-  // Datos recibidos
   TraxMeasurement oriInfo;
-  // Operaciones a bajo nivel
   TraxMsg kGetModInfo();
   TraxMsg kGetData();
   TraxMsg kSetDataComponents();
@@ -53,7 +51,6 @@ private:
   void rcvResponse();
   TraxMsg mngPacket(std::vector< char>);
   TraxMeasurement unpackPayload(std::vector<char>);
-  // Conversion de tipos
   float hexa2float(std::vector<char>);
   double hexa2double(std::vector<unsigned char>);
   int hexa2int(std::vector<unsigned char>);
@@ -63,10 +60,8 @@ private:
 public:
   TraxAHRSModuleDriver();
   ~TraxAHRSModuleDriver();
-  // Operaciones a alto nivel
   void configureDevice();
   bool getData();
-  // Retorno de estructura de datos
   TraxMeasurement getInfo();
 };
 
