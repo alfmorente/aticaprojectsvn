@@ -33,7 +33,6 @@ public:
   ~Manager();
   void initROS();
 private:
-  // Estado de los demas nodos
   bool communication;
   bool positionOrientationOK;
   bool frontCameraOK;
@@ -43,32 +42,19 @@ private:
   bool lrfOK;
   bool tvCameraOK;
   bool positionerOK;
-  // Posicion del conmutador Local/teleoperado
   short currentSwitcher;
-  // Artefactos ROS
-  // Estado del nodo Communication
   ros::ServiceClient cmNodeStatus;
-  // Estado del nodo Position/Orientation
   ros::ServiceClient poNodeStatus;
-  // Estado del nodo FrontCamera
   ros::ServiceClient fcNodeStatus;
-  // Estado del nodo RearCamera
   ros::ServiceClient rcNodeStatus;
-  // Estado del nodo Driving
   ros::ServiceClient drNodeStatus;
-  // Estado del nodo IR Camera
   ros::ServiceClient irNodeStatus;
-  // Estado del nodo LRF
   ros::ServiceClient lrfNodeStatus;
-  // Estado del nodo TV Camera
   ros::ServiceClient tvNosdeStatus;
-  // Estado del nodo Positioner
   ros::ServiceClient ptNodeStatus;
-  // Estado del conmutador local/teleoperado (from Electric)
   ros::ServiceClient switcher;
   ros::ServiceServer serverVehicleStatus;
   ros::Subscriber switcherLocalTelecontrol;
-  // Callbacks
   bool fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::Request &rq, CITIUS_Control_Manager::srv_vehicleStatus::Response &rsp);
   void fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher);
 };
