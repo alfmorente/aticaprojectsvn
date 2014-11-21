@@ -55,17 +55,11 @@ ElectricConnectionManager::~ElectricConnectionManager() {
  * @param[in] frame Trama a enviar via socket al vehículo 
  */
 void ElectricConnectionManager::sendToVehicle(FrameDriving frame) {
-
-  // Buffer de envio
   char bufData[8];
-
-  // Rellenado del buffer
   memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
   memcpy(&bufData[2], &frame.id_instruction, sizeof (frame.id_instruction));
   memcpy(&bufData[4], &frame.element, sizeof (frame.element));
   memcpy(&bufData[6], &frame.value, sizeof (frame.value));
-
-  // Envio via socket
   send(socketDescriptor, bufData, sizeof (bufData), 0);
   usleep(1000);
 }
@@ -75,27 +69,18 @@ void ElectricConnectionManager::sendToVehicle(FrameDriving frame) {
  * información del vehículo
  */
 void ElectricConnectionManager::reqElectricInfo() {
-
   FrameDriving frame;
-
-  // Comun 
   frame.instruction = GET;
   frame.id_instruction = -1;
   frame.value = -1;
-
-  // Nivel de bateria
   frame.element = BATTERY_LEVEL;
   sendToVehicle(frame);
-  // Tension de bateria 
   frame.element = BATTERY_VOLTAGE;
   sendToVehicle(frame);
-  // Intensidad bateria
   frame.element = BATTERY_CURRENT;
   sendToVehicle(frame);
-  // Temperatura bateria
   frame.element = BATTERY_TEMPERATURE;
   sendToVehicle(frame);
-
 }
 
 short ElectricConnectionManager::waitForSwitcherPosition() {
@@ -105,7 +90,6 @@ short ElectricConnectionManager::waitForSwitcherPosition() {
   frame.id_instruction = -1;
   frame.element = OPERATION_MODE_SWITCH;
   frame.value = -1;
-  // Envio a vehículo
   sendToVehicle(frame);
   while (!swPosition.flag) {
     checkForVehicleMessages();
@@ -153,56 +137,36 @@ void ElectricConnectionManager::setTurnOff() {
  * @return Booleano que indica si se ha llevado a cabo una lectura via socket
  */
 bool ElectricConnectionManager::checkForVehicleMessages() {
-
   char bufData[8];
-
   if (recv(socketDescriptor, bufData, sizeof (bufData), 0) > 0) {
-    // Estructura de recepcion
     FrameDriving fdr;
     short aux;
-
-    // Rellenado del buffer
     memcpy(&aux, &bufData[0], sizeof (aux));
     fdr.instruction = static_cast<CommandID> (aux);
     memcpy(&fdr.id_instruction, &bufData[2], sizeof (fdr.id_instruction));
     memcpy(&aux, &bufData[4], sizeof (aux));
     fdr.element = static_cast<DeviceID> (aux);
     memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));
-    
-    printf("RCV :: %d - %d - %d - %d\n",fdr.instruction,fdr.id_instruction,fdr.element,fdr.value);
-
     if (fdr.instruction == ACK) {
-
       informResponse(true, fdr.id_instruction);
-
     } else if (fdr.instruction == NACK) {
-
       RtxStruct rtxList = informResponse(false, fdr.id_instruction);
-
       for (int i = 0; i < rtxList.numOfMsgs; i++) {
         sendToVehicle((FrameDriving) rtxList.msgs.at(i));
       }
-
     } else if (fdr.instruction == INFO) { 
       if (fdr.element == SUPPLY_ALARMS) {
-
         setVehicleInfo(fdr.element, fdr.value);
-
       } else if (fdr.element == TURN_OFF) {
-
         ROS_INFO("[Control] Electric - Preparando el apagado del sistema");
         turnOff = true;
-
       } else if (fdr.element == OPERATION_MODE_SWITCH) {
-  
         ROS_INFO("[Control] Electric - Cambio en posicion del conmutador local/teleoperado");
         swPosition.flag = true;
         swPosition.position = fdr.value;
-
       } else { // INFO corriente o alarmas
         setVehicleInfo(fdr.element, fdr.value);
       }
-
     }
     return true;
   } else {
@@ -326,7 +290,6 @@ short ElectricConnectionManager::getCountCriticalMessages() {
  */
 void ElectricConnectionManager::setCountCriticalMessages(short cont) {
   countMsg = cont;
-  // Contador: 1 .. 1024
   if (countMsg == 1025)
     countMsg = 1;
 }
@@ -411,34 +374,23 @@ bool ElectricConnectionManager::isCriticalInstruction(DeviceID element) {
  * haberlos) y una lista de dichos mensajes.
  */
 RtxStruct ElectricConnectionManager::informResponse(bool ack, short id_instruction) {
-
   RtxStruct ret;
   ret.numOfMsgs = 0;
-
-  // Se situa el iterador al principio de la cola
   vector<FrameDriving>::iterator it = messageQueue.begin();
-
   if (ack) { // ACK
-
     if (id_instruction == (*it).id_instruction) { // Primer elemento y requerido coinciden
-      // Se elimina el primer elemento
       messageQueue.erase(it);
     } else if (id_instruction > (*it).id_instruction) { // Confirmacion de varios elementos
       while (id_instruction >= (*it).id_instruction) {
         messageQueue.erase(it);
       }
     }
-
   } else { // NACK
-
     while (it != messageQueue.end()) {
-      // Se incluyen en la respuesta todos los  mensajes no confirmados
-      // para retransmitir
       ret.numOfMsgs++;
       ret.msgs.push_back((*it));
       it++;
     }
-
   }
   return ret;
 }

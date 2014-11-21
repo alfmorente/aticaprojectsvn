@@ -125,6 +125,7 @@ CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/SocketDriver.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/Timer.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: include/constant.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
 CMakeFiles/electric.dir/src/RosNode_Electric.cpp.o: srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h
@@ -198,6 +199,7 @@ CMakeFiles/electric.dir/src/main.cpp.o: include/SocketDriver.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/Timer.h
 CMakeFiles/electric.dir/src/main.cpp.o: include/constant.h
 CMakeFiles/electric.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+CMakeFiles/electric.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 CMakeFiles/electric.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
 CMakeFiles/electric.dir/src/main.cpp.o: msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
 CMakeFiles/electric.dir/src/main.cpp.o: srv_gen/cpp/include/CITIUS_Control_Electric/srv_vehicleStatus.h

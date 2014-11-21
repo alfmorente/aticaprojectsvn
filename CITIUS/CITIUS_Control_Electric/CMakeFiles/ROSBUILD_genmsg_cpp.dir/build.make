@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric
 
@@ -45,30 +42,10 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric
 # Include the progress variables for this target.
 include CMakeFiles/ROSBUILD_genmsg_cpp.dir/progress.make
 
-CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
 CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
-
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: msg/msg_electricCommand.msg
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: manifest.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/cpp_common/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/rostime/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp_traits/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/genmsg/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/genpy/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/message_runtime/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/rosconsole/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/std_msgs/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
-msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h"
-	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/msg/msg_electricCommand.msg
+CMakeFiles/ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h: msg/msg_electricInfo.msg
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -86,7 +63,7 @@ msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h: /opt/ros/groovy/
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/msg/msg_electricInfo.msg
 
@@ -106,7 +83,7 @@ msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h: /opt/ros/groovy/shar
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/msg/msg_switcher.msg
 
@@ -126,15 +103,35 @@ msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h: /opt/ros/groovy/share
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
 msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h"
 	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/msg/msg_command.msg
 
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: msg/msg_electricCommand.msg
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: manifest.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/cpp_common/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/rostime/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp_traits/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp_serialization/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/genmsg/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/genpy/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/message_runtime/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/rosconsole/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/std_msgs/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/xmlrpcpp/package.xml
+msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h"
+	/opt/ros/groovy/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric/msg/msg_electricCommand.msg
+
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp
-ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricInfo.h
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_switcher.h
 ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_command.h
+ROSBUILD_genmsg_cpp: msg_gen/cpp/include/CITIUS_Control_Electric/msg_electricCommand.h
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make
 .PHONY : ROSBUILD_genmsg_cpp
 
