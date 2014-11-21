@@ -15,32 +15,24 @@
 bool SocketDriver::doConnect(int device) {
   string ip = getValueFromConfig(CONFIG_FILE_IP_NAME,device);
   if (ip == "") return false;
-
   string port = getValueFromConfig(CONFIG_FILE_PORT_NAME,device);
   if (port == "") return false;
-
   if ((he = gethostbyname(ip.c_str())) == NULL) {
     return false;
   }
-
   if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
     return false;
   }
-
   server.sin_family = AF_INET;
   server.sin_port = htons(atoi(port.c_str()));
   server.sin_addr = *((struct in_addr *) he->h_addr);
   bzero(&(server.sin_zero), 8);
-
   if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
     return false;
-
   }
-
   if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) < 0) {
     printf("Imposible establecer socket como no bloqueante en operaciones L/E\n");
   }
-  
   return true;
 }
 
@@ -60,7 +52,6 @@ void SocketDriver::disconnect() {
  * @return String con el resultado de la búsqueda
  */
 string SocketDriver::getValueFromConfig(string parameter, int device){
-
   int pos;
   string cadena, parametro, value = "";
   bool found = false;
@@ -72,12 +63,9 @@ string SocketDriver::getValueFromConfig(string parameter, int device){
   } else if (device == DEVICE_AHRS) {
     fichero.open("socket_MAGN.conf");
   }
-  
-
   if (!fichero.is_open()) {
     return "";
   }
-
   while (!fichero.eof() && !found) {
     getline(fichero, cadena);
     if (cadena[0] != '#' && cadena[0] != NULL) {
@@ -95,6 +83,5 @@ string SocketDriver::getValueFromConfig(string parameter, int device){
     }
   }
   fichero.close();
-
   return value;
 }

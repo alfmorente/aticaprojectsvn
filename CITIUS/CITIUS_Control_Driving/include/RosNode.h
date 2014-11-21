@@ -15,7 +15,6 @@
 
 #include "constant.h"
 
-
 using namespace std;
 
 /**
