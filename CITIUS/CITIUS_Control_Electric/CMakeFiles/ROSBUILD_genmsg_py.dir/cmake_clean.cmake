@@ -7,10 +7,10 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Electric/srv"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "src/CITIUS_Control_Electric/msg/__init__.py"
+  "src/CITIUS_Control_Electric/msg/_msg_electricCommand.py"
   "src/CITIUS_Control_Electric/msg/_msg_electricInfo.py"
   "src/CITIUS_Control_Electric/msg/_msg_switcher.py"
   "src/CITIUS_Control_Electric/msg/_msg_command.py"
-  "src/CITIUS_Control_Electric/msg/_msg_electricCommand.py"
 )
 
 # Per-language clean rules from dependency scanning.

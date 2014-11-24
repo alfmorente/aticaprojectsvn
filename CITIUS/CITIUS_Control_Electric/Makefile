@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Electric
 
@@ -137,6 +140,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric
+
+# Build rule for target.
+ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric
+.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric
+
+# fast build rule for target.
+ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric.dir/build
+.PHONY : ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -176,6 +192,19 @@ ROSBUILD_genmsg_py/fast:
 .PHONY : ROSBUILD_genmsg_py/fast
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_genmsg_roseus_CITIUS_Control_Electric
+
+# Build rule for target.
+ROSBUILD_genmsg_roseus_CITIUS_Control_Electric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_roseus_CITIUS_Control_Electric
+.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_Electric
+
+# fast build rule for target.
+ROSBUILD_genmsg_roseus_CITIUS_Control_Electric/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Electric.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Electric.dir/build
+.PHONY : ROSBUILD_genmsg_roseus_CITIUS_Control_Electric/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -213,6 +242,19 @@ ROSBUILD_gensrv_py: cmake_check_build_system
 ROSBUILD_gensrv_py/fast:
 	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
 .PHONY : ROSBUILD_gensrv_py/fast
+
+#=============================================================================
+# Target rules for targets named ROSBUILD_gensrv_roseus_CITIUS_Control_Electric
+
+# Build rule for target.
+ROSBUILD_gensrv_roseus_CITIUS_Control_Electric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_roseus_CITIUS_Control_Electric
+.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Electric
+
+# fast build rule for target.
+ROSBUILD_gensrv_roseus_CITIUS_Control_Electric/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Electric.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_CITIUS_Control_Electric.dir/build
+.PHONY : ROSBUILD_gensrv_roseus_CITIUS_Control_Electric/fast
 
 #=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
@@ -624,12 +666,15 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... ROSBUILD_genmanifest_roseus_CITIUS_Control_Electric"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_genmsg_py"
+	@echo "... ROSBUILD_genmsg_roseus_CITIUS_Control_Electric"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... ROSBUILD_gensrv_py"
+	@echo "... ROSBUILD_gensrv_roseus_CITIUS_Control_Electric"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... doxygen"

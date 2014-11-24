@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.cpp
+DrivingConnectionManager.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/DrivingConnectionManager.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.cpp
+RosNode.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode.h
+
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.cpp
 RosNode_Driving.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/RosNode_Driving.h
@@ -13,6 +21,14 @@ RosNode_Driving.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/SocketDriver.cpp
 SocketDriver.h
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/SocketDriver.h
+
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Timer.cpp
+Timer.h
+/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/Timer.h
+unistd.h
+-
+sys/time.h
+-
 
 /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/src/main.cpp
 RosNode_Driving.h
