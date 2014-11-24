@@ -114,17 +114,6 @@
       </df>
       <df name="msg">
       </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="CITIUS_Control_Manager">
-              <in>msg_switcher.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
-      </df>
       <df name="src">
         <df name="CITIUS_Control_Manager">
           <df name="msg">

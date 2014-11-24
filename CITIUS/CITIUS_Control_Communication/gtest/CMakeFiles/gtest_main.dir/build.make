@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication
 
@@ -77,8 +80,8 @@ gtest_main_OBJECTS = \
 gtest_main_EXTERNAL_OBJECTS =
 
 lib/libgtest_main.so: gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
-lib/libgtest_main.so: lib/libgtest.so
 lib/libgtest_main.so: gtest/CMakeFiles/gtest_main.dir/build.make
+lib/libgtest_main.so: lib/libgtest.so
 lib/libgtest_main.so: gtest/CMakeFiles/gtest_main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX shared library ../lib/libgtest_main.so"
 	cd /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/gtest && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gtest_main.dir/link.txt --verbose=$(VERBOSE)
