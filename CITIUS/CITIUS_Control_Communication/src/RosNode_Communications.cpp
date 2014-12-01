@@ -64,9 +64,9 @@ void RosNode_Communications::initROS() {
   subsPosOriInfo = nh.subscribe("posOriInfo", 1000, &RosNode_Communications::fnc_subs_posOriInfo, this);
   //          Subsistema de payload de observacion
   subsIRCameraInfo = nh.subscribe("IRInformation", 1000, &RosNode_Communications::fcn_subs_irCameraInfo, this);
-  subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_positionerInfo, this);
+  subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
   subsTVCameraInfo = nh.subscribe("TVInformation", 1000, &RosNode_Communications::fcn_subs_tvCameraInfo, this);
-  subsPositionerInfo = nh.subscribe("PanTiltPosition", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
+  subsPositionerInfo = nh.subscribe("PanTiltPosition", 1000, &RosNode_Communications::fcn_subs_positionerInfo, this);
 
   // Inicializacion de servicios
   //          Subsistema de control
