@@ -49,6 +49,8 @@ int main(int argc, char** argv) {
         count1Hz = 0;
         // Informe de la camara activa a pinchar
         nodeComm->informCameraToStream();
+        // Informe de heartbeat (a Comm Mngmt de todos los subsistemas)
+        nodeComm->informHeartbeatPositionInfo();
       }
     }
     usleep(50000);

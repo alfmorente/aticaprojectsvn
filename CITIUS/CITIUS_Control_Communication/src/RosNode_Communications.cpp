@@ -6,6 +6,8 @@
  * @date 2013, 2014
  */
 
+#include <cmath>
+
 #include "RosNode_Communications.h"
 
 /// Declaracion para patron Singleton
@@ -35,6 +37,11 @@ RosNode_Communications::RosNode_Communications() {
   // Inicializador de selectores de camaras
   currentDrivingCamera = FRONT_CAMERA_ID;
   currentObservationCamera = TV_CAMERA;
+  hbPosition.latitude = 0;
+  hbPosition.longitude = 0;
+  hbPosition.altitude = 0;
+  hbPosition.heading = 0;
+  hbPosition.speed = 0;
 }
 
 /**
@@ -164,16 +171,6 @@ void RosNode_Communications::initJAUS() {
 
   }
 
-  // Global Waypoint Driver
-  globalWaypointDriverComponent = ojCmptCreate((char *) "Global Waypoint Driver", JAUS_GLOBAL_WAYPOINT_DRIVER, 1);
-  if (globalWaypointDriverComponent == NULL) {
-    ROS_INFO("[Control] Communication - No se ha podido crear el componente GLOBAL WAYPOINT DRIVER");
-    exit(0);
-  } else {
-    // REVISAR COMPONENTE INNECESARIO PARA UGV
-    // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  }
-
   // Velocity State Sensor
   velocityStateSensorComponent = ojCmptCreate((char *) "Velocity State Sensor", JAUS_VELOCITY_STATE_SENSOR, 1);
   if (velocityStateSensorComponent == NULL) {
@@ -202,12 +199,7 @@ void RosNode_Communications::initJAUS() {
     ROS_INFO("[Control] Communication - No se ha podido crear el componente HEARTBEAT INFORMATION");
     exit(0);
   } else {
-    ojCmptAddServiceOutputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_CHANNEL_STATE_16, 0xFF);
     ojCmptAddServiceOutputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_POSITION_INFO_17, 0xFF);
-    ojCmptAddServiceInputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_CHANNEL_STATE_16, 0xFF);
-    ojCmptAddServiceInputMessage(heartBeatInformationComponent, JAUS_HEARTBEAT_INFORMATION, JAUS_HEARTBEAT_POSITION_INFO_17, 0xFF);
-    ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_CHANNEL_STATE_16, fcn_receive_heartbeat_channel_state);
-    ojCmptSetMessageCallback(heartBeatInformationComponent, JAUS_HEARTBEAT_POSITION_INFO_17, fcn_receive_heartbeat_position_info);
   }
 
   // Run de componentes
@@ -215,7 +207,6 @@ void RosNode_Communications::initJAUS() {
   ojCmptRun(primitiveDriverComponent);
   ojCmptRun(visualSensorComponent);
   ojCmptRun(platformSensorComponent);
-  ojCmptRun(globalWaypointDriverComponent);
   ojCmptRun(velocityStateSensorComponent);
   ojCmptRun(globalPoseSensorComponent);
   ojCmptRun(heartBeatInformationComponent);
@@ -231,7 +222,6 @@ void RosNode_Communications::finishJAUS() {
   ojCmptDestroy(primitiveDriverComponent);
   ojCmptDestroy(visualSensorComponent);
   ojCmptDestroy(platformSensorComponent);
-  ojCmptDestroy(globalWaypointDriverComponent);
   ojCmptDestroy(velocityStateSensorComponent);
   ojCmptDestroy(globalPoseSensorComponent);
   ojCmptDestroy(heartBeatInformationComponent);
@@ -328,6 +318,56 @@ void RosNode_Communications::informCameraToStream(){
   jausAddressDestroy(jAdd);
   jausMessageDestroy(jMsg);
 }
+
+/**
+ * Método público que envía información de heartbeat (mensaje JAUS Heartbeat - 
+ * Position Info) a los nodos JAUS de Communication Management de todos los
+ * subsistemas
+ */
+void RosNode_Communications::informHeartbeatPositionInfo() {
+  JausMessage jMsg = NULL;
+  JausAddress jAdd = jausAddressCreate();
+  jAdd->subsystem = JAUS_SUBSYSTEM_UGV;
+  jAdd->node = JAUS_NODE_COMM_MNG;
+  jAdd->component = JAUS_HEARTBEAT_INFORMATION;
+  HeartbeatPositionInfo17Message hpi = heartbeatPositionInfo17MessageCreate();
+  hpi->latitude = hbPosition.latitude;
+  hpi->longitude = hbPosition.longitude;
+  hpi->altitude = hbPosition.altitude;
+  hpi->heading = hbPosition.heading;
+  hpi->speed = hbPosition.speed;
+  // Hacia UGV
+  jausAddressCopy(hpi->destination, jAdd);
+  jMsg = heartbeatPositionInfo17MessageToJausMessage(hpi);
+  if (jMsg != NULL) {
+    ojCmptSendMessage(instance->heartBeatInformationComponent, jMsg);
+  } else {
+    ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion heartbeat hacia UGV");
+  }
+  // Hacia MyC
+  jAdd->subsystem = JAUS_SUBSYSTEM_MYC;
+  jausAddressCopy(hpi->destination, jAdd);
+  jMsg = heartbeatPositionInfo17MessageToJausMessage(hpi);
+  if (jMsg != NULL) {
+    ojCmptSendMessage(instance->heartBeatInformationComponent, jMsg);
+  } else {
+    ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion heartbeat hacia MyC");
+  }
+  // Hacia MyC
+  jAdd->subsystem = JAUS_SUBSYSTEM_USV;
+  jausAddressCopy(hpi->destination, jAdd);
+  jMsg = heartbeatPositionInfo17MessageToJausMessage(hpi);
+  if (jMsg != NULL) {
+    ojCmptSendMessage(instance->heartBeatInformationComponent, jMsg);
+  } else {
+    ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion heartbeat hacia USV");
+  }
+  
+  heartbeatPositionInfo17MessageDestroy(hpi);
+  jausAddressDestroy(jAdd);
+  jausMessageDestroy(jMsg);
+}
+
 
 /*******************************************************************************
  *******************************************************************************
@@ -462,11 +502,15 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
   ReportGlobalPoseMessage rgpm = reportGlobalPoseMessageCreate();
   rgpm->presenceVector = 0x0077;
   rgpm->latitudeDegrees = msg.latitude;
+  hbPosition.latitude = msg.latitude;
   rgpm->longitudeDegrees = msg.longitude;
+  hbPosition.longitude = msg.longitude;
   rgpm->attitudeRmsRadians = msg.altitude;
+  hbPosition.altitude = msg.altitude;
   rgpm->rollRadians = msg.roll;
   rgpm->pitchRadians = msg.pitch;
   rgpm->yawRadians = msg.yaw;
+  hbPosition.heading = msg.yaw;
   jausAddressCopy(rgpm->destination, jAdd);
   jMsg = reportGlobalPoseMessageToJausMessage(rgpm);
   reportGlobalPoseMessageDestroy(rgpm);
@@ -479,6 +523,7 @@ void RosNode_Communications::fnc_subs_posOriInfo(CITIUS_Control_Communication::m
   rvsm->velocityXMps = msg.velX;
   rvsm->velocityYMps = msg.velY;
   rvsm->velocityZMps = msg.velZ;
+  hbPosition.speed = sqrt(pow(msg.velX,2)+pow(msg.velY,2)+pow(msg.velZ,2));
   jAdd->component = JAUS_VELOCITY_STATE_SENSOR;
   jAdd->instance = JAUS_DESTINANTION_INSTANCE;
   jausAddressCopy(rvsm->destination, jAdd);
@@ -1010,24 +1055,3 @@ void RosNode_Communications::fcn_receive_set_travel_speed(OjCmpt cmp, JausMessag
   setTravelSpeedMessageDestroy(sTravelSpeed);
 }
 
-// Componente HeartBeat Information
-
-/** 
- * Método privado que recibe mensajes JAUS de tipo "HeartBeat - Channel State".
- * @todo Recepcion innecesaria en este nivel? 
- * @param[in] cmp Componente JAUS emisor
- * @param[in] msg Mensaje JAUS capturado
- */
-void RosNode_Communications::fcn_receive_heartbeat_channel_state(OjCmpt cmp, JausMessage msg) {
-
-}
-
-/** 
- * Método privado que recibe mensajes JAUS de tipo "HeartBeat - Position Info".
- * @todo Recepcion innecesaria en este nivel? 
- * @param[in] cmp Componente JAUS emisor
- * @param[in] msg Mensaje JAUS capturado
- */
-void RosNode_Communications::fcn_receive_heartbeat_position_info(OjCmpt cmp, JausMessage msg) {
-
-}
