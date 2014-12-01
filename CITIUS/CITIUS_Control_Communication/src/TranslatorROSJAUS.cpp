@@ -209,9 +209,9 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(JausSubsystemID subDest,
   ReportCameraPoseMessage rcpm = reportCameraPoseMessageCreate();
   rcpm->cameraID = id_camera;
   rcpm->presenceVector = (PRESENCE_VECTOR_CURRENT_PAN | PRESENCE_VECTOR_CURRENT_TILT | PRESENCE_VECTOR_CURRENT_ZOOM);
-  rcpm->xCameraAxisDirectionCosineZ = pan;
-  rcpm->xCameraAxisDirectionCosineY = tilt;
-  rcpm->zCameraOriginMeters = zoom;
+  rcpm->xCameraAxisDirectionCosineZ = (pan * CONV_JAUS_PANTILT);
+  rcpm->xCameraAxisDirectionCosineY = (tilt * CONV_JAUS_PANTILT);
+  rcpm->zCameraOriginMeters = (zoom * CONV_JAUS_ZOOM);
   jausAddressCopy(rcpm->destination, jAdd);
   jMsg = reportCameraPoseMessageToJausMessage(rcpm);
   reportCameraPoseMessageDestroy(rcpm);

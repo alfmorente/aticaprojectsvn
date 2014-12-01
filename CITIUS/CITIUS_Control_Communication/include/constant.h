@@ -156,6 +156,10 @@ typedef enum {
 #define PRESENCE_VECTOR_DIPSR 0x04 ///<Obtención de PV de luces largas en mensajes JAUS Report Signaling Elements
 #define PRESENCE_VECTOR_DIPSS 0x01 ///<Obtención de PV de luces cortas en mensajes JAUS Report Signaling Elements
 
+// Conversion % a mensajes JAUS (Report Camera Pose)
+#define CONV_JAUS_PANTILT 1/100 ///<Factor de conversión de % (camara) a 0..1 (Pan y Tilt en Report Camera Pose)
+#define CONV_JAUS_ZOOM 32/100 ///<Factor de conversión de % (camara) a 0..32 (Zoom en Report Camera Pose)
+
 /**
  * \enum JausSubsystemID
  * \brief Identificador de subsistemas JAUS
