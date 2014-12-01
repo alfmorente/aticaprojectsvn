@@ -191,6 +191,20 @@ typedef enum {
   IR_CAMERA = 4 ///<Identificador de cámara nocturna Payload de Observación
 } CameraID;
 
+/**
+ * \enum HeartBeatPosition
+ * \brief Estructura con información para formar mensaje de HeartBeat de
+ * posicionamiento del vehículo. Se actualiza con la información recibida de 
+ * los dispositivos de posición/orientación.
+ */
+typedef struct{
+  double latitude;
+  double longitude;
+  double altitude;
+  double heading;
+  double speed;
+}HeartBeatPosition;
+
 
 #endif	/* CONSTANT_H */
 
