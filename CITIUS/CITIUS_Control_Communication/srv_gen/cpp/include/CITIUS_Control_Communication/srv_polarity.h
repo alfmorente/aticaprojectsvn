@@ -26,17 +26,17 @@ struct srv_polarityRequest_ {
   typedef srv_polarityRequest_<ContainerAllocator> Type;
 
   srv_polarityRequest_()
-  : newPolarity(0)
+  : newPolarity(false)
   {
   }
 
   srv_polarityRequest_(const ContainerAllocator& _alloc)
-  : newPolarity(0)
+  : newPolarity(false)
   {
   }
 
-  typedef int8_t _newPolarity_type;
-  int8_t newPolarity;
+  typedef uint8_t _newPolarity_type;
+  uint8_t newPolarity;
 
 
   typedef boost::shared_ptr< ::CITIUS_Control_Communication::srv_polarityRequest_<ContainerAllocator> > Ptr;
@@ -101,12 +101,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::CITIUS_Control_Communication::srv_polarityRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "ef5d16e770ebfca055d4ce2df7383c68";
+    return "eb5cb3c1a75b0d1dc40d9025e983ad31";
   }
 
   static const char* value(const  ::CITIUS_Control_Communication::srv_polarityRequest_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xef5d16e770ebfca0ULL;
-  static const uint64_t static_value2 = 0x55d4ce2df7383c68ULL;
+  static const uint64_t static_value1 = 0xeb5cb3c1a75b0d1dULL;
+  static const uint64_t static_value2 = 0xc40d9025e983ad31ULL;
 };
 
 template<class ContainerAllocator>
@@ -123,7 +123,7 @@ template<class ContainerAllocator>
 struct Definition< ::CITIUS_Control_Communication::srv_polarityRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "int8 newPolarity\n\
+    return "bool newPolarity\n\
 \n\
 ";
   }
@@ -224,7 +224,7 @@ template<>
 struct MD5Sum<CITIUS_Control_Communication::srv_polarity> {
   static const char* value() 
   {
-    return "127bb913cce0f3eeeb8bb8d8486eee81";
+    return "2bb9a206470d2b7ae5b9c973e2da3934";
   }
 
   static const char* value(const CITIUS_Control_Communication::srv_polarity&) { return value(); } 
@@ -244,7 +244,7 @@ template<class ContainerAllocator>
 struct MD5Sum<CITIUS_Control_Communication::srv_polarityRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "127bb913cce0f3eeeb8bb8d8486eee81";
+    return "2bb9a206470d2b7ae5b9c973e2da3934";
   }
 
   static const char* value(const CITIUS_Control_Communication::srv_polarityRequest_<ContainerAllocator> &) { return value(); } 
@@ -264,7 +264,7 @@ template<class ContainerAllocator>
 struct MD5Sum<CITIUS_Control_Communication::srv_polarityResponse_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "127bb913cce0f3eeeb8bb8d8486eee81";
+    return "2bb9a206470d2b7ae5b9c973e2da3934";
   }
 
   static const char* value(const CITIUS_Control_Communication::srv_polarityResponse_<ContainerAllocator> &) { return value(); } 

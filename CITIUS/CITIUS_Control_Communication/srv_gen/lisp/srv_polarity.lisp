@@ -10,8 +10,8 @@
   ((newPolarity
     :reader newPolarity
     :initarg :newPolarity
-    :type cl:fixnum
-    :initform 0))
+    :type cl:boolean
+    :initform cl:nil))
 )
 
 (cl:defclass srv_polarity-request (<srv_polarity-request>)
@@ -28,15 +28,11 @@
   (newPolarity m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <srv_polarity-request>) ostream)
   "Serializes a message object of type '<srv_polarity-request>"
-  (cl:let* ((signed (cl:slot-value msg 'newPolarity)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 256) signed)))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
-    )
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'newPolarity) 1 0)) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <srv_polarity-request>) istream)
   "Deserializes a message object of type '<srv_polarity-request>"
-    (cl:let ((unsigned 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
-      (cl:setf (cl:slot-value msg 'newPolarity) (cl:if (cl:< unsigned 128) unsigned (cl:- unsigned 256))))
+    (cl:setf (cl:slot-value msg 'newPolarity) (cl:not (cl:zerop (cl:read-byte istream))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<srv_polarity-request>)))
@@ -47,16 +43,16 @@
   "CITIUS_Control_Communication/srv_polarityRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<srv_polarity-request>)))
   "Returns md5sum for a message object of type '<srv_polarity-request>"
-  "127bb913cce0f3eeeb8bb8d8486eee81")
+  "2bb9a206470d2b7ae5b9c973e2da3934")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'srv_polarity-request)))
   "Returns md5sum for a message object of type 'srv_polarity-request"
-  "127bb913cce0f3eeeb8bb8d8486eee81")
+  "2bb9a206470d2b7ae5b9c973e2da3934")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<srv_polarity-request>)))
   "Returns full string definition for message of type '<srv_polarity-request>"
-  (cl:format cl:nil "int8 newPolarity~%~%~%"))
+  (cl:format cl:nil "bool newPolarity~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'srv_polarity-request)))
   "Returns full string definition for message of type 'srv_polarity-request"
-  (cl:format cl:nil "int8 newPolarity~%~%~%"))
+  (cl:format cl:nil "bool newPolarity~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <srv_polarity-request>))
   (cl:+ 0
      1
@@ -105,10 +101,10 @@
   "CITIUS_Control_Communication/srv_polarityResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<srv_polarity-response>)))
   "Returns md5sum for a message object of type '<srv_polarity-response>"
-  "127bb913cce0f3eeeb8bb8d8486eee81")
+  "2bb9a206470d2b7ae5b9c973e2da3934")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'srv_polarity-response)))
   "Returns md5sum for a message object of type 'srv_polarity-response"
-  "127bb913cce0f3eeeb8bb8d8486eee81")
+  "2bb9a206470d2b7ae5b9c973e2da3934")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<srv_polarity-response>)))
   "Returns full string definition for message of type '<srv_polarity-response>"
   (cl:format cl:nil "bool ret~%~%~%~%"))
