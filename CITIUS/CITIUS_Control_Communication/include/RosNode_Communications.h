@@ -72,6 +72,7 @@ public:
   void finishJAUS();
   void informStatus();
   void informCameraToStream();
+  void informHeartbeatPositionInfo();
   bool isControllerAvailable();
 private:
   static RosNode_Communications *instance;
@@ -83,6 +84,7 @@ private:
   JausNodeID nodeController;
   short currentObservationCamera;
   short currentDrivingCamera;
+  HeartBeatPosition hbPosition;
   ros::Subscriber subsFrontCameraInfo;
   ros::Subscriber subsRearCameraInfo;
   ros::Subscriber subsVehicleInfo;
@@ -113,7 +115,6 @@ private:
   OjCmpt primitiveDriverComponent;
   OjCmpt visualSensorComponent;
   OjCmpt platformSensorComponent;
-  OjCmpt globalWaypointDriverComponent;
   OjCmpt velocityStateSensorComponent;
   OjCmpt globalPoseSensorComponent;
   OjCmpt heartBeatInformationComponent;
@@ -127,8 +128,6 @@ private:
   static void fcn_receive_set_night_time_camera(OjCmpt, JausMessage);
   static void fcn_receive_set_telemeter(OjCmpt, JausMessage);
   static void fcn_receive_set_travel_speed(OjCmpt, JausMessage);
-  static void fcn_receive_heartbeat_channel_state(OjCmpt, JausMessage);
-  static void fcn_receive_heartbeat_position_info(OjCmpt, JausMessage);
   void fnc_subs_frontCameraInfo(CITIUS_Control_Communication::msg_frontCameraInfo msg);
   void fnc_subs_rearCameraInfo(CITIUS_Control_Communication::msg_rearCameraInfo msg);
   void fnc_subs_vehicleInfo(CITIUS_Control_Communication::msg_vehicleInfo msg);
