@@ -353,7 +353,7 @@ void RosNode_Communications::informHeartbeatPositionInfo() {
   } else {
     ROS_INFO("[Control] Communications - No se ha posdido generar mensaje JAUS con informacion heartbeat hacia MyC");
   }
-  // Hacia MyC
+  // Hacia USV
   jAdd->subsystem = JAUS_SUBSYSTEM_USV;
   jausAddressCopy(hpi->destination, jAdd);
   jMsg = heartbeatPositionInfo17MessageToJausMessage(hpi);
