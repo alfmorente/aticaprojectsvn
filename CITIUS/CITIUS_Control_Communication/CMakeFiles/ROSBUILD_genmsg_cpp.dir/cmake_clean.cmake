@@ -18,6 +18,7 @@ FILE(REMOVE_RECURSE
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_command.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_panTiltPosition.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_vehicleInfo.h"
+  "msg_gen/cpp/include/CITIUS_Control_Communication/msg_lastExec.h"
   "msg_gen/cpp/include/CITIUS_Control_Communication/msg_echoesFound.h"
 )
 

@@ -28,6 +28,8 @@
     (:file "_package_msg_panTiltPosition" :depends-on ("_package"))
     (:file "msg_vehicleInfo" :depends-on ("_package_msg_vehicleInfo"))
     (:file "_package_msg_vehicleInfo" :depends-on ("_package"))
+    (:file "msg_lastExec" :depends-on ("_package_msg_lastExec"))
+    (:file "_package_msg_lastExec" :depends-on ("_package"))
     (:file "msg_echoesFound" :depends-on ("_package_msg_echoesFound"))
     (:file "_package_msg_echoesFound" :depends-on ("_package"))
   ))

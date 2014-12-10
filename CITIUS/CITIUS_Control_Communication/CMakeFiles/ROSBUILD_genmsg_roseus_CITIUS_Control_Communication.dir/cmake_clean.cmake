@@ -30,6 +30,8 @@ FILE(REMOVE_RECURSE
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_vehicleInfo.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_lastExec.l"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg/msg_echoesFound.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Communication/msg"
 )

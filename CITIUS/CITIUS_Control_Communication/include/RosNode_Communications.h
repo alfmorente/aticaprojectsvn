@@ -34,6 +34,7 @@
 #include "CITIUS_Control_Communication/msg_echoesFound.h"
 #include "CITIUS_Control_Communication/msg_irinfo.h"
 #include "CITIUS_Control_Communication/msg_panTiltPosition.h"
+#include "CITIUS_Control_Communication/msg_lastExec.h"
 #include "CITIUS_Control_Communication/srv_dzoom.h"
 #include "CITIUS_Control_Communication/srv_polarity.h"
 #include "CITIUS_Control_Communication/srv_zoomDirect.h"
@@ -99,6 +100,7 @@ private:
   ros::Subscriber subsTelemeterInfo;
   ros::Subscriber subsTVCameraInfo;
   ros::Subscriber subsPositionerInfo;
+  ros::Subscriber subsLastExec;
   ros::ServiceClient clientIRCameraZoom;
   ros::ServiceClient clientIRCameraPolarity;
   ros::ServiceClient clientTVCameraDirectZoom;
@@ -137,6 +139,7 @@ private:
   void fcn_subs_telemeterInfo(CITIUS_Control_Communication::msg_echoesFound msg);
   void fcn_subs_tvCameraInfo(CITIUS_Control_Communication::msg_tvinfo msg);
   void fcn_subs_positionerInfo(CITIUS_Control_Communication::msg_panTiltPosition msg);
+  void fcn_subs_lastExec(CITIUS_Control_Communication::msg_lastExec msg);
   bool fcv_serv_nodeStatus(CITIUS_Control_Communication::srv_nodeStatus::Request &rq, CITIUS_Control_Communication::srv_nodeStatus::Response &rsp);
 };
 

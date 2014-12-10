@@ -19,6 +19,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Communication/msg/_msg_command.py"
   "src/CITIUS_Control_Communication/msg/_msg_panTiltPosition.py"
   "src/CITIUS_Control_Communication/msg/_msg_vehicleInfo.py"
+  "src/CITIUS_Control_Communication/msg/_msg_lastExec.py"
   "src/CITIUS_Control_Communication/msg/_msg_echoesFound.py"
 )
 
