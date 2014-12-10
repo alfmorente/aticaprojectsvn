@@ -22,13 +22,14 @@ Manager::Manager() {
   tvCameraOK = false;
   positionerOK = false;
   currentSwitcher = SWITCHER_INIT;
+  turnOffChecker = new TurnOffAlright();
 }
 
 /**
  * Destructor de la clase
  */
 Manager::~Manager() {
-
+  delete(turnOffChecker);
 }
 
 /**
@@ -65,6 +66,9 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
   CITIUS_Control_Manager::srv_nodeStatus service;
   switch (rq.status) {
     case OPERATION_MODE_INICIANDO:
+      ROS_INFO("[Control] Manager - Modo de operacion INICIANDO activado");
+      nh.setParam("vehicleStatus", OPERATION_MODE_INICIANDO);
+      turnOffChecker->setStatusLine("INICIANDO");
       service.request.status = NODESTATUS_OK;
       while (!cmNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
         ROS_INFO("[Control] Manager - Reintentando conexion con nodo Communication...");
@@ -204,6 +208,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       if (!drivingOK) {
         ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehiculo. Finalizado");
         nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
+        turnOffChecker->setStatusLine("APAGANDO");
         rsp.confirmation = false;
       } else {
         if (!positionOrientationOK || !frontCameraOK || !rearCameraOK || !irCameraOK || !lrfOK || !tvCameraOK || !positionerOK) {
@@ -214,9 +219,11 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         if (rq.posSwitcher == SWITCHER_LOCAL) {
           ROS_INFO("[Control] Manager - Modo de operacion LOCAL activado");
           nh.setParam("vehicleStatus", OPERATION_MODE_LOCAL);
+          turnOffChecker->setStatusLine("LOCAL");
         } else if (rq.posSwitcher == SWITCHER_TELECONTROL) {
           ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
           nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
+          turnOffChecker->setStatusLine("CONDUCCION");
         }
         rsp.confirmation = true;
       }
@@ -228,6 +235,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     case OPERATION_MODE_CONDUCCION:
       if (currentStatus == OPERATION_MODE_OBSERVACION) {
         nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
+        turnOffChecker->setStatusLine("CONDUCCION");
         ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
         rsp.confirmation = true;
       } else {
@@ -238,6 +246,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     case OPERATION_MODE_OBSERVACION:
       if (currentStatus == OPERATION_MODE_CONDUCCION) {
         nh.setParam("vehicleStatus", OPERATION_MODE_OBSERVACION);
+        turnOffChecker->setStatusLine("OBSERVACION");
         rsp.confirmation = true;
         ROS_INFO("[Control] Manager - Modo de operacion OBSERVACION activado");
       } else {
@@ -321,6 +330,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       }
       rsp.confirmation = true;
       nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
+      turnOffChecker->setStatusLine("APAGANDO");
       break;
     default:
       rsp.confirmation = false;
@@ -343,11 +353,25 @@ void Manager::fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher msg) {
     if (msg.switcher == SWITCHER_LOCAL) {
       ROS_INFO("[Control] Manager - Modo de operacion LOCAL activado");
       nh.setParam("vehicleStatus", OPERATION_MODE_LOCAL);
+      turnOffChecker->setStatusLine("LOCAL");
       currentSwitcher = SWITCHER_LOCAL;
     } else if (msg.switcher == SWITCHER_TELECONTROL) {
       ROS_INFO("[Control] Manager - Modo de operacion CONDUCCION activado");
       nh.setParam("vehicleStatus", OPERATION_MODE_CONDUCCION);
+      turnOffChecker->setStatusLine("CONDUCCION");
       currentSwitcher = SWITCHER_TELECONTROL;
     }
+  }
+}
+
+/**
+ * Método público que comprueba que la última ejecución del programa llegó a su
+ * fin de manera ordenada y envía un mensaje de alarmas para conocimiento del
+ * controlador en caso contrario
+ * @return 
+ */
+void Manager::checkPreviousExec() {
+  if(!turnOffChecker->checkCorrectTurnedOff()){
+    // Send alarm message
   }
 }
