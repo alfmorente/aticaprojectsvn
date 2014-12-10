@@ -108,11 +108,25 @@
         <df name="CITIUS_Control_Manager">
         </df>
         <in>Manager.h</in>
+        <in>TurnOffAlright.h</in>
         <in>constant.h</in>
       </df>
       <df name="lib">
       </df>
       <df name="msg">
+        <in>msg_lastExec.msg</in>
+      </df>
+      <df name="msg_gen">
+        <df name="cpp">
+          <df name="include">
+            <df name="CITIUS_Control_Manager">
+              <in>msg_lastExec.h</in>
+              <in>msg_switcher.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="lisp">
+        </df>
       </df>
       <df name="src">
         <df name="CITIUS_Control_Manager">
@@ -122,6 +136,7 @@
           </df>
         </df>
         <in>Manager.cpp</in>
+        <in>TurnOffAlright.cpp</in>
         <in>main.cpp</in>
       </df>
       <df name="srv">

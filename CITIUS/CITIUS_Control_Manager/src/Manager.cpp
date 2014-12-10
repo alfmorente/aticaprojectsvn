@@ -48,6 +48,7 @@ void Manager::initROS() {
   ptNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStatePanTilt");
   serverVehicleStatus = nh.advertiseService("vehicleStatus", &Manager::fcv_serv_vehicleStatus, this);
   switcherLocalTelecontrol = nh.subscribe("switcher", 1000, &Manager::fnc_subs_switcher, this);
+  pubLastExec =  nh.advertise<CITIUS_Control_Manager::msg_lastExec>("lastExec", 1000);
 }
 
 /**
@@ -372,6 +373,8 @@ void Manager::fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher msg) {
  */
 void Manager::checkPreviousExec() {
   if(!turnOffChecker->checkCorrectTurnedOff()){
-    // Send alarm message
+    CITIUS_Control_Manager::msg_lastExec msg;
+    msg.badExec = true;
+    pubLastExec.publish(msg);
   }
 }

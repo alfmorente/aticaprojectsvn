@@ -9,6 +9,9 @@ FILE(REMOVE_RECURSE
   "msg_gen/lisp/msg_switcher.lisp"
   "msg_gen/lisp/_package.lisp"
   "msg_gen/lisp/_package_msg_switcher.lisp"
+  "msg_gen/lisp/msg_lastExec.lisp"
+  "msg_gen/lisp/_package.lisp"
+  "msg_gen/lisp/_package_msg_lastExec.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

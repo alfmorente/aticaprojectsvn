@@ -3,5 +3,7 @@
   (:export
    "<MSG_SWITCHER>"
    "MSG_SWITCHER"
+   "<MSG_LASTEXEC>"
+   "MSG_LASTEXEC"
   ))
 

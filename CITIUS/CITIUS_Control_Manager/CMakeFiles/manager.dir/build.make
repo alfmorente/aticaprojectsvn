@@ -34,6 +34,9 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager
 
@@ -121,16 +124,54 @@ CMakeFiles/manager.dir/src/Manager.cpp.o.provides: CMakeFiles/manager.dir/src/Ma
 
 CMakeFiles/manager.dir/src/Manager.cpp.o.provides.build: CMakeFiles/manager.dir/src/Manager.cpp.o
 
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: CMakeFiles/manager.dir/flags.make
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: src/TurnOffAlright.cpp
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: manifest.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o -c /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/TurnOffAlright.cpp
+
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/manager.dir/src/TurnOffAlright.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/TurnOffAlright.cpp > CMakeFiles/manager.dir/src/TurnOffAlright.cpp.i
+
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/manager.dir/src/TurnOffAlright.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/TurnOffAlright.cpp -o CMakeFiles/manager.dir/src/TurnOffAlright.cpp.s
+
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.requires:
+.PHONY : CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.requires
+
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.provides: CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.requires
+	$(MAKE) -f CMakeFiles/manager.dir/build.make CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.provides.build
+.PHONY : CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.provides
+
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.provides.build: CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o
+
 # Object files for target manager
 manager_OBJECTS = \
 "CMakeFiles/manager.dir/src/main.cpp.o" \
-"CMakeFiles/manager.dir/src/Manager.cpp.o"
+"CMakeFiles/manager.dir/src/Manager.cpp.o" \
+"CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o"
 
 # External object files for target manager
 manager_EXTERNAL_OBJECTS =
 
 bin/manager: CMakeFiles/manager.dir/src/main.cpp.o
 bin/manager: CMakeFiles/manager.dir/src/Manager.cpp.o
+bin/manager: CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o
 bin/manager: CMakeFiles/manager.dir/build.make
 bin/manager: CMakeFiles/manager.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/manager"
@@ -142,6 +183,7 @@ CMakeFiles/manager.dir/build: bin/manager
 
 CMakeFiles/manager.dir/requires: CMakeFiles/manager.dir/src/main.cpp.o.requires
 CMakeFiles/manager.dir/requires: CMakeFiles/manager.dir/src/Manager.cpp.o.requires
+CMakeFiles/manager.dir/requires: CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o.requires
 .PHONY : CMakeFiles/manager.dir/requires
 
 CMakeFiles/manager.dir/clean:

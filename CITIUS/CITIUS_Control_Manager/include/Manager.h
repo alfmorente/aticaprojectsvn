@@ -18,6 +18,7 @@
 #include "CITIUS_Control_Manager/srv_nodeStatus.h"
 #include "CITIUS_Control_Manager/srv_vehicleStatus.h"
 #include "CITIUS_Control_Manager/msg_switcher.h"
+#include "CITIUS_Control_Manager/msg_lastExec.h"
 #include "constant.h"
 #include "TurnOffAlright.h"
 #include <cstdlib>
@@ -58,6 +59,7 @@ private:
   ros::ServiceClient switcher;
   ros::ServiceServer serverVehicleStatus;
   ros::Subscriber switcherLocalTelecontrol;
+  ros::Publisher pubLastExec;
   bool fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::Request &rq, CITIUS_Control_Manager::srv_vehicleStatus::Response &rsp);
   void fnc_subs_switcher(CITIUS_Control_Manager::msg_switcher);
 };
