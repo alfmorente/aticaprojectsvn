@@ -69,6 +69,8 @@ void RosNode_Communications::initROS() {
   subsFrontCameraInfo = nh.subscribe("frontCameraInfo", 1000, &RosNode_Communications::fnc_subs_frontCameraInfo, this);
   subsRearCameraInfo = nh.subscribe("rearCameraInfo", 1000, &RosNode_Communications::fnc_subs_rearCameraInfo, this);
   subsPosOriInfo = nh.subscribe("posOriInfo", 1000, &RosNode_Communications::fnc_subs_posOriInfo, this);
+  subsLastExec = nh.subscribe("lastExec", 1000, &RosNode_Communications::fcn_subs_lastExec, this);
+  
   //          Subsistema de payload de observacion
   subsIRCameraInfo = nh.subscribe("IRInformation", 1000, &RosNode_Communications::fcn_subs_irCameraInfo, this);
   subsTelemeterInfo = nh.subscribe("LRFEchoesFound", 1000, &RosNode_Communications::fcn_subs_telemeterInfo, this);
@@ -612,6 +614,20 @@ void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communicatio
   }
   jausMessageDestroy(jMsg);
 }
+
+/**
+ * Método privado consumidor del topic asociado a información sobre mal apagado
+ * del sistema de control del vehículo durante la ejecución anterior.
+ * @param[in] msg Mensaje ROS con información sobre mal apagado en anterior
+ * ejecución
+ */
+void RosNode_Communications::fcn_subs_lastExec(CITIUS_Control_Communication::msg_lastExec msg) {
+  if(msg.badExec){
+    // Enviar mensaje con alerta ¿Que mensaje? ¿Que alerta?
+    // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  }
+}
+
 
 /*******************************************************************************
  *******************************************************************************

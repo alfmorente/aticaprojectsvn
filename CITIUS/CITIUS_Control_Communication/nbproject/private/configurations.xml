@@ -804,6 +804,7 @@
               <in>msg_electricInfo.h</in>
               <in>msg_frontCameraInfo.h</in>
               <in>msg_irinfo.h</in>
+              <in>msg_lastExec.h</in>
               <in>msg_panTiltPosition.h</in>
               <in>msg_posOriInfo.h</in>
               <in>msg_rearCameraInfo.h</in>
