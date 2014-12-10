@@ -10,8 +10,12 @@
           <in>CMakeCXXCompilerId.cpp</in>
         </df>
       </df>
+      <df name="msg">
+        <in>msg_lastExec.msg</in>
+      </df>
       <df name="src">
         <in>Manager.cpp</in>
+        <in>TurnOffAlright.cpp</in>
         <in>main.cpp</in>
       </df>
     </df>
@@ -72,22 +76,21 @@
       <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
+        <cTool>
+        </cTool>
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
-      </item>
-      <item path="/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
+            flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
         <cTool>
           <preprocessorList>
             <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
@@ -140,12 +143,16 @@
       <item path="CMakeFiles/CompilerIdC/CMakeCCompilerId.c"
             ex="false"
             tool="0"
-            flavor2="0">
+            flavor2="2">
+        <cTool>
+        </cTool>
       </item>
       <item path="CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
+            flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <folder path="0">
         <ccTool>
@@ -201,9 +208,13 @@
           </undefinedList>
         </ccTool>
       </folder>
+      <item path="msg/msg_lastExec.msg" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/Manager.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="src/TurnOffAlright.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

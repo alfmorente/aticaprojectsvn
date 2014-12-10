@@ -38,6 +38,9 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager
 
@@ -49,8 +52,8 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
-	/usr/bin/cmake -i .
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -540,6 +543,30 @@ src/Manager.cpp.s:
 	$(MAKE) -f CMakeFiles/manager.dir/build.make CMakeFiles/manager.dir/src/Manager.cpp.s
 .PHONY : src/Manager.cpp.s
 
+src/TurnOffAlright.o: src/TurnOffAlright.cpp.o
+.PHONY : src/TurnOffAlright.o
+
+# target to build an object file
+src/TurnOffAlright.cpp.o:
+	$(MAKE) -f CMakeFiles/manager.dir/build.make CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o
+.PHONY : src/TurnOffAlright.cpp.o
+
+src/TurnOffAlright.i: src/TurnOffAlright.cpp.i
+.PHONY : src/TurnOffAlright.i
+
+# target to preprocess a source file
+src/TurnOffAlright.cpp.i:
+	$(MAKE) -f CMakeFiles/manager.dir/build.make CMakeFiles/manager.dir/src/TurnOffAlright.cpp.i
+.PHONY : src/TurnOffAlright.cpp.i
+
+src/TurnOffAlright.s: src/TurnOffAlright.cpp.s
+.PHONY : src/TurnOffAlright.s
+
+# target to generate assembly for a file
+src/TurnOffAlright.cpp.s:
+	$(MAKE) -f CMakeFiles/manager.dir/build.make CMakeFiles/manager.dir/src/TurnOffAlright.cpp.s
+.PHONY : src/TurnOffAlright.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -608,6 +635,9 @@ help:
 	@echo "... src/Manager.o"
 	@echo "... src/Manager.i"
 	@echo "... src/Manager.s"
+	@echo "... src/TurnOffAlright.o"
+	@echo "... src/TurnOffAlright.i"
+	@echo "... src/TurnOffAlright.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

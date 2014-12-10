@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Manager/srv"
   "CMakeFiles/manager.dir/src/main.cpp.o"
   "CMakeFiles/manager.dir/src/Manager.cpp.o"
+  "CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o"
   "bin/manager.pdb"
   "bin/manager"
 )

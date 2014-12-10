@@ -8,6 +8,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/ROSBUILD_genmsg_roseus_CITIUS_Control_Manager"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/msg/msg_switcher.l"
   "/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/msg"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/msg/msg_lastExec.l"
+  "/home/atica/.ros/roseus/groovy/CITIUS_Control_Manager/msg"
 )
 
 # Per-language clean rules from dependency scanning.

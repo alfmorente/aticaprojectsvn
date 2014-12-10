@@ -7,6 +7,7 @@ FILE(REMOVE_RECURSE
   "src/CITIUS_Control_Manager/srv"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
   "msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h"
+  "msg_gen/cpp/include/CITIUS_Control_Manager/msg_lastExec.h"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -58,10 +58,15 @@ CMakeFiles/manager.dir/src/Manager.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Manager.h
+ include/TurnOffAlright.h
  include/constant.h
+ msg_gen/cpp/include/CITIUS_Control_Manager/msg_lastExec.h
  msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h
+CMakeFiles/manager.dir/src/TurnOffAlright.cpp.o
+ /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/TurnOffAlright.cpp
+ include/TurnOffAlright.h
 CMakeFiles/manager.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/src/main.cpp
  /opt/ros/groovy/include/XmlRpcDecl.h
@@ -119,7 +124,9 @@ CMakeFiles/manager.dir/src/main.cpp.o
  /opt/ros/groovy/include/ros/wall_timer_options.h
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  include/Manager.h
+ include/TurnOffAlright.h
  include/constant.h
+ msg_gen/cpp/include/CITIUS_Control_Manager/msg_lastExec.h
  msg_gen/cpp/include/CITIUS_Control_Manager/msg_switcher.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_nodeStatus.h
  srv_gen/cpp/include/CITIUS_Control_Manager/srv_vehicleStatus.h
