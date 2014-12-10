@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
     nh.getParam("vehicleStatus", status);
     ros::spinOnce();
   }
+  manager->checkPreviousExec();
   ROS_INFO("[Control] Manager - Maquina de estados iniciada");
   while (ros::ok() && status != OPERATION_MODE_APAGANDO) {
     nh.getParam("vehicleStatus", status);

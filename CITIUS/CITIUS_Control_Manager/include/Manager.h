@@ -19,6 +19,7 @@
 #include "CITIUS_Control_Manager/srv_vehicleStatus.h"
 #include "CITIUS_Control_Manager/msg_switcher.h"
 #include "constant.h"
+#include "TurnOffAlright.h"
 #include <cstdlib>
 
 using namespace std;
@@ -32,7 +33,9 @@ public:
   Manager();
   ~Manager();
   void initROS();
+  void checkPreviousExec();
 private:
+  TurnOffAlright *turnOffChecker;
   bool communication;
   bool positionOrientationOK;
   bool frontCameraOK;
