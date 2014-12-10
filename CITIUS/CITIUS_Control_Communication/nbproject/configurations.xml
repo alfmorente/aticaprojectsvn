@@ -24,9 +24,6 @@
           </df>
         </df>
       </df>
-      <df name="msg">
-        <in>msg_electricCommand.msg</in>
-      </df>
       <df name="src">
         <in>JausHandler.cpp</in>
         <in>RosNode.cpp</in>
@@ -98,11 +95,6 @@
       <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
             ex="false"
             tool="1"
-            flavor2="0">
-      </item>
-      <item path="/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h"
-            ex="false"
-            tool="3"
             flavor2="0">
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
@@ -265,8 +257,6 @@
         <cTool>
         </cTool>
       </item>
-      <item path="msg/msg_electricCommand.msg" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/JausHandler.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
@@ -279,7 +269,9 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
       <item path="src/TranslatorROSJAUS.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
