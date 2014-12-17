@@ -40,9 +40,16 @@ void RosNode_FrontCamera::initROS() {
  * @param[in] msg Mensaje ROS con órdenes de actuacion sobre la cámara
  */
 void RosNode_FrontCamera::fcn_sub_ctrlFrontCamera(CITIUS_Control_FrontCamera::msg_ctrlFrontCamera msg) {
-  if (msg.isZoom) dFrontCamera->setZoom(msg.zoom);
-  if (msg.isPan) dFrontCamera->setPan(msg.pan);
-  if (msg.isZoom) dFrontCamera->setTilt(msg.tilt);
+  printf("Recibido comando\n");  
+  if (msg.isZoom){
+      dFrontCamera->setZoom(msg.zoom);
+  }
+  if (msg.isPan){ 
+      dFrontCamera->setPan(msg.pan);
+  }
+  if (msg.isTilt){ 
+      dFrontCamera->setTilt(msg.tilt);
+  }
 }
 
 /**
@@ -88,8 +95,8 @@ void RosNode_FrontCamera::manageDevice() {
   if (lensPos.state) {
     CITIUS_Control_FrontCamera::msg_frontCameraInfo rcMsg;
     rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-    rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-    rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.tilt = lensPos.tilt * (100/180);//CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.zoom = lensPos.zoom * (100/180);//CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
     pubFrontCameraInfo.publish(rcMsg);
     usleep(50000);
   }
