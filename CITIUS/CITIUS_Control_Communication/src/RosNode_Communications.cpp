@@ -103,7 +103,7 @@ void RosNode_Communications::initROS() {
 void RosNode_Communications::initJAUS() {
 
   try {
-    configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
+    configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
     handler = new JausHandler();
     nm = new NodeManager(this->configData, this->handler);
   } catch (...) {
@@ -457,7 +457,7 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
     ojCmptSendMessage(this->velocityStateSensorComponent, jMsg);
   }
   // UGV Info
-  jMsg = translator->getJausMsgFromUGVInfo(this->subsystemController, this->nodeController, msg.motorRPM, msg.motorTemperature);
+  jMsg = translator->getJausMsgFromUGVInfo(this->subsystemController, this->nodeController, msg.motorRPM, msg.motorTemperature, msg.alarms);
   if (jMsg != NULL) {
     ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
   }
@@ -480,6 +480,7 @@ void RosNode_Communications::fnc_subs_vehicleInfo(CITIUS_Control_Communication::
 void RosNode_Communications::fnc_subs_electricInfo(CITIUS_Control_Communication::msg_electricInfo msg) {
   TranslatorROSJAUS *translator = new TranslatorROSJAUS();
   JausMessage jMsg = translator->getJausMsgFromElectricInfo(this->subsystemController, this->nodeController, msg.battery_level, msg.battery_voltage, msg.battery_current, msg.battery_temperature, msg.supply_alarms);
+  // decomentar
   if (jMsg != NULL) {
     ojCmptSendMessage(this->primitiveDriverComponent, jMsg);
   }
@@ -622,9 +623,13 @@ void RosNode_Communications::fcn_subs_positionerInfo(CITIUS_Control_Communicatio
  * ejecución
  */
 void RosNode_Communications::fcn_subs_lastExec(CITIUS_Control_Communication::msg_lastExec msg) {
-  if(msg.badExec){
-    // Enviar mensaje con alerta ¿Que mensaje? ¿Que alerta?
-    // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  if (msg.badExec) {
+    TranslatorROSJAUS *translator = new TranslatorROSJAUS();
+    JausMessage jMsg = translator->getJausMsgFromAlarm(this->subsystemController, this->nodeController, ID_ALARMS_WRONG_TURN_OFF);
+    if (jMsg != NULL) {
+      ojCmptSendMessage(this->visualSensorComponent, jMsg);
+    }
+    jausMessageDestroy(jMsg);
   }
 }
 
@@ -644,9 +649,11 @@ void RosNode_Communications::fcn_subs_lastExec(CITIUS_Control_Communication::msg
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg) {
-  RunMissionMessage rMission = runMissionMessageFromJausMessage(msg);
+    printf("Run Mission\n");
+    RunMissionMessage rMission = runMissionMessageFromJausMessage(msg);
   CITIUS_Control_Communication::srv_vehicleStatus vehicleStatus;
   short tempStatus = rMission->missionId;
+  printf("Run Mission recibido :: Estado:= %d\n",tempStatus);
   switch (tempStatus) {
     case 5: // Conduccion (Valor de ICD)
       vehicleStatus.request.status = OPERATION_MODE_CONDUCCION;
@@ -674,7 +681,8 @@ void RosNode_Communications::fcn_receive_run_mission(OjCmpt cmp, JausMessage msg
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessage msg) {
-  SetWrenchEffortMessage sWrenchEffort = setWrenchEffortMessageFromJausMessage(msg);
+  printf("Set Wrench Effort\n");
+    SetWrenchEffortMessage sWrenchEffort = setWrenchEffortMessageFromJausMessage(msg);
   CITIUS_Control_Communication::msg_command command;
   if ((sWrenchEffort->presenceVector & PRESENCE_VECTOR_STEER) == PRESENCE_VECTOR_STEER) {
     command.id_device = STEERING;
@@ -702,16 +710,22 @@ void RosNode_Communications::fcn_receive_set_wrench_effort(OjCmpt cmp, JausMessa
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_discrete_devices(OjCmpt cmp, JausMessage msg) {
-  SetDiscreteDevicesMessage sDiscreteDevice = setDiscreteDevicesMessageFromJausMessage(msg);
+  printf("Set Discrete Device\n");
+    SetDiscreteDevicesMessage sDiscreteDevice = setDiscreteDevicesMessageFromJausMessage(msg);
   CITIUS_Control_Communication::msg_command command;
   if ((sDiscreteDevice->presenceVector & PRESENCE_VECTOR_PARKING_BRAKE) == PRESENCE_VECTOR_PARKING_BRAKE) {
     command.id_device = HANDBRAKE;
     command.value = sDiscreteDevice->parkingBrake;
     instance->pubCommand.publish(command);
+    /*if(sDiscreteDevice->parkingBrake)
+        printf("Handbrake ON\n");
+    else
+        printf("Handbrake OFF\n");*/
   }
   if ((sDiscreteDevice->presenceVector & PRESENCE_VECTOR_GEAR) == PRESENCE_VECTOR_GEAR) {
     command.id_device = GEAR;
-    command.value = sDiscreteDevice->gear;
+    command.value = sDiscreteDevice->gear-1;
+    //printf("Recibida marcha := %d\n",command.value+1);
     instance->pubCommand.publish(command);
   }
   setDiscreteDevicesMessageDestroy(sDiscreteDevice);
@@ -728,7 +742,9 @@ void RosNode_Communications::fcn_receive_set_discrete_devices(OjCmpt cmp, JausMe
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage msg) {
-  SetCameraPoseMessage sCameraPose = setCameraPoseMessageFromJausMessage(msg);
+  printf("Set Camera Pose\n");
+    SetCameraPoseMessage sCameraPose = setCameraPoseMessageFromJausMessage(msg);
+  
   // Camara delantera
   if (sCameraPose->cameraID == FRONT_CAMERA_ID) {
     CITIUS_Control_Communication::msg_ctrlFrontCamera fcCommand;
@@ -781,6 +797,7 @@ void RosNode_Communications::fcn_receive_set_camera_pose(OjCmpt cmp, JausMessage
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, JausMessage msg) {
+    printf("Recibido Signaling\n");
   SetSignalingElements18Message sSignaling = setSignalingElements18MessageFromJausMessage(msg);
   CITIUS_Control_Communication::msg_command command;
   if ((sSignaling->presenceVector & PRESENCE_VECTOR_DIPSP) == PRESENCE_VECTOR_DIPSP) {
@@ -824,7 +841,8 @@ void RosNode_Communications::fcn_receive_set_signaling_elements(OjCmpt cmp, Jaus
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage msg) {
-  SetPositioner19Message setPositioner = setPositioner19MessageFromJausMessage(msg);
+  printf("Set Positioner\n");
+    SetPositioner19Message setPositioner = setPositioner19MessageFromJausMessage(msg);
   if (jausByteIsBitSet(setPositioner->presenceVector, JAUS_19_PV_PAN_BIT)) {
     CITIUS_Control_Communication::srv_panAbsolutePosition serviceAbsPan;
     serviceAbsPan.request.panPosition = setPositioner->pan;
@@ -905,7 +923,8 @@ void RosNode_Communications::fcn_receive_set_positioner(OjCmpt cmp, JausMessage 
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMessage msg) {
-  instance->currentObservationCamera = TV_CAMERA;
+  printf("Set Day-time camera\n");
+    instance->currentObservationCamera = TV_CAMERA;
   SetDayTimeCamera21Message setDayCam = setDayTimeCamera21MessageFromJausMessage(msg);
   if (jausByteIsBitSet(setDayCam->presenceVector, JAUS_21_PV_DIRECT_ZOOM_BIT)) {
     CITIUS_Control_Communication::srv_zoomDirect serviceDirectZoom;
@@ -986,7 +1005,8 @@ void RosNode_Communications::fcn_receive_set_day_time_camera(OjCmpt cmp, JausMes
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausMessage msg) {
-  instance->currentObservationCamera = IR_CAMERA;
+ printf("Set night-time camera\n");
+    instance->currentObservationCamera = IR_CAMERA;
   SetNightTimeCamera23Message setNightCam = setNightTimeCamera23MessageFromJausMessage(msg);
   if (jausByteIsBitSet(setNightCam->presenceVector, JAUS_23_PV_ZOOM_BIT)) {
     CITIUS_Control_Communication::srv_dzoom serviceZoom;
@@ -1034,7 +1054,8 @@ void RosNode_Communications::fcn_receive_set_night_time_camera(OjCmpt cmp, JausM
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_telemeter(OjCmpt cmp, JausMessage msg) {
-  SetTelemeter26Message setTelemeterMsg = setTelemeter26MessageFromJausMessage(msg);
+ printf("Set Telemeter\n");
+    SetTelemeter26Message setTelemeterMsg = setTelemeter26MessageFromJausMessage(msg);
   if (setTelemeterMsg->shoot) {
     CITIUS_Control_Communication::srv_shoot serviceTelemeter;
     short numOfAttemps = 0;
@@ -1063,7 +1084,8 @@ void RosNode_Communications::fcn_receive_set_telemeter(OjCmpt cmp, JausMessage m
  * @param[in] msg Mensaje JAUS capturado
  */
 void RosNode_Communications::fcn_receive_set_travel_speed(OjCmpt cmp, JausMessage msg) {
-  SetTravelSpeedMessage sTravelSpeed = setTravelSpeedMessageFromJausMessage(msg);
+  printf("Set Travel Speed\n");
+    SetTravelSpeedMessage sTravelSpeed = setTravelSpeedMessageFromJausMessage(msg);
   CITIUS_Control_Communication::msg_command command;
   command.id_device = CRUISING_SPEED;
   command.value = sTravelSpeed->speedMps;

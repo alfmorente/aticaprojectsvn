@@ -1,2 +1,2 @@
 int8 currentDZoom
-int8 currentPolarity
+bool currentPolarity
