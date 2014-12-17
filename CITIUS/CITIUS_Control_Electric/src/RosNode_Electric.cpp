@@ -32,29 +32,33 @@ RosNode_Electric::~RosNode_Electric() {
 void RosNode_Electric::initROS() {
   ros::NodeHandle nh;
   clientVehicleStatus = nh.serviceClient<CITIUS_Control_Electric::srv_vehicleStatus>("vehicleStatus");
+  servNodeStatus = nh.advertiseService("elNodeStatus", &RosNode_Electric::fcv_serv_nodeStatus, this);
   pubElectricInfo = nh.advertise<CITIUS_Control_Electric::msg_electricInfo>("electricInfo", 1000);
   pubCommand = nh.advertise<CITIUS_Control_Electric::msg_command>("command", 1000);
-  pubSwitcher = nh.advertise<CITIUS_Control_Electric::msg_switcher>("switcher", 1000);
-  subsElectricCommand = nh.subscribe("electricCommand", 1000, &RosNode_Electric::fcn_sub_electricCommand,this);
-  ROS_INFO("[Control] Electric - Solicitando inicio de nodos del vehiculo");
+  subsElectricCommand = nh.subscribe("electricCommand", 1000, &RosNode_Electric::fcn_sub_electricCommand, this);
   dElectric->setTurnOn();
-  CITIUS_Control_Electric::srv_vehicleStatus service;
-  service.request.status = OPERATION_MODE_INICIANDO;
-  // Solicitar a vehículo posicion conmutador local/teleoperado
-  ROS_INFO("[Control] Electric - Esperando posicion del conmutador local/teleoperado para arrancar");
-  //service.request.posSwitcher = dElectric->waitForSwitcherPosition();
-  // Cambiar (parche)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  service.request.posSwitcher = SWITCHER_TELECONTROL;
-  while (!clientVehicleStatus.call(service)) {
-    ros::spinOnce();
-  }
-  if (service.response.confirmation) {
-    ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
+  ROS_INFO("[Control] Electric - Se ha iniciado el vehiculo");
+}
+
+/**
+ * Método privado encargado del tratamiento de servicios para la modificación de
+ * la máquina de estados del nodo
+ * @param[in] rq Parámetros de requerimiento
+ * @param[in] rsp Parámetros de respuesta
+ * @return Booleano que indica si se ha realizado el correcto tratamiento de
+ * la petición  de servicio
+ */
+bool RosNode_Electric::fcv_serv_nodeStatus(CITIUS_Control_Electric::srv_nodeStatus::Request &rq, CITIUS_Control_Electric::srv_nodeStatus::Response &rsp) {
+  if (rq.status == NODESTATUS_OK) {
     nodeStatus = NODESTATUS_OK;
-  } else {
-    ROS_INFO("[Control] Electric - El vehiculo no ha podido iniciar");
+    rsp.confirmation = true;
+  } else if (rq.status == NODESTATUS_OFF) {
     nodeStatus = NODESTATUS_OFF;
+    rsp.confirmation = true;
+  } else {
+    rsp.confirmation = false;
   }
+  return true;
 }
 
 /**
@@ -113,44 +117,6 @@ void RosNode_Electric::publishElectricInfo(ElectricInfo info) {
 }
 
 /**
- * Método público que publica la información de un cambio en la posición del 
- * conmutador local / teleoperado que recibe como parámetro en el topic ROS 
- * correspondiente
- * @param[in] position Nueva posición leida del conmutador local / teleoperado
- */
-void RosNode_Electric::publishSwitcherInfo(short position) {
-  CITIUS_Control_Electric::msg_switcher msg;
-  msg.switcher = position;
-  pubSwitcher.publish(msg);
-}
-
-/**
- * Método público que publica una serie de comandos de activacion sobre diversos 
- * actuadores ante una lectura de cambio en el conmutador local / teleoperado
- * @param[in] on Nueva posición del conmutador local / teleoperado
- */
-void RosNode_Electric::publishSetupCommands(bool on) {
-  CITIUS_Control_Electric::msg_command msg;
-  if (on)
-    msg.value = 1;
-  else
-    msg.value = 0;
-  msg.id_device = MT_THROTTLE;
-  pubCommand.publish(msg);
-  msg.id_device = MT_BRAKE;
-  pubCommand.publish(msg);
-  msg.id_device = MT_HANDBRAKE;
-  pubCommand.publish(msg);
-  msg.id_device = MT_STEERING;
-  pubCommand.publish(msg);
-  msg.id_device = MT_GEAR;
-  pubCommand.publish(msg);
-  msg.id_device = MT_LIGHTS;
-  pubCommand.publish(msg);
-  msg.id_device = MT_BLINKERS;
-  pubCommand.publish(msg);
-}
-/**
  * Método público que comprueba si el último mensaje recibido del vehículo es
  * una petición de finalizar la ejecución y da soporte en caso afirmativo
  */
@@ -170,23 +136,6 @@ void RosNode_Electric::checkTurnOff() {
     } else {
       ROS_INFO("[Control] Electric - Sin confirmacion para apagar el vehiculo");
     }
-  }
-}
-
-/**
- * Método público que comprueba si el último mensaje recibido del vehículo es 
- * un cambio de posición en el conmutador local / teleoperado y da soporte al
- * mismo en caso afirmativo
- */
-void RosNode_Electric::checkSwitcher() {
-  if (dElectric->getSwitcherStruct().flag) {
-    publishSwitcherInfo(dElectric->getSwitcherStruct().position);
-    if (dElectric->getSwitcherStruct().position == 1) {
-      publishSetupCommands(true);
-    } else if (dElectric->getSwitcherStruct().position == 0) {
-      publishSetupCommands(false);
-    }
-    dElectric->setSwitcherStruct(false);
   }
 }
 

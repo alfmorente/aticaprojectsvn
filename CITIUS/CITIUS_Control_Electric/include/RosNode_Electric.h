@@ -20,6 +20,7 @@
 #include "CITIUS_Control_Electric/msg_electricCommand.h"
 #include "CITIUS_Control_Electric/msg_command.h"
 #include "CITIUS_Control_Electric/msg_switcher.h"
+#include "CITIUS_Control_Electric/srv_nodeStatus.h"
 #include "CITIUS_Control_Electric/srv_vehicleStatus.h"
 #include <deque>
 #include <cstdlib>
@@ -38,8 +39,10 @@ private:
   ros::Publisher pubCommand;
   ros::Publisher pubSwitcher;
   ros::Subscriber subsElectricCommand;
+  ros::ServiceServer servNodeStatus;
   ros::ServiceClient clientVehicleStatus;
   ElectricConnectionManager *dElectric;
+  bool fcv_serv_nodeStatus(CITIUS_Control_Electric::srv_nodeStatus::Request &rq, CITIUS_Control_Electric::srv_nodeStatus::Response &rsp);
 public:
   RosNode_Electric();
   ~RosNode_Electric();
@@ -47,10 +50,7 @@ public:
   void fcn_sub_electricCommand(CITIUS_Control_Electric::msg_electricCommand msg);
   ElectricConnectionManager *getDriverMng();
   void publishElectricInfo(ElectricInfo info);
-  void publishSwitcherInfo(short position);
-  void publishSetupCommands(bool on);
   void checkTurnOff();
-  void checkSwitcher();
   void checkSupplyAlarms();
 };
 
