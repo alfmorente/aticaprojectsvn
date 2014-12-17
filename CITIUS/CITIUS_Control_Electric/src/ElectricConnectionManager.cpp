@@ -38,8 +38,6 @@ ElectricConnectionManager::ElectricConnectionManager() {
   systemSupplies.observationSystemSupply24 = 0;
   systemSupplies.observationSystemSupply48 = 0;
   turnOff = false;
-  swPosition.flag = false;
-  swPosition.position = -1;
   alarms.flag = false;
   alarms.supplyAlarms = 0x0000;
 }
@@ -83,22 +81,6 @@ void ElectricConnectionManager::reqElectricInfo() {
   sendToVehicle(frame);
 }
 
-short ElectricConnectionManager::waitForSwitcherPosition() {
-  short pos = SWITCHER_INIT;
-  FrameDriving frame;
-  frame.instruction = GET;
-  frame.id_instruction = -1;
-  frame.element = OPERATION_MODE_SWITCH;
-  frame.value = -1;
-  sendToVehicle(frame);
-  while (!swPosition.flag) {
-    checkForVehicleMessages();
-  }
-  pos = swPosition.position;
-  setSwitcherStruct(false);
-  return pos;
-}
-
 /**
  * Método público que envía un mensaje para SET para solicitar el inicio del 
  * suministro eléctrico del vehículo
@@ -123,7 +105,8 @@ void ElectricConnectionManager::setTurnOn() {
 void ElectricConnectionManager::setTurnOff() {
   FrameDriving frame;
   frame.instruction = SET;
-  frame.id_instruction = -1;
+  frame.id_instruction = countMsg;
+  countMsg++;
   frame.element = TURN_OFF;
   frame.value = 1;
   sendToVehicle(frame);
@@ -160,10 +143,6 @@ bool ElectricConnectionManager::checkForVehicleMessages() {
       } else if (fdr.element == TURN_OFF) {
         ROS_INFO("[Control] Electric - Preparando el apagado del sistema");
         turnOff = true;
-      } else if (fdr.element == OPERATION_MODE_SWITCH) {
-        ROS_INFO("[Control] Electric - Cambio en posicion del conmutador local/teleoperado");
-        swPosition.flag = true;
-        swPosition.position = fdr.value;
       } else { // INFO corriente o alarmas
         setVehicleInfo(fdr.element, fdr.value);
       }
@@ -302,27 +281,6 @@ void ElectricConnectionManager::setCountCriticalMessages(short cont) {
  */
 bool ElectricConnectionManager::getTurnOffFlag() {
   return turnOff;
-}
-
-/**
- * Método público consultor del atributo "swPosition" de la clase utilizado para 
- * indicar que ha habido un cambio en la posición del conmutador (switcher) 
- * local / teleoperado
- * @return Atributo "swPosition" de la clase
- */
-SwitcherStruct ElectricConnectionManager::getSwitcherStruct() {
-  return swPosition;
-}
-
-/**
- * Método público modificador del atributo "swPosition" de la clase que se 
- * actualiza cuando se detecta un cambio de posición del conmutador (switcher) 
- * local / teleoperado del vehículo o cuando se ha llevado a cabo el tratamiento 
- * tras su detección
- * @param[in] flag Nueva posición del estado de la estructura de tratamiento
- */
-void ElectricConnectionManager::setSwitcherStruct(bool flag) {
-  swPosition.flag = flag;
 }
 
 /**

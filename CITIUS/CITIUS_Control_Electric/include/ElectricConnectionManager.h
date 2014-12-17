@@ -42,7 +42,6 @@ private:
   ElectricInfo electricInfo;
   SystemSupplies systemSupplies;
   bool turnOff;
-  SwitcherStruct swPosition;
   SupplyAlarmsStruct alarms;
   void setVehicleInfo(DeviceID id_device, short value);
   RtxStruct informResponse(bool ack, short id_instruction);
@@ -53,15 +52,12 @@ public:
   void sendToVehicle(FrameDriving);
   bool checkForVehicleMessages();
   void reqElectricInfo();
-  short waitForSwitcherPosition();
   void setTurnOn();
   void setTurnOff();
   bool getTurnOffFlag();
   ElectricInfo getVehicleInfo();
   short getCountCriticalMessages();
   void setCountCriticalMessages(short count);
-  void setSwitcherStruct(bool position);
-  SwitcherStruct getSwitcherStruct();
   void setSupplyAlarmsStruct(bool flag);
   SupplyAlarmsStruct getSupplyAlarmsStruct();
 };

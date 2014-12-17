@@ -29,7 +29,11 @@ int main(int argc, char** argv) {
   if (numOfAttemps < MAX_ATTEMPS) {
     ROS_INFO("[Control] Electric - Conexion establecida con vehiculo");
     nodeElectric->initROS();
-    if (nodeElectric->getNodeStatus() != NODESTATUS_OFF) {
+    ROS_INFO("[Control] Electric - Esperando la activacion del nodo");
+    while(nodeElectric->getNodeStatus() == NODESTATUS_INIT){
+        ros::spinOnce();
+    }
+    if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
       ROS_INFO("[Control] Electric - Nodo listo para operar");
     }
     // Temporizador de requerimiento de informacion
@@ -42,7 +46,7 @@ int main(int argc, char** argv) {
       if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
         nodeElectric->getDriverMng()->checkForVehicleMessages();
         nodeElectric->checkTurnOff();
-        nodeElectric->checkSwitcher();
+        
         nodeElectric->checkSupplyAlarms();
         if (timer->GetTimed() >= FREC_2HZ) {
           timer->Reset();
@@ -55,7 +59,6 @@ int main(int argc, char** argv) {
         nodeElectric->checkSupplyAlarms();
         nodeElectric->getDriverMng()->checkForVehicleMessages();
         nodeElectric->checkTurnOff();
-        nodeElectric->checkSwitcher();
       }
       usleep(1000);
     }
