@@ -41,7 +41,7 @@ private:
   bool positionOrientationOK;
   bool frontCameraOK;
   bool rearCameraOK;
-  bool drivingOK;
+  bool electricOK;
   bool irCameraOK;
   bool lrfOK;
   bool tvCameraOK;
@@ -52,6 +52,7 @@ private:
   ros::ServiceClient fcNodeStatus;
   ros::ServiceClient rcNodeStatus;
   ros::ServiceClient drNodeStatus;
+  ros::ServiceClient elNodeStatus;
   ros::ServiceClient irNodeStatus;
   ros::ServiceClient lrfNodeStatus;
   ros::ServiceClient tvNosdeStatus;

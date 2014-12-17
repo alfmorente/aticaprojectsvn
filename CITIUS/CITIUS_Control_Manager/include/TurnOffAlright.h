@@ -33,6 +33,7 @@ public:
   TurnOffAlright();
   void setStatusLine(string);
   bool checkCorrectTurnedOff();
+  void clearFile();
 private:
   bool fileExists();
   string getDate();

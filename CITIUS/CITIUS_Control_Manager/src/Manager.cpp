@@ -16,7 +16,7 @@ Manager::Manager() {
   positionOrientationOK = false;
   frontCameraOK = false;
   rearCameraOK = false;
-  drivingOK = false;
+  electricOK = false;
   irCameraOK = false;
   lrfOK = false;
   tvCameraOK = false;
@@ -41,7 +41,8 @@ void Manager::initROS() {
   poNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("poNodeStatus");
   fcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("fcNodeStatus");
   rcNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("rcNodeStatus");
-  drNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("vmNodeStatus");
+  drNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("drNodeStatus");
+  elNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("elNodeStatus");
   irNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStateIRCamera");
   lrfNodeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStateLRF");
   tvNosdeStatus = nh.serviceClient<CITIUS_Control_Manager::srv_nodeStatus>("nodeStateTVCamera");
@@ -69,6 +70,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     case OPERATION_MODE_INICIANDO:
       ROS_INFO("[Control] Manager - Modo de operacion INICIANDO activado");
       nh.setParam("vehicleStatus", OPERATION_MODE_INICIANDO);
+      turnOffChecker->clearFile();
       turnOffChecker->setStatusLine("INICIANDO");
       service.request.status = NODESTATUS_OK;
       while (!cmNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
@@ -131,16 +133,16 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         ROS_INFO("[Control] Manager - Nodo RearCamera no pudo arrancar. Cumplido numero maximo de reintentos");
       }
       numOfAttemps = 0;
-      while (!drNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
-        ROS_INFO("[Control] Manager - Reintentando conexion con nodo Driving...");
+      while (!elNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
+        ROS_INFO("[Control] Manager - Reintentando conexion con nodo Electric...");
         numOfAttemps++;
       }
       if (numOfAttemps < MAX_ATTEMPS) {
         if (!service.response.confirmation) {
-          ROS_INFO("[Control] Manager - Nodo Driving no pudo arrancar");
+          ROS_INFO("[Control] Manager - Nodo Electric no pudo arrancar");
         } else {
-          ROS_INFO("[Control] Manager - Nodo Driving arrancado correctamente");
-          drivingOK = true;
+          ROS_INFO("[Control] Manager - Nodo Electric arrancado correctamente");
+          electricOK = true;
         }
       } else {
         ROS_INFO("[Control] Manager - Nodo Driving no pudo arrancar. Cumplido numero maximo de reintentos");
@@ -206,8 +208,8 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         ROS_INFO("[Control] Manager - Nodo Positioner no pudo arrancar. Cumplido numero maximo de reintentos");
       }
       // Comprobacion de errores
-      if (!drivingOK) {
-        ROS_INFO("[Control] Manager - Sin nodo Driving no hay vehiculo. Finalizado");
+      if (!electricOK) {
+        ROS_INFO("[Control] Manager - Sin nodo Electric no hay vehiculo. Finalizado");
         nh.setParam("vehicleStatus", OPERATION_MODE_APAGANDO);
         turnOffChecker->setStatusLine("APAGANDO");
         rsp.confirmation = false;
@@ -258,6 +260,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
     case OPERATION_MODE_APAGANDO:
       service.request.status = NODESTATUS_OFF;
       if (communication) {
+        ROS_INFO("[Control] Manager - Apagando nodo Communication");
         while (!cmNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo Communication no se pudo apagar");
@@ -265,15 +268,15 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
           ROS_INFO("[Control] Manager - Nodo Communication apagado correctamente");
         }
       }
-      if (drivingOK) {
+      ROS_INFO("[Control] Manager - Apagando nodo Driving");
         while (!drNodeStatus.call(service))
           if (!service.response.confirmation) {
             ROS_INFO("[Control] Manager - Nodo Driving no se pudo apagar");
           } else {
             ROS_INFO("[Control] Manager - Nodo Driving apagado correctamente");
           }
-      }
       if (positionOrientationOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo Position/Orientation");
         while (!poNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo Position/Orientation no se pudo apagar");
@@ -282,6 +285,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
       if (frontCameraOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo FrontCamera");
         while (!fcNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo FrontCamera no se pudo apagar");
@@ -290,6 +294,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
       if (rearCameraOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo RearCamera");
         while (!rcNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo RearCamera no se pudo apagar");
@@ -298,6 +303,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
       if (irCameraOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo IRCamera");
         while (!irNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo IRCamera no se pudo apagar");
@@ -306,6 +312,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
       if (lrfOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo LRF");
         while (!lrfNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo LRF no se pudo apagar");
@@ -314,6 +321,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
       if (tvCameraOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo TVCamera");
         while (!tvNosdeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo TVCamera no se pudo apagar");
@@ -322,6 +330,7 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       }
       if (positionerOK) {
+        ROS_INFO("[Control] Manager - Apagando nodo Positioner");
         while (!ptNodeStatus.call(service));
         if (!service.response.confirmation) {
           ROS_INFO("[Control] Manager - Nodo Positioner no se pudo apagar");
