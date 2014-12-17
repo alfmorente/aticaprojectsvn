@@ -40,9 +40,10 @@ void RosNode_RearCamera::initROS() {
  * @param[in] msg Mensaje ROS con órdenes de actuacion sobre la cámara
  */
 void RosNode_RearCamera::fcn_sub_ctrlRearCamera(CITIUS_Control_RearCamera::msg_ctrlRearCamera msg) {
+    printf("Recibido comando\n");
   if (msg.isZoom) dRearCamera->setZoom(msg.zoom);
   if (msg.isPan) dRearCamera->setPan(msg.pan);
-  if (msg.isZoom) dRearCamera->setTilt(msg.tilt);
+  if (msg.isTilt) dRearCamera->setTilt(msg.tilt);
 }
 
 /**
@@ -87,8 +88,8 @@ void RosNode_RearCamera::manageDevice() {
   LensPosition lensPos = dRearCamera->getPosition();
   if (lensPos.state) {
     CITIUS_Control_RearCamera::msg_rearCameraInfo rcMsg;
-    rcMsg.pan = lensPos.pan * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
-    rcMsg.tilt = lensPos.tilt * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.pan = lensPos.pan * (100/180);//CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
+    rcMsg.tilt = lensPos.tilt * (100/180);// CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
     rcMsg.zoom = lensPos.zoom * CONV_TO_CAMERA; // * (100/5000) Conversion de formato camara
     pubRearCameraInfo.publish(rcMsg);
     usleep(50000);
