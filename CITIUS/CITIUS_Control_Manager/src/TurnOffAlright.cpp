@@ -11,7 +11,7 @@
  * Constructor de la clase
  */
 TurnOffAlright::TurnOffAlright() {
-  filename = "Operation_Status.txt";
+  filename = "/home/ugv/catkin_ws/src/CITIUS_Control_Manager/bin/Operation_Status.txt";
 }
 
 /**
@@ -60,9 +60,6 @@ bool TurnOffAlright::checkCorrectTurnedOff() {
       myfile >> line;
     }
     myfile.close();
-    ofstream initFile(filename.c_str());
-    initFile << "";
-    initFile.close();
     return (strcmp(line, "APAGANDO") == 0);
   } else {
     ofstream initFile(filename.c_str());
@@ -71,6 +68,17 @@ bool TurnOffAlright::checkCorrectTurnedOff() {
     return true;
   }
 }
+
+/**
+ * Método público que borra el contenido anterior del fichero de control de 
+ * correcto apagado y lo prepara para una nueva escritura
+ */
+void TurnOffAlright::clearFile() {
+  ofstream initFile(filename.c_str());
+  initFile << "";
+  initFile.close();
+}
+
 
 
 

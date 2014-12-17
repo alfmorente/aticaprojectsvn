@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
   int status = -1;
   ros::NodeHandle nh;
   nh.setParam("vehicleStatus", status);
-  ROS_INFO("[Control] Manager - Esperando conexion con nodo Electric");
+  ROS_INFO("[Control] Manager - Esperando conexion con vehiculo");
   while (status == -1) {
     nh.getParam("vehicleStatus", status);
     ros::spinOnce();
