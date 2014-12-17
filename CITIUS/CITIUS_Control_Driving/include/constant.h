@@ -162,6 +162,7 @@ typedef struct {
   bool dipsr; ///<Valor de luces largas
   bool dipsp; ///<Valor de luces de posicion
   bool klaxon; ///<Valor de vocina
+  short alarms; ///<Valor de alarmas
 } DrivingInfo;
 
 /**
@@ -196,6 +197,52 @@ typedef struct {
 #define MASK_ALARMS_FLAGS_FAILED 0x0080 ///< Indicador de fallo en los testigos
 #define MASK_ALARMS_ACC_FAILED 0x0100 ///<Indicador de fallo en aceleración
 #define MASK_ALARMS_GEAR_FAILED 0x0200 ///<Indicador de fallo en el cambio de marchas
+
+/**
+ * \struct SwitcherStruct
+ * \brief Estructura para manejo de indicaciones de cambio en la posición del
+ * conmutador Local/Teleoperado
+ */
+typedef struct {
+  bool flag; ///<Indicador de cambio en posicion del conmutador
+  short position; ///<Posicion del conmutador tras el cambio
+} SwitcherStruct;
+
+#define SWITCHER_INIT -1 ///<Valor para posición del conmutador previa lectura
+#define SWITCHER_LOCAL 0 ///<Valor para posición del conmutador LOCAL
+#define SWITCHER_TELECONTROL 1 ///<Valor para posición del conmutador TELEOPERADO
+
+/**
+ * \struct UpdateReg
+ * \brief Estructura para manejo de la entrada en la cola de mensajes críticos 
+ * de un actuador específico
+ */
+typedef struct {
+  bool flag; ///<Indicador de comando esperando para enviar
+  short value; ///<Valor del comando
+} UpdateReg;
+
+/**
+ * \struct UpdateReg
+ * \brief Estructura contenedora de todos los registros de actualización que 
+ * permiten la entrada en la cola de mensajes críticos
+ */
+typedef struct {
+  UpdateReg throttle; ///<Registro de actualización para acelerador
+  UpdateReg brake; ///<Registro de actualización para freno de servicio
+  UpdateReg handBrake; ///<Registro de actualización para freno de mano
+  UpdateReg gear; ///<Registro de actualización para marcha
+  UpdateReg speed; ///<Registro de actualización para velocidad de crucero
+  UpdateReg steering; ///<Registro de actualización para dirección
+} UpdateRegs;
+
+// Identificadores de alarmas a enviar hacia MyC
+#define ID_ALARMS_NOT_ALARMS 0 ///<Identificador de fin de alarmas en Control
+#define ID_ALARMS_WRONG_TURN_OFF 1 ///<Identificador de alarma de apagado incorrecto previo
+#define ID_ALARMS_DRIVING 2 ///<Identificador de alarma producida en módulo de conducción
+#define ID_ALARMS_ELECTRIC 3 ///<Identificador de alarma producida en módulo eléctrico
+#define ID_ALARMS_DRIVING_ELECTRIC 4 ///<Identificador de alarmas en módulos eléctrico y conducción
+
 
 #endif	/* CONSTANT_H */
 

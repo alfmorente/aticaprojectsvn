@@ -29,9 +29,24 @@ DrivingConnectionManager::DrivingConnectionManager() {
   vehicleInfo.speed = 0;
   vehicleInfo.motorTemperature = 0;
   vehicleInfo.motorRPM = 0;
+  vehicleInfo.alarms = 0;
   alarms.flag = false;
   alarms.driveAlarms = 0x0000;
   alarms.steeringAlarms = 0x0000;
+  swPosition.flag = false;
+  swPosition.position = -1;
+  updateRegs.throttle.flag = false;
+  updateRegs.throttle.value = 0;
+  updateRegs.brake.flag = false;
+  updateRegs.brake.value = 0;
+  updateRegs.handBrake.flag = false;
+  updateRegs.handBrake.value = 0;
+  updateRegs.speed.flag = false;
+  updateRegs.speed.value = 0;
+  updateRegs.gear.flag = false;
+  updateRegs.gear.value = 0;
+  updateRegs.steering.flag = false;
+  updateRegs.steering.value = 0;
 }
 
 /**
@@ -47,13 +62,18 @@ DrivingConnectionManager::~DrivingConnectionManager() {
  * @param[in] frame Trama a enviar via socket al vehículo 
  */
 void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
-  char bufData[8];
-  memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
-  memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
-  memcpy(&bufData[4], &frame.element, sizeof (frame.element));
-  memcpy(&bufData[6], &frame.value, sizeof (frame.value));
-  send(socketDescriptor, bufData, sizeof (bufData), 0);
-  usleep(10000);
+    // BORRAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (frame.element != BLINKER_RIGHT) {
+        char bufData[8];
+        memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
+        memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
+        memcpy(&bufData[4], &frame.element, sizeof (frame.element));
+        memcpy(&bufData[6], &frame.value, sizeof (frame.value));
+        printf("--> SND: (%d) %d :: %d = %d\n",frame.id_instruccion,frame.instruction,frame.element,frame.value);
+        send(socketDescriptor, bufData, sizeof (bufData), 0);
+        usleep(10000);
+    }
+
 }
 
 /**
@@ -116,20 +136,22 @@ bool DrivingConnectionManager::checkForVehicleMessages() {
     memcpy(&fdr.id_instruccion, &bufData[2], sizeof (fdr.id_instruccion));
     memcpy(&aux, &bufData[4], sizeof (aux));
     fdr.element = static_cast<DeviceID> (aux);
-    memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));    
+    memcpy(&fdr.value, &bufData[6], sizeof (fdr.value));  
+    printf("  <-- RCV: (%d) %d :: %d = %d\n",fdr.id_instruccion,fdr.instruction,fdr.element,fdr.value);
     if (fdr.instruction == ACK) {
       if (isCriticalInstruction(fdr.element)){
-          informResponse(true, fdr.id_instruccion);
+          manageACK(fdr.element,fdr.id_instruccion);
       }
     } else if (fdr.instruction == NACK) {
-      RtxStruct rtxList = informResponse(false, fdr.id_instruccion);
-      for (int i = 0; i < rtxList.numOfMsgs; i++) {
-        sendToVehicle((FrameDriving) rtxList.msgs.at(i));
-      }
+      manageNACK(fdr.id_instruccion);
     } else if (fdr.instruction == INFO) {
       if (fdr.element == STEERING_ALARMS || fdr.element == DRIVE_ALARMS) {
         setAlarmsInfo(fdr.element, fdr.value);
-      } else { // INFO corriente
+      } else if (fdr.element == OPERATION_MODE_SWITCH) {
+        ROS_INFO("[Control] Driving - Cambio en posicion del conmutador local/teleoperado");
+        swPosition.flag = true;
+        swPosition.position = fdr.value;
+      }else { // INFO corriente
         setVehicleInfo(fdr.element, fdr.value);
       }
     }
@@ -216,18 +238,12 @@ void DrivingConnectionManager::setVehicleInfo(DeviceID id_device, short value) {
     case DIPSR:
       vehicleInfo.dipsr = (bool) value;
       break;
+    case DRIVE_ALARMS:
+      vehicleInfo.alarms = value;
+      break;
     default:
       break;
   }
-}
-
-/**
- * Método público consultor del atributo "countMsg" de la clase utilizado para 
- * llevar el conteo de los mensajes críticos (mecanismo de integridad)
- * @return Atributo "countMsg" de la clase
- */
-short DrivingConnectionManager::getCountCriticalMessages() {
-  return countMsg;
 }
 
 /**
@@ -328,47 +344,297 @@ bool DrivingConnectionManager::isMTCommand(DeviceID element) {
 }
 
 /**
- * Método público que, una vez que un mensaje es considerado crítico, se utiliza 
- * para encolarlo hasta que se reciba el ACK correspondiente o retransmitirlo en 
- * caso de obtener un NACK
- * @param[in] frame Trama a incluir en la cola de mensajes críticos
+ * Método público consultor del atributo "swPosition" de la clase utilizado para 
+ * indicar que ha habido un cambio en la posición del conmutador (switcher) 
+ * local / teleoperado
+ * @return Atributo "swPosition" de la clase
  */
-void DrivingConnectionManager::addToQueue(FrameDriving frame) {
-  messageQueue.push_back(frame);
+SwitcherStruct DrivingConnectionManager::getSwitcherStruct() {
+  return swPosition;
 }
 
 /**
- * Método privado para el tratamiento de la cola de mensajes tras la recepcion 
- * de un mensaje de confirmación (ACK) o negación (NACK). En el caso de recibir 
- * un ACK, se desencolan todos los mensajes cuyo campo "id_instruccion" es menor 
- * al que se incluye en la trama del propio ACK. En el caso de recibir un NACK, 
- * se retransmiten todos los mensajes de la cola cuyo campo "id_instruccion" sea
- * menor o igual que el que se incluye en la trama del propio ACK y se elimina
- * el resto
- * @param[in] ack Indica si se ha recibido un ACK (true) o un NACK (false) 
- * @param[in] id_instruction Indica el campo "id_instruccion" (cuenta) del mensaje
- * recibido del vehículo
- * @return Estructura con el numero de mensajes a retransmitir (en caso de
- * haberlos) y una lista de dichos mensajes.
+ * Método público modificador del atributo "swPosition" de la clase que se 
+ * actualiza cuando se detecta un cambio de posición del conmutador (switcher) 
+ * local / teleoperado del vehículo o cuando se ha llevado a cabo el tratamiento 
+ * tras su detección
+ * @param[in] flag Nueva posición del estado de la estructura de tratamiento
  */
-RtxStruct DrivingConnectionManager::informResponse(bool ack, short id_instruction) {
-  RtxStruct ret;
-  ret.numOfMsgs = 0;
-  vector<FrameDriving>::iterator it = messageQueue.begin();
-  if (ack) { // ACK
-    if (id_instruction == (*it).id_instruccion) { // Primer elemento y requerido coinciden
-      messageQueue.erase(it);
-    } else if (id_instruction > (*it).id_instruccion) { // Confirmacion de varios elementos
-      while (id_instruction >= (*it).id_instruccion) {
-        messageQueue.erase(it);
+void DrivingConnectionManager::setSwitcherStruct(bool flag) {
+  swPosition.flag = flag;
+}
+
+/**
+ * Método público que solicita la posición del conmutador local/teleoperado al
+ * vehículo y realiza la lectura de la respuesta
+ * @return Valor de lectura obtenido del conmutador local/teleoperado
+ */
+short DrivingConnectionManager::waitForSwitcherPosition() {
+  short pos = SWITCHER_INIT;
+  FrameDriving frame;
+  frame.instruction = GET;
+  frame.id_instruccion = -1;
+  frame.element = OPERATION_MODE_SWITCH;
+  frame.value = -1;
+  sendToVehicle(frame);
+  while (!swPosition.flag) {
+    checkForVehicleMessages();
+    usleep(1000);
+  }
+  pos = swPosition.position;
+  setSwitcherStruct(false);
+  return pos;
+}
+
+/**
+ * Método público que recibe un comando recibido del HMI y lo gestiona. Si hay
+ * un comando hacia el mismo actuador en la cola de mensajes críticos
+ * (esperando confirmación ACK), introduce la nueva orden en los registros de
+ * actualización para su posterior tratamiento. En el caso de no haber un 
+ * comando hacia el mismo actuador en la cola de mensajes críticos, lo transmite
+ * al vehículo y lo encola
+ * @param[in] command Comando a gestionar
+ */
+void DrivingConnectionManager::setCommand(FrameDriving command) {
+  switch(command.element){
+    case THROTTLE:
+      updateRegs.throttle.flag = true;
+      updateRegs.throttle.value = command.value;
+      if(!isCommandInQueue(command.element)){
+        FrameDriving com;
+        com.instruction = command.instruction;
+        com.element = command.element;
+        com.value = command.value;
+        com.id_instruccion = countMsg;
+        setCountCriticalMessages(countMsg+1);
+        sendToVehicle(com);
+        messageQueue.push_back(com);
+        updateRegs.throttle.flag = false;
       }
+      break;
+    case BRAKE:
+      updateRegs.brake.flag = true;
+      updateRegs.brake.value = command.value;
+      if(!isCommandInQueue(command.element)){
+        FrameDriving com;
+        com.instruction = command.instruction;
+        com.element = command.element;
+        com.value = command.value;
+        com.id_instruccion = countMsg;
+        setCountCriticalMessages(countMsg+1);
+        sendToVehicle(com);
+        messageQueue.push_back(com);
+        updateRegs.brake.flag = false;
+      }
+      break;
+    case HANDBRAKE:
+      updateRegs.brake.flag = true;
+      updateRegs.brake.value = command.value;
+      if(!isCommandInQueue(command.element)){
+        FrameDriving com;
+        com.instruction = command.instruction;
+        com.element = command.element;
+        com.value = command.value;
+        com.id_instruccion = countMsg;
+        setCountCriticalMessages(countMsg+1);
+        sendToVehicle(com);
+        messageQueue.push_back(com);
+        updateRegs.handBrake.flag = false;
+      }
+      break;
+    case CRUISING_SPEED:
+      updateRegs.speed.flag = true;
+      updateRegs.speed.value = command.value;
+      if(!isCommandInQueue(command.element)){
+        FrameDriving com;
+        com.instruction = command.instruction;
+        com.element = command.element;
+        com.value = command.value;
+        com.id_instruccion = countMsg;
+        setCountCriticalMessages(countMsg+1);
+        sendToVehicle(com);
+        messageQueue.push_back(com);
+        updateRegs.speed.flag = false;
+      }
+      break;
+    case STEERING:
+      updateRegs.steering.flag = true;
+      updateRegs.steering.value = command.value;
+      if(!isCommandInQueue(command.element)){
+        FrameDriving com;
+        com.instruction = command.instruction;
+        com.element = command.element;
+        com.value = command.value;
+        com.id_instruccion = countMsg;
+        setCountCriticalMessages(countMsg+1);
+        sendToVehicle(com);
+        messageQueue.push_back(com);
+        updateRegs.steering.flag = false;
+      }
+      break;
+    case GEAR:
+      updateRegs.gear.flag = true;
+      updateRegs.gear.value = command.value;
+      if(!isCommandInQueue(command.element)){
+        FrameDriving com;
+        com.instruction = command.instruction;
+        com.element = command.element;
+        com.value = command.value;
+        com.id_instruccion = countMsg;
+        setCountCriticalMessages(countMsg+1);
+        sendToVehicle(com);
+        messageQueue.push_back(com);
+        updateRegs.gear.flag = false;
+      }
+      break;
+    default:
+      FrameDriving com;
+      com.instruction = command.instruction;
+      com.element = command.element;
+      com.value = command.value;
+      com.id_instruccion = -1;
+      sendToVehicle(com);
+      break;
+  };
+}
+
+/**
+ * Método privado que comprueba si existe un comando específico de un actuador
+ * en la cola de comandos críticos
+ * @param[in] idDevice Identificador del actuador a buscar
+ * @return Booleano que indica si se encuentra en la cola o no
+ */
+bool DrivingConnectionManager::isCommandInQueue(short idDevice) {
+  for (vector<FrameDriving>::iterator it = messageQueue.begin(); it != messageQueue.end(); ++it) {
+    if (idDevice == (*it).element) {
+      return true;
     }
-  } else { // NACK
-    while (it != messageQueue.end()) {
-      ret.numOfMsgs++;
-      ret.msgs.push_back((*it));
+  }
+  return false;
+}
+
+/**
+ * Método privado que gestiona la recepción de un comando de tipo ACK por parte
+ * del vehículo. Elimina el mensaje de la cola de mensajes críticos que estaba
+ * esperando confirmación y comprueba si en el registro de actualización hay un
+ * mensaje esperando a que se produzca dicha actualización. En caso afirmativo
+ * se transmite dicho nuevo mensaje al vehículo y se encola
+ * @param[in] element Identificador del elemento cuyo ACK se ha recibido
+ * @param[in] id_instruccion Identificador de instrucción (mecanismo de 
+ * integridad)
+ */
+void DrivingConnectionManager::manageACK(short element, short id_instruccion) {
+  // Comprobar: QUE OCURRE CUANDO LLEGA A 1024??
+  vector<FrameDriving>::iterator it = messageQueue.begin();
+  while(it < messageQueue.end()){
+    if (id_instruccion >= (*it).id_instruccion) {
+      messageQueue.erase(it);
+      if(isThereCommandReady(element)){
+        sendCommandFromUpdateRegs(element);
+      }
+    }else{
       it++;
     }
   }
-  return ret;
 }
+
+/**
+ * Método privado que gestiona la recepción de un comando de tipo NACK por parte
+ * del vehículo. Realiza la retransmisión de todos los mensajes encolados en
+ * la cola de comandos críticos con identificador de instrucción igual o 
+ * posterior al que transporte el NACK recibido
+ * @param[in] id_instruccion Identificador de la instrucción contenido en el 
+ * NACK recibido
+ */
+void DrivingConnectionManager::manageNACK(short id_instruccion) {
+  for (vector<FrameDriving>::iterator it = messageQueue.begin(); it != messageQueue.end(); ++it) {
+    sendToVehicle(*it);
+  }
+}
+
+/**
+ * Método privado que comprueba si hay un comando hacia un actuador específico
+ * esperando a ser transmitido al vehículo en los registros de actualización de
+ * mensajes
+ * @param[in] element Identificador del elemento a buscar en los registros
+ * @return Booleano que indica si la búsqueda ha resultado positiva o no
+ */
+bool DrivingConnectionManager::isThereCommandReady(short element) {
+  switch(element){
+    case THROTTLE:
+      return updateRegs.throttle.flag;
+      break;
+    case BRAKE:
+      return updateRegs.brake.flag;
+      break;
+    case HANDBRAKE:
+      return updateRegs.handBrake.flag;
+      break;
+    case CRUISING_SPEED:
+      return updateRegs.speed.flag;
+      break;
+    case STEERING:
+      return updateRegs.steering.flag;
+      break;
+    case GEAR:
+      return updateRegs.gear.flag;
+      break;
+    default:
+      break;
+  };
+  return false;
+}
+
+/**
+ * Método privado que rescata un mensaje de los registros de actualización, lo 
+ * encola y lo transmite al vehículo.
+ * @param[in] element Identificador del actuador cuyo mensaje debe ser obtenido
+ * de los registros de actualización
+ */
+void DrivingConnectionManager::sendCommandFromUpdateRegs(short element) {
+  FrameDriving com;
+  com.instruction = SET;
+  com.element = static_cast<DeviceID>(element);
+  switch(element){
+    case THROTTLE:
+      updateRegs.throttle.flag = false;
+      com.value = updateRegs.throttle.value;
+      break;
+    case BRAKE:
+      updateRegs.brake.flag = false;
+      com.value = updateRegs.brake.value;
+      break;
+    case HANDBRAKE:
+      updateRegs.handBrake.flag = false;
+      com.value = updateRegs.handBrake.value;
+      break;
+    case CRUISING_SPEED:
+      updateRegs.speed.flag = false;
+      com.value = updateRegs.speed.value;
+      break;
+    case STEERING:
+      updateRegs.steering.flag = false;
+      com.value = updateRegs.steering.value;
+      break;
+    case GEAR:
+      updateRegs.gear.flag = false;
+      com.value = updateRegs.gear.value;
+      break;
+    default:
+      return;
+      break;
+  };
+  com.id_instruccion = countMsg;
+  setCountCriticalMessages(countMsg+1);
+  sendToVehicle(com);
+  messageQueue.push_back(com);
+}
+
+/**
+ * Método público modificador del campo alarmas del atributo vehicleInfo
+ * @param[in] id_alarm Identificador de la alarma
+ */
+void DrivingConnectionManager::setAlarmsInfo(short id_alarm) {
+  vehicleInfo.alarms = id_alarm;
+}
+
