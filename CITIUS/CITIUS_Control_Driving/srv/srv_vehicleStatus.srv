@@ -1,0 +1,4 @@
+uint8 status
+uint8 posSwitcher
+---
+bool confirmation
