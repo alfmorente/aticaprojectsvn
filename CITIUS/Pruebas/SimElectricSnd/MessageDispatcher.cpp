@@ -699,24 +699,3 @@ void MessageDispatcher::sendSupplyAlarmsMsg(int socketDescriptor){
   send(socketDescriptor, buff, sizeof (buff), 0);
   usleep(100);
 }
-
-void MessageDispatcher::sendOperationModeSwitchMsg(int socketDescriptor){
-  short value;
-  cout << "Selecciona el valor para OPERATION MODE SWITCH (0:1):" << endl;
-  cin >> value;
-
-  FrameDriving frame;
-  frame.instruction = INFO;
-  frame.id_instruction = -1;
-  frame.element = OPERATION_MODE_SWITCH;
-  frame.value = value;
-
-  //Buffer de envio 
-  char buff[8];
-  memcpy(&buff[0], &frame.instruction, sizeof (frame.instruction));
-  memcpy(&buff[2], &frame.id_instruction, sizeof (frame.id_instruction));
-  memcpy(&buff[4], &frame.element, sizeof (frame.element));
-  memcpy(&buff[6], &frame.value, sizeof (frame.value));
-  send(socketDescriptor, buff, sizeof (buff), 0);
-  usleep(100);
-}

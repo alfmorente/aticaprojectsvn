@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
   while (!exit) {
 
     newSt = printfMenu();
-    if (newSt == 33) { // Salir
+    if (newSt == 32) { // Salir
       exit = true;
     } else { // Opcion valida
       requestDispatcher(fd2, newSt);
@@ -132,8 +132,7 @@ int printfMenu() {
   cout << "29) Enviar mensaje OBSERVATION SYSTEM SUPPLY 24" << endl;
   cout << "30) Enviar mensaje OBSERVATION SYSTEM SUPPLY 48" << endl;
   cout << "31) Enviar mensaje SUPPLY ALARMS" << endl;
-  cout << "32) Enviar mensaje OPERATION MODE SWITCH" << endl;
-  cout << "33) Salir" << endl;
+  cout << "32) Salir" << endl;
   cout << "****************************************" << endl;
   cout << " Selecciona una opcion:" << endl;
 
@@ -244,9 +243,6 @@ void requestDispatcher(int socketDescriptor, int request) {
       break;
     case 31: // supply alarms
       disp->sendSupplyAlarmsMsg(socketDescriptor);
-      break;
-    case 32: // operation mode switch
-      disp->sendOperationModeSwitchMsg(socketDescriptor);
       break;
     default: // nothing to do
       break;

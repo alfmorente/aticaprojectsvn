@@ -48,6 +48,7 @@ public:
   void sendMotorRPMInfo(int socketDescriptor);
   void sendMotorTemperatureInfo(int socketDescriptor);
   void sendCruissingSpeedInfo(int socketDescriptor);
+  void sendSWitcherInfo(int socketDescriptor);
 };
 
 #endif	/* MESSAGEDISPATCHER_H */

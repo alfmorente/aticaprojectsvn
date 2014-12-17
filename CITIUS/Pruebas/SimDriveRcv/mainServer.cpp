@@ -36,6 +36,7 @@ typedef struct {
     bool dipsr;
     bool dipsp;
     bool klaxon;
+    short switcher;
 }DrivingInfo;
 
 /*******************************************************************************
@@ -69,6 +70,7 @@ int main(int argc, char *argv[]) {
     vehicleInfo.speed = 0;
     vehicleInfo.motorTemperature = 0;
     vehicleInfo.motorRPM = 0;
+    vehicleInfo.switcher = 1;
 
     int fd, fd2, currentMsgCount = 1; /* los ficheros descriptores */
 
@@ -142,9 +144,10 @@ int main(int argc, char *argv[]) {
                 printf("SET: %d = %d\n", fdr.element, fdr.value);
                 if(isCriticalInstruction(fdr.element)){
                     printf("Cuanta sim: %d - Cuenta mensaje: %d\n",currentMsgCount,fdr.id_instruction);
+                    usleep(1000);
                 }
             }else if(fdr.instruction == GET){
-                printf("GET: %d\n", fdr.element);
+                //printf("GET: %d\n", fdr.element);
             }else{
                 printf("Comando desconocido\n");
             }
@@ -290,6 +293,9 @@ short getDeviceValue(short element, DrivingInfo vehicleInfo) {
         case DIPSR:
             return vehicleInfo.dipsr;
             break;
+      case OPERATION_MODE_SWITCH:
+        return vehicleInfo.switcher;
+        break;
         default:
             break;
     }
