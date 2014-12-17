@@ -38,8 +38,8 @@ typedef enum {
 #define ORDER_PAN 1 ///<Identificador de orden PAN
 #define ORDER_TILT 2 ///<Identificador de orden TILT
 
-#define CONV_TO_CAMERA 1/50 ///<Factor de conversion entre PTZ porcentual y valores de cámara
-#define CONV_FROM_CAMERA 50 ///<Factor de conversion entre  valores de cámara y PTZ porcentual
+#define CONV_TO_CAMERA 1/100 ///<Factor de conversion entre PTZ porcentual y valores de cámara
+#define CONV_FROM_CAMERA 100 ///<Factor de conversion entre  valores de cámara y PTZ porcentual
 
 /**
  * \struct FrameDriving
