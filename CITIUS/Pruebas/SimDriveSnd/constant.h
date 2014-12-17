@@ -19,8 +19,6 @@ extern "C" {
 }
 #endif
 
-
-
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
  * IDENTIFICADOR DE INSTRUCCION
@@ -32,69 +30,77 @@ extern "C" {
 #define ACK 3
 #define NACK 4
 
+
 /*******************************************************************************
  * PROTOCOLO PAYLOAD DE CONDUCCION             
- * IDENTIFICADOR DE ELEMENTO
+ * IDENTIFICADOR DE INSTRUCCION
 *******************************************************************************/
 
-#define RESET 0
-#define BLINKER_RIGHT 1
-#define BLINKER_LEFT 2
-#define BLINKER_EMERGENCY 3
-#define MT_BLINKERS 4
-#define DIPSP 5
-#define DIPSS 6
-#define DIPSR 7
-#define KLAXON 8
-#define MT_LIGHTS 9
-#define GEAR 10
-#define MT_GEAR 11
-#define THROTTLE 12
-#define MOTOR_RPM 13
-#define CRUISING_SPEED 14 
-#define MT_THROTTLE 15
-#define MOTOR_TEMPERATURE 16
-#define HANDBRAKE 17
-#define MT_HANDBRAKE 18
-#define BRAKE 19
-#define MT_BRAKE 20
-#define STEERING 21
-#define STEERING_ALARMS 22
-#define MT_STEERING 23
-#define DRIVE_ALARMS 24
-#define BATTERY_LEVEL 25
-#define BATTERY_VOLTAGE 26
-#define BATTERY_CURRENT 27
-#define BATTERY_TEMPERATURE 28
-#define SUPPLY_TURN_ON 29
-#define SUPPLY_CHECK 30
-#define TURN_OFF 31
-#define SUPPLY_5 32
-#define SUPPLY_12 33
-#define SUPPLY_24_DRIVE 34
-#define SUPPLY_24_OCC 35
-#define CONTROL_SYSTEM_SUPPLY 36
-#define CONTROL_SYSTEM_SUPPLY_5 37
-#define CONTROL_SYSTEM_SUPPLY_12 38
-#define CONTROL_SYSTEM_SUPPLY_24 39
-#define CONTROL_SYSTEM_SUPPLY_48 40
-#define DRIVE_SYSTEM_SUPPLY 41
-#define DRIVE_SYSTEM_SUPPLY_5 42
-#define DRIVE_SYSTEM_SUPPLY_12 43
-#define DRIVE_SYSTEM_SUPPLY_24 44
-#define DRIVE_SYSTEM_SUPPLY_48 45
-#define COMM_SYSTEM_SUPPLY 46
-#define COMM_SYSTEM_SUPPLY_5 47
-#define COMM_SYSTEM_SUPPLY_12 48
-#define COMM_SYSTEM_SUPPLY_24 49
-#define COMM_SYSTEM_SUPPLY_48 50
-#define OBSERVATION_SYSTEM_SUPPLY 51
-#define OBSERVATION_SYSTEM_SUPPLY_5 52
-#define OBSERVATION_SYSTEM_SUPPLY_12 53
-#define OBSERVATION_SYSTEM_SUPPLY_24 54
-#define OBSERVATION_SYSTEM_SUPPLY_48 55
-#define SUPPLY_ALARMS 56
-#define OPERATION_MODE_SWITCH 57
+/**
+ * \enum DeviceID
+ * \brief Identificador de dispositivo para protocolo con Payload de conducción
+ */
+typedef enum {
+  RESET = 0, ///<Valor para formación de comando RESET
+  BLINKER_RIGHT = 1, ///<Valor para formación de comando BLINKER_RIGHT
+  BLINKER_LEFT = 2, ///<Valor para formación de comando BLINKER_LEFT
+  BLINKER_EMERGENCY = 3, ///<Valor para formación de comando BLINKER_EMERGENCY
+  MT_BLINKERS = 4, ///<Valor para formación de comando MT_BLINKERS
+  DIPSP = 5, ///<Valor para formación de comando DIPSP
+  DIPSS = 6, ///<Valor para formación de comando DIPSS
+  DIPSR = 7, ///<Valor para formación de comando DIPSR
+  KLAXON = 8, ///<Valor para formación de comando KLAXON
+  MT_LIGHTS = 9, ///<Valor para formación de comando MT_LIGHTS
+  GEAR = 10, ///<Valor para formación de comando GEAR
+  MT_GEAR = 11, ///<Valor para formación de comando MT_GEAR
+  THROTTLE = 12, ///<Valor para formación de comando THROTTLE
+  MOTOR_RPM = 13, ///<Valor para formación de comando MOTOR_RPM
+  CRUISING_SPEED = 14, ///<Valor para formación de comando CRUISING_SPEED
+  MT_THROTTLE = 15, ///<Valor para formación de comando MT_THROTTLE
+  MOTOR_TEMPERATURE = 16, ///<Valor para formación de comando MOTOR_TEMPERATURE
+  HANDBRAKE = 17, ///<Valor para formación de comando HANDBRAKE
+  MT_HANDBRAKE = 18, ///<Valor para formación de comando MT_HANDBRAKE
+  BRAKE = 19, ///<Valor para formación de comando BRAKE
+  MT_BRAKE = 20, ///<Valor para formación de comando MT_BRAKE
+  STEERING = 21, ///<Valor para formación de comando STEERING
+  STEERING_ALARMS = 22, ///<Valor para formación de comando STEERING_ALARMS
+  MT_STEERING = 23, ///<Valor para formación de comando MT_STEERING
+  DRIVE_ALARMS = 24, ///<Valor para formación de comando DRIVE_ALARMS
+  BATTERY_LEVEL = 25, ///<Valor para formación de comando BATTERY_LEVEL
+  BATTERY_VOLTAGE = 26, ///<Valor para formación de comando BATTERY_VOLTAGE
+  BATTERY_CURRENT = 27, ///<Valor para formación de comando BATTERY_CURRENT
+  BATTERY_TEMPERATURE = 28, ///<Valor para formación de comando BATTERY_TEMPERATURE
+  SUPPLY_TURN_ON = 29, ///<Valor para formación de comando SUPPLY_TURN_ON
+  SUPPLY_CHECK = 30, ///<Valor para formación de comando SUPPLY_CHECK
+  TURN_OFF = 31, ///<Valor para formación de comando TURN_OFF
+  SUPPLY_5 = 32, ///<Valor para formación de comando SUPPLY_5
+  SUPPLY_12 = 33, ///<Valor para formación de comando SUPPLY_12
+  SUPPLY_24_DRIVE = 34, ///<Valor para formación de comando SUPPLY_24_DRIVE
+  SUPPLY_24_OCC = 35, ///<Valor para formación de comando SUPPLY_24_OCC
+  SUPPLY_48 = 36, ///<Valor para formación de comando SUPPLY_48
+  CONTROL_SYSTEM_SUPPLY = 37, ///<Valor para formación de comando CONTROL_SYSTEM_SUPPLY
+  CONTROL_SYSTEM_SUPPLY_5 = 38, ///<Valor para formación de comando CONTROL_SYSTEM_SUPPLY_5
+  CONTROL_SYSTEM_SUPPLY_12 = 39, ///<Valor para formación de comando CONTROL_SYSTEM_SUPPLY_12
+  CONTROL_SYSTEM_SUPPLY_24 = 40, ///<Valor para formación de comando CONTROL_SYSTEM_SUPPLY_24
+  CONTROL_SYSTEM_SUPPLY_48 = 41, ///<Valor para formación de comando CONTROL_SYSTEM_SUPPLY_48
+  DRIVE_SYSTEM_SUPPLY = 42, ///<Valor para formación de comando DRIVE_SYSTEM_SUPPLY
+  DRIVE_SYSTEM_SUPPLY_5 = 43, ///<Valor para formación de comando DRIVE_SYSTEM_SUPPLY_5
+  DRIVE_SYSTEM_SUPPLY_12 = 44, ///<Valor para formación de comando DRIVE_SYSTEM_SUPPLY_12
+  DRIVE_SYSTEM_SUPPLY_24 = 45, ///<Valor para formación de comando DRIVE_SYSTEM_SUPPLY_24
+  DRIVE_SYSTEM_SUPPLY_48 = 46, ///<Valor para formación de comando DRIVE_SYSTEM_SUPPLY_48
+  COMM_SYSTEM_SUPPLY = 47, ///<Valor para formación de comando COMM_SYSTEM_SUPPLY
+  COMM_SYSTEM_SUPPLY_5 = 48, ///<Valor para formación de comando COMM_SYSTEM_SUPPLY_5
+  COMM_SYSTEM_SUPPLY_12 = 49, ///<Valor para formación de comando COMM_SYSTEM_SUPPLY_12
+  COMM_SYSTEM_SUPPLY_24 = 50, ///<Valor para formación de comando COMM_SYSTEM_SUPPLY_24
+  COMM_SYSTEM_SUPPLY_48 = 51, ///<Valor para formación de comando COMM_SYSTEM_SUPPLY_48
+  OBSERVATION_SYSTEM_SUPPLY = 52, ///<Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY
+  OBSERVATION_SYSTEM_SUPPLY_5 = 53, ///<Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_5
+  OBSERVATION_SYSTEM_SUPPLY_12 = 54, ///<Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_12
+  OBSERVATION_SYSTEM_SUPPLY_24 = 55, ///<Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_24
+  OBSERVATION_SYSTEM_SUPPLY_48 = 56, ///<Valor para formación de comando OBSERVATION_SYSTEM_SUPPLY_48
+  SUPPLY_ALARMS = 57, ///<Valor para formación de comando SUPPLY_ALARMS
+  OPERATION_MODE_SWITCH = 58 ///<Valor para formación de comando OPERATION_MODE_SWITCH
+} DeviceID;
 
 
 

@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
   while (!exit) {
 
     newSt = printfMenu();
-    if (newSt == 25) { // Salir
+    if (newSt == 26) { // Salir
       exit = true;
     } else { // Opcion valida
       requestDispatcher(fd2, newSt);
@@ -125,14 +125,15 @@ int printfMenu() {
   cout << "22) Enviar mensaje MOTOR RPM" << endl;
   cout << "23) Enviar mensaje MOTOR TEMPERATURE" << endl;
   cout << "24) Enviar mensaje CRUISSING SPEED" << endl;
-  cout << "25) Salir" << endl;
+  cout << "25) Enviar mensaje SWITCHER" << endl;
+  cout << "26) Salir" << endl;
   cout << "****************************************" << endl;
   cout << " Selecciona una opcion:" << endl;
 
   int intAux;
   cin >> intAux;
 
-  if (intAux < 1 || intAux > 25) {
+  if (intAux < 1 || intAux > 26) {
     cout << "Opcion no valida" << endl;
     return 0;
   } else {
@@ -215,6 +216,9 @@ void requestDispatcher(int socketDescriptor, int request) {
       break;
     case 24: // cruissing speed
       disp->sendCruissingSpeedInfo(socketDescriptor);
+      break;
+    case 25:
+      disp->sendSWitcherInfo(socketDescriptor);
       break;
     default: // nothing to do
       break;

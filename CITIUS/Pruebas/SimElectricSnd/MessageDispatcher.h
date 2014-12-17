@@ -55,7 +55,6 @@ public:
   void sendObservationSystemSupply24Msg(int socketDescriptor);
   void sendObservationSystemSupply48Msg(int socketDescriptor);
   void sendSupplyAlarmsMsg(int socketDescriptor);
-  void sendOperationModeSwitchMsg(int socketDescriptor);
 
 };
 
