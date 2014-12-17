@@ -30,14 +30,15 @@ public:
   JausMessage getJausMsgFromWrenchEffortInfo(JausSubsystemID subDest, JausNodeID nodDest, short steer, short throttle, short brake);
   JausMessage getJausMsgFromDiscreteDeviceInfo(JausSubsystemID subDest, JausNodeID nodDest, bool parkingbrake, short gear);
   JausMessage getJausMsgFromTravelSpeedInfo(JausSubsystemID subDest, JausNodeID nodDest, short speed);
-  JausMessage getJausMsgFromUGVInfo(JausSubsystemID subDest, JausNodeID nodDest, short motorRPM, short motorTemperature);
+  JausMessage getJausMsgFromUGVInfo(JausSubsystemID subDest, JausNodeID nodDest, short motorRPM, short motorTemperature, short idAlarm);
   JausMessage getJausMsgFromSignalingInfo(JausSubsystemID subDest, JausNodeID nodDest, bool blinker_left, bool blinker_right, bool dipsp, bool dipss, bool dipsr, bool klaxon);
   JausMessage getJausMsgFromElectricInfo(JausSubsystemID subDest, JausNodeID nodDest, short bat_level, short bat_voltage, short bat_current, short bat_temp, short alarms);
   JausMessage getJausMsgFromCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, CameraID id_camera, short pan, short tilt, short zoom);
-  JausMessage getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, short polarity);
+  JausMessage getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, bool polarity);
   JausMessage getJausMsgFromTelemeterInfo(JausSubsystemID subDest, JausNodeID nodDest, short *ecs);
   JausMessage getJausMsgFromTVCamera(JausSubsystemID subDest, JausNodeID nodDest, short zoom, short focus, bool autofocus);
   JausMessage getJausMsgFromPositioner(JausSubsystemID subDest, JausNodeID nodDest, short pan, short tilt);
+  JausMessage getJausMsgFromAlarm(JausSubsystemID subDest, JausNodeID nodDest, short id_alarm);
 };
 
 #endif	/* TRANSLATORROSJAUS_H */

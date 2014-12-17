@@ -160,6 +160,13 @@ typedef enum {
 #define CONV_JAUS_PANTILT 1/100 ///<Factor de conversión de % (camara) a 0..1 (Pan y Tilt en Report Camera Pose)
 #define CONV_JAUS_ZOOM 32/100 ///<Factor de conversión de % (camara) a 0..32 (Zoom en Report Camera Pose)
 
+// Identificadores de alarmas a enviar hacia MyC
+#define ID_ALARMS_NOT_ALARMS 0 ///<Identificador de fin de alarmas en Control
+#define ID_ALARMS_WRONG_TURN_OFF 1 ///<Identificador de alarma de apagado incorrecto previo
+#define ID_ALARMS_DRIVING 2 ///<Identificador de alarma producida en módulo de conducción
+#define ID_ALARMS_ELECTRIC 3 ///<Identificador de alarma producida en módulo eléctrico
+#define ID_ALARMS_DRIVING_ELECTRIC 4 ///<Identificador de alarmas en módulos eléctrico y conducción
+
 /**
  * \enum JausSubsystemID
  * \brief Identificador de subsistemas JAUS

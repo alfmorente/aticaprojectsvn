@@ -64,6 +64,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID 
   rddm->presenceVector = (PRESENCE_VECTOR_PARKING_BRAKE | PRESENCE_VECTOR_GEAR);
   rddm->parkingBrake = (JausBoolean) parkingbrake;
   rddm->gear = gear+1;
+  //printf("Se va a enviar marcha := %d\n",rddm->gear);
   jausAddressCopy(rddm->destination, jAdd);
   jMsg = reportDiscreteDevicesMessageToJausMessage(rddm);
   reportDiscreteDevicesMessageDestroy(rddm);
@@ -102,7 +103,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromTravelSpeedInfo(JausSubsystemID sub
  * @param[in] motorTemperature Valor de lectura de la temperatura del motor
  * @return Mensaje JAUS - UGV Info
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(JausSubsystemID subDest, JausNodeID nodDest, short motorRPM, short motorTemperature) {
+JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(JausSubsystemID subDest, JausNodeID nodDest, short motorRPM, short motorTemperature, short idAlarm) {
   JausMessage jMsg = NULL;
   JausAddress jAdd = jausAddressCreate();
   jAdd->subsystem = subDest;
@@ -110,9 +111,12 @@ JausMessage TranslatorROSJAUS::getJausMsgFromUGVInfo(JausSubsystemID subDest, Ja
   jAdd->component = JAUS_PRIMITIVE_DRIVER;
   jAdd->instance = JAUS_DESTINANTION_INSTANCE;
   UGVInfo12Message ugvm = ugvInfo12MessageCreate();
-  ugvm->presenceVector = (PRESENCE_VECTOR_MOTOR_RPM | PRESENCE_VECTOR_MOTOR_TEMPERATURE);
+  ugvm->presenceVector = (PRESENCE_VECTOR_MOTOR_RPM | 
+          PRESENCE_VECTOR_MOTOR_TEMPERATURE | 
+          PRESENCE_VECTOR_ALARMS);
   ugvm->motor_rpm = motorRPM;
   ugvm->motor_temperature = motorTemperature;
+  ugvm->alarms = idAlarm;
   jausAddressCopy(ugvm->destination, jAdd);
   jMsg = ugvInfo12MessageToJausMessage(ugvm);
   ugvInfo12MessageDestroy(ugvm);
@@ -175,13 +179,11 @@ JausMessage TranslatorROSJAUS::getJausMsgFromElectricInfo(JausSubsystemID subDes
   ugvm->presenceVector = PRESENCE_VECTOR_BATTERY_LEVEL |
           PRESENCE_VECTOR_BATTERY_VOLTAGE |
           PRESENCE_VECTOR_BATTERY_CURRENT |
-          PRESENCE_VECTOR_BATTERY_TEMPERATURE |
-          PRESENCE_VECTOR_ALARMS;
+          PRESENCE_VECTOR_BATTERY_TEMPERATURE;
   ugvm->battery_level = bat_level;
   ugvm->battery_voltage = bat_voltage;
   ugvm->battery_current = bat_current;
   ugvm->battery_temperature = bat_temp;
-  ugvm->alarms = alarms;
   jausAddressCopy(ugvm->destination, jAdd);
   jMsg = ugvInfo12MessageToJausMessage(ugvm);
   ugvInfo12MessageDestroy(ugvm);
@@ -228,7 +230,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(JausSubsystemID subDest,
  * @param[in] polarity Valor de lectura de POLARIDAD
  * @return Mensaje JAUS - Report Night-time Camera
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, short polarity) {
+JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, bool polarity) {
   JausMessage jMsg = NULL;
   JausAddress jAdd = jausAddressCreate();
   jAdd->subsystem = subDest;
@@ -237,9 +239,9 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDes
   jAdd->instance = JAUS_DESTINANTION_INSTANCE;
   ReportNightTimeCamera24Message ircm = reportNightTimeCamera24MessageCreate();
   ircm->active_zoom = zoom;
-  if (polarity == 0) {
+  if (polarity) {
     ircm->active_polarity = JAUS_FALSE;
-  } else if (polarity == 1) {
+  } else{
     ircm->active_polarity = JAUS_TRUE;
   }
   jausAddressCopy(ircm->destination, jAdd);
@@ -328,3 +330,28 @@ JausMessage TranslatorROSJAUS::getJausMsgFromPositioner(JausSubsystemID subDest,
   jausAddressDestroy(jAdd);
   return jMsg;
 }
+
+/**
+ * Método público que obtiene mensaje JAUS - UGV Info a partir de una alarma
+ * @param[in] subDest Subsistema de destino
+ * @param[in] nodDest Nodo de destino
+ * @param[in] id_alarm Identificador de la alarma a enviar
+ * @return Mensaje JAUS - UGV Info
+ */
+JausMessage TranslatorROSJAUS::getJausMsgFromAlarm(JausSubsystemID subDest, JausNodeID nodDest, short id_alarm) {
+  JausMessage jMsg = NULL;
+  JausAddress jAdd = jausAddressCreate();
+  jAdd->subsystem = subDest;
+  jAdd->node = nodDest;
+  jAdd->component = JAUS_PRIMITIVE_DRIVER;
+  jAdd->instance = JAUS_DESTINANTION_INSTANCE;
+  UGVInfo12Message ugvm = ugvInfo12MessageCreate();
+  ugvm->presenceVector = PRESENCE_VECTOR_ALARMS;
+  ugvm->alarms = id_alarm;
+  jausAddressCopy(ugvm->destination, jAdd);
+  jMsg = ugvInfo12MessageToJausMessage(ugvm);
+  ugvInfo12MessageDestroy(ugvm);
+  jausAddressDestroy(jAdd);
+  return jMsg;
+}
+
