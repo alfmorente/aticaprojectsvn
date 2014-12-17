@@ -32,7 +32,31 @@ void RosNode_Driving::initROS() {
   ros::NodeHandle nh;
   pubVehicleInfo = nh.advertise<CITIUS_Control_Driving::msg_vehicleInfo>("vehicleInfo", 1000);
   subsCommand = nh.subscribe("command", 1000, &RosNode_Driving::fcn_sub_command, this);
-  servNodeStatus = nh.advertiseService("vmNodeStatus", &RosNode_Driving::fcv_serv_nodeStatus, this);
+  pubSwitcher = nh.advertise<CITIUS_Control_Driving::msg_switcher>("switcher", 1000);
+  servNodeStatus = nh.advertiseService("drNodeStatus", &RosNode_Driving::fcv_serv_nodeStatus, this);
+  clientStatus = nh.serviceClient<CITIUS_Control_Driving::srv_vehicleStatus>("vehicleStatus");
+  CITIUS_Control_Driving::srv_vehicleStatus serv;
+  ROS_INFO("[Control] Driving - Esperando posicion conmutador local/teleoperado");
+  short pos = dVehicle->waitForSwitcherPosition();
+  //short pos = 1;
+  serv.request.posSwitcher = pos;
+  serv.request.status = OPERATION_MODE_INICIANDO;
+  ROS_INFO("[Control] Driving - Solicitando inicio de maquina de estados del vehiculo");
+  while(!clientStatus.call(serv)){
+      usleep(1000);
+  }
+  if(serv.response.confirmation){
+      ROS_INFO("[Control] Driving - Nodo listo para operar");
+      nodeStatus = NODESTATUS_OK;
+  }else{
+      ROS_INFO("[Control] Driving - Se denego la iniciacion de maquina de estados del vehiculo");
+      nodeStatus = NODESTATUS_OFF;
+  }
+  
+  // Borrar
+  nh.setParam("vehicleStatus",OPERATION_MODE_CONDUCCION);
+  nodeStatus = NODESTATUS_OK;
+  
 }
 
 /**
@@ -65,15 +89,7 @@ void RosNode_Driving::fcn_sub_command(CITIUS_Control_Driving::msg_command msg) {
         command.instruction = SET;
         command.element = static_cast<DeviceID> (msg.id_device);
         command.value = msg.value;
-        if (dVehicle->isCriticalInstruction(static_cast<DeviceID> (msg.id_device))) {
-          short cont = dVehicle->getCountCriticalMessages();
-          command.id_instruccion = cont;
-          dVehicle->addToQueue(command);
-          dVehicle->setCountCriticalMessages(cont + 1);
-        } else {
-          command.id_instruccion = -1;
-        }
-        dVehicle->sendToVehicle(command);
+        dVehicle->setCommand(command);
       } else {
         ROS_INFO("[Control] Driving - Descartado comando %d:=%d - Fuera de rango", msg.id_device, msg.value);
       }
@@ -98,7 +114,6 @@ bool RosNode_Driving::fcv_serv_nodeStatus(CITIUS_Control_Driving::srv_nodeStatus
     nodeStatus = NODESTATUS_OK;
     rsp.confirmation = true;
   } else if (rq.status == NODESTATUS_OFF) {
-    dVehicle->disconnect();
     nodeStatus = NODESTATUS_OFF;
     rsp.confirmation = true;
   } else {
@@ -219,6 +234,7 @@ void RosNode_Driving::publishDrivingInfo(DrivingInfo info) {
   msg.dipsr = info.dipsr;
   msg.dipsp = info.dipsp;
   msg.klaxon = info.klaxon;
+  msg.alarms = info.alarms;
   pubVehicleInfo.publish(msg);
 }
 
@@ -231,19 +247,23 @@ void RosNode_Driving::checkAlarms() {
     if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) == MASK_NOT_ALARMS) && !electricAlarms) {
       if (nodeStatus == NODESTATUS_CORRUPT) { // Fin de las alarmas en ambos subsistemas
         ROS_INFO("[Control] Driving - Nodo en estado OK - Sin alarmas");
+        dVehicle->setAlarmsInfo(ID_ALARMS_NOT_ALARMS);
         nodeStatus = NODESTATUS_OK;
       }
     } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) == MASK_NOT_ALARMS) && electricAlarms) {
       if (nodeStatus == NODESTATUS_OK) { // Nuevas alarmas en Electric
         ROS_INFO("[Control] Driving - Nodo en estado DEGRADADO - Alarmas en Electric");
+        dVehicle->setAlarmsInfo(ID_ALARMS_ELECTRIC);
         setEmergecyCommands();
         nodeStatus = NODESTATUS_CORRUPT;
       } else { 
         ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Fin de alarmas en Driving pero hay alarmas en Electric");
+        dVehicle->setAlarmsInfo(ID_ALARMS_DRIVING);
       }
     } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) != MASK_NOT_ALARMS) && !electricAlarms) {
       if (nodeStatus == NODESTATUS_OK) { // Nuevas alarmas en Driving
         ROS_INFO("[Control] Driving - Nodo en estado DEGRADADO - Alarmas en Driving");
+        dVehicle->setAlarmsInfo(ID_ALARMS_DRIVING);
         setEmergecyCommands();
         nodeStatus = NODESTATUS_CORRUPT;
         if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_CONNECTION_STEERING_FAILED) == MASK_ALARMS_CONNECTION_STEERING_FAILED) {
@@ -278,9 +298,11 @@ void RosNode_Driving::checkAlarms() {
         }
       } else { // Deja de haber alarmas en Electric
         ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Fin de alarmas en Electric pero hay alarmas en Driving");
+        dVehicle->setAlarmsInfo(ID_ALARMS_DRIVING);
       }
     } else if (((dVehicle->getAlarmsStruct().driveAlarms | MASK_NOT_ALARMS) != MASK_NOT_ALARMS) && electricAlarms) {
       ROS_INFO("[Control] Driving - Modo en estado DEGRADADO - Alarmas en Driving & Electric");
+      dVehicle->setAlarmsInfo(ID_ALARMS_DRIVING_ELECTRIC);
       if ((dVehicle->getAlarmsStruct().driveAlarms & MASK_ALARMS_CONNECTION_STEERING_FAILED) == MASK_ALARMS_CONNECTION_STEERING_FAILED) {
         ROS_INFO("[Control] Driving - Alarma: Fallo de conexion");
       }
@@ -328,39 +350,44 @@ void RosNode_Driving::setEmergecyCommands() {
   // Acelerador
   command.element = THROTTLE;
   command.value = 0;
-  short cont = dVehicle->getCountCriticalMessages();
-  command.id_instruccion = cont;
-  dVehicle->addToQueue(command);
-  dVehicle->setCountCriticalMessages(cont + 1);
-  dVehicle->sendToVehicle(command);
+  dVehicle->setCommand(command);
   // Direccion
   command.element = STEERING;
-  cont = dVehicle->getCountCriticalMessages();
-  command.id_instruccion = cont;
-  dVehicle->addToQueue(command);
-  dVehicle->setCountCriticalMessages(cont + 1);
-  dVehicle->sendToVehicle(command);
+  dVehicle->setCommand(command);
   // Marcha
   command.element = GEAR;
-  cont = dVehicle->getCountCriticalMessages();
-  command.id_instruccion = cont;
-  dVehicle->addToQueue(command);
-  dVehicle->setCountCriticalMessages(cont + 1);
-  dVehicle->sendToVehicle(command);
+  dVehicle->setCommand(command);
   // Freno
   command.element = BRAKE;
   command.value = 100;
-  cont = dVehicle->getCountCriticalMessages();
-  command.id_instruccion = cont;
-  dVehicle->addToQueue(command);
-  dVehicle->setCountCriticalMessages(cont + 1);
-  dVehicle->sendToVehicle(command);
+  dVehicle->setCommand(command);
   // Freno de estacionamiento
   command.element = HANDBRAKE;
   command.value = 1;
-  cont = dVehicle->getCountCriticalMessages();
-  command.id_instruccion = cont;
-  dVehicle->addToQueue(command);
-  dVehicle->setCountCriticalMessages(cont + 1);
-  dVehicle->sendToVehicle(command);
+  dVehicle->setCommand(command);
+}
+
+/**
+ * Método público que comprueba si el último mensaje recibido del vehículo es 
+ * un cambio de posición en el conmutador local / teleoperado y da soporte al
+ * mismo en caso afirmativo
+ */
+void RosNode_Driving::checkSwitcher() {
+  if (dVehicle->getSwitcherStruct().flag) {
+    publishSwitcherInfo(dVehicle->getSwitcherStruct().position);
+    dVehicle->setSwitcherStruct(false);
+  }
+}
+
+
+/**
+ * Método público que publica la información de un cambio en la posición del 
+ * conmutador local / teleoperado que recibe como parámetro en el topic ROS 
+ * correspondiente
+ * @param[in] position Nueva posición leida del conmutador local / teleoperado
+ */
+void RosNode_Driving::publishSwitcherInfo(short position) {
+  CITIUS_Control_Driving::msg_switcher msg;
+  msg.switcher = position;
+  pubSwitcher.publish(msg);
 }

@@ -39,12 +39,18 @@ class DrivingConnectionManager: public SocketDriver {
 private:
   short countMsg;
   vector<FrameDriving> messageQueue;
+  UpdateRegs updateRegs;
   DrivingInfo vehicleInfo;
   AlarmsStruct alarms;
   short steeringAlarms;
+  SwitcherStruct swPosition;
   void setVehicleInfo(DeviceID element, short value);
   void setAlarmsInfo(DeviceID element, short value);
-  RtxStruct informResponse(bool ack, short id_instruction);
+  bool isCommandInQueue(short idDevice);
+  void manageACK(short element, short id_instruccion);
+  void manageNACK(short id_instruccion);
+  bool isThereCommandReady(short element);
+  void sendCommandFromUpdateRegs(short element);
 public:
   DrivingConnectionManager();
   ~DrivingConnectionManager();
@@ -53,13 +59,16 @@ public:
   bool checkForVehicleMessages();
   DrivingInfo getVehicleInfo(bool full);
   int getSocketDescriptor();
-  short getCountCriticalMessages();
   void setCountCriticalMessages(short cont);
   AlarmsStruct getAlarmsStruct();
   void setAlarmsStruct(bool flag);
   bool isCriticalInstruction(DeviceID element);
   bool isMTCommand(DeviceID element);
-  void addToQueue(FrameDriving frame);
+  void setSwitcherStruct(bool position);
+  SwitcherStruct getSwitcherStruct();
+  short waitForSwitcherPosition();
+  void setCommand(FrameDriving command);
+  void setAlarmsInfo(short id_alarm);
 };
 
 #endif	/* DrivingConnectionManager */

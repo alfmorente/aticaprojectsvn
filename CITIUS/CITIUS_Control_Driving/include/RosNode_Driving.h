@@ -17,7 +17,9 @@
 #include "RosNode.h"
 #include "DrivingConnectionManager.h"
 #include "CITIUS_Control_Driving/msg_command.h"
+#include "CITIUS_Control_Driving/msg_switcher.h"
 #include "CITIUS_Control_Driving/msg_vehicleInfo.h"
+#include "CITIUS_Control_Driving/srv_vehicleStatus.h"
 #include "CITIUS_Control_Driving/srv_nodeStatus.h"
 #include "Timer.h"
 
@@ -29,8 +31,10 @@
 class RosNode_Driving : public RosNode {
 private:
   ros::Publisher pubVehicleInfo;
+  ros::Publisher pubSwitcher;
   ros::Subscriber subsCommand;
   ros::ServiceServer servNodeStatus;
+  ros::ServiceClient clientStatus;
   DrivingConnectionManager *dVehicle;
   bool electricAlarms;
   void fcn_sub_command(CITIUS_Control_Driving::msg_command msg);
@@ -43,7 +47,9 @@ public:
   void initROS();
   DrivingConnectionManager *getDriverMng();
   void publishDrivingInfo(DrivingInfo);
+  void publishSwitcherInfo(short position);
   void checkAlarms();
+  void checkSwitcher();
 };
 
 #endif	/* ROSNODE_DRIVING_H */

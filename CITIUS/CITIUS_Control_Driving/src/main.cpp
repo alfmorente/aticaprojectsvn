@@ -24,12 +24,7 @@ int main(int argc, char** argv) {
     
     ROS_INFO("[Control] Driving - Establecida conexion con vehiculo");
     nodeDriving->initROS();
-    ROS_INFO("[Control] Driving - Esperando activacion de nodo");
-    while (nodeDriving->getNodeStatus() == NODESTATUS_INIT) {
-      ros::spinOnce();
-    }
-    if (nodeDriving->getNodeStatus() == NODESTATUS_OK)
-      ROS_INFO("[Control] Driving - Nodo listo para operar");
+
     // Conteo de 5 hz -> 5 * 1hz (Vehiculo 5Hz, Senalizacion 1Hz))
     short hzCount = 0;
     // Temporizador de requerimiento de informacion
@@ -46,6 +41,7 @@ int main(int argc, char** argv) {
         if (nodeDriving->getNodeStatus() == NODESTATUS_OK) {          
           nodeDriving->getDriverMng()->checkForVehicleMessages();
           nodeDriving->checkAlarms();
+          nodeDriving->checkSwitcher();
           // Comprobación del temporizador y requerimiento de info
           if (timer->GetTimed() >= FREC_5HZ) {
             // Clear del timer
@@ -65,6 +61,7 @@ int main(int argc, char** argv) {
         else if(nodeDriving->getNodeStatus() == NODESTATUS_CORRUPT){
           nodeDriving->getDriverMng()->checkForVehicleMessages();
           nodeDriving->checkAlarms();
+          nodeDriving->checkSwitcher();
         }
                 
       }

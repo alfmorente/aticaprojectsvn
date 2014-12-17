@@ -13,3 +13,4 @@ bool dipss
 bool dipsr
 bool dipsp
 bool klaxon
+uint8 alarms
