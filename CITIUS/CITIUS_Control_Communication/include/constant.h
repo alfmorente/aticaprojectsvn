@@ -182,10 +182,10 @@ typedef enum {
  * \brief Identificador de subsistemas JAUS
  */
 typedef enum {
-  JAUS_NODE_CONTROL = 1, ///<Identificador de nodo JAUS Control
+  JAUS_NODE_CONTROL = 3, ///<Identificador de nodo JAUS Control
   JAUS_NODE_TABLET = 2, ///<Identificador de nodo JAUS Tablet
   JAUS_NODE_CAMERA = 2, ///<Identificador de nodo JAUS Camera
-  JAUS_NODE_COMM_MNG = 3, ///<Identificador de nodo JAUS Communication Mng
+  JAUS_NODE_COMM_MNG = 1, ///<Identificador de nodo JAUS Communication Mng
   JAUS_NODE_AOC = 4 ///<Identificador de nodo JAUS AOC
 } JausNodeID;
 

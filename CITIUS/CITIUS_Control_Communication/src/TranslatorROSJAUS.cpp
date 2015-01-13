@@ -64,6 +64,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID 
   rddm->presenceVector = (PRESENCE_VECTOR_PARKING_BRAKE | PRESENCE_VECTOR_GEAR);
   rddm->parkingBrake = (JausBoolean) parkingbrake;
   rddm->gear = gear+1;
+  printf("%d \n",rddm->gear);
   //printf("Se va a enviar marcha := %d\n",rddm->gear);
   jausAddressCopy(rddm->destination, jAdd);
   jMsg = reportDiscreteDevicesMessageToJausMessage(rddm);
@@ -230,7 +231,7 @@ JausMessage TranslatorROSJAUS::getJausMsgFromCameraInfo(JausSubsystemID subDest,
  * @param[in] polarity Valor de lectura de POLARIDAD
  * @return Mensaje JAUS - Report Night-time Camera
  */
-JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, bool polarity) {
+JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDest, JausNodeID nodDest, short zoom, short polarity) {
   JausMessage jMsg = NULL;
   JausAddress jAdd = jausAddressCreate();
   jAdd->subsystem = subDest;
@@ -239,9 +240,9 @@ JausMessage TranslatorROSJAUS::getJausMsgFromIRCameraInfo(JausSubsystemID subDes
   jAdd->instance = JAUS_DESTINANTION_INSTANCE;
   ReportNightTimeCamera24Message ircm = reportNightTimeCamera24MessageCreate();
   ircm->active_zoom = zoom;
-  if (polarity) {
+  if (polarity == 0) {
     ircm->active_polarity = JAUS_FALSE;
-  } else{
+  } else if (polarity == 1) {
     ircm->active_polarity = JAUS_TRUE;
   }
   jausAddressCopy(ircm->destination, jAdd);
