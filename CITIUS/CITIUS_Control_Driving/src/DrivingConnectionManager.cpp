@@ -62,17 +62,14 @@ DrivingConnectionManager::~DrivingConnectionManager() {
  * @param[in] frame Trama a enviar via socket al vehículo 
  */
 void DrivingConnectionManager::sendToVehicle(FrameDriving frame) {
-    // BORRAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if (frame.element != BLINKER_RIGHT) {
-        char bufData[8];
-        memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
-        memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
-        memcpy(&bufData[4], &frame.element, sizeof (frame.element));
-        memcpy(&bufData[6], &frame.value, sizeof (frame.value));
-        printf("--> SND: (%d) %d :: %d = %d\n",frame.id_instruccion,frame.instruction,frame.element,frame.value);
-        send(socketDescriptor, bufData, sizeof (bufData), 0);
-        usleep(10000);
-    }
+  char bufData[8];
+  memcpy(&bufData[0], &frame.instruction, sizeof (frame.instruction));
+  memcpy(&bufData[2], &frame.id_instruccion, sizeof (frame.id_instruccion));
+  memcpy(&bufData[4], &frame.element, sizeof (frame.element));
+  memcpy(&bufData[6], &frame.value, sizeof (frame.value));
+  printf("--> SND: (%d) %d :: %d = %d\n", frame.id_instruccion, frame.instruction, frame.element, frame.value);
+  send(socketDescriptor, bufData, sizeof (bufData), 0);
+  usleep(1000);
 
 }
 
