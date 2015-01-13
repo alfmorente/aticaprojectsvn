@@ -41,6 +41,7 @@ int main(int argc, char** argv) {
     ROS_INFO("[Control] Position / Orientation - Esperando activacion de nodo");
     while (nodePosOri->getNodeStatus() == NODESTATUS_INIT) {
       ros::spinOnce();
+      //printf("%d\n",nodePosOri->getNodeStatus());
     }
     if (nodePosOri->getNodeStatus() == NODESTATUS_OK) {
       nodePosOri->configureDevices();

@@ -181,7 +181,9 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateZ = information.gyrZ;
     }
   } else if (gpsinsOK && magnOK) {
+      printf("Solicitando datos\n");
     if (gpsinsDriver->getData()) {
+        printf("Datos obtenidos\n");
       CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
       GPSINSInfo informationG = gpsinsDriver->getInfo();
       msgSnd.positionStatus = informationG.positionStatus;
