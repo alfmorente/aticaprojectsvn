@@ -235,7 +235,7 @@ void RosNode_Communications::finishJAUS() {
  * @return 
  */
 bool RosNode_Communications::isControllerAvailable(){
-  if(handler->isMyCAvailable()){
+  /*if(handler->isMyCAvailable()){
     ROS_INFO("[Control] Communications - Controlador: Mando y Control");
     subsystemController = JAUS_SUBSYSTEM_MYC;
     nodeController = JAUS_NODE_CONTROL;
@@ -247,7 +247,10 @@ bool RosNode_Communications::isControllerAvailable(){
       nodeController = JAUS_NODE_TABLET;
       return true;
     }
-  }
+  }*/
+    subsystemController = JAUS_SUBSYSTEM_MYC;
+    nodeController = JAUS_NODE_CONTROL;
+    return true;
   return false;
 }
 
