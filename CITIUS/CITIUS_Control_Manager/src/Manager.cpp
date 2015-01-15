@@ -73,6 +73,15 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
       turnOffChecker->clearFile();
       turnOffChecker->setStatusLine("INICIANDO");
       service.request.status = NODESTATUS_OK;
+      
+      numOfAttemps = 0;
+      while (!elNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
+        ROS_INFO("[Control] Manager - Reintentando conexion con nodo Electric...");
+        usleep(1000000);
+      }
+      ROS_INFO("[Control] Manager - Nodo Electric arrancado correctamente");
+      electricOK = true;
+
       while (!cmNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
         ROS_INFO("[Control] Manager - Reintentando conexion con nodo Communication...");
         numOfAttemps++;
@@ -131,21 +140,6 @@ bool Manager::fcv_serv_vehicleStatus(CITIUS_Control_Manager::srv_vehicleStatus::
         }
       } else {
         ROS_INFO("[Control] Manager - Nodo RearCamera no pudo arrancar. Cumplido numero maximo de reintentos");
-      }
-      numOfAttemps = 0;
-      while (!elNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
-        ROS_INFO("[Control] Manager - Reintentando conexion con nodo Electric...");
-        numOfAttemps++;
-      }
-      if (numOfAttemps < MAX_ATTEMPS) {
-        if (!service.response.confirmation) {
-          ROS_INFO("[Control] Manager - Nodo Electric no pudo arrancar");
-        } else {
-          ROS_INFO("[Control] Manager - Nodo Electric arrancado correctamente");
-          electricOK = true;
-        }
-      } else {
-        ROS_INFO("[Control] Manager - Nodo Driving no pudo arrancar. Cumplido numero maximo de reintentos");
       }
       numOfAttemps = 0;
       while (!irNodeStatus.call(service) && numOfAttemps < MAX_ATTEMPS) {
