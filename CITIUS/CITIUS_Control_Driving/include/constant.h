@@ -123,7 +123,7 @@ typedef enum {
 
 #define FREC_10HZ 0.1 ///<Periodo para ejecución de rutinas con frecuencia 10Hz
 //#define FREC_5HZ 0.2 ///<Periodo para ejecución de rutinas con frecuencia 5Hz
-#define FREC_5HZ 2
+#define FREC_5HZ 0.2
 #define FREC_2HZ 0.5 ///<Periodo para ejecución de rutinas con frecuencia 2Hz
 #define FREC_1HZ 1 ///<Periodo para ejecución de rutinas con frecuencia 1Hz
 

@@ -7,6 +7,7 @@
  */
 
 #include "DrivingConnectionManager.h"
+#include <termios.h>
 
 /** 
  * Constructor de la clase
@@ -53,7 +54,8 @@ DrivingConnectionManager::DrivingConnectionManager() {
  * Destructor de la clase
  */
 DrivingConnectionManager::~DrivingConnectionManager() {
-
+  shutdown(socketDescriptor,SHUT_WR);
+  close(socketDescriptor);
 }
 
 /**
