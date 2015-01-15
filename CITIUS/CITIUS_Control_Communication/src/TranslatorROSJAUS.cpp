@@ -64,7 +64,6 @@ JausMessage TranslatorROSJAUS::getJausMsgFromDiscreteDeviceInfo(JausSubsystemID 
   rddm->presenceVector = (PRESENCE_VECTOR_PARKING_BRAKE | PRESENCE_VECTOR_GEAR);
   rddm->parkingBrake = (JausBoolean) parkingbrake;
   rddm->gear = gear+1;
-  printf("%d \n",rddm->gear);
   //printf("Se va a enviar marcha := %d\n",rddm->gear);
   jausAddressCopy(rddm->destination, jAdd);
   jMsg = reportDiscreteDevicesMessageToJausMessage(rddm);
