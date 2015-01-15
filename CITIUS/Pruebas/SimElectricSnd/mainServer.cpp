@@ -168,6 +168,7 @@ void requestDispatcher(int socketDescriptor, int request) {
       break;
     case 6: // turn off
       disp->sendTurnOffMsg(socketDescriptor);
+      exit(0);
       break;
     case 7: // supply 5
       disp->sendSupply5Msg(socketDescriptor);

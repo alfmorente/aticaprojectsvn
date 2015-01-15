@@ -130,7 +130,7 @@ typedef enum {
 *******************************************************************************/
 
 #define IP_PAYLOAD_CONDUCCION_DRIVING "127.0.0.1"
-#define PORT_PAYLOAD_CONDUCCION_DRIVING 20000
+#define PORT_PAYLOAD_CONDUCCION_DRIVING 10001
 
 /*******************************************************************************
  * FRECUENCIA DE REQUERIMIENTO DE INFORMACION A DISPOSITIVO
