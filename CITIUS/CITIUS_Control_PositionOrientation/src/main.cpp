@@ -18,22 +18,33 @@
 int main(int argc, char** argv) {
   ros::init(argc, argv, "RosNode_Control_Position_Orientation");
   RosNode_PositionOrientation *nodePosOri = new RosNode_PositionOrientation();
-  // Conexion con GPS/INS
-  if (nodePosOri->getXSensManager()->doConnect(DEVICE_XSENS)) {
-    ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo GPS/INS");
-    nodePosOri->setGpsStatus(true);
-  } else {
-    ROS_INFO("[Control] Position / Orientation - No se puede conectar al dispositivo GPS/INS");
-    nodePosOri->setGpsStatus(false);
+
+  // Conexion con dispositivos
+  ROS_INFO("[Control] Position / Orientation - Conectando con dispositivos");
+  nodePosOri->setGpsStatus(false);
+  nodePosOri->setMagnStatus(false);
+  while (!nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus()) {
+    // Conexion con GPS/INS
+    if (nodePosOri->getXSensManager()->doConnect(DEVICE_XSENS)) {
+      ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo GPS/INS");
+      nodePosOri->setGpsStatus(true);
+    } else {
+      ROS_INFO("[Control] Position / Orientation - No se puede conectar al dispositivo GPS/INS");
+    }
+    // Conexion con magnetometro
+    if (nodePosOri->getMagnetometerManager()->doConnect(DEVICE_AHRS)) {
+      ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo Magnetometro");
+      nodePosOri->setMagnStatus(true);
+    } else {
+      ROS_INFO("[Control] Position / Orientation - No se puede conectar al dispositivo Magnetometro");
+    }
+    // Check de conexion minima
+    if(!nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus()){
+      ROS_INFO("[Control] Position / Orientation - Imposible conexion con ningun dispositivo. Reintentando...");
+      usleep(3000000);
+    }
   }
-  // Conexion con magnetometro
-  if (nodePosOri->getMagnetometerManager()->doConnect(DEVICE_AHRS)) {
-    ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo Magnetometro");
-    nodePosOri->setMagnStatus(true);
-  } else {
-    ROS_INFO("[Control] Position / Orientation - No se puede conectar al dispositivo Magnetometro");
-    nodePosOri->setMagnStatus(false);
-  }
+
   // Check de conexion de dispositivos
   if (nodePosOri->getGpsStatus() || nodePosOri->getMagnStatus()) {
     // Inicio de artefactos ROS
