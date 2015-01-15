@@ -21,51 +21,50 @@ int main(int argc, char** argv) {
 
   ros::init(argc, argv, "Control_ROS_Node_Electric");
   RosNode_Electric *nodeElectric = new RosNode_Electric();
-  short numOfAttemps = 0;
-  ROS_INFO("[Control] Electric - Conectando con subsistema de gestion de energia");
-  while (!nodeElectric->getDriverMng()->doConnect(DEVICE_ELECTRIC) && numOfAttemps < MAX_ATTEMPS) {
-    numOfAttemps++;
-  }
-  if (numOfAttemps < MAX_ATTEMPS) {
-    ROS_INFO("[Control] Electric - Conexion establecida con vehiculo");
-    nodeElectric->initROS();
-    ROS_INFO("[Control] Electric - Esperando la activacion del nodo");
-    while(nodeElectric->getNodeStatus() == NODESTATUS_INIT){
-        ros::spinOnce();
-    }
-    if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
-      ROS_INFO("[Control] Electric - Nodo listo para operar");
-    }
-    // Temporizador de requerimiento de informacion
-    Timer *timer = new Timer();
-    timer->Enable();
 
-    while (ros::ok() && nodeElectric->getNodeStatus() != NODESTATUS_OFF) {
-      ros::spinOnce();
-      // Funcionamiento correcto (sin alarmas)
-      if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
-        nodeElectric->getDriverMng()->checkForVehicleMessages();
-        nodeElectric->checkTurnOff();
-        
-        nodeElectric->checkSupplyAlarms();
-        if (timer->GetTimed() >= FREC_2HZ) {
-          timer->Reset();
-          nodeElectric->getDriverMng()->reqElectricInfo();
-          nodeElectric->publishElectricInfo(nodeElectric->getDriverMng()->getVehicleInfo());
-        }
-      }
-      // Funcionamiento en modo degradado 
-      else if(nodeElectric->getNodeStatus() == NODESTATUS_CORRUPT){
-        nodeElectric->checkSupplyAlarms();
-        nodeElectric->getDriverMng()->checkForVehicleMessages();
-        nodeElectric->checkTurnOff();
-      }
-      usleep(1000);
-    }
-    delete(timer);
-  } else {
-    ROS_INFO("[Control] Electric - No se puede conectar al vehiculo. Maximo numero de reintentos realizados.");
+  // Espera conexion cada segundo
+  ROS_INFO("[Control] Electric - Esperando conexion con vehiculo");
+  while (!nodeElectric->getDriverMng()->doConnect(DEVICE_ELECTRIC)){
+    usleep(1000000);
+    ROS_INFO("[Control] Electric - Imposible conexion. Reintentando...");
   }
+
+  ROS_INFO("[Control] Electric - Conexion establecida con vehiculo");
+  nodeElectric->initROS();
+  ROS_INFO("[Control] Electric - Esperando la activacion del nodo");
+  while (nodeElectric->getNodeStatus() == NODESTATUS_INIT) {
+    ros::spinOnce();
+  }
+  if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
+    ROS_INFO("[Control] Electric - Nodo listo para operar");
+  }
+  // Temporizador de requerimiento de informacion
+  Timer *timer = new Timer();
+  timer->Enable();
+
+  while (ros::ok() && nodeElectric->getNodeStatus() != NODESTATUS_OFF) {
+    ros::spinOnce();
+    // Funcionamiento correcto (sin alarmas)
+    if (nodeElectric->getNodeStatus() == NODESTATUS_OK) {
+      nodeElectric->getDriverMng()->checkForVehicleMessages();
+      nodeElectric->checkTurnOff();
+
+      nodeElectric->checkSupplyAlarms();
+      if (timer->GetTimed() >= FREC_2HZ) {
+        timer->Reset();
+        nodeElectric->getDriverMng()->reqElectricInfo();
+        nodeElectric->publishElectricInfo(nodeElectric->getDriverMng()->getVehicleInfo());
+      }
+    }      // Funcionamiento en modo degradado 
+    else if (nodeElectric->getNodeStatus() == NODESTATUS_CORRUPT) {
+      nodeElectric->checkSupplyAlarms();
+      nodeElectric->getDriverMng()->checkForVehicleMessages();
+      nodeElectric->checkTurnOff();
+    }
+    usleep(1000);
+  }
+  
+  delete(timer);
   delete(nodeElectric);
   ROS_INFO("[Control] Electric - Nodo finalizado");
   return 0;
