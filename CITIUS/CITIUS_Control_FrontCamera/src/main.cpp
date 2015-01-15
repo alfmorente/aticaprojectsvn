@@ -19,26 +19,29 @@ int main(int argc, char** argv) {
 
   ros::init(argc, argv, "RosNode_Control_FrontCam");
   RosNode_FrontCamera *fc = new RosNode_FrontCamera();
-  if (fc->getDriverMng()->checkConnection()) {
-    fc->initROS();
-    ROS_INFO("[Control] FrontCamera - Esperando activacion de nodo");
-    while (fc->getNodeStatus() != NODESTATUS_OK) {
-      ros::spinOnce();
-    }
-    ROS_INFO("[Control] FrontCamera - Nodo listo para operar");
-    Timer *timer = new Timer();
-    timer->Enable();
-    while (ros::ok() && fc->getNodeStatus() != NODESTATUS_OFF) {
-      ros::spinOnce();
-      if (timer->GetTimed() >= FREC_2HZ) {
-        timer->Reset();
-        fc->manageDevice();
-      }
-    }
-    delete(timer);
-  } else {
-    ROS_INFO("[Control] FrontCamera - No se puede conectar con la camara");
+
+  // Espera conexion cada segundo
+  ROS_INFO("[Control] FrontCamera - Esperando conexion con camara");
+  while (!fc->getDriverMng()->checkConnection()) {
+    usleep(3000000);
+    ROS_INFO("[Control] FrontCamera - Imposible conexion. Reintentando...");
   }
+  fc->initROS();
+  ROS_INFO("[Control] FrontCamera - Esperando activacion de nodo");
+  while (fc->getNodeStatus() != NODESTATUS_OK) {
+    ros::spinOnce();
+  }
+  ROS_INFO("[Control] FrontCamera - Nodo listo para operar");
+  Timer *timer = new Timer();
+  timer->Enable();
+  while (ros::ok() && fc->getNodeStatus() != NODESTATUS_OFF) {
+    ros::spinOnce();
+    if (timer->GetTimed() >= FREC_2HZ) {
+      timer->Reset();
+      fc->manageDevice();
+    }
+  }
+  delete(timer);
   delete(fc);
   ROS_INFO("[Control] FrontCamera - Nodo finalizado");
   return 0;
