@@ -18,29 +18,33 @@
 int main(int argc, char** argv) {
   ros::init(argc, argv, "RosNode_Control_RearCam");
   RosNode_RearCamera *rc = new RosNode_RearCamera();
+  rc->initROS();
+  
   // Espera conexion cada segundo
   ROS_INFO("[Control] RearCamera - Esperando conexion con camara");
-  while (!rc->getDriverMng()->checkConnection()) {
+  while (!rc->getDriverMng()->checkConnection() && rc->getNodeStatus() != NODESTATUS_OFF) {
     usleep(3000000);
+    ros::spinOnce();
     ROS_INFO("[Control] RearCamera - Imposible conexion. Reintentando...");
   }
-  rc->initROS();
-  ROS_INFO("[Control] RearCamera - Esperando activacion de nodo");
-  while (rc->getNodeStatus() != NODESTATUS_OK) {
-    ros::spinOnce();
-  }
-  ROS_INFO("[Control] RearCamera - Nodo listo para operar");
-  // Temporizador de requerimiento de informacion
-  Timer *timer = new Timer();
-  timer->Enable();
-  while (ros::ok() && rc->getNodeStatus() != NODESTATUS_OFF) {
-    ros::spinOnce();
-    if (timer->GetTimed() >= FREC_2HZ) {
-      timer->Reset();
-      rc->manageDevice();
+  if (rc->getNodeStatus() != NODESTATUS_OFF) {
+    ROS_INFO("[Control] RearCamera - Esperando activacion de nodo");
+    while (rc->getNodeStatus() != NODESTATUS_OK) {
+      ros::spinOnce();
     }
+    ROS_INFO("[Control] RearCamera - Nodo listo para operar");
+    // Temporizador de requerimiento de informacion
+    Timer *timer = new Timer();
+    timer->Enable();
+    while (ros::ok() && rc->getNodeStatus() != NODESTATUS_OFF) {
+      ros::spinOnce();
+      if (timer->GetTimed() >= FREC_2HZ) {
+        timer->Reset();
+        rc->manageDevice();
+      }
+    }
+    delete(timer);
   }
-  delete(timer);
   delete(rc);
   ROS_INFO("[Control] RearCamera - Nodo finalizado");
   return 0;
