@@ -36,18 +36,10 @@ void JausHandler::handleEvent(NodeManagerEvent *e) {
       if(treeEvent->getSubType() == SystemTreeEvent::SubsystemAdded && treeEvent->getSubsystem()->id == JAUS_SUBSYSTEM_MYC){
         mycAvailable = true;
       }
-      // Actualizacion subsistema MyC eliminado
-      /*if((treeEvent->getSubType() == SystemTreeEvent::SubsystemRemoved || treeEvent->getSubType() == SystemTreeEvent::SubsystemTimeout) && treeEvent->getSubsystem()->id == JAUS_SUBSYSTEM_MYC){
-        mycAvailable = false;
-      }*/
       // Actualizacion nodo tablet añadido
       if(treeEvent->getSubType() == SystemTreeEvent::NodeAdded && treeEvent->getNode()->id == JAUS_NODE_TABLET){
         tabletAvailable = true;
       }
-      // Actualizacion nodo tablet eliminado
-      /*if((treeEvent->getSubType() == SystemTreeEvent::NodeRemoved || treeEvent->getSubType() == SystemTreeEvent::NodeTimeout) && treeEvent->getSubsystem()->id == JAUS_SUBSYSTEM_UGV && treeEvent->getNode()->id == JAUS_NODE_TABLET){
-        tabletAvailable = false;
-      }*/
       printf("%s\n", treeEvent->toString().c_str());
       delete e;
       break;
