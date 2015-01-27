@@ -49,9 +49,13 @@
 #ifndef   JAUS_8_PV 
 #define  JAUS_8_PV_PAN_BIT    			0 //Short
 #define  JAUS_8_PV_TILT_BIT    			1 //Short
-#define  JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT    	2 //Bool1
-#define  JAUS_8_PV_INFRARED_FILTER_BIT    	3 //Bool2
-#define  JAUS_8_PV_TRACKING_FUNCTION_BIT    	4 //Bool3
+#define  JAUS_8_PV_ZOOM_BIT                	2 //Bool3
+#define  JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT    	3 //Bool1
+#define  JAUS_8_PV_INFRARED_FILTER_BIT    	4 //Bool2
+#define  JAUS_8_PV_TRACKING_FUNCTION_BIT    	5 //Bool3
+#define  JAUS_8_PV_WIPER_BIT                	6 //Bool3
+
+
 #endif
 
 typedef struct
@@ -96,11 +100,13 @@ typedef struct
           // PRESENCE VECTOR
   JausByte presenceVector; 
 		
-  JausDouble active_pan;					// Scaled Short (-1.0, 1.0), Res: 3e-5
-  JausDouble active_tilt;				// Scaled Short (-1.0, 1.0), Res: 3e-5
+  JausDouble active_pan;				// Scaled Short (-180,180)
+  JausDouble active_tilt;				// Scaled Short (-90,90)
+  JausDouble active_zoom;                               // Scaled Short (0,100)
   JausBoolean active_day_night_function;		
   JausBoolean active_infrared_filter;			
   JausBoolean active_tracking_function;		
+  JausBoolean active_wiper;		
   
 }ReportUSVObservationsConfig8MessageStruct;
 
