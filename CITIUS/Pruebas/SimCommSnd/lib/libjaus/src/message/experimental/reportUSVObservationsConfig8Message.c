@@ -68,11 +68,13 @@ static unsigned int dataSize(ReportUSVObservationsConfig8Message message);
 static void dataInitialize(ReportUSVObservationsConfig8Message message) {
     message ->presenceVector = newJausByte(JAUS_BYTE_PRESENCE_VECTOR_ALL_ON);
 
-    message-> active_pan = newJausDouble(0); // Scaled Short (-100, 100), Res: 0.0031
-    message-> active_tilt = newJausDouble(0); // Scaled Short (-100, 100), Res: 0.0031
+    message-> active_pan = newJausDouble(0); // Scaled Short (-180, 180)
+    message-> active_tilt = newJausDouble(0); // Scaled Short (-90, 90)
+    message-> active_zoom = newJausDouble(0); // Scaled Short (0, 100)
     message-> active_day_night_function = JAUS_FALSE;
     message-> active_infrared_filter = JAUS_FALSE;
     message-> active_tracking_function = JAUS_FALSE;
+    message-> active_wiper = JAUS_FALSE;
 
     message-> properties.expFlag = JAUS_EXPERIMENTAL_MESSAGE;
 }
@@ -107,7 +109,7 @@ static JausBoolean dataFromBuffer(ReportUSVObservationsConfig8Message message, u
 
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->active_pan = jausShortToDouble(tempShort, -100, 100);
+            message->active_pan = jausShortToDouble(tempShort, -180, 180);
         }
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_TILT_BIT)) {
             //Se desempaqueta el parámetro temperature
@@ -116,12 +118,22 @@ static JausBoolean dataFromBuffer(ReportUSVObservationsConfig8Message message, u
 
             //Se suma tamaño del parámetro
             index += JAUS_SHORT_SIZE_BYTES;
-            message->active_tilt = jausShortToDouble(tempShort, -100, 100);
+            message->active_tilt = jausShortToDouble(tempShort, -90, 90);
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_ZOOM_BIT)) {
+            //Se desempaqueta el parámetro temperature
+            if (!jausShortFromBuffer(&tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+
+            //Se suma tamaño del parámetro
+            index += JAUS_SHORT_SIZE_BYTES;
+            message->active_zoom = jausShortToDouble(tempShort, 0, 100);
         }
 
         char b1 = 0;
         char b2 = 0;
         char b3 = 0;
+        char b4 = 0;
 
         //Se comprueban que bits están activos.
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT))
@@ -130,9 +142,11 @@ static JausBoolean dataFromBuffer(ReportUSVObservationsConfig8Message message, u
             b2 = 1;
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_TRACKING_FUNCTION_BIT))
             b3 = 1;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_WIPER_BIT))
+            b4 = 1;
 
         //Si hay algún bit activo se descomprime el siguiente byte.
-        if ((b1 + b2 + b3) > 0) {
+        if ((b1 + b2 + b3 + b4) > 0) {
             tempByte = 0;
             //Se desempaqueta el Byte completo que guarda los distintos booleanos.
             if (!jausByteFromBuffer(&tempByte, buffer + index, bufferSizeBytes - index))
@@ -146,6 +160,9 @@ static JausBoolean dataFromBuffer(ReportUSVObservationsConfig8Message message, u
             }
             if (b3 > 0) {
                 message->active_tracking_function = jausByteIsBitSet(tempByte, JAUS_8_PV_TRACKING_FUNCTION_BIT) ? JAUS_TRUE : JAUS_FALSE;
+            }
+            if (b4 > 0) {
+                message->active_wiper = jausByteIsBitSet(tempByte, JAUS_8_PV_WIPER_BIT) ? JAUS_TRUE : JAUS_FALSE;
             }
         }
 
@@ -173,13 +190,19 @@ static int dataToBuffer(ReportUSVObservationsConfig8Message message, unsigned ch
         index += JAUS_BYTE_SIZE_BYTES;
 
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_PAN_BIT)) {
-            tempShort = jausShortFromDouble(message->active_pan, -100, 100);
+            tempShort = jausShortFromDouble(message->active_pan, -180, 180);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
         }
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_TILT_BIT)) {
-            tempShort = jausShortFromDouble(message->active_tilt, -100, 100);
+            tempShort = jausShortFromDouble(message->active_tilt, -90, 90);
+            if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
+                return JAUS_FALSE;
+            index += JAUS_SHORT_SIZE_BYTES;
+        }
+        if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_ZOOM_BIT)) {
+            tempShort = jausShortFromDouble(message->active_zoom, 0, 100);
             if (!jausShortToBuffer(tempShort, buffer + index, bufferSizeBytes - index))
                 return JAUS_FALSE;
             index += JAUS_SHORT_SIZE_BYTES;
@@ -188,6 +211,7 @@ static int dataToBuffer(ReportUSVObservationsConfig8Message message, unsigned ch
         char b1 = 0;
         char b2 = 0;
         char b3 = 0;
+        char b4 = 0;
         //Se comprueban que bits están activos.
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT))
             b1 = 1;
@@ -195,9 +219,11 @@ static int dataToBuffer(ReportUSVObservationsConfig8Message message, unsigned ch
             b2 = 1;
         if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_TRACKING_FUNCTION_BIT))
             b3 = 1;
+        if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_WIPER_BIT))
+            b4 = 1;
 
         //Si hay algún bit activo se descomprime el siguiente byte.
-        if ((b1 + b2 + b3) > 0) {
+        if ((b1 + b2 + b3 + b4) > 0) {
             tempByte = 0;
             if (b1 > 0) {
                 if (message->active_day_night_function) jausByteSetBit(&tempByte, JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT);
@@ -207,6 +233,9 @@ static int dataToBuffer(ReportUSVObservationsConfig8Message message, unsigned ch
             }
             if (b3 > 0) {
                 if (message->active_tracking_function) jausByteSetBit(&tempByte, JAUS_8_PV_TRACKING_FUNCTION_BIT);
+            }
+            if (b4 > 0) {
+                if (message->active_wiper) jausByteSetBit(&tempByte, JAUS_8_PV_WIPER_BIT);
             }
 
             //pack
@@ -260,9 +289,13 @@ static unsigned int dataSize(ReportUSVObservationsConfig8Message message) {
     if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_TILT_BIT)) {
         index += JAUS_SHORT_SIZE_BYTES;
     }
+	if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_ZOOM_BIT)) {
+        index += JAUS_SHORT_SIZE_BYTES;
+    }
     char b1 = 0;
     char b2 = 0;
     char b3 = 0;
+    char b4 = 0;
     //Se comprueban que bits están activos.
     if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_DAY_NIGHT_FUNCTION_BIT))
         b1 = 1;
@@ -270,9 +303,11 @@ static unsigned int dataSize(ReportUSVObservationsConfig8Message message) {
         b2 = 1;
     if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_TRACKING_FUNCTION_BIT))
         b3 = 1;
+    if (jausByteIsBitSet(message->presenceVector, JAUS_8_PV_WIPER_BIT))
+        b4 = 1;
 
     //Si hay algún bit activo se descomprime el siguiente byte.
-    if ((b1 + b2 + b3) > 0) {
+    if ((b1 + b2 + b3 + b4) > 0) {
         index += JAUS_BYTE_SIZE_BYTES;
     }
 
