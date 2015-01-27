@@ -49,9 +49,13 @@
 #ifndef   JAUS_7_PV 
 #define  JAUS_7_PV_PAN_BIT    			0 //Short
 #define  JAUS_7_PV_TILT_BIT    			1 //Short
-#define  JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT    	2 //Bool1
-#define  JAUS_7_PV_INFRARED_FILTER_BIT    	3 //Bool2
-#define  JAUS_7_PV_TRACKING_FUNCTION_BIT    	4 //Bool3
+#define  JAUS_7_PV_ZOOM_BIT                     2 //Short
+#define  JAUS_7_PV_DAY_NIGHT_FUNCTION_BIT    	3 //Bool1
+#define  JAUS_7_PV_INFRARED_FILTER_BIT    	4 //Bool2
+#define  JAUS_7_PV_TRACKING_FUNCTION_BIT    	5 //Bool3
+#define  JAUS_7_PV_WIPER_BIT            	6 //Bool4
+
+
 #endif
 
 typedef struct
@@ -96,11 +100,13 @@ typedef struct
   
   // MESSAGE DATA MEMBERS GO HERE
   
-  JausDouble pan;					// Scaled Short (-100, 100), Res: 0.0031
-  JausDouble tilt;					// Scaled Short (-100, 100), Res: 0.0031
+  JausDouble pan;					// Scaled Short (-180, 180)
+  JausDouble tilt;					// Scaled Short (-90, 90)
+  JausDouble zoom;                                      // Scaled Short (0, 100)
   JausBoolean day_night_function;			
   JausBoolean infrared_filter;				
-  JausBoolean tracking_function;				
+  JausBoolean tracking_function;
+  JausBoolean wiper;
 
 }SetUSVObservationsConfig7MessageStruct;
 

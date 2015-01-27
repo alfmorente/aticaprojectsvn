@@ -55,10 +55,10 @@
  *              - Node 'AOC Server' (USV) -> ID = 4
  * 
  ******************************************************************************/
-#define JAUSNODE_ID_CONTROL 1
+#define JAUSNODE_ID_CONTROL 3
 #define JAUSNODE_ID_CAMERA 2
 #define JAUSNODE_ID_TABLET 2
-#define JAUSNODE_ID_COMMUNICATION_MNG 3
+#define JAUSNODE_ID_COMMUNICATION_MNG 1
 #define JAUSNODE_ID_AOC_SERVER 4
 /* ************************************************************************** */
 
