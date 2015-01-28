@@ -57,11 +57,11 @@ string SocketDriver::getValueFromConfig(string parameter, int device){
   bool found = false;
   ifstream fichero;
   if (device == DEVICE_ELECTRIC || device == DEVICE_DRIVING) {
-    fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/bin/socket.conf");
+    fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_Driving/bin/socket.conf");
   } else if (device == DEVICE_XSENS) {
-    fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/bin/socket_INSGPS.conf");
+    fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_Driving/bin/socket_INSGPS.conf");
   } else if (device == DEVICE_AHRS) {
-    fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Driving/bin/socket_MAGN.conf");
+    fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_Driving/bin/socket_MAGN.conf");
   }
   if (!fichero.is_open()) {
     return "";
