@@ -103,7 +103,7 @@ void RosNode_Communications::initROS() {
 void RosNode_Communications::initJAUS() {
 
   try {
-    configData = new FileLoader("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Communication/bin/nodeManager.conf");
+    configData = new FileLoader("/home/ugv/catkin_ws/src/CITIUS_Control_Communication/bin/nodeManager.conf");
     handler = new JausHandler();
     nm = new NodeManager(this->configData, this->handler);
   } catch (...) {
@@ -248,9 +248,6 @@ bool RosNode_Communications::isControllerAvailable(){
       return true;
     }
   }
-    subsystemController = JAUS_SUBSYSTEM_MYC;
-    nodeController = JAUS_NODE_CONTROL;
-    return true;
   return false;
 }
 
@@ -280,7 +277,11 @@ void RosNode_Communications::informStatus() {
   } else {
     rmsm->missionId = JAUS_OPERATION_MODE_INICIANDO;
   }
-  rmsm->status = 0;
+  rmsm->status = JAUS_CONTROLLER_NONE;
+  if(subsystemController == JAUS_SUBSYSTEM_MYC && nodeController == JAUS_NODE_CONTROL)
+    rmsm->status = JAUS_CONTROLLER_C2;
+  else if(subsystemController == JAUS_SUBSYSTEM_UGV && nodeController == JAUS_NODE_TABLET)
+    rmsm->status = JAUS_CONTROLLER_TABLET;
   jausAddressCopy(rmsm->destination, jAdd);
   jMsg = reportMissionStatusMessageToJausMessage(rmsm);
   if (jMsg != NULL) {

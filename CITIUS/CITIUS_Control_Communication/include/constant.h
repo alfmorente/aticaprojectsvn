@@ -112,6 +112,17 @@ typedef enum {
   JAUS_OPERATION_MODE_OBSERVACION = 6 ///<Identificador del modo de operación OBSERVACION de la máquina de estados del vehículo para transmitir en mensaje JAUS
 } JausOperationMode;
 
+/**
+ * \enum JausController
+ * \brief Posibles controladores del vehículo
+ */
+typedef enum {
+  JAUS_CONTROLLER_NONE = 0, ///<Identificador de ningún controladore activo
+  JAUS_CONTROLLER_C2 = 10, ///<Identificador de controlador MyC
+  JAUS_CONTROLLER_TABLET = 11, ///<Identificador de controlador Tablet
+  JAUS_CONTROLLER_TEST = 12 ///<Identificador de controlador para pruebas
+} JausController;
+
 #define FREC_10HZ 0.1 ///<Periodo para ejecución de rutinas con frecuencia 10Hz
 #define FREC_5HZ 0.2 ///<Periodo para ejecución de rutinas con frecuencia 5Hz
 #define FREC_2HZ 0.5 ///<Periodo para ejecución de rutinas con frecuencia 2Hz
