@@ -149,7 +149,6 @@ bool AxisP3364LveDriver::sendSetToDevice(short order, float value) {
   usleep(500);
   return true;
 }
-
 /**
  * Método público que solicita el valor de las variables sobre las que se puede 
  * actuar 
@@ -164,24 +163,24 @@ LensPosition AxisP3364LveDriver::getPosition() {
   pos.zoom = 0;
   socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
   if (socketDescriptor >= 0) {
-      if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) != -1) {
-        stringstream stream;
-        stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << ip_address << PTZ_ROUTE << "query=position\r\n";
-        int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
-        if (nBytesSent < 0) {
-          printf("Error en la escritura\n");
-          pos.state = false;
-        }
-        char respuesta[256];
-        int nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
-        respuesta[nBytesRead] = '\0';
-        if (nBytesRead > 0) {
-          pos.state = true;
-          pos.pan = extractPan(respuesta);
-          pos.tilt = extractTilt(respuesta);
-          pos.zoom = extractZoom(respuesta);
-        }
+    if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) != -1) {
+      stringstream stream;
+      stream << "GET http://" << AUTH_CAM_USER << "@" << AUTH_CAM_PASS << ":" << ip_address << PTZ_ROUTE << "query=position\r\n";
+      int nBytesSent = send(socketDescriptor, stream.str().c_str(), strlen(stream.str().c_str()), 0);
+      if (nBytesSent < 0) {
+        printf("Error en la escritura\n");
+        pos.state = false;
       }
+      char respuesta[256];
+      int nBytesRead = recv(socketDescriptor, respuesta, 256, 0);
+      respuesta[nBytesRead] = '\0';
+      if (nBytesRead > 0) {
+        pos.state = true;
+        pos.pan = extractPan(respuesta);
+        pos.tilt = extractTilt(respuesta);
+        pos.zoom = extractZoom(respuesta);
+      }
+    }
   }
   close(socketDescriptor);
   usleep(500);
