@@ -23,6 +23,9 @@ bool SocketDriver::doConnect(int device) {
   if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
     return false;
   }
+  if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) < 0) {
+    printf("Imposible establecer socket como no bloqueante en operaciones L/E\n");
+  }
   server.sin_family = AF_INET;
   server.sin_port = htons(atoi(port.c_str()));
   server.sin_addr = *((struct in_addr *) he->h_addr);
@@ -30,9 +33,7 @@ bool SocketDriver::doConnect(int device) {
   if (connect(socketDescriptor, (struct sockaddr *) &server, sizeof (struct sockaddr)) == -1) {
     return false;
   }
-  if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) < 0) {
-    printf("Imposible establecer socket como no bloqueante en operaciones L/E\n");
-  }
+
   return true;
 }
 
@@ -57,11 +58,11 @@ string SocketDriver::getValueFromConfig(string parameter, int device){
   bool found = false;
   ifstream fichero;
   if (device == DEVICE_ELECTRIC || device == DEVICE_DRIVING) {
-    fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_PositionOrientation/bin/socket.conf");
+    fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/bin/socket.conf");
   } else if (device == DEVICE_XSENS) {
-    fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_PositionOrientation/bin/socket_INSGPS.conf");
+    fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/bin/socket_INSGPS.conf");
   } else if (device == DEVICE_AHRS) {
-    fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_PositionOrientation/bin/socket_MAGN.conf");
+    fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_PositionOrientation/bin/socket_MAGN.conf");
   }
   if (!fichero.is_open()) {
     return "";
