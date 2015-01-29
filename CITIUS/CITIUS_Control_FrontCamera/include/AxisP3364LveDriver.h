@@ -22,6 +22,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <fcntl.h>
 #include <sstream>
 #include <fstream>
 #include "constant.h"
