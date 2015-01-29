@@ -15,8 +15,6 @@
 RosNode_PositionOrientation::RosNode_PositionOrientation() {
   nodeStatus = NODESTATUS_INIT;
   gpsinsDriver = new XSensMTi700Driver();
-  magnetometerDriver = new TraxAHRSModuleDriver();
-  magnOK = false;
   gpsinsOK = false;
 }
 
@@ -26,7 +24,6 @@ RosNode_PositionOrientation::RosNode_PositionOrientation() {
  */
 RosNode_PositionOrientation::~RosNode_PositionOrientation() {
   delete(gpsinsDriver);
-  delete(magnetometerDriver);
 }
 
 /**
@@ -43,14 +40,8 @@ void RosNode_PositionOrientation::initROS() {
  * supuesto de que se hayan iniciado correctamente
  */
 void RosNode_PositionOrientation::configureDevices() {
-  if (gpsinsOK) {
-    gpsinsDriver->configureDevice();
-    ROS_INFO("[Control] Position / Orientation - Configuracion de GPS/INS establecida");
-  }
-  if (magnOK) {
-    magnetometerDriver->configureDevice();
-    ROS_INFO("[Control] Position / Orientation - Configuracion de Magnetometro establecida");
-  }
+  gpsinsDriver->configureDevice();
+  ROS_INFO("[Control] Position / Orientation - Configuracion de GPS/INS establecida");
 }
 
 /**
@@ -88,30 +79,12 @@ XSensMTi700Driver *RosNode_PositionOrientation::getXSensManager() {
 }
 
 /**
- * Método público consultor del atributo "gpsinsDriver" de la clase con 
- * referencia al objeto que gestiona el dispositivo TRAX AHRS Module
- * @return Referencia al objeto de la clase "TraxAHRSModuleDriver"
- */
-TraxAHRSModuleDriver *RosNode_PositionOrientation::getMagnetometerManager() {
-  return magnetometerDriver;
-}
-
-/**
  * Método público consultor del atributo "gpsinsOK" de la clase que indica si
  *  el dispositivo está disponible durante la ejecución del nodo
  * @return Atributo "gpsinsOK" de la clase
  */
 bool RosNode_PositionOrientation::getGpsStatus() {
   return gpsinsOK;
-}
-
-/**
- * Método público consultor del atributo "magnOK" de la clase que indica si
- *  el dispositivo está disponible durante la ejecución del nodo
- * @return Atributo "magnOK" de la clase
- */
-bool RosNode_PositionOrientation::getMagnStatus() {
-  return magnOK;
 }
 
 /**
@@ -123,19 +96,10 @@ void RosNode_PositionOrientation::setGpsStatus(bool status) {
 }
 
 /**
- * Método público modificador del atributo "magOK" de la clase
- * @param[in] status Nuevo valor para el atributo "magOK"
- */
-void RosNode_PositionOrientation::setMagnStatus(bool status) {
-  magnOK = status;
-}
-
-/**
  * Método público que obtiene el valor de la ultima lectura de los dispositivos 
  * y publica la información en el topic correspondiente
  */
 void RosNode_PositionOrientation::publishInformation() {
-  if (gpsinsOK && !magnOK) {
     if (gpsinsDriver->getData()) {
       CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
       GPSINSInfo information = gpsinsDriver->getInfo();
@@ -157,81 +121,5 @@ void RosNode_PositionOrientation::publishInformation() {
       msgSnd.rateY = information.rateY;
       msgSnd.rateZ = information.rateZ;
       pubPosOriInfo.publish(msgSnd);
-    }
-  } else if (!gpsinsOK && magnOK) {
-    if (magnetometerDriver->getData()) {
-      CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
-      TraxMeasurement information = magnetometerDriver->getInfo();
-      msgSnd.positionStatus = 0;
-      msgSnd.orientationStatus = information.heading_status;
-      msgSnd.latitude = 0;
-      msgSnd.longitude = 0;
-      msgSnd.altitude = 0;
-      msgSnd.roll = information.roll;
-      msgSnd.pitch = information.pitch;
-      msgSnd.yaw = information.heading;
-      msgSnd.velX = 0;
-      msgSnd.velY = 0;
-      msgSnd.velZ = 0;
-      msgSnd.accX = information.accX;
-      msgSnd.accY = information.accY;
-      msgSnd.accZ = information.accZ;
-      msgSnd.rateX = information.gyrX;
-      msgSnd.rateY = information.gyrY;
-      msgSnd.rateZ = information.gyrZ;
-    }
-  } else if (gpsinsOK && magnOK) {
-      printf("Solicitando datos\n");
-    if (gpsinsDriver->getData()) {
-        printf("Datos obtenidos\n");
-      CITIUS_Control_PositionOrientation::msg_posOriInfo msgSnd;
-      GPSINSInfo informationG = gpsinsDriver->getInfo();
-      msgSnd.positionStatus = informationG.positionStatus;
-      msgSnd.latitude = informationG.latitude;
-      msgSnd.longitude = informationG.longitude;
-      msgSnd.altitude = informationG.altitude;
-      msgSnd.velX = informationG.velX;
-      msgSnd.velY = informationG.velY;
-      msgSnd.velZ = informationG.velZ;
-      if (magnetometerDriver->getData()) {
-        TraxMeasurement informationM = magnetometerDriver->getInfo();
-        if (informationM.heading_status == 1) {
-          msgSnd.orientationStatus = informationM.heading_status;
-          msgSnd.roll = informationM.roll;
-          msgSnd.pitch = informationM.pitch;
-          msgSnd.yaw = informationM.heading;
-          msgSnd.accX = informationM.accX;
-          msgSnd.accY = informationM.accY;
-          msgSnd.accZ = informationM.accZ;
-          msgSnd.rateX = informationM.gyrX;
-          msgSnd.rateY = informationM.gyrY;
-          msgSnd.rateZ = informationM.gyrZ;
-        } else {
-          msgSnd.orientationStatus = informationG.orientationStatus;
-          msgSnd.roll = informationG.roll;
-          msgSnd.pitch = informationG.pitch;
-          msgSnd.yaw = informationG.yaw;
-          msgSnd.accX = informationG.accX;
-          msgSnd.accY = informationG.accY;
-          msgSnd.accZ = informationG.accZ;
-          msgSnd.rateX = informationG.rateX;
-          msgSnd.rateY = informationG.rateY;
-          msgSnd.rateZ = informationG.rateZ;
-        }
-      } else {
-        msgSnd.orientationStatus = informationG.orientationStatus;
-        msgSnd.roll = informationG.roll;
-        msgSnd.pitch = informationG.pitch;
-        msgSnd.yaw = informationG.yaw;
-        msgSnd.accX = informationG.accX;
-        msgSnd.accY = informationG.accY;
-        msgSnd.accZ = informationG.accZ;
-        msgSnd.rateX = informationG.rateX;
-        msgSnd.rateY = informationG.rateY;
-        msgSnd.rateZ = informationG.rateZ;
-      }
-      pubPosOriInfo.publish(msgSnd);
-    }
-
   }
 }
