@@ -20,81 +20,42 @@ int main(int argc, char** argv) {
   RosNode_PositionOrientation *nodePosOri = new RosNode_PositionOrientation();
 
   // Conexion con dispositivos
-  ROS_INFO("[Control] Position / Orientation - Conectando con dispositivos");
+  ROS_INFO("[Control] Position / Orientation - Conectando con INS/GPS");
   nodePosOri->setGpsStatus(false);
-  nodePosOri->setMagnStatus(false);
   // Inicio de artefactos ROS
   nodePosOri->initROS();
-  while (!nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
+  while(!nodePosOri->getGpsStatus() && nodePosOri->getNodeStatus() != NODESTATUS_OFF){
     // Conexion con GPS/INS
     if (nodePosOri->getXSensManager()->doConnect(DEVICE_XSENS)) {
-      ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo GPS/INS");
       nodePosOri->setGpsStatus(true);
     } else {
-      ROS_INFO("[Control] Position / Orientation - No se puede conectar al dispositivo GPS/INS");
+      ROS_INFO("[Control] Position / Orientation - No se puede conectar al GPS/INS");
     }
-    // Conexion con magnetometro
-    if (nodePosOri->getMagnetometerManager()->doConnect(DEVICE_AHRS)) {
-      ROS_INFO("[Control] Position / Orientation - Conectado a dispositivo Magnetometro");
-      nodePosOri->setMagnStatus(true);
-    } else {
-      ROS_INFO("[Control] Position / Orientation - No se puede conectar al dispositivo Magnetometro");
-    }
-    // Check de conexion minima
-    if (!nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus()) {
+    // Check de conexion
+    if (!nodePosOri->getGpsStatus()) {
       usleep(3000000);
       ros::spinOnce();
-      ROS_INFO("[Control] Position / Orientation - Imposible conexion con ningun dispositivo. Reintentando...");
+      ROS_INFO("[Control] Position / Orientation - Imposible conexion con INS/GPS. Reintentando...");
     }
   }
-  if (nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
-    // Check de conexion de dispositivos
-    if (nodePosOri->getGpsStatus() || nodePosOri->getMagnStatus()) {
-      ROS_INFO("[Control] Position / Orientation - Esperando activacion de nodo");
-      while (nodePosOri->getNodeStatus() == NODESTATUS_INIT) {
-        ros::spinOnce();
-        //printf("%d\n",nodePosOri->getNodeStatus());
-      }
-      if (nodePosOri->getNodeStatus() == NODESTATUS_OK) {
-        nodePosOri->configureDevices();
-        ROS_INFO("[Control] Position / Orientation - Nodo activado y listo para operar");
 
-      }
-      // Bucle principal Funcionamiento completo (GPS/INS + Mag)
-      if (nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
-        ROS_INFO("[Control] Position / Orientation - Funcionando con GPS/INS y Magnetometro");
-        while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
-          ros::spinOnce();
-          nodePosOri->publishInformation();
-          usleep(50000);
-        }
-      }
-        // Bucle principal Funcionamiento parcial solo GPS/INS
-      else if (nodePosOri->getGpsStatus() && !nodePosOri->getMagnStatus()) {
-        ROS_INFO("[Control] Position / Orientation - Funcionando solo con GPS/INS");
-        while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
-          ros::spinOnce();
-          nodePosOri->publishInformation();
-          usleep(50000);
-        }
-      }
-        // Bucle principal Funcionamiento parcial solo Mag
-      else if (!nodePosOri->getGpsStatus() && nodePosOri->getMagnStatus()) {
-        Timer *timer = new Timer();
-        timer->Enable();
-        ROS_INFO("[Control] Position / Orientation - Funcionando solo con Magnetometro");
-        while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
-          ros::spinOnce();
-          if (timer->GetTimed() >= FREC_10HZ) {
-            nodePosOri->publishInformation();
-            usleep(50000);
-          }
-        }
-        delete(timer);
-      }
-      nodePosOri->getXSensManager()->disconnect();
-      ROS_INFO("[Control] Position / Orientation - Desconectado dispositivo GPS/INS");
+  if (nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
+    ROS_INFO("[Control] Position / Orientation - Esperando activacion de nodo");
+    while (nodePosOri->getNodeStatus() == NODESTATUS_INIT) {
+      ros::spinOnce();
     }
+    if (nodePosOri->getNodeStatus() == NODESTATUS_OK) {
+      nodePosOri->configureDevices(); 
+      ROS_INFO("[Control] Position / Orientation - Nodo activado y listo para operar");
+    }
+    // Bucle principal Funcionamiento completo (GPS/INS)
+    while (ros::ok() && nodePosOri->getNodeStatus() != NODESTATUS_OFF) {
+      ros::spinOnce();
+      nodePosOri->publishInformation();
+      usleep(50000);
+    }
+    nodePosOri->getXSensManager()->disconnect();
+    ROS_INFO("[Control] Position / Orientation - Desconectado dispositivo GPS/INS");
   }
   delete(nodePosOri);
   ROS_INFO("[Control] Position / Orientation - Nodo finalizado");

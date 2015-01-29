@@ -18,7 +18,6 @@
 #include "CITIUS_Control_PositionOrientation/msg_posOriInfo.h"
 #include "constant.h"
 #include "XSensMTi700Driver.h"
-#include "TraxAHRSModuleDriver.h"
 #include <cstdlib>
 #include "ros/ros.h"
 #include <ros/node_handle.h>
@@ -36,8 +35,6 @@ private:
   ros::Publisher pubPosOriInfo;
   ros::ServiceServer servNodeStatus;
   XSensMTi700Driver *gpsinsDriver;
-  TraxAHRSModuleDriver *magnetometerDriver;
-  bool magnOK;
   bool gpsinsOK;
   bool fcn_serv_nodeStatus(CITIUS_Control_PositionOrientation::srv_nodeStatus::Request &, CITIUS_Control_PositionOrientation::srv_nodeStatus::Response &);
 public:
@@ -45,11 +42,8 @@ public:
   ~RosNode_PositionOrientation();
   void initROS();
   XSensMTi700Driver *getXSensManager();
-  TraxAHRSModuleDriver *getMagnetometerManager();
   bool getGpsStatus();
-  bool getMagnStatus();
   void setGpsStatus(bool);
-  void setMagnStatus(bool);
   void publishInformation();
   void configureDevices();
 };
