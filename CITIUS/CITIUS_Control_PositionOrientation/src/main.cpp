@@ -30,9 +30,6 @@ int main(int argc, char** argv) {
       nodePosOri->setGpsStatus(true);
     } else {
       ROS_INFO("[Control] Position / Orientation - No se puede conectar al GPS/INS");
-    }
-    // Check de conexion
-    if (!nodePosOri->getGpsStatus()) {
       usleep(3000000);
       ros::spinOnce();
       ROS_INFO("[Control] Position / Orientation - Imposible conexion con INS/GPS. Reintentando...");
