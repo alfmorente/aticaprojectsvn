@@ -11,7 +11,7 @@
  * Constructor de la clase
  */
 TurnOffAlright::TurnOffAlright() {
-  filename = "/home/ugv/catkin_ws/src/CITIUS_Control_Manager/bin/Operation_Status.txt";
+  filename = "/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_Manager/bin/Operation_Status.txt";
 }
 
 /**
