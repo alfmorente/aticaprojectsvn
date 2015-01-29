@@ -24,6 +24,7 @@
 #include <sstream>
 #include <fstream>
 #include "constant.h"
+#include <fcntl.h>
 
 using namespace std;
 

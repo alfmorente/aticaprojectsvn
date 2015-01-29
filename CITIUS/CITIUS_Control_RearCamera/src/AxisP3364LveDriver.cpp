@@ -35,7 +35,7 @@ string AxisP3364LveDriver::getValueFromConfig(string parameter) {
   string cadena, parametro, value = "";
   bool found = false;
   ifstream fichero;
-  fichero.open("/home/ugv/catkin_ws/src/CITIUS_Control_RearCamera/bin/socket.conf");
+  fichero.open("/home/atica/catkin_ws/src/CITIUS/CITIUS_Control_RearCamera/bin/socket.conf");
   if (!fichero.is_open()) {
     return "";
   }
@@ -77,6 +77,9 @@ bool AxisP3364LveDriver::checkConnection() {
     close(socketDescriptor);
     usleep(500);
     return false;
+  }
+  if (fcntl(socketDescriptor, F_SETFL, fcntl(socketDescriptor, F_GETFL) | O_NONBLOCK) < 0) {
+    printf("Imposible establecer socket como no bloqueante en operaciones L/E\n");
   }
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
