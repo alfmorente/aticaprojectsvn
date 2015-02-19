@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="90">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
       <df name="bin">
@@ -40,6 +40,8 @@
         <df name="driving.dir">
           <df name="src">
           </df>
+        </df>
+        <df name="Progress">
         </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>
@@ -105,11 +107,15 @@
           <in>CANCommunication.hpp</in>
           <in>ConduccionCamionThread.hpp</in>
           <in>ConduccionThread.hpp</in>
+          <in>DrivingConnectionManager.h</in>
           <in>SerialCommunication.hpp</in>
+          <in>SocketDriver.h</in>
           <in>Thread.hpp</in>
           <in>Timer.hpp</in>
           <in>built_in.h</in>
           <in>conduccion.h</in>
+          <in>constant.h</in>
+          <in>constantCarly.h</in>
           <in>interaction.h</in>
           <in>ksm.h</in>
           <in>mastil.h</in>
@@ -142,7 +148,9 @@
         <in>CANCommunication.cpp</in>
         <in>ConduccionCamionThread.cpp</in>
         <in>ConduccionThread.cpp</in>
+        <in>DrivingConnectionManager.cpp</in>
         <in>SerialCommunication.cpp</in>
+        <in>SocketDriver.cpp</in>
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>

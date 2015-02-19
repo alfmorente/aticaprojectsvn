@@ -345,6 +345,19 @@ rospack_gensrv/fast:
 .PHONY : rospack_gensrv/fast
 
 #=============================================================================
+# Target rules for targets named rospack_gensrv_all
+
+# Build rule for target.
+rospack_gensrv_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_gensrv_all
+.PHONY : rospack_gensrv_all
+
+# fast build rule for target.
+rospack_gensrv_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_gensrv_all.dir/build.make CMakeFiles/rospack_gensrv_all.dir/build
+.PHONY : rospack_gensrv_all/fast
+
+#=============================================================================
 # Target rules for targets named run_tests
 
 # Build rule for target.
@@ -472,30 +485,6 @@ src/CANCommunication.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/CANCommunication.cpp.s
 .PHONY : src/CANCommunication.cpp.s
 
-src/ConduccionCamionThread.o: src/ConduccionCamionThread.cpp.o
-.PHONY : src/ConduccionCamionThread.o
-
-# target to build an object file
-src/ConduccionCamionThread.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.o
-.PHONY : src/ConduccionCamionThread.cpp.o
-
-src/ConduccionCamionThread.i: src/ConduccionCamionThread.cpp.i
-.PHONY : src/ConduccionCamionThread.i
-
-# target to preprocess a source file
-src/ConduccionCamionThread.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.i
-.PHONY : src/ConduccionCamionThread.cpp.i
-
-src/ConduccionCamionThread.s: src/ConduccionCamionThread.cpp.s
-.PHONY : src/ConduccionCamionThread.s
-
-# target to generate assembly for a file
-src/ConduccionCamionThread.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.s
-.PHONY : src/ConduccionCamionThread.cpp.s
-
 src/ConduccionThread.o: src/ConduccionThread.cpp.o
 .PHONY : src/ConduccionThread.o
 
@@ -520,29 +509,53 @@ src/ConduccionThread.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionThread.cpp.s
 .PHONY : src/ConduccionThread.cpp.s
 
-src/SerialCommunication.o: src/SerialCommunication.cpp.o
-.PHONY : src/SerialCommunication.o
+src/DrivingConnectionManager.o: src/DrivingConnectionManager.cpp.o
+.PHONY : src/DrivingConnectionManager.o
 
 # target to build an object file
-src/SerialCommunication.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SerialCommunication.cpp.o
-.PHONY : src/SerialCommunication.cpp.o
+src/DrivingConnectionManager.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
+.PHONY : src/DrivingConnectionManager.cpp.o
 
-src/SerialCommunication.i: src/SerialCommunication.cpp.i
-.PHONY : src/SerialCommunication.i
+src/DrivingConnectionManager.i: src/DrivingConnectionManager.cpp.i
+.PHONY : src/DrivingConnectionManager.i
 
 # target to preprocess a source file
-src/SerialCommunication.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SerialCommunication.cpp.i
-.PHONY : src/SerialCommunication.cpp.i
+src/DrivingConnectionManager.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.i
+.PHONY : src/DrivingConnectionManager.cpp.i
 
-src/SerialCommunication.s: src/SerialCommunication.cpp.s
-.PHONY : src/SerialCommunication.s
+src/DrivingConnectionManager.s: src/DrivingConnectionManager.cpp.s
+.PHONY : src/DrivingConnectionManager.s
 
 # target to generate assembly for a file
-src/SerialCommunication.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SerialCommunication.cpp.s
-.PHONY : src/SerialCommunication.cpp.s
+src/DrivingConnectionManager.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
+.PHONY : src/DrivingConnectionManager.cpp.s
+
+src/SocketDriver.o: src/SocketDriver.cpp.o
+.PHONY : src/SocketDriver.o
+
+# target to build an object file
+src/SocketDriver.cpp.o:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.o
+.PHONY : src/SocketDriver.cpp.o
+
+src/SocketDriver.i: src/SocketDriver.cpp.i
+.PHONY : src/SocketDriver.i
+
+# target to preprocess a source file
+src/SocketDriver.cpp.i:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.i
+.PHONY : src/SocketDriver.cpp.i
+
+src/SocketDriver.s: src/SocketDriver.cpp.s
+.PHONY : src/SocketDriver.s
+
+# target to generate assembly for a file
+src/SocketDriver.cpp.s:
+	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.s
+.PHONY : src/SocketDriver.cpp.s
 
 src/Thread.o: src/Thread.cpp.o
 .PHONY : src/Thread.o
@@ -692,6 +705,7 @@ help:
 	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
+	@echo "... rospack_gensrv_all"
 	@echo "... run_tests"
 	@echo "... test"
 	@echo "... test-future"
@@ -703,15 +717,15 @@ help:
 	@echo "... src/CANCommunication.o"
 	@echo "... src/CANCommunication.i"
 	@echo "... src/CANCommunication.s"
-	@echo "... src/ConduccionCamionThread.o"
-	@echo "... src/ConduccionCamionThread.i"
-	@echo "... src/ConduccionCamionThread.s"
 	@echo "... src/ConduccionThread.o"
 	@echo "... src/ConduccionThread.i"
 	@echo "... src/ConduccionThread.s"
-	@echo "... src/SerialCommunication.o"
-	@echo "... src/SerialCommunication.i"
-	@echo "... src/SerialCommunication.s"
+	@echo "... src/DrivingConnectionManager.o"
+	@echo "... src/DrivingConnectionManager.i"
+	@echo "... src/DrivingConnectionManager.s"
+	@echo "... src/SocketDriver.o"
+	@echo "... src/SocketDriver.i"
+	@echo "... src/SocketDriver.s"
 	@echo "... src/Thread.o"
 	@echo "... src/Thread.i"
 	@echo "... src/Thread.s"

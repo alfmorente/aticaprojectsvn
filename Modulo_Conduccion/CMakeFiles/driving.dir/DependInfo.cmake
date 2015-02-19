@@ -10,9 +10,9 @@ SET(CMAKE_DEPENDS_CHECK_C
 SET(CMAKE_C_COMPILER_ID "GNU")
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/atica/catkin_ws/src/Modulo_Conduccion/src/CANCommunication.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/CANCommunication.cpp.o"
-  "/home/atica/catkin_ws/src/Modulo_Conduccion/src/ConduccionCamionThread.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/ConduccionCamionThread.cpp.o"
   "/home/atica/catkin_ws/src/Modulo_Conduccion/src/ConduccionThread.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/ConduccionThread.cpp.o"
-  "/home/atica/catkin_ws/src/Modulo_Conduccion/src/SerialCommunication.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/SerialCommunication.cpp.o"
+  "/home/atica/catkin_ws/src/Modulo_Conduccion/src/DrivingConnectionManager.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
+  "/home/atica/catkin_ws/src/Modulo_Conduccion/src/SocketDriver.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/SocketDriver.cpp.o"
   "/home/atica/catkin_ws/src/Modulo_Conduccion/src/Thread.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/Thread.cpp.o"
   "/home/atica/catkin_ws/src/Modulo_Conduccion/src/Timer.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/Timer.cpp.o"
   "/home/atica/catkin_ws/src/Modulo_Conduccion/src/conduccion.cpp" "/home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles/driving.dir/src/conduccion.cpp.o"
