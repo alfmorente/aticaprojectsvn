@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/main.cpp.o -c /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/main.cpp",
+  "file": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/main.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o -c /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/DrivingConnectionManager.cpp",
+  "file": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/DrivingConnectionManager.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/RosNode_Driving.cpp.o -c /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/RosNode_Driving.cpp",
+  "file": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/RosNode_Driving.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/RosNode.cpp.o -c /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/RosNode.cpp",
+  "file": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/RosNode.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/Timer.cpp.o -c /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/Timer.cpp",
+  "file": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/Timer.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/SocketDriver.cpp.o -c /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/SocketDriver.cpp",
+  "file": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/SocketDriver.cpp"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/gtest",
+  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
+  "file": "/usr/src/gtest/src/gtest-all.cc"
+},
+{
+  "directory": "/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/gtest",
+  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"Driving_Bobcat\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
+  "file": "/usr/src/gtest/src/gtest_main.cc"
+}
+]
