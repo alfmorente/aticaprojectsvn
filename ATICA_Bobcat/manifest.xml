@@ -1,0 +1,15 @@
+<package>
+  <description brief="Driving_Bobcat">
+
+     Driving_Bobcat
+
+  </description>
+  <author>Carlos Amores</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Driving_Bobcat</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

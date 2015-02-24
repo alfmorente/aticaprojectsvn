@@ -1,0 +1,47 @@
+Scanning dependencies of target rosbuild_premsgsrvgen
+[  0%] Built target rosbuild_premsgsrvgen
+Scanning dependencies of target ROSBUILD_genmsg_cpp
+[  4%] Generating msg_gen/cpp/include/Driving_Bobcat/msg_switcher.h
+[  8%] Generating msg_gen/cpp/include/Driving_Bobcat/msg_command.h
+[ 13%] Generating msg_gen/cpp/include/Driving_Bobcat/msg_vehicleInfo.h
+[ 13%] Built target ROSBUILD_genmsg_cpp
+Scanning dependencies of target ROSBUILD_genmsg_lisp
+[ 17%] Generating msg_gen/lisp/msg_switcher.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_switcher.lisp
+[ 21%] Generating msg_gen/lisp/msg_command.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_command.lisp
+[ 26%] Generating msg_gen/lisp/msg_vehicleInfo.lisp, msg_gen/lisp/_package.lisp, msg_gen/lisp/_package_msg_vehicleInfo.lisp
+[ 26%] Built target ROSBUILD_genmsg_lisp
+Scanning dependencies of target ROSBUILD_genmsg_py
+[ 30%] Generating src/Driving_Bobcat/msg/_msg_vehicleInfo.py
+[ 34%] Generating src/Driving_Bobcat/msg/_msg_switcher.py
+[ 39%] Generating src/Driving_Bobcat/msg/_msg_command.py
+[ 43%] Generating src/Driving_Bobcat/msg/__init__.py
+[ 43%] Built target ROSBUILD_genmsg_py
+Scanning dependencies of target rospack_genmsg
+[ 43%] Built target rospack_genmsg
+Scanning dependencies of target ROSBUILD_gensrv_cpp
+[ 47%] Generating srv_gen/cpp/include/Driving_Bobcat/srv_vehicleStatus.h
+[ 52%] Generating srv_gen/cpp/include/Driving_Bobcat/srv_nodeStatus.h
+[ 52%] Built target ROSBUILD_gensrv_cpp
+Scanning dependencies of target ROSBUILD_gensrv_lisp
+[ 56%] Generating srv_gen/lisp/srv_vehicleStatus.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_vehicleStatus.lisp
+[ 60%] Generating srv_gen/lisp/srv_nodeStatus.lisp, srv_gen/lisp/_package.lisp, srv_gen/lisp/_package_srv_nodeStatus.lisp
+[ 60%] Built target ROSBUILD_gensrv_lisp
+Scanning dependencies of target ROSBUILD_gensrv_py
+[ 65%] Generating src/Driving_Bobcat/srv/_srv_nodeStatus.py
+[ 69%] Generating src/Driving_Bobcat/srv/_srv_vehicleStatus.py
+[ 73%] Generating src/Driving_Bobcat/srv/__init__.py
+[ 73%] Built target ROSBUILD_gensrv_py
+Scanning dependencies of target rospack_gensrv
+[ 73%] Built target rospack_gensrv
+Scanning dependencies of target rospack_genmsg_libexe
+[ 73%] Built target rospack_genmsg_libexe
+Scanning dependencies of target rosbuild_precompile
+[ 73%] Built target rosbuild_precompile
+Scanning dependencies of target driving
+[ 78%] Building CXX object CMakeFiles/driving.dir/src/main.cpp.o
+In file included from /home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/main.cpp:9:0:
+/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include/RosNode_Driving.h:19:39: error fatal: Driving_ATICA/msg_command.h: No existe el archivo o el directorio
+compilación terminada.
+make[2]: *** [CMakeFiles/driving.dir/src/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/driving.dir/all] Error 2
+make: *** [all] Error 2

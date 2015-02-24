@@ -1,0 +1,20 @@
+called: /usr/bin/g++
+	/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat
+	/usr/bin/g++
+	-O2
+	-g
+	-I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/include
+	-I/opt/ros/groovy/include
+	-I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/msg_gen/cpp/include
+	-I/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/srv_gen/cpp/include
+	-DROS_PACKAGE_NAME="Driving_Bobcat"
+	-W
+	-Wall
+	-Wno-unused-parameter
+	-fno-strict-aliasing
+	-pthread
+	-o
+	CMakeFiles/driving.dir/src/main.cpp.o
+	-c
+	/home/atica/catkin_ws/src/ATICA_Bobcat/Driving_Bobcat/src/main.cpp
+
