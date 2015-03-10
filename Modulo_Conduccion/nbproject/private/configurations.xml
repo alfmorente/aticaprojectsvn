@@ -114,7 +114,6 @@
           <in>Timer.hpp</in>
           <in>built_in.h</in>
           <in>conduccion.h</in>
-          <in>constant.h</in>
           <in>constantCarly.h</in>
           <in>interaction.h</in>
           <in>ksm.h</in>
@@ -126,37 +125,15 @@
       </df>
       <df name="msg">
       </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="Modulo_Conduccion">
-              <in>bomba.h</in>
-              <in>mastil.h</in>
-              <in>messageCAN.h</in>
-              <in>nivelBomba.h</in>
-            </df>
-          </df>
-        </df>
-        <df name="lisp">
-        </df>
-      </df>
       <df name="src">
         <df name="Modulo_Conduccion">
-          <df name="msg">
-          </df>
         </df>
         <in>CANCommunication.cpp</in>
-        <in>ConduccionCamionThread.cpp</in>
         <in>ConduccionThread.cpp</in>
-        <in>DrivingConnectionManager.cpp</in>
-        <in>SerialCommunication.cpp</in>
-        <in>SocketDriver.cpp</in>
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>
         <in>interaction.cpp</in>
-        <in>mastil.cpp</in>
-        <in>operaciones.c</in>
       </df>
       <df name="test_results">
       </df>

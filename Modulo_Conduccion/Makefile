@@ -163,19 +163,6 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmsg_py
-
-# Build rule for target.
-ROSBUILD_genmsg_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_py
-.PHONY : ROSBUILD_genmsg_py
-
-# fast build rule for target.
-ROSBUILD_genmsg_py/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
-.PHONY : ROSBUILD_genmsg_py/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -306,19 +293,6 @@ rospack_genmsg/fast:
 .PHONY : rospack_genmsg/fast
 
 #=============================================================================
-# Target rules for targets named rospack_genmsg_all
-
-# Build rule for target.
-rospack_genmsg_all: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
-.PHONY : rospack_genmsg_all
-
-# fast build rule for target.
-rospack_genmsg_all/fast:
-	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
-.PHONY : rospack_genmsg_all/fast
-
-#=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
 
 # Build rule for target.
@@ -343,19 +317,6 @@ rospack_gensrv: cmake_check_build_system
 rospack_gensrv/fast:
 	$(MAKE) -f CMakeFiles/rospack_gensrv.dir/build.make CMakeFiles/rospack_gensrv.dir/build
 .PHONY : rospack_gensrv/fast
-
-#=============================================================================
-# Target rules for targets named rospack_gensrv_all
-
-# Build rule for target.
-rospack_gensrv_all: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rospack_gensrv_all
-.PHONY : rospack_gensrv_all
-
-# fast build rule for target.
-rospack_gensrv_all/fast:
-	$(MAKE) -f CMakeFiles/rospack_gensrv_all.dir/build.make CMakeFiles/rospack_gensrv_all.dir/build
-.PHONY : rospack_gensrv_all/fast
 
 #=============================================================================
 # Target rules for targets named run_tests
@@ -509,54 +470,6 @@ src/ConduccionThread.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/ConduccionThread.cpp.s
 .PHONY : src/ConduccionThread.cpp.s
 
-src/DrivingConnectionManager.o: src/DrivingConnectionManager.cpp.o
-.PHONY : src/DrivingConnectionManager.o
-
-# target to build an object file
-src/DrivingConnectionManager.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
-.PHONY : src/DrivingConnectionManager.cpp.o
-
-src/DrivingConnectionManager.i: src/DrivingConnectionManager.cpp.i
-.PHONY : src/DrivingConnectionManager.i
-
-# target to preprocess a source file
-src/DrivingConnectionManager.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.i
-.PHONY : src/DrivingConnectionManager.cpp.i
-
-src/DrivingConnectionManager.s: src/DrivingConnectionManager.cpp.s
-.PHONY : src/DrivingConnectionManager.s
-
-# target to generate assembly for a file
-src/DrivingConnectionManager.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
-.PHONY : src/DrivingConnectionManager.cpp.s
-
-src/SocketDriver.o: src/SocketDriver.cpp.o
-.PHONY : src/SocketDriver.o
-
-# target to build an object file
-src/SocketDriver.cpp.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.o
-.PHONY : src/SocketDriver.cpp.o
-
-src/SocketDriver.i: src/SocketDriver.cpp.i
-.PHONY : src/SocketDriver.i
-
-# target to preprocess a source file
-src/SocketDriver.cpp.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.i
-.PHONY : src/SocketDriver.cpp.i
-
-src/SocketDriver.s: src/SocketDriver.cpp.s
-.PHONY : src/SocketDriver.s
-
-# target to generate assembly for a file
-src/SocketDriver.cpp.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.s
-.PHONY : src/SocketDriver.cpp.s
-
 src/Thread.o: src/Thread.cpp.o
 .PHONY : src/Thread.o
 
@@ -653,30 +566,6 @@ src/interaction.cpp.s:
 	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/interaction.cpp.s
 .PHONY : src/interaction.cpp.s
 
-src/operaciones.o: src/operaciones.c.o
-.PHONY : src/operaciones.o
-
-# target to build an object file
-src/operaciones.c.o:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.o
-.PHONY : src/operaciones.c.o
-
-src/operaciones.i: src/operaciones.c.i
-.PHONY : src/operaciones.i
-
-# target to preprocess a source file
-src/operaciones.c.i:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.i
-.PHONY : src/operaciones.c.i
-
-src/operaciones.s: src/operaciones.c.s
-.PHONY : src/operaciones.s
-
-# target to generate assembly for a file
-src/operaciones.c.s:
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.s
-.PHONY : src/operaciones.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -685,7 +574,6 @@ help:
 	@echo "... depend"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
-	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
 	@echo "... _catkin_empty_exported_target"
@@ -702,10 +590,8 @@ help:
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
-	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
-	@echo "... rospack_gensrv_all"
 	@echo "... run_tests"
 	@echo "... test"
 	@echo "... test-future"
@@ -720,12 +606,6 @@ help:
 	@echo "... src/ConduccionThread.o"
 	@echo "... src/ConduccionThread.i"
 	@echo "... src/ConduccionThread.s"
-	@echo "... src/DrivingConnectionManager.o"
-	@echo "... src/DrivingConnectionManager.i"
-	@echo "... src/DrivingConnectionManager.s"
-	@echo "... src/SocketDriver.o"
-	@echo "... src/SocketDriver.i"
-	@echo "... src/SocketDriver.s"
 	@echo "... src/Thread.o"
 	@echo "... src/Thread.i"
 	@echo "... src/Thread.s"
@@ -738,9 +618,6 @@ help:
 	@echo "... src/interaction.o"
 	@echo "... src/interaction.i"
 	@echo "... src/interaction.s"
-	@echo "... src/operaciones.o"
-	@echo "... src/operaciones.i"
-	@echo "... src/operaciones.s"
 .PHONY : help
 
 

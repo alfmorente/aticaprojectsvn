@@ -280,123 +280,6 @@ CMakeFiles/driving.dir/src/interaction.cpp.o.provides: CMakeFiles/driving.dir/sr
 
 CMakeFiles/driving.dir/src/interaction.cpp.o.provides.build: CMakeFiles/driving.dir/src/interaction.cpp.o
 
-CMakeFiles/driving.dir/src/operaciones.c.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/operaciones.c.o: src/operaciones.c
-CMakeFiles/driving.dir/src/operaciones.c.o: manifest.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /opt/ros/groovy/share/roscpp/package.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/driving.dir/src/operaciones.c.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/driving.dir/src/operaciones.c.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles $(CMAKE_PROGRESS_7)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/driving.dir/src/operaciones.c.o"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/operaciones.c.o   -c /home/atica/catkin_ws/src/Modulo_Conduccion/src/operaciones.c
-
-CMakeFiles/driving.dir/src/operaciones.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/driving.dir/src/operaciones.c.i"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Conduccion/src/operaciones.c > CMakeFiles/driving.dir/src/operaciones.c.i
-
-CMakeFiles/driving.dir/src/operaciones.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/driving.dir/src/operaciones.c.s"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Conduccion/src/operaciones.c -o CMakeFiles/driving.dir/src/operaciones.c.s
-
-CMakeFiles/driving.dir/src/operaciones.c.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/operaciones.c.o.requires
-
-CMakeFiles/driving.dir/src/operaciones.c.o.provides: CMakeFiles/driving.dir/src/operaciones.c.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/operaciones.c.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/operaciones.c.o.provides
-
-CMakeFiles/driving.dir/src/operaciones.c.o.provides.build: CMakeFiles/driving.dir/src/operaciones.c.o
-
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: src/SocketDriver.cpp
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: manifest.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles $(CMAKE_PROGRESS_8)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/SocketDriver.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/SocketDriver.cpp.o -c /home/atica/catkin_ws/src/Modulo_Conduccion/src/SocketDriver.cpp
-
-CMakeFiles/driving.dir/src/SocketDriver.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/SocketDriver.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Conduccion/src/SocketDriver.cpp > CMakeFiles/driving.dir/src/SocketDriver.cpp.i
-
-CMakeFiles/driving.dir/src/SocketDriver.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/SocketDriver.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Conduccion/src/SocketDriver.cpp -o CMakeFiles/driving.dir/src/SocketDriver.cpp.s
-
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/SocketDriver.cpp.o.requires
-
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o.provides: CMakeFiles/driving.dir/src/SocketDriver.cpp.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/SocketDriver.cpp.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/SocketDriver.cpp.o.provides
-
-CMakeFiles/driving.dir/src/SocketDriver.cpp.o.provides.build: CMakeFiles/driving.dir/src/SocketDriver.cpp.o
-
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: CMakeFiles/driving.dir/flags.make
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: src/DrivingConnectionManager.cpp
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: manifest.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/rostime/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/genpy/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Conduccion/CMakeFiles $(CMAKE_PROGRESS_9)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o -c /home/atica/catkin_ws/src/Modulo_Conduccion/src/DrivingConnectionManager.cpp
-
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Conduccion/src/DrivingConnectionManager.cpp > CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.i
-
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Conduccion/src/DrivingConnectionManager.cpp -o CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.s
-
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.requires:
-.PHONY : CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.requires
-
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.provides: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.requires
-	$(MAKE) -f CMakeFiles/driving.dir/build.make CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.provides.build
-.PHONY : CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.provides
-
-CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.provides.build: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
-
 # Object files for target driving
 driving_OBJECTS = \
 "CMakeFiles/driving.dir/src/CANCommunication.cpp.o" \
@@ -404,10 +287,7 @@ driving_OBJECTS = \
 "CMakeFiles/driving.dir/src/ConduccionThread.cpp.o" \
 "CMakeFiles/driving.dir/src/Thread.cpp.o" \
 "CMakeFiles/driving.dir/src/Timer.cpp.o" \
-"CMakeFiles/driving.dir/src/interaction.cpp.o" \
-"CMakeFiles/driving.dir/src/operaciones.c.o" \
-"CMakeFiles/driving.dir/src/SocketDriver.cpp.o" \
-"CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o"
+"CMakeFiles/driving.dir/src/interaction.cpp.o"
 
 # External object files for target driving
 driving_EXTERNAL_OBJECTS =
@@ -418,9 +298,6 @@ bin/driving: CMakeFiles/driving.dir/src/ConduccionThread.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/Thread.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/Timer.cpp.o
 bin/driving: CMakeFiles/driving.dir/src/interaction.cpp.o
-bin/driving: CMakeFiles/driving.dir/src/operaciones.c.o
-bin/driving: CMakeFiles/driving.dir/src/SocketDriver.cpp.o
-bin/driving: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o
 bin/driving: CMakeFiles/driving.dir/build.make
 bin/driving: CMakeFiles/driving.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/driving"
@@ -436,9 +313,6 @@ CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/ConduccionThread.cpp
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/Thread.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/Timer.cpp.o.requires
 CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/interaction.cpp.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/operaciones.c.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/SocketDriver.cpp.o.requires
-CMakeFiles/driving.dir/requires: CMakeFiles/driving.dir/src/DrivingConnectionManager.cpp.o.requires
 .PHONY : CMakeFiles/driving.dir/requires
 
 CMakeFiles/driving.dir/clean:

@@ -21,15 +21,11 @@
       </df>
       <df name="src">
         <in>CANCommunication.cpp</in>
-        <in>ConduccionCamionThread.cpp</in>
         <in>ConduccionThread.cpp</in>
-        <in>SerialCommunication.cpp</in>
         <in>Thread.cpp</in>
         <in>Timer.cpp</in>
         <in>conduccion.cpp</in>
         <in>interaction.cpp</in>
-        <in>mastil.cpp</in>
-        <in>operaciones.c</in>
       </df>
     </df>
     <logicalFolder name="src"
@@ -231,37 +227,11 @@
             <pElem>../Common_files/msg_gen/cpp/include</pElem>
             <pElem>../Common_files/srv_gen/cpp/include</pElem>
             <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/ConduccionCamionThread.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-          <incDir>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>include</pElem>
-            <pElem>../Common_files/msg_gen/cpp/include</pElem>
-            <pElem>../Common_files/srv_gen/cpp/include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
             <pElem>.</pElem>
           </incDir>
         </ccTool>
       </item>
       <item path="src/ConduccionThread.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-          <incDir>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>include</pElem>
-            <pElem>../Common_files/msg_gen/cpp/include</pElem>
-            <pElem>../Common_files/srv_gen/cpp/include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/SerialCommunication.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
           <incDir>
             <pElem>msg_gen/cpp/include</pElem>
@@ -297,19 +267,6 @@
           </incDir>
         </ccTool>
       </item>
-      <item path="src/conduccion.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>include</pElem>
-            <pElem>../Common_files/msg_gen/cpp/include</pElem>
-            <pElem>../Common_files/srv_gen/cpp/include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>srv_gen/cpp/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
-        </ccTool>
-      </item>
       <item path="src/interaction.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
           <incDir>
@@ -321,20 +278,6 @@
             <pElem>.</pElem>
           </incDir>
         </ccTool>
-      </item>
-      <item path="src/mastil.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-          <incDir>
-            <pElem>msg_gen/cpp/include</pElem>
-            <pElem>include</pElem>
-            <pElem>../Common_files/msg_gen/cpp/include</pElem>
-            <pElem>../Common_files/srv_gen/cpp/include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/operaciones.c" ex="false" tool="0" flavor2="2">
       </item>
     </conf>
   </confs>
