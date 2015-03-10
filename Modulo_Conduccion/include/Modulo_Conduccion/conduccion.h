@@ -46,8 +46,6 @@ extern "C" {
 #include "CANCommunication.hpp"
 #include "Thread.hpp"
 #include "ConduccionThread.hpp"
-#include "DrivingConnectionManager.h"
-#include "constantCarly.h"
 
 // Interaccion con usuario
 #include "interaction.h"
@@ -82,12 +80,9 @@ Common_files::msg_emergency_stopPtr msg_emergency_stop(new Common_files::msg_eme
 
 CANCommunication * can;
 ConduccionThread * conduccion;
-DrivingConnectionManager * driving;
-
 
 bool finDePrograma;                     // Flag que comprueba si se crea bien la comunicacion con CAN
 int CANflag;                            // Flag contador de reintentos de establecimiento de comunicaciones CAN
-int Serialflag;
 bool parada_emergencia;                 // Flag que controla que cuando la parada de emergencia esta ON no pueda recibir mensajes de com_teleop
 short valor_conmutador;                 // Flag que contrala el cambio del conmutador de manual a remote
 short valor_parada_obstaculo;           // Flag que contrala el cambio de la parada de emergencia por obstaculo
@@ -112,8 +107,6 @@ short error_diferenciales;              // Flag que controla el error de los dif
 void publishEmergencyStop();
 void publishBackup();
 void publishSwitch();
-
-void publishBackupArduino(DrivingInfo info);
 
 void publishInfoStop (short valor, int i);
 void publishError (short valor, int i);

@@ -98,7 +98,7 @@ int main(int argc, char **argv)
   }
   usleep(100000);
   
-  //conduccion->envio_trama_reinicio_CAN_AUTOMATA();  //VALIDO PARA COMUNIACION CAN
+  conduccion->envio_trama_reinicio_CAN_AUTOMATA();  //VALIDO PARA COMUNIACION CAN
   
   ros::Rate loop_rate(40); //Equivale a 50 milisegundos
   
@@ -106,37 +106,16 @@ int main(int argc, char **argv)
         case OPERATION_MODE_DEBUG:
                        
             //cout << "FUNCIONAMIENTO EN MODO DEBUG \n\n";
-            Timer *timer = new Timer();
-            timer->Enable();
-            //while (ros::ok() && finDePrograma && !(can->errorWrite) && !(can->errorRead)) {    // PARA COMUNIACCION CAN
-            while (ros::ok() && finDePrograma) {  // PARA COMUNICACION POR SOCKET
+            while (ros::ok() && finDePrograma && !(can->errorWrite) && !(can->errorRead)) {    // PARA COMUNIACCION CAN
+            
                 
                 n.getParam("state_module_driving",estado_actual);
                 if(estado_actual==STATE_ERROR || estado_actual== STATE_OFF) {             
                    finDePrograma=disconnectCommunication();   // Fin de programa = false (se cierra el CAN)
 
                    cout << "Fin de programa --- Se cierra el CAN \n";
-                }
-                
-                else {      
-                    driving->checkMessageTimeout();
-                    driving->checkForVehicleMessages();
-                    //driving->checkAlarms();
-                    //driving->checkSwitcher();
-                    
-                    // Comprobación del temporizador y requerimiento de info
-                    if (timer->GetTimed() >= FREC_1HZ) {
-                        // Clear del timer
-                        timer->Reset();
-                        driving->reqVehicleInfo(true);
-                        publishBackupArduino(driving->getVehicleInfo(true));
-                    }
-                    
-                    
-                    /*
-                     * 
-                     * SÓLO DISPONIBLE PARA LA COMUNICACION CAN
-                  
+                }             
+                else {                      
                         checkEmergencyStop();
                     
                         checkSwitch();
@@ -149,7 +128,7 @@ int main(int argc, char **argv)
                                 publishBackup();
                                 conduccion->flag_active_backup = false;
                         }        	                                 
-                     */ 
+                      
                      
                 }
                 
@@ -235,21 +214,6 @@ void publishBackup() {
     cout << "***************************************************** \n\n\n";
   */
 }
-
-
-void publishBackupArduino(DrivingInfo info) {
-      msg_backup->steer = info.steering;
-      msg_backup->throttle = info.thottle;
-      msg_backup->brake = info.brake;
-      msg_backup->handbrake = info.parkingBrake;
-      msg_backup->gear = info.gear;
-      msg_backup->speed = info.speed;
-      msg_backup->engine = 0;
-  
-      pub_backup.publish(msg_backup);
- 
-}
-
 
 
 void publishSwitch(){
@@ -530,13 +494,9 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
 
 bool createCommunication(){
     
-    /* CREAR COMUNICACION POR SOCKET*/
-    
-    return (driving->doConnect(DEVICE_DRIVING));
-    
-    
+        
     /* CREAR COMUNICACION POR CAN*/
-    /*
+    
     bool res = false;
 
     while(CANflag < 3 && CANflag != 0);
@@ -565,16 +525,14 @@ bool createCommunication(){
 
     
     return res = true;
-    */
+    
 }
 
 bool disconnectCommunication(){
     
     /*FIN COMUNICACION CAN */
-     //can->~CANCommunication();
-    
-    /*FIN COMUNICACION SOCKET */
-    DrivingConnectionManager->disconnect();
+    can->~CANCommunication();
+      
     
     return false;
 }
@@ -615,10 +573,7 @@ void initialize(ros::NodeHandle n) {
   error_cambio_marcha = 0;              // Al principio se le asigna el valor 0 que indica que no hay ningun error en el cambio de amrcha
   error_direccion = 0;                  // Al principio se le asigna el valor 0 que indica que no hay ningun error en la direccion
   error_diferenciales = 0;              // Al principio se le asigna el valor 0 que indica que no hay ningun error en los diferenciales
-  
-  // variables para el camion de bomberos
-  //freno_Mano = "OK";
-  //rev = 100.00;
+    
   sleep(1);
 }
 
