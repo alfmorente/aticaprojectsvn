@@ -1,0 +1,15 @@
+<package>
+  <description brief="RcvJoy">
+
+     RcvJoy
+
+  </description>
+  <author>Carlos Amores</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/RcvJoy</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
