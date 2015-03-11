@@ -43,12 +43,14 @@ void RosNode_Joystick::fcn_sub_joy(sensor_msgs::Joy msg){
   // Acelerador
   if(msg.axes.at(EJE_ACELERADOR)!=estados.aceleracion){
     printf("Cambio en el acelerador/freno:\n");
-    if(msg.axes.at(EJE_ACELERADOR)>0){
-      estados.aceleracion = msg.axes.at(EJE_ACELERADOR)*ACC_MAX;
+    if(msg.axes.at(EJE_ACELERADOR)!=1){
+      //estados.aceleracion = msg.axes.at(EJE_ACELERADOR)*ACC_MAX;
+        estados.aceleracion = (1-msg.axes.at(EJE_ACELERADOR))*ACC_MAX_XBOX;
       estados.freno_servicio = 0;
-    }else if(msg.axes.at(EJE_ACELERADOR)<0){
-      estados.freno_servicio = -msg.axes.at(EJE_ACELERADOR)*ACC_MAX;
-      estados.aceleracion = 0; 
+    }else if(msg.axes.at(EJE_FRENO)!=1){
+      //estados.freno_servicio = -msg.axes.at(EJE_ACELERADOR)*ACC_MAX;
+        estados.freno_servicio = (1-msg.axes.at(EJE_FRENO))*ACC_MAX_XBOX;
+        estados.aceleracion = 0; 
     }else{
       estados.freno_servicio = 0;
       estados.aceleracion = 0; 
