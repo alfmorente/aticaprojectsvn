@@ -59,6 +59,7 @@ CMakeFiles/joystick.dir/src/RosNode_Joystick.cpp.o
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  /opt/ros/groovy/include/sensor_msgs/Joy.h
  /opt/ros/groovy/include/std_msgs/Header.h
+ include/../../Common_files/msg_gen/cpp/include/Common_files/msg_com_teleop.h
  include/RosNode_Joystick.h
 CMakeFiles/joystick.dir/src/main.cpp.o
  /home/atica/catkin_ws/src/RcvJoy/src/main.cpp
@@ -118,4 +119,5 @@ CMakeFiles/joystick.dir/src/main.cpp.o
  /opt/ros/groovy/include/rosconsole/macros_generated.h
  /opt/ros/groovy/include/sensor_msgs/Joy.h
  /opt/ros/groovy/include/std_msgs/Header.h
+ include/../../Common_files/msg_gen/cpp/include/Common_files/msg_com_teleop.h
  include/RosNode_Joystick.h

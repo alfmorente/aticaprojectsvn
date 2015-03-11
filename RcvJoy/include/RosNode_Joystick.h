@@ -28,8 +28,9 @@
 #define ID_REMOTE_ACT_LASER2D 9
 
 #define ACC_MAX 100
+#define ACC_MAX_XBOX 50
 // Botones
-#define BTN_LUCES_POSICION 0
+/*#define BTN_LUCES_POSICION 0
 #define BTN_LUCES_CORTAS 1
 #define BTN_LUCES_LARGAS 2
 #define BTN_CLAXON 3
@@ -43,7 +44,26 @@
 
 #define EJE_DIRECCION 0
 #define EJE_ACELERADOR 2
-#define EJE_INTERMITENTE 5
+#define EJE_INTERMITENTE 5*/
+
+// XBOX
+// Botones
+#define BTN_LUCES_POSICION 2
+#define BTN_LUCES_CORTAS 0
+#define BTN_LUCES_LARGAS 1
+#define BTN_CLAXON 3
+#define BTN_BAJAR_MARCHA 4
+#define BTN_SUBIR_MARCHA 5
+#define BTN_HIDRAULICO 6
+#define BTN_ARRANQUE 7
+#define BTN_FRENOMANO 10
+
+// Ejes
+
+#define EJE_DIRECCION 0
+#define EJE_ACELERADOR 5
+#define EJE_INTERMITENTE 6
+#define EJE_FRENO 2
 
 typedef struct{
   int valor;
