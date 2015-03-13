@@ -1,27 +1,27 @@
 [
 {
   "directory": "/home/atica/catkin_ws/src/Modulo_Convoy",
-  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/opt/ros/groovy/include    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/convoy.dir/src/convoy.cpp.o -c /home/atica/catkin_ws/src/Modulo_Convoy/src/convoy.cpp",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/home/atica/catkin_ws/src/Common_files/srv_gen/cpp/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/Modulo_Convoy/msg_gen/cpp/include    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/convoy.dir/src/convoy.cpp.o -c /home/atica/catkin_ws/src/Modulo_Convoy/src/convoy.cpp",
   "file": "/home/atica/catkin_ws/src/Modulo_Convoy/src/convoy.cpp"
 },
 {
   "directory": "/home/atica/catkin_ws/src/Modulo_Convoy",
-  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/opt/ros/groovy/include    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/convoy.dir/src/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_Convoy/src/interaction.cpp",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/home/atica/catkin_ws/src/Common_files/srv_gen/cpp/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/Modulo_Convoy/msg_gen/cpp/include    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/convoy.dir/src/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_Convoy/src/interaction.cpp",
   "file": "/home/atica/catkin_ws/src/Modulo_Convoy/src/interaction.cpp"
 },
 {
   "directory": "/home/atica/catkin_ws/src/Modulo_Convoy",
-  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/opt/ros/groovy/include    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/convoy.dir/src/Timer.cpp.o -c /home/atica/catkin_ws/src/Modulo_Convoy/src/Timer.cpp",
+  "command": "/usr/bin/g++    -O2 -g -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/home/atica/catkin_ws/src/Common_files/srv_gen/cpp/include -I/opt/ros/groovy/include -I/home/atica/catkin_ws/src/Modulo_Convoy/msg_gen/cpp/include    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"' -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/convoy.dir/src/Timer.cpp.o -c /home/atica/catkin_ws/src/Modulo_Convoy/src/Timer.cpp",
   "file": "/home/atica/catkin_ws/src/Modulo_Convoy/src/Timer.cpp"
 },
 {
   "directory": "/home/atica/catkin_ws/src/Modulo_Convoy/gtest",
-  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
+  "command": "/usr/bin/g++   -Dgtest_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc",
   "file": "/usr/src/gtest/src/gtest-all.cc"
 },
 {
   "directory": "/home/atica/catkin_ws/src/Modulo_Convoy/gtest",
-  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include -I/opt/ros/groovy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
+  "command": "/usr/bin/g++   -Dgtest_main_EXPORTS -DGTEST_CREATE_SHARED_LIBRARY=1 -O2 -g -fPIC -I/home/atica/catkin_ws/src/Modulo_Convoy/include -I/usr/src/gtest/include -I/usr/src/gtest    -DROS_PACKAGE_NAME='\"Modulo_Convoy\"'  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/gtest/src/gtest_main.cc",
   "file": "/usr/src/gtest/src/gtest_main.cc"
 }
 ]

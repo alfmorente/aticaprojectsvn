@@ -47,6 +47,8 @@
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir">
         </df>
+        <df name="ROSBUILD_genmsg_py.dir">
+        </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
@@ -56,6 +58,8 @@
         <df name="rosbuild_premsgsrvgen.dir">
         </df>
         <df name="rospack_genmsg.dir">
+        </df>
+        <df name="rospack_genmsg_all.dir">
         </df>
         <df name="rospack_genmsg_libexe.dir">
         </df>
@@ -103,7 +107,11 @@
       </df>
       <df name="lib">
       </df>
+      <df name="msg">
+      </df>
       <df name="src">
+        <df name="Modulo_Convoy">
+        </df>
         <in>Timer.cpp</in>
         <in>convoy.cpp</in>
         <in>interaction.cpp</in>

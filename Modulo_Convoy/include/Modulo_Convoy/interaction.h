@@ -19,9 +19,6 @@ extern "C" {
 }
 #endif
 
-#endif	/* INTERACTION_H */
-
-
 #include <stdlib.h>
 #include <iostream>
 
@@ -29,3 +26,7 @@ extern "C" {
 int getOperationMode(int,char **);
 // Sintaxis correcta ante fallo
 void printCorrectSyntax();
+
+#endif	/* INTERACTION_H */
+
+
