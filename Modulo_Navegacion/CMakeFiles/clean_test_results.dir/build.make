@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # Utility rule file for clean_test_results.
 
@@ -43,7 +43,7 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/cmake -E remove_directory /home/atica/catkin_ws/src/Modulo_Navegacion/test_results
+	/usr/bin/cmake -E remove_directory /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -58,6 +58,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/atica/catkin_ws/src/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

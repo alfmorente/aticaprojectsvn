@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # Utility rule file for ROSBUILD_genmsg_py.
 
@@ -44,16 +44,126 @@ include CMakeFiles/ROSBUILD_genmsg_py.dir/progress.make
 
 CMakeFiles/ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/__init__.py
 
-src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_laser.py
-src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py
 src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_gest_navegacion.py
-src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_modo.py
-src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_waypoint.py
+src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_module_enable.py
+src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_error.py
+src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_laser.py
+src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_waypoints.py
 src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_gps.py
-src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_errores.py
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_1)
+src/Modulo_Navegacion/msg/__init__.py: src/Modulo_Navegacion/msg/_msg_mode.py
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/__init__.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_laser.msg /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_habilitacion_modulo.msg /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_gest_navegacion.msg /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_modo.msg /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_waypoint.msg /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_gps.msg /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_errores.msg
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_gest_navegacion.msg /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_module_enable.msg /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_error.msg /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_laser.msg /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_waypoints.msg /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_gps.msg /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_mode.msg
+
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: msg/msg_gest_navegacion.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/PoseWithCovariance.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/PoseStamped.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/nav_msgs/msg/Odometry.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/Quaternion.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/Twist.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/std_msgs/msg/Header.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/Vector3.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/Pose.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/TwistWithCovariance.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/TransformStamped.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/Point.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/tf/msg/tfMessage.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/sensor_msgs/msg/LaserScan.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/msg/Transform.msg
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: manifest.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_gest_navegacion.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_gest_navegacion.msg
+
+src/Modulo_Navegacion/msg/_msg_module_enable.py: msg/msg_module_enable.msg
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Navegacion/msg/_msg_module_enable.py: manifest.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_module_enable.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_module_enable.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_module_enable.msg
+
+src/Modulo_Navegacion/msg/_msg_error.py: msg/msg_error.msg
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Navegacion/msg/_msg_error.py: manifest.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_error.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_error.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_error.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_error.msg
 
 src/Modulo_Navegacion/msg/_msg_laser.py: msg/msg_laser.msg
 src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -71,89 +181,53 @@ src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/std_msgs/package.
 src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_2)
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_laser.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_laser.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_laser.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_laser.msg
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_laser.msg
 
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: msg/msg_habilitacion_modulo.msg
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: manifest.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_habilitacion_modulo.msg
-
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: msg/msg_gest_navegacion.msg
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: manifest.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Navegacion/msg/_msg_gest_navegacion.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_gest_navegacion.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_gest_navegacion.msg
-
-src/Modulo_Navegacion/msg/_msg_modo.py: msg/msg_modo.msg
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Navegacion/msg/_msg_modo.py: manifest.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Navegacion/msg/_msg_modo.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_modo.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_modo.msg
-
-src/Modulo_Navegacion/msg/_msg_waypoint.py: msg/msg_waypoint.msg
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Navegacion/msg/_msg_waypoint.py: manifest.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Navegacion/msg/_msg_waypoint.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_6)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_waypoint.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_waypoint.msg
+src/Modulo_Navegacion/msg/_msg_waypoints.py: msg/msg_waypoints.msg
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Navegacion/msg/_msg_waypoints.py: manifest.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_waypoints.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_waypoints.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_waypoints.msg
 
 src/Modulo_Navegacion/msg/_msg_gps.py: msg/msg_gps.msg
 src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -171,39 +245,63 @@ src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/std_msgs/package.xm
 src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
 src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_7)
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_gps.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_gps.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_gps.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_gps.msg
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_gps.msg
 
-src/Modulo_Navegacion/msg/_msg_errores.py: msg/msg_errores.msg
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
-src/Modulo_Navegacion/msg/_msg_errores.py: manifest.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/cpp_common/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/rostime/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp_traits/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/genmsg/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/genpy/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/message_runtime/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/rosconsole/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/std_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
-src/Modulo_Navegacion/msg/_msg_errores.py: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_8)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_errores.py"
-	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Modulo_Navegacion/msg/msg_errores.msg
+src/Modulo_Navegacion/msg/_msg_mode.py: msg/msg_mode.msg
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/roslib/cmake/../../../lib/roslib/gendeps
+src/Modulo_Navegacion/msg/_msg_mode.py: manifest.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/cpp_common/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/rostime/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/roscpp_traits/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/roscpp_serialization/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/genmsg/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/genpy/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/message_runtime/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/rosconsole/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/std_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/xmlrpcpp/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/roscpp/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/geometry_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/message_filters/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/sensor_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/tf/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/gencpp/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/genlisp/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/message_generation/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/actionlib_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /opt/ros/groovy/share/nav_msgs/package.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /home/atica/catkin_ws/src/Common_files/manifest.xml
+src/Modulo_Navegacion/msg/_msg_mode.py: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+src/Modulo_Navegacion/msg/_msg_mode.py: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating src/Modulo_Navegacion/msg/_msg_mode.py"
+	/opt/ros/groovy/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/msg/msg_mode.msg
 
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py
 ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/__init__.py
-ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_laser.py
-ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_habilitacion_modulo.py
 ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_gest_navegacion.py
-ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_modo.py
-ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_waypoint.py
+ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_module_enable.py
+ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_error.py
+ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_laser.py
+ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_waypoints.py
 ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_gps.py
-ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_errores.py
+ROSBUILD_genmsg_py: src/Modulo_Navegacion/msg/_msg_mode.py
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py.dir/build.make
 .PHONY : ROSBUILD_genmsg_py
 
@@ -216,6 +314,6 @@ CMakeFiles/ROSBUILD_genmsg_py.dir/clean:
 .PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/clean
 
 CMakeFiles/ROSBUILD_genmsg_py.dir/depend:
-	cd /home/atica/catkin_ws/src/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles/ROSBUILD_genmsg_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles/ROSBUILD_genmsg_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/depend
 

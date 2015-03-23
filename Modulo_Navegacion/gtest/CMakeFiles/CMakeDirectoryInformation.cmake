@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 SET(CMAKE_RELATIVE_PATH_TOP_SOURCE "/usr/src/gtest")
-SET(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/atica/catkin_ws/src/Modulo_Navegacion")
+SET(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion")
 
 # Force unix paths in dependencies.
 SET(CMAKE_FORCE_UNIX_PATHS 1)
@@ -11,6 +11,8 @@ SET(CMAKE_FORCE_UNIX_PATHS 1)
 # The C and CXX include file search paths:
 SET(CMAKE_C_INCLUDE_PATH
   "include"
+  "/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include"
+  "/home/atica/catkin_ws/src/Common_files/srv_gen/cpp/include"
   "/opt/ros/groovy/include"
   "/usr/src/gtest/include"
   "/usr/src/gtest"
