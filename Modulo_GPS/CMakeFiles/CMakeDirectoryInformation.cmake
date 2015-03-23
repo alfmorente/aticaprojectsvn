@@ -12,6 +12,7 @@ SET(CMAKE_FORCE_UNIX_PATHS 1)
 SET(CMAKE_C_INCLUDE_PATH
   "include"
   "/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include"
+  "/home/atica/catkin_ws/src/Common_files/srv_gen/cpp/include"
   "/opt/ros/groovy/include"
   )
 SET(CMAKE_CXX_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})

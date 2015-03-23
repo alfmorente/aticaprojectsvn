@@ -74,6 +74,7 @@ int main(int argc, char **argv) {
                 while (!gps->gps_conf_setimutoantoffset(-35,15,62,0,0,0));
                 cout << "Offset antena OK" << endl;
                  */
+                gps->setCom2ToRcvCorrections(); //configurar GPS en RTK                
                 gps->gps_log_general("bestgpsposa", "ontime 0.1");
                 while (gps->getGPSPos().sol_status != "SOL_COMPUTED") {
                     gps->rcvData();
@@ -84,13 +85,18 @@ int main(int argc, char **argv) {
                 //cout << "Comenzar movimiento 4km/h para alinear IMU" << endl;
 
                 gps->gps_log_general("inspvaa", "ontime 0.1");
-                while ((gps->getInspVa().status != "INS_SOLUTION_GOOD") && (gps->getInspVa().status != "INS_ALIGNMENT_COMPLETE")) {
+                
+                // Para obtener el YAW cuando no va el alineamiento de la IMU
+                gps->gps_log_general("bestgpsvela", "ontime 0.1");
+                
+                //Descomentar cuando se consiga alinear la IMU
+                /*while ((gps->getInspVa().status != "INS_SOLUTION_GOOD") && (gps->getInspVa().status != "INS_ALIGNMENT_COMPLETE")) {
                     gps->rcvData();
                     cout << "Esperando Alineamiento de IMU: " << gps->getInspVa().status << endl;
                 }
-                cout << "IMU Alineado" << endl;
+                cout << "IMU Alineado" << endl;*/
                 
-                bool flagInspva = false,flagBestGPSPosa = false;
+                bool flagInspva = false,flagBestGPSPosa = false, flagBestGPSVel =false;
                 int typeFrame;
                 short stateOfGPS = 0;
                 short stateOfIMU = 0;
@@ -109,11 +115,16 @@ int main(int argc, char **argv) {
                             case TT_INSPVAA:
                                 flagInspva = true;
                                 break;
+                            case TT_GPSVELA:
+                                flagBestGPSVel = true;
+                                break;
+                                
                             default:
                                 break;
                         }
 
-                        if (flagBestGPSPosa && flagInspva) {
+                        //Descomentar cuando se consiga alinear la IMU
+                        if (flagBestGPSPosa && flagBestGPSVel)/* && flagInspva) */ {
                             
                             // Comprobacion de estados para gestion de errores
                             
@@ -130,10 +141,9 @@ int main(int argc, char **argv) {
                                 }
                                 pub_errores.publish(errMessage);
                             }
-                            
                             // Estados de la IMU
                             
-                            if(gps->getInspVa().state!=stateOfIMU){
+                            /*if(gps->getInspVa().state!=stateOfIMU){
                                 stateOfIMU=gps->getInspVa().state;
                                 errMessage.id_subsystem = SUBS_GPS;
                                 errMessage.id_error = stateOfIMU;
@@ -143,7 +153,7 @@ int main(int argc, char **argv) {
                                     errMessage.type_error = TOE_UNDEFINED;
                                 }
                                 pub_errores.publish(errMessage);
-                            }
+                            }*/
                             
                             // Creacion del mensaje de datos
                             
@@ -152,7 +162,7 @@ int main(int argc, char **argv) {
                             insMessage.altitude=gps->getGPSPos().hgt;
                             insMessage.roll=gps->getInspVa().roll;
                             insMessage.pitch=gps->getInspVa().pitch;
-                            insMessage.yaw=gps->getInspVa().azimuth;
+                            insMessage.yaw=gps->getGPSVel().trk_gnd; //Se coje el yaw de gpsvel
                             pub_gps.publish(insMessage);
                         }
                     }

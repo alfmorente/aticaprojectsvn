@@ -159,6 +159,8 @@ class GPS_Management
 	public:
                 // Constructor
 		GPS_Management();
+                // Receptor de correcciones
+                void setCom2ToRcvCorrections();                
                 // Getters de los atributos
                 Bestgpsvel getGPSVel();
                 Bestgpspos getGPSPos();

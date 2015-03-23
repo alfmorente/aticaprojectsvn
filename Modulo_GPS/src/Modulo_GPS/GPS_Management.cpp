@@ -1000,3 +1000,50 @@ short GPS_Management::getStateOfIMU(string s){
     else
         return GPS_GLOBAL_ERROR;
 }
+
+
+void GPS_Management::setCom2ToRcvCorrections() {
+
+    cout << "Configurando COM2 para obtencion de correcciones..." << endl;
+    cout << "Enviando INTERFACE MODE...";
+    string options[4];
+    options[0] = "COM2";
+    options[1] = "RTCMV3";
+    options[2] = "NONE";
+    options[3] = "OFF";
+    string msg = create_message("INTERFACEMODE", 4, options);
+    this->port.send((char *) msg.c_str(), msg.length());
+
+    // Recepcion de la respuesta
+    Response r = reception_management(true, false);
+
+    if (r.ok) cout << "OK" << endl;
+    else {
+        cout << "ERROR" << endl;
+        cout << "Fallo la configuracion RTK" << endl;
+        return;
+    }
+
+    cout << "Enviando configuracion COM...";
+
+    string optionsCom[7];
+    optionsCom[0] = "COM2";
+    optionsCom[1] = "57600";
+    optionsCom[2] = "N";
+    optionsCom[3] = "8";
+    optionsCom[4] = "1";
+    optionsCom[5] = "N";
+    optionsCom[6] = "OFF";
+    msg = create_message("COM", 7, optionsCom);
+    this->port.send((char *) msg.c_str(), msg.length());
+
+    // Recepcion de la respuesta
+    r = reception_management(true, false);
+
+    if (r.ok) cout << "OK" << endl;
+    else {
+        cout << "ERROR" << endl;
+        cout << "Fallo la configuracion RTK" << endl;
+        return;
+    }
+}
