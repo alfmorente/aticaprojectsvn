@@ -1,3 +1,10 @@
+/* 
+ * File:   gest_errores.cpp
+ * Author: Alfonso Morente
+ *
+ * Created on 13 de septiembre de 2013, 9:51
+ */
+
 #include "../include/Modulo_Gest_Errores/gest_errores.h"
 
 using namespace std;
