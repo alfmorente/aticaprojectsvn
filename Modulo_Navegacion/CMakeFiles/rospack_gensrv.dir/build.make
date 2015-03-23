@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # Utility rule file for rospack_gensrv.
 
@@ -57,6 +57,6 @@ CMakeFiles/rospack_gensrv.dir/clean:
 .PHONY : CMakeFiles/rospack_gensrv.dir/clean
 
 CMakeFiles/rospack_gensrv.dir/depend:
-	cd /home/atica/catkin_ws/src/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles/rospack_gensrv.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles/rospack_gensrv.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/rospack_gensrv.dir/depend
 

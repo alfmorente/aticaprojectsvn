@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # Include any dependencies generated for this target.
 include CMakeFiles/gest_navegacion.dir/depend.make
@@ -61,17 +61,29 @@ CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/std_m
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/tf/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/gencpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/genlisp/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/message_generation/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/actionlib_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /opt/ros/groovy/share/nav_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o -c /home/atica/catkin_ws/src/Modulo_Navegacion/src/navegacion.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o -c /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/navegacion.cpp
 
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Navegacion/src/navegacion.cpp > CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/navegacion.cpp > CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.i
 
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Navegacion/src/navegacion.cpp -o CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/navegacion.cpp -o CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.s
 
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o.requires:
 .PHONY : CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o.requires
@@ -82,14 +94,114 @@ CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o.provides: CMakeFiles/gest_na
 
 CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o.provides.build: CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o
 
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: CMakeFiles/gest_navegacion.dir/flags.make
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: src/ll-utm.cpp
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: manifest.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/tf/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/gencpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/genlisp/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/message_generation/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/actionlib_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /opt/ros/groovy/share/nav_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o -c /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/ll-utm.cpp
+
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/ll-utm.cpp > CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.i
+
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/ll-utm.cpp -o CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.s
+
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.requires:
+.PHONY : CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.requires
+
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.provides: CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.requires
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.provides.build
+.PHONY : CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.provides
+
+CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.provides.build: CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o
+
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: CMakeFiles/gest_navegacion.dir/flags.make
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: src/AnalisisFichero.cpp
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: manifest.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/message_filters/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/tf/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/gencpp/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/genlisp/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/message_generation/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/actionlib_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /opt/ros/groovy/share/nav_msgs/package.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o -c /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/AnalisisFichero.cpp
+
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/AnalisisFichero.cpp > CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.i
+
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/src/AnalisisFichero.cpp -o CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.s
+
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.requires:
+.PHONY : CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.requires
+
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.provides: CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.requires
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.provides.build
+.PHONY : CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.provides
+
+CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.provides.build: CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o
+
 # Object files for target gest_navegacion
 gest_navegacion_OBJECTS = \
-"CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o"
+"CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o" \
+"CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o" \
+"CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o"
 
 # External object files for target gest_navegacion
 gest_navegacion_EXTERNAL_OBJECTS =
 
 bin/gest_navegacion: CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o
+bin/gest_navegacion: CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o
+bin/gest_navegacion: CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o
 bin/gest_navegacion: CMakeFiles/gest_navegacion.dir/build.make
 bin/gest_navegacion: CMakeFiles/gest_navegacion.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/gest_navegacion"
@@ -100,6 +212,8 @@ CMakeFiles/gest_navegacion.dir/build: bin/gest_navegacion
 .PHONY : CMakeFiles/gest_navegacion.dir/build
 
 CMakeFiles/gest_navegacion.dir/requires: CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o.requires
+CMakeFiles/gest_navegacion.dir/requires: CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o.requires
+CMakeFiles/gest_navegacion.dir/requires: CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o.requires
 .PHONY : CMakeFiles/gest_navegacion.dir/requires
 
 CMakeFiles/gest_navegacion.dir/clean:
@@ -107,6 +221,6 @@ CMakeFiles/gest_navegacion.dir/clean:
 .PHONY : CMakeFiles/gest_navegacion.dir/clean
 
 CMakeFiles/gest_navegacion.dir/depend:
-	cd /home/atica/catkin_ws/src/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles/gest_navegacion.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles/gest_navegacion.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/gest_navegacion.dir/depend
 

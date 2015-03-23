@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/atica/catkin_ws/src/Modulo_Navegacion/devel/setup.sh
+    local-name: /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/devel/setup.sh

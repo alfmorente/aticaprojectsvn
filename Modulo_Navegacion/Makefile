@@ -35,22 +35,19 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Navegacion
+CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -110,9 +107,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Modulo_Navegacion/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -451,6 +448,54 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/AnalisisFichero.o: src/AnalisisFichero.cpp.o
+.PHONY : src/AnalisisFichero.o
+
+# target to build an object file
+src/AnalisisFichero.cpp.o:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o
+.PHONY : src/AnalisisFichero.cpp.o
+
+src/AnalisisFichero.i: src/AnalisisFichero.cpp.i
+.PHONY : src/AnalisisFichero.i
+
+# target to preprocess a source file
+src/AnalisisFichero.cpp.i:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.i
+.PHONY : src/AnalisisFichero.cpp.i
+
+src/AnalisisFichero.s: src/AnalisisFichero.cpp.s
+.PHONY : src/AnalisisFichero.s
+
+# target to generate assembly for a file
+src/AnalisisFichero.cpp.s:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.s
+.PHONY : src/AnalisisFichero.cpp.s
+
+src/ll-utm.o: src/ll-utm.cpp.o
+.PHONY : src/ll-utm.o
+
+# target to build an object file
+src/ll-utm.cpp.o:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o
+.PHONY : src/ll-utm.cpp.o
+
+src/ll-utm.i: src/ll-utm.cpp.i
+.PHONY : src/ll-utm.i
+
+# target to preprocess a source file
+src/ll-utm.cpp.i:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.i
+.PHONY : src/ll-utm.cpp.i
+
+src/ll-utm.s: src/ll-utm.cpp.s
+.PHONY : src/ll-utm.s
+
+# target to generate assembly for a file
+src/ll-utm.cpp.s:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.s
+.PHONY : src/ll-utm.cpp.s
+
 src/navegacion.o: src/navegacion.cpp.o
 .PHONY : src/navegacion.o
 
@@ -511,6 +556,12 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/AnalisisFichero.o"
+	@echo "... src/AnalisisFichero.i"
+	@echo "... src/AnalisisFichero.s"
+	@echo "... src/ll-utm.o"
+	@echo "... src/ll-utm.i"
+	@echo "... src/ll-utm.s"
 	@echo "... src/navegacion.o"
 	@echo "... src/navegacion.i"
 	@echo "... src/navegacion.s"

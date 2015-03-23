@@ -3,6 +3,8 @@ FILE(REMOVE_RECURSE
   "msg_gen"
   "src/Modulo_Navegacion/msg"
   "CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o"
+  "CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o"
+  "CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o"
   "bin/gest_navegacion.pdb"
   "bin/gest_navegacion"
 )

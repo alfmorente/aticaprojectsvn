@@ -18,6 +18,8 @@ extern "C" {
 
 #endif	/* CONSTANT_H */
 
+
+/**
 // Constantes del fichero de configuracion
 #define STATE_OFF 0
 #define STATE_CONF 1
@@ -92,3 +94,4 @@ extern "C" {
 #define MODE_EXIT 3
 #define MODE_REQUEST 4
 #define MODE_FINISH 5
+ **/
