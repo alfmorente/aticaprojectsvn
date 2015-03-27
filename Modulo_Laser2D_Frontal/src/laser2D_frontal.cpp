@@ -1,4 +1,5 @@
 #include <Modulo_Laser2D_Frontal/laser2D_frontal.h>
+#include <Modulo_Laser2D_Frontal/interaction.h>
 
 using namespace std;
 
@@ -6,120 +7,144 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
+  // Obtencion del modo de operacion y comprobacion de que es correcto
+  int operationMode=getOperationMode(argc, argv);
+  if (operationMode == 0) {
+        return 1;
+  }
+  ROS_INFO("Operation mode: %d",operationMode);
   // Inicio de ROS
   ros::init(argc, argv, "laser2D_frontal");
   ros::NodeHandle n;
-
-  // Espera activa de inicio de modulo
-  int current_state=STATE_OFF;
-  do
-  {
-      current_state=getStateModule(n);
-      usleep(100000);
-  }  while(current_state!=STATE_CONF);
-  ROS_INFO("Atica Laser2D Frontal :: Iniciando configuración...");
   
-  // Generación de publicadores
-  pub_data = n.advertise<sensor_msgs::LaserScan>("laser", 1000);
-  pub_error = n.advertise<Common_files::msg_error>("error", 1000);
-
-  //Gestion del ficheros 
-  //Apertura
-  int response=file.openFiles();
-  if(response!=NO_ERROR)
-  {
-      if(response==LASER_LOG_FILE_ERROR)
-          ROS_INFO("Laser: Error al abrir el fichero Log");
-      else
-          file.writeErrorInLOG(response,"Fichero LOG de datos");
-      publicErrorToROS(response);
-      setStateModule(n,STATE_ERROR);
-      return 1;
-  }
-  //Lectura de la configuración
-  response=file.readConfig(&configParameters,&configOutput,&configConection);
-  if(response!=NO_ERROR)
-  {
-      file.writeErrorInLOG(response,"Fichero de Configuracion");
-      publicErrorToROS(response);
-      setStateModule(n,STATE_ERROR);
-      return 1;
-  }
-  
-  //Conexion con el dispositivo
-  response=connect();
-  if(response!=NO_ERROR)
-  {
-      file.writeErrorInLOG(response,"configureLaser");
-      publicErrorToROS(response);
-      setStateModule(n,STATE_ERROR);
-      return 1;
-  }  
-          
-  //Configuracion del dispositivo
-  response=configure();
-  if(response!=NO_ERROR)
-  {
-      publicErrorToROS(response);
-      setStateModule(n,STATE_ERROR);
-      miLaser.disconnect();
-      return 1;
-  }      
-
-
-
-
-  // Todo esta correcto, lo especificamos con el correspondiente parametro
-  setStateModule(n,STATE_OK);
-  ROS_INFO("Atica Laser2D Frontal :: Configurado y funcionando");
-  file.writeDataInLOG("Atica Laser2D Frontal :: Configurado y funcionando");
-
   int error;
-
-  //Empiezo a recoger datos del laser
-  int numErrorResponses=0;	
-  int timeout=configOutput.outputInterval/configParameters.scanningFrecuency;
-  if(timeout <1)
-      timeout=1;
-  
-  ROS_INFO("Recogiendo Datos del laser 2D frontal");
-  while (ros::ok() && getStateModule(n)!=STATE_OFF)
+  int numErrorResponses;
+  int response;
+  int timeout;
+  int current_state;  
+  switch (operationMode) 
   {
-        error=recvData(&scanData,timeout);
-        if(error==NO_ERROR)
-        {
-            numErrorResponses=0;
-            publicDataToROS(scanData);
-        }
-        else
-        {	
-            //Se mira si es error de comunicacion
-            if(isAlive(error))
-            {
-                file.writeErrorInLOG(error,"getScanData");
-                publicErrorToROS(error);
-                if(error==INCORRECT_ANSWER)
-                {
-                        numErrorResponses++;
-                        if(numErrorResponses>=10)		
-                        {
-                                file.writeErrorInLOG(FRAME_OVERFLOW,"getScanData");
-                                publicErrorToROS(error);
+        case OPERATION_MODE_DEBUG:
+            // Espera activa de inicio de modulo
+             current_state=STATE_OFF;
+             do
+             {
+                 current_state=getStateModule(n);
+                 usleep(100000);
+             }  while(current_state!=STATE_CONF);
+             ROS_INFO("Atica Laser2D Frontal :: Iniciando configuracion...");
 
-                        }
-                }
-            }
-            else
-            {
-                setStateModule(n,STATE_ERROR);
-                file.writeErrorInLOG(COMM_ERROR,"getScanData");
-                publicErrorToROS(COMM_ERROR);
-                disconnect();
-                return 1;
-            }
-        }
-  }
+             // Generación de publicadores
+             pub_data = n.advertise<sensor_msgs::LaserScan>("laser", 1000);
+             pub_error = n.advertise<Common_files::msg_error>("error", 1000);
+
+             //Gestion del ficheros 
+             //Apertura        
+             response=file.openFiles();
+             if(response!=NO_ERROR)
+             {
+                 if(response==LASER_LOG_FILE_ERROR)
+                     ROS_INFO("Laser: Error al abrir el fichero Log");
+                 else
+                     file.writeErrorInLOG(response,"Fichero LOG de datos");
+                 publicErrorToROS(response);
+                 setStateModule(n,STATE_ERROR);
+                 return 1;
+             }
+             //Lectura de la configuración
+             response=file.readConfig(&configParameters,&configOutput,&configConection);
+             if(response!=NO_ERROR)
+             {
+                 file.writeErrorInLOG(response,"Fichero de Configuracion");
+                 publicErrorToROS(response);
+                 setStateModule(n,STATE_ERROR);
+                 return 1;
+             }
+
+             //Conexion con el dispositivo
+             response=connect();
+             if(response!=NO_ERROR)
+             {
+                 publicErrorToROS(response);
+                 setStateModule(n,STATE_ERROR);
+                 return 1;
+             }  
+
+             //Configuracion del dispositivo
+             response=configure();
+             if(response!=NO_ERROR)
+             {                
+                 publicErrorToROS(response);
+                 setStateModule(n,STATE_ERROR);
+                 miLaser.disconnect();
+                 return 1;
+             }      
+
+
+
+
+             // Todo esta correcto, lo especificamos con el correspondiente parametro
+             setStateModule(n,STATE_OK);
+             ROS_INFO("Atica Laser2D Frontal :: Configurado y funcionando");
+             file.writeDataInLOG("Atica Laser2D Frontal :: Configurado y funcionando");
+
+
+
+             //Empiezo a recoger datos del laser
+             numErrorResponses=0;	
+             timeout=configOutput.outputInterval/configParameters.scanningFrecuency;
+             if(timeout <1)
+                 timeout=1;
+
+             ROS_INFO("Recogiendo Datos del laser 2D frontal");
+             while (ros::ok() && getStateModule(n)!=STATE_OFF)
+             {
+                   error=recvData(&scanData,timeout);
+                   if(error==NO_ERROR)
+                   {
+                       numErrorResponses=0;
+                       publicDataToROS(scanData);
+                   }
+                   else
+                   {	
+                       //Se mira si es error de comunicacion
+                       if(isAlive(error))
+                       {
+                           file.writeErrorInLOG(error,"getScanData");
+                           publicErrorToROS(error);
+                           if(error==INCORRECT_ANSWER)
+                           {
+                                   numErrorResponses++;
+                                   if(numErrorResponses>=10)		
+                                   {
+                                           file.writeErrorInLOG(FRAME_OVERFLOW,"getScanData");
+                                           publicErrorToROS(error);
+
+                                   }
+                           }
+                       }
+                       else
+                       {
+                           setStateModule(n,STATE_ERROR);
+                           file.writeErrorInLOG(COMM_ERROR,"getScanData");
+                           publicErrorToROS(COMM_ERROR);
+                           disconnect();
+                           return 1;
+                       }
+                   }
+             }
+             break;
+        case OPERATION_MODE_RELEASE:
+            // Funcionamiento del modo release
+            break;
+        case OPERATION_MODE_SIMULATION:
+            // Funcionamiento del modo simulacion
+            break;
+        default:
+            break;
   
+  }
+ 
   ROS_INFO("Atica Laser2D Frontal :: Modulo finalizado");
   return 0;
 }
@@ -174,7 +199,7 @@ int configure(){
                     return error;
             sleep(1);
 
-    }while(q.statusLMS!=7);	
+    }while(q.statusLMS!=measurement);	
     ROS_INFO("Laser: laser READY");
     //fin nuevo
 
@@ -182,7 +207,7 @@ int configure(){
 
     ROS_INFO("Configurando datos de salida del laser");
     //Configuro parámetros secundarios del laser
-    error=miLaser.configureDataOutput(configOutput,0xF4724744);//(0x01, 0x00,eightBits,0,1,false,false,false,false,1,0xF4724744);
+    error=miLaser.configureDataOutput(configOutput,PASSWORD);//(0x01, 0x00,eightBits,0,1,false,false,false,false,1,PASSWORD;
     if(error!= NO_ERROR)
     {	
             ROS_INFO("Laser: Error configurando.Compruebe el fichero LOG");
@@ -195,7 +220,7 @@ int configure(){
 
     //Configuro los parametros principales del laser
     ROS_INFO("Laser: Configurando parametros de configuracion del laser");
-    error=miLaser.configureLaser(configParameters,0xF4724744);
+    error=miLaser.configureLaser(configParameters,PASSWORD);
     if(error!= NO_ERROR)
     {	
             ROS_INFO("Laser: Error configurando.Compruebe el fichero LOG");
@@ -215,7 +240,7 @@ int configure(){
                     return error;
             sleep(1);
 
-    }while(q.statusLMS!=7);	
+    }while(q.statusLMS!=measurement);	
     ROS_INFO("Laser: laser READY");
 
 
@@ -251,10 +276,15 @@ void publicDataToROS(laserScan scanData)
 {
     sensor_msgs::LaserScan rosLaser;
     int factorEscala=scanData.laserChannel16[0].scalingFactor;
+    rosLaser.header.stamp=ros::Time::now();
 
-    rosLaser.angle_increment=(configParameters.stopAngle-configParameters.startAngle)/configParameters.angleResolution+1; 
+    rosLaser.angle_increment=configParameters.angleResolution;
     rosLaser.angle_min=configParameters.startAngle;
     rosLaser.angle_max=configParameters.stopAngle;
+    rosLaser.time_increment=0.02;
+    rosLaser.scan_time=0.1;
+    rosLaser.range_max=100;
+    rosLaser.range_min=0;
 
     stringstream data;
     float angle;
@@ -280,6 +310,9 @@ void publicDataToROS(laserScan scanData)
             }
             data << endl;
             file.writeDataInLOG(data.str().c_str());
+	    rosLaser.angle_min=rosLaser.angle_min*M_PI/180;
+	    rosLaser.angle_max=rosLaser.angle_max*M_PI/180;
+	    rosLaser.angle_increment=rosLaser.angle_increment*M_PI/180;
             pub_data.publish(rosLaser);
     }
     else

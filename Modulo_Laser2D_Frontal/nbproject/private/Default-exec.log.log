@@ -1,0 +1,19 @@
+called: /usr/bin/g++
+	/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal
+	/usr/bin/g++
+	-O2
+	-g
+	-I/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/include
+	-I/opt/ros/groovy/include
+	-I/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/msg_gen/cpp/include
+	-DROS_PACKAGE_NAME="Modulo_Laser2D_Frontal"
+	-W
+	-Wall
+	-Wno-unused-parameter
+	-fno-strict-aliasing
+	-pthread
+	-o
+	CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o
+	-c
+	/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/laser2D_frontal.cpp
+
