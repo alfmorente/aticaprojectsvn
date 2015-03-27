@@ -192,7 +192,7 @@ void NodeROSCommunication::fcn_sub_gps(const Common_files::msg_gpsPtr& msg)
         destino->component = JAUS_SUBSYSTEM_COMMANDER;
         mensajeJAUS tipoMensajeJAUS;
         
-        ROS_INFO("ENVIO GPS");
+        //ROS_INFO("ENVIO GPS");
         //Files::writeDataInLOG("ENVIO GPS");
         tipoMensajeJAUS.posGPS=reportGlobalPoseMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.posGPS->destination, destino);
@@ -356,7 +356,7 @@ void NodeROSCommunication::fcn_sub_backup(const Common_files::msg_backupPtr& msg
         mensajeJAUS tipoMensajeJAUS;
      
         // Se envia el mensaje por JAUS
-        ROS_INFO("ENVIO BACKUP WRENCH");
+        //ROS_INFO("ENVIO BACKUP WRENCH");
         //Files::writeDataInLOG("ENVIO BACKUP WRENCH");            
         tipoMensajeJAUS.backupWrench=reportWrenchEffortMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.backupWrench->destination, destino);
@@ -370,7 +370,7 @@ void NodeROSCommunication::fcn_sub_backup(const Common_files::msg_backupPtr& msg
     	subsystemJAUS->sendJAUSMessage(msg_JAUS,NO_ACK);
       
         // Se envia el mensaje por JAUS
-         ROS_INFO("ENVIO BACKUP DISCRETE");
+        // ROS_INFO("ENVIO BACKUP DISCRETE");
         //Files::writeDataInLOG("ENVIO BACKUP DISCRETE"); 
         tipoMensajeJAUS.backupDiscrete=reportDiscreteDevicesMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.backupDiscrete->destination, destino);
@@ -404,7 +404,7 @@ void NodeROSCommunication::fcn_sub_backup(const Common_files::msg_backupPtr& msg
     	subsystemJAUS->sendJAUSMessage(msg_JAUS,NO_ACK);
         
         // Se envia el mensaje por JAUS
-        ROS_INFO("ENVIO BACKUP SPEED");   
+        //ROS_INFO("ENVIO BACKUP SPEED");   
         //Files::writeDataInLOG("ENVIO BACKUP SPEED"); 
         tipoMensajeJAUS.backupSpeed=reportVelocityStateMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.backupSpeed->destination, destino);
@@ -431,7 +431,7 @@ void NodeROSCommunication::fcn_sub_teach_file(const Common_files::msg_streamPtr&
         destino->component = JAUS_SUBSYSTEM_COMMANDER;
         mensajeJAUS tipoMensajeJAUS;
         
-        ROS_INFO("ENVIO FICHERO");
+        //ROS_INFO("ENVIO FICHERO");
         //Files::writeDataInLOG("ENVIO FICHERO"); 
         tipoMensajeJAUS.file=reportFileDataMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.file->destination,destino);

@@ -47,7 +47,7 @@
 #include <time.h>
 #include "jaus.h"
 
-#define SUBSYSTEM_TIMEOUT_SEC 5.0
+#define SUBSYSTEM_TIMEOUT_SEC 2.0
 
 typedef struct
 {
