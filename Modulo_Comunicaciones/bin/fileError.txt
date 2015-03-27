@@ -1,0 +1,1 @@
+15925.972145:	CommunicationError de comunicacion con la UCR
