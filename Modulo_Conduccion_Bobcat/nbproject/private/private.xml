@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <code-assistance-data xmlns="http://www.netbeans.org/ns/make-project-private/1">
+        <code-model-enabled>true</code-model-enabled>
+    </code-assistance-data>
+    <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
+        <activeConfTypeElem>0</activeConfTypeElem>
+        <activeConfIndexElem>0</activeConfIndexElem>
+    </data>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion_Bobcat/src/DrivingConnectionManager.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion_Bobcat/src/conduccion.cpp</file>
+            <file>file:/home/atica/catkin_ws/src/Modulo_Conduccion_Bobcat/include/Modulo_Conduccion_Bobcat/constantes.h</file>
+        </group>
+    </open-files>
+</project-private>

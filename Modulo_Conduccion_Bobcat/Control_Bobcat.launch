@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="joy" name="joy_node" type="joy_node" args="1" output="screen" />
+	<node pkg="RcvJoy" name="joy_reciever" type="joystick" args="1" output="screen" />
+	<node pkg="Modulo_Conduccion" name="conduccion" type="driving" args="1" output="screen" />
+</launch>
