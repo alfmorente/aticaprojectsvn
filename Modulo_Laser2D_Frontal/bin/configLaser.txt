@@ -1,0 +1,33 @@
+# configuracion del Laser
+#Parametros basicos de configuracion
+#Posibles configuraciones
+# scanningFrecuency (Hz)           angleResolution(Âº)
+#	25				0.1667
+#	25			   	0.25
+#	35				0.25
+#	35				0.5
+#	50				0.3333
+#	50				0.5
+#	75				0.5
+#	75				1
+#	100				0.6667
+#	100				1
+# startAngle (minimum angle -5º)
+# stopAngle  (maximum angle 185º)
+
+ipLaser: 192.168.0.1
+portLaser: 2111
+scanningFrecuency: 50
+angleResolution: 0.5
+startAngle:-5
+stopAngle: 185
+
+#parametro de salida
+#Flags 0(false) 1(true)
+#OutputInterval 1...50000
+
+timeFlag: 1
+positionFlag: 0
+deviceNameFlag: 0
+commentFlag: 0
+outputInterval: 5

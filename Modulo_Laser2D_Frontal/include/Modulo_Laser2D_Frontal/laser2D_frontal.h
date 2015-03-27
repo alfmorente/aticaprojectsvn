@@ -21,7 +21,7 @@ extern "C" {
 // Mensajes
 #include <Modulo_Laser2D_Frontal/Files.h>
 #include <Modulo_Laser2D_Frontal/SickLMS5xx.h>
-#include "Common_files/msg_error.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h"
 #include "sensor_msgs/LaserScan.h"
 #include "../../../Common_files/include/Common_files/constant.h"
 

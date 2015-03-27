@@ -22,7 +22,10 @@ int Sicklms5xx::connect(short puerto,string ip)
 	if(!laserSocket->connectLaser(puerto,ip))
 		return CONNECTION_ERROR;
 	else
+	{
+		startMeasurement(PASSWORD); //Pongo el laser con luz verde (midiendo)
 		return NO_ERROR;
+	}
 }
 
 /** disconnect: Metodo publico que conecta con el Laser
@@ -34,6 +37,7 @@ int Sicklms5xx::connect(short puerto,string ip)
 **/
 void Sicklms5xx::disconnect()
 {
+	startMeasurement(PASSWORD); //Para dejar al laser con luz verde (midiendo)
 	laserSocket->disconnectLaser();
 	delete laserSocket;
 }

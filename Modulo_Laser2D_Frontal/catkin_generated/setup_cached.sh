@@ -10,7 +10,7 @@
 export CATKIN_TEST_RESULTS_DIR="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/test_results"
 export CMAKE_PREFIX_PATH="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/devel:$CMAKE_PREFIX_PATH"
 export CPATH="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/devel/include:$CPATH"
-export LD_LIBRARY_PATH="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/devel/lib:/home/atica/catkin_ws/devel/lib:/opt/ros/groovy/lib:/usr/lib/jvm/java-7-openjdk-i386/jre/jre/lib/amd64:/usr/lib/jvm/java-7-openjdk-i386/jre/jre/lib/i386"
+export LD_LIBRARY_PATH="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/devel/lib:/home/atica/catkin_ws/devel/lib:/opt/ros/groovy/lib:/usr/local/netbeans-7.4/cnd/bin/Linux-x86:/usr/local/netbeans-7.4/cnd/bin/Linux-x86_64:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/amd64:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/i386"
 export PATH="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/devel/bin:/home/atica/catkin_ws/devel/bin:/opt/ros/groovy/bin:/usr/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 export PKG_CONFIG_PATH="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal"

@@ -1,0 +1,20 @@
+Scanning dependencies of target rosbuild_premsgsrvgen
+[  0%] Built target rosbuild_premsgsrvgen
+Scanning dependencies of target ROSBUILD_genmsg_cpp
+[  0%] Built target ROSBUILD_genmsg_cpp
+Scanning dependencies of target ROSBUILD_genmsg_lisp
+[  0%] Built target ROSBUILD_genmsg_lisp
+Scanning dependencies of target rospack_genmsg
+[  0%] Built target rospack_genmsg
+Scanning dependencies of target rospack_genmsg_libexe
+[  0%] Built target rospack_genmsg_libexe
+Scanning dependencies of target rosbuild_precompile
+[  0%] Built target rosbuild_precompile
+Scanning dependencies of target laser2D_frontal
+[ 20%] Building CXX object CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o
+In file included from /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/laser2D_frontal.cpp:1:0:
+/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/include/Modulo_Laser2D_Frontal/laser2D_frontal.h:24:36: error fatal: Common_files/msg_error.h: No existe el archivo o el directorio
+compilación terminada.
+make[2]: *** [CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o] Error 1
+make[1]: *** [CMakeFiles/laser2D_frontal.dir/all] Error 2
+make: *** [all] Error 2

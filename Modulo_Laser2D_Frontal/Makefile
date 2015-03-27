@@ -531,6 +531,30 @@ src/TypeConverter.cpp.s:
 	$(MAKE) -f CMakeFiles/laser2D_frontal.dir/build.make CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.s
 .PHONY : src/TypeConverter.cpp.s
 
+src/interaction.o: src/interaction.cpp.o
+.PHONY : src/interaction.o
+
+# target to build an object file
+src/interaction.cpp.o:
+	$(MAKE) -f CMakeFiles/laser2D_frontal.dir/build.make CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o
+.PHONY : src/interaction.cpp.o
+
+src/interaction.i: src/interaction.cpp.i
+.PHONY : src/interaction.i
+
+# target to preprocess a source file
+src/interaction.cpp.i:
+	$(MAKE) -f CMakeFiles/laser2D_frontal.dir/build.make CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.i
+.PHONY : src/interaction.cpp.i
+
+src/interaction.s: src/interaction.cpp.s
+.PHONY : src/interaction.s
+
+# target to generate assembly for a file
+src/interaction.cpp.s:
+	$(MAKE) -f CMakeFiles/laser2D_frontal.dir/build.make CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.s
+.PHONY : src/interaction.cpp.s
+
 src/laser2D_frontal.o: src/laser2D_frontal.cpp.o
 .PHONY : src/laser2D_frontal.o
 
@@ -602,6 +626,9 @@ help:
 	@echo "... src/TypeConverter.o"
 	@echo "... src/TypeConverter.i"
 	@echo "... src/TypeConverter.s"
+	@echo "... src/interaction.o"
+	@echo "... src/interaction.i"
+	@echo "... src/interaction.s"
 	@echo "... src/laser2D_frontal.o"
 	@echo "... src/laser2D_frontal.i"
 	@echo "... src/laser2D_frontal.s"

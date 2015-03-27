@@ -7,17 +7,17 @@ Files::Files()
 
 int Files::openFiles()
 {
-    fileError.open("fileError.txt");
+    fileError.open("/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/bin/fileError.txt");
     if(fileError.bad())
       return LASER_LOG_FILE_ERROR;
 
-    fileData.open("fileData.txt");
+    fileData.open("/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/bin/fileData.txt");
     if(fileData.bad())
     {
       writeErrorInLOG(LASER_LOG_FILE_ERROR,"Fichero de datos");
       return LASER_LOG_FILE_ERROR;
     }
-    fileConfig.open("configLaser.txt");
+    fileConfig.open("/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/bin/configLaser.txt");
     if(!fileConfig.is_open())	
     {
        writeErrorInLOG(LASER_LOG_FILE_ERROR,"Fichero de configuracion");
@@ -91,10 +91,10 @@ int Files::readConfig(measuringParameters* config,dataOutput* configOutput,conec
         }
         fileConfig.close();
         config->numberSegments=1;
-        configOutput->outputChannel=1; //reserved
-        configOutput->remission=true; //reserved 
+        configOutput->outputChannel=0; //reserved
+        configOutput->remission=false; //reserved 
         configOutput->encoderData=0;
-        configOutput->Resolution=sixteenBits;
+        configOutput->Resolution=eightBits;
         configOutput->Unit=0;
         return NO_ERROR;
 }

@@ -64,8 +64,6 @@ CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /opt/ros/groovy/share/
 CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
 CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
 CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
-CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o -c /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/laser2D_frontal.cpp
@@ -105,8 +103,6 @@ CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o: /opt/ros/groovy/share/roscp
 CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
 CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
 CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
-CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o -c /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/SickLMS5xx.cpp
@@ -146,8 +142,6 @@ CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o: /opt/ros/groovy/share/roscpp/pac
 CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
 CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
 CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
-CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o -c /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/Files.cpp
@@ -187,8 +181,6 @@ CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: /opt/ros/groovy/sh
 CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
 CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
 CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
-CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o -c /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/SocketCommunication.cpp
@@ -228,8 +220,6 @@ CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: /opt/ros/groovy/share/ro
 CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
 CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
 CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
-CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o -c /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/TypeConverter.cpp
@@ -251,13 +241,53 @@ CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o.provides: CMakeFiles/lase
 
 CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o.provides.build: CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o
 
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: CMakeFiles/laser2D_frontal.dir/flags.make
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: src/interaction.cpp
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: manifest.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/geometry_msgs/package.xml
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: /opt/ros/groovy/share/sensor_msgs/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/interaction.cpp
+
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/interaction.cpp > CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.i
+
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/interaction.cpp -o CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.s
+
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.requires:
+.PHONY : CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.requires
+
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.provides: CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.requires
+	$(MAKE) -f CMakeFiles/laser2D_frontal.dir/build.make CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.provides.build
+.PHONY : CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.provides
+
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.provides.build: CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o
+
 # Object files for target laser2D_frontal
 laser2D_frontal_OBJECTS = \
 "CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o" \
 "CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o" \
 "CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o" \
 "CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o" \
-"CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o"
+"CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o" \
+"CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o"
 
 # External object files for target laser2D_frontal
 laser2D_frontal_EXTERNAL_OBJECTS =
@@ -267,6 +297,7 @@ bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/src/SickLMS5xx.cpp.o
 bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o
 bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o
 bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o
+bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o
 bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/build.make
 bin/laser2D_frontal: CMakeFiles/laser2D_frontal.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/laser2D_frontal"
@@ -281,6 +312,7 @@ CMakeFiles/laser2D_frontal.dir/requires: CMakeFiles/laser2D_frontal.dir/src/Sick
 CMakeFiles/laser2D_frontal.dir/requires: CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o.requires
 CMakeFiles/laser2D_frontal.dir/requires: CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o.requires
 CMakeFiles/laser2D_frontal.dir/requires: CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o.requires
+CMakeFiles/laser2D_frontal.dir/requires: CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o.requires
 .PHONY : CMakeFiles/laser2D_frontal.dir/requires
 
 CMakeFiles/laser2D_frontal.dir/clean:

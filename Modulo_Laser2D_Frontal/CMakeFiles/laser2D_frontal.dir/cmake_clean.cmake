@@ -4,6 +4,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/laser2D_frontal.dir/src/Files.cpp.o"
   "CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o"
   "CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o"
+  "CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o"
   "bin/laser2D_frontal.pdb"
   "bin/laser2D_frontal"
 )
