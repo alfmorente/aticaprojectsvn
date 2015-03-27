@@ -19,11 +19,11 @@ extern "C" {
 #endif	/* GPS_H */
 
 // Mensajes
-#include "Common_files/msg_gps.h"
-#include "Common_files/msg_error.h"
-#include "Common_files/msg_module_enable.h"
-#include "Common_files/msg_stream.h"
-#include "Common_files/msg_backup.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_gps.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_module_enable.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_stream.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_backup.h"
 
 // Librerias 
 #include <iostream>
