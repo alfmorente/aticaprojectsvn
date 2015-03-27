@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     // Espera activa de inicio de modulo
     int estado_actual = STATE_OFF;
     while (estado_actual != STATE_CONF) {
-        n.getParam("estado_modulo_GPS", estado_actual);
+        n.getParam("state_module_gps", estado_actual);
     }
     cout << "ATICA GPS :: Iniciando configuración..." << endl;
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
     Common_files::msg_error errMessage;
     
     // Todo esta correcto, lo especificamos con el correspondiente parametro
-    n.setParam("estado_modulo_GPS",STATE_OK);
+    n.setParam("state_module_gps",STATE_OK);
     cout << "ATICA GPS :: Configurado y funcionando" << endl;
     GPS_Management *gps;
 
@@ -102,7 +102,7 @@ int main(int argc, char **argv) {
                 short stateOfIMU = 0;
                 
                 while (ros::ok() && !exitModule) {
-                    n.getParam("estado_modulo_GPS",estado_actual);
+                    n.getParam("state_module_gps",estado_actual);
                     if(estado_actual== STATE_ERROR || estado_actual==STATE_OFF){
                         exitModule=true;
                     }else {
@@ -160,9 +160,12 @@ int main(int argc, char **argv) {
                             insMessage.latitude=gps->getGPSPos().lat;
                             insMessage.longitude=gps->getGPSPos().lon;
                             insMessage.altitude=gps->getGPSPos().hgt;
-                            insMessage.roll=gps->getInspVa().roll;
-                            insMessage.pitch=gps->getInspVa().pitch;
-                            insMessage.yaw=gps->getGPSVel().trk_gnd; //Se coje el yaw de gpsvel
+                            insMessage.roll=gps->getInspVa().roll*M_PI/180;
+                            insMessage.pitch=gps->getInspVa().pitch*M_PI/180;
+                            insMessage.yaw=gps->getGPSVel().trk_gnd*M_PI/180; 
+			    if(insMessage.yaw > M_PI)	
+				insMessage.yaw=insMessage.yaw-2*M_PI;
+			    //Se coje el yaw de gpsvel (el GPS lo da entre 0 y 2PI y hay que 				    //convertirlo en valores entre -PI y PI) 
                             pub_gps.publish(insMessage);
                         }
                     }

@@ -8,7 +8,7 @@ using namespace std;
 GPS_Management::GPS_Management(){
   port_opened=false;
   if(port.openSerial("/dev/ttyUSB0")){
-    port.configura(B115200);
+    port.configura(B9600);
     port_opened=true;
   }else{
     cerr << "No se ha podido abrir el puerto serie" << endl;

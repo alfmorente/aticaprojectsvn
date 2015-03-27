@@ -31,9 +31,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_GPS
 
@@ -65,8 +62,6 @@ CMakeFiles/gps.dir/src/gps.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xm
 CMakeFiles/gps.dir/src/gps.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/gps.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/gps.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/gps.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/gps.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/gps.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/gps.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/gps.cpp
@@ -104,8 +99,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o: /opt/ros/groovy/share/
 CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/external_signals.cpp
@@ -143,8 +136,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o: /opt/ros/groovy/share/rosgr
 CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/interaction.cpp
@@ -182,8 +173,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: /opt/ros/groovy/share/rosgr
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/TeachThread.cpp
@@ -221,8 +210,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o: /opt/ros/groovy/share/rosgraph_m
 CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/Thread.cpp
@@ -260,8 +247,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o: /opt/ros/groovy/share/rosgraph
 CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/CksFrame.cpp
@@ -299,8 +284,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: /opt/ros/groovy/share/rosgra
 CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/PortSerial.cpp
@@ -338,8 +321,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o: /opt/ros/groovy/share/ros
 CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/TypeConverter.cpp
@@ -377,8 +358,6 @@ CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: /opt/ros/groovy/share/ro
 CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
-CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o -c /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/GPS_Management.cpp
