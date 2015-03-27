@@ -1,0 +1,16 @@
+<package>
+  <description brief="Modulo_Conduccion_Bobcat">
+
+     Modulo_Conduccion_Bobcat
+
+  </description>
+  <author>Atica</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Modulo_Conduccion_Bobcat</url>
+  <depend package="roscpp"/>
+  <depend package="Common_files"/>
+
+</package>
+
+
