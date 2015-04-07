@@ -24,18 +24,12 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
-          <df name="CMakeFiles">
-            <df name="cmTryCompileExec.dir">
-            </df>
-          </df>
         </df>
         <df name="Common_files.dir">
         </df>
         <df name="CompilerIdC">
-          <in>CMakeCCompilerId.c</in>
         </df>
         <df name="CompilerIdCXX">
-          <in>CMakeCXXCompilerId.cpp</in>
         </df>
         <df name="doxygen.dir">
         </df>
