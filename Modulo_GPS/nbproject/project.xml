@@ -4,16 +4,13 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>Modulo_GPS</name>
-            <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions>cpp</cpp-extensions>
-            <header-extensions>h</header-extensions>
+            <header-extensions>h,hpp</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
-            <make-dep-projects>
-                <make-dep-project>../Common_files</make-dep-project>
-            </make-dep-projects>
+            <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>../Common_files/msg_gen/cpp/include/Common_files</sourceRootElem>
+                <sourceRootElem>.</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

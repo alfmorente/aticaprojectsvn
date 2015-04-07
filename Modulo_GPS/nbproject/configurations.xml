@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="../Common_files/msg_gen/cpp/include/Common_files" name="1">
+    <df root="." name="0">
+      <df name="src">
+        <df name="Modulo_GPS">
+          <in>CksFrame.cpp</in>
+          <in>GPS_Management.cpp</in>
+          <in>PortSerial.cpp</in>
+          <in>TeachThread.cpp</in>
+          <in>Thread.cpp</in>
+          <in>TypeConverter.cpp</in>
+          <in>external_signals.cpp</in>
+          <in>interaction.cpp</in>
+        </df>
+        <in>gps.cpp</in>
+      </df>
     </df>
-    <logicalFolder name="Modules"
-                   displayName="Modules"
-                   projectFiles="true"
-                   root="/usr/share/cmake-2.8/Modules">
-      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c</itemPath>
-      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp</itemPath>
-      <itemPath>/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h</itemPath>
-      <itemPath>/usr/share/cmake-2.8/Modules/CheckFunctionExists.c</itemPath>
-    </logicalFolder>
-    <logicalFolder name="src" displayName="src" projectFiles="true" root="src">
-      <itemPath>src/gps.cpp</itemPath>
-    </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>CMakeLists.txt</itemPath>
       <itemPath>Makefile</itemPath>
-      <itemPath>Makefile-Modulo_GPS.mk</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
-    <Elem>../Common_files/msg_gen/cpp/include/Common_files</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
-  <projectmakefile>Makefile-Modulo_GPS.mk</projectmakefile>
+  <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Default" type="0">
       <toolsSet>
-        <compilerSet>GNU|GNU</compilerSet>
+        <compilerSet>default</compilerSet>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -43,68 +44,37 @@
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
-          <cTool>
+          <ccTool>
             <incDir>
-              <pElem>CMakeFiles/CMakeTmp</pElem>
+              <pElem>include</pElem>
+              <pElem>/opt/ros/groovy/include</pElem>
+              <pElem>.</pElem>
             </incDir>
-          </cTool>
+            <preprocessorList>
+              <Elem>ROS_PACKAGE_NAME="Modulo_GPS"</Elem>
+            </preprocessorList>
+          </ccTool>
         </makeTool>
-        <requiredProjects>
-          <makeArtifact PL="../Common_files"
-                        CT="0"
-                        CN="Default"
-                        AC="true"
-                        BL="false"
-                        WD="../Common_files"
-                        BC="${MAKE} -f Makefile"
-                        CC="${MAKE} -f Makefile clean"
-                        OP="">
-          </makeArtifact>
-        </requiredProjects>
       </makefileType>
-      <item path="/usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
-            ex="false"
-            tool="0"
-            flavor2="2">
-        <cTool>
-        </cTool>
+      <item path="src/Modulo_GPS/CksFrame.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
+      <item path="src/Modulo_GPS/GPS_Management.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/PortSerial.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/TeachThread.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/Thread.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/TypeConverter.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Modulo_GPS/external_signals.cpp"
             ex="false"
             tool="1"
-            flavor2="4">
-        <ccTool>
-        </ccTool>
+            flavor2="0">
       </item>
-      <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
-            ex="false"
-            tool="0"
-            flavor2="2">
-        <cTool>
-          <preprocessorList>
-            <Elem>CHECK_FUNCTION_EXISTS=pthread_create</Elem>
-          </preprocessorList>
-        </cTool>
+      <item path="src/Modulo_GPS/interaction.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <folder path="Modules">
-        <ccTool>
-          <incDir>
-            <pElem>CMakeFiles/CMakeTmp</pElem>
-          </incDir>
-        </ccTool>
-      </folder>
-      <folder path="src">
-        <ccTool>
-          <incDir>
-            <pElem>include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>.</pElem>
-          </incDir>
-          <preprocessorList>
-            <Elem>ROS_PACKAGE_NAME="Modulo_GPS"</Elem>
-          </preprocessorList>
-        </ccTool>
-      </folder>
       <item path="src/gps.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
