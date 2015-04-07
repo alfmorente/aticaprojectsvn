@@ -20,6 +20,14 @@ TeachThread::~TeachThread() {
 }
 
 void TeachThread::DoWork(){
+  
+  
+  
+  
+  
+  
+  
+  
     TiXmlDocument doc;
     TiXmlDeclaration * decl = new TiXmlDeclaration("1.0", "UTF-8", "no");
     doc.LinkEndChild(decl);
