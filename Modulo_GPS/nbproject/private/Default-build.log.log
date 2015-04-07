@@ -1,0 +1,23 @@
+Scanning dependencies of target rospack_genmsg_libexe
+[  0%] Built target rospack_genmsg_libexe
+Scanning dependencies of target rosbuild_precompile
+[  0%] Built target rosbuild_precompile
+Scanning dependencies of target gps
+[ 11%] Building CXX object CMakeFiles/gps.dir/src/gps.cpp.o
+/home/atica/catkin_ws/src/Modulo_GPS/src/gps.cpp: En la función ‘int main(int, char**)’:
+/home/atica/catkin_ws/src/Modulo_GPS/src/gps.cpp:99:22: aviso: se define la variable ‘flagInspva’ pero no se usa [-Wunused-but-set-variable]
+/home/atica/catkin_ws/src/Modulo_GPS/src/gps.cpp:102:23: aviso: variable ‘stateOfIMU’ sin usar [-Wunused-variable]
+[ 22%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/external_signals.cpp.o
+[ 33%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/interaction.cpp.o
+[ 44%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o
+[ 55%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o
+/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/Thread.cpp: En la función miembro static ‘static void* Thread::Executer(void*)’:
+/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/Thread.cpp:46:1: aviso: no hay una declaración de devolución en la función que no devuelve void [-Wreturn-type]
+[ 66%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/CksFrame.cpp.o
+[ 77%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o
+[ 88%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o
+[100%] Building CXX object CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o
+/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/GPS_Management.cpp: En el constructor ‘GPS_Management::GPS_Management()’:
+/home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/GPS_Management.cpp:10:36: aviso: conversión obsoleta de una constante de cadena a ‘char*’ [-Wwrite-strings]
+Linking CXX executable bin/gps
+[100%] Built target gps
