@@ -28,8 +28,10 @@
         <df name="Common_files.dir">
         </df>
         <df name="CompilerIdC">
+          <in>CMakeCCompilerId.c</in>
         </df>
         <df name="CompilerIdCXX">
+          <in>CMakeCXXCompilerId.cpp</in>
         </df>
         <df name="doxygen.dir">
         </df>
@@ -39,7 +41,11 @@
             </df>
           </df>
         </df>
+        <df name="Progress">
+        </df>
         <df name="rosbuild_clean-test-results.dir">
+        </df>
+        <df name="ROSBUILD_genmanifest_roseus_Modulo_GPS.dir">
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
         </df>
@@ -47,9 +53,13 @@
         </df>
         <df name="ROSBUILD_genmsg_py.dir">
         </df>
+        <df name="ROSBUILD_genmsg_roseus_Modulo_GPS.dir">
+        </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
+        </df>
+        <df name="ROSBUILD_gensrv_roseus_Modulo_GPS.dir">
         </df>
         <df name="rosbuild_precompile.dir">
         </df>
@@ -101,6 +111,7 @@
           <in>CksFrame.h</in>
           <in>GPS_Management.h</in>
           <in>PortSerial.h</in>
+          <in>TeachString.h</in>
           <in>TeachThread.hpp</in>
           <in>Thread.hpp</in>
           <in>TypeConverter.h</in>
@@ -117,6 +128,7 @@
           <in>CksFrame.cpp</in>
           <in>GPS_Management.cpp</in>
           <in>PortSerial.cpp</in>
+          <in>TeachString.cpp</in>
           <in>TeachThread.cpp</in>
           <in>Thread.cpp</in>
           <in>TypeConverter.cpp</in>

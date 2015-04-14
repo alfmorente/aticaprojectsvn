@@ -37,7 +37,6 @@
 from __future__ import print_function
 import argparse
 import copy
-import errno
 import os
 import platform
 import sys
@@ -93,7 +92,7 @@ def _rollback_env_variable(environ, name, subfolder):
             subfolder = subfolder[1:]
         if subfolder.endswith(os.path.sep) or (os.path.altsep and subfolder.endswith(os.path.altsep)):
             subfolder = subfolder[:-1]
-    for ws_path in _get_workspaces(environ, include_fuerte=True, include_non_existing=True):
+    for ws_path in _get_workspaces(environ, include_fuerte=True):
         path_to_find = os.path.join(ws_path, subfolder) if subfolder else ws_path
         path_to_remove = None
         for env_path in env_paths:
@@ -108,7 +107,7 @@ def _rollback_env_variable(environ, name, subfolder):
     return new_value if value_modified else None
 
 
-def _get_workspaces(environ, include_fuerte=False, include_non_existing=False):
+def _get_workspaces(environ, include_fuerte=False):
     '''
     Based on CMAKE_PREFIX_PATH return all catkin workspaces.
 
@@ -119,7 +118,7 @@ def _get_workspaces(environ, include_fuerte=False, include_non_existing=False):
     value = environ[env_name] if env_name in environ else ''
     paths = [path for path in value.split(os.pathsep) if path]
     # remove non-workspace paths
-    workspaces = [path for path in paths if os.path.isfile(os.path.join(path, CATKIN_MARKER_FILE)) or (include_fuerte and path.startswith('/opt/ros/fuerte')) or (include_non_existing and not os.path.exists(path))]
+    workspaces = [path for path in paths if os.path.isfile(os.path.join(path, CATKIN_MARKER_FILE)) or (include_fuerte and path.startswith('/opt/ros/fuerte'))]
     return workspaces
 
 
@@ -245,36 +244,24 @@ def _parse_arguments(args=None):
 
 if __name__ == '__main__':
     try:
-        try:
-            args = _parse_arguments()
-        except Exception as e:
-            print(e, file=sys.stderr)
-            sys.exit(1)
+        args = _parse_arguments()
+    except Exception as e:
+        print(e, file=sys.stderr)
+        exit(1)
 
-        # environment at generation time
-        CMAKE_PREFIX_PATH = '/home/atica/catkin_ws/devel;/opt/ros/groovy'.split(';')
-        # prepend current workspace if not already part of CPP
-        base_path = os.path.dirname(__file__)
-        if base_path not in CMAKE_PREFIX_PATH:
-            CMAKE_PREFIX_PATH.insert(0, base_path)
-        CMAKE_PREFIX_PATH = os.pathsep.join(CMAKE_PREFIX_PATH)
+    # environment at generation time
+    CMAKE_PREFIX_PATH = '/home/atica/catkin_ws/devel;/opt/ros/groovy'.split(';')
+    # prepend current workspace if not already part of CPP
+    base_path = os.path.dirname(__file__)
+    if base_path not in CMAKE_PREFIX_PATH:
+        CMAKE_PREFIX_PATH.insert(0, base_path)
+    CMAKE_PREFIX_PATH = os.pathsep.join(CMAKE_PREFIX_PATH)
 
-        environ = dict(os.environ)
-        lines = []
-        if not args.extend:
-            lines += rollback_env_variables(environ, ENV_VAR_SUBFOLDERS)
-        lines += prepend_env_variables(environ, ENV_VAR_SUBFOLDERS, CMAKE_PREFIX_PATH)
-        lines += find_env_hooks(environ, CMAKE_PREFIX_PATH)
-        print('\n'.join(lines))
-
-        # need to explicitly flush the output
-        sys.stdout.flush()
-    except IOError as e:
-        # and catch potantial "broken pipe" if stdout is not writable
-        # which can happen when piping the output to a file but the disk is full
-        if e.errno == errno.EPIPE:
-            print(e, file=sys.stderr)
-            sys.exit(2)
-        raise
-
+    environ = dict(os.environ)
+    lines = []
+    if not args.extend:
+        lines += rollback_env_variables(environ, ENV_VAR_SUBFOLDERS)
+    lines += prepend_env_variables(environ, ENV_VAR_SUBFOLDERS, CMAKE_PREFIX_PATH)
+    lines += find_env_hooks(environ, CMAKE_PREFIX_PATH)
+    print('\n'.join(lines))
     sys.exit(0)

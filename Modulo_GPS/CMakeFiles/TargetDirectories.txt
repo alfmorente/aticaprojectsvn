@@ -1,10 +1,7 @@
-/home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_genmanifest_roseus_Modulo_GPS.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_genmsg_cpp.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_genmsg_lisp.dir
-/home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_genmsg_roseus_Modulo_GPS.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_gensrv_cpp.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_gensrv_lisp.dir
-/home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/ROSBUILD_gensrv_roseus_Modulo_GPS.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/_catkin_empty_exported_target.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/clean_test_results.dir
 /home/atica/catkin_ws/src/Modulo_GPS/CMakeFiles/doxygen.dir
