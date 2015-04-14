@@ -35,9 +35,6 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
-# Escaping for special characters.
-EQUALS = =
-
 # The program to use to edit the cache.
 CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
 
@@ -143,19 +140,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmanifest_roseus_Modulo_GPS
-
-# Build rule for target.
-ROSBUILD_genmanifest_roseus_Modulo_GPS: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmanifest_roseus_Modulo_GPS
-.PHONY : ROSBUILD_genmanifest_roseus_Modulo_GPS
-
-# fast build rule for target.
-ROSBUILD_genmanifest_roseus_Modulo_GPS/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmanifest_roseus_Modulo_GPS.dir/build.make CMakeFiles/ROSBUILD_genmanifest_roseus_Modulo_GPS.dir/build
-.PHONY : ROSBUILD_genmanifest_roseus_Modulo_GPS/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -182,19 +166,6 @@ ROSBUILD_genmsg_lisp/fast:
 .PHONY : ROSBUILD_genmsg_lisp/fast
 
 #=============================================================================
-# Target rules for targets named ROSBUILD_genmsg_roseus_Modulo_GPS
-
-# Build rule for target.
-ROSBUILD_genmsg_roseus_Modulo_GPS: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_genmsg_roseus_Modulo_GPS
-.PHONY : ROSBUILD_genmsg_roseus_Modulo_GPS
-
-# fast build rule for target.
-ROSBUILD_genmsg_roseus_Modulo_GPS/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_roseus_Modulo_GPS.dir/build.make CMakeFiles/ROSBUILD_genmsg_roseus_Modulo_GPS.dir/build
-.PHONY : ROSBUILD_genmsg_roseus_Modulo_GPS/fast
-
-#=============================================================================
 # Target rules for targets named ROSBUILD_gensrv_cpp
 
 # Build rule for target.
@@ -219,19 +190,6 @@ ROSBUILD_gensrv_lisp: cmake_check_build_system
 ROSBUILD_gensrv_lisp/fast:
 	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_lisp.dir/build.make CMakeFiles/ROSBUILD_gensrv_lisp.dir/build
 .PHONY : ROSBUILD_gensrv_lisp/fast
-
-#=============================================================================
-# Target rules for targets named ROSBUILD_gensrv_roseus_Modulo_GPS
-
-# Build rule for target.
-ROSBUILD_gensrv_roseus_Modulo_GPS: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_roseus_Modulo_GPS
-.PHONY : ROSBUILD_gensrv_roseus_Modulo_GPS
-
-# fast build rule for target.
-ROSBUILD_gensrv_roseus_Modulo_GPS/fast:
-	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_roseus_Modulo_GPS.dir/build.make CMakeFiles/ROSBUILD_gensrv_roseus_Modulo_GPS.dir/build
-.PHONY : ROSBUILD_gensrv_roseus_Modulo_GPS/fast
 
 #=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
@@ -539,6 +497,30 @@ src/Modulo_GPS/PortSerial.cpp.s:
 	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.s
 .PHONY : src/Modulo_GPS/PortSerial.cpp.s
 
+src/Modulo_GPS/TeachString.o: src/Modulo_GPS/TeachString.cpp.o
+.PHONY : src/Modulo_GPS/TeachString.o
+
+# target to build an object file
+src/Modulo_GPS/TeachString.cpp.o:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o
+.PHONY : src/Modulo_GPS/TeachString.cpp.o
+
+src/Modulo_GPS/TeachString.i: src/Modulo_GPS/TeachString.cpp.i
+.PHONY : src/Modulo_GPS/TeachString.i
+
+# target to preprocess a source file
+src/Modulo_GPS/TeachString.cpp.i:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.i
+.PHONY : src/Modulo_GPS/TeachString.cpp.i
+
+src/Modulo_GPS/TeachString.s: src/Modulo_GPS/TeachString.cpp.s
+.PHONY : src/Modulo_GPS/TeachString.s
+
+# target to generate assembly for a file
+src/Modulo_GPS/TeachString.cpp.s:
+	$(MAKE) -f CMakeFiles/gps.dir/build.make CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.s
+.PHONY : src/Modulo_GPS/TeachString.cpp.s
+
 src/Modulo_GPS/TeachThread.o: src/Modulo_GPS/TeachThread.cpp.o
 .PHONY : src/Modulo_GPS/TeachThread.o
 
@@ -689,13 +671,10 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... ROSBUILD_genmanifest_roseus_Modulo_GPS"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
-	@echo "... ROSBUILD_genmsg_roseus_Modulo_GPS"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
-	@echo "... ROSBUILD_gensrv_roseus_Modulo_GPS"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... clean_test_results"
 	@echo "... doxygen"
@@ -729,6 +708,9 @@ help:
 	@echo "... src/Modulo_GPS/PortSerial.o"
 	@echo "... src/Modulo_GPS/PortSerial.i"
 	@echo "... src/Modulo_GPS/PortSerial.s"
+	@echo "... src/Modulo_GPS/TeachString.o"
+	@echo "... src/Modulo_GPS/TeachString.i"
+	@echo "... src/Modulo_GPS/TeachString.s"
 	@echo "... src/Modulo_GPS/TeachThread.o"
 	@echo "... src/Modulo_GPS/TeachThread.i"
 	@echo "... src/Modulo_GPS/TeachThread.s"

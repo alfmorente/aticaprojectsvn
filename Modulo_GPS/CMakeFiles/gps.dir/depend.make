@@ -15,6 +15,9 @@ CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o: include/Modulo_GPS/const
 CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: src/Modulo_GPS/PortSerial.cpp
 CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o: include/Modulo_GPS/PortSerial.h
 
+CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o: src/Modulo_GPS/TeachString.cpp
+CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o: include/Modulo_GPS/TeachString.h
+
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: src/Modulo_GPS/TeachThread.cpp
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: include/Modulo_GPS/TeachThread.hpp
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: include/Modulo_GPS/Thread.hpp

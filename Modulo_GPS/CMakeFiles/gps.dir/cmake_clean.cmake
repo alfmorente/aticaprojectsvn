@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/gps.dir/src/Modulo_GPS/PortSerial.cpp.o"
   "CMakeFiles/gps.dir/src/Modulo_GPS/TypeConverter.cpp.o"
   "CMakeFiles/gps.dir/src/Modulo_GPS/GPS_Management.cpp.o"
+  "CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o"
   "bin/gps.pdb"
   "bin/gps"
 )
