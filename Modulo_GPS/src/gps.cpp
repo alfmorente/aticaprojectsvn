@@ -106,15 +106,6 @@ int main(int argc, char **argv) {
           if (estado_actual == STATE_ERROR || estado_actual == STATE_OFF) {
             exitModule = true;
           } else {
-
-            if (launchTeach) { // LANZAR TEACH
-              // Lanzar el hilo
-              teachThread.Run();
-              launchTeach = false;
-            }
-            
-            
-
             typeFrame = gps->rcvData();
             switch (typeFrame) {
               case TT_BESTGPSPOSA:
@@ -188,12 +179,6 @@ int main(int argc, char **argv) {
         if (estado_actual == STATE_ERROR || estado_actual == STATE_OFF) {
           exitModule = true;
         } else {
-          if (launchTeach) { // LANZAR TEACH
-            // Lanzar el hilo
-            teachThread.Run();
-            launchTeach = false;
-          }
-
           if (readyToPublish) {
             readyToPublish = false;
             // Obtiene posicion y genera el mensaje
@@ -237,11 +222,18 @@ void fcn_sub_enableModule(const Common_files::msg_module_enable msg) {
     if (msg.status == ON) {
       if (!teachActive) {
         teachActive = true;
-        launchTeach = true;
+        teachThread.Run();
       }
     } else if (msg.status == OFF) {
       if (teachActive) {
         teachActive = false;
+        vector<string> teaches = teachThread.getTeaches();
+        Common_files::msg_stream msg;
+        for(int i=0;i<teaches.size();i++){
+          msg.id_file = TOF_TEACH;
+          msg.stream = teaches.at(i);
+          pub_stream.publish(msg);
+        }
       }
     }
   }
@@ -307,5 +299,4 @@ void initModuleVariables() {
   exitModule = false;
   readyToPublish = false;
   teachActive = false;
-  launchTeach = false;
 }

@@ -55,7 +55,7 @@ typedef struct{
 }insData;
 
 // Variable de continuacion de modulo
-bool exitModule, readyToPublish, teachActive, launchTeach;
+bool exitModule, readyToPublish, teachActive;
 // Variable donde guardar datos de INS
 insData insdata;
 // Hilo que controla el teach

@@ -16,31 +16,30 @@
 #include <tinyxml.h>
 #include <sstream>
 #include <string>
+#include "TeachString.h"
 
-
-typedef struct{
-    float latitude;
-    float longitude;
-}TeachData;
+typedef struct {
+  float latitude;
+  float longitude;
+} TeachData;
 
 class TeachThread : public Thread {
-    
 public:
-    TeachThread();
-    virtual ~TeachThread();
-    virtual void DoWork();
-    void setMode(bool);
-    
-    
-    // Atributos cola de datos
-    queue<TeachData> queueGPSdata;
+  TeachThread();
+  virtual ~TeachThread();
+  virtual void DoWork();
+  void setMode(bool);
 
-    
+  // Atributos cola de datos
+  queue<TeachData> queueGPSdata;
+  vector<string> getTeaches();
+
+
 private:
-    bool mode_active; // Flag de estado
-    string getDate(bool);
-    
-    
+  TeachString *teachSt;
+  bool mode_active; // Flag de estado
+  vector<string> teaches;
+
 };
 
 #endif	/* TEACHTHREAD_HPP */
