@@ -1,10 +1,9 @@
-/* 
- * File:   gest_errores.h
- * Author: atica
- *
- * Created on 13 de septiembre de 2013, 11:07
+/** 
+ * @file  gest_errores.h
+ * @brief Archivo de cabecera del módulo Gestión de errores
+ * @author Alfonso Morente
+ * @date 13/09/2013
  */
-
 
 #ifndef GEST_ERRORES_H
 #define	GEST_ERRORES_H

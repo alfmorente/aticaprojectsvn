@@ -1,15 +1,27 @@
-/* 
- * File:   gest_errores.cpp
- * Author: Alfonso Morente
- *
- * Created on 13 de septiembre de 2013, 9:51
- */
+/**
+  @file gest_errores.cpp
+  @brief 
+
+ * Archivo principal del Módulo Gestión de Errores encargado de administrar todos
+ * los errores ocurridos en el sistema. Para ello los clasifica segun su prioridad
+ * y los envía de nuevo al sistema ya clasificados.
+
+  @author Alfonso Morente
+  @date xx/xx/2014
+
+*/
 
 #include "../include/Modulo_Gest_Errores/gest_errores.h"
 
 using namespace std;
 ofstream flog;
 
+/**
+ * Método principal del nodo. 
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario. 
+ */
 int main(int argc, char **argv) {
     // Obtencion del modo de operacion y comprobacion de que es correcto
     int operationMode;
@@ -23,9 +35,7 @@ int main(int argc, char **argv) {
     // Manejador ROS
     ros::NodeHandle n;
 
-
-    // Espera activa de inicio de modulo
-    //int estado_actual=STATE_OK;       // Para poder probar
+    // Espera activa de inicio de modulo  
     int estado_actual = STATE_OFF;
     while (estado_actual != STATE_CONF) {
         n.getParam("state_module_error_management", estado_actual);
@@ -88,7 +98,12 @@ int main(int argc, char **argv) {
  * *****************************************************************************
  * ****************************************************************************/
 
-// Suscriptor de modo
+/**
+ * Suscriptor de modo.
+ * Actualiza variables dependiendo del modo recibido
+ * @param[in] msg Mensaje proveniente del publicador
+ *  
+ */
 void fcn_sub_mode(const Common_files::msg_modePtr& msg) {
     ROS_INFO("Cambio de modo");
     if ((msg->status == MODE_START) && (msg->type_msg == INFO))
@@ -103,7 +118,12 @@ void fcn_sub_mode(const Common_files::msg_modePtr& msg) {
 
 }
 
-// Suscriptor de errores
+/**
+ * Suscriptor de errores
+ * Clasifica los errores en críticos o warnings. 
+ * Actualiza la tabla de modos disponibles
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     bool av_mode_aux[14];
@@ -176,7 +196,12 @@ void fcn_sub_error(const Common_files::msg_errorPtr& msg) {
     }
 }
 
-// Servicio de heartbeat para Gestion de sistema
+/**
+ * Servicio de heartbeat para Gestion de sistema
+ * @param req 
+ * @param resp
+ * @return 
+ */
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp) {
     if (req.param == PARAM_ALIVE) {
         resp.value = 0;
@@ -190,7 +215,11 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
  *                              FUNCIONES PROPIAS
  * *****************************************************************************
  * ****************************************************************************/
-// Inicialización de variables
+
+/**
+ * Inicialización de variables del sistema
+ * @param n Nodo de trabajo de ROS
+ */
 void initialize(ros::NodeHandle n) {
     // Creacion de suscriptores
     sub_error = n.subscribe("error", 1000, fcn_sub_error);
@@ -220,8 +249,13 @@ void initialize(ros::NodeHandle n) {
     }
 }
 
-// Especifica que tipo de error se ha recibido y rellena el correspondiente
-// campo del mensaje. Luego lo envia relleno.
+/**
+ * Especifica que tipo de error se ha recibido y rellena el correspondiente
+ * campo del mensaje. Luego lo envia relleno.
+ * @param msg Mensaje de error sin clasificar
+ * @param mode Modo en que se encuentra el sistema
+ * @return Devuelve la criticidad del error
+ */
 short isWarningOrCritical(const Common_files::msg_errorPtr& msg, short mode) {
     short error = 0;
     switch (mode) {
@@ -274,7 +308,11 @@ short isWarningOrCritical(const Common_files::msg_errorPtr& msg, short mode) {
     return error;
 }
 
-// Método que define la gravedad del error para el modo REMOTE
+/**
+ * Define la gravedad del error para el modo REMOTE
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_remote_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -785,6 +823,11 @@ short mode_remote_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
+/**
+ * Define la gravedad del error para el submodo START ENGINE
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_startengine_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -1295,6 +1338,11 @@ short mode_startengine_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
+/**
+ * Define la gravedad del error para el submodo STOP ENGINE
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_stopengine_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -1805,6 +1853,11 @@ short mode_stopengine_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
+/**
+ * Define la gravedad del error para el submodo ENGAGE BRAKE
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_engagebrake_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -2315,7 +2368,11 @@ short mode_engagebrake_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo PLAN
+/**
+ * Define la gravedad del error para el modo PLAN
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_plan_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -2826,7 +2883,11 @@ short mode_plan_error(const Common_files::msg_errorPtr& msg) {
     return (type_error);
 }
 
-// Método que define la gravedad del error para el modo COME TO ME
+/**
+ * Define la gravedad del error para el modo COME TO ME
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_cometome_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -3337,7 +3398,11 @@ short mode_cometome_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo FOLLOW ME
+/**
+ * Define la gravedad del error para el modo FOLLOW ME
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_followme_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -3848,7 +3913,11 @@ short mode_followme_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo TEACH
+/**
+ * Define la gravedad del error para el modo TEACH
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_teach_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -4359,7 +4428,11 @@ short mode_teach_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo MAPPING
+/**
+ * Define la gravedad del error para el modo MAPPING
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_mapping_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -4870,7 +4943,11 @@ short mode_mapping_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo CONVOY
+/**
+ * Define la gravedad del error para el modo CONVOY
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_convoy_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -5381,7 +5458,11 @@ short mode_convoy_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo CONVOY+TELEOP
+/**
+ * Define la gravedad del error para el modo CONVOY+TELEOP
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_conv_teleop_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -5892,7 +5973,11 @@ short mode_conv_teleop_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Método que define la gravedad del error para el modo CONVOY+AUTO
+/**
+ * Define la gravedad del error para el modo CONVOY+AUTO
+ * @param msg Mensaje de error sin clasificar
+ * @return Devuelve la criticidad del error 
+ */
 short mode_conv_auto_error(const Common_files::msg_errorPtr& msg) {
     short type_error = 0;
     switch (msg->id_subsystem) {
@@ -6403,7 +6488,9 @@ short mode_conv_auto_error(const Common_files::msg_errorPtr& msg) {
     return type_error;
 }
 
-// Cambia a modo neutro
+/**
+ * Cambia a modo neutro
+ */
 void switchNeutral() {
     // Envia msg_mode con estado EXIT cuando llega confirmacion de DRIVING
     msg_ch_neutral->mode = currentMode;
@@ -6412,7 +6499,11 @@ void switchNeutral() {
     pub_mode.publish(msg_ch_neutral);
 }
 
-// Convierte los errores de entrada en sus correspondientes errores de salida
+/**
+ * Convierte los errores de entrada en sus correspondientes errores de salida
+ * @param msg Mensaje con identificador de entrada
+ * @return Identificador de error de salida
+ */
 int convertOutputError(const Common_files::msg_errorPtr& msg) {
     int out_error = 0;
     switch (msg->id_subsystem) {
@@ -6733,7 +6824,10 @@ int convertOutputError(const Common_files::msg_errorPtr& msg) {
     return out_error;
 }
 
-// Funcion para escribir en el fichero log
+/**
+ * Escribe el mensaje de error en un fichero log
+ * @param msg Mensaje de error
+ */
 void writeToLog(const Common_files::msg_errorPtr& msg) {
     struct timeval timeLog;
     gettimeofday(&timeLog, NULL);
@@ -6741,7 +6835,13 @@ void writeToLog(const Common_files::msg_errorPtr& msg) {
     flog << msg << endl;
 }
 
-// Actualiza la tabla de modos disponibles ante la llegada de un mensaje de error
+/**
+ * Actualiza la tabla de modos disponibles ante la llegada de un mensaje 
+ * de error
+ * @param msg Mensaje de error recibido en el módulo
+ * @param originalTable Tabla de modos disponibles 
+ * @return Devuelve false si ha habido cambios en la tabla de modos disponibles
+ */
 bool updateModeAvailable(const Common_files::msg_errorPtr& msg, bool originalTable[13]) {
     int i = 0;
     short type_error;
@@ -6767,7 +6867,13 @@ bool updateModeAvailable(const Common_files::msg_errorPtr& msg, bool originalTab
     return compareTable(originalTable, avail_mode); // La función devuelve false si ha habido cambios en la tabla de modos disponibles
 }
 
-// Actualiza la tabla de modos disponibles ante la llegada de un mensaje fin de error
+/**
+ * Actualiza la tabla de modos disponibles ante la llegada de un mensaje 
+ * fin de error
+ * @param msg Mensaje de error del tipo fin de error
+ * @param originalTable Tabla de modos disponibles
+ * @return Devuelve false si ha habido cambios en la tabla de modos disponibles
+ */
 bool updateEndError(const Common_files::msg_errorPtr& msg, bool originalTable[13]) {
     short type_error;
     int i, j, summ = 0;
@@ -6799,7 +6905,11 @@ bool updateEndError(const Common_files::msg_errorPtr& msg, bool originalTable[13
     return compareTable(originalTable, avail_mode); // La función devuelve false si ha habido cambios en la tabla de modos disponibles
 }
 
-// Comprueba el número de errores de la tabla de errores global
+/**
+ * Comprueba el número de errores de la tabla de errores global
+ * @param mode Modo a comprobar
+ * @return Devuelve el número de errores del modo requerido
+ */
 int checkErrorTable(int mode) {
     int i, j;
     int summ = 0;
@@ -6814,7 +6924,13 @@ int checkErrorTable(int mode) {
     //cout << "Modo disponible con ID " << mode << " es " << (short) avail_mode.available[mode] << endl;
 }
 
-// Compara las tablas de modos disponibles para publicar o no
+/**
+ * Compara las tablas de modos disponibles para publicar o no
+ * @param original Tabla de modos disponibles
+ * @param msg Mensaje de modos disponibles
+ * @return Devuelve true si no hay cambios en la tabla; false si hay algún campo
+ * diferente
+ */
 bool compareTable(bool original[13], const Common_files::msg_availablePtr& msg) {
     for (int i = 1; i < 13; i++) {
         if (original[i] != msg->available[i]) {
