@@ -1,8 +1,6 @@
 FILE(REMOVE_RECURSE
-  "msg_gen"
-  "msg_gen"
-  "src/Modulo_Gest_Errores/msg"
   "CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o"
+  "CMakeFiles/gest_errores.dir/src/interaction.cpp.o"
   "bin/gest_errores.pdb"
   "bin/gest_errores"
 )

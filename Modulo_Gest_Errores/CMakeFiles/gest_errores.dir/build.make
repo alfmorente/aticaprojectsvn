@@ -61,6 +61,7 @@ CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o: /opt/ros/groovy/share/std_ms
 CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
 CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Errores/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o"
 	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o -c /home/atica/catkin_ws/src/Modulo_Gest_Errores/src/gest_errores.cpp
@@ -82,14 +83,53 @@ CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o.provides: CMakeFiles/gest_err
 
 CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o.provides.build: CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o
 
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: CMakeFiles/gest_errores.dir/flags.make
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: src/interaction.cpp
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: manifest.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/cpp_common/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rostime/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp_traits/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp_serialization/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/genmsg/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/genpy/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/message_runtime/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosconsole/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/std_msgs/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosgraph_msgs/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Errores/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_errores.dir/src/interaction.cpp.o"
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_errores.dir/src/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_Gest_Errores/src/interaction.cpp
+
+CMakeFiles/gest_errores.dir/src/interaction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gest_errores.dir/src/interaction.cpp.i"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Gest_Errores/src/interaction.cpp > CMakeFiles/gest_errores.dir/src/interaction.cpp.i
+
+CMakeFiles/gest_errores.dir/src/interaction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gest_errores.dir/src/interaction.cpp.s"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Gest_Errores/src/interaction.cpp -o CMakeFiles/gest_errores.dir/src/interaction.cpp.s
+
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o.requires:
+.PHONY : CMakeFiles/gest_errores.dir/src/interaction.cpp.o.requires
+
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o.provides: CMakeFiles/gest_errores.dir/src/interaction.cpp.o.requires
+	$(MAKE) -f CMakeFiles/gest_errores.dir/build.make CMakeFiles/gest_errores.dir/src/interaction.cpp.o.provides.build
+.PHONY : CMakeFiles/gest_errores.dir/src/interaction.cpp.o.provides
+
+CMakeFiles/gest_errores.dir/src/interaction.cpp.o.provides.build: CMakeFiles/gest_errores.dir/src/interaction.cpp.o
+
 # Object files for target gest_errores
 gest_errores_OBJECTS = \
-"CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o"
+"CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o" \
+"CMakeFiles/gest_errores.dir/src/interaction.cpp.o"
 
 # External object files for target gest_errores
 gest_errores_EXTERNAL_OBJECTS =
 
 bin/gest_errores: CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o
+bin/gest_errores: CMakeFiles/gest_errores.dir/src/interaction.cpp.o
 bin/gest_errores: CMakeFiles/gest_errores.dir/build.make
 bin/gest_errores: CMakeFiles/gest_errores.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable bin/gest_errores"
@@ -100,6 +140,7 @@ CMakeFiles/gest_errores.dir/build: bin/gest_errores
 .PHONY : CMakeFiles/gest_errores.dir/build
 
 CMakeFiles/gest_errores.dir/requires: CMakeFiles/gest_errores.dir/src/gest_errores.cpp.o.requires
+CMakeFiles/gest_errores.dir/requires: CMakeFiles/gest_errores.dir/src/interaction.cpp.o.requires
 .PHONY : CMakeFiles/gest_errores.dir/requires
 
 CMakeFiles/gest_errores.dir/clean:

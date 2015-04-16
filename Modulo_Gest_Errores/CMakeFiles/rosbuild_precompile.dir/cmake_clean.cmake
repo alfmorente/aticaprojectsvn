@@ -1,7 +1,4 @@
 FILE(REMOVE_RECURSE
-  "msg_gen"
-  "msg_gen"
-  "src/Modulo_Gest_Errores/msg"
   "CMakeFiles/rosbuild_precompile"
 )
 
