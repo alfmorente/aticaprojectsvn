@@ -1,9 +1,13 @@
-/* 
- * File:   human_localization.cpp
- * Author: atica
- *
- * Created on 10 de diciembre de 2013, 12:40
- */
+/**
+  @file human_localization.cpp
+  @brief 
+
+ * Archivo principal del Módulo Human Localization
+
+  @author Alfonso Morente
+  @date 10/12/2013
+
+*/
 
 #include "../include/Modulo_HumanLocalization/human_localization.h"
 
@@ -19,8 +23,12 @@ using namespace std;
 
 // Variable control de modo-habilitación módulo
   bool enableModule;
-/*
- * 
+
+  /**
+ * Método principal del nodo. 
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario. 
  */
 int main(int argc, char** argv) {
 

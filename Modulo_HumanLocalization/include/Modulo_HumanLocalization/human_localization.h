@@ -1,8 +1,8 @@
-/* 
- * File:   human_localization.h
- * Author: atica
- *
- * Created on 10 de diciembre de 2013, 12:42
+/** 
+ * @file  human_localization.h
+ * @brief Archivo de cabecera del módulo Human Localization
+ * @author Alfonso Morente
+ * @date 10/12/2013
  */
 
 #ifndef HUMAN_LOCALIZATION_H
