@@ -1,14 +1,16 @@
-/* 
- * File:   ConduccionThread.hpp
- * Author: Sergio Doctor López
- *
- * Created on 6 de febrero de 2014
+
+/** 
+ * @file  TeachThread.h
+ * @brief Declara el tipo de la clase "TeachThread"
+ * - La clase hereda de la clase Thread y representa un hilo de ejecución
+ * alternativo al principal de programa que se comunica con el mismo para la 
+ * obtención de puntos del modo teach y si almacenamiento en caso de estar activo.
+ * @author Carlos Amores
+ * @date 2013, 2014, 2015
  */
 
 #ifndef TEACHTHREAD_HPP
 #define	TEACHTHREAD_HPP
-
-
 
 #include "Thread.hpp"
 #include <queue>
@@ -18,11 +20,19 @@
 #include <string>
 #include "TeachString.h"
 
+/**
+ * \struct TeachData
+ * \brief Estructura para almacenamiento coordenadas
+ */
 typedef struct {
     float latitude;
     float longitude;
 } TeachData;
 
+/**
+ * \class TeachThread
+ * \brief Clase que representa el hilo de ejecución del modo Teach
+ */
 class TeachThread : public Thread {
 public:
     TeachThread();
@@ -30,12 +40,9 @@ public:
     virtual void DoWork();
     void setMode(bool);
     bool dataReady();
-
     // Atributos cola de datos
     queue<TeachData> queueGPSdata;
     vector<string> getTeaches();
-
-
 private:
     TeachString *teachSt;
     bool mode_active; // Flag de estado

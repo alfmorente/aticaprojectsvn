@@ -1,9 +1,12 @@
-/* 
- * File:   GPS_Management.h
- * Author: carlosamores
- *
- * Created on 21 de marzo de 2013, 10:03
+
+/** 
+ * @file  GPS_Management.h
+ * @brief Declara el tipo de la clase "GPS_Management"
+ * - La clase implementa la comunicación con el dispositivo GPS+IMU
+ * @author Carlos Amores
+ * @date 2013, 2014, 2015
  */
+
 #include <string>
 #include "Modulo_GPS/constant_gps.h"
 #include "../../Common_files/include/Common_files/constant.h"
@@ -14,6 +17,10 @@
 
 using namespace std;
 
+/**
+ * \struct Response
+ * \brief Estructura para gestión de respuestas del GPS+IMU
+ */
 struct Response{
     bool ok;
     string header;
@@ -23,6 +30,10 @@ struct Response{
     string checksum;
 };
 
+/**
+ * \struct Bestgpsvel
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje BESTGPSVEL
+ */
 struct Bestgpsvel{
     string sol_status;
     string vel_type;
@@ -34,6 +45,10 @@ struct Bestgpsvel{
     float reserved;
 };
 
+/**
+ * \struct Bestgpspos
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje BESTGPSPOS
+ */
 struct Bestgpspos{
     short state;
     string sol_status;
@@ -59,6 +74,10 @@ struct Bestgpspos{
     unsigned char res4;
 };
 
+/**
+ * \struct Bestleverarm
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje BESTLEVERALARM
+ */
 struct Bestleverarm{
     double x_offset;
     double y_offset;
@@ -69,6 +88,10 @@ struct Bestleverarm{
     int imapping;
 };
 
+/**
+ * \struct Corrimudata
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje CORRIMUDATA
+ */
 struct Corrimudata{
     unsigned long week;
     double seconds;
@@ -80,6 +103,10 @@ struct Corrimudata{
     double vertical_acc;
 };
 
+/**
+ * \struct Inspvas
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje INSPVAS
+ */
 struct Inspvas{
     unsigned long week;
     double seconds;
@@ -95,6 +122,10 @@ struct Inspvas{
     string status;
 };
 
+/**
+ * \struct Inspva
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje INSPVA
+ */
 struct Inspva{
     short state;
     unsigned long week;
@@ -111,6 +142,10 @@ struct Inspva{
     string status;
 };
 
+/**
+ * \struct Inspos
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje INSPOS
+ */
 struct Inspos{
     unsigned long week;
     double seconds;
@@ -120,6 +155,10 @@ struct Inspos{
     string status;
 };
 
+/**
+ * \struct Heading
+ * \brief Estructura para alamacenamiento de datos obtenidos del mensaje HEADING
+ */
 struct Heading{
     string sol_stat;
     string pos_type;
@@ -140,6 +179,11 @@ struct Heading{
     unsigned char sig_mask;
 };
 
+/**
+ * \class GPS_Management
+ * \brief Clase que representa al driver de comunicación con el dispositivo
+ * GPS+IMU
+ */
 class GPS_Management
 {
 	private:
@@ -170,8 +214,6 @@ class GPS_Management
                 Corrimudata getCorrIMUData();
                 Inspos getInsPos();
                 Heading getHeading();
-
-
                 // Funciones de configuracion
 		bool gps_conf_alignmentmode(string mode);
                 bool gps_conf_applyvehiclebodyrotation(string mode);
@@ -193,7 +235,6 @@ class GPS_Management
                 bool gps_conf_setmark1offset(double x,double y,double z,double alphaOffset,double betaOffset,double gammaOffset);
                 bool gps_conf_setwheelparameters(unsigned short ticks,double circ, double spacing);
                 bool gps_conf_vehiclebodyrotation(double xAngle,double yAngle,double zAngle, double a, double b,double c);
-
                 //Manejador de mensajes LOG
                 bool gps_log_general(string command, string type);
                 Response reception_management(bool confirmation, bool data);
@@ -201,7 +242,6 @@ class GPS_Management
                 string* getData(int numData,string data);
                 int calcChecksum(string dataFrame);
                 string create_message(string command, int num_param, string options[]);
-
                 //Funciones de adquisición de datos
                 bool gps_adq_bestgpsvel(Response res);
                 bool gps_adq_bestgpspos(Response res);
@@ -211,12 +251,9 @@ class GPS_Management
                 bool gps_adq_corrimudata(Response res);
                 bool gps_adq_inspos(Response res);
                 bool gps_adq_heading(Response res);
-
                 bool isPortOpened();
-
                 // Recepcion continua de datos
                 int rcvData();
-                
                 // Obtencion del estado del GPS
                 short getStateOfGPS(string);
                 // Obtencion del estado de la IMU
