@@ -1,9 +1,13 @@
-/* 
- * File:   rangedata.cpp
- * Author: atica
- *
- * Created on 18 de marzo de 2014, 12:23
- */
+/**
+  @file rangedata.cpp
+  @brief 
+
+ * Archivo principal del Módulo Range Data Fusion. 
+
+  @author Alfonso Morente
+  @date 18/03/2014
+
+*/
 
 #include "../include/Modulo_RangeDataFusion/rangedata.h"
 
@@ -15,8 +19,11 @@ using namespace std;
 // Variable de continuacion de modulo
 bool exitModule;
 
-/*
- * 
+/**
+ * Método principal del nodo. 
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario. 
  */
 int main(int argc, char** argv) {
   // Obtencion del modo de operacion y comprobacion de que es correcto
@@ -43,7 +50,8 @@ int main(int argc, char** argv) {
   
   // Creacion de suscriptores
   ros::Subscriber sub_gps = n.subscribe("gps", 1000, fcn_sub_gps);
-  ros::Subscriber sub_moduleEnable = n.subscribe("laser", 1000, fcn_sub_laser);
+  ros::Subscriber sub_laser = n.subscribe("laser", 1000, fcn_sub_laser);
+  ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_module_enable);
   //ros::Subscriber sub_beacon = n.subscribe("beacon", 1000, fcn_sub_beacon);
 
   // Variable de continuacion de modulo
@@ -96,6 +104,12 @@ int main(int argc, char** argv) {
  *                              SUSCRIPTORES
  * *****************************************************************************
  * ****************************************************************************/
+
+// Suscriptor de habilitación de modulo (module_enable)
+void fcn_sub_module_enable(const Common_files::msg_module_enable msg)
+{
+    
+}
 
 // Suscriptor de GPS
 void fcn_sub_gps(const Common_files::msg_gps msg)

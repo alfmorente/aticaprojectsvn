@@ -1,8 +1,8 @@
-/* 
- * File:   rangedata.h
- * Author: atica
- *
- * Created on 18 de marzo de 2014, 12:23
+/** 
+ * @file  rangedata.h
+ * @brief Archivo de cabecera del módulo Range Data Fusion
+ * @author Alfonso Morente
+ * @date 18/03/2014
  */
 
 #ifndef RANGEDATA_H
@@ -28,6 +28,7 @@ extern "C" {
 #include "Common_files/msg_rangedatafusion.h"
 
 // Funciones de suscripcion
+void fcn_sub_module_enable(const Common_files::msg_module_enable);
 void fcn_sub_gps(const Common_files::msg_gps);
 void fcn_sub_laser(const Common_files::msg_laser);
 //void fcn_sub_beacon(const Common_files::msg_beacon);
