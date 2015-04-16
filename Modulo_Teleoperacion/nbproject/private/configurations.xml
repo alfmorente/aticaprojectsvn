@@ -2,6 +2,8 @@
 <configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name="bin">
+      </df>
       <df name="catkin">
         <df name="catkin_generated">
           <df name="version">
@@ -53,9 +55,13 @@
         </df>
         <df name="rospack_genmsg.dir">
         </df>
+        <df name="rospack_genmsg_all.dir">
+        </df>
         <df name="rospack_genmsg_libexe.dir">
         </df>
         <df name="rospack_gensrv.dir">
+        </df>
+        <df name="rospack_gensrv_all.dir">
         </df>
         <df name="run_tests.dir">
         </df>

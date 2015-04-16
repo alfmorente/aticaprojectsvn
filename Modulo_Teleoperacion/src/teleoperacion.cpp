@@ -1,7 +1,26 @@
+/**
+  @file gest_errores.cpp
+  @brief 
+
+ * Archivo principal del Módulo Teleoperación (Remote). Se encarga de recibir
+ * los comandos de teleoperación, filtrarlos por si vienen con valores fuera de
+ * rango y publicarlos para el módulo de conducción.
+
+  @author Alfonso Morente
+  @date 13/09/2013
+
+*/
+
 #include "../include/Modulo_Teleoperacion/teleoperacion.h"
 
 using namespace std;
 
+/**
+ * Método principal del nodo. 
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario. 
+ */
 int main(int argc, char **argv)
 {
   // Obtencion del modo de operacion y comprobacion de que es correcto
@@ -89,7 +108,10 @@ int main(int argc, char **argv)
  * *****************************************************************************
  * ****************************************************************************/
 
-// Suscriptor de habilitacion de modulo
+/**
+ * Suscriptor de habilitacion de modulo
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_enable_module(const Common_files::msg_module_enablePtr& msg)
 {    
     if((msg->id_module==ID_MOD_REMOTE) && (msg->status==1)){
@@ -102,15 +124,14 @@ void fcn_sub_enable_module(const Common_files::msg_module_enablePtr& msg)
     }
 }
 
-// Suscriptor de teleoperado que introduce los parametros dentro de rango
+/**
+ * Suscriptor de teleoperado que introduce los parametros dentro de rango
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
 {
-    //cout << "Comando recibido\n";
-    //cout << msg << endl;
     if(enableModule==true){
         // El nuevo mensaje esta depurado y conserva el id_elemento
-        /*Common_files::msg_com_teleop msg_cteleop;
-        Common_files::msg_error msg_err;*/
         Common_files::msg_com_teleopPtr msg_cteleop(new Common_files::msg_com_teleop);
         Common_files::msg_errorPtr msg_err(new Common_files::msg_error);
         msg_cteleop->id_element=msg->id_element;
@@ -118,12 +139,9 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
 
         // Proceso de depuracion de valores
         msg_cteleop->value = convertToCorrectValues(msg->id_element,msg->value);
-        //cout << "Comando depurado\n";
-        //cout << msg_cteleop;
         // Publicacion de mensaje ya depurado
         pub_teleop.publish(msg_cteleop);
         
-        //cout << "Numero errores: " << error_count << endl;
         if (error_count>=MAX_OUTRANGE_ERROR){
             cout << "error en modulo\n";
             msg_err->id_subsystem=SUBS_REMOTE;
@@ -142,7 +160,12 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
     }
 }
 
-// Servicio de heartbeat con Gestion del sistema
+/**
+ * Servicio de heartbeat para Gestion de sistema
+ * @param req 
+ * @param resp
+ * @return 
+ */
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
 {
     if(req.param==PARAM_ALIVE)
@@ -160,8 +183,10 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
  * *****************************************************************************
  * ****************************************************************************/
 
-// Funciones propias
-// Funcion inicialización de variables
+/**
+ * Inicialización de variables del sistema
+ * @param n Nodo de trabajo de ROS
+ */
 void initialize(ros::NodeHandle n) {
     // Creacion de suscriptores
     sub_hab_modulo = n.subscribe("modEnable", 1000, fcn_sub_enable_module);
@@ -179,7 +204,12 @@ void initialize(ros::NodeHandle n) {
     
 }
 
-// Acota los valores para que no se salgan de rango
+/**
+ * Acota los valores de los comandos de entrada para que no se salgan de rango
+ * @param id_elem Tipo de comando
+ * @param value Valor del comando sin filtrar
+ * @return Devuelve el valor del comando dentro de rango 
+ */
 int convertToCorrectValues(int id_elem, int value){
     switch (id_elem){
         case ID_REMOTE_STEER:
@@ -339,7 +369,13 @@ int convertToCorrectValues(int id_elem, int value){
     }
 }
 
-// Obtener el modo de operacion
+/**
+ * Función que elige una versión del software dependiendo del 
+ * argumento de entrada
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Devuelve 0 si hay errores o número de versión si no hay errores
+ */
 int getOperationMode(int argc, char **argv){
     if(argc!=4){
         printCorrectSyntax();
@@ -363,7 +399,10 @@ int getOperationMode(int argc, char **argv){
     return a;
 }
 
-// Sintaxis correcta ante fallo
+/**
+ * Muestra por pantalla que se ha producido un error al elegir versión.
+ * Presenta la manera de ejecutar el programa correctamente
+ */
 void printCorrectSyntax() {
     cout << "Invalid option. Syntax: ./teleoperacoion [mode option]" << endl;
     cout << "Options: " << endl;

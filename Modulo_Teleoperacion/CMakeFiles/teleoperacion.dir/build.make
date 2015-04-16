@@ -62,18 +62,17 @@ CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o: /opt/ros/groovy/share/rosg
 CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
-CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Teleoperacion/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o"
-	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o -c /home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o -c /home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp
 
 CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.i"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp > CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -E /home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp > CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.i
 
 CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.s"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp -o CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -S /home/atica/catkin_ws/src/Modulo_Teleoperacion/src/teleoperacion.cpp -o CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.s
 
 CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o.requires:
 .PHONY : CMakeFiles/teleoperacion.dir/src/teleoperacion.cpp.o.requires

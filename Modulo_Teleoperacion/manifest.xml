@@ -8,8 +8,10 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Modulo_Teleoperacion</url>
-  <depend package="roscpp"/>
+  <!--<depend package="roscpp"/>-->
   <depend package="Common_files"/>
+  <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
 
 </package>
 

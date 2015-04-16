@@ -1,9 +1,10 @@
-/* 
- * File:   teleoperacion.h
- * Author: atica
- * 
- * Created on 13 de septiembre de 2013, 11:27
+/** 
+ * @file  teleoperacion.h
+ * @brief Archivo de cabecera del módulo Teleoperación
+ * @author Alfonso Morente
+ * @date 13/09/2013
  */
+
 
 #ifndef TELEOPERACION_H
 #define	TELEOPERACION_H
@@ -20,11 +21,11 @@ extern "C" {
 #endif	/* TELEOPERACION_H */
 
 //Mensajes
-#include "Common_files/msg_com_teleop.h"
-#include "Common_files/msg_error.h"
-#include "Common_files/msg_module_enable.h"
-#include "Common_files/msg_mode.h"
-#include "Common_files/srv_data.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_com_teleop.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_error.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_module_enable.h"
+#include "../../../Common_files/msg_gen/cpp/include/Common_files/msg_mode.h"
+#include "../../../Common_files/srv_gen/cpp/include/Common_files/srv_data.h"
 
 //ROS y demás librerias
 #include "ros/ros.h"
