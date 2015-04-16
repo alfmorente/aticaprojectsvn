@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
   // Generación de publicadores
   pub_gps = n.advertise<Common_files::msg_gps>("gps", 1000);
   pub_errores = n.advertise<Common_files::msg_error>("error", 1000);
-  pub_stream = n.advertise<Common_files::msg_stream>("teachfile", 1000);
+  pub_stream = n.advertise<Common_files::msg_stream>("teachFile", 1000);
   // Inicialización de suscriptores
   ros::Subscriber sub_moduleEnable = n.subscribe("modEnable", 1000, fcn_sub_enableModule);
   ros::Subscriber sub_backup = n.subscribe("backup", 1000, fcn_sub_backup);
@@ -63,11 +63,11 @@ int main(int argc, char **argv) {
         //gps->rcvData();
 
         cout << "Configurando (Modo de alineamiento inicial)..." << endl;
-        while (!gps->gps_conf_alignmentmode(ALIGNMENTMODE_UNAIDED));
+       // while (!gps->gps_conf_alignmentmode(ALIGNMENTMODE_UNAIDED));
         cout << "Establecido modo de alineamiento - KINEMATIC" << endl;
 
         cout << "Configuracion (Azimuth inicial)..." << endl;
-        while (!gps->gps_conf_setinitazimuth(-90, 5));
+       // while (!gps->gps_conf_setinitazimuth(-90, 5));
         cout << "Azimuth OK" << endl;
         /*
         cout << "Configurando offset de la antena..." << endl;
@@ -151,7 +151,7 @@ int main(int argc, char **argv) {
                 teachData.latitude = insMessage.latitude;
                 teachData.longitude = insMessage.longitude;
                 teachThread.queueGPSdata.push(teachData);
-              } else {
+	      } else {
                 teachThread.setMode(false);
               }
             }
@@ -191,12 +191,10 @@ int main(int argc, char **argv) {
             // Publica posicion
             pub_gps.publish(insMessage);
             if (teachActive) {
-              teachThread.setMode(true);
               teachData.latitude = insdata.latitude;
               teachData.longitude = insdata.longitude;
               teachThread.queueGPSdata.push(teachData);
-            } else {
-              teachThread.setMode(false);
+		
             }
           }
           // Prepara la recepcion de mensajes
@@ -218,22 +216,34 @@ int main(int argc, char **argv) {
 
 void fcn_sub_enableModule(const Common_files::msg_module_enable msg) {
   // TODO
+
   if (msg.id_module == ID_MOD_TEACH) {
     if (msg.status == ON) {
+      ROS_INFO("MODULO GPS: TEACH ON");
       if (!teachActive) {
+          teachThread.setMode(true);
         teachActive = true;
         teachThread.Run();
       }
     } else if (msg.status == OFF) {
       if (teachActive) {
+          teachThread.setMode(false);
+        ROS_INFO("MODULO GPS: TEACH OFF");
         teachActive = false;
-        vector<string> teaches = teachThread.getTeaches();
+        teachThread.setMode(false);
+        
+        while(!teachThread.dataReady()){
+            usleep(1000);
+        } 
+        
+	vector<string> teaches = teachThread.getTeaches();
         Common_files::msg_stream msg;
         for(int i=0;i<teaches.size();i++){
           msg.id_file = TOF_TEACH;
           msg.stream = teaches.at(i);
           pub_stream.publish(msg);
         }
+        //teaches.clear();       
       }
     }
   }

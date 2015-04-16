@@ -38,6 +38,7 @@ string TeachString::getString(float number){
 }
 
 vector<string> TeachString::divideTeach(string teach) {
+	printf("Dividiendo fichero\n");
   int numOfFiles = (teach.size() / (SIZE_MAX_TEACH))+1;
 
   cout << teach.size() << " bytes" << endl;
@@ -51,9 +52,11 @@ vector<string> TeachString::divideTeach(string teach) {
     indexOfTeach = 0;
     if(i!=(numOfFiles-1)){
       indexOfTeach += SIZE_MAX_TEACH;
+	printf("Buscando el barraN\n");
       while (teach[firstSub+indexOfTeach] != '\n') {
         indexOfTeach++;
       }
+	printf("Encontrado\n");
       indexOfTeach++;
       ret.push_back(teach.substr(firstSub, indexOfTeach));
     } else {
@@ -98,7 +101,7 @@ vector<string> TeachString::divideTeach(string teach) {
 
 string TeachString::getNOfRoute(){
   string ret = "RT";
-  ifstream fin("nOfRoute.txt"); 
+  ifstream fin("/home/atica/catkin_ws/src/Modulo_GPS/bin/nOfRoute.txt"); 
   string aux;
   fin >> aux;
   fin.close();
@@ -110,12 +113,12 @@ string TeachString::getNOfRoute(){
 
 void TeachString::increaseNOfRoute() {
   int num;
-  std::ifstream fin("nOfRoute.txt");
+  std::ifstream fin("/home/atica/catkin_ws/src/Modulo_GPS/bin/nOfRoute.txt");
   fin >> num;
   fin.clear();
   fin.close();
   num++;
-  std::ofstream fout("nOfRoute.txt");
+  std::ofstream fout("/home/atica/catkin_ws/src/Modulo_GPS/bin/nOfRoute.txt");
   fout << num;
   fout.close();
 }

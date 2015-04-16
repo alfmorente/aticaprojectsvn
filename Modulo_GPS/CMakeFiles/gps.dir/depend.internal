@@ -20,6 +20,7 @@ CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o
  include/Modulo_GPS/TeachString.h
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o
  /home/atica/catkin_ws/src/Modulo_GPS/src/Modulo_GPS/TeachThread.cpp
+ include/Modulo_GPS/TeachString.h
  include/Modulo_GPS/TeachThread.hpp
  include/Modulo_GPS/Thread.hpp
 CMakeFiles/gps.dir/src/Modulo_GPS/Thread.cpp.o
@@ -101,6 +102,7 @@ CMakeFiles/gps.dir/src/gps.cpp.o
  include/Modulo_GPS/CksFrame.h
  include/Modulo_GPS/GPS_Management.h
  include/Modulo_GPS/PortSerial.h
+ include/Modulo_GPS/TeachString.h
  include/Modulo_GPS/TeachThread.hpp
  include/Modulo_GPS/Thread.hpp
  include/Modulo_GPS/TypeConverter.h

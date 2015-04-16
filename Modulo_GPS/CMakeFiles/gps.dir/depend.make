@@ -19,6 +19,7 @@ CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o: src/Modulo_GPS/TeachString.
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachString.cpp.o: include/Modulo_GPS/TeachString.h
 
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: src/Modulo_GPS/TeachThread.cpp
+CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: include/Modulo_GPS/TeachString.h
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: include/Modulo_GPS/TeachThread.hpp
 CMakeFiles/gps.dir/src/Modulo_GPS/TeachThread.cpp.o: include/Modulo_GPS/Thread.hpp
 
@@ -100,6 +101,7 @@ CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/../../../Common_files/msg_g
 CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/CksFrame.h
 CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/GPS_Management.h
 CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/PortSerial.h
+CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/TeachString.h
 CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/TeachThread.hpp
 CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/Thread.hpp
 CMakeFiles/gps.dir/src/gps.cpp.o: include/Modulo_GPS/TypeConverter.h
