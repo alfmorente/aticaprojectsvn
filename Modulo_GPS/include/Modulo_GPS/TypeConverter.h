@@ -1,3 +1,11 @@
+
+/** 
+ * @file  TypeConverter.h
+ * @brief Colección de funciones para transformación de tipos
+ * @author Carlos Amores
+ * @date 2013, 2014, 2015
+ */
+
 #include <string.h>
 #include <sstream>
 
