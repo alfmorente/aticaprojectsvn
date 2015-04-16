@@ -19,26 +19,28 @@
 #include "TeachString.h"
 
 typedef struct {
-  float latitude;
-  float longitude;
+    float latitude;
+    float longitude;
 } TeachData;
 
 class TeachThread : public Thread {
 public:
-  TeachThread();
-  virtual ~TeachThread();
-  virtual void DoWork();
-  void setMode(bool);
+    TeachThread();
+    virtual ~TeachThread();
+    virtual void DoWork();
+    void setMode(bool);
+    bool dataReady();
 
-  // Atributos cola de datos
-  queue<TeachData> queueGPSdata;
-  vector<string> getTeaches();
+    // Atributos cola de datos
+    queue<TeachData> queueGPSdata;
+    vector<string> getTeaches();
 
 
 private:
-  TeachString *teachSt;
-  bool mode_active; // Flag de estado
-  vector<string> teaches;
+    TeachString *teachSt;
+    bool mode_active; // Flag de estado
+    vector<string> teaches;
+    bool ready;
 
 };
 

@@ -24,6 +24,10 @@
         <df name="clean_test_results.dir">
         </df>
         <df name="CMakeTmp">
+          <df name="CMakeFiles">
+            <df name="cmTryCompileExec.dir">
+            </df>
+          </df>
         </df>
         <df name="Common_files.dir">
         </df>
@@ -40,8 +44,6 @@
             <df name="Modulo_GPS">
             </df>
           </df>
-        </df>
-        <df name="Progress">
         </df>
         <df name="rosbuild_clean-test-results.dir">
         </df>

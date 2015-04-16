@@ -7,7 +7,7 @@ using namespace std;
 // Constructor de la clase
 GPS_Management::GPS_Management(){
   port_opened=false;
-  if(port.openSerial("/dev/ttyUSB0")){
+  if(port.openSerial("/dev/ttyS0")){
     port.configura(B9600);
     port_opened=true;
   }else{

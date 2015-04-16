@@ -48,9 +48,6 @@
           <ccTool>
             <incDir>
               <pElem>include</pElem>
-              <pElem>/opt/ros/groovy/include</pElem>
-              <pElem>/usr/include/gtest</pElem>
-              <pElem>.</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ROS_PACKAGE_NAME="Modulo_GPS"</Elem>
@@ -60,28 +57,67 @@
       </makefileType>
       <item path="src/Modulo_GPS/CksFrame.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Modulo_GPS/GPS_Management.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Modulo_GPS/PortSerial.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
-      <item path="src/Modulo_GPS/TeachString.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/Modulo_GPS/TeachString.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
       </item>
       <item path="src/Modulo_GPS/TeachThread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Modulo_GPS/Thread.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Modulo_GPS/TypeConverter.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Modulo_GPS/external_signals.cpp"
@@ -89,14 +125,30 @@
             tool="1"
             flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/Modulo_GPS/interaction.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>/usr/include/gtest</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/gps.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
     </conf>
