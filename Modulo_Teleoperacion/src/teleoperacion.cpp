@@ -1,5 +1,5 @@
 /**
-  @file gest_errores.cpp
+  @file teleoperacion.cpp
   @brief 
 
  * Archivo principal del Módulo Teleoperación (Remote). Se encarga de recibir
