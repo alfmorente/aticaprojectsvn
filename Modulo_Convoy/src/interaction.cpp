@@ -1,3 +1,15 @@
+/**
+  @file interaction.cpp
+  @brief 
+
+ * Archivo utilizado para elegir la versión del software en desarrollo
+ * DEBUG, RELEASE o SIMULATION
+
+  @author Carlos Amores
+  @date 10/03/2014
+
+*/
+
 #include "../include/Modulo_Convoy/interaction.h"
 #include "../../../src/Common_files/include/Common_files/constant.h"
 

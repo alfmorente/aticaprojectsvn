@@ -1,8 +1,9 @@
-/* 
- * File:   Timer.hpp
- * Author: Sergio Doctor López
- *
- * Created on 5 de febrero de 2014
+/** 
+ * @file  Timer.hpp
+ * @brief Declara el tipo de la clase "Timer"
+ * - La clase implementa la gestión de un temporizador
+ * @author Sergio Doctor
+ * @date 05/02/2014
  */
 
 #ifndef _TIMER_HPP
@@ -17,6 +18,11 @@ namespace Time {
 
 }
 
+/**
+ * \class Timer
+ * \brief Clase que representa un temporizador utilizado para contear la 
+ * frecuencia de de publicación del nodo ROS
+ */
 class Timer {
     double startTime;
 public:

@@ -1,8 +1,8 @@
-/* 
- * File:   convoy.h
- * Author: Alfonso Morente
- *
- * Created on 19 de marzo de 2014, 9:51
+/** 
+ * @file  convoy.h
+ * @brief Archivo de cabecera del módulo Convoy
+ * @author Alfonso Morente
+ * @date 19/03/2014
  */
 
 #ifndef CONVOY_H
