@@ -1,6 +1,17 @@
+/**
+  @file CksFrame.cpp
+  @brief Implementación de la colección de funciones que calculan CRC32
+  @author Carlos Amores
+  @date 2013,2014,2015
+*/
+
 #include "Modulo_GPS/CksFrame.h"
 
-
+/**
+ * Método auxiliar que calcula el valor de checksum CRC32 de un entero
+ * @param[i] i Entero cuyo CRC32 se desea calcular
+ * @return Valor del CRC32 calculado sobre un entero
+ */
 unsigned long CRC32Value(int i)
 {
   int j;
@@ -15,6 +26,13 @@ unsigned long CRC32Value(int i)
   return ulCRC;
 }
 
+/**
+ * Método principal que calcula el CRC32 de una cadena mediante la descomposición
+ * estándar de la misma
+ * @param ulCount Contador auxiliar de cálculo
+ * @param ucBuffer Cadena cuyo CRC32 se desea calcular
+ * @return Valor del CRC32 calculado sobre una cadena
+ */
 unsigned long CalculateBlockCRC32(unsigned long ulCount,unsigned char *ucBuffer)
 {
   unsigned long ulTemp1;
