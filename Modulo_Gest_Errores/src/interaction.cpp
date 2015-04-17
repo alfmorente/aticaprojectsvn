@@ -1,7 +1,6 @@
 /**
   @file interaction.cpp
   @brief 
-
  * Archivo utilizado para elegir la versión del software en desarrollo
  * DEBUG, RELEASE o SIMULATION
 
@@ -9,6 +8,7 @@
   @date 10/03/2014
 
 */
+
 #include "../include/Modulo_Gest_Errores/interaction.h"
 #include "../../../src/Common_files/include/Common_files/constant.h"
 
