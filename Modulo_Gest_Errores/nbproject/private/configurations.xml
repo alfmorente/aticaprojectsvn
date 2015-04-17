@@ -273,9 +273,6 @@
         <df name="cpp">
           <df name="include">
             <df name="Modulo_Gest_Errores">
-              <in>msg_com_teleoperado.h</in>
-              <in>msg_errores.h</in>
-              <in>msg_modo.h</in>
             </df>
           </df>
         </df>

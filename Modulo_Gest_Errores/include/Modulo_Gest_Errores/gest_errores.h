@@ -36,17 +36,17 @@ extern "C" {
 #include "interaction.h"
 
 // Definicion constantes propias del modulo
-#define MODE_START_ENGINE 8
-#define MODE_STOP_ENGINE 9
-#define MODE_ENGAGE_BRAKE 10
-#define MODE_MAPPING 11
-#define MODE_TEACH 12
+#define MODE_START_ENGINE 8     ///<Constante de modos no incluida en constant.h
+#define MODE_STOP_ENGINE 9      ///<Constante de modos no incluida en constant.h
+#define MODE_ENGAGE_BRAKE 10    ///<Constante de modos no incluida en constant.h
+#define MODE_MAPPING 11         ///<Constante de modos no incluida en constant.h
+#define MODE_TEACH 12           ///<Constante de modos no incluida en constant.h
 
-#define TOE_UNAVAILABLE 99
-#define MIN_MODES 1
-#define MAX_MODES 14
-#define MAX_MODULES 15
-#define MAX_ERRORS 28
+#define TOE_UNAVAILABLE 99      ///<Constante para modo erróneo
+#define MIN_MODES 1             ///<Usado para los bucles for que recorren la tabla de errores
+#define MAX_MODES 14            ///<Usado para los bucles for que recorren la tabla de errores
+#define MAX_MODULES 15          ///<Usado para los bucles for que recorren la tabla de errores
+#define MAX_ERRORS 28           ///<Usado para los bucles for que recorren la tabla de errores
 
 // Definición de variables globales
 // Publicadores y suscriptores
