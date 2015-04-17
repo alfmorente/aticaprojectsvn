@@ -1,14 +1,26 @@
-/* 
- * File:   convoy.cpp
- * Author: Alfonso Morente
- *
- * Created on 19 de marzo de 2014, 9:51
- */
+/**
+  @file convoy.cpp
+  @brief 
+
+ * Archivo principal del Módulo Convoy. Se encarga de establecer la comunicación
+ * entre los dos vehículos que forman el convoy. Es el mismo software para los 
+ * dos vehículos.
+
+  @author Alfonso Morente
+  @date 19/03/2014
+
+*/
 
 #include "../include/Modulo_Convoy/convoy.h"
 
 using namespace std;
 
+/**
+ * Método principal del nodo. 
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario. 
+ */
 int main(int argc, char** argv) {
     // Obtencion del modo de operacion y comprobacion de que es correcto
     int operationMode;
@@ -89,7 +101,12 @@ int main(int argc, char** argv) {
  *                              SUSCRIPTORES
  * *****************************************************************************
  * ****************************************************************************/
-// Suscriptor de habilitación de módulo (module_enable)
+
+/**
+ * Suscriptor de habilitación de módulo. Al recibir la orden de habilitación 
+ * también indica que el vehículo se comporta de LEADER.
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_module_enable(const Common_files::msg_module_enablePtr& msg) {
     if ((msg->id_module == ID_MOD_CONVOY) && (msg->submode == SUBMODE_CONVOY) && (msg->status == MOD_ON)) {
         enableModule = ENABLE_ON;
@@ -101,7 +118,11 @@ void fcn_sub_module_enable(const Common_files::msg_module_enablePtr& msg) {
     }
 }
 
-// Suscriptor de los datos del GPS
+/**
+ * Suscriptor de los datos del GPS. Recibe los datos del GPS y los envía al 
+ * vehículo FOLLOWER a través del socket
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_gps(const Common_files::msg_gpsPtr& msg) {
     if ((sendDataFlag)) { // Envía msg_gps si el módulo está activado y la conexión inicial establecida
         stringstream tx_string;
@@ -111,7 +132,11 @@ void fcn_sub_gps(const Common_files::msg_gpsPtr& msg) {
     }
 }
 
-// Suscriptor de errores
+/**
+ * Suscriptor de errores. En caso de recibir un mensaje crítico en el LEADER, se 
+ * manda por socket un error de parada al FOLLOWER
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_error(const Common_files::msg_errorPtr& msg){
     /*Caso de error recibido siendo vehículo Leader*/
     if((sendDataFlag) && (vehicleRole==LEADER) && (msg->id_subsystem == SUBS_CONVOY) && (msg->id_error == LEADER_CRITICAL_ERROR_OUTPUT)){
@@ -138,7 +163,11 @@ void fcn_sub_error_follower(const Common_files::msg_errorPtr& msg) {
     }
 }*/
 
-// Suscriptor de backup en vehiculo follower
+/**
+ * Suscriptor de backup en vehiculo follower. La información recibida se 
+ * transmite al LEADER.
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_backup_follower(const Common_files::msg_backupPtr& msg) {
     if ((sendDataFlag) && (vehicleRole == FOLLOWER)) {
         stringstream tx_string;
@@ -148,7 +177,10 @@ void fcn_sub_backup_follower(const Common_files::msg_backupPtr& msg) {
     }
 }
 
-// Suscriptor de modo en vehiculo follower
+/**
+ * Suscriptor de modo en vehiculo follower.
+ * @param msg Mensaje proveniente del publicador
+ */
 void fcn_sub_mode_follower(const Common_files::msg_modePtr& msg) {
     if ((msg->type_msg == INFO) && (msg->mode == MODE_CONVOY) && (msg->status == MODE_START))
         modeACK = true;
@@ -160,6 +192,7 @@ void fcn_sub_mode_follower(const Common_files::msg_modePtr& msg) {
  *                              FUNCIONES PROPIAS
  * *****************************************************************************
  * ****************************************************************************/
+
 // Inicialización de variables
 void initialize(ros::NodeHandle n) {
     exitModule = false;

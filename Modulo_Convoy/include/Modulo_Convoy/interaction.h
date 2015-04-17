@@ -1,8 +1,8 @@
-/* 
- * File:   interaction.h
- * Author: atica
- *
- * Created on 10 de marzo de 2014, 11:10
+/** 
+ * @file  interaction.h
+ * @brief Archivo de cabecera de interaction.cpp
+ * @author Carlos Amores
+ * @date 10/03/2014
  */
 
 #ifndef INTERACTION_H
