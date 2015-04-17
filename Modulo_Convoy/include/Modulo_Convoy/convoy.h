@@ -47,25 +47,25 @@ extern "C" {
 
 using namespace std;
 // Variables globales
-#define IP_LOCAL "127.0.0.1"
-#define IP_REMOTE "127.0.0.1"
-#define TIMER_LONG 10.0
-#define TIMER_SHORT 1.0
-#define BUFSIZE 2048
+#define IP_LOCAL "127.0.0.1"    ///<Dirección IP local
+#define IP_REMOTE "127.0.0.1"   ///<Dirección IP del equipo remoto
+#define TIMER_LONG 10.0         ///<Tiempo de espera para los "handshake"
+#define TIMER_SHORT 1.0         ///<Tiempo de espera para la función "hearbeat"
+#define BUFSIZE 2048            ///<Tamaño del buffer de recepción
 // Tipos de mensaje transmitidos por el socket
-#define TYPE_GPS 0
-#define TYPE_ERROR 1
-#define TYPE_MODE 2
-#define TYPE_BACKUP 3
-#define TYPE_HEARTBEAT 4
+#define TYPE_GPS 0              ///<Mensaje tipo GPS
+#define TYPE_ERROR 1            ///<Mensaje tipo ERROR
+#define TYPE_MODE 2             ///<Mensaje tipo MODE
+#define TYPE_BACKUP 3           ///<Mensaje tipo BACKUP
+#define TYPE_HEARTBEAT 4        ///<Mensaje tipo HEARTBEAT
 // Definición estados de la variable enableModule
-#define ENABLE_INIT 0           // Estado inicial del módulo
-#define ENABLE_ON 1             // Módulo habilitado
-#define ENABLE_OFF 2            // Desactivación de módulo
+#define ENABLE_INIT 0           ///<Estado inicial del módulo
+#define ENABLE_ON 1             ///<Módulo habilitado
+#define ENABLE_OFF 2            ///<Desactivación de módulo
 // Definición del papel del vehículo (vehicleRole)
-#define LEADER 0
-#define FOLLOWER 1
-#define UNDEFINED 2
+#define LEADER 0                ///<Papel vehículo líder
+#define FOLLOWER 1              ///<Papel vehículo follower
+#define UNDEFINED 2             ///<No se ha recibido todavía que papel desempeña el vehículo
 
 ros::Publisher pub_error;
 ros::Publisher pub_mode;

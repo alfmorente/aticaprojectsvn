@@ -193,7 +193,10 @@ void fcn_sub_mode_follower(const Common_files::msg_modePtr& msg) {
  * *****************************************************************************
  * ****************************************************************************/
 
-// Inicialización de variables
+/**
+ * Inicialización de variables del sistema
+ * @param n Nodo de trabajo de ROS
+ */
 void initialize(ros::NodeHandle n) {
     exitModule = false;
     enableModule = ENABLE_INIT;
@@ -229,7 +232,12 @@ void initialize(ros::NodeHandle n) {
     pthread_create(&s_Thread, NULL, socketThread, NULL);
 }
 
-// Hilo para la gestión del socket (enviar-recibir)
+/**
+ * Hilo principal para la gestión del socket de comunicación entre los dos
+ * vehículos
+ * @param 
+ * @return 
+ */
 void* socketThread(void*) {
     /*Variables de la función*/
     stringstream tx_string;
@@ -352,7 +360,12 @@ void* socketThread(void*) {
     usleep(10000);
 }
 
-// Función para crear el socket UDP
+/**
+ * Función para crear el socket UDP
+ * @param fd Descriptor de fichero del socket
+ * @param address Estructura propia del socket
+ * @return True si se ha creado el socket correctamente. False en caso contrario
+ */
 bool createSocket(int fd, struct sockaddr_in address) {
     int count = 0;
     bool socketOK = true;
@@ -386,7 +399,10 @@ bool createSocket(int fd, struct sockaddr_in address) {
     return socketOK;
 }
 
-// Función de handshake en el follower
+/**
+ * Función de handshake, conexión inicial, en el follower
+ * @return True cuando se establece la conexión correctamente. False en caso contrario
+ */
 bool handshakeFollower() {
     bool connectionOK;
     stringstream tx_string;
@@ -411,7 +427,10 @@ bool handshakeFollower() {
     return connectionOK;
 }
 
-// Función de handshake en el Leader
+/**
+ * Función de handshake en el Leader
+ * @return True cuando se establece la conexión correctamente. False en caso contrario
+ */
 bool handshakeLeader() {
     // Definición de variables de la función
     bool connectionOK = false;
@@ -445,7 +464,9 @@ bool handshakeLeader() {
     return connectionOK;
 }
 
-// Función desconexión del cliente - cierre de socket
+/**
+ * Función desconexión del cliente - cierre de socket
+ */
 void disconnectSocket() {
     stringstream tx_string;
     unsigned char buf[BUFSIZE];         //receive buffer
@@ -473,7 +494,10 @@ void disconnectSocket() {
     close(fd_local);
 }
 
-// Función conversión de cadenas del Socket a paquete ROS
+/**
+ * Convierte las cadenas recibidas en el socket a paquete ROS
+ * @param buffer cadena recibida desde el socket
+ */
 void convertToROS(unsigned char* buffer) {
     string name_param;
     stringstream aux;
@@ -534,7 +558,13 @@ void convertToROS(unsigned char* buffer) {
     }
 }
 
-// Comprueba de manera periódica que el vehículo Follower está conectado mediante un método de envía-esperaACK
+/**
+ * Comprueba de manera periódica que el vehículo Follower está conectado 
+ * mediante un método de envía-esperaACK
+ * @param fd Descriptor de archivos del socket
+ * @param address Estructura propia del socket
+ * @return 
+ */
 bool heartbeat(int fd, struct sockaddr_in address) {
     bool heartbeatOK = false;
     stringstream tx_string;

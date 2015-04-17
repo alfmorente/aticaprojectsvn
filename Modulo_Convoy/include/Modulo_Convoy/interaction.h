@@ -1,3 +1,4 @@
+
 /** 
  * @file  interaction.h
  * @brief Archivo de cabecera de interaction.cpp
@@ -6,18 +7,21 @@
  */
 
 #ifndef INTERACTION_H
-#define	INTERACTION_H
+#define INTERACTION_H
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 extern "C" {
 #endif
 
 
 
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 }
 #endif
+
+#endif  /* INTERACTION_H */
+
 
 #include <stdlib.h>
 #include <iostream>
@@ -26,7 +30,3 @@ extern "C" {
 int getOperationMode(int,char **);
 // Sintaxis correcta ante fallo
 void printCorrectSyntax();
-
-#endif	/* INTERACTION_H */
-
-
