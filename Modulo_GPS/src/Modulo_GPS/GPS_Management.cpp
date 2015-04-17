@@ -1,10 +1,18 @@
-#include <string.h>
+/**
+  @file GPS_Management.cpp
+  @brief Implementación de la clase GPS_Management
+  @author Carlos Amores
+  @date 2013,2014,2015
+*/
 
+#include <string.h>
 #include "Modulo_GPS/GPS_Management.h"
 
 using namespace std;
 
-// Constructor de la clase
+/**
+ * Constructor de la clase
+ */
 GPS_Management::GPS_Management(){
   port_opened=false;
   if(port.openSerial("/dev/ttyS0")){
@@ -15,76 +23,97 @@ GPS_Management::GPS_Management(){
   }
 }
 
-// Getters de los atributos
+/**
+ * Método consultor del atributo bestgpsvel
+ * @return Atributo bestgpsvel de la clase
+ */
 Bestgpsvel GPS_Management::getGPSVel(){return this->bestgpsvel;}
+
+/**
+ * Método consultor del atributo bestgpspos
+ * @return Atributo bestgpspos de la clase
+ */
 Bestgpspos GPS_Management::getGPSPos(){return this->bestgpspos;}
+
+/**
+ * Método consultor del atributo inspvas
+ * @return Atributo inspvas de la clase
+ */
 Inspvas GPS_Management::getInspVas(){return this->inspvas;}
+
+/**
+ * Método consultor del atributo inspva
+ * @return Atributo inspva de la clase
+ */
 Inspva GPS_Management::getInspVa(){return this->inspva;}
+
+/**
+ * Método consultor del atributo bestleverarm
+ * @return Atributo bestleverarm de la clase
+ */
 Bestleverarm GPS_Management::getLeverarm(){return this->bestleverarm;}
+
+/**
+ * Método consultor del atributo corrimudata
+ * @return Atributo corrimudata de la clase
+ */
 Corrimudata GPS_Management::getCorrIMUData(){return this->corrimudata;}
+
+/**
+ * Método consultor del atributo inspos
+ * @return Atributo inspos de la clase
+ */
 Inspos GPS_Management::getInsPos(){return this->inspos;}
+
+/**
+ * Método consultor del atributo heading
+ * @return Atributo heading de la clase
+ */
 Heading GPS_Management::getHeading(){return this->heading;}
 
-/*gps_conf_alignmentmode:Configura la forma de alinearse de la IMU
- *
- * Recibe:
- *  type:Indica el tipo de alineamiento
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura la forma de alinearse de la IMU
+ * @param[in] mode Tipo de alineamiento
+ * @return Booleano indicando si la petición se realizo correctamente
  */
 bool GPS_Management::gps_conf_alignmentmode(string mode){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=mode;
   string msg = create_message("ALIGNMENTMODE",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_applyvehiclebodyrotation:Activa o desactiva la rotación del gps respecto al vehículo
- *
- * Recibe:
- *  state:Indica si se habilita o no la rotación
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que activa o desactiva la rotación del gps respecto al vehículo
+ * @param[in] mode Indica si se habilita o no la rotación
+ * @return Booleano que indica si la petición se realizo correctamente
  */
 bool GPS_Management::gps_conf_applyvehiclebodyrotation(string mode){
   // Formacion del mensaje
-
   string options[1];
   options[0]=mode;
   string msg = create_message("APPLYVEHICLEBODYROTATION",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
-
   return r.ok;
 }
 
-/* gps_conf_canconfig: Configuracion del puerto CAN
- *
- * Recibe:
- *  port: puerto a gestionar
- *  switch: activa/desactiva la configuracion del puerto CAN
- *  bit_rate: velocidad de comunicacion por el puerto
- *  base: direccion base
- *  tx_mask: mascara de los datos transmitidos
- *  source: de donde vienen los datos
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Méotodo público para configuración del puerto CAN
+ * @param[in] port Puerto a gestionar
+ * @param[in] mode Activa/desactiva la configuración
+ * @param[in] bitrate Velocidad de comunicación por el puerto
+ * @param[in] base Dirección base
+ * @param[in] tx_max Máscara de los datos transmitidos
+ * @param[in] source De donde vienen los daros
+ * @return Booleano que indica si la petición se realizó correctamente
  */
 bool GPS_Management::gps_conf_canconfig(string port, string mode, string bitrate, int base, int tx_max, string source){
   string options[6];
@@ -95,263 +124,183 @@ bool GPS_Management::gps_conf_canconfig(string port, string mode, string bitrate
   options[4]=toString(tx_max);
   options[5]=source;
   string msg = create_message("CANCONFIG",6,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
-
   return r.ok;
 }
 
-/* gps_conf_exthdgoffset:Configura el offset angular de la antena del gps
- *
- * Recibe:
- *  heading:Offset angular del azimuth
- *  headingSTD:Desviacion del heading
- *  pitch:Offset angular del pitch
- *  pitchSTD:Desviación del pitch
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura el offset angular de la antena de GPS
+ * @param[in] heading Offset angular en azimuth
+ * @param[in] headingSTD Desviación del heading
+ * @param[in] pitch Offset angular en pitch
+ * @param[in] pitchSTD Desviación del pitch
+ * @return Booleano que indica si la petición se realizó correctamente
  */
 bool GPS_Management::gps_conf_exthdgoffset(double heading,double headingSTD, double pitch, double pitchSTD){
-
   // Formacion del mensaje
-
   string options[4];
   options[0]=toString(heading);
   options[1]=toString(headingSTD);
   options[2]=toString(pitch);
   options[3]=toString(pitchSTD);
   string msg = create_message("EXTHDGOFFSET",4,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_freset: Resetea datos del GPS
- *
- * Recibe:
- *  target: dato a resetear
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que resetea la configuración del GPS
+ * @param[in] target Módulo a resetear
+ * @return Booleano que indica si la petición se realizó con éxito
  */
 bool GPS_Management::gps_conf_freset(string target){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=target;
-
   string msg = create_message("FRESET",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_inscommand:Activa o desactiva el posicionamiento INS
- *
- * Recibe:
- *  state:Indica si se habilita o no el posicionamiento INS
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que activa/desactiva el posicionamiento de la IMU
+ * @param[in] stateIndica si se habilita o no el posicionamiento de la IMU
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_inscommand(string state){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=state;
   string msg = create_message("INSCOMMAND",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/*gps_conf_insphaseupdate:Configura el periodo de trabajo del INSGPS
- *
- * Recibe:
- *  mode: activa/deseactiva el control de fase
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura el periodo de operación del dispositivo
+ * @param[in] mode Activa/Desactiva el control de fase
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_insphaseupdate(string mode){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=mode;
   string msg = create_message("INSPHASEUPDATE",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
-
   return r.ok;
-
 }
 
-/* gps_conf_inszput:Actualiza la velocidad a 0
- *
- * Recibe:Nada
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que actializa la velocidad a '
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_inszupt(){
-
   // Formacion del mensaje
   string msg = create_message("INZUPT",0,NULL);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_inszuptcontrol:Activa o desactiva la posibilidad de actualizar la velocidad a 0
- *
- * Recibe:
- *  state:Indica si se habilita o no esta posibilidad
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que activa/desactiva la posibilidad de actualizar la velocidad a 0
+ * @param[in] state Indica si se habilita o no esta posibilidad
+ * @return  Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_inszuptcontrol(string state){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=state;
   string msg = create_message("INSZUPTCONTROL",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/*gps_conf_nmeatalker: Cambia el comportamiento del emisor nmea
- *
- * Recibe:
- *  id: tipo de comportamiento
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que cambia el comportamiento del emisor NMEA
+ * @param[in] id Tipo de comportamiento
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_nmeatalker(string id){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=id;
   string msg = create_message("NMEATALKER",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
-
   return r.ok;
-
 }
 
-/* gps_conf_rvbcalibrate:Activa o desactiva la posibilidad de configurar el oofset angular de la antena
- *
- * Recibe:
- *  state:Indica si se habilita o no esta posibilidad
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que activa o desactiva la posibilidad de configurar el oofset 
+ * angular de la antena
+ * @param[in] state Indica si se habilita o no esta posibilidad
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_rvbcalibrate(string state){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=state;
   string msg = create_message("RVBCALIBRATE",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setimuorientation:Configura la orientacion del SPAN-CPT
- *
- * Recibe:
- *  orientation: Orientacion de los ejes del SPAN-CPT (que eje esta alineado con la gravedad)
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura la orientacion del SPAN-CPT
+ * @param[in] orientation Orientacion de los ejes del SPAN-CPT (que eje esta alineado
+ *  con la gravedad)
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setimuorientation(string orientation){
-
   // Formacion del mensaje
-
   string options[1];
   options[0]=orientation;
   string msg = create_message("SETIMUORIENTATION",1,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setimutoantoffset:Configura el offset lineal de la antena
- *
- * Recibe:
- *  x:Offset en el eje X
- *  y:Offset en el eje Y
- *  z:Offset en el eje Z
- *  a:Incertidumbre del valor de x
- *  b:Incertidumbre del valor de y
- *  c:Incertidumbre del valor de z
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura el offset lineal de la antena
+ * @param[in] x Offset en eje X
+ * @param[in] y Offset en eje Y
+ * @param[in] z Offset en eje Z
+ * @param[in] a Incertidumbre en X
+ * @param[in] b Incertidumbre en Y
+ * @param[in] c Incertidumbre en Z
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setimutoantoffset(double x,double y, double z, double a,double b, double c){
-
   // Formacion del mensaje
-
   string options[6];
   options[0]=toString(x);
   options[1]=toString(y);
@@ -360,33 +309,25 @@ bool GPS_Management::gps_conf_setimutoantoffset(double x,double y, double z, dou
   options[4]=toString(b);
   options[5]=toString(c);
   string msg = create_message("SETIMUTOANTOFFSET",6,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setimutoantoffset2:Configura el offset lineal de una segunda antena
- *
- * Recibe:
- *  x:Offset en el eje X
- *  y:Offset en el eje Y
- *  z:Offset en el eje Z
- *  a:Incertidumbre del valor de x
- *  b:Incertidumbre del valor de y
- *  c:Incertidumbre del valor de z
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura el offset lineal de una segunda antena
+ * @param[in] x Offset en eje X
+ * @param[in] y Offset en eje Y
+ * @param[in] z Offset en eje Z
+ * @param[in] a Incertidumbre en X
+ * @param[in] b Incertidumbre en Y
+ * @param[in] c Incertidumbre en Z
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setimutoantoffset2(double x,double y, double z, double a,double b, double c){
-
   // Formacion del mensaje
-
   string options[6];
   options[0]=toString(x);
   options[1]=toString(y);
@@ -395,33 +336,25 @@ bool GPS_Management::gps_conf_setimutoantoffset2(double x,double y, double z, do
   options[4]=toString(b);
   options[5]=toString(c);
   string msg = create_message("SETIMUTOANTOFFSET2",6,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setinitattitude:Inicializa la orientación del SPAN-CPT
- *
- * Recibe:
- *  pitch:valor del pitch inicial
- *  roll:valor del roll inicial
- *  azimuth:valor del azimuth inicial
- *  pitchSTD:desviación del pitch inicial
- *  rollSTD:desviación del roll inicial
- *  azSTD:desviación del azimuth inicial
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que inicializa la orientación del SPAN-CPT
+ * @param[in] pitch Valor de pitch inicial
+ * @param[in] roll Valor de roll inicial
+ * @param[in] azimuth Valor de azimuth inicial
+ * @param[in] pitchSTD Desviación de pitch inicial
+ * @param[in] rollSTD Desviación de roll inicial
+ * @param[in] azSTD Desviación de azimuth inicial
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setinitattitude(double pitch,double roll, double azimuth, double pitchSTD,double rollSTD, double azSTD){
-
   // Formacion del mensaje
-
   string options[6];
   options[0]=toString(roll);
   options[1]=toString(pitch);
@@ -430,89 +363,65 @@ bool GPS_Management::gps_conf_setinitattitude(double pitch,double roll, double a
   options[4]=toString(pitchSTD);
   options[5]=toString(azSTD);
   string msg = create_message("SETINITATTITUDE",6,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setinitazimuth:Inicializa solo el azimuth del SPAN-CPT
- *
- * Recibe:
- *  azimuth:valor del azimuth inicial
- *  azSTD:desviación del azimuth inicial
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que inicializa solo el azimuth del SPAN-CPT
+ * @param[in] azimuth Valor del azimuth inicial
+ * @param[in] azSTD Desviación del azimuth inicial
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setinitazimuth(double azimuth,double azSTD){
-
   // Formacion del mensaje
-
   string options[2];
   options[0]=toString(azimuth);
   options[1]=toString(azSTD);
   string msg = create_message("SETINITAZIMUTH",2,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setinsoffset:Especifica el offset de la posición del SPAN-CPT
- *
- * Recibe:
- *  x:valor inicial en el eje x
- *  y:valor inicial en el eje y
- *  z:valor inicial en el eje z
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que especifica el offset de la posición del SPAN-CPT
+ * @param[in] x Valor inicial en X
+ * @param[in] y Valor inicial en Y
+ * @param[in] z Valor inicial en Z
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setinsoffset(double x,double y,double z){
-
   // Formacion del mensaje
-
   string options[3];
   options[0]=toString(x);
   options[1]=toString(y);
   options[2]=toString(z);
   string msg = create_message("SETINSOFFSET",3,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setmark1offset: Especifica el offset al Mark1 del evento
- *
- * Recibe:
- *  x:valor offset en el eje x
- *  y:valor offset en el eje y
- *  z:valor offset en el eje z
- *  alphaoffset:offset en el roll
- *  betaOffset:offset en el pitch
- *  gammaOffset:offset en el azimuth
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que especifica el offset al Mark1 del evento
+ * @param[in] x Offset en el eje X
+ * @param[in] y Offset en el eje Y
+ * @param[in] z Offset en el eje Z
+ * @param[in] alphaOffset Offset en roll
+ * @param[in] betaOffset Offset en pitch
+ * @param[in] gammaOffset Offset en azimuth
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setmark1offset(double x,double y,double z, double alphaOffset, double betaOffset, double gammaOffset){
-
   // Formacion del mensaje
-
   string options[6];
   options[0]=toString(x);
   options[1]=toString(y);
@@ -521,62 +430,47 @@ bool GPS_Management::gps_conf_setmark1offset(double x,double y,double z, double 
   options[4]=toString(betaOffset);
   options[5]=toString(gammaOffset);
   string msg = create_message("SETMARK1OFFSET",6,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_setwheelparameters:Configura los parámetros de la rueda en caso de disponer de un sensor para esta
- *
- * Recibe:
- *  ticks:número de ticks por revolución
- *  circ:circunferencia de la rueda
- *  spacing:espacio entre ticks o resolución del sensor (en metros)
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura los parámetros de la rueda en caso de disponer 
+ * de un sensor para esta
+ * @param[in] ticks Número de ticks por revolución
+ * @param[in] circ Circunferencia de la rueda
+ * @param[in] spacing Espacio entre ticks o resolución del sensor (en metros)
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_setwheelparameters(unsigned short ticks,double circ,double spacing){
-
   // Formacion del mensaje
-
   string options[3];
   options[0]=toString(ticks);
   options[1]=toString(circ);
   options[2]=toString(spacing);
   string msg = create_message("SETWHEELPARAMETERS",3,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_conf_vehiclebodyrotation: Configura el offset angular entre el vehículo y el SPAN-CPT
- *
- * Recibe:
- *  xAngle:ángulo en el eje x
- *  yAngle:ángulo en el eje y
- *  zAngle:ángulo en el eje z
- *  a:Incertidumbre del valor de xAngle
- *  b:Incertidumbre del valor de yAngle
- *  c:Incertidumbre del valor de zAngle
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que configura el offset angular entre el vehículo y el SPAN-CPT
+ * @param[in] xAngle Ángulo en eje X
+ * @param[in] yAngle Ángulo en eje Y
+ * @param[in] zAngle Ángulo en eje Z
+ * @param[in] a Incertidumbre del valor de xAngle
+ * @param[in] b Incertidumbre del valor de yAngle
+ * @param[in] c Incertidumbre del valor de zAngle
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_conf_vehiclebodyrotation(double xAngle,double yAngle, double zAngle, double a,double b, double c){
-
   // Formacion del mensaje
-
   string options[6];
   options[0]=toString(xAngle);
   options[1]=toString(yAngle);
@@ -585,24 +479,18 @@ bool GPS_Management::gps_conf_vehiclebodyrotation(double xAngle,double yAngle, d
   options[4]=toString(b);
   options[5]=toString(c);
   string msg = create_message("VEHICLEBODYROTATION",6,options);
-
   // Envio del mensaje
   this->port.send((char *)msg.c_str(),msg.length());
-
   // Recepcion de la respuesta
-
   Response r = reception_management(true,false);
   return r.ok;
-
 }
 
-/* gps_log_general: Genera y envia un comando de tipo log
- *
- * Recibe:
- *  command: comando
- *  type: tipo de respuesta deseada (onchange, onnew, etc.)
- * Devuelve: Un booleano indicando si la petición se realizo correctamente
- *
+/**
+ * Método público que genera y envia un comando de tipo log
+ * @param[in] command Comando
+ * @param[in] type Tipo de respuesta deseada (onchange, onnew, etc.)
+ * @return Booleano que indica si la petición se ha realizado con éxito
  */
 bool GPS_Management::gps_log_general(string command, string type){
   string options[2];
@@ -610,16 +498,17 @@ bool GPS_Management::gps_log_general(string command, string type){
   options[1] = type;
   string msg = create_message("log", 2, options);
   // Envio del mensaje
-
   this->port.send((char *) msg.c_str(), msg.length());
-
   // Recepcion de la respuesta
   Response r = reception_management(true, false);
-
   return r.ok;
 }
 
-// Funciones de adquisición de datos
+/**
+ * Método público para adquisición de datos de tipo BESTGPSVEL
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_bestgpsvel(Response res){
   // Rellenar atributo bestgpsvel con los datos obtenidos de Response
   string *datos = getData(8,res.data);
@@ -634,6 +523,11 @@ bool GPS_Management::gps_adq_bestgpsvel(Response res){
   return true;
 }
 
+/**
+ * Método público para adquisición de datos de tipo BESTGPSPOS
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_bestgpspos(Response res){
   // Rellenar atributo bestgpspos con los datos obtenidos de Response
   string *datos = getData(21,res.data);
@@ -662,10 +556,14 @@ bool GPS_Management::gps_adq_bestgpspos(Response res){
   return true;
 }
 
+/**
+ * Método público para adquisición de datos de tipo INSPVAS
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_inspvas(Response res){
   // Rellenar atributo bestgpspos con los datos obtenidos de Response
   string *datos = getData(12,res.data);
-
   this->inspvas.week=stringToLong(datos[0]);
   this->inspvas.seconds=stringToDouble(datos[1]);
   this->inspvas.lat=stringToDouble(datos[2]);
@@ -678,10 +576,14 @@ bool GPS_Management::gps_adq_inspvas(Response res){
   this->inspvas.pitch=stringToDouble(datos[9]);
   this->inspvas.azimuth=stringToDouble(datos[10]);
   this->inspvas.status=datos[11];
-
   return true;
 }
 
+/**
+ * Método público para adquisición de datos de tipo INSPVA
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_inspva(Response res){
   // Rellenar atributo bestgpspos con los datos obtenidos de Response
   string *datos = getData(12,res.data);
@@ -698,10 +600,14 @@ bool GPS_Management::gps_adq_inspva(Response res){
   this->inspva.pitch=stringToDouble(datos[9]);
   this->inspva.azimuth=stringToDouble(datos[10]);
   this->inspva.status=datos[11];
-
   return true;
 }
 
+/**
+ * Método público para adquisición de datos de tipo BESTLEVERARM
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_bestleverarm(Response res){
   string *datos = getData(7,res.data);
   this->bestleverarm.x_offset=stringToDouble(datos[0]);
@@ -714,6 +620,11 @@ bool GPS_Management::gps_adq_bestleverarm(Response res){
   return true;
 }
 
+/**
+ * Método público para adquisición de datos de tipo CORRIMUDATA
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_corrimudata(Response res){
   string *datos = getData(8,res.data);
   this->corrimudata.week=stringToLong(datos[0]);
@@ -727,7 +638,11 @@ bool GPS_Management::gps_adq_corrimudata(Response res){
   return true;
 }
 
-
+/**
+ * Método público para adquisición de datos de tipo INSPOS
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_inspos(Response res){
   string *datos = getData(6,res.data);
   this->inspos.week=stringToLong(datos[0]);
@@ -739,6 +654,11 @@ bool GPS_Management::gps_adq_inspos(Response res){
   return true;
 }
 
+/**
+ * Método público para adquisición de datos de tipo HEADING
+ * @param[in] res Respuesta a descomponer
+ * @return Booleano que indica si la operación se ha realizado con éxito
+ */
 bool GPS_Management::gps_adq_heading(Response res) {
     string *datos = getData(17, res.data);
     this->heading.sol_stat=datos[0];
@@ -761,6 +681,13 @@ bool GPS_Management::gps_adq_heading(Response res) {
     return true;
 }
 
+/**
+ * Método público para generación de mensajes
+ * @param[in] command Cabecera del mensaje
+ * @param[in] num_param Número de parámetros del mensaje
+ * @param[in] options Parámetros para generar el mensaje tras la cabecera
+ * @return Mensaje generado en formato String
+ */
 string GPS_Management::create_message(string command, int num_param, string options[]){
   string message=command;
   for(int i=0;i<num_param;i++){
@@ -771,11 +698,17 @@ string GPS_Management::create_message(string command, int num_param, string opti
   return message;
 }
 
+/**
+ * Método público para la obtención de una estructura de tipo Response en base
+ * a los datos en crudo obtenidos del GPS
+ * @param[in] confirmation Indica si la recepción es de un mensaje de confirmación
+ * @param[in] data Indica si la receipción es un de un mensaje de datos
+ * @return Estructura de la respuesta recibida ya escapsulada en datos
+ */
 Response GPS_Management::reception_management(bool confirmation, bool data){
   Response resp;
   bool startConfirmation = false, endConfirmation = false;
   bool startData = false, endData =false;
-
   if (confirmation)
   {
     // Se lee OK o Error
@@ -812,16 +745,13 @@ Response GPS_Management::reception_management(bool confirmation, bool data){
       resp.ok = true;
     else
       resp.ok = false;
-
     // No se esperan datos
     resp.data = "";
   }
-
   if(data){
     // Se lee los datos
     char c;
     string dataFrame = "";
-
     // Se busca el comienzo de los datos
     while (!startData){
       if (this->port.recv(&c, 1, 10) == SERIAL_OK){
@@ -833,7 +763,6 @@ Response GPS_Management::reception_management(bool confirmation, bool data){
         return resp;
       }
     }
-
     // Se busca el final de los datos
     while (!endData){
       if (this->port.recv(&c, 1, 1) == SERIAL_OK){
@@ -846,9 +775,7 @@ Response GPS_Management::reception_management(bool confirmation, bool data){
         return resp;
       }
     }
-
     analizeFrame(dataFrame, &resp);
-
     // Comprobacion de checksum
     string buf = resp.header + resp.headerdata + resp.data;
     unsigned long crcCalculated = CalculateBlockCRC32(buf.length(), (unsigned char*) buf.c_str());
@@ -862,10 +789,15 @@ Response GPS_Management::reception_management(bool confirmation, bool data){
       cerr << "Checksum ERROR" << endl;
     } 
   }
-
   return resp;
 }
 
+/**
+ * Método público para descomposición del mensaje en partes
+ * @param[in] numData Número de partes que componen el mensaje
+ * @param[in] frameData Mensaje en sí
+ * @return Partes del mensaje descompuesto
+ */
 string* GPS_Management::getData(int numData, string frameData){
   int pos=0;
   string* data=new string[numData];
@@ -875,19 +807,25 @@ string* GPS_Management::getData(int numData, string frameData){
   {
     data[pos++]=s;
     s=strtok(NULL,",");
-
   }
   return data;
 }
 
+/**
+ * Método consultor del atriburo port_opened
+ * @return Atributo port_opened
+ */
 bool GPS_Management::isPortOpened(){
-
   return port_opened;
 }
 
+/**
+ * Método público que analiza una trama de datos
+ * @param[in] frame Trama de datos
+ * @param[io] resp Mensaje a transformar mediante análisis
+ */
 void GPS_Management::analizeFrame(string frame,Response* resp){
   unsigned int pos=0;
-
   while(frame[pos]!=',')
   {
     resp->header+=frame[pos++];
@@ -901,16 +839,16 @@ void GPS_Management::analizeFrame(string frame,Response* resp){
   {
     resp->data+=frame[pos++];
   }
-  
   pos++;
   while(frame[pos]!='\r'){
     resp->checksum+=frame[pos++];
-  }
-
-    
+  } 
 }
 
-// Funcion que recibe datos independientemente cual sea
+/**
+ * Método público que lee y clasifica un mensaje del dispositivo por puerto serie
+ * @return Tipo de trama obtenida
+ */
 int GPS_Management::rcvData(){
   int tt=TT_ERROR;
   Response res = reception_management(false,true);
@@ -943,10 +881,15 @@ int GPS_Management::rcvData(){
   }else{
     tt=TT_ERROR;
   }
-  
   return tt;
 }
 
+/**
+ * Método público que obtiene el estado del GPS mediante la consulta en el campo
+ * correspondiente de un mensaje
+ * @param[in] s Campo del mensaje
+ * @return Valor entero que indica el estado mediante el uso de constantes
+ */
 short GPS_Management::getStateOfGPS(string s){
     if(strcmp(s.c_str(),"INSUFFICIENT_OBS")==0)
         return INSUFFICIENT_OBS;
@@ -984,6 +927,12 @@ short GPS_Management::getStateOfGPS(string s){
         return GPS_GLOBAL_ERROR;
 }
 
+/**
+ * Método público que obtiene el estado de la IMU mediante la consulta en el campo
+ * correspondiente de un mensaje
+ * @param[in] s Campo del mensaje
+ * @return Valor entero que indica el estado mediante el uso de constantes
+ */
 short GPS_Management::getStateOfIMU(string s){
     if(strcmp(s.c_str(),"NS_INACTIVE")==0)
         return INS_INACTIVE;
@@ -1001,9 +950,11 @@ short GPS_Management::getStateOfIMU(string s){
         return GPS_GLOBAL_ERROR;
 }
 
-
+/**
+ * Método público que envía las tramas correspondientes para la configuración
+ * del puerto serie COM2 para la recepción de correcciones GPS (RTK)
+ */
 void GPS_Management::setCom2ToRcvCorrections() {
-
     cout << "Configurando COM2 para obtencion de correcciones..." << endl;
     cout << "Enviando INTERFACE MODE...";
     string options[4];
@@ -1013,19 +964,15 @@ void GPS_Management::setCom2ToRcvCorrections() {
     options[3] = "OFF";
     string msg = create_message("INTERFACEMODE", 4, options);
     this->port.send((char *) msg.c_str(), msg.length());
-
     // Recepcion de la respuesta
     Response r = reception_management(true, false);
-
     if (r.ok) cout << "OK" << endl;
     else {
         cout << "ERROR" << endl;
         cout << "Fallo la configuracion RTK" << endl;
         return;
     }
-
     cout << "Enviando configuracion COM...";
-
     string optionsCom[7];
     optionsCom[0] = "COM2";
     optionsCom[1] = "57600";
@@ -1036,7 +983,6 @@ void GPS_Management::setCom2ToRcvCorrections() {
     optionsCom[6] = "OFF";
     msg = create_message("COM", 7, optionsCom);
     this->port.send((char *) msg.c_str(), msg.length());
-
     // Recepcion de la respuesta
     r = reception_management(true, false);
 
