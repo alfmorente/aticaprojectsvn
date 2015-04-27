@@ -1,8 +1,19 @@
-#include <vector>
+/**
+ * @file   AnalisisFichero.h
+ * @brief  Fichero de cabecera de analisis del fichero del PLAN
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
 
+#include <vector>
 #include "Modulo_Navegacion/AnalisisFichero.h"
 
 
+/**
+ * Metodo para separar las distintas lineas de la pagina
+ * @param[in] page String con la pagina ocmpleta
+ * @return Vector de string con cada una de las líneas
+ */
 vector<string> createVectorLineFromPage(string page)
 {
   vector <string> vecLine;
@@ -16,6 +27,11 @@ vector<string> createVectorLineFromPage(string page)
   return vecLine;
 }
 
+/**
+ * Metodo para separar las distintas cadenas de una linea
+ * @param[in] line Linea de la pagina
+ * @return Vector con las cadenas de dicha linea
+ */
 vector<string> createVectorFromLine(string line)
 {
   vector <string> vecData;
@@ -29,6 +45,12 @@ vector<string> createVectorFromLine(string line)
   return vecData;
 }
 
+/**
+ * Método que analiza la cabecera principal del PLAN
+ * @param[in] mainHead Cabecera principal
+ * @param[io] newPlan Estructura donde se guarda la informacion de dicha cabecera
+ * @return Booleano indicando que el formato de la cabecera principal es correcto
+ */
 bool analizeMainHead(vector<string> mainHead,PathPlan* newPlan)
 {
     if(mainHead.size()< 2)
@@ -38,6 +60,14 @@ bool analizeMainHead(vector<string> mainHead,PathPlan* newPlan)
     newPlan->NamePath=mainHead.at(1);
     return true;    
 }
+
+/**
+ * Método que analiza la cabecera de cada página
+ * @param[in] pageHead Cabecera de la página
+ * @param[io] newPlan Estructura donde se guarda la información de dicha página
+ * @param[in] page Pagina a analizar
+ * @return Bolleano indicando que el formato de la cabecera de la página es correcto
+ */
 bool analizePageHead(vector<string> pageHead,PathPlan* newPlan,int page)
 {
     DataPage Body;
@@ -70,6 +100,14 @@ bool analizePageHead(vector<string> pageHead,PathPlan* newPlan,int page)
     newPlan->vecDP.push_back(Body);
     return true;    
 }
+
+/**
+ * Método que analiza cada línea de waypoints
+ * @param[in] vWaypoint Línea con los Waypoints
+ * @param[in] page Pagina a analizar 
+ * @param[io] newPlan Estructura 
+ * @return Booleano indicando que el formato de la linea de waypoints es correcta
+ */
 bool analizeLineWaypoint(vector<string> vWaypoint, int page, PathPlan* newPlan)
 {
 
@@ -85,6 +123,12 @@ bool analizeLineWaypoint(vector<string> vWaypoint, int page, PathPlan* newPlan)
     newPlan->vecDP.at(page-1).type.push_back(vWaypoint.at(3));    
     return true;   
 }
+
+/**
+ * Método que analiza la linea de final de plan
+ * @param[in] vEnd Línea de final de plan
+ * @return Booleano indicando que el formato de la linea de final de plan es correcta
+ */
 bool analizeEndPage(vector<string> vEnd)
 {
     if(vEnd.size()<2)
@@ -95,6 +139,14 @@ bool analizeEndPage(vector<string> vEnd)
         return false;    
     return true;   
 }
+
+/**
+ * Método para analizar una página del fichero PLAN
+ * @param[in] page Pagina a analizar
+ * @param[in] currentPage Número de página que se espera analizar
+ * @param[io] newPlan Estructura donde guardar la información de la página
+ * @return Booleano que indica si el formato de la página es correcto
+ */
 bool analizePage(string page,int currentPage, PathPlan* newPlan)
 {
     bool endPage=false;
@@ -161,6 +213,10 @@ bool analizePage(string page,int currentPage, PathPlan* newPlan)
     
 }
 
+/**
+ * Método para limpiar el plan anterior
+ * @param[io] oldPlan Estructura con la información del plan anterior
+ */
 void cleanPathPlan(PathPlan* oldPlan)
 {
     oldPlan->NamePath.clear();
@@ -168,6 +224,12 @@ void cleanPathPlan(PathPlan* oldPlan)
     oldPlan->numPages=0;
     oldPlan->vecDP.clear();
 }
+
+/**
+ * Metodo auxiliar que convierte un string en un entero
+ * @param[in] s String a convertir
+ * @return Entero convertido
+ */
 int convertStringToInt(string s)
 {
     int value;
@@ -177,6 +239,11 @@ int convertStringToInt(string s)
     return value;    
 }
 
+/**
+ * Metodo auxiliar que convierte un string en un double
+ * @param[in] s String a convertir
+ * @return Double convertido
+ */
 double convertStringToDouble(string s)
 {
     double value;

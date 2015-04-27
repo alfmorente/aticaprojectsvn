@@ -43,6 +43,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
@@ -304,7 +307,7 @@ clean: CMakeFiles/doxygen.dir/clean
 CMakeFiles/gest_navegacion.dir/all: CMakeFiles/rosbuild_precompile.dir/all
 	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/depend
 	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles  24 25 26
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles  24 25 26 27
 	@echo "Built target gest_navegacion"
 .PHONY : CMakeFiles/gest_navegacion.dir/all
 
@@ -314,7 +317,7 @@ all: CMakeFiles/gest_navegacion.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gest_navegacion.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles 25
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles 26
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gest_navegacion.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles 0
 .PHONY : CMakeFiles/gest_navegacion.dir/rule
@@ -766,7 +769,7 @@ gtest/preinstall:
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles  27
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles  28
 	@echo "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
@@ -797,7 +800,7 @@ clean: gtest/CMakeFiles/gtest.dir/clean
 gtest/CMakeFiles/gtest_main.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles  28
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion/CMakeFiles  29
 	@echo "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 

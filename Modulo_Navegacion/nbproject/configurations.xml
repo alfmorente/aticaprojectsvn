@@ -21,6 +21,9 @@
       </df>
       <df name="src">
         <in>AnalisisFichero.cpp</in>
+        <in>NodeROSNavigation.cpp</in>
+        <in>Seguimiento.cpp</in>
+        <in>gest_navegacion.cpp</in>
         <in>navegacion.cpp</in>
       </df>
     </df>
@@ -67,11 +70,6 @@
             flavor2="4">
         <ccTool>
         </ccTool>
-      </item>
-      <item path="/usr/share/cmake-2.8/Modules/CMakeCompilerABI.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
             ex="false"
@@ -126,7 +124,15 @@
       </folder>
       <item path="src/AnalisisFichero.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/navegacion.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/NodeROSNavigation.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Seguimiento.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/gest_navegacion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/navegacion.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
       </item>
     </conf>
   </confs>

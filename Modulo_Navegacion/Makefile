@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
@@ -46,8 +49,8 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Navegacion_Atica/Modulo_Navegacion
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
-	/usr/bin/cmake -i .
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -472,53 +475,77 @@ src/AnalisisFichero.cpp.s:
 	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.s
 .PHONY : src/AnalisisFichero.cpp.s
 
-src/ll-utm.o: src/ll-utm.cpp.o
-.PHONY : src/ll-utm.o
+src/NodeROSNavigation.o: src/NodeROSNavigation.cpp.o
+.PHONY : src/NodeROSNavigation.o
 
 # target to build an object file
-src/ll-utm.cpp.o:
-	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o
-.PHONY : src/ll-utm.cpp.o
+src/NodeROSNavigation.cpp.o:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/NodeROSNavigation.cpp.o
+.PHONY : src/NodeROSNavigation.cpp.o
 
-src/ll-utm.i: src/ll-utm.cpp.i
-.PHONY : src/ll-utm.i
+src/NodeROSNavigation.i: src/NodeROSNavigation.cpp.i
+.PHONY : src/NodeROSNavigation.i
 
 # target to preprocess a source file
-src/ll-utm.cpp.i:
-	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.i
-.PHONY : src/ll-utm.cpp.i
+src/NodeROSNavigation.cpp.i:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/NodeROSNavigation.cpp.i
+.PHONY : src/NodeROSNavigation.cpp.i
 
-src/ll-utm.s: src/ll-utm.cpp.s
-.PHONY : src/ll-utm.s
+src/NodeROSNavigation.s: src/NodeROSNavigation.cpp.s
+.PHONY : src/NodeROSNavigation.s
 
 # target to generate assembly for a file
-src/ll-utm.cpp.s:
-	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.s
-.PHONY : src/ll-utm.cpp.s
+src/NodeROSNavigation.cpp.s:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/NodeROSNavigation.cpp.s
+.PHONY : src/NodeROSNavigation.cpp.s
 
-src/navegacion.o: src/navegacion.cpp.o
-.PHONY : src/navegacion.o
+src/Seguimiento.o: src/Seguimiento.cpp.o
+.PHONY : src/Seguimiento.o
 
 # target to build an object file
-src/navegacion.cpp.o:
-	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o
-.PHONY : src/navegacion.cpp.o
+src/Seguimiento.cpp.o:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/Seguimiento.cpp.o
+.PHONY : src/Seguimiento.cpp.o
 
-src/navegacion.i: src/navegacion.cpp.i
-.PHONY : src/navegacion.i
+src/Seguimiento.i: src/Seguimiento.cpp.i
+.PHONY : src/Seguimiento.i
 
 # target to preprocess a source file
-src/navegacion.cpp.i:
-	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.i
-.PHONY : src/navegacion.cpp.i
+src/Seguimiento.cpp.i:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/Seguimiento.cpp.i
+.PHONY : src/Seguimiento.cpp.i
 
-src/navegacion.s: src/navegacion.cpp.s
-.PHONY : src/navegacion.s
+src/Seguimiento.s: src/Seguimiento.cpp.s
+.PHONY : src/Seguimiento.s
 
 # target to generate assembly for a file
-src/navegacion.cpp.s:
-	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.s
-.PHONY : src/navegacion.cpp.s
+src/Seguimiento.cpp.s:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/Seguimiento.cpp.s
+.PHONY : src/Seguimiento.cpp.s
+
+src/gest_navegacion.o: src/gest_navegacion.cpp.o
+.PHONY : src/gest_navegacion.o
+
+# target to build an object file
+src/gest_navegacion.cpp.o:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/gest_navegacion.cpp.o
+.PHONY : src/gest_navegacion.cpp.o
+
+src/gest_navegacion.i: src/gest_navegacion.cpp.i
+.PHONY : src/gest_navegacion.i
+
+# target to preprocess a source file
+src/gest_navegacion.cpp.i:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/gest_navegacion.cpp.i
+.PHONY : src/gest_navegacion.cpp.i
+
+src/gest_navegacion.s: src/gest_navegacion.cpp.s
+.PHONY : src/gest_navegacion.s
+
+# target to generate assembly for a file
+src/gest_navegacion.cpp.s:
+	$(MAKE) -f CMakeFiles/gest_navegacion.dir/build.make CMakeFiles/gest_navegacion.dir/src/gest_navegacion.cpp.s
+.PHONY : src/gest_navegacion.cpp.s
 
 # Help Target
 help:
@@ -559,12 +586,15 @@ help:
 	@echo "... src/AnalisisFichero.o"
 	@echo "... src/AnalisisFichero.i"
 	@echo "... src/AnalisisFichero.s"
-	@echo "... src/ll-utm.o"
-	@echo "... src/ll-utm.i"
-	@echo "... src/ll-utm.s"
-	@echo "... src/navegacion.o"
-	@echo "... src/navegacion.i"
-	@echo "... src/navegacion.s"
+	@echo "... src/NodeROSNavigation.o"
+	@echo "... src/NodeROSNavigation.i"
+	@echo "... src/NodeROSNavigation.s"
+	@echo "... src/Seguimiento.o"
+	@echo "... src/Seguimiento.i"
+	@echo "... src/Seguimiento.s"
+	@echo "... src/gest_navegacion.o"
+	@echo "... src/gest_navegacion.i"
+	@echo "... src/gest_navegacion.s"
 .PHONY : help
 
 

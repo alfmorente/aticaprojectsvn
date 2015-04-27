@@ -35,7 +35,7 @@ dbfc5f63c9d94c2b00fdd7bf62368633 msg_gen/lisp/msg_error.lisp
 17a007ef78d0c668a4f8f84b67a7110f msg_gen/lisp/msg_mode.lisp
 2345b4ed45f2c8fdf75b02c5cf8b641b msg_gen/lisp/msg_module_enable.lisp
 5e7eedb04321502cb016670c6d4e0de2 msg_gen/lisp/msg_waypoints.lisp
-0d2cab8b640756c7497894d903832eb6 src/Modulo_Navegacion/msg/__init__.py
+052fc31c157e61cc3614391a6370ce3c src/Modulo_Navegacion/msg/__init__.py
 62969fd740d8bf19e29e3459e9b84e52 src/Modulo_Navegacion/msg/_msg_error.py
 1a15e83dda0040ae3469cf408b5886eb src/Modulo_Navegacion/msg/_msg_gest_navegacion.py
 58152d5457396fc55ce7699c6a4bc50f src/Modulo_Navegacion/msg/_msg_gps.py
