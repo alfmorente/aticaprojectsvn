@@ -1,3 +1,11 @@
+/**
+ * @file   SocketCommunication.h
+ * @brief  Fichero Cabecera de gestion de la comunicacion socket con el laser
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
+
+
 #include <Modulo_Laser2D_Rear/TypeConverter.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -5,7 +13,10 @@
 #include <arpa/inet.h>
 
 
-
+/**
+ * \class SocketCommunication
+ * \brief Clase que engloba la comunicacion TCP con el laser
+ */
 //SocketCommunication: Clase que se encarga de todo lo relativo al manejo de  de las tramas que se intercambian con el Laser
 class SocketCommunication
 {

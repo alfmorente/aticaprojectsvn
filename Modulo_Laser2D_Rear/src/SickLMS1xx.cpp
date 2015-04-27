@@ -1,10 +1,25 @@
+/**
+ * @file   SickLMS1xx.cpp
+ * @brief  Fichero fuente de gestion del Laser SickLMS1xx
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
 #include <Modulo_Laser2D_Rear/SickLMS1xx.h>
+
+/**
+ * Constructor de la clase
+ */
 Sicklms1xx::Sicklms1xx()
 {
 	Automatic=false;
 }
 
 
+/**
+ * Metodo para conectar con el laser
+ * @param[in] puerto Puerto del laser
+ * @param[in] ip  IP del laser
+ */
 /** connect: Metodo publico que conecta con el Laser
     
     Parametros de entrada: 
@@ -25,6 +40,9 @@ int Sicklms1xx::connect(short puerto,string ip)
 		return NO_ERROR;
 }
 
+/**
+ * Metodo para desconectar del laser
+ */
 /** disconnect: Metodo publico que conecta con el Laser
     
     Parametros de entrada: 
@@ -38,7 +56,11 @@ void Sicklms1xx::disconnect()
 	delete laserSocket;
 }
 
-
+/**
+ * Metodo para poner a medir el laser
+ * @param[in] clientPassword Contraseña para realizar esta accion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** startMeasurement: Metodo privado que le comunica al laser que empieze a medir 
     
     Parametros de entrada: 
@@ -79,6 +101,11 @@ int Sicklms1xx::startMeasurement(int clientPassword)
 	}
 }
 
+/**
+ * Metodo para que pare de medir el laser
+ * @param[in] clientPassword Contraseña para realizar esta accion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** stopMeasurement: Metodo privado que le comunica al laser que pare de medir 
     
     Parametros de entrada: 
@@ -108,6 +135,11 @@ int Sicklms1xx::stopMeasurement(int clientPassword)
 		return NO_ERROR;
 }
 
+/**
+ * Metodo para obtener el estado del laser
+ * @param[io] laserQuery Estructura donde poner la respuesta de la trama
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** queryStatus: Metodo publico que le pide al laser informacion sobre su estado
     
     Parametros de entrada: 
@@ -140,6 +172,11 @@ int Sicklms1xx::queryStatus(queryInformation* laserQuery)
 	return NO_ERROR;
 }
 
+/**
+ * Metodo para habilitar/deshabilitar el escaneo continuo
+ * @param[in] state Indica si se quiere habilitar o deshabilitar
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** setScanDataContinuous: Metodo publico que habilita o deshabilita el laser en modo continuo
     
     Parametros de entrada: 
@@ -169,6 +206,13 @@ int Sicklms1xx::setScanDataContinuous(bool state)
 
 }
 
+
+/**
+ * Metodo para obtener un scan del laser
+ * @param[io] laseScanData Estructura donde se guardara la informacion obtenida
+ * @param[in] timeout Tiempo maximo de espera de dicha informacion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** getScanData: Metodo publico para obtener principalmente las distancia a las que estan los obstaculos para los distintos ángulos
     
     Parametros de entrada: 
@@ -205,6 +249,11 @@ int Sicklms1xx::getScanData(laserScan* laserScanData,int timeout)
 
 }
 
+/**
+ * Metodo para obtener los parametros de configuracion de medida del laser
+ * @param[io] laseParametersMeasure Estructura donde se guardara la informacion obtenida
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** getMeasuringParameters: Metodo publico para obtener los parametros basicos de configuracion del laser
     
     Parametros de entrada: 
@@ -232,6 +281,13 @@ int Sicklms1xx::getMeasuringParameters(measuringParameters* laserParametersMeasu
 
 }
 
+
+/**
+ * Metodo para poner el nivel de acceso al laser
+ * @param[in] userLevel Nivel de acceso
+ * @param[in] password Contraseña para dicho nivel de acceso
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** selecUserLevel: Metodo privado para poner el nivel de uso del laser
     
     Parametros de entrada: 
@@ -265,6 +321,12 @@ int Sicklms1xx::selecUserLevel(char userLevel,int password)
 
 }
 
+/**
+ * Metodo para configurar los parametros de medida del laser
+ * @param[io] laseParametersMeasure Estructura donde se guardara la informacion obtenida
+ * @param[in] clientPassword Contraseña para realizar esta operacion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** configureLaser: Metodo publico para configurar los parametros basicos del laser
     
     Parametros de entrada: 
@@ -350,6 +412,12 @@ int Sicklms1xx::configureLaser(measuringParameters laserParametersMeasure,int cl
 	return NO_ERROR;
 }
 
+/**
+ * Metodo para configurar las salidas del laser
+ * @param[io] configOutput Estructura donde se guardara la informacion obtenida
+ * @param[in] password Contraseña para realizar esta operacion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** configureDataOutput: Metodo publico para configurar el formato de los datos de salida de getScanData
     
     Parametros de entrada: 
@@ -412,6 +480,11 @@ int Sicklms1xx::configureDataOutput(dataOutput configOutput,int clientPassword)
 
 }
 
+/**
+ * Metodo para obtener el nivel de contaminacion del laser
+ * @param[io] contaminationLevel Variable donde se guardara la informacion obtenida
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** getContaminationLevel: Metodo publico para obtener el nivel de contaminacion del laser
     
     Parametros de entrada: 
@@ -436,6 +509,12 @@ int Sicklms1xx::getContaminationLevel(unsigned short* contaminationLevel)
 
 }
 
+/**
+ * Metodo para configurar las salidas del laser
+ * @param[in] outputNumber Numero de salida del laser a configurar
+ * @param[in] statusOutput Valor al que se pone dicha salida
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** setLmsOutput: Metodo publico para configurar el estado de las salidas digitales del laser
     
     Parametros de entrada: 
@@ -468,6 +547,12 @@ int  Sicklms1xx::setLmsOutput(char outputNumber, bool statusOutput)
 
 }
 
+/**
+ * Metodo para configurar los leds del laser
+ * @param[in] typeLED LED a configurar
+ * @param[in] statusLED Valor a configurar en el LED
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** setLMSLEDs: Metodo publico para configurar el estado de los leds del laser
     
     Parametros de entrada: 
@@ -500,6 +585,11 @@ bool  Sicklms1xx::setLMSLEDs(char typeLED,bool statusLED)
 
 }
 
+/**
+ * Metodo para configurar el display del laser
+ * @param[in] displayStatus Valor a configurar en el display 
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** setLMSLEDs: Metodo publico para configurar el estado de los leds del laser
     
     Parametros de entrada: 
@@ -530,6 +620,11 @@ bool  Sicklms1xx::setLMSDisplay(char displayStatus)
 
 }
 
+/**
+ * Metodo para salvar permanentemente la configuracion actual
+ * @param[in] clientPassword contraseña para poder realizar la operacion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** saveDataPermanently: Metodo publico para salvar la configuracion en la EEPROM del laser
     
     Parametros de entrada: 
@@ -585,6 +680,11 @@ int Sicklms1xx::saveDataPermanently(int clientPassword)
 	return NO_ERROR;
 
 }
+
+/**
+ * Metodo para iniciar el dispositivo
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** startDevice: Metodo privado que le comunica al laser que empieze a medir (Es llamado dentro de startMeasurement)
     
     Parametros de entrada: Ninguno
@@ -610,6 +710,12 @@ int Sicklms1xx::startDevice()
 
 }
 
+/**
+ * Metodo para configurar el tipo de filtro del laser
+ * @param[in] typeFilter Tipo de filtro a configurar
+ * @param[in] clientPassword Contraseña para que se pueda realizar la operacion
+ * @return Entero que indica si la operacion fue realizada correctamente
+ */
 /** frEchoFilter: Metodo publico para comfigurar el tipo de filtro
     
     Parametros de entrada: 
@@ -665,6 +771,10 @@ int  Sicklms1xx::frEchoFilter(int typeFilter,int clientPassword)
 
 }
 
+/**
+ * Metodo para guardar la informacion del laser despues de un scan
+ * @param[io] laserScanData Estructura donde se guarda la informacion
+ */
 
 /** guardaDatos: Metodo privado que guarda todos los parametros de un scan del laser
 	
@@ -773,13 +883,3 @@ void Sicklms1xx::guardaDatos(laserScan* laserScanData)
 		
 	}	
 }
-
-
-
-
-
-
-
-
-                          
-

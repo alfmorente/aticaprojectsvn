@@ -35,6 +35,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Laser2D_Rear
 
@@ -46,8 +49,8 @@ CMAKE_BINARY_DIR = /home/atica/catkin_ws/src/Modulo_Laser2D_Rear
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
-	/usr/bin/cmake -i .
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -228,6 +231,19 @@ doxygen/fast:
 .PHONY : doxygen/fast
 
 #=============================================================================
+# Target rules for targets named laser2D_rear
+
+# Build rule for target.
+laser2D_rear: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 laser2D_rear
+.PHONY : laser2D_rear
+
+# fast build rule for target.
+laser2D_rear/fast:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/build
+.PHONY : laser2D_rear/fast
+
+#=============================================================================
 # Target rules for targets named rosbuild_clean-test-results
 
 # Build rule for target.
@@ -278,6 +294,19 @@ rospack_genmsg: cmake_check_build_system
 rospack_genmsg/fast:
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 .PHONY : rospack_genmsg/fast
+
+#=============================================================================
+# Target rules for targets named rospack_genmsg_all
+
+# Build rule for target.
+rospack_genmsg_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
+.PHONY : rospack_genmsg_all
+
+# fast build rule for target.
+rospack_genmsg_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
+.PHONY : rospack_genmsg_all/fast
 
 #=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
@@ -409,6 +438,126 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/Files.o: src/Files.cpp.o
+.PHONY : src/Files.o
+
+# target to build an object file
+src/Files.cpp.o:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/Files.cpp.o
+.PHONY : src/Files.cpp.o
+
+src/Files.i: src/Files.cpp.i
+.PHONY : src/Files.i
+
+# target to preprocess a source file
+src/Files.cpp.i:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/Files.cpp.i
+.PHONY : src/Files.cpp.i
+
+src/Files.s: src/Files.cpp.s
+.PHONY : src/Files.s
+
+# target to generate assembly for a file
+src/Files.cpp.s:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/Files.cpp.s
+.PHONY : src/Files.cpp.s
+
+src/SickLMS1xx.o: src/SickLMS1xx.cpp.o
+.PHONY : src/SickLMS1xx.o
+
+# target to build an object file
+src/SickLMS1xx.cpp.o:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/SickLMS1xx.cpp.o
+.PHONY : src/SickLMS1xx.cpp.o
+
+src/SickLMS1xx.i: src/SickLMS1xx.cpp.i
+.PHONY : src/SickLMS1xx.i
+
+# target to preprocess a source file
+src/SickLMS1xx.cpp.i:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/SickLMS1xx.cpp.i
+.PHONY : src/SickLMS1xx.cpp.i
+
+src/SickLMS1xx.s: src/SickLMS1xx.cpp.s
+.PHONY : src/SickLMS1xx.s
+
+# target to generate assembly for a file
+src/SickLMS1xx.cpp.s:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/SickLMS1xx.cpp.s
+.PHONY : src/SickLMS1xx.cpp.s
+
+src/SocketCommunication.o: src/SocketCommunication.cpp.o
+.PHONY : src/SocketCommunication.o
+
+# target to build an object file
+src/SocketCommunication.cpp.o:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/SocketCommunication.cpp.o
+.PHONY : src/SocketCommunication.cpp.o
+
+src/SocketCommunication.i: src/SocketCommunication.cpp.i
+.PHONY : src/SocketCommunication.i
+
+# target to preprocess a source file
+src/SocketCommunication.cpp.i:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/SocketCommunication.cpp.i
+.PHONY : src/SocketCommunication.cpp.i
+
+src/SocketCommunication.s: src/SocketCommunication.cpp.s
+.PHONY : src/SocketCommunication.s
+
+# target to generate assembly for a file
+src/SocketCommunication.cpp.s:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/SocketCommunication.cpp.s
+.PHONY : src/SocketCommunication.cpp.s
+
+src/TypeConverter.o: src/TypeConverter.cpp.o
+.PHONY : src/TypeConverter.o
+
+# target to build an object file
+src/TypeConverter.cpp.o:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/TypeConverter.cpp.o
+.PHONY : src/TypeConverter.cpp.o
+
+src/TypeConverter.i: src/TypeConverter.cpp.i
+.PHONY : src/TypeConverter.i
+
+# target to preprocess a source file
+src/TypeConverter.cpp.i:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/TypeConverter.cpp.i
+.PHONY : src/TypeConverter.cpp.i
+
+src/TypeConverter.s: src/TypeConverter.cpp.s
+.PHONY : src/TypeConverter.s
+
+# target to generate assembly for a file
+src/TypeConverter.cpp.s:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/TypeConverter.cpp.s
+.PHONY : src/TypeConverter.cpp.s
+
+src/laser2D_rear.o: src/laser2D_rear.cpp.o
+.PHONY : src/laser2D_rear.o
+
+# target to build an object file
+src/laser2D_rear.cpp.o:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/laser2D_rear.cpp.o
+.PHONY : src/laser2D_rear.cpp.o
+
+src/laser2D_rear.i: src/laser2D_rear.cpp.i
+.PHONY : src/laser2D_rear.i
+
+# target to preprocess a source file
+src/laser2D_rear.cpp.i:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/laser2D_rear.cpp.i
+.PHONY : src/laser2D_rear.cpp.i
+
+src/laser2D_rear.s: src/laser2D_rear.cpp.s
+.PHONY : src/laser2D_rear.s
+
+# target to generate assembly for a file
+src/laser2D_rear.cpp.s:
+	$(MAKE) -f CMakeFiles/laser2D_rear.dir/build.make CMakeFiles/laser2D_rear.dir/src/laser2D_rear.cpp.s
+.PHONY : src/laser2D_rear.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -426,12 +575,14 @@ help:
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... laser2D_rear"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... rosbuild_clean-test-results"
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
+	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... run_tests"
@@ -442,6 +593,21 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/Files.o"
+	@echo "... src/Files.i"
+	@echo "... src/Files.s"
+	@echo "... src/SickLMS1xx.o"
+	@echo "... src/SickLMS1xx.i"
+	@echo "... src/SickLMS1xx.s"
+	@echo "... src/SocketCommunication.o"
+	@echo "... src/SocketCommunication.i"
+	@echo "... src/SocketCommunication.s"
+	@echo "... src/TypeConverter.o"
+	@echo "... src/TypeConverter.i"
+	@echo "... src/TypeConverter.s"
+	@echo "... src/laser2D_rear.o"
+	@echo "... src/laser2D_rear.i"
+	@echo "... src/laser2D_rear.s"
 .PHONY : help
 
 
