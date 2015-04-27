@@ -1,7 +1,4 @@
 FILE(REMOVE_RECURSE
-  "msg_gen"
-  "msg_gen"
-  "src/Modulo_Gest_Sistema/msg"
   "CMakeFiles/rospack_gensrv"
 )
 

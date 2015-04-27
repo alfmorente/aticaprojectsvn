@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/ccmake
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/atica/catkin_ws/src/Modulo_Gest_Sistema
 
@@ -62,6 +65,8 @@ CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: /opt/ros/groovy/share/rosgra
 CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o -c /home/atica/catkin_ws/src/Modulo_Gest_Sistema/src/gest_sistema.cpp
@@ -99,6 +104,8 @@ CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: /opt/ros/groovy/share/rosgrap
 CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: /opt/ros/groovy/share/xmlrpcpp/package.xml
 CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: /opt/ros/groovy/share/roscpp/package.xml
 CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/manifest.xml
+CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/msg_gen/generated
+CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: /home/atica/catkin_ws/src/Common_files/srv_gen/generated
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/atica/catkin_ws/src/Modulo_Gest_Sistema/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/gest_sistema.dir/src/interaction.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -W -Wall -Wno-unused-parameter -fno-strict-aliasing -pthread -o CMakeFiles/gest_sistema.dir/src/interaction.cpp.o -c /home/atica/catkin_ws/src/Modulo_Gest_Sistema/src/interaction.cpp

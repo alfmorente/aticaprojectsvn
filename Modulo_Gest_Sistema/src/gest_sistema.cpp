@@ -1,9 +1,23 @@
+/**
+ * @file   gest_sistema.cpp
+ * @brief  Fichero fuente para gestión del sistema
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
+ */
+
+
 #include "Modulo_Gest_Sistema/gest_sistema.h"
 #include "Modulo_Gest_Sistema/interaction.h"
 #include "../../Common_files/include/Common_files/constant.h"
 
 using namespace std;
 
+/**
+ * Función principal que gestiona el sistema completo
+ * @param argc Número de argumentos de entrada 
+ * @param argv Valores de los argumentos de entrada 
+ * @return Entero que indica si el modulo finalizó correctamente
+ */
 
 int main(int argc, char **argv)
 {
@@ -86,6 +100,13 @@ int main(int argc, char **argv)
     return 0;
 }
 
+/**
+ * Callback Servidor ROS que devuelve el modo actual a una petición de otro módulo
+ * @param[io] req  Petición del servicio recibida por el cliente
+ * @param[io] resp Respuesta del servicio enviada por el servidor
+ * @return 
+ */
+
 //Funcion servidor de datos (Devuelve el dato que se le solicita)
 bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
 {
@@ -106,6 +127,10 @@ bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_dat
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Callback Subscriptor ROS del modo de operación desde comunicaciones
+ * @param[in] msg Mensaje ROS con el modo de operación
+ */
 
 //Subscriptor del modo al topic del módulo Communicator
 void fcn_sub_mode_communication(const Common_files::msg_modePtr& msg)
@@ -168,6 +193,11 @@ void fcn_sub_mode_communication(const Common_files::msg_modePtr& msg)
         }
 }
 
+/**
+ * Callback Subscriptor ROS del modo de operación desde Errores
+ * @param[in] msg Mensaje ROS con el modo de operación 
+ */
+
 //Subscriptor del modo al topic del módulo Error
 void fcn_sub_mode_error(const Common_files::msg_modePtr& msg)
 {
@@ -193,13 +223,20 @@ void fcn_sub_mode_error(const Common_files::msg_modePtr& msg)
         }
 }
 
-
+/**
+ * Callback ROS con la disponibilidad de los modos
+ * @param msg Mensaje ROS con la disponibilidad de los modos
+ */
 void fcn_sub_available(const Common_files::msg_availablePtr& msg)
 {
     for(unsigned int i=AVAILABLE_POS_REMOTE;i<=AVAILABLE_POS_TEACH;i++)
         modesAvailables[i]=msg->available[i];
 }
 
+/**
+ * Callback Subscriptor ROS de las funciones auxiliares
+ * @param msg Mensaje ROS con la función auxiliar a realizar
+ */
 void fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr& msg)
 {    
     ROS_INFO("FUNCION AUXILIAR %d %d %d",msg->type_msg,msg->function,msg->value);
@@ -346,6 +383,10 @@ void fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr& msg)
     }
 }
 
+/**
+ * Callback Subscriptor ROS del ACK de la parada de emergencia
+ * @param msg Mensaje ROS de la parada de emergencia
+ */
 void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg)
 {
     if(msg->value==INFO){
@@ -354,6 +395,10 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg)
     }
 }
 
+/**
+ * Callback Subscriptor ROS de información del conmutador Manual/Automatico
+ * @param msg Mensaje ROS con el estado del conmutador
+ */
 void fcn_sub_switch(const Common_files::msg_switchPtr& msg)
 {
     ROS_INFO("RECIBO SWITCH %d",msg->value);
@@ -406,6 +451,10 @@ void fcn_sub_switch(const Common_files::msg_switchPtr& msg)
     
 }
 
+/**
+ * Callback Subscriptor ROS del modo de operación desde el módulo convoy
+ * @param msg Mensaje ROS con el modo de operación
+ */
 //Subscriptor del modo al topic del módulo Convoy
 void fcn_sub_mode_convoy(const Common_files::msg_modePtr& msg)
 {
@@ -458,12 +507,19 @@ void fcn_sub_mode_convoy(const Common_files::msg_modePtr& msg)
     }
 
 }
+
+
 /*******************************************************************************
  *******************************************************************************
  *                              FUNCIONES PROPIAS
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Función que pone un estado determinado a los distintos módulos
+ * @param n Manejador ROS
+ * @param mode Estado del Módulo
+ */
 void modeManagement(ros::NodeHandle n,int mode) {
     n.setParam("state_module_driving", mode);
     n.setParam("state_module_navigation", mode);
@@ -481,6 +537,11 @@ void modeManagement(ros::NodeHandle n,int mode) {
     n.setParam("state_module_convoy", mode);
 }
 
+/**
+ * Función que espera que todos los módulos se hayan lanzado
+ * @param n Manejador de ROS
+ * @return Booleano indicando si todos los módulos se lanzaron correctamente
+ */
 bool waitForAllModulesReady(ros::NodeHandle n){
     
     int state;
@@ -660,6 +721,10 @@ bool waitForAllModulesReady(ros::NodeHandle n){
     return true;
 }
 
+/**
+ * Función que obtiene el estado actual de los demas módulos
+ * @param n Manejador de ROS
+ */
 void updateStatusModules(ros::NodeHandle n)
 {
     n.getParam("state_module_remote",state_remote);
@@ -678,6 +743,12 @@ void updateStatusModules(ros::NodeHandle n)
     n.getParam("state_module_communication",state_communication);
 
 }
+
+/**
+ * Funcion que activa el modo indicado
+ * @param mode Modo de operación
+ * @return Booleano indicando si la activación se realizo correctamente
+ */
 bool modeRUN(int mode)
 {
     bool runOK;
@@ -814,6 +885,11 @@ bool modeRUN(int mode)
        }
        return runOK;
 }
+
+/**
+ * Función que para el modo indicado
+ * @param mode Modo de operación
+ */
 void modeSTOP(int mode)
 {
     Common_files::msg_module_enablePtr module_enable(new Common_files::msg_module_enable);
@@ -851,6 +927,12 @@ void modeSTOP(int mode)
             break;
     }
 }
+
+/**
+ * Función que aborta el modo de operación indicado
+ * @param mode Modo de operación
+ * @return Booleano indicando si el aborto de dicho modo se hizo correctamente
+ */
 bool modeEXIT(int mode)
 {
    bool exitOK;
@@ -944,6 +1026,10 @@ bool modeEXIT(int mode)
     return exitOK;
 
 }
+/**
+ * Función que reanuda el modo de operación indicado
+ * @param mode Modo de operación 
+ */
 void modeRESUME(int mode)
 {
    Common_files::msg_module_enablePtr module_enable(new Common_files::msg_module_enable);
@@ -981,6 +1067,10 @@ void modeRESUME(int mode)
             break;
     }
 }
+/**
+ * Función que ejecuta la parada de emergencia en caso de que esta hiciera falta
+ * @return Booleano indicando si la parada se realizó correctamente
+ */
 bool emergencySTOP()
 {
     stoppingCar=true;
@@ -1002,6 +1092,12 @@ bool emergencySTOP()
     }   
 }
 
+/**
+ * Funcion que ejecuta un timer
+ * @param[in] sec Segundos de espera del temporizador
+ * @param[in] typeACK Tipo de ACK al que espera el timer
+ * @return Booleano indicando si el temporizador expiró o llegó el ACK 
+ */
 bool timerACK(double sec, int typeACK)
 {
     int ack=false;
@@ -1026,6 +1122,10 @@ bool timerACK(double sec, int typeACK)
         return true;
 }
 
+/**
+ * Funcion que chequea periodicamente que los demas módulos continuan activos
+ * @param[in] event Tiempo en el que se ejecuta el evento
+ */
 /** Chequea el estado de cada uno de los subsistemas comprobando que estan vivos.
  Se realiza mediante un cliente que va llamando a cada uno de los servidores que se 
  encuentran en cada unos de los subsistemas**/
@@ -1063,6 +1163,11 @@ void checkModulesAlive(const ros::TimerEvent& event)
     }
 }
 
+/**
+ * Función que indica el subsistema que no esta disponible
+ * @param[int] subsystem Indica el subsistema con el que se ha perdido la comunicación
+ * @return Entero con el tipo de error
+ */
 /**Devuelve el tipo de error segun el subsistema que no se encuentre disponible*/
 int getErrorModule(int subsystem)
 {
