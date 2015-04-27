@@ -1,12 +1,12 @@
-/* 
- * File:   gps.h
- * Author: carlosamores
- *
- * Created on 16 de septiembre de 2013, 11:51
+/**
+ * @file   camaras.h
+ * @brief  Fichero de cabecera de gestion de la camara
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
 
-#ifndef GPS_H
-#define	GPS_H
+#ifndef CAMARAS_H
+#define	CAMARAS_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -26,8 +26,8 @@ extern "C" {
 
 // ROS y demas librerias
 #include "ros/ros.h"
-#define NAME_SERIAL "/dev/ttyUSB0"
-#define VELOCITY B9600
+#define NAME_SERIAL "/dev/ttyUSB0" ///< Constante que define el nombre del puerto serie
+#define VELOCITY B9600 ///< Constante que define la velocidad del puerto serie
 
 //Variables
 bool exitModule;
@@ -43,7 +43,7 @@ ros::Publisher pub_error;
 
 // Funciones propias
 
-bool connect();
+bool connect();    
 bool disconnect();
 bool configure();
 bool sendData();
