@@ -68,7 +68,7 @@ CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: include/Modulo_Gest_Sistema/
 CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: include/Modulo_Gest_Sistema/gest_sistema.h
 CMakeFiles/gest_sistema.dir/src/gest_sistema.cpp.o: include/Modulo_Gest_Sistema/interaction.h
 
+CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: src/../../Common_files/include/Common_files/constant.h
 CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: src/interaction.cpp
-CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: include/Modulo_Gest_Sistema/constant.h
 CMakeFiles/gest_sistema.dir/src/interaction.cpp.o: include/Modulo_Gest_Sistema/interaction.h
 

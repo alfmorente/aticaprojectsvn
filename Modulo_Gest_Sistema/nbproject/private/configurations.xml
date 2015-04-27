@@ -100,7 +100,6 @@
       </df>
       <df name="include">
         <df name="Modulo_Gest_Sistema">
-          <in>constant.h</in>
           <in>gest_sistema.h</in>
           <in>interaction.h</in>
         </df>

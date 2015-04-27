@@ -1,9 +1,10 @@
-/* 
- * File:   gest_sistema.h
- * Author: carlosamores
- *
- * Created on 12 de septiembre de 2013, 12:58
+/**
+ * @file   gest_sistema.h
+ * @brief  Fichero de cabecera para gestión del sistema
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
  */
+
 
 #ifndef GEST_SISTEMA_H
 #define	GEST_SISTEMA_H
@@ -21,17 +22,17 @@ extern "C" {
 // Defines propios del módulo
 
 // Timeout para activacion de modulos
-#define TIMEOUT_ACTIVATION_MODULE 10 //segundos
-#define TIMEOUT_ACK 10
-#define NUM_MODULES 13
+#define TIMEOUT_ACTIVATION_MODULE 10 ///< Constante que indica el tiempo de espera de activación de otro módulo
+#define TIMEOUT_ACK 1 ///< Constante que indica el tiempo de espera del ACK en la parada de emergencia
+#define NUM_MODULES 13 ///< Constante que indica el numero de módulos del sistema
 
 // Tipo de ack
-#define CONVOY_ACK 0
-#define EMERGENCY_ACK 1
+#define CONVOY_ACK 0 ///< Constante que indica el tipo de ACK de convoy
+#define EMERGENCY_ACK 1 ///< Constante que indica el tipo de ACK de emergencia
 
 // Modo convoy follower
-#define LEADER 0
-#define FOLLOWER 1
+#define LEADER 0 ///< Constante que indica tipo de vehículo Leader
+#define FOLLOWER 1 ///< Constante que indica tipo de vehículo Follower
 
 
 // Mensajes
@@ -105,11 +106,11 @@ bool fcn_server_data(Common_files::srv_data::Request &req, Common_files::srv_dat
 
 // Funciones propias
 
-// Cambia el estado de todos los modulos al estado de entrada
+// Cambia el estado de todos los módulos al estado de entrada
 void modeManagement(ros::NodeHandle,int);
 
-// Espera hasta que esten listos todos los modulos con su correspondiente
-// timeout por si alguno no responde, se para la aplicacion
+// Espera hasta que esten listos todos los módulos con su correspondiente
+// timeout por si alguno no responde, se para la aplicación
 bool waitForAllModulesReady(ros::NodeHandle);
 
 //Actualiza el estado de los modulos
