@@ -1,8 +1,10 @@
-/* 
- * File:   conduccion.cpp
- * Author: Sergio Doctor López
- *
- * Created on 5 de marzo de 2014, 10:03
+/** 
+ * @file  ConduccionThread.hpp
+ * @brief Implementación del main principal del Subsistema Driving
+ * @author Sergio Doctor 
+ * @date 2014
+ * @addtogroup 
+ * @{
  */
 
 #include "../include/Modulo_Conduccion/conduccion.h"
@@ -20,6 +22,11 @@ using namespace std;
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Método que gestiona la entrada se señales por teclado
+ * @param signal Tipo de señal
+ */
+
 // the signal handler for manual break Ctrl-C
 void signal_handler(int signal)
 {
@@ -34,6 +41,12 @@ void signal_handler(int signal)
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Método principal del nodo. 
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Entero distinto de 0 si ha habido problemas. 0 en caso contrario. 
+ */
 
 int main(int argc, char **argv)
 {
@@ -179,6 +192,11 @@ int main(int argc, char **argv)
  * *****************************************************************************
  * ****************************************************************************/
 
+
+/**
+ * Publicación de la parada de emergencia
+ */
+
 void publishEmergencyStop(){
 
     cout << "Publicacion de la parada de emergencia = INFORM \n";
@@ -187,6 +205,9 @@ void publishEmergencyStop(){
         
 }
 
+/**
+ * Publicación del backup, el cual dispone de información procedente del vehículo
+ */
 
 void publishBackup() {
     // Publicacion del mensaje de Backup
@@ -215,6 +236,10 @@ void publishBackup() {
   */
 }
 
+/**
+ * Publicación del modo de conducción (automática o manual)
+ */
+
 
 void publishSwitch(){
 
@@ -231,6 +256,12 @@ void publishSwitch(){
     cout << "***************************************************** \n\n\n";
     
 }
+
+/**
+ * Publicación del tipo de parada de emergencia
+ * @param valor Si se ha activado o desactivado cualquier parada de emergencia 
+ * @param i Tipo de parada de emergencia (obstáculo, seta remota o seta local)
+ */
 
 
 void publishInfoStop (short valor, int i) {
@@ -310,6 +341,12 @@ void publishInfoStop (short valor, int i) {
         
 }
 
+/**
+ * Publicación del mensaje de error
+ * @param valor Clasificación del error 
+ * @param i Tipo de error (fallo en el acelerador, fallo en la dirección,...)
+ */
+
 
 void publishError (short valor, int i) {
     // Publicacion del mensaje error
@@ -367,11 +404,24 @@ void publishError (short valor, int i) {
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Suscriptor de los comandos de navegación
+ * Envío de mensajes de navegación al vehículo
+ * @param msg Mensaje proveniente del publicador
+ */
+
 // Suscriptor al Módulo de Navegacion
 void fcn_sub_navigation(const Common_files::msg_navigationPtr& msg)
 {
   ROS_INFO("I heard a NAVIGATION message \n");
 }
+
+
+/**
+ * Suscriptor de los comandos de teleoperación
+ * Envío de mensajes (acelerador, freno, marcha,...) del modo remote al vehículo
+ * @param msg Mensaje proveniente del publicador
+ */
 
 // Suscriptor al Módulo de Remote
 void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
@@ -430,6 +480,13 @@ void fcn_sub_com_teleop(const Common_files::msg_com_teleopPtr& msg)
         
 }
 
+/**
+ * Suscriptor del engine/brake
+ * Cuando le llega un engine/brake del módulo de gestión de sistema, se le envía un mensaje al vehículo para que se active/desactive el motor o para 
+ * que ponga/quite el freno de estacionamiento
+ * @param msg Mensaje proveniente del publicador
+ */
+
 // Suscriptor al Módulo de System Management
 void fcn_sub_engine_brake(const Common_files::msg_fcn_auxPtr& msg)  {
     
@@ -456,6 +513,13 @@ void fcn_sub_engine_brake(const Common_files::msg_fcn_auxPtr& msg)  {
     conduccion->m_engine_brake_CAN_AUTOMATA();
 }
 
+
+/**
+ * Suscriptor de la parada de emergencia
+ * Cuando le llega una parada de emergencia del módulo de gestión de sistema, se le envía un mensaje al vehículo para que se detenga
+ * @param msg Mensaje proveniente del publicador
+ */
+
 // Suscriptor al Módulo de System Management
 void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg) {
 
@@ -469,6 +533,13 @@ void fcn_sub_emergency_stop(const Common_files::msg_emergency_stopPtr& msg) {
 
 }
 
+
+/**
+ * Servicio de heartbeat para Gestion de sistema
+ * @param req 
+ * @param resp
+ * @return 
+ */
 
 // Servicio de heartbeat con Gestion del sistema
 bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
@@ -491,6 +562,11 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
  *                              FUNCIONES PROPIAS
  * *****************************************************************************
  * ****************************************************************************/
+
+/**
+ * Método que crea las comunicaciones CAN
+ * @return Devuelve verdadero o falso si se ha creado correctamente la conexión
+ */
 
 bool createCommunication(){
     
@@ -528,6 +604,11 @@ bool createCommunication(){
     
 }
 
+/**
+ * Método que desconecta las comunicaciones CAN
+ * @return Devuelve verdadero o falso si se ha desconectado correctamente la conexión
+ */
+
 bool disconnectCommunication(){
     
     /*FIN COMUNICACION CAN */
@@ -537,7 +618,10 @@ bool disconnectCommunication(){
     return false;
 }
 
-
+/**
+ * Inicialización de variables del sistema
+ * @param n Nodo de trabajo de ROS
+ */
 void initialize(ros::NodeHandle n) {
     
   // Generación de publicadores
@@ -577,6 +661,9 @@ void initialize(ros::NodeHandle n) {
   sleep(1);
 }
 
+/**
+ * Método que comprueba constantemente si se produce una parada de emergencia
+ */
 
 void checkEmergencyStop () {
 
@@ -602,6 +689,9 @@ void checkEmergencyStop () {
     
 }
 
+/**
+ * Método que comprueba constantemente si se ha producido un cambio de manual a automático o viceversa
+ */
 
 void checkSwitch() {
 
@@ -612,6 +702,10 @@ void checkSwitch() {
     
 }
 
+/**
+ * Método que comprueba constantemente si se ha producido alguna parada de emergencia (por obstáculo, a través de la seta de emergencia remota o 
+ * a través de la seta de emergencia del vehículo
+ */
 
 void checkInfoStop() {
     //cout << "parada_emergencia_obstaculo: " << conduccion->parada_emergencia_obstaculo << endl;
@@ -635,6 +729,9 @@ void checkInfoStop() {
     
 }
 
+/**
+ * Método que comprueba constantemente si se ha producido algún error en el vehículo
+ */
 
 void checkError() {
     

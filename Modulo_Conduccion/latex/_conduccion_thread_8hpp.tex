@@ -1,0 +1,80 @@
+\hypertarget{_conduccion_thread_8hpp}{\section{include/\-Modulo\-\_\-\-Conduccion/\-Conduccion\-Thread.hpp \-File \-Reference}
+\label{_conduccion_thread_8hpp}\index{include/\-Modulo\-\_\-\-Conduccion/\-Conduccion\-Thread.\-hpp@{include/\-Modulo\-\_\-\-Conduccion/\-Conduccion\-Thread.\-hpp}}
+}
+
+
+\-Declara el tipo de la clase \char`\"{}\-Conduccion\-Thread\char`\"{}.  
+
+
+{\ttfamily \#include \char`\"{}\-Thread.\-hpp\char`\"{}}\*
+{\ttfamily \#include \char`\"{}\-C\-A\-N\-Communication.\-hpp\char`\"{}}\*
+{\ttfamily \#include \char`\"{}\-Timer.\-hpp\char`\"{}}\*
+{\ttfamily \#include $<$queue$>$}\*
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_conduccion_thread}{\-Conduccion\-Thread}
+\begin{DoxyCompactList}\small\item\em \-Clase que representa el tratamiento de los menajes \-C\-A\-N que se le envía/recibe el vehículo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{_conduccion_thread_8hpp_a9cf883931e4ebfe282a433d2b54b760c}{\#define \hyperlink{_conduccion_thread_8hpp_a9cf883931e4ebfe282a433d2b54b760c}{\-A\-R\-R\-A\-N\-Q\-U\-E\-\_\-\-P\-A\-R\-A\-D\-A}~0x01}\label{_conduccion_thread_8hpp_a9cf883931e4ebfe282a433d2b54b760c}
+
+\begin{DoxyCompactList}\small\item\em \-Valor del arranque del vehículo // \-En binario (0000 0001) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_ac1425cbe6a6055717e08b62984924a7d}{\#define \hyperlink{_conduccion_thread_8hpp_ac1425cbe6a6055717e08b62984924a7d}{\-F\-R\-E\-N\-O\-\_\-\-E\-S\-T\-A\-C\-I\-O\-N\-A\-M\-I\-E\-N\-T\-O}~0x02}\label{_conduccion_thread_8hpp_ac1425cbe6a6055717e08b62984924a7d}
+
+\begin{DoxyCompactList}\small\item\em \-Valor del freno de estacionamiento // \-En binario (0000 0010) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_accc898f427bcfab8f8554d0683a736de}{\#define \hyperlink{_conduccion_thread_8hpp_accc898f427bcfab8f8554d0683a736de}{\-M\-A\-N}~0x00}\label{_conduccion_thread_8hpp_accc898f427bcfab8f8554d0683a736de}
+
+\begin{DoxyCompactList}\small\item\em \-Valor del freno de estacionamiento // \-En binario (0000 0000) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_a0cc6f7717df9fbdc0f33efb88720a639}{\#define \hyperlink{_conduccion_thread_8hpp_a0cc6f7717df9fbdc0f33efb88720a639}{\-A\-U\-T\-O}~0x01}\label{_conduccion_thread_8hpp_a0cc6f7717df9fbdc0f33efb88720a639}
+
+\begin{DoxyCompactList}\small\item\em \-Valor del freno de estacionamiento // \-En binario (0000 0001) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_ab92b0d3f26ea0fd591739e3942414a5d}{\#define \hyperlink{_conduccion_thread_8hpp_ab92b0d3f26ea0fd591739e3942414a5d}{\-M\-A\-R\-C\-H\-A\-\_\-\-H\-\_\-}~0x08}\label{_conduccion_thread_8hpp_ab92b0d3f26ea0fd591739e3942414a5d}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la \-Marcha \-H // \-En binario (0000 1000) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_afdb9f1f9f6931227fd35364484ef7452}{\#define \hyperlink{_conduccion_thread_8hpp_afdb9f1f9f6931227fd35364484ef7452}{\-M\-A\-R\-C\-H\-A\-\_\-\-N\-\_\-}~0x10}\label{_conduccion_thread_8hpp_afdb9f1f9f6931227fd35364484ef7452}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la \-Marcha \-N // \-En binario (0001 0000) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_ac96f50ae847e8acb6f8f37d18cc6c224}{\#define \hyperlink{_conduccion_thread_8hpp_ac96f50ae847e8acb6f8f37d18cc6c224}{\-M\-A\-R\-C\-H\-A\-\_\-\-R\-\_\-}~0x20}\label{_conduccion_thread_8hpp_ac96f50ae847e8acb6f8f37d18cc6c224}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la \-Marcha \-R // \-En binario (0010 0000) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_a2b066b1c9420c785e88330d573a4f3c1}{\#define \hyperlink{_conduccion_thread_8hpp_a2b066b1c9420c785e88330d573a4f3c1}{\-M\-A\-R\-C\-H\-A\-\_\-\-N1\-\_\-}~0x40}\label{_conduccion_thread_8hpp_a2b066b1c9420c785e88330d573a4f3c1}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la \-Marcha \-N1 // \-En binario (0100 0000) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_abb4bf703c0c62fb12284617022f1e85b}{\#define \hyperlink{_conduccion_thread_8hpp_abb4bf703c0c62fb12284617022f1e85b}{\-M\-A\-R\-C\-H\-A\-\_\-\-L\-\_\-}~0x80}\label{_conduccion_thread_8hpp_abb4bf703c0c62fb12284617022f1e85b}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la \-Marcha \-L // \-En binario (1000 0000) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_aad0115ce280fb4af2b295eb2fe59754d}{\#define \hyperlink{_conduccion_thread_8hpp_aad0115ce280fb4af2b295eb2fe59754d}{\-C\-O\-N\-F\-\_\-\-P\-A\-R\-A\-D\-A\-\_\-\-E\-M\-E\-R\-G\-E\-N\-C\-I\-A}~0x01}\label{_conduccion_thread_8hpp_aad0115ce280fb4af2b295eb2fe59754d}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la confirmación de la parada de emergencia // \-En binario (0000 0001) \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_a9946b019c8818a6a2d138a0142f8aafb}{\#define \hyperlink{_conduccion_thread_8hpp_a9946b019c8818a6a2d138a0142f8aafb}{\-P\-A\-R\-A\-D\-A\-\_\-\-E\-M\-E\-R\-G\-E\-N\-C\-I\-A\-\_\-\-O\-B\-S\-T\-A\-C\-U\-L\-O}~0x02}\label{_conduccion_thread_8hpp_a9946b019c8818a6a2d138a0142f8aafb}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la señal de activación/desactivación del láser // \-En binario (0000 0010) -\/$>$$>$$>$$>$ \-Señal de activación/desactivacion del laser. \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_aa96d36caa33bde05fc2a0bc1040e0ffa}{\#define \hyperlink{_conduccion_thread_8hpp_aa96d36caa33bde05fc2a0bc1040e0ffa}{\-P\-A\-R\-A\-D\-A\-\_\-\-E\-M\-E\-R\-G\-E\-N\-C\-I\-A\-\_\-\-R\-E\-M\-O\-T\-A}~0x04}\label{_conduccion_thread_8hpp_aa96d36caa33bde05fc2a0bc1040e0ffa}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la señal de parada por activación de la seta remota // \-En binario (0000 0100) -\/$>$$>$$>$$>$ \-Señal de parada por la seta remota. \end{DoxyCompactList}\item 
+\hypertarget{_conduccion_thread_8hpp_a75d4392df15c1b2b1d2475284a42677d}{\#define \hyperlink{_conduccion_thread_8hpp_a75d4392df15c1b2b1d2475284a42677d}{\-P\-A\-R\-A\-D\-A\-\_\-\-E\-M\-E\-R\-G\-E\-N\-C\-I\-A\-\_\-\-L\-O\-C\-A\-L}~0x08}\label{_conduccion_thread_8hpp_a75d4392df15c1b2b1d2475284a42677d}
+
+\begin{DoxyCompactList}\small\item\em \-Valor de la señal de parada por activación de la seta del vehículo // \-En binario (0000 1000) -\/$>$$>$$>$$>$ \-Señal de parada por la seta del vehiculo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Declara el tipo de la clase \char`\"{}\-Conduccion\-Thread\char`\"{}. \-Implementación del main principal del \-Subsistema \-Driving.
+
+
+\begin{DoxyItemize}
+\item \-La clase implementa el tratamiento de los mensajes \-C\-A\-N que se reciben/envían del \-Subsistema \-Driving \begin{DoxyAuthor}{\-Author}
+\-Sergio \-Doctor 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+2014
+\end{DoxyDate}
+\begin{DoxyAuthor}{\-Author}
+\-Sergio \-Doctor 
+\end{DoxyAuthor}
+\begin{DoxyDate}{\-Date}
+2014 
+\end{DoxyDate}
+
+\end{DoxyItemize}

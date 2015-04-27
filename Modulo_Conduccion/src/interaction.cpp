@@ -1,7 +1,27 @@
+/**
+  @file interaction.cpp
+  @brief 
+
+ * Archivo utilizado para elegir la versión del software en desarrollo
+ * DEBUG, RELEASE o SIMULATION
+
+  @author Carlos Amores
+  @date 10/03/2014
+
+*/
+
 #include "../include/Modulo_Conduccion/interaction.h"
 #include "../../Common_files/include/Common_files/constant.h"
 
 using namespace std;
+
+/**
+ * Función principal que elige una versión del software dependiendo del 
+ * argumento de entrada
+ * @param[in] argc Número de argumentos
+ * @param[in] argv Vector de argumentos
+ * @return Devuelve 0 si hay errores o número de versión si no hay errores
+ */
 
 int getOperationMode(int argc, char **argv){
     if(argc!=4){
@@ -25,6 +45,11 @@ int getOperationMode(int argc, char **argv){
     }
     return a;
 }
+
+/**
+ * Muestra por pantalla que se ha producido un error al elegir versión.
+ * Presenta la manera de ejecutar el programa correctamente
+ */
 
 void printCorrectSyntax() {
     cout << "Invalid option. Syntax: ./driving [mode option]" << endl;

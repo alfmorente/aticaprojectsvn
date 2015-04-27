@@ -1,8 +1,11 @@
-/* 
- * File:   conduccion.h
- * Author: Sergio Doctor López
- *
- * Created on 10 de marzo de 2014, 10:50
+/** 
+ * @file  conduccion.h
+ * @brief Main principal del subsistema Driving
+ * - Representa el main del subsistema Driving
+ * @author Sergio Doctor 
+ * @date 2014
+ * @addtogroup 
+ * @{
  */
 
 #ifndef CONDUCCION_H

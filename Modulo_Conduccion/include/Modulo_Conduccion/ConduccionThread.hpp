@@ -1,8 +1,11 @@
-/* 
- * File:   ConduccionThread.hpp
- * Author: Sergio Doctor López
- *
- * Created on 6 de febrero de 2014
+/** 
+ * @file  ConduccionThread.hpp
+ * @brief Declara el tipo de la clase "ConduccionThread"
+ * - La clase implementa el tratamiento de los mensajes CAN que se reciben/envían del Subsistema Driving
+ * @author Sergio Doctor 
+ * @date 2014
+ * @addtogroup 
+ * @{
  */
 
 #ifndef CONDUCCIONTHREAD_HPP
@@ -11,24 +14,24 @@
 
 // MASCARAS DE LAS TRAMAS DE INFO
 
-        // BYTE 0
-        #define ARRANQUE_PARADA 0x01                     // En binario (0000 0001)
-        #define FRENO_ESTACIONAMIENTO 0x02              // En binario (0000 0010)
-        
-        // BYTE 2
-        #define MAN 0x00                             // En binario (0000 0000)
-        #define AUTO 0x01                               // En binario (0000 0001)
-        #define MARCHA_H_ 0x08                          // En binario (0000 1000)
-        #define MARCHA_N_ 0x10                          // En binario (0001 0000)
-        #define MARCHA_R_ 0x20                          // En binario (0010 0000)
-        #define MARCHA_N1_ 0x40                         // En binario (0100 0000)
-        #define MARCHA_L_ 0x80                          // En binario (1000 0000)
+// BYTE 0
+#define ARRANQUE_PARADA 0x01                 ///<Valor del arranque del vehículo        // En binario (0000 0001)
+#define FRENO_ESTACIONAMIENTO 0x02           ///<Valor del freno de estacionamiento     // En binario (0000 0010)
 
-        // BYTE 7
-        #define CONF_PARADA_EMERGENCIA 0x01             // En binario (0000 0001)
-        #define PARADA_EMERGENCIA_OBSTACULO 0x02        // En binario (0000 0010)   ->>>> Señal de activación/desactivacion del laser
-        #define PARADA_EMERGENCIA_REMOTA 0x04           // En binario (0000 0100)   ->>>> Señal de parada por la seta remota
-        #define PARADA_EMERGENCIA_LOCAL 0x08            // En binario (0000 1000)   ->>>> Señal de parada por la seta del vehiculo
+// BYTE 2
+#define MAN 0x00                             ///<Valor del freno de estacionamiento     // En binario (0000 0000)
+#define AUTO 0x01                            ///<Valor del freno de estacionamiento     // En binario (0000 0001)
+#define MARCHA_H_ 0x08                       ///<Valor de la Marcha H                   // En binario (0000 1000)
+#define MARCHA_N_ 0x10                       ///<Valor de la Marcha N                   // En binario (0001 0000)
+#define MARCHA_R_ 0x20                       ///<Valor de la Marcha R                   // En binario (0010 0000)
+#define MARCHA_N1_ 0x40                      ///<Valor de la Marcha N1                  // En binario (0100 0000)
+#define MARCHA_L_ 0x80                       ///<Valor de la Marcha L                   // En binario (1000 0000)
+
+// BYTE 7
+#define CONF_PARADA_EMERGENCIA 0x01          ///<Valor de la confirmación de la parada de emergencia                        // En binario (0000 0001)
+#define PARADA_EMERGENCIA_OBSTACULO 0x02     ///<Valor de la señal de activación/desactivación del láser                    // En binario (0000 0010)   ->>>> Señal de activación/desactivacion del laser
+#define PARADA_EMERGENCIA_REMOTA 0x04        ///<Valor de la señal de parada por activación de la seta remota               // En binario (0000 0100)   ->>>> Señal de parada por la seta remota
+#define PARADA_EMERGENCIA_LOCAL 0x08         ///<Valor de la señal de parada por activación de la seta del vehículo         // En binario (0000 1000)   ->>>> Señal de parada por la seta del vehiculo
 
 // FIN MASCARAS PARA LAS TRAMAS INFO
 
@@ -36,6 +39,12 @@
 #include "CANCommunication.hpp"
 #include "Timer.hpp"
 #include <queue>
+
+
+/**
+ * \class ConduccionThread
+ * \brief Clase que representa el tratamiento de los menajes CAN que se le envía/recibe el vehículo
+ */
 
 class ConduccionThread : public Thread {
     

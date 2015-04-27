@@ -1,0 +1,93 @@
+\hypertarget{class_thread}{\section{\-Thread \-Class \-Reference}
+\label{class_thread}\index{\-Thread@{\-Thread}}
+}
+
+
+\-Clase que representa el hilo de ejecución a través del cual se van a escribir/leer mensajes \-C\-A\-N para luego procesarlos.  
+
+
+
+
+{\ttfamily \#include $<$\-Thread.\-hpp$>$}
+
+\-Inheritance diagram for \-Thread\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_thread}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{class_thread_a37d9edd3a1a776cbc27dedff949c9726}{$\sim$\-Thread} ()
+\item 
+void \hyperlink{class_thread_a26c650bc1d2d290979a2f693569ab9c8}{\-Run} ()  throw (\-Thread\-Exception)
+\item 
+void \hyperlink{class_thread_a9a7979cfd00ccef6276a2ea47ed5a464}{\-Terminate} ()  throw (\-Thread\-Exception)
+\item 
+bool \hyperlink{class_thread_add375d7ae010c2297c01154b3cb84d32}{\-Is\-Active} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_thread_a33f1a9a1e8b8797bb0ca17059f1c4dbc}{pthread\-\_\-t {\bfseries handler}}\label{class_thread_a33f1a9a1e8b8797bb0ca17059f1c4dbc}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_thread_a7db4848a0eebac704a82048e11e97c0f}{virtual void {\bfseries \-Do\-Work} ()=0}\label{class_thread_a7db4848a0eebac704a82048e11e97c0f}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_thread_aead2efd9497d0a22b184eb9056a82fdf}{bool {\bfseries active}}\label{class_thread_aead2efd9497d0a22b184eb9056a82fdf}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Clase que representa el hilo de ejecución a través del cual se van a escribir/leer mensajes \-C\-A\-N para luego procesarlos. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{class_thread_a37d9edd3a1a776cbc27dedff949c9726}{\index{\-Thread@{\-Thread}!$\sim$\-Thread@{$\sim$\-Thread}}
+\index{$\sim$\-Thread@{$\sim$\-Thread}!Thread@{\-Thread}}
+\subsubsection[{$\sim$\-Thread}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Thread\-::$\sim$\-Thread} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_thread_a37d9edd3a1a776cbc27dedff949c9726}
+\-Destructor de la clase 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_thread_add375d7ae010c2297c01154b3cb84d32}{\index{\-Thread@{\-Thread}!\-Is\-Active@{\-Is\-Active}}
+\index{\-Is\-Active@{\-Is\-Active}!Thread@{\-Thread}}
+\subsubsection[{\-Is\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Thread\-::\-Is\-Active} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_thread_add375d7ae010c2297c01154b3cb84d32}
+\-Método que indica si el hilo de ejecución está activo \begin{DoxyReturn}{\-Returns}
+\-Devuelve si el hilo está activo 
+\end{DoxyReturn}
+\hypertarget{class_thread_a26c650bc1d2d290979a2f693569ab9c8}{\index{\-Thread@{\-Thread}!\-Run@{\-Run}}
+\index{\-Run@{\-Run}!Thread@{\-Thread}}
+\subsubsection[{\-Run}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Thread\-::\-Run} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)  throw ({\bf \-Thread\-Exception})}}\label{class_thread_a26c650bc1d2d290979a2f693569ab9c8}
+\-Método que hace correr el hilo de ejecución \hypertarget{class_thread_a9a7979cfd00ccef6276a2ea47ed5a464}{\index{\-Thread@{\-Thread}!\-Terminate@{\-Terminate}}
+\index{\-Terminate@{\-Terminate}!Thread@{\-Thread}}
+\subsubsection[{\-Terminate}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Thread\-::\-Terminate} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)  throw ({\bf \-Thread\-Exception})}}\label{class_thread_a9a7979cfd00ccef6276a2ea47ed5a464}
+\-Método que hace terminar el hilo de ejecución 
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\-Modulo\-\_\-\-Conduccion/\hyperlink{_thread_8hpp}{\-Thread.\-hpp}\item 
+src/\hyperlink{_thread_8cpp}{\-Thread.\-cpp}\end{DoxyCompactItemize}

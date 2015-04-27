@@ -1,8 +1,11 @@
-/* 
- * File:   CANCommunication.hpp
- * Author: Sergio Doctor López
- *
- * Created on 5 de febrero de 2014
+/** 
+ * @file  CANCommunication.hpp
+ * @brief Declara el tipo de la clase "CANCommunication"
+ * - La clase implementa la escritura/lectura de los mensajes CAN del Subsistema Driving
+ * @author Sergio Doctor 
+ * @date 2014
+ * @addtogroup 
+ * @{
  */
 
 #ifndef CANCOMMUNICATION_HPP
@@ -30,26 +33,19 @@ using namespace std;
 //****************************************************************************
 // DEFINES
 
-#define DEFAULT_NODE "/dev/pcan0"
-#define ERROR_WRITE_FRAME 1000
-#define ERROR_READ_FRAME 1000
-
-/*
-#ifndef bool
-  #define bool  int
-  #define true  1
-  #define false 0
-#endif
-*/
-//****************************************************************************
-// GLOBALS
-
-
+#define DEFAULT_NODE "/dev/pcan0"  ///<Nombre del nodo en el que conectado el dispositivo CAN
+#define ERROR_WRITE_FRAME 1000     ///<Número de tramas de escrituras erroneas a partir de las cuales saltaria un error de escritura
+#define ERROR_READ_FRAME 1000      ///<Número de tramas de lectura erroneas a partir de las cuales saltaria un error de lectura
 
 
 
 //****************************************************************************
 // CLASS
+
+/**
+ * \class CANCommunication
+ * \brief Clase que representa las comunicaciones CAN del subsistema driving
+ */
 
 class CANCommunication: public Thread{
     

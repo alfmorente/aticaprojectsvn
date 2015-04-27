@@ -1,15 +1,18 @@
-/* 
- * File:   ConduccionThread.cpp
- * Author: Sergio Doctor López
- *
- * Created on 6 de febrero de 2014
+/** 
+ * @file  ConduccionThread.cpp
+ * @brief Implementación de la clase "ConduccionThread"
+ * @author Sergio Doctor
+ * @date 2014
  */
-
 #include "../include/Modulo_Conduccion/ConduccionThread.hpp"
 #include <queue>
 #include <iostream>
 
 
+/**
+ * Constructor de la clase ConduccionThread
+ * @param canCOND Variable que contiene un objeto de la clase CANCommunication
+ */
 
 ConduccionThread::ConduccionThread(CANCommunication * canCOND) {
     CONDUCCION_ACTIVE = true;
@@ -17,8 +20,16 @@ ConduccionThread::ConduccionThread(CANCommunication * canCOND) {
     CANCONDUCCION = canCOND;
 }
 
+/**
+ * Destructor de la clase ConduccionThread
+ */
+
 ConduccionThread::~ConduccionThread() {
 }
+
+/**
+ * Hilo de la clase ConduccionThread que se encarga de desencolar los mensajes de una pila para su posterior tratamiento
+ */
 
 void ConduccionThread::DoWork(){
 
@@ -83,6 +94,11 @@ void ConduccionThread::DoWork(){
 
 }
       
+
+/**
+ * Método que realiza el tratamiento de los mensajes enviados al autómata
+ * @param StatusMsg Variable que contiene una estructura con el mensaje que se envíara al autómata
+ */
 
 // Tratamiento del mensaje 005 (vehículo --> autómata --> CAN)
 
@@ -188,6 +204,11 @@ void ConduccionThread::m_Status_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
 
 // Tratamiento del mensaje 00E (vehículo --> autómata --> CAN
 
+/**
+ * Método que gestiona los mensajes de error que llegan del autómata
+ * @param StatusMsg Variable que contiene mensajes CAN con los posibles errores que haya en el autómata
+ */
+
 void ConduccionThread::m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){   
          
     // BYTE 0 - Fallo Arranque/Parada
@@ -222,7 +243,9 @@ void ConduccionThread::m_Error_Message_AUTOMATA_CAN(TPCANRdMsg StatusMsg){
 
 }
 
-
+/**
+ * Método que gestiona el envío de mensajes CAN al autómata
+ */
 
 // Envío del mensaje 00A (CAN --> autómata --> vehículo)
 
@@ -416,6 +439,10 @@ void ConduccionThread::m_teleop_CAN_AUTOMATA(){
 }
 
 
+/**
+ * Método que envía un mensaje con la puesta del freno de mano y con el vehículo parado
+ */
+
 void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
   
     TPCANMsg msgEx;
@@ -451,7 +478,9 @@ void ConduccionThread::m_engine_brake_CAN_AUTOMATA(){
     
 }
 
-
+/**
+ * Método que envía un mensaje al vehículo para que realice una parada de emergencía
+ */
 
 void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
     
@@ -483,6 +512,9 @@ void ConduccionThread::m_emergency_stop_CAN_AUTOMATA(){
     
 }
 
+/**
+ * Método que envía un mensaje al vehículo con el reinicio de todas las variables que afectan al funcionamiento del vehículo
+ */
 
 void ConduccionThread::envio_trama_reinicio_CAN_AUTOMATA(){
     
@@ -504,6 +536,10 @@ void ConduccionThread::envio_trama_reinicio_CAN_AUTOMATA(){
     CANCONDUCCION->SendMessage(&msgEx);
     cout << "Reiniciado" << endl;
 }
+
+/**
+ * Método que realiza una inicialización de los valores de la clase ConduccionThread
+ */
 
 void ConduccionThread::inicializacion_valores_tx() {
     paradaEmergencia = false;

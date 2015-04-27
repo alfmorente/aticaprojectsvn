@@ -1,12 +1,25 @@
-/* 
- * File:   CANCommunication.cpp
- * Author: Sergio Doctor López
- * 
- * Created on 05 de febrero de 2014
+/** 
+ * @file  CANCommunication.cpp
+ * @brief Implementación de la clase "CANCommunication"
+ * @author Sergio Doctor López
+ * @date 2013, 2014
  */
 
 #include "../include/Modulo_Conduccion/CANCommunication.hpp"
 #include <libpcan.h>
+
+
+/**
+ * Constructor de la clase
+ * @param bDevNodeGiven Nodo donde se encuentra definido el puerto en el sistema
+ * @param bTypeGiven Valor del tipo de nodo
+ * @param nType  Tipo de dispositivo del CAN
+ * @param dwPort Puerto en el cual se realiza la conexión CAN
+ * @param wIrq Configuración Irq del dispositivo CAN
+ * @param bitrate Velocidad de envío de tramas del CAN
+ * @param frame_extended Modo de la trama: extendida o standart
+ * @param id Etiqueta de conexión 
+ */
 
 CANCommunication::CANCommunication(bool bDevNodeGiven, bool bTypeGiven, int nType,
                                    __u32 dwPort, __u16 wIrq, uint32_t bitrate,
@@ -30,9 +43,19 @@ CANCommunication::CANCommunication(bool bDevNodeGiven, bool bTypeGiven, int nTyp
     
 }
 
+
+/**
+ * Destructor de la clase
+ */
+
 CANCommunication::~CANCommunication() {
     CloseCommunication(h);
 }
+
+/**
+ * Método que establece la comunicación CAN
+ * @return Devuelve si la conexión se ha establecido correctamente
+ */
 
 bool CANCommunication::EstablishCommunication() {
 
@@ -77,6 +100,11 @@ bool CANCommunication::EstablishCommunication() {
 }
     
 
+/**
+ * Método que configura la conexión CAN
+ * @return Devuleve si la configuración se ha realizado correctamente
+ */
+
 bool CANCommunication::ConfigureCommunication() {
 
     bool res = false;
@@ -106,6 +134,11 @@ bool CANCommunication::ConfigureCommunication() {
 
 }
 
+/**
+ * Método que configura la conexión CAN
+ * @return Devuleve si la configuración se ha realizado correctamente
+ */
+
 bool CANCommunication::CloseCommunication(HANDLE h) {
     
     bool res = false;
@@ -124,7 +157,11 @@ bool CANCommunication::CloseCommunication(HANDLE h) {
     return res;
 }
 
-
+/**
+ * Método que envía un mensaje CAN
+ * @param msgTx Estructura que contiene el mensaje de envío CAN
+ * @return Devuelve si el mensaje se ha enviado correctamente
+ */
 bool CANCommunication::SendMessage(TPCANMsg* msgTx) {
 
     bool res = false;
@@ -149,6 +186,12 @@ bool CANCommunication::SendMessage(TPCANMsg* msgTx) {
     return res;
 }
 
+/**
+ * Método que recive un mensaje CAN
+ * @param msgTx Estructura que contiene el mensaje de recepción CAN
+ * @return Devuelve si el mensaje se ha enviado correctamente
+ */
+
 int32_t CANCommunication::ReceiveMessage(TPCANRdMsg* msgRx) {
 
     //errno_can = LINUX_CAN_Read(h, msgRx);
@@ -170,11 +213,22 @@ int32_t CANCommunication::ReceiveMessage(TPCANRdMsg* msgRx) {
 
 }
 
+/**
+ * Método que chequea si el numero de tramas de escrituras erróneas llegan a un máximo
+ * @param contWrite Número de tramas de escrituras erróneas
+ */ 
+
 void CANCommunication::checkErrorWrite (int contWrite) {
     if (contWrite == ERROR_WRITE_FRAME)
         errorWrite = true;       
     
 }
+
+/**
+ * Método que chequea si el numero de tramas de recepción erróneas llegan a un máximo
+ * @param contWrite Número de tramas de recepción erróneas
+ */ 
+
  
 void CANCommunication::checkErrorRead (int contRead) {
     if (contRead == ERROR_READ_FRAME)
@@ -182,7 +236,9 @@ void CANCommunication::checkErrorRead (int contRead) {
     
 }
 
-
+/**
+ * Hilo principal de la clase CANCommunication que lo que hace es leer mensajes del puerto CAN
+*/ 
 void CANCommunication::DoWork() {
 
     this->CommunicationTimer.Reset();
@@ -226,46 +282,12 @@ void CANCommunication::DoWork() {
                             cout << "\n CAN COMUNICATION - Error en lectura en el CAN de Ática\n";
                      }
                 }
-            }/*
-            else if (this->id == "Camion"){
-                if (!(msgRx.Msg.MSGTYPE & MSGTYPE_RTR)) {
-                     switch (msgRx.Msg.ID) {
-                        case 0x18EFFFCC:
-                        case 0xCF00203:
-                        case 0xCF00400:
-                        case 0x18F00503:
-                        case 0x18F0010B:
-                        case 0x18FEF100:
-                        case 0x18FFA121:
-                        case 0xCF00300:
-                        case 0x18FEEE00:
-                        case 0x18FEEF00:
-                        case 0x18FEAE30:
-                        case 0x18FEF500:
-                        case 0x18FEC1EE:
-                        case 0x18FEEA0B:
-                        case 0x18FEE527:
-                        case 0xCFE6CEE:
-                        case 0x18F00029:
-                        case 0x18FED9FD:
-                        case 0x18FEF227:
-                        case 0x1CFEC703:
-                            pthread_mutex_lock (&ConduccionCamionQueue_mutex);                  
-                            ConduccionCamionQueue.push (msgRx);
-                            pthread_mutex_unlock (&ConduccionCamionQueue_mutex);
-                            this->CommunicationTimer.Reset(); // Se resetea cada vez que se reciba 1 mensaje   
-                            break;
-                        
-                        default:
-                            cout << "\n CAN COMUNICATION - Error en lectura en el CAN del Camión \n";
-                     }
-                }
-            }*/
+            }
             else 
                 cout << "\n Error en lectura en hilo de conducción\n";
         }
         
-        //usleep(10000);
+        
     }
 }
 
