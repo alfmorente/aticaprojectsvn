@@ -1,8 +1,19 @@
+/**
+ * @file   laser2D_rear.h
+ * @brief  Fichero fuente de gestion del Modulo del Laser frontal
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
 #include <Modulo_Laser2D_Rear/laser2D_rear.h>
 
 using namespace std;
 
-
+/**
+ * Funcion principal que gestiona el modulo del laser trasero
+ * @param[in] argc Numero de argumentos de entrada
+ * @param[in] argv valores de los argumentos de entrada
+ * @return Entero indicando si el modulo finalizo correctamente
+ */
 int main(int argc, char **argv)
 {
 
@@ -136,7 +147,10 @@ int main(int argc, char **argv)
  * ****************************************************************************/
 
 //Funciones propias
-
+/**
+ * Funcion para conectar con el dispositivo
+ * @return Entero indicando si la operacion se realizo correctamente
+ */
 int connect()
 {
     file.writeDataInLOG("Conectando con el Laser... ");
@@ -152,11 +166,17 @@ int connect()
     return NO_ERROR;
 }
 
-bool disconnect(){
+/**
+ * Funcion que desconecta del dispositivo
+ */
+void disconnect(){
     miLaser.disconnect();
-    return true;
 }
 
+/**
+ * Funcion que configura el dispositivo
+ * @return Entero indicando si la operacion se realizo correctamente
+ */
 int configure(){
  
     int error;
@@ -231,7 +251,11 @@ int configure(){
 }
 
 
-
+/**
+ * Funcion para obtener el estado del modulo
+ * @param[in] n Manejador de ROS
+ * @return Entero indicando el estado de dicho modulo
+ */
 int getStateModule(ros::NodeHandle n)
 {
     int state;
@@ -239,11 +263,20 @@ int getStateModule(ros::NodeHandle n)
     return state;
 }
 
+/**
+ * Funcion para poner el modulo en un estado determinado
+ * @param[in] n manejador de ROS
+ * @param[in] state Estado en el que se quiere poner el modulo
+ */
 void setStateModule(ros::NodeHandle n,int state)
 {
     n.setParam("state_module_laser2D_rear",state);
 }
 
+/**
+ * Funcion que publica la informacion obtenida por el laser
+ * @param[in] scanData Estructura con la informacion del laser
+ */
 void publicDataToROS(laserScan scanData)
 {
     sensor_msgs::LaserScan rosLaser;
@@ -283,6 +316,10 @@ void publicDataToROS(laserScan scanData)
             ROS_INFO("Configure el laser para tener acceso a algun canal de datos");
 }
 
+/**
+ * Funcion que publica los errores producidos en el modulo
+ * @param[in] error Tipo de error
+ */
 void publicErrorToROS(int error)
 {
         
@@ -294,6 +331,12 @@ void publicErrorToROS(int error)
     
 }
 
+/**
+ * Funcion que recibe un scan del laser
+ * @param[io] scanData estructura donde se guarda la informacion recibida por el laser 
+ * @param[in] timeout Maximo tiempo de espera de recepcion
+ * @return Entero que indica si la recepcion fue correcta
+ */
 int recvData(laserScan* scanData,int timeout)
 {
     int error;
@@ -301,6 +344,11 @@ int recvData(laserScan* scanData,int timeout)
     return error;
 }
 
+/**
+ * Funcion que nos dice si la comunicacion con el laser sigue correcta
+ * @param error Error que se ha producido en el modulo
+ * @return Booleano indicando si dicho error es de comunicacion
+ */
 bool isAlive(int error)
 {
     if(error==COMM_ERROR)

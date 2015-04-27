@@ -1,9 +1,10 @@
-/* 
- * File:   laser2D.h
- * Author: carlosamores
- *
- * Created on 16 de septiembre de 2013, 11:45
+/**
+ * @file   laser2D_rear.h
+ * @brief  Fichero Cabecera de gestion del Modulo del Laser frontal
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
+
 
 #ifndef LASER2D_H
 #define	LASER2D_H
@@ -51,7 +52,7 @@ sensor_msgs::LaserScan rosLaser;
 
 // Funciones propias del Módulo
 int connect();
-bool disconnect();
+void disconnect();
 int configure();
 bool sendData();
 int  recvData(laserScan* scanData,int timeout);
