@@ -1,9 +1,11 @@
-/* 
- * File:   JausSubsystemVehicle.h
- * Author: atica
- *
- * Created on 28 de abril de 2014, 12:08
+/**
+ * @file   JausSubsystemVehicle.h
+ * @brief  Fichero de cabecera para la comunicación JAUS del vehículo
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
  */
+
+
 
 #ifndef JAUSSUBSYSTEM_H
 #define	JAUSSUBSYSTEM_H
@@ -12,9 +14,21 @@
 #include "../../../Common_files/include/Common_files/constant.h"
 #include <Modulo_Comunicaciones/constantCommunication.h>
 
+/**
+ * \struct ComConfig
+ * \brief  Estructura con los datos de configuracion de la comunicacion
+ */
+struct ComConfig
+{
+    //Por rellenar
+};
 
 int redondea(float valor);
 
+/**
+ * \class JausSubsystemVehicle
+ * \brief  Clase que gestiona el subsistema JAUS del vehículo
+ */
 class JausSubsystemVehicle 
 {
     private:

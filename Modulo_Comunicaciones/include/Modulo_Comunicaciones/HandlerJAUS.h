@@ -1,9 +1,10 @@
-/* 
- * File:   handlerJAUS.h
- * Author: atica
- *
- * Created on 19 de noviembre de 2013, 12:51
+/**
+ * @file   HandlerJAUS.h
+ * @brief  Fichero de cabecera para el manejador de JAUS
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
+
 
 #ifndef HANDLERJAUS_H
 #define	HANDLERJAUS_H
@@ -20,11 +21,16 @@
 #include <jaus.h>      // Header file for JAUS types, structs and messages
 #include <openJaus.h>  // Header file for the OpenJAUS specific C/C++ code base
 
-#define JAUS_NO_EVENT 0
-#define JAUS_EVENT_CONNECT 1
-#define JAUS_EVENT_DISCONNECT 2
-#define JAUS_EVENT_LOSED 2
+#define JAUS_NO_EVENT 0 ///< Constante que indica que no hay evento JAUS
+#define JAUS_EVENT_CONNECT 1 ///< Constante que indica que se ha conectado otro subsistema JAUS
+#define JAUS_EVENT_DISCONNECT 2 ///< Constante que indica que se ha desconectado otro subsistema JAUS
+//#define JAUS_EVENT_LOSED 3 ///< Constante que indica comunicación perdida 
 
+
+/**
+ * \class HandlerJAUS
+ * \brief Clase que maneja JAUS
+ */
 class HandlerJAUS : public EventHandler
 {
 

@@ -1,8 +1,22 @@
+/**
+ * @file   communication.cpp
+ * @brief  Fichero fuente para la gestión del módulo de comunicaciones
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
+ */
+
+
 #include <Modulo_Comunicaciones/NodeROSCommunication.h>
 #include <Modulo_Comunicaciones/JausSubsystemVehicle.h>
 #include <Modulo_Comunicaciones/interaction.h>
 #include <Modulo_Comunicaciones/Files.h>
 
+/**
+ * Función principal para gestión del módulo
+ * @param[in] argc Numero de argumentos de entrada
+ * @param[in] argv Valores de los argumentos de entrada
+ * @return Entero que indica si el módulo finalizo correctamente
+ */
 int main(int argc, char **argv)
 {
     // Indica el modo de Operacion del modulo
@@ -40,9 +54,9 @@ int main(int argc, char **argv)
         errorCOM->id_error=error; //por definir
         rosnode->pub_error.publish(errorCOM); 
         if(error==COMM_LOG_FILE_ERROR)
-                Files::writeErrorInLOG(error,"Fichero LOG data: ");
+                files.writeErrorInLOG(error,"Fichero LOG data: ");
         else if(error==COMM_CONFIG_FILE_ERROR)
-                Files::writeErrorInLOG(error,"Fichero de configuracion: ");
+                files.writeErrorInLOG(error,"Fichero de configuracion: ");
         exit(1);
     }
     error =files.readConfig(&configModule);
@@ -54,12 +68,12 @@ int main(int argc, char **argv)
         errorCOM->type_error = TOE_UNDEFINED;
         errorCOM->id_error=error; //por definir
         rosnode->pub_error.publish(errorCOM);    
-        Files::writeErrorInLOG(error,"Fichero de configuracion: ");
+        files.writeErrorInLOG(error,"Fichero de configuracion: ");
         exit(1);
     }  
     
     ROS_INFO("ATICA COMMUNICATION VEHICLE:: Init configuration...");
-    Files::writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Init configuration...");
+    files.writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Init configuration...");
 
 
     JausSubsystemVehicle* subsystemVehicle=JausSubsystemVehicle::getInstance();
@@ -76,14 +90,14 @@ int main(int argc, char **argv)
         errorCOM->id_error = error;
         rosnode->pub_error.publish(errorCOM);
         rosnode->setStateModule(STATE_ERROR); //completar
-        Files::writeErrorInLOG(error, "Configuracion: ");
+        files.writeErrorInLOG(error, "Configuracion: ");
         exit(1);
     }
 
     //Configuracion realizada. Modulo preparado y activo
     rosnode->setStateModule(STATE_OK); //completar
     ROS_INFO("ATICA COMMUNICATION VEHICLE:: Configurate and Run");
-    Files::writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Configurate and Run");
+    files.writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Configurate and Run");
 
     // Espera activa de inicio general de los módulos
     int state_system;
@@ -110,15 +124,15 @@ int main(int argc, char **argv)
         {
             subsystemVehicle->losedCommunication();   
             subsystemVehicle->communicationState=COM_OFF;    
-            Files::writeErrorInLOG(COMMUNICATION_UCR_FAIL,"Communication");      
-            Files::writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Communication losed");            
+            files.writeErrorInLOG(COMMUNICATION_UCR_FAIL,"Communication");      
+            files.writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Communication losed");            
         }
         else if(subsystemVehicle->communicationState==COM_OFF)
         {
             if(subsystemVehicle->connect())
             {
 		sleep(2); //Quitarlo en breve (esperar conexion de la UCR)
-                Files::writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Communication stablished");
+                files.writeDataInLOG("ATICA COMMUNICATION VEHICLE:: Communication stablished");
                 subsystemVehicle->communicationState=COM_ON; 
                 subsystemVehicle->establishedCommunication();
                 

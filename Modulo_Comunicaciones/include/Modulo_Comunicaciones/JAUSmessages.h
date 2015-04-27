@@ -1,17 +1,23 @@
-/* 
- * File:   ConversionTypes.h
- * Author: atica
- *
- * Created on 28 de abril de 2014, 12:52
+/**
+ * @file   JAUSmessages.h
+ * @brief  Fichero de cabecera con los mensajes JAUS utilizados
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
+
+
 
 #ifndef JAUSMESSAGES_H
 #define	JAUSMESSAGES_H
 
 #include <Modulo_Comunicaciones/constantCommunication.h>
 
+/**
+ * \struct mensajeJAUS
+ * \brief  Estructura con todos los mensaje JAUS
+ */
 // Estructura de datos que maneja los mensajes JAUS
-typedef struct{
+struct mensajeJAUS{
 
     ReportImageMessage image;
     ReportGlobalPoseMessage posGPS;
@@ -53,7 +59,7 @@ typedef struct{
     SetCameraPoseMessage camPose;
     SetCameraCapabilitiesMessage camZoom;
 
-}mensajeJAUS;
+};
 
 #endif	/* JAUSMESSAGES_H */
 

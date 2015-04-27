@@ -1,9 +1,11 @@
-/* 
- * File:   NodeROSCommunication.h
- * Author: atica
- *
- * Created on 28 de abril de 2014, 12:33
+/**
+ * @file   NodeROSCommunication.h
+ * @brief  Fichero de cabecera para gestion del Nodo ROS de comunicaciones
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
  */
+
+
 
 #ifndef NODEROSCOMMUNICATION_H
 #define	NODEROSCOMMUNICATION_H
@@ -12,6 +14,10 @@
 #include <Modulo_Comunicaciones/constantCommunication.h>
 #include "../../../Common_files/include/Common_files/constant.h"
 
+/**
+ * \class NodeROSCommunication
+ * \brief Clase que gestiona el nodo ROS del Módulo de comunicaciones
+ */
 class NodeROSCommunication {
 
     public:

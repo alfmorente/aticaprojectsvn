@@ -1,9 +1,10 @@
-/* 
- * File:   NodeROSCommunication.cpp
- * Author: atica
- * 
- * Created on 28 de abril de 2014, 12:33
+/**
+ * @file   NodeROSCommunication.cpp
+ * @brief  Fichero fuente para la gestión del Nodo ROS de comunicaciones
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
  */
+
 
 #include <Modulo_Comunicaciones/JausSubsystemVehicle.h>
 #include <Modulo_Comunicaciones/NodeROSCommunication.h>
@@ -14,6 +15,10 @@ JausSubsystemVehicle* subsystemJAUS=NULL;
 NodeROSCommunication* NodeROSCommunication::nodeCom=NULL;
 bool NodeROSCommunication::instanceROSCreate=false;
 
+/**
+ * Método que obtiene una instancia de la clase
+ * @return Puntero a un objeto NodeROSCommunication
+ */
 NodeROSCommunication* NodeROSCommunication::getInstance()
 {
     if(!instanceROSCreate)
@@ -27,21 +32,36 @@ NodeROSCommunication* NodeROSCommunication::getInstance()
     return  nodeCom;
 }
 
+/**
+ * Constructor de la clase
+ */
 NodeROSCommunication::NodeROSCommunication() 
 {
     n=new ros::NodeHandle();
 }
 
+/**
+ * Destructor de la clase
+ */
 NodeROSCommunication::~NodeROSCommunication()
 {
     delete nodeCom;
 }
 
+/**
+ * Método para inicializar el nodo ROS
+ * @param argc Número de argumentosde entrada del nodo
+ * @param argv Valores de los argumentos de entrada del nodo
+ * @param name Nombre del nodo
+ */
 void NodeROSCommunication::init(int argc,char** argv,char* name)
 {
      ros::init(argc,argv,"COMMUNICATION_NODE");
 }
 
+/**
+ * Método para crear los subscriptores
+ */
 void NodeROSCommunication::createSubscribers()
 {
   sub_gps = n->subscribe("gps", 1000, fcn_sub_gps);
@@ -58,6 +78,10 @@ void NodeROSCommunication::createSubscribers()
     
     
 }
+
+/**
+ * Método para crear los publicadores
+ */
 void NodeROSCommunication::createPublishers()
 {
   //Publicadores
@@ -71,17 +95,28 @@ void NodeROSCommunication::createPublishers()
   pub_ctrl_camera=n->advertise<Common_files::msg_ctrl_camera>("ctrlCamera", 1000);    
 }
 
+/**
+ * Método para crear los servidores
+ */
 void NodeROSCommunication::createServers()
 {
     server_alive=n->advertiseService("module_alive_0",fcn_server_alive);
 }
 
+/**
+ * Método para crear los clientes
+ */
 void NodeROSCommunication::createClients()
 {
     clientMode=n->serviceClient<Common_files::srv_data>("serviceParam");    
 }
 
-
+/**
+ * Callback servidor ROS para avisa de que el nodo sigue vivo
+ * @param req  Petición de estado actual del nodo  
+ * @param resp Respuesta con el estado actual
+ * @return Booleano indicando que ha llegado petición del estado y no de otra cosa
+ */
 //Funcion servidor de datos (Devuelve el dato que se le solicita)
 bool NodeROSCommunication::fcn_server_alive(Common_files::srv_data::Request &req, Common_files::srv_data::Response &resp)
 {
@@ -101,6 +136,10 @@ bool NodeROSCommunication::fcn_server_alive(Common_files::srv_data::Request &req
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Callback subscriptor ROS de la disponibilidad de modos
+ * @param[in] msg Mensaje ROS con disponibilidad de modos
+ */
 //Subscriptor de modos disponibles
 void NodeROSCommunication::fcn_sub_available(const Common_files::msg_availablePtr& msg)
 {
@@ -141,6 +180,11 @@ void NodeROSCommunication::fcn_sub_available(const Common_files::msg_availablePt
     	subsystemJAUS->sendJAUSMessage(msg_JAUS,ACK_AVAILABLE);
     }
 }
+
+/**
+ * Callback subscriptor ROS delack para funciones auxiliares
+ * @param[in] msg Mensaje ROS con el ack para la función auxiliar
+ */
 //Subscriptor de ack de funcioens axuailiares
 void NodeROSCommunication::fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr& msg)
 {
@@ -173,6 +217,11 @@ void NodeROSCommunication::fcn_sub_fcn_aux(const Common_files::msg_fcn_auxPtr& m
     }
     
 }
+
+/**
+ * Callback subscriptor ROS de los datos del GPS
+ * @param[in] msg Mensaje con los datos del GPS
+ */
 // Suscriptor de gps
 void NodeROSCommunication::fcn_sub_gps(const Common_files::msg_gpsPtr& msg)
 {
@@ -214,6 +263,10 @@ void NodeROSCommunication::fcn_sub_gps(const Common_files::msg_gpsPtr& msg)
     }
 }
 
+/**
+ * Callback subscriptor ROS de errores
+ * @param[in] msg Mensaje con el error producido
+ */
 // Suscriptor de errores
 void NodeROSCommunication::fcn_sub_error(const Common_files::msg_errorPtr& msg)
 {
@@ -248,6 +301,10 @@ void NodeROSCommunication::fcn_sub_error(const Common_files::msg_errorPtr& msg)
     }
 }
 
+/**
+ * Callback subscriptor ROS de la imagen de la cámara (no se utiliza)
+ * @param[in] msg Mensaje ROS con la imagen de la cámara
+ */
 // Suscriptor de camaras
 void NodeROSCommunication::fcn_sub_camera(const Common_files::msg_cameraPtr& msg)
 {  
@@ -281,6 +338,10 @@ void NodeROSCommunication::fcn_sub_camera(const Common_files::msg_cameraPtr& msg
     }
 }
 
+/**
+ * Callback subscriptor ROS del estado del modo actual
+ * @param[in] msg Mensaje ROS con el estado del modo
+ */
 //Suscriptor de modo
 void NodeROSCommunication::fcn_sub_mode(const Common_files::msg_modePtr& msg)
 {
@@ -340,6 +401,10 @@ void NodeROSCommunication::fcn_sub_mode(const Common_files::msg_modePtr& msg)
         
 }
 
+/**
+ * Callback Subscriptor ROS de la información de backup del vehículo
+ * @param[in] msg Mensaje ROS con el backup del vehículo
+ */
 // Suscriptor de backup
 void NodeROSCommunication::fcn_sub_backup(const Common_files::msg_backupPtr& msg)
 {
@@ -417,9 +482,14 @@ void NodeROSCommunication::fcn_sub_backup(const Common_files::msg_backupPtr& msg
     }
 }
 
+/**
+ * Callback subscriptor ROS del fichero teach
+ * @param[in] msg Mensaje ROS con el fichero teach
+ */
 void NodeROSCommunication::fcn_sub_teach_file(const Common_files::msg_streamPtr& msg)
 {
     // Espera que la comunicacion este activa
+    ROS_INFO("Modulo de Comunicaciones: Fichero TEACH");
     if(subsystemJAUS->communicationState == COM_ON) {
         // Se envia el mensaje por JAUS
         JausMessage msg_JAUS=NULL;
@@ -431,12 +501,13 @@ void NodeROSCommunication::fcn_sub_teach_file(const Common_files::msg_streamPtr&
         destino->component = JAUS_SUBSYSTEM_COMMANDER;
         mensajeJAUS tipoMensajeJAUS;
         
-        //ROS_INFO("ENVIO FICHERO");
         //Files::writeDataInLOG("ENVIO FICHERO"); 
         tipoMensajeJAUS.file=reportFileDataMessageCreate();
         jausAddressCopy(tipoMensajeJAUS.file->destination,destino);
         tipoMensajeJAUS.file->typeFile=msg->id_file;
         tipoMensajeJAUS.file->bufferSizeBytes=msg->stream.size();
+	tipoMensajeJAUS.file->data=new JausByte[tipoMensajeJAUS.file->bufferSizeBytes];
+        ROS_INFO("Tamano: %d",tipoMensajeJAUS.file->bufferSizeBytes);
         for(unsigned int i=0;i< tipoMensajeJAUS.file->bufferSizeBytes;i++)
             tipoMensajeJAUS.file->data[i]=msg->stream[i];
         msg_JAUS = reportFileDataMessageToJausMessage(tipoMensajeJAUS.file);
@@ -448,6 +519,10 @@ void NodeROSCommunication::fcn_sub_teach_file(const Common_files::msg_streamPtr&
     
 }
 
+/**
+ * Callback subscriptor ROS con la información de la parada de emergencia
+ * @param[in] msg Mensaje con el estado de la parada de emergencia
+ */
 void NodeROSCommunication::fcn_sub_info_stop(const Common_files::msg_info_stopPtr& msg)
 {
     // Espera que la comunicacion este activa
@@ -476,17 +551,30 @@ void NodeROSCommunication::fcn_sub_info_stop(const Common_files::msg_info_stopPt
     
 }
 
+/**
+ * Método para obtener el estado del módulo
+ * @return Entero con el estado del módulo
+ */
 int NodeROSCommunication::getStateModule()
 {
     int state;
     n->getParam("state_module_communication",state);
     return state; 
 }
+
+/**
+ * Método para poner módulo en un estado determinado
+ * @param[in] state Estado en el que se pone el módulo
+ */
 void NodeROSCommunication::setStateModule(int state)
 {
     n->setParam("state_module_communication",state);
 }
 
+/**
+ * Método para obtener los parámetros de configuración de navegación autónoma
+ * @return String con el fichero con los parámetros de configuración
+ */
 string NodeROSCommunication::getDebugConfiguration()
 {
     stringstream fileConf;
@@ -507,6 +595,12 @@ string NodeROSCommunication::getDebugConfiguration()
     return fileConf.str();
     
 }
+
+/**
+ * Método para guardar los valores de configuración para la navegación autónoma
+ * @param[in] file Fichero de parámetros de configuración de la navegación autónoma
+ * @return Booleano indicando que el formato del fichero es correcto
+ */
 bool NodeROSCommunication::setDebugConfiguration(string file)
 {  
     int error=false;
@@ -546,6 +640,11 @@ bool NodeROSCommunication::setDebugConfiguration(string file)
     
 }
 
+/**
+ * Método que llama al servicio que devuelve el modo actual 
+ * @param[io] mode Puntero donde se guarda el modo actual recibido en el servicio
+ * @return Booleano indicando que el servidor respondio correctamente
+ */
 bool NodeROSCommunication::requestMode(int*mode)
 {
     Common_files::srv_data servMode;

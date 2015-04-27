@@ -1,9 +1,23 @@
+/**
+ * @file   HandlerJAUS.cpp
+ * @brief  Fichero fuente para el manejador de JAUS
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
 #include "../include/Modulo_Comunicaciones/HandlerJAUS.h"
 
+/**
+ * Constructor de la clase
+ */
 HandlerJAUS::HandlerJAUS()
 {
 	eventConexion=JAUS_NO_EVENT;
 }
+
+/**
+ * Método que recibe los eventos producidos en la comunicación JAUS
+ * @param[io] e Evento recibido por otro nodo o subsistema
+ */
 void HandlerJAUS::handleEvent(NodeManagerEvent *e)
 {
 	SystemTreeEvent *treeEvent;
@@ -72,6 +86,11 @@ void HandlerJAUS::handleEvent(NodeManagerEvent *e)
 			break;
 	}
 }
+
+/**
+ * Método que controla los eventos de conexión o desconexión de JAUS
+ * @return Entero indicando el tipo de evento
+ */
 int HandlerJAUS::controlJaus()
 {
 	if(eventConexion==JAUS_EVENT_DISCONNECT)
