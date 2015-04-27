@@ -444,10 +444,6 @@
         <ccTool>
           <incDir>
             <pElem>include</pElem>
-            <pElem>/opt/ros/groovy/include</pElem>
-            <pElem>libjaus/include</pElem>
-            <pElem>libopenJaus/include</pElem>
-            <pElem>.</pElem>
           </incDir>
           <preprocessorList>
             <Elem>ROS_PACKAGE_NAME="Modulo_Comunicaciones"</Elem>
@@ -2057,26 +2053,72 @@
       </item>
       <item path="src/Files.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/HandlerJAUS.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/JausSubsystemVehicle.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/NodeROSCommunication.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/communication.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>../Common_files/msg_gen/cpp/include</pElem>
+            <pElem>../Common_files/srv_gen/cpp/include</pElem>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="src/interaction.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
+          <incDir>
+            <pElem>/opt/ros/groovy/include</pElem>
+            <pElem>libjaus/include</pElem>
+            <pElem>libopenJaus/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
         </ccTool>
       </item>
     </conf>

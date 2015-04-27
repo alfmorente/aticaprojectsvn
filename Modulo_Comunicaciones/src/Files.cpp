@@ -1,15 +1,30 @@
+/**
+ * @file   Files.cpp
+ * @brief  Fichero de cabecera para gestion de ficheros
+ * @author David Jiménez 
+ * @date   2013, 2014, 2015
+ */
+
+
+
 #include <Modulo_Comunicaciones/Files.h>
 #include "../../Common_files/include/Common_files/constant.h"
 
-ofstream Files::fileError;
-ofstream Files::fileData;
+//ofstream Files::fileError;
+//ofstream Files::fileData;
 
-
+/**
+ * Constructor de la clase
+ */
 Files::Files()
 {
     
 }
 
+/**
+ * Método que abre los ficheros de datos,configuración y posibles errores
+ * @return Entero que indica si la apertura de ficheros fue correcta
+ */
 int Files::openFiles()
 {
     fileError.open("/home/atica/catkin_ws/src/Modulo_Comunicaciones/bin/fileError.txt");
@@ -32,6 +47,11 @@ int Files::openFiles()
     
 }
 
+/**
+ * Método que lee el fichero de configuración
+ * @param[io] config  Estructura para guardar la configuración del módulo
+ * @return Entero que indica si la lectura del fichero de configuración fue correcta
+ */
 int Files::readConfig(ComConfig* config)
 {
 	string cadena;
@@ -61,7 +81,11 @@ int Files::readConfig(ComConfig* config)
         return NO_ERROR;
 }
 
-
+/**
+ * Método que escribe en el fichero LOG el error producido en el módulo
+ * @param[in] error Error a escribir en el fichero LOG
+ * @param[in] typeResponse Cadena que define el error
+ */
 void Files::writeErrorInLOG(int error, string typeResponse)
 {   
 
@@ -98,6 +122,10 @@ void Files::writeErrorInLOG(int error, string typeResponse)
         fileError << endl;
 }
 
+/**
+ * Método que escribe en el LOG información obtenida por el modulo
+ * @param[in] info Cadena que define la información a escribir
+ */
 void Files::writeDataInLOG(string info)
 {
 
@@ -107,6 +135,13 @@ void Files::writeDataInLOG(string info)
         fileData <<info<< endl;
 }
 
+/**
+ * Método que actualiza la estructura de configuración con los datos del fichero
+ * @param[in] parametro Nombre del parámetro 
+ * @param[in] valor  Valor del parámetro
+ * @param[io] config Estructura para guardar la configuración del módulo
+ * @return Booleano que indica si el parámetro a configurar existe
+ */
 bool Files::setValueConfiguration(string parametro,string valor,ComConfig* config)
 {
 

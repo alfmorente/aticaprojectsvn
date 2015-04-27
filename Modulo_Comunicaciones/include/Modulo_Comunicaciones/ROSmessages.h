@@ -1,9 +1,11 @@
-/* 
- * File:   messages.h
- * Author: atica
- *
- * Created on 5 de junio de 2014, 11:37
+/**
+ * @file   ROSmessages.h
+ * @brief  Fichero de cabecera con la inclusión de los mensajes ROS
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
+
+
 
 #ifndef ROSMESSAGES_H
 #define	ROSMESSAGES_H

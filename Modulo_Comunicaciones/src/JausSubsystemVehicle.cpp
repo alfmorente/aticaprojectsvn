@@ -1,20 +1,24 @@
-/* 
- * File:   JausSubsystemVehicle.cpp
- * Author: atica
- * 
- * Created on 28 de abril de 2014, 12:09
+/**
+ * @file   JausSubsystemVehicle.cpp
+ * @brief  Fichero fuente para la gestión del subsistema JAUS
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
 
 #include <Modulo_Comunicaciones/JausSubsystemVehicle.h>
 #include <Modulo_Comunicaciones/NodeROSCommunication.h>
 #include <Modulo_Comunicaciones/ROSmessages.h>
 #include <Modulo_Comunicaciones/JAUSmessages.h>
-#define NO_ERROR -1
+#define NO_ERROR -1 ///< Constante que indica que no ha habido ningún error
 
 NodeROSCommunication* nodeROS=NULL;
 JausSubsystemVehicle* JausSubsystemVehicle::subsystemJAUS=NULL;
 bool JausSubsystemVehicle::instanceJAUSCreate=false;
 
+/**
+ * Método para obtener una instancia de la clase
+ * @return Puntero a la clase JausSubsistemVehicle
+ */
 JausSubsystemVehicle* JausSubsystemVehicle::getInstance()
 {
     if(!instanceJAUSCreate)
@@ -27,17 +31,27 @@ JausSubsystemVehicle* JausSubsystemVehicle::getInstance()
     return subsystemJAUS;
 }
 
+/**
+ * Constructor de la clase
+ */
 JausSubsystemVehicle::JausSubsystemVehicle() 
 {   
 
 }
 
+/**
+ * Destructor de la clase
+ */
 JausSubsystemVehicle::~JausSubsystemVehicle()
 {
     if(instanceJAUSCreate)
         delete subsystemJAUS;   
 }
 
+/**
+ * Método para ver si la conexión con la estación de teleoperación e ha establecido
+ * @return Booleano que indica si se realizó la conexión
+ */
 bool JausSubsystemVehicle::connect()
 {
     if(handler->controlJaus()!=JAUS_EVENT_CONNECT)
@@ -46,6 +60,10 @@ bool JausSubsystemVehicle::connect()
         return true;
 }
 
+
+/**
+ * Método que desconecta con la estación de teleoperación
+ */
 // Desconexion JAUS
 void JausSubsystemVehicle::disconnect()
 {
@@ -55,7 +73,10 @@ void JausSubsystemVehicle::disconnect()
     delete configData;
 }
 
-
+/**
+ * Método que configura JAUS
+ * @return Entero que indica que la configuración se realizo correctamente 
+ */
 int JausSubsystemVehicle::configureJAUS(){
 
     string nombre= "/home/atica/catkin_ws/src/Modulo_Comunicaciones/bin/NodeManager.conf";
@@ -111,6 +132,10 @@ int JausSubsystemVehicle::configureJAUS(){
     }
 }
 
+/**
+ * Método que chequea que la comunicación continua activa
+ * @return Booleano indicando si la conexión continua activa
+ */
 // Comprobacion de la conexion
 bool JausSubsystemVehicle::checkConnection()
 {
@@ -120,6 +145,11 @@ bool JausSubsystemVehicle::checkConnection()
         return false;
 }
 
+/**
+ * Método que envía un mensaje JAUS
+ * @param msg_JAUS Mensaje JAUS a enviar
+ * @param typeACK Indica si el mensaje requiere un ACK
+ */
 // Envio de mensaje JAUS
 void JausSubsystemVehicle::sendJAUSMessage(JausMessage msg_JAUS, int typeACK)
 {
@@ -148,6 +178,11 @@ void JausSubsystemVehicle::sendJAUSMessage(JausMessage msg_JAUS, int typeACK)
         ojCmptSendMessage(compVehicle,msg_JAUS);
 }
 
+/**
+ * Método que gestiona los mensajes recibidos por JAUS
+ * @param[in] comp Componente JAUS 
+ * @param[in] rxMessage Mensaje JAUS 
+ */
 // Recepcion de mensaje JAUS
 void JausSubsystemVehicle::rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage){
    
@@ -377,6 +412,7 @@ void JausSubsystemVehicle::rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage){
                 break;
                 //Report de fichero actualizado
             case JAUS_REPORT_FILE_DATA:
+		ROS_INFO("Recibo fichero de datos");
                 tipoMensajeJAUS.file = reportFileDataMessageFromJausMessage(rxMessage);
                 if (tipoMensajeJAUS.file) {
                     mens_file->id_file = tipoMensajeJAUS.file->typeFile;
@@ -522,6 +558,12 @@ void JausSubsystemVehicle::rcvJAUSMessage(OjCmpt comp,JausMessage rxMessage){
     }
 }
 
+/**
+ * Método para la espera de un ACK (en caso de requerirlo)
+ * @param[in] typeACK Tipo de ACK que se espera
+ * @param[in] timeout Tiempo máximo de espera de ese ack
+ * @return Booleano indicando si se recibio el ACK 
+ */
 bool JausSubsystemVehicle::waitForACK(int typeACK,int timeout)
 {
    clock_t tstart; // gestiona los timeout's
@@ -550,6 +592,9 @@ bool JausSubsystemVehicle::waitForACK(int typeACK,int timeout)
        
 }
 
+/**
+ * Método que realiza las operaciones oportunas trás perdida de la comunicación
+ */
 void JausSubsystemVehicle::losedCommunication()
 {
     int mode;
@@ -582,6 +627,9 @@ void JausSubsystemVehicle::losedCommunication()
     
 }
 
+/**
+ * Método que realiza las operaciones oportunas trás establecerse la comunicación
+ */
 void JausSubsystemVehicle::establishedCommunication()
 {
     int modeActual;
@@ -636,6 +684,11 @@ void JausSubsystemVehicle::establishedCommunication()
     nodeROS->pub_error.publish(error);
 }
 
+/**
+ * Función auxiliar para redondear un float
+ * @param value Valor a redondear
+ * @return Entero redondeado
+ */
 int redondea(float value)
 {
 	int res;
