@@ -1,0 +1,136 @@
+\hypertarget{class_timer}{\section{\-Timer \-Class \-Reference}
+\label{class_timer}\index{\-Timer@{\-Timer}}
+}
+
+
+\-Clase que representa un temporizador utilizado para contear la frecuencia de de publicación del nodo \-R\-O\-S.  
+
+
+
+
+{\ttfamily \#include $<$\-Timer.\-hpp$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_timer_a5f16e8da27d2a5a5242dead46de05d97}{\-Timer} ()
+\item 
+void \hyperlink{class_timer_ae7c0c1e7d12de4b8a6e7c64e451cdd2a}{\-Reset} ()
+\item 
+double \hyperlink{class_timer_af1ec46b36eb5b90f7b4dfad29f9aee5b}{\-Get\-Timed} ()
+\item 
+float \hyperlink{class_timer_a3bb0f087deb92ce89270ebe5f5adbf13}{\-Get\-Time} ()
+\item 
+int \hyperlink{class_timer_a9f907e1cf928fcbe790b16490cc50a7b}{\-Get\-State} ()
+\item 
+void \hyperlink{class_timer_a75556dc66dcca80ebd21e6e460d24219}{\-Enable} ()
+\item 
+void \hyperlink{class_timer_a90fe39d8a55ad3b9d662d227109a588c}{\-Disable} ()
+\item 
+void \hyperlink{class_timer_a4c33d0dbe892a1ad8c784cbf043b3b26}{\-Wait\-Until} (double t)
+\item 
+void \hyperlink{class_timer_ac77f20e91f884c90b89021fb448909ea}{\-Wait\-Until} (float t)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_timer_a2d6d1eddef72b6c3680265003cb1bf9a}{int {\bfseries state}}\label{class_timer_a2d6d1eddef72b6c3680265003cb1bf9a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Clase que representa un temporizador utilizado para contear la frecuencia de de publicación del nodo \-R\-O\-S. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{class_timer_a5f16e8da27d2a5a5242dead46de05d97}{\index{\-Timer@{\-Timer}!\-Timer@{\-Timer}}
+\index{\-Timer@{\-Timer}!Timer@{\-Timer}}
+\subsubsection[{\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Timer\-::\-Timer} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_a5f16e8da27d2a5a5242dead46de05d97}
+\-Constructor de la clase 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_timer_a90fe39d8a55ad3b9d662d227109a588c}{\index{\-Timer@{\-Timer}!\-Disable@{\-Disable}}
+\index{\-Disable@{\-Disable}!Timer@{\-Timer}}
+\subsubsection[{\-Disable}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Timer\-::\-Disable} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_a90fe39d8a55ad3b9d662d227109a588c}
+\-Método público que deshabilita el temporizador e inicia la cuenta \hypertarget{class_timer_a75556dc66dcca80ebd21e6e460d24219}{\index{\-Timer@{\-Timer}!\-Enable@{\-Enable}}
+\index{\-Enable@{\-Enable}!Timer@{\-Timer}}
+\subsubsection[{\-Enable}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Timer\-::\-Enable} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_a75556dc66dcca80ebd21e6e460d24219}
+\-Método público que habilita el temporizador e inicia la cuenta \hypertarget{class_timer_a9f907e1cf928fcbe790b16490cc50a7b}{\index{\-Timer@{\-Timer}!\-Get\-State@{\-Get\-State}}
+\index{\-Get\-State@{\-Get\-State}!Timer@{\-Timer}}
+\subsubsection[{\-Get\-State}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Timer\-::\-Get\-State} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_a9f907e1cf928fcbe790b16490cc50a7b}
+\-Método público que devuelde el estado del \hyperlink{class_timer}{\-Timer} \begin{DoxyReturn}{\-Returns}
+\-Estado del timer 
+\end{DoxyReturn}
+\hypertarget{class_timer_a3bb0f087deb92ce89270ebe5f5adbf13}{\index{\-Timer@{\-Timer}!\-Get\-Time@{\-Get\-Time}}
+\index{\-Get\-Time@{\-Get\-Time}!Timer@{\-Timer}}
+\subsubsection[{\-Get\-Time}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf \-Timer\-::\-Get\-Time} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_a3bb0f087deb92ce89270ebe5f5adbf13}
+\-Método público que obtiene los segundos desde la inicialización del temporizador \begin{DoxyReturn}{\-Returns}
+\-Número de segundos desde la inicialización del temporizador en un formato específico 
+\end{DoxyReturn}
+\hypertarget{class_timer_af1ec46b36eb5b90f7b4dfad29f9aee5b}{\index{\-Timer@{\-Timer}!\-Get\-Timed@{\-Get\-Timed}}
+\index{\-Get\-Timed@{\-Get\-Timed}!Timer@{\-Timer}}
+\subsubsection[{\-Get\-Timed}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf \-Timer\-::\-Get\-Timed} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_af1ec46b36eb5b90f7b4dfad29f9aee5b}
+\-Método público que obtiene los segundos desde la inicialización del temporizador \begin{DoxyReturn}{\-Returns}
+\-Número de segundos desde la inicialización del temporizador 
+\end{DoxyReturn}
+\hypertarget{class_timer_ae7c0c1e7d12de4b8a6e7c64e451cdd2a}{\index{\-Timer@{\-Timer}!\-Reset@{\-Reset}}
+\index{\-Reset@{\-Reset}!Timer@{\-Timer}}
+\subsubsection[{\-Reset}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Timer\-::\-Reset} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_timer_ae7c0c1e7d12de4b8a6e7c64e451cdd2a}
+\-Método público que efectúa un reinicio de la cuenta del temportizador \hypertarget{class_timer_a4c33d0dbe892a1ad8c784cbf043b3b26}{\index{\-Timer@{\-Timer}!\-Wait\-Until@{\-Wait\-Until}}
+\index{\-Wait\-Until@{\-Wait\-Until}!Timer@{\-Timer}}
+\subsubsection[{\-Wait\-Until}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Timer\-::\-Wait\-Until} (
+\begin{DoxyParamCaption}
+\item[{double}]{t}
+\end{DoxyParamCaption}
+)}}\label{class_timer_a4c33d0dbe892a1ad8c784cbf043b3b26}
+\-Método público que realiza una espera 
+\begin{DoxyParams}{\-Parameters}
+{\em \-Número} & de segundos a realizar la espera \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_timer_ac77f20e91f884c90b89021fb448909ea}{\index{\-Timer@{\-Timer}!\-Wait\-Until@{\-Wait\-Until}}
+\index{\-Wait\-Until@{\-Wait\-Until}!Timer@{\-Timer}}
+\subsubsection[{\-Wait\-Until}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Timer\-::\-Wait\-Until} (
+\begin{DoxyParamCaption}
+\item[{float}]{t}
+\end{DoxyParamCaption}
+)}}\label{class_timer_ac77f20e91f884c90b89021fb448909ea}
+\-Método público que realiza una espera 
+\begin{DoxyParams}{\-Parameters}
+{\em \-Número} & de segundos a realizar la espera \\
+\hline
+\end{DoxyParams}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\-Modulo\-\_\-\-Conduccion/\hyperlink{_timer_8hpp}{\-Timer.\-hpp}\item 
+src/\hyperlink{_timer_8cpp}{\-Timer.\-cpp}\end{DoxyCompactItemize}

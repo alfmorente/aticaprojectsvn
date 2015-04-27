@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="90">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="Modules"
                    displayName="Modules"
@@ -77,15 +77,11 @@
             ex="false"
             tool="0"
             flavor2="2">
-        <cTool>
-        </cTool>
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp"
             ex="false"
             tool="1"
             flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="/usr/share/cmake-2.8/Modules/CheckFunctionExists.c"
             ex="false"
@@ -144,15 +140,11 @@
             ex="false"
             tool="0"
             flavor2="2">
-        <cTool>
-        </cTool>
       </item>
       <item path="CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp"
             ex="false"
             tool="1"
             flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <folder path="0">
         <ccTool>
@@ -231,26 +223,16 @@
         </ccTool>
       </folder>
       <item path="src/CANCommunication.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="src/ConduccionThread.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="src/Thread.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="src/Timer.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
       <item path="src/conduccion.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/interaction.cpp" ex="false" tool="1" flavor2="4">
-        <ccTool>
-        </ccTool>
       </item>
     </conf>
   </confs>

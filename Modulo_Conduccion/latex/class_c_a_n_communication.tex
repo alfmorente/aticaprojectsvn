@@ -1,0 +1,230 @@
+\hypertarget{class_c_a_n_communication}{\section{\-C\-A\-N\-Communication \-Class \-Reference}
+\label{class_c_a_n_communication}\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}}
+}
+
+
+\-Clase que representa las comunicaciones \-C\-A\-N del subsistema driving.  
+
+
+
+
+{\ttfamily \#include $<$\-C\-A\-N\-Communication.\-hpp$>$}
+
+\-Inheritance diagram for \-C\-A\-N\-Communication\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_c_a_n_communication}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_c_a_n_communication_ab46dea9c6aacfc3f42361fb458516994}{\-C\-A\-N\-Communication} (bool b\-Dev\-Node\-Given, bool b\-Type\-Given, int n\-Type, \-\_\-\-\_\-u32 dw\-Port, \-\_\-\-\_\-u16 w\-Irq, uint32\-\_\-t bitrate, bool frame\-\_\-extended, string id)
+\item 
+virtual \hyperlink{class_c_a_n_communication_a1b40a02c0dd8258057d82baf3e8d89be}{$\sim$\-C\-A\-N\-Communication} ()
+\item 
+virtual bool \hyperlink{class_c_a_n_communication_a548e870616f22b44371eeacac54ec6df}{\-Establish\-Communication} ()
+\item 
+virtual bool \hyperlink{class_c_a_n_communication_a839851aece22498ef3ab4e807274387b}{\-Configure\-Communication} ()
+\item 
+bool \hyperlink{class_c_a_n_communication_afb8e85f852dba8f14884b2c988626fed}{\-Close\-Communication} (\-H\-A\-N\-D\-L\-E h)
+\item 
+virtual bool \hyperlink{class_c_a_n_communication_ada21a063037449022aa654bedb87c522}{\-Send\-Message} (\-T\-P\-C\-A\-N\-Msg $\ast$msg)
+\item 
+virtual int32\-\_\-t \hyperlink{class_c_a_n_communication_ac3746cec3589757fa7ef73f214801204}{\-Receive\-Message} (\-T\-P\-C\-A\-N\-Rd\-Msg $\ast$msg\-Rx)
+\item 
+virtual void \hyperlink{class_c_a_n_communication_a8265d49768bb020c101b661b7b36076a}{\-Do\-Work} ()
+\item 
+void \hyperlink{class_c_a_n_communication_a6221dfb0c7221e7baee07d167ddc2960}{check\-Error\-Write} (int cont\-Write)
+\item 
+void \hyperlink{class_c_a_n_communication_ac09a44e26ad196ade61428268dee71a0}{check\-Error\-Read} (int cont\-Read)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_c_a_n_communication_aa2d7f9cb5a7e4e0c1394030dd03d080a}{queue$<$ \-T\-P\-C\-A\-N\-Rd\-Msg $>$ {\bfseries \-Conduccion\-Queue}}\label{class_c_a_n_communication_aa2d7f9cb5a7e4e0c1394030dd03d080a}
+
+\item 
+\hypertarget{class_c_a_n_communication_a90482a0006085088e5a8e200abdb39d7}{queue$<$ \-T\-P\-C\-A\-N\-Rd\-Msg $>$ {\bfseries \-Conduccion\-Camion\-Queue}}\label{class_c_a_n_communication_a90482a0006085088e5a8e200abdb39d7}
+
+\item 
+\hypertarget{class_c_a_n_communication_a615d966da4be119f6b430c3b4b835433}{pthread\-\_\-mutex\-\_\-t {\bfseries \-Conduccion\-Queue\-\_\-mutex}}\label{class_c_a_n_communication_a615d966da4be119f6b430c3b4b835433}
+
+\item 
+\hypertarget{class_c_a_n_communication_a620c2b403b0b88190feb062ce82b3207}{pthread\-\_\-mutex\-\_\-t {\bfseries \-Conduccion\-Camion\-Queue\-\_\-mutex}}\label{class_c_a_n_communication_a620c2b403b0b88190feb062ce82b3207}
+
+\item 
+\hypertarget{class_c_a_n_communication_ac3f6acd5a2f05d54d7dde46b41b67ab3}{bool {\bfseries flag\-Active}}\label{class_c_a_n_communication_ac3f6acd5a2f05d54d7dde46b41b67ab3}
+
+\item 
+\hypertarget{class_c_a_n_communication_a2ac3e9a2f03766359736929405eb5397}{\hyperlink{class_timer}{\-Timer} {\bfseries \-Communication\-Timer}}\label{class_c_a_n_communication_a2ac3e9a2f03766359736929405eb5397}
+
+\item 
+\hypertarget{class_c_a_n_communication_a13abc6674fd555962aa6adf021ffbdf9}{\hyperlink{class_timer}{\-Timer} {\bfseries \-Communication\-Timer2}}\label{class_c_a_n_communication_a13abc6674fd555962aa6adf021ffbdf9}
+
+\item 
+\hypertarget{class_c_a_n_communication_a4cd6c441b966fdf076ccb9f82fdc0949}{int {\bfseries cont\-Write}}\label{class_c_a_n_communication_a4cd6c441b966fdf076ccb9f82fdc0949}
+
+\item 
+\hypertarget{class_c_a_n_communication_a756857fc938c9b4d549c9a027e7eb6c2}{int {\bfseries cont\-Read}}\label{class_c_a_n_communication_a756857fc938c9b4d549c9a027e7eb6c2}
+
+\item 
+\hypertarget{class_c_a_n_communication_ad533c50a8293ca93faa31990b96b1fcd}{bool {\bfseries inicio\-\_\-read\-\_\-write\-\_\-\-C\-A\-N\-\_\-frame}}\label{class_c_a_n_communication_ad533c50a8293ca93faa31990b96b1fcd}
+
+\item 
+\hypertarget{class_c_a_n_communication_a5d75d2d21f673a161e902ccbc4821512}{bool {\bfseries error\-Write}}\label{class_c_a_n_communication_a5d75d2d21f673a161e902ccbc4821512}
+
+\item 
+\hypertarget{class_c_a_n_communication_ab3b7a5ab3eaa6e45188fb787bf1b60d7}{bool {\bfseries error\-Read}}\label{class_c_a_n_communication_ab3b7a5ab3eaa6e45188fb787bf1b60d7}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Clase que representa las comunicaciones \-C\-A\-N del subsistema driving. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{class_c_a_n_communication_ab46dea9c6aacfc3f42361fb458516994}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}}
+\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-C\-A\-N\-Communication}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-A\-N\-Communication\-::\-C\-A\-N\-Communication} (
+\begin{DoxyParamCaption}
+\item[{bool}]{b\-Dev\-Node\-Given, }
+\item[{bool}]{b\-Type\-Given, }
+\item[{int}]{n\-Type, }
+\item[{\-\_\-\-\_\-u32}]{dw\-Port, }
+\item[{\-\_\-\-\_\-u16}]{w\-Irq, }
+\item[{uint32\-\_\-t}]{bitrate, }
+\item[{bool}]{frame\-\_\-extended, }
+\item[{string}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_c_a_n_communication_ab46dea9c6aacfc3f42361fb458516994}
+\-Constructor de la clase 
+\begin{DoxyParams}{\-Parameters}
+{\em b\-Dev\-Node\-Given} & \-Nodo donde se encuentra definido el puerto en el sistema \\
+\hline
+{\em b\-Type\-Given} & \-Valor del tipo de nodo \\
+\hline
+{\em n\-Type} & \-Tipo de dispositivo del \-C\-A\-N \\
+\hline
+{\em dw\-Port} & \-Puerto en el cual se realiza la conexión \-C\-A\-N \\
+\hline
+{\em w\-Irq} & \-Configuración \-Irq del dispositivo \-C\-A\-N \\
+\hline
+{\em bitrate} & \-Velocidad de envío de tramas del \-C\-A\-N \\
+\hline
+{\em frame\-\_\-extended} & \-Modo de la trama\-: extendida o standart \\
+\hline
+{\em id} & \-Etiqueta de conexión \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_c_a_n_communication_a1b40a02c0dd8258057d82baf3e8d89be}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!$\sim$\-C\-A\-N\-Communication@{$\sim$\-C\-A\-N\-Communication}}
+\index{$\sim$\-C\-A\-N\-Communication@{$\sim$\-C\-A\-N\-Communication}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{$\sim$\-C\-A\-N\-Communication}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-C\-A\-N\-Communication\-::$\sim$\-C\-A\-N\-Communication} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_c_a_n_communication_a1b40a02c0dd8258057d82baf3e8d89be}
+\-Destructor de la clase 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_c_a_n_communication_ac09a44e26ad196ade61428268dee71a0}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!check\-Error\-Read@{check\-Error\-Read}}
+\index{check\-Error\-Read@{check\-Error\-Read}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{check\-Error\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-C\-A\-N\-Communication\-::check\-Error\-Read} (
+\begin{DoxyParamCaption}
+\item[{int}]{cont\-Read}
+\end{DoxyParamCaption}
+)}}\label{class_c_a_n_communication_ac09a44e26ad196ade61428268dee71a0}
+\-Método que chequea si el numero de tramas de recepción erróneas llegan a un máximo 
+\begin{DoxyParams}{\-Parameters}
+{\em cont\-Write} & \-Número de tramas de recepción erróneas \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_c_a_n_communication_a6221dfb0c7221e7baee07d167ddc2960}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!check\-Error\-Write@{check\-Error\-Write}}
+\index{check\-Error\-Write@{check\-Error\-Write}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{check\-Error\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-C\-A\-N\-Communication\-::check\-Error\-Write} (
+\begin{DoxyParamCaption}
+\item[{int}]{cont\-Write}
+\end{DoxyParamCaption}
+)}}\label{class_c_a_n_communication_a6221dfb0c7221e7baee07d167ddc2960}
+\-Método que chequea si el numero de tramas de escrituras erróneas llegan a un máximo 
+\begin{DoxyParams}{\-Parameters}
+{\em cont\-Write} & \-Número de tramas de escrituras erróneas \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_c_a_n_communication_afb8e85f852dba8f14884b2c988626fed}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-Close\-Communication@{\-Close\-Communication}}
+\index{\-Close\-Communication@{\-Close\-Communication}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-Close\-Communication}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-C\-A\-N\-Communication\-::\-Close\-Communication} (
+\begin{DoxyParamCaption}
+\item[{\-H\-A\-N\-D\-L\-E}]{h}
+\end{DoxyParamCaption}
+)}}\label{class_c_a_n_communication_afb8e85f852dba8f14884b2c988626fed}
+\-Método que configura la conexión \-C\-A\-N \begin{DoxyReturn}{\-Returns}
+\-Devuleve si la configuración se ha realizado correctamente 
+\end{DoxyReturn}
+\hypertarget{class_c_a_n_communication_a839851aece22498ef3ab4e807274387b}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-Configure\-Communication@{\-Configure\-Communication}}
+\index{\-Configure\-Communication@{\-Configure\-Communication}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-Configure\-Communication}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-C\-A\-N\-Communication\-::\-Configure\-Communication} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_c_a_n_communication_a839851aece22498ef3ab4e807274387b}
+\-Método que configura la conexión \-C\-A\-N \begin{DoxyReturn}{\-Returns}
+\-Devuleve si la configuración se ha realizado correctamente 
+\end{DoxyReturn}
+\hypertarget{class_c_a_n_communication_a8265d49768bb020c101b661b7b36076a}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-Do\-Work@{\-Do\-Work}}
+\index{\-Do\-Work@{\-Do\-Work}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-Do\-Work}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-C\-A\-N\-Communication\-::\-Do\-Work} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_c_a_n_communication_a8265d49768bb020c101b661b7b36076a}
+\-Hilo principal de la clase \hyperlink{class_c_a_n_communication}{\-C\-A\-N\-Communication} que lo que hace es leer mensajes del puerto \-C\-A\-N 
+
+\-Implements \hyperlink{class_thread}{\-Thread}.
+
+\hypertarget{class_c_a_n_communication_a548e870616f22b44371eeacac54ec6df}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-Establish\-Communication@{\-Establish\-Communication}}
+\index{\-Establish\-Communication@{\-Establish\-Communication}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-Establish\-Communication}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-C\-A\-N\-Communication\-::\-Establish\-Communication} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_c_a_n_communication_a548e870616f22b44371eeacac54ec6df}
+\-Método que establece la comunicación \-C\-A\-N \begin{DoxyReturn}{\-Returns}
+\-Devuelve si la conexión se ha establecido correctamente 
+\end{DoxyReturn}
+\hypertarget{class_c_a_n_communication_ac3746cec3589757fa7ef73f214801204}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-Receive\-Message@{\-Receive\-Message}}
+\index{\-Receive\-Message@{\-Receive\-Message}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-Receive\-Message}]{\setlength{\rightskip}{0pt plus 5cm}int32\-\_\-t {\bf \-C\-A\-N\-Communication\-::\-Receive\-Message} (
+\begin{DoxyParamCaption}
+\item[{\-T\-P\-C\-A\-N\-Rd\-Msg $\ast$}]{msg\-Rx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_c_a_n_communication_ac3746cec3589757fa7ef73f214801204}
+\-Método que recive un mensaje \-C\-A\-N 
+\begin{DoxyParams}{\-Parameters}
+{\em msg\-Tx} & \-Estructura que contiene el mensaje de recepción \-C\-A\-N \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Devuelve si el mensaje se ha enviado correctamente 
+\end{DoxyReturn}
+\hypertarget{class_c_a_n_communication_ada21a063037449022aa654bedb87c522}{\index{\-C\-A\-N\-Communication@{\-C\-A\-N\-Communication}!\-Send\-Message@{\-Send\-Message}}
+\index{\-Send\-Message@{\-Send\-Message}!CANCommunication@{\-C\-A\-N\-Communication}}
+\subsubsection[{\-Send\-Message}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-C\-A\-N\-Communication\-::\-Send\-Message} (
+\begin{DoxyParamCaption}
+\item[{\-T\-P\-C\-A\-N\-Msg $\ast$}]{msg\-Tx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_c_a_n_communication_ada21a063037449022aa654bedb87c522}
+\-Método que envía un mensaje \-C\-A\-N 
+\begin{DoxyParams}{\-Parameters}
+{\em msg\-Tx} & \-Estructura que contiene el mensaje de envío \-C\-A\-N \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Devuelve si el mensaje se ha enviado correctamente 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\-Modulo\-\_\-\-Conduccion/\hyperlink{_c_a_n_communication_8hpp}{\-C\-A\-N\-Communication.\-hpp}\item 
+src/\hyperlink{_c_a_n_communication_8cpp}{\-C\-A\-N\-Communication.\-cpp}\end{DoxyCompactItemize}

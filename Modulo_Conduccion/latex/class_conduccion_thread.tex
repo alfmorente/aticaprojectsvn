@@ -1,0 +1,277 @@
+\hypertarget{class_conduccion_thread}{\section{\-Conduccion\-Thread \-Class \-Reference}
+\label{class_conduccion_thread}\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}}
+}
+
+
+\-Clase que representa el tratamiento de los menajes \-C\-A\-N que se le envía/recibe el vehículo.  
+
+
+
+
+{\ttfamily \#include $<$\-Conduccion\-Thread.\-hpp$>$}
+
+\-Inheritance diagram for \-Conduccion\-Thread\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_conduccion_thread}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_conduccion_thread_af4208860e61866c8aebd86a58f99f83e}{\-Conduccion\-Thread} (\hyperlink{class_c_a_n_communication}{\-C\-A\-N\-Communication} $\ast$can\-C\-O\-N\-D)
+\item 
+virtual \hyperlink{class_conduccion_thread_af18549f4e72097c5c82a13975396423a}{$\sim$\-Conduccion\-Thread} ()
+\item 
+virtual void \hyperlink{class_conduccion_thread_a4267de3c2e18e8b2c3e56cd8e8edfa77}{\-Do\-Work} ()
+\item 
+void \hyperlink{class_conduccion_thread_ada8b449805f320d94841224eee0cdce5}{m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} ()
+\item 
+void \hyperlink{class_conduccion_thread_a644e33e7220de02cec522de1fa9d3adb}{m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} ()
+\item 
+void \hyperlink{class_conduccion_thread_ad0a03718e4e843801ff9133763df3020}{m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} ()
+\item 
+void \hyperlink{class_conduccion_thread_afa3bfdecad32e8498ed537b01042aff2}{envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} ()
+\item 
+void \hyperlink{class_conduccion_thread_a291eb5c1d53b449f445db2673d421745}{inicializacion\-\_\-valores\-\_\-tx} ()
+\item 
+void \hyperlink{class_conduccion_thread_a5a6b4ac4bb02c365951316d4ff881f0c}{m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N} (\-T\-P\-C\-A\-N\-Rd\-Msg \-Status\-Msg)
+\item 
+void \hyperlink{class_conduccion_thread_abebb162804ed8480b52266fa2e8c1130}{m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N} (\-T\-P\-C\-A\-N\-Rd\-Msg \-Status\-Msg)
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_conduccion_thread_aaed647038c099a0ab408ccef321a2b4a}{pthread\-\_\-mutex\-\_\-t {\bfseries \-Conduccion\-Thread\-\_\-mutex}}\label{class_conduccion_thread_aaed647038c099a0ab408ccef321a2b4a}
+
+\item 
+\hypertarget{class_conduccion_thread_a403ef03e71fc3272e4825ce47c23af19}{bool {\bfseries \-C\-O\-N\-D\-U\-C\-C\-I\-O\-N\-\_\-\-A\-C\-T\-I\-V\-E}}\label{class_conduccion_thread_a403ef03e71fc3272e4825ce47c23af19}
+
+\item 
+\hypertarget{class_conduccion_thread_aa31ebdd2a99392133312f5f55388cbb2}{bool {\bfseries flag\-\_\-active\-\_\-backup}}\label{class_conduccion_thread_aa31ebdd2a99392133312f5f55388cbb2}
+
+\item 
+\hypertarget{class_conduccion_thread_ac267a2a1bef42087301ac8bf1d80cdaa}{short {\bfseries valor\-\_\-arranque\-\_\-parada}}\label{class_conduccion_thread_ac267a2a1bef42087301ac8bf1d80cdaa}
+
+\item 
+\hypertarget{class_conduccion_thread_a027aac83ca25ec528c272026bdba4744}{short {\bfseries valor\-\_\-freno\-\_\-estacionamiento}}\label{class_conduccion_thread_a027aac83ca25ec528c272026bdba4744}
+
+\item 
+\hypertarget{class_conduccion_thread_af522b2c32ac9be0c3f3cbdd90011912c}{short {\bfseries acelerador\-\_\-tx}}\label{class_conduccion_thread_af522b2c32ac9be0c3f3cbdd90011912c}
+
+\item 
+\hypertarget{class_conduccion_thread_a7fa33669ea495a7279d47b370e7318ac}{short {\bfseries velocidad\-\_\-tx}}\label{class_conduccion_thread_a7fa33669ea495a7279d47b370e7318ac}
+
+\item 
+\hypertarget{class_conduccion_thread_a7f7f4e74587782e5ee4820fc3e10ef69}{short {\bfseries freno\-\_\-servicio\-\_\-tx}}\label{class_conduccion_thread_a7f7f4e74587782e5ee4820fc3e10ef69}
+
+\item 
+\hypertarget{class_conduccion_thread_a53c06f8afb12b02c90161cf79bee3832}{short {\bfseries valor\-\_\-marcha}}\label{class_conduccion_thread_a53c06f8afb12b02c90161cf79bee3832}
+
+\item 
+\hypertarget{class_conduccion_thread_af5d168172fb768c1faf1d1b169a35bbb}{short {\bfseries cambio\-\_\-marcha\-\_\-tx}}\label{class_conduccion_thread_af5d168172fb768c1faf1d1b169a35bbb}
+
+\item 
+\hypertarget{class_conduccion_thread_afb7dea488a424dde8dd3b14cc1fd6762}{short {\bfseries sentido\-\_\-direccion\-\_\-tx}}\label{class_conduccion_thread_afb7dea488a424dde8dd3b14cc1fd6762}
+
+\item 
+\hypertarget{class_conduccion_thread_a0b2410e2414a60cdf4f3d23a5ea6324e}{short {\bfseries direccion\-\_\-tx}}\label{class_conduccion_thread_a0b2410e2414a60cdf4f3d23a5ea6324e}
+
+\item 
+\hypertarget{class_conduccion_thread_a357ae9530e53f77b49e061a1efc110d5}{short {\bfseries valor\-\_\-direccion}}\label{class_conduccion_thread_a357ae9530e53f77b49e061a1efc110d5}
+
+\item 
+\hypertarget{class_conduccion_thread_a9acb1cfde19437bf396aa3efe44e1081}{short {\bfseries valor\-\_\-luces}}\label{class_conduccion_thread_a9acb1cfde19437bf396aa3efe44e1081}
+
+\item 
+\hypertarget{class_conduccion_thread_acd7791ecaa072c4a439a28e9d1b6f4e5}{short {\bfseries valor\-\_\-luces\-\_\-\-I\-R}}\label{class_conduccion_thread_acd7791ecaa072c4a439a28e9d1b6f4e5}
+
+\item 
+\hypertarget{class_conduccion_thread_a9851b5f9c6ad1f9c8d71498b6081d290}{short {\bfseries valor\-\_\-diferencial}}\label{class_conduccion_thread_a9851b5f9c6ad1f9c8d71498b6081d290}
+
+\item 
+\hypertarget{class_conduccion_thread_aee22628f727ee2a33224bc6010a4443d}{short {\bfseries valor\-\_\-laser}}\label{class_conduccion_thread_aee22628f727ee2a33224bc6010a4443d}
+
+\item 
+\hypertarget{class_conduccion_thread_a2371b144beb68d9a86f9025dddf6d8ba}{short {\bfseries valor\-\_\-parada\-\_\-emergencia}}\label{class_conduccion_thread_a2371b144beb68d9a86f9025dddf6d8ba}
+
+\item 
+\hypertarget{class_conduccion_thread_a051c3cfaa09dc000627cf45b2e520a4c}{uint8\-\_\-t {\bfseries byte\-\_\-7}}\label{class_conduccion_thread_a051c3cfaa09dc000627cf45b2e520a4c}
+
+\item 
+\hypertarget{class_conduccion_thread_acf1873ccee4ce10dac23017aa7b6c3ad}{short {\bfseries arranque\-\_\-parada}}\label{class_conduccion_thread_acf1873ccee4ce10dac23017aa7b6c3ad}
+
+\item 
+\hypertarget{class_conduccion_thread_ac78c299549691cca4b12fdc5a330ef16}{short {\bfseries freno\-\_\-estacionamiento}}\label{class_conduccion_thread_ac78c299549691cca4b12fdc5a330ef16}
+
+\item 
+\hypertarget{class_conduccion_thread_a52209657e37aeb8416654702a689fdd9}{short {\bfseries conmutador\-\_\-m\-\_\-a}}\label{class_conduccion_thread_a52209657e37aeb8416654702a689fdd9}
+
+\item 
+\hypertarget{class_conduccion_thread_a580a948849a18a610b7a13a3017bcb91}{short {\bfseries acelerador}}\label{class_conduccion_thread_a580a948849a18a610b7a13a3017bcb91}
+
+\item 
+\hypertarget{class_conduccion_thread_af2b3c6b9f1d12885115905124f183f1f}{short {\bfseries velocidad}}\label{class_conduccion_thread_af2b3c6b9f1d12885115905124f183f1f}
+
+\item 
+\hypertarget{class_conduccion_thread_a79f043e0c8a1f4e1af6059ae751a7e00}{short {\bfseries freno\-\_\-servicio}}\label{class_conduccion_thread_a79f043e0c8a1f4e1af6059ae751a7e00}
+
+\item 
+\hypertarget{class_conduccion_thread_ac8a3034d0d7fb45dac02833dfa7671b7}{short {\bfseries marcha\-\_\-actual}}\label{class_conduccion_thread_ac8a3034d0d7fb45dac02833dfa7671b7}
+
+\item 
+\hypertarget{class_conduccion_thread_a272f1aba8ef25f8d2e5f1b18839f5e84}{short {\bfseries sentido\-\_\-marcha}}\label{class_conduccion_thread_a272f1aba8ef25f8d2e5f1b18839f5e84}
+
+\item 
+\hypertarget{class_conduccion_thread_a490a54758fc10174c3296c1bc8a8818a}{short {\bfseries direccion}}\label{class_conduccion_thread_a490a54758fc10174c3296c1bc8a8818a}
+
+\item 
+\hypertarget{class_conduccion_thread_a309acc3f3239bf03aed0d09cc5f5e9ac}{short {\bfseries conf\-\_\-parada\-\_\-emergencia}}\label{class_conduccion_thread_a309acc3f3239bf03aed0d09cc5f5e9ac}
+
+\item 
+\hypertarget{class_conduccion_thread_afdeb8f2fe8ac2aac12739546e66e034c}{short {\bfseries parada\-\_\-emergencia\-\_\-obstaculo}}\label{class_conduccion_thread_afdeb8f2fe8ac2aac12739546e66e034c}
+
+\item 
+\hypertarget{class_conduccion_thread_a8582bb8005611928ee7adad13e392ea5}{short {\bfseries parada\-\_\-emergencia\-\_\-remota}}\label{class_conduccion_thread_a8582bb8005611928ee7adad13e392ea5}
+
+\item 
+\hypertarget{class_conduccion_thread_a2e71fa8b1e2fda996e60a7fad26f9453}{short {\bfseries parada\-\_\-emergencia\-\_\-local}}\label{class_conduccion_thread_a2e71fa8b1e2fda996e60a7fad26f9453}
+
+\item 
+\hypertarget{class_conduccion_thread_a29f4159aa0ea8d5d5e51e973cfca9166}{short {\bfseries error\-\_\-arranque\-\_\-parada}}\label{class_conduccion_thread_a29f4159aa0ea8d5d5e51e973cfca9166}
+
+\item 
+\hypertarget{class_conduccion_thread_a5b9bc034347928a7ada5b59f5449795b}{short {\bfseries error\-\_\-acelerador}}\label{class_conduccion_thread_a5b9bc034347928a7ada5b59f5449795b}
+
+\item 
+\hypertarget{class_conduccion_thread_a9da8e5de08c1962e0776c1dd459aae6f}{short {\bfseries error\-\_\-freno\-\_\-estacionamiento}}\label{class_conduccion_thread_a9da8e5de08c1962e0776c1dd459aae6f}
+
+\item 
+\hypertarget{class_conduccion_thread_a66e012a6849293985a7cdd5d95803ce6}{short {\bfseries error\-\_\-freno\-\_\-servicio}}\label{class_conduccion_thread_a66e012a6849293985a7cdd5d95803ce6}
+
+\item 
+\hypertarget{class_conduccion_thread_ac4909c2ae76a41854d65d7bdef69c47e}{short {\bfseries error\-\_\-cambio\-\_\-marcha}}\label{class_conduccion_thread_ac4909c2ae76a41854d65d7bdef69c47e}
+
+\item 
+\hypertarget{class_conduccion_thread_a8261f17b8cd5d13adc5275e16733cc44}{short {\bfseries error\-\_\-direccion}}\label{class_conduccion_thread_a8261f17b8cd5d13adc5275e16733cc44}
+
+\item 
+\hypertarget{class_conduccion_thread_a13bae73eda9adf8544e105c8c6d85467}{short {\bfseries error\-\_\-bloqueo\-\_\-diferenciales}}\label{class_conduccion_thread_a13bae73eda9adf8544e105c8c6d85467}
+
+\item 
+\hypertarget{class_conduccion_thread_ae64f68126af967e86cf46620486bf961}{bool {\bfseries parada\-Emergencia}}\label{class_conduccion_thread_ae64f68126af967e86cf46620486bf961}
+
+\item 
+\hypertarget{class_conduccion_thread_a29640b1b31c6ca5d85e7640284e4bbf7}{int {\bfseries tipo\-\_\-parada}}\label{class_conduccion_thread_a29640b1b31c6ca5d85e7640284e4bbf7}
+
+\item 
+\hypertarget{class_conduccion_thread_a56fb420f61e01a9a98c397f95abdab7c}{int {\bfseries tipo\-\_\-parada\-\_\-emergencia}}\label{class_conduccion_thread_a56fb420f61e01a9a98c397f95abdab7c}
+
+\item 
+\hypertarget{class_conduccion_thread_aac780ac9687c7f507c919a748399654e}{\hyperlink{class_timer}{\-Timer} {\bfseries t}}\label{class_conduccion_thread_aac780ac9687c7f507c919a748399654e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Clase que representa el tratamiento de los menajes \-C\-A\-N que se le envía/recibe el vehículo. 
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{class_conduccion_thread_af4208860e61866c8aebd86a58f99f83e}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!\-Conduccion\-Thread@{\-Conduccion\-Thread}}
+\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{\-Conduccion\-Thread}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Conduccion\-Thread\-::\-Conduccion\-Thread} (
+\begin{DoxyParamCaption}
+\item[{{\bf \-C\-A\-N\-Communication} $\ast$}]{can\-C\-O\-N\-D}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_af4208860e61866c8aebd86a58f99f83e}
+\-Constructor de la clase \hyperlink{class_conduccion_thread}{\-Conduccion\-Thread} 
+\begin{DoxyParams}{\-Parameters}
+{\em can\-C\-O\-N\-D} & \-Variable que contiene un objeto de la clase \hyperlink{class_c_a_n_communication}{\-C\-A\-N\-Communication} \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_conduccion_thread_af18549f4e72097c5c82a13975396423a}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!$\sim$\-Conduccion\-Thread@{$\sim$\-Conduccion\-Thread}}
+\index{$\sim$\-Conduccion\-Thread@{$\sim$\-Conduccion\-Thread}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{$\sim$\-Conduccion\-Thread}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Conduccion\-Thread\-::$\sim$\-Conduccion\-Thread} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_conduccion_thread_af18549f4e72097c5c82a13975396423a}
+\-Destructor de la clase \hyperlink{class_conduccion_thread}{\-Conduccion\-Thread} 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{class_conduccion_thread_a4267de3c2e18e8b2c3e56cd8e8edfa77}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!\-Do\-Work@{\-Do\-Work}}
+\index{\-Do\-Work@{\-Do\-Work}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{\-Do\-Work}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::\-Do\-Work} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}\label{class_conduccion_thread_a4267de3c2e18e8b2c3e56cd8e8edfa77}
+\-Hilo de la clase \hyperlink{class_conduccion_thread}{\-Conduccion\-Thread} que se encarga de desencolar los mensajes de una pila para su posterior tratamiento 
+
+\-Implements \hyperlink{class_thread}{\-Thread}.
+
+\hypertarget{class_conduccion_thread_afa3bfdecad32e8498ed537b01042aff2}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}}
+\index{envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::envio\-\_\-trama\-\_\-reinicio\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_afa3bfdecad32e8498ed537b01042aff2}
+\-Método que envía un mensaje al vehículo con el reinicio de todas las variables que afectan al funcionamiento del vehículo \hypertarget{class_conduccion_thread_a291eb5c1d53b449f445db2673d421745}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!inicializacion\-\_\-valores\-\_\-tx@{inicializacion\-\_\-valores\-\_\-tx}}
+\index{inicializacion\-\_\-valores\-\_\-tx@{inicializacion\-\_\-valores\-\_\-tx}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{inicializacion\-\_\-valores\-\_\-tx}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::inicializacion\-\_\-valores\-\_\-tx} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_a291eb5c1d53b449f445db2673d421745}
+\-Método que realiza una inicialización de los valores de la clase \hyperlink{class_conduccion_thread}{\-Conduccion\-Thread} \hypertarget{class_conduccion_thread_ad0a03718e4e843801ff9133763df3020}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}}
+\index{m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::m\-\_\-emergency\-\_\-stop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_ad0a03718e4e843801ff9133763df3020}
+\-Método que envía un mensaje al vehículo para que realice una parada de emergencía \hypertarget{class_conduccion_thread_a644e33e7220de02cec522de1fa9d3adb}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}}
+\index{m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::m\-\_\-engine\-\_\-brake\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_a644e33e7220de02cec522de1fa9d3adb}
+\-Método que envía un mensaje con la puesta del freno de mano y con el vehículo parado \hypertarget{class_conduccion_thread_abebb162804ed8480b52266fa2e8c1130}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N@{m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N}}
+\index{m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N@{m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::m\-\_\-\-Error\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N} (
+\begin{DoxyParamCaption}
+\item[{\-T\-P\-C\-A\-N\-Rd\-Msg}]{\-Status\-Msg}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_abebb162804ed8480b52266fa2e8c1130}
+\-Método que gestiona los mensajes de error que llegan del autómata 
+\begin{DoxyParams}{\-Parameters}
+{\em \-Status\-Msg} & \-Variable que contiene mensajes \-C\-A\-N con los posibles errores que haya en el autómata \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_conduccion_thread_a5a6b4ac4bb02c365951316d4ff881f0c}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N@{m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N}}
+\index{m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N@{m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::m\-\_\-\-Status\-\_\-\-Message\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A\-\_\-\-C\-A\-N} (
+\begin{DoxyParamCaption}
+\item[{\-T\-P\-C\-A\-N\-Rd\-Msg}]{\-Status\-Msg}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_a5a6b4ac4bb02c365951316d4ff881f0c}
+\-Método que realiza el tratamiento de los mensajes enviados al autómata 
+\begin{DoxyParams}{\-Parameters}
+{\em \-Status\-Msg} & \-Variable que contiene una estructura con el mensaje que se envíara al autómata \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_conduccion_thread_ada8b449805f320d94841224eee0cdce5}{\index{\-Conduccion\-Thread@{\-Conduccion\-Thread}!m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}}
+\index{m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A@{m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}!ConduccionThread@{\-Conduccion\-Thread}}
+\subsubsection[{m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Conduccion\-Thread\-::m\-\_\-teleop\-\_\-\-C\-A\-N\-\_\-\-A\-U\-T\-O\-M\-A\-T\-A} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_conduccion_thread_ada8b449805f320d94841224eee0cdce5}
+\-Método que gestiona el envío de mensajes \-C\-A\-N al autómata 
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\-Modulo\-\_\-\-Conduccion/\hyperlink{_conduccion_thread_8hpp}{\-Conduccion\-Thread.\-hpp}\item 
+src/\hyperlink{_conduccion_thread_8cpp}{\-Conduccion\-Thread.\-cpp}\end{DoxyCompactItemize}
