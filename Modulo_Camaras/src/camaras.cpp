@@ -1,9 +1,22 @@
+/**
+ * @file   camaras.cpp
+ * @brief  Fichero fuente principal de gestión del módulo de las cámaras
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
+
 #include <Modulo_Camaras/camaras.h>
 #include <Modulo_Camaras/Files.h>
 #include <Modulo_Camaras/interaction.h>
 
 using namespace std;
 
+/**
+ * Funcion principal para el control de la camara
+ * @param argc Numero de argumentos de entrada por consola
+ * @param argv Valores de los argumentos de entrada por consola
+ * @return Entero que indica si el modulo finalizo correctamente
+ */
 int main(int argc, char **argv)
 {
     // Indica el modo de Operacion del modulo
@@ -62,7 +75,7 @@ int main(int argc, char **argv)
         errorCOM.type_error=TOE_UNDEFINED;
         errorCOM.id_error=error; 
         pub_error.publish(errorCOM);    
-        Files::writeErrorInLOG(error,"Fichero de configuracion: ");
+        files.writeErrorInLOG(error,"Fichero de configuracion: ");
         exit(1);
     } 
 
@@ -133,6 +146,10 @@ int main(int argc, char **argv)
  * *****************************************************************************
  * ****************************************************************************/
 
+/**
+ * Callback Subscriptor ROS para el control de la camara
+ * @param[in] msg Mensaje ROS para el control de la camara
+ */
 void fcn_sub_ctrl_camera(Common_files::msg_ctrl_camera msg)
 {
     if(msg.id_control==CAMERA_PAN)

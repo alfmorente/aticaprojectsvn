@@ -1,12 +1,17 @@
-/* 
- * File:   ProtPelcoD.cpp
- * Author: atica
- * 
- * Created on 13 de mayo de 2014, 11:52
+/**
+ * @file   ProtPelcoD.cpp
+ * @brief  Fichero fuente de gestion del protocolo PELCOD
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
-
 #include <Modulo_Camaras/ProtPelcoD.h>
 
+/**
+ * Constructor de la clase
+ * @param[in] idCamera Identificador de la camara a usar
+ * @param[in] vel_pan Velocidad del PAN en caso de utilizarlo
+ * @param[in] vel_tilt Velocidad del TILT en caso de utilizarlo
+ */
 ProtPelcoD::ProtPelcoD(int idCamera, int vel_pan,int vel_tilt) 
 {
     serial=new PortSerial();
@@ -15,12 +20,20 @@ ProtPelcoD::ProtPelcoD(int idCamera, int vel_pan,int vel_tilt)
     this->velTILT=vel_tilt;
 }
 
-
+/**
+ * Destructor de la clase
+ */
 ProtPelcoD::~ProtPelcoD() 
 {
     delete serial;
 }
 
+/**
+ * Metodo que conecta con la camara 
+ * @param[in] namePort Nombre del puerto con el que se conecta la camara
+ * @param[in] velocity Velocidad de la conexion
+ * @return 
+ */
 bool ProtPelcoD::connect(char* namePort,int velocity)
 {
     if(serial->openSerial(namePort))
@@ -32,6 +45,11 @@ bool ProtPelcoD::connect(char* namePort,int velocity)
         return false;
     
 }
+
+/**
+ * Metodo que hace PAN a la camara
+ * @param[in] typePAN indica la direccion del PAN
+ */
 void ProtPelcoD::commandPAN(int typePAN)
 {
     char command1,command2,data1,data2;   
@@ -59,6 +77,10 @@ void ProtPelcoD::commandPAN(int typePAN)
     sendCommand(command1,command2,data1,data2);
 }
 
+/**
+ * Metodo que hace TILT a la camara
+ * @param typeTILT Indica la direccion del TILT
+ */
 void ProtPelcoD::commandTILT(int typeTILT)
 {
     char command1,command2,data1,data2;    
@@ -85,25 +107,29 @@ void ProtPelcoD::commandTILT(int typeTILT)
     sendCommand(command1,command2,data1,data2);
 }
 
+/**
+ * Metodo que hace ZOOM a la camara
+ * @param[in] typeZOOM Indica la el tipo de ZOOM 
+ */
 void ProtPelcoD::commandZOOM(int typeZOOM)
 {
     char command1,command2,data1,data2;
     command1=PELCO_ZERO;
     if(typeZOOM==CAMERA_ZOOM_IN)
     {
-	printf("ZOOM IN\n");
+		printf("ZOOM IN\n");
         command2=PELCO_ZOOM_IN;
 
     }
     else if(typeZOOM==CAMERA_ZOOM_OUT)
     {
-	printf("ZOOM OUT\n");
+		printf("ZOOM OUT\n");
         command2=PELCO_ZOOM_OUT;
     
     }        
     else //typeZOOM==CAMERA_ZOOM_STOP
     {
-	printf("ZOOM STOP\n");
+		printf("ZOOM STOP\n");
         command1=PELCO_ZERO;        
         command2=PELCO_ZERO;
     
@@ -113,6 +139,10 @@ void ProtPelcoD::commandZOOM(int typeZOOM)
     sendCommand(command1,command2,data1,data2);
 }
 
+/**
+ * Metodo que actua sobre el iris de la camara
+ * @param[in] typeIRIS Indica si se cierra o se abre el iris
+ */
 void ProtPelcoD::commandIRIS(int typeIRIS)
 {
     char command1,command2,data1,data2;
@@ -133,6 +163,10 @@ void ProtPelcoD::commandIRIS(int typeIRIS)
     sendCommand(command1,command2,data1,data2);
 }
 
+/**
+ * Metodo que actua sobre el focus de la camara
+ * @param[in] typeFOCUS Indica si se acerca o aleja el FOCUS
+ */
 void ProtPelcoD::commandFOCUS(int typeFOCUS)
 {
     char command1,command2,data1,data2;
@@ -153,6 +187,10 @@ void ProtPelcoD::commandFOCUS(int typeFOCUS)
     sendCommand(command1,command2,data1,data2);
 }
 
+/**
+ * Metodo que actua sobre el modo de funcionamiento de la camara
+ * @param[in] typeAUTO Indica el modo de funcionamiento (Manual/Scan)
+ */
 void ProtPelcoD::commandAUTO(int typeAUTO)
 {
     char command1,command2,data1,data2;
@@ -172,6 +210,10 @@ void ProtPelcoD::commandAUTO(int typeAUTO)
     sendCommand(command1,command2,data1,data2);
 }
 
+/**
+ * Metodo que actua sobre el encendido de la camara
+ * @param[in] typePOWER Indica si se enciende o no la camara
+ */
 void ProtPelcoD::commandPOWER(int typePOWER)
 {
     char command1,command2,data1,data2;
@@ -190,11 +232,26 @@ void ProtPelcoD::commandPOWER(int typePOWER)
     data2=PELCO_ZERO;         
     sendCommand(command1,command2,data1,data2);
 }
-
+/**
+ * Metodo para enviar otros comandos a la camara
+ * @param[in] byte1 Indica el valor del byte 1 del protocolo
+ * @param[in] byte2 Indica el valor del byte 2 del protocolo
+ * @param[in] byte3 Indica el valor del byte 3 del protocolo
+ * @param[in] byte4 Indica el valor del byte 4 del protocolo
+ */
 void ProtPelcoD::commandOTHER(char byte1,char byte2,char byte3,char byte4)
 {        
     sendCommand(byte1,byte2,byte3,byte4);
 }
+
+/**
+ * Metodo que envia una trama PELCOD a la camara
+ * @param[in] command1 Byte 1 del protocolo
+ * @param[in] command2 Byte 2 del protocolo
+ * @param[in] data1 Byte 3 del protocolo
+ * @param[in] data2 Byte 4 del protocolo
+ * @return 
+ */
 bool ProtPelcoD::sendCommand(char command1,char command2,char data1,char data2)
 {
     
@@ -217,6 +274,11 @@ bool ProtPelcoD::sendCommand(char command1,char command2,char data1,char data2)
         return false;
 }
 
+/**
+ * Metodo que calcula en ckecksum de la trama PELCOD
+ * @param command Trama PELCOD sin el checksum
+ * @return 
+ */
 char ProtPelcoD::calcChecksum(char command[])
 {
     char checksum=0;
@@ -226,7 +288,9 @@ char ProtPelcoD::calcChecksum(char command[])
     return checksum;
     
 }
-
+/**
+ * Metodo que desconecta de la camara
+ */
 void ProtPelcoD::disconnect()
 {
      serial->closeSerial();
