@@ -2,9 +2,10 @@ FILE(REMOVE_RECURSE
   "msg_gen"
   "msg_gen"
   "src/Modulo_Navegacion/msg"
-  "CMakeFiles/gest_navegacion.dir/src/navegacion.cpp.o"
-  "CMakeFiles/gest_navegacion.dir/src/ll-utm.cpp.o"
+  "CMakeFiles/gest_navegacion.dir/src/gest_navegacion.cpp.o"
   "CMakeFiles/gest_navegacion.dir/src/AnalisisFichero.cpp.o"
+  "CMakeFiles/gest_navegacion.dir/src/NodeROSNavigation.cpp.o"
+  "CMakeFiles/gest_navegacion.dir/src/Seguimiento.cpp.o"
   "bin/gest_navegacion.pdb"
   "bin/gest_navegacion"
 )

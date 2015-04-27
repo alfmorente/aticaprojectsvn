@@ -1,3 +1,10 @@
+/**
+ * @file   AnalisisFichero.h
+ * @brief  Fichero de cabecera de analisis del fichero del PLAN
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
+
 //Funciones de análisis de ficheros
 #include <string>
 #include <string.h>
@@ -8,22 +15,31 @@
 
 using namespace std;
 
-typedef struct Body
+/**
+ * \struct DataPage
+ * \brief  Estructura con la informacion de una pagina
+ */
+struct DataPage
 {    
     int numWP;
     int currentPage;  
     vector <double> wpLat;
     vector <double> wpLon;  
     vector <string> type;      
-}DataPage;
+};
 
-typedef struct Plan
+/**
+ * \struct PathPlan
+ * \brief  Estructura con la informacion completa del plan
+ */
+struct PathPlan
 {
     string NamePath;
     int numPages;
     string idPath;
     vector<DataPage>  vecDP;
-}PathPlan;
+};
+
 
 
 vector<string> createVectorLineFromPage(string page);
