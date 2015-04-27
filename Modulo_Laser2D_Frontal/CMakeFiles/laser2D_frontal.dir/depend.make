@@ -21,7 +21,9 @@ CMakeFiles/laser2D_frontal.dir/src/SocketCommunication.cpp.o: include/Modulo_Las
 CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: src/TypeConverter.cpp
 CMakeFiles/laser2D_frontal.dir/src/TypeConverter.cpp.o: include/Modulo_Laser2D_Frontal/TypeConverter.h
 
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: src/../../Common_files/include/Common_files/constant.h
 CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: src/interaction.cpp
+CMakeFiles/laser2D_frontal.dir/src/interaction.cpp.o: include/Modulo_Laser2D_Frontal/interaction.h
 
 CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: src/laser2D_frontal.cpp
 CMakeFiles/laser2D_frontal.dir/src/laser2D_frontal.cpp.o: /opt/ros/groovy/include/XmlRpcDecl.h

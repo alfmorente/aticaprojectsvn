@@ -1,9 +1,10 @@
-/* 
- * File:   config_error.h
- * Author: atica
- *
- * Created on 16 de abril de 2014, 13:06
+/**
+ * @file   Files.h
+ * @brief  Fichero de cabecera para gestion de ficheros
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
  */
+
 
 #ifndef FILES_H
 #define	FILES_H
@@ -13,6 +14,11 @@
 #include <sys/time.h>
 #include <math.h>
 
+
+/**
+ * \class Files
+ * \brief Fichero de cabecera de gestion de ficheros
+ */
 
 class Files
 {

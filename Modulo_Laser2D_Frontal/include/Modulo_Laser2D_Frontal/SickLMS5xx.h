@@ -1,3 +1,10 @@
+/**
+ * @file   SickLMS5xx.h
+ * @brief  Fichero Cabecera de gestion del Laser SickLMS5xx
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
+
 #ifndef SICKLMS5XX_H
 #define	SICKLMS5XX_H
 
@@ -9,82 +16,102 @@
 
 
 
-#define NO_ERROR 0
-#define ERROR_FRECUENCY 1
-#define ERROR_ANGULAR_RESOLUTION 2
-#define ERROR_FRECUENCY_AND_RESOLUTION 3
-#define ERROR_SCAN_AREA 4
-#define ERROR_OTHER 5
+#define NO_ERROR -1  ///<Constante que indica que no ha habido ningun error
+#define ERROR_FRECUENCY 1 ///<Constante que indica error al configurar la frecuencia del laser
+#define ERROR_ANGULAR_RESOLUTION 2 ///<Constante que indica error al configurar la resolucion angular del laser
+#define ERROR_FRECUENCY_AND_RESOLUTION 3///<Constante que indica error al configurar la frecuencia y la resolucion angular del laser
+#define ERROR_SCAN_AREA 4 ///<Constante que indica error al configurar el area de escaneo
+#define ERROR_OTHER 5 ///<Constante que indica error de configuracion de otro tipo
 
-#define COMMAND_NO_ACEPTED 1
-#define ERROR_START_DEVICE 0
-#define ERROR_USER_LEVEL 0
+#define COMMAND_NO_ACEPTED 1 ///<Constante que indica que el comando ha sido aceptado por el laser
+#define ERROR_START_DEVICE 0 ///<Constante que indica error al iniciar dispositivo
+#define ERROR_USER_LEVEL 0 ///<Constante que indica error al configurar el modo de gestion del dispositivo
 
-#define LEVEL_MAINTENANCE_PERSONEL 2
-#define LEVEL_AUTHORISED_CLIENT 3
-#define LEVEL_SERVICE 4
-#define PASSWORD 0xF4724744
-
+#define LEVEL_MAINTENANCE_PERSONEL 2 ///<Constante que indica gestion del laser a nivel de mantenimiento personal
+#define LEVEL_AUTHORISED_CLIENT 3///<Constante que indica gestion del laser a nivel de servicio
+#define LEVEL_SERVICE 4 ///<Constante que indica gestion del laser a nivelde servicio
+#define PASSWORD 0xF4724744 ///<Constante que indica el password para el cliente autorizado
 
 //Tipos de LED
-#define STOP 0
-#define OK	1
-#define Q1	2
-#define Q2	3
-#define CONTAMINATION 4
-
-//Status
-#define ON 1
-#define OFF 0
+#define STOP 0 ///<Constante que indica LED STOP
+#define OK	1 ///<Constante que indica LED OK
+#define Q1	2 ///<Constante que indica LED Q1
+#define Q2	3 ///<Constante que indica LED Q2
+#define CONTAMINATION 4 ///<Constante que indica LED Contaminacion
 
 using namespace std;
+
+/**
+ * \enum status
+ * \brief  Enumerado con los distintos estados del laser
+ */
 //Estado del laser
 enum status
 {
-	undefined=0,
-	initialisation=1,
-	configuration=2,
-	idle=3,
-	rotating=4,
-	in_preparation=5,
-	ready=6,
-	measurement=7
+	undefined=0, ///< Undefinido  
+	initialisation=1, ///< Inicializando
+	configuration=2, ///< Configurando
+	idle=3, ///< Ocioso
+	rotating=4,///< Rotando
+	in_preparation=5, ///< En proceso de preparación
+	ready=6,///< Preparado
+	measurement=7 ///< Midiendo
 };
 
+/**
+ * \enum rotType
+ * \brief  Enumerado con los distintos tipos de rotación
+ */
 // Tipo de rotation
 enum rotType
 {
-	none=0,
-	pitching=1,
-	rolling=2,
-	free_rotation=3
+	none=0, ///< Ninguno
+	pitching=1, ///<Rotación pitch
+	rolling=2, ///< Rotación Roll
+	free_rotation=3 ///< Libre rotación
 };
 
+/**
+ * \enum resolution
+ * \brief  Enumerado con los distintos tipos de resoluciones
+ */
 //resolucion
 enum resolution
 {
-	eightBits=0,
-	sixteenBits=1
+	eightBits=0, ///< Resolución de 8 bits
+	sixteenBits=1 ///< Resolución de 16 bits
 };
 
+/**
+ * \enum typeFilter
+ * \brief  Enumerado con los distintos tipos de filtros
+ */
 //tipo de filtro
 enum typeFilter
 {
-	firstEcho=0,
-	allEchoes=1,
-	lastEcho=2
+	firstEcho=0, ///< Primer rebote del señal del laser
+	allEchoes=1, ///< Todos los rebotes de la señal del laser
+	lastEcho=2   ///< Último rebote de la señal del laser
 };
 
+/**
+ * \enum ContLevel
+ * \brief  Enumerado con los distintos tipos de contaminación
+ */
 //Tipo de contaminacion
 enum ContLevel 
 {
-	noContamination=0,
-	warningContamination=1,
-	errorContamination=2,
-	seriousErrorContamination=3
+	noContamination=0, ///< No contaminación
+	warningContamination=1, ///< Aviso de contaminación 
+	errorContamination=2, ///< Error leve por contaminación
+	seriousErrorContamination=3 ///<Error serio de contaminación
 };
 
 
+/**
+ * \struct deviceInformation
+ * \brief  Estructura con informacion del dispositivo
+ */
 //Informacion del dispositivo
 struct deviceInformation
 {
@@ -94,6 +121,10 @@ struct deviceInformation
 	unsigned short deviceStatus;
 };
 
+/**
+ * \struct timeInformation
+ * \brief  Estructura con informacion de la fecha
+ */
 //Informacion de la Fecha y Hora
 struct timeInformation
 {
@@ -106,6 +137,10 @@ struct timeInformation
 	unsigned int   microSecond;
 };
 
+/**
+ * \struct positionInformation
+ * \brief  Estructura con informacion de la posicion del dispositivo
+ */
 //Informacion de la posicion del laser
 struct positionInformation
 {
@@ -120,7 +155,10 @@ struct positionInformation
 	
 };
 
-
+/**
+ * \struct eventInformation
+ * \brief  Estructura con informacion de los eventos del laser
+ */
 // Informacion de eventos
 struct eventInformation
 {
@@ -132,6 +170,10 @@ struct eventInformation
 
 };
 
+/**
+ * \struct statusInformation
+ * \brief  Estructura con informacion del estado del laser
+ */
 //Informacion del estado del laser
 struct statusInformation
 {
@@ -146,7 +188,11 @@ struct statusInformation
 	bool statusTemperatureRange;
 };
 
-//Informacion de los encodersdel laser
+/**
+ * \struct encoderInformation
+ * \brief  Estructura con informacion de los encoders del laser
+ */
+//Informacion de los encoders del laser
 struct encoderInformation
 {
 	unsigned short encoderPosition[3];
@@ -155,6 +201,10 @@ struct encoderInformation
 
 };
 
+/**
+ * \struct channelsInformation
+ * \brief  Estructura con informacion de los canales de salida del laser
+ */
 //Informacion de los canales de informacion
 struct channelsInformation
 {
@@ -169,6 +219,10 @@ struct channelsInformation
 
 };
 
+/**
+ * \struct otherInformation
+ * \brief  Estructura con otra informacion del laser
+ */
 //Otra informacion del laser
 struct otherInformation
 {
@@ -180,6 +234,10 @@ struct otherInformation
 };
 
 
+/**
+ * \struct queryInformation
+ * \brief  Estructura con informacion de la respuesta a un Query al laser
+ */
 //Informacion para una peticion al laser de información sobre este. Solo lectura
 struct queryInformation
 {
@@ -194,6 +252,10 @@ struct queryInformation
 
 };
 
+/**
+ * \struct measuringParameters
+ * \brief  Estructura con informacion de la respuesta a una peticion de los parametros de medida
+ */
 //Informacion sobre los parametros basicos de medida del laser. Son parametros de configuracion del laser. Lectura y escritura
 struct measuringParameters
 {
@@ -205,6 +267,10 @@ struct measuringParameters
 
 };
 
+/**
+ * \struct conectionParameters
+ * \brief  Estructura con informacion de conexion con el laser
+ */
 //Informacion sobre los parametros basicos de medida del laser. Son parametros de configuracion del laser. Lectura y escritura
 struct conectionParameters
 {
@@ -213,6 +279,10 @@ struct conectionParameters
 
 };
 
+/**
+ * \struct dataOutput
+ * \brief  Estructura con informacion de la respuesta a una peticion de los datos de salida del laser 
+ */
 //Informacion sobre el formato de los datos de salida del laser.Son parametros de configuración del laser. Solo escritura
 struct dataOutput
 {
@@ -228,6 +298,10 @@ struct dataOutput
 	short outputInterval;
 };
 
+/**
+ * \struct laserScan
+ * \brief  Estructura que incluye toda la informacion de laser en un escaneo de este 
+ */
 //Informacion sobre un scan del laser. Solo lectura
 struct laserScan
 {
@@ -252,6 +326,10 @@ struct laserScan
 
 };
 
+/**
+ * \class Sicklms5xx
+ * \brief Clase que engloba el protocolo para la comunicacion con el laser
+ */
 class Sicklms5xx
 {
 
@@ -285,8 +363,6 @@ class Sicklms5xx
 		int setLmsOutput(char outputNumber, bool statusOutput);
 		int saveDataPermanently(int clientPassword);
 		
-
-
 
 };
 #endif	/* SICKLMS1XX_H */

@@ -1,8 +1,15 @@
+/**
+ * @file   SocketCommunication.cpp
+ * @brief  Fichero fuente de gestion del socket de communicacion
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
 #include <Modulo_Laser2D_Frontal/SocketCommunication.h>
 
-
-
-
+/**
+ * Constructor de la clase
+ * @param[io] error Variable para guardar el error en caso de haberlo 
+ */
 SocketCommunication::SocketCommunication(bool* error)
 {
 
@@ -18,6 +25,12 @@ SocketCommunication::SocketCommunication(bool* error)
 
 }
 
+/**
+ * Metodo para ralizar la conexion TCP
+ * @param[in] puertoLaser Puerto al que se conecta
+ * @param[in] ipLaser IP a la que se conecta
+ * @return 
+ */
 /**
 	connectLaser: conecta con el laser
 	Parametros de entrada:
@@ -47,6 +60,9 @@ bool SocketCommunication::connectLaser(short puertoLaser,string ipLaser)
 }
 
 /**
+ * Metodo para realizar la desconexion TCP
+ */
+/**
 	disconnectLaser: desconecta con el laser y cierra el socket
 	Parametros de entrada:Ninguno
 	Parametro de salida: Ninguno
@@ -58,6 +74,13 @@ void SocketCommunication::disconnectLaser()
 
 }
 
+/**
+ * Metodo para crear la trama a enviar por el socket
+ * @param[in] typeCommand Tipo de comando del laser
+ * @param[in] command Comando a enviar
+ * @param[in] parametros Parametros de la trama
+ * @param[in] numParametros Numero de parametros de la trama
+ */
 /**
 	createMessage: Crea el comando que se enviará al laser y lo guarda en la variable senderMessage
 	Parametros de entrada:
@@ -81,7 +104,10 @@ void SocketCommunication::createMessage(string typeCommand, string command, stri
 	senderMessage += 0x03;
 }
 
-
+/**
+ * Metodo para enviar una trama por el socket
+ * @return Booleano indicando si la operacion se realizo correctamente
+ */
 /**
 	sendMessage: Envia el comando guardado en senderMessage al laser
 	Parametros de entrada: Ninguno
@@ -101,11 +127,17 @@ bool SocketCommunication::sendMessage()
 }
 
 /**
+ * Metodo para recibir algo por el socket
+ * @param[in] timeMaxWait Tiempo maximo de espera
+ * @return Booleano que indica si la operacion se realizo correctamente
+ */
+/**
 	recvMessage: Recibe la respuesta del laser y lo guarda en receiverMessage
 	Parametros de entrada: 
 		- timeMaxWait: Tiempo máximo de espera de la respuesta
 	Parametro de salida: booleano que indica si se recibió correctamente.
 **/
+
 bool SocketCommunication::recvMessage(float timeMaxWait)
 {
 	
@@ -148,7 +180,13 @@ bool SocketCommunication::recvMessage(float timeMaxWait)
 	  return true;
 }
 
-
+/**
+ * Metodo que comprueba que la respuesta recibida es correcta
+ * @param[in] typeWish Tipo de comando deseado en la respuesta 
+ * @param[in] commandWish Comando deseado en la respuesta
+ * @param[in] numParametros Numero de parametros deseados en la respuesta
+ * @return Booleano que indica si la respuesta es correcta
+ */
 /**
 	compruebaRespuesta: Comprueba la respuesta del laser
 	Parametros de entrada: 

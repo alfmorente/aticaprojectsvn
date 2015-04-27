@@ -1,10 +1,23 @@
+/**
+ * @file   Files.cpp
+ * @brief  Fichero fuente de gestión de ficheros
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
 #include <Modulo_Laser2D_Frontal/Files.h>
 
+/**
+ * Constructor de la clase
+ */
 Files::Files()
 {
     
 }
 
+/**
+ * Metodo que abre los ficheros de datos,configuracion y posibles errores
+ * @return Entero que indica si la apertura de ficheros fue correcta  
+ */
 int Files::openFiles()
 {
     fileError.open("/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/bin/fileError.txt");
@@ -27,7 +40,15 @@ int Files::openFiles()
     
 }
 
-
+/**
+ * Actualiza la estructura de configuracion con los datos del fichero
+ * @param[in] parametro Nombre del parametro 
+ * @param[in] valor  Valor del parametro
+ * @param[io] config  Estructura para guardar la configuracion de medidas del laser
+ * @param[io] configOutput  Estructura para guardar la configuracion de salida del laser
+ * @param[io] configConection  Estructura para guardar la configuracion de conexion con el laser
+ * @return Booleano que indica si el parametro a configurar existe
+ */
 bool Files::setValueConfiguration(string parametro,string valor,measuringParameters* config,dataOutput* configOutput,conectionParameters* configConection)
 {
 
@@ -64,6 +85,14 @@ bool Files::setValueConfiguration(string parametro,string valor,measuringParamet
 	
 	return true;
 }
+
+/**
+ * Metodo que lee el fichero de configuracion
+ * @param[io] config  Estructura para guardar la configuracion de medidas del laser
+ * @param[io] configOutput  Estructura para guardar la configuracion de salida del laser
+ * @param[io] configConection  Estructura para guardar la configuracion de conexion con el laser
+ * @return Entero que indica si la lectura del fichero de configuracion fue correcta
+ */
 int Files::readConfig(measuringParameters* config,dataOutput* configOutput,conectionParameters* configConection)
 {
 	string cadena;
@@ -99,7 +128,11 @@ int Files::readConfig(measuringParameters* config,dataOutput* configOutput,conec
         return NO_ERROR;
 }
 
-
+/**
+ * Escribe en el fichero LOG el error producido en el modulo
+ * @param[in] error Error a escribir en el fichero LOG
+ * @param[in] typeResponse Cadena que define el error
+ */
 void Files::writeErrorInLOG(int error, string typeResponse)
 {
 	struct timeval timeLog;
@@ -177,6 +210,10 @@ void Files::writeErrorInLOG(int error, string typeResponse)
         fileError << endl;
 }
 
+/**
+ * Escribe en el LOG informacion obtenida por el modulo
+ * @param[in] info Cadena que define la informacion a escribir
+ */
 void Files::writeDataInLOG(string info)
 {
     	struct timeval timeLog;

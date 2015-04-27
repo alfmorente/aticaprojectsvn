@@ -1,3 +1,10 @@
+/**
+ * @file   TypeConverter.h
+ * @brief  Fichero Cabecera para la gestion de conversion de tipo de datos
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
+
 #include <iostream>
 #include <string>
 #include <sstream>
