@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/Files.cpp
+Modulo_Laser2D_Frontal/Files.h
+-
+
+/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/SickLMS5xx.cpp
+Modulo_Laser2D_Frontal/SickLMS5xx.h
+-
+
 /home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/src/laser2D_frontal.cpp
 Modulo_Laser2D_Frontal/laser2D_frontal.h
 -

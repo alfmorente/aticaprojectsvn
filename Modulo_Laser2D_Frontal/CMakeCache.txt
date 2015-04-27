@@ -35,19 +35,19 @@ CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=Debug
+CMAKE_BUILD_TYPE:STRING=
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler.
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
 
 //Flags used by the compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
 
 //Flags used by the compiler during debug builds.
-CMAKE_CXX_FLAGS_DEBUG:STRING=-g3 -gdwarf-2
+CMAKE_CXX_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the compiler during release minsize builds.
 CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -67,7 +67,7 @@ CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc
 CMAKE_C_FLAGS:STRING=
 
 //Flags used by the compiler during debug builds.
-CMAKE_C_FLAGS_DEBUG:STRING=-g3 -gdwarf-2
+CMAKE_C_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the compiler during release minsize builds.
 CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -96,7 +96,7 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Enable/Disable output of compile commands during generation.
-CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
+CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
@@ -363,6 +363,8 @@ CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_DETERMINE_CXX_ABI_COMPILED:INTERNAL=TRUE
 //Result of TRY_COMPILE
 CMAKE_DETERMINE_C_ABI_COMPILED:INTERNAL=TRUE
+//Path to cache edit program executable.
+CMAKE_EDIT_COMMAND:INTERNAL=/usr/bin/ccmake
 //Executable file format
 CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
@@ -457,11 +459,11 @@ GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 Modulo_Laser2D_Frontal_CFLAGS_OTHER:INTERNAL=
 Modulo_Laser2D_Frontal_INCLUDEDIR:INTERNAL=
-Modulo_Laser2D_Frontal_INCLUDE_DIRS:INTERNAL=/opt/ros/groovy/include
+Modulo_Laser2D_Frontal_INCLUDE_DIRS:INTERNAL=/home/atica/catkin_ws/src/Common_files/msg_gen/cpp/include;/home/atica/catkin_ws/src/Common_files/srv_gen/cpp/include;/opt/ros/groovy/include
 Modulo_Laser2D_Frontal_LDFLAGS_OTHER:INTERNAL=
 Modulo_Laser2D_Frontal_LIBRARIES:INTERNAL=roscpp;:/usr/lib/libboost_signals-mt.so;:/usr/lib/libboost_filesystem-mt.so;rosconsole;:/usr/lib/libboost_regex-mt.so;:/usr/lib/liblog4cxx.so;xmlrpcpp;roscpp_serialization;rostime;:/usr/lib/libboost_date_time-mt.so;:/usr/lib/libboost_system-mt.so;:/usr/lib/libboost_thread-mt.so;pthread;cpp_common
 Modulo_Laser2D_Frontal_LIBRARY_DIRS:INTERNAL=/opt/ros/groovy/lib
-Modulo_Laser2D_Frontal_cached_manifest_list:INTERNAL=/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/manifest.xml;/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/home/atica/catkin_ws/src/Common_files/manifest.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml
+Modulo_Laser2D_Frontal_cached_manifest_list:INTERNAL=/home/atica/catkin_ws/src/Modulo_Laser2D_Frontal/manifest.xml;/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/home/atica/catkin_ws/src/Common_files/manifest.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/home/atica/catkin_ws/src/Common_files/msg_gen/generated;/home/atica/catkin_ws/src/Common_files/srv_gen/generated
 Modulo_Laser2D_Frontal_temp:INTERNAL=
 //ADVANCED property for variable: PYTHON_EXECUTABLE
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
@@ -470,10 +472,10 @@ PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
 _rosbuild_EXPORTS:INTERNAL=
-_rosbuild_cached_flag_time:INTERNAL=1425988814.97
+_rosbuild_cached_flag_time:INTERNAL=1429093253.4
 _roslang_LANGS:INTERNAL=roslisp
 _rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/home/atica/catkin_ws/src/Common_files/manifest.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml
-_rospack_msgsrv_gen_invoke_result:INTERNAL=
+_rospack_msgsrv_gen_invoke_result:INTERNAL=/home/atica/catkin_ws/src/Common_files/msg_gen/generated;/home/atica/catkin_ws/src/Common_files/srv_gen/generated
 roslib_path:INTERNAL=/opt/ros/groovy/share/roslib
 roslisp_CMAKE:INTERNAL=/opt/ros/groovy/share/roslisp/rosbuild/roslisp.cmake
 

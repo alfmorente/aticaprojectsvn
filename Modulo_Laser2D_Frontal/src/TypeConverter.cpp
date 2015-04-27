@@ -1,7 +1,19 @@
+/**
+ * @file   TypeConverter.cpp
+ * @brief  Fichero fuente de gestion de conversion de tipo de datos
+ * @author David Jimenez 
+ * @date   2013, 2014, 2015
+ */
+
 #include <Modulo_Laser2D_Frontal/TypeConverter.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Metodo para convertir de booleano a string
+ * @param[in] dato Booleano a convertir
+ * @return String convertido
+ */
 /** convertTostring: 
     Parametros de entrada: 
 	-dato: booleano para ser convertido a string
@@ -18,6 +30,13 @@ string convertTostring(bool dato)
 
 }
 
+/**
+ * Metodo para convertir un short a string
+ * @param[in] dato Short a convertir
+ * @param[in] hex Indica si el short esta en hexadecimal
+ * @param[in] addSign Indica si hace falta añadirle signo al string
+ * @return String convertido
+ */
 /** convertTostring: 
     Parametros de entrada: 
 	-dato: short para ser convertido a string
@@ -47,9 +66,16 @@ string convertTostring(short dato,bool hex,bool addSign)
 	return dataString;
 
 }
+
+/**
+ * Metodo para convertir un float a string
+ * @param[in] dato Float a convertir
+ * @param[in] addSign Indica si hay que añadirle signo al string
+ * @return String convertido
+ */
 /** convertTostring: 
     Parametros de entrada: 
-	-dato: float para ser convertido a stringl
+	-dato: float para ser convertido a string
 	-addSign: Indica si hay que añadirle signo al string
     Parametro de salida: string con el valor del float
 **/
@@ -67,6 +93,12 @@ string convertTostring(float dato,bool addSign)
 
 }
 
+/**
+ * Metodo para convertir un int  a string
+ * @param[in] dato Entero a convertir
+ * @param[in] addSign Indica si hay que añadirle signo al string
+ * @return String convertido
+ */
 /** convertTostring: 
     Parametros de entrada: 
 	-dato: int para ser convertido a string
@@ -100,6 +132,12 @@ string convertTostring(int dato,bool hex,bool addSign)
 
 }
 
+/**
+ * Metodo para convertir un char a string
+ * @param[in] dato Char a convertir
+ * @param[in] addSign Indica si hay que añadirle signo al string
+ * @return String convertido
+ */
 /** convertTostring: 
     Parametros de entrada: 
 	-dato: char para ser convertido a string
@@ -129,6 +167,13 @@ string convertTostring(char dato,bool hex,bool addSign)
 	return dataString;
 
 }
+
+/**
+ * Metodo para dividir un string en otro con distinto numero de bytes
+ * @param[in] dato String a ser dividido
+ * @param[in] nBytes Numero de bytes en los que quiere ser dividido
+ * @return String dividido
+ */
 /** divideInTwoBytes: 
     Parametros de entrada: 
 	-dato: string para ser dividido
@@ -197,6 +242,11 @@ string divideInTwoBytes(string dato,int nBytes)
 		
 }
 
+/**
+ * Metodo que convierte un char en hexadecimal en un entero
+ * @param[in] c Char en hexadecimal a convertir
+ * @return Entero en decimal
+ */
 /** convertToInt: 
     Parametros de entrada: 
 	-c: caracter de un numero en hexadecimal 0..F
@@ -244,6 +294,11 @@ int convertToInt(char c)
 	}
 }
 
+/**
+ * Metodo que convierte un string en un float
+ * @param[in] dato String a convertir
+ * @return Float convertido
+ */
 /** convertToReal: 
     Parametros de entrada: 
 	-dato: string en hexadecimal para ser convertido
@@ -271,6 +326,11 @@ float convertToReal(string dato)
 	return res;
 
 }
+/**
+ * Metodo que convierte un string en un entero
+ * @param[in] dato String a convertir
+ * @return Entero convertido
+ */
 /** convertToReal: 
     Parametros de entrada: 
 	-dato: string en hexadecimal para ser convertido
@@ -303,6 +363,11 @@ int convertToInteger(string dato)
 
 }
 
+/**
+ * Metodo que convierte un string en un entero sin signo
+ * @param[in] dato String a convertir
+ * @return Entero sin signo convertido
+ */
 /** convertToReal: 
     Parametros de entrada: 
 	-dato: string en hexadecimal para ser convertido
