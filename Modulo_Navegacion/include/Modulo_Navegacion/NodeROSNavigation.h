@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera del nodo ROS para gestionar la navegación
  * @author David Jiménez 
  * @date   2013, 2014, 2015
+ * @addtogroup Navigation
+ * @{
  */
 
 #ifndef NODEROSNAVIGATION_H
@@ -74,3 +76,7 @@ class NodeROSNavigation
             void fcn_sub_vel(const geometry_msgs::Twist msg); 
 };
 #endif
+
+/**
+ *@}
+ */
