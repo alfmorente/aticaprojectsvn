@@ -3,6 +3,8 @@
  * @brief  Fichero de constantes propias del módulo de comunicaciones
  * @author David Jiménez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -92,3 +94,7 @@ using namespace std;
 #define TOM_UNKNOW -1 ///< Constante para indicar tipo de mensaje ROS desconocido
 
 #endif //CONSTANT_COMMUNICATION.H
+
+/**
+ *@}
+ */

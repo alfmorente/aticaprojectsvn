@@ -1,8 +1,10 @@
-/* 
- * File:   interaction.h
- * Author: atica
- *
- * Created on 10 de marzo de 2014, 11:10
+/** 
+ * @file  interaction.h
+ * @brief Archivo de cabecera de interaction
+ * @author Carlos Amores
+ * @date 10/03/2014
+ * @addtogroup CommVehicle
+ * @{
  */
 
 #ifndef INTERACTION_H
@@ -29,3 +31,7 @@ extern "C" {
 int getOperationMode(int,char **);
 // Sintaxis correcta ante fallo
 void printCorrectSyntax();
+
+/**
+ *@}
+ */
