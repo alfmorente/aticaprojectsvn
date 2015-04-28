@@ -6,6 +6,8 @@
  * excepción asociada a posibles errores
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #ifndef _THREAD_HPP
@@ -52,3 +54,7 @@ public:
 };
 
 #endif
+
+/**
+ * @}
+ */

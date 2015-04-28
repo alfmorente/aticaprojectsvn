@@ -6,6 +6,8 @@
  * implementación del modo Teach del vehículo
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #ifndef TEACHSTRING_H
@@ -51,3 +53,6 @@ public:
 
 #endif	/* TEACHSTRING_H */
 
+/**
+ * @}
+ */

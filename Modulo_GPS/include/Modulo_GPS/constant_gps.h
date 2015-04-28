@@ -4,6 +4,8 @@
  * @brief Colección de constantes necesarias para el tratamiento de GPS+IMU
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #ifndef CONSTANT_H
@@ -160,5 +162,6 @@ extern "C" {
 #define UNAUTHORIZED_STATE 27
  * */
 
-
-
+/**
+ * @}
+ */

@@ -4,6 +4,8 @@
  * @brief Fichero de cabecera para funciones de gestióin del GPS+IMU
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 #ifndef GPS_H
 #define	GPS_H
@@ -61,5 +63,6 @@ bool isAlive();
 bool checkStateGPS();
 void initModuleVariables();
 
-
-
+/**
+ * @}
+ */

@@ -5,6 +5,8 @@
  * - La clase implementa la comunicación con el dispositivo GPS+IMU
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #include <string>
@@ -260,3 +262,6 @@ class GPS_Management
                 short getStateOfIMU(string);
 };
 
+/**
+ * @}
+ */

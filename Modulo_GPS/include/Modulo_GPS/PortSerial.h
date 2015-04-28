@@ -6,6 +6,8 @@
  * abstraiga del uso de funciones de bajo nivel
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #include <sys/types.h>
@@ -42,3 +44,7 @@ public:
   void clean();
   void configura(int velocity);
 };
+
+/**
+ * @}
+ */
