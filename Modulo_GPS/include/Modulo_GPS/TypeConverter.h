@@ -4,6 +4,8 @@
  * @brief Colección de funciones para transformación de tipos
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #include <string.h>
@@ -16,3 +18,7 @@ double stringToDouble(string s);
 float stringToFloat(string s);
 long stringToLong(string s);
 int stringToInt(string s);
+
+/**
+ * @}
+ */

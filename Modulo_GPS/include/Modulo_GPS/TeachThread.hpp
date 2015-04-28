@@ -7,6 +7,8 @@
  * obtención de puntos del modo teach y si almacenamiento en caso de estar activo.
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup GPS
+ * @{
  */
 
 #ifndef TEACHTHREAD_HPP
@@ -53,3 +55,6 @@ private:
 
 #endif	/* TEACHTHREAD_HPP */
 
+/**
+ * @}
+ */
