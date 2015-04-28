@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para la gestion del seguimiento
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup Navigation
+ * @{
  */
 
 #ifndef SEGUIMIENTO_H
@@ -148,3 +150,7 @@ class Seguimiento
 
 
 #endif //SEGUIMIENTO_H 
+
+/**
+ *@}
+ */

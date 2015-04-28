@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera de analisis del fichero del PLAN
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup Navigation
+ * @{
  */
 
 //Funciones de análisis de ficheros
@@ -52,4 +54,8 @@ bool analizePageHead(vector<string> pageHead,PathPlan* newPlan,int page);
 void cleanPathPlan(PathPlan*);
 int convertStringToInt(string s);
 double convertStringToDouble(string s);
+
+/**
+ *@}
+ */
 
