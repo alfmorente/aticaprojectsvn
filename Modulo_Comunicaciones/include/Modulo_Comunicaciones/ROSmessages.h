@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera con la inclusión de los mensajes ROS
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -27,3 +29,6 @@ Common_files::msg_ctrl_cameraPtr mens_ctrl_cam(new Common_files::msg_ctrl_camera
 
 #endif	/* ROSMESSAGES_H */
 
+/**
+ *@}
+ */

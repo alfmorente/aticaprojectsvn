@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera con los mensajes JAUS utilizados
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -63,3 +65,6 @@ struct mensajeJAUS{
 
 #endif	/* JAUSMESSAGES_H */
 
+/**
+ *@}
+ */

@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para gestion de ficheros
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -53,3 +55,6 @@ class Files
 
 #endif	/* FILES_H */
 
+/**
+ *@}
+ */

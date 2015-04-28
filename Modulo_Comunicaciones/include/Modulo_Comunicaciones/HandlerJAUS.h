@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para el manejador de JAUS
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -47,3 +49,6 @@ class HandlerJAUS : public EventHandler
 
 #endif	/* HANDLERJAUS_H */
 
+/**
+ *@}
+ */

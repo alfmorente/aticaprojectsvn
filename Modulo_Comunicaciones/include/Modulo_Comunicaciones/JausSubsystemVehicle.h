@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para la comunicación JAUS del vehículo
  * @author David Jiménez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -66,3 +68,6 @@ class JausSubsystemVehicle
 
 #endif	/* JAUSSUBSYSTEM_H */
 
+/**
+ *@}
+ */

@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para gestion del Nodo ROS de comunicaciones
  * @author David Jiménez 
  * @date   2013, 2014, 2015
+ * @addtogroup CommVehicle
+ * @{
  */
 
 
@@ -90,3 +92,6 @@ class NodeROSCommunication {
 
 #endif	/* NODEROSCOMMUNICATION_H */
 
+/**
+ *@}
+ */
