@@ -3,6 +3,8 @@
  * @brief Archivo de cabecera del módulo Convoy
  * @author Alfonso Morente
  * @date 19/03/2014
+ * @addtogroup Convoy
+ * @{
  */
 
 #ifndef CONVOY_H
@@ -127,3 +129,6 @@ bool handshakeFollower();
 
 #endif	/* CONVOY_H */
 
+/**
+ *@}
+ */
