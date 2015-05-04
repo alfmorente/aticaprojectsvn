@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera de gestion de la camara
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup Camera
+ * @{
  */
 
 #ifndef CAMARAS_H
@@ -53,3 +55,7 @@ bool checkStateCamera();
 
 //Funciones de subscripcion
 void fcn_sub_ctrl_camera(Common_files::msg_ctrl_camera msg);
+
+/**
+ *@}
+ */
