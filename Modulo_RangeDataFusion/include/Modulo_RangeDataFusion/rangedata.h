@@ -3,6 +3,8 @@
  * @brief Archivo de cabecera del módulo Range Data Fusion
  * @author Alfonso Morente
  * @date 18/03/2014
+ * @addtogroup RangeDataFusion
+ * @{
  */
 
 #ifndef RANGEDATA_H
@@ -43,3 +45,7 @@ void fcn_sub_laser(const Common_files::msg_laser);
 #include <pwd.h>
 #include "../../../Common_files/include/Common_files/constant.h"
 #include "interaction.h"
+
+/**
+ *@}
+ */
