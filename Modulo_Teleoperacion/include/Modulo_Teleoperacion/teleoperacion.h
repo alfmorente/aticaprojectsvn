@@ -3,6 +3,8 @@
  * @brief Archivo de cabecera del módulo Teleoperación
  * @author Alfonso Morente
  * @date 13/09/2013
+ * @addtogroup Remote
+ * @{
  */
 
 
@@ -86,3 +88,7 @@ int convertToCorrectValues(int,int);
 #define MAX_DIFF_VALUE 1        ///<Valor máximo del comando activación del diferencial
 #define MIN_LASER_VALUE 0       ///<Valor mínimo del comando activación del laser
 #define MAX_LASER_VALUE 1       ///<Valor máximo del comando activación del laser
+
+/**
+ *@}
+ */
