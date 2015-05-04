@@ -1,8 +1,10 @@
 /**
- * @file   File.h
+ * @file   Files.h
  * @brief  Fichero de cabecera para gestion de ficheros
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup Camera
+ * @{
  */
 
 
@@ -51,3 +53,6 @@ class Files
 
 #endif	/* FILES_H */
 
+/**
+ *@}
+ */

@@ -1,4 +1,3 @@
-
 /** 
  * @file  PortSerial.h
  * @brief Declara el tipo de la clase "PortSerial"
@@ -6,6 +5,8 @@
  * abstraiga del uso de funciones de bajo nivel
  * @author Carlos Amores
  * @date 2013, 2014, 2015
+ * @addtogroup Camera
+ * @{
  */
 
 #include <sys/types.h>
@@ -42,3 +43,7 @@ public:
   void clean();
   void configura(int velocity);
 };
+
+/**
+ *@}
+ */

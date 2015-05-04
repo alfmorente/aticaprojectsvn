@@ -1,8 +1,10 @@
 /**
- * @file   ProtPelco.h
+ * @file   ProtPelcoD.h
  * @brief  Fichero de cabecera de gestion del protocolo PELCO
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup Camera
+ * @{
  */
 
 #ifndef PROTPELCOD_H
@@ -86,3 +88,6 @@ class ProtPelcoD
 
 #endif	/* PROTPELCOD_H */
 
+/**
+ *@}
+ */
