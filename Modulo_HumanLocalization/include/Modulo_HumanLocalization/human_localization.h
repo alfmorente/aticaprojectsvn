@@ -3,6 +3,8 @@
  * @brief Archivo de cabecera del módulo Human Localization
  * @author Alfonso Morente
  * @date 10/12/2013
+ * @addtogroup HumanLocalization
+ * @{
  */
 
 #ifndef HUMAN_LOCALIZATION_H
@@ -41,3 +43,7 @@ bool fcn_heartbeat(Common_files::srv_data::Request &req, Common_files::srv_data:
 #include <pwd.h>
 #include "../../../Common_files/include/Common_files/constant.h"
 #include "interaction.h"
+
+/**
+ *@}
+ */
