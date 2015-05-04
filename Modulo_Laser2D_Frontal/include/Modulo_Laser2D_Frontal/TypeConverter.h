@@ -3,6 +3,8 @@
  * @brief  Fichero Cabecera para la gestion de conversion de tipo de datos
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup FrontLaser
+ * @{
  */
 
 #include <iostream>
@@ -37,11 +39,6 @@ float convertToReal(string dato);
 int convertToInteger(string dato);
 unsigned int  convertToUnsignedInteger(string dato);
 
-
-	
-		
-	
-
-
-
-
+/**
+ *@}
+ */

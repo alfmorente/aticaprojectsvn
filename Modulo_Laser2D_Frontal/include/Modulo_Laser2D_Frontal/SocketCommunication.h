@@ -3,6 +3,8 @@
  * @brief  Fichero Cabecera de gestion de la comunicacion socket con el laser
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup FrontLaser
+ * @{
  */
 
 #include <Modulo_Laser2D_Frontal/TypeConverter.h>
@@ -38,3 +40,6 @@ class SocketCommunication
 		bool compruebaRespuesta(string typeWish,string commandWish,int numParametros);
 };
 
+/**
+ *@}
+ */

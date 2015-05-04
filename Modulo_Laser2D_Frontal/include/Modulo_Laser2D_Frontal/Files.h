@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para gestion de ficheros
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup FrontLaser
+ * @{
  */
 
 
@@ -50,3 +52,6 @@ int filesOperation(measuringParameters*,dataOutput*,conectionParameters*);
 int getTimeout(int outputInterval,int scanningFrecuency);**/
 #endif	/* CONFIG_ERROR_H */
 
+/**
+ *@}
+ */
