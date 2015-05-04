@@ -3,6 +3,8 @@
  * @brief  Fichero de cabecera para gestión del sistema
  * @author David Jiménez 
  * @date   2013, 2014, 2015
+ * @addtogroup GestSist
+ * @{
  */
 
 
@@ -125,3 +127,7 @@ bool emergencySTOP();
 bool timerACK(double,int);
 void checkModulesAlive(const ros::TimerEvent& event);
 int getErrorModule(int subsystem);
+
+/**
+ * @}
+ */
