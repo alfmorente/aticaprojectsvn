@@ -7,41 +7,21 @@
       <df name="catkin">
         <df name="catkin_generated">
           <df name="version">
-            <in>package.cmake</in>
           </df>
         </df>
       </df>
       <df name="catkin_generated">
         <df name="installspace">
-          <in>_setup_util.py</in>
-          <in>env.sh</in>
-          <in>setup.bash</in>
-          <in>setup.sh</in>
-          <in>setup.zsh</in>
         </df>
         <df name="stamps">
           <df name="Modulo_Gest_Errores">
-            <in>interrogate_setup_dot_py.py.stamp</in>
-            <in>package.xml.stamp</in>
           </df>
         </df>
-        <in>env_cached.sh</in>
-        <in>generate_cached_setup.py</in>
-        <in>ordered_paths.cmake</in>
-        <in>setup_cached.sh</in>
       </df>
       <df name="CMakeFiles">
         <df name="_catkin_empty_exported_target.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="clean_test_results.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="CMakeTmp">
           <df name="CMakeFiles">
@@ -51,213 +31,72 @@
         </df>
         <df name="CompilerIdC">
           <in>CMakeCCompilerId.c</in>
-          <in>a.out</in>
         </df>
         <df name="CompilerIdCXX">
           <in>CMakeCXXCompilerId.cpp</in>
-          <in>a.out</in>
         </df>
         <df name="doxygen.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="gest_errores.dir">
           <df name="src">
           </df>
-          <in>CXX.includecache</in>
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>flags.make</in>
-          <in>link.txt</in>
-          <in>progress.make</in>
         </df>
         <df name="rosbuild_clean-test-results.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_genmsg_cpp.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_genmsg_lisp.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_genmsg_py.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_gensrv_cpp.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="ROSBUILD_gensrv_lisp.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="rosbuild_precompile.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="rosbuild_premsgsrvgen.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="rospack_genmsg.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="rospack_genmsg_all.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="rospack_genmsg_libexe.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>depend.internal</in>
-          <in>depend.make</in>
-          <in>progress.make</in>
         </df>
         <df name="rospack_gensrv.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="run_tests.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test-future.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test-results-run.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test-results.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="test.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
         <df name="tests.dir">
-          <in>DependInfo.cmake</in>
-          <in>build.make</in>
-          <in>cmake_clean.cmake</in>
-          <in>progress.make</in>
         </df>
-        <in>CMakeCCompiler.cmake</in>
-        <in>CMakeCXXCompiler.cmake</in>
-        <in>CMakeDetermineCompilerABI_C.bin</in>
-        <in>CMakeDetermineCompilerABI_CXX.bin</in>
-        <in>CMakeDirectoryInformation.cmake</in>
-        <in>CMakeError.log</in>
-        <in>CMakeOutput.log</in>
-        <in>CMakeRuleHashes.txt</in>
-        <in>CMakeSystem.cmake</in>
-        <in>Makefile.cmake</in>
-        <in>Makefile2</in>
-        <in>TargetDirectories.txt</in>
-        <in>cmake.check_cache</in>
-        <in>progress.marks</in>
       </df>
       <df name="devel">
         <df name="etc">
           <df name="catkin">
             <df name="profile.d">
-              <in>05.catkin-test-results.sh</in>
-              <in>05.catkin_make.bash</in>
-              <in>05.catkin_make_isolated.bash</in>
             </df>
           </df>
         </df>
-        <in>_setup_util.py</in>
-        <in>env.sh</in>
-        <in>setup.bash</in>
-        <in>setup.sh</in>
-        <in>setup.zsh</in>
       </df>
       <df name="gtest">
         <df name="CMakeFiles">
           <df name="gtest.dir">
             <df name="src">
             </df>
-            <in>DependInfo.cmake</in>
-            <in>build.make</in>
-            <in>cmake_clean.cmake</in>
-            <in>depend.make</in>
-            <in>flags.make</in>
-            <in>link.txt</in>
-            <in>progress.make</in>
           </df>
           <df name="gtest_main.dir">
             <df name="src">
             </df>
-            <in>DependInfo.cmake</in>
-            <in>build.make</in>
-            <in>cmake_clean.cmake</in>
-            <in>depend.make</in>
-            <in>flags.make</in>
-            <in>link.txt</in>
-            <in>progress.make</in>
           </df>
-          <in>CMakeDirectoryInformation.cmake</in>
-          <in>progress.marks</in>
         </df>
-        <in>Makefile</in>
-        <in>cmake_install.cmake</in>
       </df>
       <df name="include">
         <df name="Modulo_Gest_Errores">
@@ -269,17 +108,8 @@
       </df>
       <df name="msg">
       </df>
-      <df name="msg_gen">
-        <df name="cpp">
-          <df name="include">
-            <df name="Modulo_Gest_Errores">
-            </df>
-          </df>
-        </df>
-      </df>
       <df name="src">
         <df name="Modulo_Gest_Errores">
-          <in>__init__.py</in>
         </df>
         <in>gest_errores.cpp</in>
         <in>interaction.cpp</in>

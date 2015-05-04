@@ -10,11 +10,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/atica/catkin_ws/src/Modulo_Gest_Errores/src/gest_errores.cpp</file>
-            <file>file:/home/atica/catkin_ws/src/Modulo_Gest_Errores/src/interaction.cpp</file>
-            <file>file:/home/atica/catkin_ws/src/Modulo_Gest_Errores/include/Modulo_Gest_Errores/gest_errores.h</file>
-            <file>file:/home/atica/catkin_ws/src/Modulo_Gest_Errores/include/Modulo_Gest_Errores/interaction.h</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
