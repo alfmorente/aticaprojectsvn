@@ -4,6 +4,8 @@
  * - La clase implementa la gestión de un temporizador
  * @author Sergio Doctor
  * @date 05/02/2014
+ * @addtogroup Convoy
+ * @{
  */
 
 #ifndef _TIMER_HPP
@@ -44,3 +46,6 @@ public:
 
 #endif	/* _TIMER_HPP */
 
+/**
+ *@}
+ */

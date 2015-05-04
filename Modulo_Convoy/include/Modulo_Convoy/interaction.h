@@ -4,6 +4,8 @@
  * @brief Archivo de cabecera de interaction.cpp
  * @author Carlos Amores
  * @date 10/03/2014
+ * @addtogroup Convoy
+ * @{
  */
 
 #ifndef INTERACTION_H
@@ -30,3 +32,7 @@ extern "C" {
 int getOperationMode(int,char **);
 // Sintaxis correcta ante fallo
 void printCorrectSyntax();
+
+/**
+ *@}
+ */
