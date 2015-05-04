@@ -1,8 +1,10 @@
 /** 
  * @file  interaction.h
- * @brief Archivo de cabecera de interaction.cpp
+ * @brief Archivo de cabecera de interaction
  * @author Carlos Amores
  * @date 10/03/2014
+ * @addtogroup GestError
+ * @{
  */
 
 #ifndef INTERACTION_H
@@ -29,3 +31,7 @@ extern "C" {
 int getOperationMode(int,char **);
 // Sintaxis correcta ante fallo
 void printCorrectSyntax();
+
+/**
+ *@}
+ */

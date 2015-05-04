@@ -3,6 +3,8 @@
  * @brief Archivo de cabecera del módulo Gestión de errores
  * @author Alfonso Morente
  * @date 13/09/2013
+ * @addtogroup GestError
+ * @{
  */
 
 #ifndef GEST_ERRORES_H
@@ -97,3 +99,6 @@ bool compareTable(bool original[13],const Common_files::msg_availablePtr&);
 
 #endif	/* GEST_ERRORES_H */
 
+/**
+ *@}
+ */
