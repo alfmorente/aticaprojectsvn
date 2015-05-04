@@ -3,6 +3,8 @@
  * @brief  Fichero Cabecera de gestion del Laser SickLMS1xx
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup RearLaser
+ * @{
  */
 #ifndef SICKLMS1XX_H
 #define	SICKLMS1XX_H
@@ -367,3 +369,7 @@ class Sicklms1xx
 
 };
 #endif	/* SICKLMS1XX_H */
+
+/**
+ *@}
+ */
