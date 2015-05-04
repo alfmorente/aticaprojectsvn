@@ -3,6 +3,8 @@
  * @brief  Fichero Cabecera de gestion del Modulo del Laser frontal
  * @author David Jimenez 
  * @date   2013, 2014, 2015
+ * @addtogroup FrontLaser
+ * @{
  */
 
 #ifndef LASER2D_H
@@ -64,3 +66,6 @@ void publicDataToROS(laserScan scandata);
 void setStateModule(ros::NodeHandle n,int state);
 int getStateModule(ros::NodeHandle n);
 
+/**
+ *@}
+ */
